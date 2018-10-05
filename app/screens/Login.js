@@ -5,16 +5,34 @@ import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
+import { LoginProcess } from '../core'
 
 class Login extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      username: false,
+      password: false
+    }
+  }
+
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Logo />
-        <InputWithButton placeholder="Email address" />
-        <InputWithButton placeholder="Enter password" />
-        <Buttons onPress={() => Actions.home({ type: 'reset' })}>
+        <InputWithButton
+          onChangeText={(text)=>this.setState({username: text})}
+          placeholder="Email address"
+          />
+        <InputWithButton
+          onChangeText={(text)=>this.setState({password: text})}
+          placeholder="Enter password"
+          secureTextEntry={true}
+          />
+        <Buttons onPress={() => LoginProcess(this.state.username, this.state.password)}>
           Log in
         </Buttons>
         <TouchableOpacity onPress={() => Actions.forgot({ type: 'reset' })}>

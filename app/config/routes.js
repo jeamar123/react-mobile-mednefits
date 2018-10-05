@@ -25,12 +25,14 @@ import Summary from '../screens/Summary';
 import Balance from '../screens/Balance';
 import SelectService from '../screens/SelectService';
 import Homes from '../screens/Home';
+import Splash from '../screens/Splash';
 
 class RouterComponent extends Component {
   render() {
     return (
       <Router>
         <Stack key="root">
+          <Scene key="Splash" component={Splash} hideNavBar />
           <Scene key="Login" component={Logins} hideNavBar initial/>
           <Scene key="forgot" component={Forgot} hideNavBar />
           <Scene key="home" component={Homes} hideNavBar />
