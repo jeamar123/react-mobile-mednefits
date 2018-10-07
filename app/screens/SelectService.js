@@ -1,61 +1,50 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Dimensions } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Title,
-  Text,
-  Body,
-} from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { Container, Content, Text } from 'native-base';
 import { Buttons } from '../components/common';
+import Navbar from '../components/common/Navbar';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
   render() {
     return (
-      <Container style={{ backgroundColor: '#EEEEEE' }}>
+      <Container style={{ backgroundColor: '#eeeeee' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#EEEEEE' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#000', fontSize: 32 }}
-              />
-              <Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}>
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#000' }}>Select Service/s</Title>
-            <Text style={{ color: '#000' }}>Scan & Pay</Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar
+          leftNav="back-home"
+          title="Select Service/s"
+          subtitle="Scan & Pay"
+        />
         <Content padder>
           <View style={styles.contain}>
             <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Consultation</Text>
+              <Text style={{ fontFamily: 'HelveticaNeue-Roman' }}>
+                Consultation
+              </Text>
             </View>
             <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>
+              <Text
+                style={{
+                  fontFamily: 'HelveticaNeue-Roman',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
                 Scaling & Polishing
               </Text>
             </View>
             <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Fillings</Text>
+              <Text style={{ fontFamily: 'HelveticaNeue-Roman' }}>
+                Fillings
+              </Text>
             </View>
             <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Extraction</Text>
+              <Text style={{ fontFamily: 'HelveticaNeue-Roman' }}>
+                Extraction
+              </Text>
             </View>
             <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>X-Ray</Text>
+              <Text style={{ fontFamily: 'HelveticaNeue-Roman' }}>X-Ray</Text>
             </View>
           </View>
 

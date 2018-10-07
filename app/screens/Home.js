@@ -6,20 +6,10 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Text,
-  Body,
-  Drawer,
-} from 'native-base';
-import { Actions } from 'react-native-router-flux';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { Container, Content, Text, Drawer } from 'native-base';
+import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
+import { Actions } from 'react-native-router-flux';
 
 const { width, height } = Dimensions.get('window');
 
@@ -42,30 +32,25 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <Header style={{ backgroundColor: '#0392cf' }}>
+          <Navbar leftNav={true} rightNav={true} />
+          {/* <Header style={{ backgroundColor: '#0392cf' }}>
             <Left>
               <Button transparent onPress={() => this.openDrawer()}>
                 <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
               </Button>
             </Left>
-            <Body>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 22,
-                  fontFamily: 'helvetica',
-                  textAlign: 'center',
-                }}
-              >
-                Mednefits
-              </Text>
-            </Body>
+            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+              <Image
+                source={require('../../assets/MednefitsLogo.png')}
+                style={{ height: 25, resizeMode: 'center', width: 155 }}
+              />
+            </View>
             <Right>
               <Button transparent onPress={() => this.openDrawer()}>
                 <Icons name="gear" style={{ color: '#fff', fontSize: 32 }} />
               </Button>
             </Right>
-          </Header>
+          </Header> */}
           <HomeContent />
           <Content padder>
             <View
