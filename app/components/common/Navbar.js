@@ -59,7 +59,11 @@ export default class Navbar extends React.Component {
               style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{ color: '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'Helvetica',
+              }}
             >
               Back
             </Text>
@@ -77,7 +81,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={Actions.pop}
+            onPress={Actions.home()}
             style={{
               paddingStart: 11,
               flexDirection: 'row',

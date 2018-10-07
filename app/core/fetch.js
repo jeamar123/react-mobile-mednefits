@@ -44,7 +44,7 @@ function getAuthToken() {
     if (result) {
       return result;
     } else {
-      Actions.login();
+      Actions.Login();
     }
   });
 }
@@ -83,6 +83,5 @@ export function UserDetail() {
   const header = {
     Authorization: { getAuthToken },
   };
-
-  fetching(AUTH_USER_PROFILE, 'POST', header, '');
+  fetching(AUTH_USER_PROFILE, 'GET', header, '');
 }

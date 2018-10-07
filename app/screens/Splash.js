@@ -14,6 +14,10 @@ class Splash extends Component {
 
   componentWillMount() {
     UserDetail();
+
+    setTimeout(() => {
+      Actions.Login();
+    }, 3000);
   }
 
   render() {
