@@ -17,6 +17,7 @@ import {
   TabHeading,
   Icon,
 } from 'native-base';
+import Navbar from '../components/common/Navbar';
 import Icons from 'react-native-vector-icons/FontAwesome';
 
 class HistoryTransaction extends Component {
@@ -24,18 +25,7 @@ class HistoryTransaction extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }} hasTabs>
-          <Left>
-            <Button transparent>
-              <Icons name="angle-left" style={{ color: '#fff' }} />
-              <Text style={{ color: '#fff', fontWeight: 'bold' }}>Home</Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#fff' }}>History</Title>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="back-home" title="History" />
         <Tabs tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}>
           <Tab
             heading="In-Network Transactions"

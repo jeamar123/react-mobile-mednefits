@@ -17,14 +17,13 @@ export default EStyleSheet.create({
     width: imageWidth,
   },
   textThanks: {
-    fontFamily: 'helvetica',
+    fontFamily: 'HelveticaNeue-Bold',
     fontSize: 26,
-    fontWeight: '600',
     color: '#0392cf',
     marginBottom: 30,
   },
   text: {
-    fontFamily: 'helvetica',
+    fontFamily: 'HelveticaNeue-Roman',
     width: width / 1.3,
     textAlign: 'center',
   },

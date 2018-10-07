@@ -101,6 +101,38 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'cancel') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={Actions.pop}
+            style={{
+              paddingStart: 15,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'HelveticaNeue-Roman',
+                width: 50,
+              }}
+            >
+              Cancel
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'null') {
       return (
         <View
@@ -236,25 +268,29 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'add-payment') {
+    } else if (this.props.rightNav == 'next') {
       return (
-        <TouchableOpacity
+        <View
           style={{
+            width: 50,
+            height: 50,
             justifyContent: 'center',
-            alignItems: 'center',
-            marginRight: 10,
+            alignItems: 'flex-end',
           }}
-          onPress={() => Actions.payadd()}
         >
-          <Icon
-            type="Feather"
-            name="plus"
-            style={{
-              color: '#fff',
-              fontSize: 24,
-            }}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 16,
+                color: '#FFFFFF',
+                marginRight: 10,
+              }}
+            >
+              Next
+            </Text>
+          </TouchableOpacity>
+        </View>
       );
     } else {
       return (

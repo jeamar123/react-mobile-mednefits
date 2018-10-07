@@ -14,31 +14,14 @@ import {
 import { SettingWallet } from '../components/SettingWallet';
 import { Buttons } from '../components/common';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import Navbar from '../components/common/Navbar';
 
 class WalletSetting extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
-                Back
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#fff', fontSize: 16 }}>
-              Wallet Setting
-            </Title>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="back" title="Wallet Setting" />
         <SettingWallet />
         <Buttons>Save</Buttons>
       </Container>

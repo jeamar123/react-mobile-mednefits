@@ -8,7 +8,7 @@ class EmailSend extends Component {
   render() {
     return (
       <Container>
-        <StatusBar backgroundColor="blue" barStyle="dark-content" />
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Email />
         <Buttons>Back to Login</Buttons>
       </Container>

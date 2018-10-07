@@ -1,44 +1,18 @@
 import React, { Component } from 'react';
-import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form';
+import { GiftedForm } from 'react-native-gifted-form';
 import { StatusBar, View, Image } from 'react-native';
-import {
-  Container,
-  Header,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
-  Text,
-  Row,
-} from 'native-base';
+import { Container, Text } from 'native-base';
 import { HistoryUser } from '../components/HistoryUser';
 import { Buttons } from '../components/common';
-import Icons from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Feather';
+import Navbar from '../components/common/Navbar';
 
 class History extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#fff', fontSize: 22 }}>History</Title>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="back" title="History" />
         <HistoryUser />
         <GiftedForm
           style={{

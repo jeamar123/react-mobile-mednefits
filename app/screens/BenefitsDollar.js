@@ -1,65 +1,26 @@
 import React, { Component } from 'react';
 import { StatusBar, Image, View } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Card,
-  CardItem,
-  Text,
-  Body,
-} from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { DollarBenefits } from '../components/DollarBenefits';
 import { Buttons } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
+import Navbar from '../components/common/Navbar';
 
 class BenefitsDollar extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                }}
-              >
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text
-              style={{ color: '#fff', fontSize: 22, fontFamily: 'helvetica' }}
-            >
-              Benefit Dollars
-            </Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="cancel" title="Benefits Dollars" />
         <DollarBenefits />
         <Content padder>
           <Card>
             <CardItem style={{ backgroundColor: '#E8E7EE' }}>
-              <Body
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Image source={require('../../assets/apps/mednefits.png')} />
+              <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Image
+                  source={require('../../assets/apps/mednefits.png')}
+                  style={{ height: 55, resizeMode: 'center', width: 155 }}
+                />
                 <Text style={{ marginTop: 10, fontFamily: 'helvetica' }}>
                   Medicloud Family Clinic
                 </Text>
@@ -75,12 +36,7 @@ class BenefitsDollar extends Component {
                   marginLeft: 50,
                 }}
               >
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontFamily: 'helvetica',
-                  }}
-                >
+                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
                   Payment Amount
                 </Text>
                 <InputWithButton

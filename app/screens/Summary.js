@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import {
   Container,
-  Header,
   Content,
   Left,
   Right,
-  Button,
   Card,
   CardItem,
   Text,
