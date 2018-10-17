@@ -58,7 +58,7 @@ function getAuthToken(){
   })
 }
 
-export function LoginProcess(username, password){
+export function LoginProcess(username, password, callback){
   try {
     loginParameter = {
       grant_type: "password",
@@ -78,8 +78,11 @@ export function LoginProcess(username, password){
     fetching(params, (err, result) => {
       if (!err.status) {
         getNotify("",err.error)
+        callback(true)
       } else {
+        callback("",true)
         getNotify("","Success! Wait a second...")
+        Actions.home({type: 'reset'})
       }
     })
   } catch (e) {

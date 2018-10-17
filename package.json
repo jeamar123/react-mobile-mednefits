@@ -20,6 +20,7 @@
     "react-native": "^0.55.4",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-gifted-form": "^0.1.1",
+    "react-native-modal": "^6.5.0",
     "react-native-router-flux": "^4.0.1",
     "react-native-vector-icons": "^4.6.0",
     "save": "^2.3.2"
