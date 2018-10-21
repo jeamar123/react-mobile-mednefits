@@ -1,39 +1,48 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TouchableOpacity } from 'react-native';
+import { StatusBar, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
-import { LoginProcess } from '../core';
+import * as Core from '../core'
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+
+  constructor(props){
+    super(props)
 
     this.state = {
       username: false,
       password: false,
-    };
+      isLoading: false
+    }
+  }
+
+  LoginHandler(){
+    this.setState({isLoading: !this.state.isLoading})
+    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
+      this.setState({isLoading: !this.state.isLoading})
+    })
   }
 
   render() {
     return (
       <Container>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
         <Logo />
         <InputWithButton
-          onChangeText={text => this.setState({ username: text })}
+          onChangeText={(text)=>this.setState({username: text})}
           placeholder="Email address"
-        />
+          />
         <InputWithButton
-          onChangeText={text => this.setState({ password: text })}
+          onChangeText={(text)=>this.setState({password: text})}
           placeholder="Enter password"
           secureTextEntry={true}
-        />
-        <Buttons
-          onPress={() => LoginProcess(this.state.username, this.state.password)}
-        >
+          />
+        <Buttons onPress={() => this.LoginHandler()}>
           Log in
         </Buttons>
         <TouchableOpacity onPress={() => Actions.forgot({ type: 'reset' })}>
