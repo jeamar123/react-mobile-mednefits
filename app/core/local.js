@@ -20,6 +20,7 @@ export function GetDataLocal(key, callback){
 
 export function SetDataLocal(params, callback){
   try {
+    AsyncStorage.removeItem(params.key);
     AsyncStorage.setItem(params.key, params.value);
     callback("", true)
   } catch (error) {

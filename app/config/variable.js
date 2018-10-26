@@ -40,7 +40,17 @@ export const CLINIC_SEND_PAYMENT = CLINIC + '/send_payment';
 export const CLINIC_PAYMENT_DIRECT = CLINIC + '/payment_direct';
 
 /* USER VARIABLE */
-export const USER = MAIN + '/user';
-export const USER_CREDITS = USER + '/credits';
-export const USER_NETWORK_TRANSACTION = USER + '/in_network_transactions';
-export const USER_SPECIFIC_IN_NETWORK = USER + '/specific_in_network';
+export const USER                       = MAIN+"/user"
+export const USER_CREDITS               = USER+"/credits"
+export const USER_NETWORK_TRANSACTION   = USER+"/in_network_transactions"
+export const USER_SPECIFIC_IN_NETWORK   = USER+"/specific_in_network"
+
+/* LOCAL VARIABLE */
+export const ACCESS_TOKEN               = "access_token"
+
+/* AWS VARIABLE */
+export const AWS_KEY                    = "AKIAI7NRA4S54ZAGYH5A"
+export const AWS_SECRET                 = "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"
+export const AWS_REGION                 = "us-east-1"
+export const AWS_BUCKET                 = "mednefits-dev"
+export const AWS_FOLDER                 = "receipts"
