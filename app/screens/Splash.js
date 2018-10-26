@@ -3,9 +3,8 @@ import { StatusBar, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
-import { InputWithButton } from '../components/TextInput';
-import { Buttons } from '../components/common';
-import { UserDetail } from '../core';
+import { ACCESS_TOKEN } from '../config/variable';
+import * as Core from '../core';
 
 class Splash extends Component {
   constructor(props) {
@@ -13,11 +12,9 @@ class Splash extends Component {
   }
 
   componentWillMount() {
-    UserDetail();
-
     setTimeout(() => {
-      Actions.Login();
-    }, 3000);
+      Core.UserDetail();
+    }, 1500);
   }
 
   render() {

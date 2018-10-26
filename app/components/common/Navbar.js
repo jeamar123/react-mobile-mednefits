@@ -81,7 +81,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={Actions.home()}
+            onPress={() => Actions.Home()}
             style={{
               paddingStart: 11,
               flexDirection: 'row',

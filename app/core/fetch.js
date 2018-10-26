@@ -3,9 +3,7 @@
 * @year 2018
 */
 
-import {
-  AsyncStorage
-} from 'react-native'
+import { AsyncStorage } from 'react-native';
 import {
   AUTH_LOGIN,
   CLIENT_SECRET,
@@ -23,11 +21,11 @@ import {
 import * as Core from './index'
 
 const headerLogin = {
-  'Accept':'application/json',
-  'Content-Type': 'application/json'
-}
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+};
 
-function fetching(params, callback){
+function fetching(params, callback) {
   fetch(params.url, {
     method: params.method,
     headers: params.header,
@@ -54,19 +52,19 @@ function fetching(params, callback){
 export function LoginProcess(username, password, callback){
   try {
     loginParameter = {
-      grant_type: "password",
+      grant_type: 'password',
       client_secret: CLIENT_SECRET,
       client_id: CLIENT_ID,
       username: username,
-      password: password
-    }
+      password: password,
+    };
 
     params = {
       url: AUTH_LOGIN,
       method: 'POST',
       header: headerLogin,
-      body: loginParameter
-    }
+      body: loginParameter,
+    };
 
     fetching(params, (result) => {
       if (!result.status) {
@@ -93,9 +91,9 @@ export function LoginProcess(username, password, callback){
           }
         })
       }
-    })
+    });
   } catch (e) {
-    getNotify("","Failed login, try again")
+    Core.getNotify('', 'Failed login, try again');
   }
 }
 
