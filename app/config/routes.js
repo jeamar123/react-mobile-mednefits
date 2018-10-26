@@ -32,15 +32,15 @@ class RouterComponent extends Component {
     return (
       <Router>
         <Stack key="root">
-          <Scene key="Splash" component={Splash} hideNavBar />
-          <Scene key="Login" component={Logins} hideNavBar initial/>
+          <Scene key="Splash" component={Splash} hideNavBar initial />
+          <Scene key="Login" component={Logins} hideNavBar />
           <Scene key="forgot" component={Forgot} hideNavBar />
           <Scene key="home" component={Homes} hideNavBar />
           <Scene key="SelectService" component={SelectService} hideNavBar />
           <Scene key="Balance" component={Balance} hideNavBar />
           <Scene key="Summary" component={Summary} hideNavBar />
           <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
-          <Scene key="ScanPay" component={ScanPay} hideNavBar />
+          <Scene key="PayScan" component={ScanPay} hideNavBar />
           <Scene
             key="HistoryTransaction"
             component={HistoryTransaction}
