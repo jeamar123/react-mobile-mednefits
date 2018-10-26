@@ -14,30 +14,14 @@ import {
   Text,
 } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import Navbar from '../components/common/Navbar';
 
 class BankList extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons name="angle-left" style={{ color: '#fff' }} />
-              <Text
-                style={{
-                  color: '#fff',
-                }}
-              >
-                Back
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#fff' }}>Bank List</Title>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="back" title="Bank List" />
         <Content>
           <List>
             <ListItem>

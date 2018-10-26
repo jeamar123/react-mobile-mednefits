@@ -5,16 +5,19 @@ import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
-import { UserDetail } from '../core'
+import { UserDetail } from '../core';
 
 class Splash extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
-  componentWillMount(){
-    UserDetail()
+  componentWillMount() {
+    UserDetail();
+
+    setTimeout(() => {
+      Actions.Login();
+    }, 3000);
   }
 
   render() {

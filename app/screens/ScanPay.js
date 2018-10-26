@@ -1,52 +1,14 @@
 import React, { Component } from 'react';
 import { StatusBar, Image } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Card,
-  CardItem,
-  Text,
-  Body,
-} from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import Navbar from '../components/common/Navbar';
 
 class ScanPay extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  fontFamily: 'helvetica',
-                }}
-              >
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text
-              style={{ color: '#fff', fontSize: 22, fontFamily: 'helvetica' }}
-            >
-              Scan & Pay
-            </Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
           <Card>
             <CardItem>

@@ -1,53 +1,30 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import {
   Container,
-  Header,
   Content,
   Left,
   Right,
-  Button,
   Card,
   CardItem,
   Text,
   Body,
 } from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
 import { SummaryComp } from '../components/SummaryComp';
 import styles from '../components/SummaryComp/styles';
+import Navbar from '../components/common/Navbar';
 
 class Summary extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                }}
-              >
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Text
-              style={{ color: '#fff', fontSize: 22, fontFamily: 'helvetica' }}
-            >
-              Summary
-            </Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar
+          leftNav="null"
+          title="Summary"
+          subtitle="In-Network"
+          rightNav="done"
+        />
         <SummaryComp />
         <Content padder>
           <Card>

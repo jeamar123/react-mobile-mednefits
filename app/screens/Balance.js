@@ -1,51 +1,30 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Text,
-  Body,
-} from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { StatusBar, View } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import styles from '../components/BalanceComp/styles';
+import Navbar from '../components/common/Navbar';
 
 class Balance extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
-            </Button>
-          </Left>
-          <Body>
-            <Text
-              style={{ color: '#fff', fontSize: 22, fontFamily: 'helvetica' }}
-            >
-              Mednefits
-            </Text>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icons name="gear" style={{ color: '#fff', fontSize: 32 }} />
-            </Button>
-          </Right>
-        </Header>
+        <Navbar leftNav={true} rightNav={true} />
         <Content padder>
           <View style={styles.container}>
-            <Text style={{ fontFamily: 'helvetica', fontSize: 20 }}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 20,
+                color: '#666666',
+              }}
+            >
               How it Works
             </Text>
             <Text
               style={{
                 fontSize: 18,
-                fontFamily: 'helvetica',
+                fontFamily: 'HelveticaNeue-Medium',
                 marginTop: 60,
               }}
             >
@@ -54,8 +33,7 @@ class Balance extends Component {
             <Text
               style={{
                 fontSize: 18,
-                fontWeight: '600',
-                fontFamily: 'helvetica',
+                fontFamily: 'HelveticaNeue-Medium',
                 marginTop: 30,
               }}
             >
@@ -65,7 +43,7 @@ class Balance extends Component {
               style={{
                 fontSize: 42,
                 color: '#0392cf',
-                fontFamily: 'helvetica',
+                fontFamily: 'HelveticaNeue-Roman',
                 marginTop: 10,
               }}
             >
@@ -74,9 +52,8 @@ class Balance extends Component {
 
             <Text
               style={{
-                fontSize: 18,
-                fontWeight: '600',
-                fontFamily: 'helvetica',
+                fontSize: 16,
+                fontFamily: 'HelveticaNeue-Roman',
                 marginTop: 50,
               }}
             >
@@ -95,7 +72,7 @@ class Balance extends Component {
                 style={{
                   color: '#fff',
                   fontSize: 18,
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 E-Claim Account
@@ -105,7 +82,7 @@ class Balance extends Component {
                   color: '#fff',
                   fontSize: 12,
                   marginTop: 10,
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 Spent
@@ -115,7 +92,7 @@ class Balance extends Component {
                   color: '#fff',
                   fontSize: 20,
                   fontWeight: '600',
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 S$ 68.00
@@ -134,7 +111,7 @@ class Balance extends Component {
                 style={{
                   color: '#fff',
                   fontSize: 18,
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 In-Network Account
@@ -144,7 +121,7 @@ class Balance extends Component {
                   color: '#fff',
                   fontSize: 12,
                   marginTop: 10,
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 Spent
@@ -154,7 +131,7 @@ class Balance extends Component {
                   color: '#fff',
                   fontSize: 20,
                   fontWeight: '600',
-                  fontFamily: 'helvetica',
+                  fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
                 S$ 140.00

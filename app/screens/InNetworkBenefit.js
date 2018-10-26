@@ -13,30 +13,18 @@ import {
 import { InNetwork } from '../components/InNetwork';
 import { Buttons } from '../components/common';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import Navbar from '../components/common/Navbar';
 
 class InNetworkBenefit extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#0392cf' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#fff', fontSize: 32 }}
-              />
-              <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#fff' }}>In-Network</Title>
-            <Text style={{ color: '#fff' }}>Benefit Dollars</Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar
+          leftNav="back-home"
+          title="In-Network"
+          subtitle="Benefits Dollars"
+        />
         <InNetwork />
         <Buttons>Back to Home</Buttons>
       </Container>
