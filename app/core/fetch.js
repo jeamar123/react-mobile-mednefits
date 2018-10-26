@@ -8,11 +8,17 @@ import {
   AUTH_LOGIN,
   CLIENT_SECRET,
   CLIENT_ID,
-  AUTH_USER_PROFILE,
-} from '../config/variable';
-import { Actions } from 'react-native-router-flux';
-import { ACCESS_TOKEN } from '../config/variable';
-import * as Core from './index';
+  AUTH_USER_PROFILE
+} from '../config/variable'
+import * as Config from '../config'
+import {
+  Actions
+} from 'react-native-router-flux'
+import {
+  getAlert,
+  getNotify
+} from './notify'
+import * as Core from './index'
 
 const headerLogin = {
   Accept: 'application/json',
@@ -23,24 +29,27 @@ function fetching(params, callback) {
   fetch(params.url, {
     method: params.method,
     headers: params.header,
-    body: JSON.stringify(params.body),
+    body: (params.body !== "") ? JSON.stringify(params.body) : "",
   })
-    .then(response => response.json())
-    .then(res => {
-      if (!res.status) {
-        callback(res);
-      } else if (res.status) {
-        callback(res);
-      } else {
-        Core.getNotify('', 'Please try again...');
-      }
-    })
-    .catch(error => {
-      Core.getNotify('', 'Ooops, failed to get data...');
-    });
+  .then(response =>response.json())
+  .then(res => {
+
+    if (!res.status) {
+      callback(res)
+    } else if (res.status) {
+      callback(res)
+    } else {
+      getNotify("","Please try again...")
+    }
+
+  })
+  .catch(error => {
+    console.warn('error fetching'+error.message);
+    getNotify("", "Ooops, failed to get data...")
+  });
 }
 
-export function LoginProcess(username, password, callback) {
+export function LoginProcess(username, password, callback){
   try {
     loginParameter = {
       grant_type: 'password',
@@ -57,14 +66,30 @@ export function LoginProcess(username, password, callback) {
       body: loginParameter,
     };
 
-    fetching(params, (err, result) => {
-      if (!err.status) {
-        Core.getNotify('', err.error);
-        callback(true);
+    fetching(params, (result) => {
+      if (!result.status) {
+        getNotify("",result.error)
+        callback(true)
       } else {
-        callback('', true);
-        Core.getNotify('', 'Success! Wait a second...');
-        Actions.home({ type: 'reset' });
+        callback("",true)
+        getNotify("","Success! Wait a second...")
+
+        data = result.data
+        data_parse = (typeof data == "string") ? JSON.parse(data) : data
+        access_token = data_parse.access_token
+
+        params = {
+          key: "access_token",
+          value: access_token
+        }
+
+        Core.SetDataLocal(params, (err, result)=> {
+          if(result){
+            Actions.home({type: 'reset'})
+          } else {
+            getNotify("","Failed login, try again")
+          }
+        })
       }
     });
   } catch (e) {
@@ -72,21 +97,30 @@ export function LoginProcess(username, password, callback) {
   }
 }
 
-export function UserDetail(callback) {
-  Core.GetAccessToken((err, result) => {
-    if (result) {
-      params = {
-        url: AUTH_USER_PROFILE,
-        method: 'GET',
-        header: {
-          Authorization: result,
-        },
-      };
-      fetching(params, res => {
-        callback(res);
-      });
-    } else {
-      console.warn('tidak ada access Token');
-    }
-  });
+export function UserDetail(callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result)=> {
+      if (err) {
+        Actions.login({type: 'reset'})
+      } else {
+        params = {
+          url: AUTH_USER_PROFILE,
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + result
+          }
+        }
+
+        fetching(params, (result) => {
+          callback("",result)
+          console.warn(result);
+        })
+
+        console.warn(params);
+      }
+    })
+  } catch (e) {
+    console.warn('error user detail'+e.message);
+    getNotify("","Failed get data, try again")
+  }
 }
