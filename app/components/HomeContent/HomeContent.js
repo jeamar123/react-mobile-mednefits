@@ -9,7 +9,7 @@ const HomeContent = () => (
       <View style={styles.contain}>
         <TouchableOpacity
           onPress={() =>
-            Actions.ScanPay({
+            Actions.PayScan({
               type: 'reset',
             })
           }
