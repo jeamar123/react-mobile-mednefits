@@ -32,7 +32,6 @@ export function GetAccessToken(callback) {
       if (result) {
         callback('', result);
       } else {
-        console.warn(result);
         Actions.Login();
       }
     });
@@ -47,7 +46,7 @@ export function CheckStatusApp(callback) {
       if (result) {
         Core.UserDetail(result => {
           if (result) {
-            getNotify('', 'Berhasil mengambil data');
+            Actions.home();
           } else {
             getNotify('', 'Gagal mengambil data');
           }
@@ -57,7 +56,7 @@ export function CheckStatusApp(callback) {
       }
     });
   } catch (error) {
-    Actions.Splash();
+    Actions.Login();
   }
 }
 

@@ -8,18 +8,12 @@ import {
   AUTH_LOGIN,
   CLIENT_SECRET,
   CLIENT_ID,
-  AUTH_USER_PROFILE
-} from '../config/variable'
-import * as Config from '../config'
-import {
-  Actions
-} from 'react-native-router-flux'
-import {
-  getAlert,
-  getNotify
-} from './notify'
-import * as Core from './index'
-import * as axios from 'react-native-axios';
+  AUTH_USER_PROFILE,
+} from '../config/variable';
+import * as Config from '../config';
+import { Actions } from 'react-native-router-flux';
+import { getAlert, getNotify } from './notify';
+import * as Core from './index';
 
 const headerLogin = {
   Accept: 'application/json',
@@ -46,13 +40,23 @@ function fetching(params, callback) {
     }
 
   })
-  .catch(error => {
-    console.warn('error fetching'+error.message);
-    getNotify("", "Ooops, failed to get data...")
-  });
+    .then(response => response.json())
+    .then(res => {
+      if (!res.status) {
+        callback(res);
+      } else if (res.status) {
+        callback(res);
+      } else {
+        getNotify('', 'Please try again...');
+      }
+    })
+    .catch(error => {
+      console.warn('error fetching' + error.message);
+      getNotify('', 'Ooops, failed to get data...');
+    });
 }
 
-export function LoginProcess(username, password, callback){
+export function LoginProcess(username, password, callback) {
   try {
     loginParameter = {
       grant_type: 'password',
@@ -69,30 +73,30 @@ export function LoginProcess(username, password, callback){
       body: loginParameter,
     };
 
-    fetching(params, (result) => {
+    fetching(params, result => {
       if (!result.status) {
-        getNotify("",result.error)
-        callback(true)
+        getNotify('', result.error);
+        callback(true);
       } else {
-        callback("",true)
-        getNotify("","Success! Wait a second...")
+        callback('', true);
+        getNotify('', 'Success! Wait a second...');
 
-        data = result.data
-        data_parse = (typeof data == "string") ? JSON.parse(data) : data
-        access_token = data_parse.access_token
+        data = result.data;
+        data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+        access_token = data_parse.access_token;
 
         params = {
-          key: "access_token",
-          value: access_token
-        }
+          key: 'access_token',
+          value: access_token,
+        };
 
-        Core.SetDataLocal(params, (err, result)=> {
-          if(result){
-            Actions.home({type: 'reset'})
+        Core.SetDataLocal(params, (err, result) => {
+          if (result) {
+            Actions.home({ type: 'reset' });
           } else {
-            getNotify("","Failed login, try again")
+            getNotify('', 'Failed login, try again');
           }
-        })
+        });
       }
     });
   } catch (e) {
