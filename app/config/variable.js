@@ -54,3 +54,12 @@ export const AWS_SECRET                 = "NB0hC+wutMUyJW0d2WQz9tCgwpk0P/EPw4HIL
 export const AWS_REGION                 = "us-east-1"
 export const AWS_BUCKET                 = "mednefits-dev"
 export const AWS_FOLDER                 = "receipts"
+
+/* FONT FAMILY */
+export const FONT_FAMILY                = "HelveticaNeue"
+export const FONT_FAMILY_REGULAR        = FONT_FAMILY+"-Regular"
+export const FONT_FAMILY_LIGHT          = FONT_FAMILY+"-Light"
+export const FONT_FAMILY_THIN           = FONT_FAMILY+"-Thin"
+export const FONT_FAMILY_ROMAN          = FONT_FAMILY+"-Roman"
+export const FONT_FAMILY_MEDIUM         = FONT_FAMILY+"-Medium"
+export const FONT_FAMILY_BOLD           = FONT_FAMILY+"-Bold"
