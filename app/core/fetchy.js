@@ -21,39 +21,28 @@ const headerLogin = {
 };
 
 function fetching(params, callback) {
-  fetch(params.url, {
-    method: params.method,
-    headers: params.header,
-    withCredentials: true,
-    credentials: 'include',
-    body: (params.body !== "") ? JSON.stringify(params.body) : "",
-  })
-  .then(response =>response.json())
-  .then(res => {
-
-    if (!res.status) {
-      callback(res)
-    } else if (res.status) {
-      callback(res)
-    } else {
-      getNotify("","Please try again...")
-    }
-
-  })
-    .then(response => response.json())
-    .then(res => {
-      if (!res.status) {
-        callback(res);
-      } else if (res.status) {
-        callback(res);
-      } else {
-        getNotify('', 'Please try again...');
-      }
-    })
-    .catch(error => {
-      console.warn('error fetching' + error.message);
-      getNotify('', 'Ooops, failed to get data...');
-    });
+  console.warn(params);
+  // fetch(params.url, {
+  //   method: params.method,
+  //   headers: params.header,
+  //   body: (params.body == "object") ? JSON.stringify(params.body) : params.body,
+  // })
+  // .then(response=>response.json())
+  // .then(res => {
+  //
+  //   if (!res.status) {
+  //     callback(res)
+  //   } else if (res.status) {
+  //     callback(res)
+  //   } else {
+  //     getNotify("","Please try again...")
+  //   }
+  //
+  // })
+  // .catch(error => {
+  //   console.warn('error fetching' + error.message);
+  //   getNotify('', 'Ooops, failed to get data...');
+  // });
 }
 
 export function LoginProcess(username, password, callback) {
@@ -73,9 +62,10 @@ export function LoginProcess(username, password, callback) {
       body: loginParameter,
     };
 
+
     fetching(params, result => {
       if (!result.status) {
-        getNotify('', result.error);
+        getNotify('', result.error_description);
         callback(true);
       } else {
         callback('', true);
@@ -92,7 +82,7 @@ export function LoginProcess(username, password, callback) {
 
         Core.SetDataLocal(params, (err, result) => {
           if (result) {
-            Actions.home({ type: 'reset' });
+            Actions.Home({ type: 'reset' });
           } else {
             getNotify('', 'Failed login, try again');
           }
@@ -122,7 +112,7 @@ export function UserDetail(callback){
 
         fetching(params, (result) => {
           callback("",result)
-          console.warn(result);
+          // console.warn(result);
         })
 
       }

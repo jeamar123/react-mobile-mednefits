@@ -22,6 +22,7 @@ export function SetDataLocal(params, callback) {
     AsyncStorage.setItem(params.key, params.value);
     callback('', true);
   } catch (error) {
+    console.warn(error.message);
     Core.getNotify('', 'Gagal set data lokal');
   }
 }
