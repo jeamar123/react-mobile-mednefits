@@ -13,7 +13,7 @@ class Splash extends Component {
 
   componentWillMount() {
     setTimeout(() => {
-      Core.UserDetail();
+      Core.CheckStatusApp();
     }, 1500);
   }
 
