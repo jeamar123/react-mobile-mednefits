@@ -19,6 +19,7 @@ import {
   getNotify
 } from './notify'
 import * as Core from './index'
+import * as axios from 'react-native-axios';
 
 const headerLogin = {
   Accept: 'application/json',
@@ -29,6 +30,8 @@ function fetching(params, callback) {
   fetch(params.url, {
     method: params.method,
     headers: params.header,
+    withCredentials: true,
+    credentials: 'include',
     body: (params.body !== "") ? JSON.stringify(params.body) : "",
   })
   .then(response =>response.json())
@@ -106,9 +109,11 @@ export function UserDetail(callback){
         params = {
           url: AUTH_USER_PROFILE,
           method: 'GET',
-          headers: {
-            'Authorization': 'Bearer ' + result
-          }
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': result
+          })
         }
 
         fetching(params, (result) => {
@@ -116,9 +121,9 @@ export function UserDetail(callback){
           console.warn(result);
         })
 
-        console.warn(params);
       }
     })
+
   } catch (e) {
     console.warn('error user detail'+e.message);
     getNotify("","Failed get data, try again")
