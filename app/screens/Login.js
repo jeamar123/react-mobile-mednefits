@@ -45,7 +45,7 @@ class Login extends Component {
         <Buttons onPress={() => this.LoginHandler()}>
           Log in
         </Buttons>
-        <TouchableOpacity onPress={() => Actions.forgot({ type: 'reset' })}>
+        <TouchableOpacity onPress={() => Actions.Forgot({ type: 'reset' })}>
           <Text style={{ color: '#0392cf', fontFamily: 'helvetica' }}>
             Forgot password?
           </Text>

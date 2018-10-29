@@ -6,10 +6,12 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Container, Content, Text, Drawer } from 'native-base';
+import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
+import {Text} from '../common'
+import * as Config from '../config'
 
 const { width, height } = Dimensions.get('window');
 
@@ -56,7 +58,7 @@ class Home extends Component {
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
             >
-              <Text style={{ fontFamily: 'helvetica', textAlign: 'center' }}>
+              <Text style={{ textAlign: 'center' }}>
                 Benefits Category
               </Text>
             </View>
@@ -68,7 +70,8 @@ class Home extends Component {
                     source={require('../../assets/apps/health.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    fontFamily={Config.FONT_FAMILY_MEDIUM}
+                    style={{ textAlign: 'center' }}
                   >
                     Health Screening
                   </Text>
@@ -87,7 +90,7 @@ class Home extends Component {
                     source={require('../../assets/apps/general.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    style={{ textAlign: 'center' }}
                   >
                     General Practitioner
                   </Text>
@@ -106,7 +109,7 @@ class Home extends Component {
                     source={require('../../assets/apps/tooth.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    style={{ textAlign: 'center' }}
                   >
                     Dental Care
                   </Text>
@@ -125,7 +128,7 @@ class Home extends Component {
                     source={require('../../assets/apps/chienese.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    style={{ textAlign: 'center' }}
                   >
                     Traditional Chienese Medicine
                   </Text>
@@ -138,7 +141,7 @@ class Home extends Component {
                     source={require('../../assets/apps/Specialist.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    style={{ textAlign: 'center' }}
                   >
                     Health Specialist
                   </Text>
@@ -151,7 +154,7 @@ class Home extends Component {
                     source={require('../../assets/apps/Wellness.png')}
                   />
                   <Text
-                    style={{ fontFamily: 'helvetica', textAlign: 'center' }}
+                    style={{ textAlign: 'center' }}
                   >
                     Wellness
                   </Text>

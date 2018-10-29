@@ -13,8 +13,8 @@ class Splash extends Component {
 
   componentWillMount() {
     setTimeout(() => {
-      Core.UserDetail();
-    }, 1500);
+      Core.AppStatus()
+    }, 500);
   }
 
   render() {
