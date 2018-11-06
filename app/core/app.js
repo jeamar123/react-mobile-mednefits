@@ -6,12 +6,6 @@
 import {
   AsyncStorage
 } from 'react-native'
-import {
-  AUTH_LOGIN,
-  CLIENT_SECRET,
-  CLIENT_ID,
-  AUTH_USER_PROFILE
-} from '../config/variable'
 import {Actions} from 'react-native-router-flux'
 import {
   getAlert,
@@ -26,12 +20,11 @@ const headerLogin = {
 }
 
 export function AppStatus(){
-  Core.UserDetail((err,result)=>{
-    if (result.error) {
-      getNotify("", result.message)
-      Actions.Login({type: 'reset'})
+  Core.UserDetail((err, result)=>{
+    if (result.login_status) {
+      Actions.Home({type: 'reset'})
     } else {
-      Actions.home({type: 'reset'})
+      Actions.Login({type: 'reset'})
     }
   })
 }

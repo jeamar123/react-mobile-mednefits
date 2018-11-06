@@ -24,11 +24,9 @@ function fetching(params, callback) {
   fetch(params.url, {
     method: params.method,
     headers: params.header,
-    withCredentials: true,
-    credentials: 'include',
     body: (params.body !== "") ? JSON.stringify(params.body) : "",
   })
-  .then(response =>response.json())
+  .then(response=>response.json())
   .then(res => {
 
     if (!res.status) {
@@ -40,20 +38,10 @@ function fetching(params, callback) {
     }
 
   })
-    .then(response => response.json())
-    .then(res => {
-      if (!res.status) {
-        callback(res);
-      } else if (res.status) {
-        callback(res);
-      } else {
-        getNotify('', 'Please try again...');
-      }
-    })
-    .catch(error => {
-      console.warn('error fetching' + error.message);
-      getNotify('', 'Ooops, failed to get data...');
-    });
+  .catch(error => {
+    console.warn('error fetching' + error.message);
+    getNotify('', 'Ooops, failed to get data...');
+  });
 }
 
 export function LoginProcess(username, password, callback) {
@@ -92,7 +80,7 @@ export function LoginProcess(username, password, callback) {
 
         Core.SetDataLocal(params, (err, result) => {
           if (result) {
-            Actions.home({ type: 'reset' });
+            Actions.Home({ type: 'reset' });
           } else {
             getNotify('', 'Failed login, try again');
           }
@@ -106,30 +94,30 @@ export function LoginProcess(username, password, callback) {
 
 export function UserDetail(callback){
   try {
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result)=> {
-      if (err) {
-        Actions.login({type: 'reset'})
+     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result)=> {
+      if (err || result == undefined) {
+        Actions.Login({type: 'reset'})
       } else {
         params = {
           url: AUTH_USER_PROFILE,
           method: 'GET',
-          headers: new Headers({
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': result
-          })
+          header: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": result
+          }
         }
 
         fetching(params, (result) => {
           callback("",result)
-          console.warn(result);
         })
-
       }
+
     })
 
   } catch (e) {
     console.warn('error user detail'+e.message);
     getNotify("","Failed get data, try again")
   }
+
 }

@@ -5,11 +5,9 @@ import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { ACCESS_TOKEN } from '../config/variable';
 import * as Core from '../core';
+import * as Config from '../config';
 
 class Splash extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     setTimeout(() => {

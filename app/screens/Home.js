@@ -58,7 +58,9 @@ class Home extends Component {
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
             >
-              <Text style={{ textAlign: 'center' }}>
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center' }}>
                 Benefits Category
               </Text>
             </View>
@@ -70,7 +72,7 @@ class Home extends Component {
                     source={require('../../assets/apps/health.png')}
                   />
                   <Text
-                    fontFamily={Config.FONT_FAMILY_MEDIUM}
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     Health Screening
@@ -90,6 +92,7 @@ class Home extends Component {
                     source={require('../../assets/apps/general.png')}
                   />
                   <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     General Practitioner
@@ -109,6 +112,7 @@ class Home extends Component {
                     source={require('../../assets/apps/tooth.png')}
                   />
                   <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     Dental Care
@@ -128,6 +132,7 @@ class Home extends Component {
                     source={require('../../assets/apps/chienese.png')}
                   />
                   <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     Traditional Chienese Medicine
@@ -141,6 +146,7 @@ class Home extends Component {
                     source={require('../../assets/apps/Specialist.png')}
                   />
                   <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     Health Specialist
@@ -154,6 +160,7 @@ class Home extends Component {
                     source={require('../../assets/apps/Wellness.png')}
                   />
                   <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
                     Wellness

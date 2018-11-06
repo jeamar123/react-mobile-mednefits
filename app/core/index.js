@@ -1,4 +1,4 @@
-export * from './fetch'
+export * from './fetchy'
 export * from './loader'
 export * from './notify'
 export * from './local'
