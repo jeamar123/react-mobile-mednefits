@@ -27,6 +27,7 @@ import Balance from '../screens/Balance';
 import SelectService from '../screens/SelectService';
 import Homes from '../screens/Home';
 import Splash from '../screens/Splash';
+import Barcode from '../screens/Barcode';
 
 class RouterComponent extends Component {
   render() {
@@ -77,6 +78,7 @@ class RouterComponent extends Component {
           <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
           <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
           <Scene key="EmailSend" component={EmailSend} hideNavBar />
+          <Scene key="Barcode" component={Barcode} hideNavBar initial/>
         </Stack>
       </Router>
     );

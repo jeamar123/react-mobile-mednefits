@@ -6,6 +6,7 @@ import {
   Image,
   Platform,
   StyleSheet,
+  StatusBar
 } from 'react-native';
 import { Icon, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -326,6 +327,7 @@ export default class Navbar extends React.Component {
           },
         ]}
       >
+        <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
         {this.renderLeft()}
         {this.renderMiddle()}
         {this.renderRight()}
