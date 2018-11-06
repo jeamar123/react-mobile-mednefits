@@ -61,9 +61,10 @@ export function LoginProcess(username, password, callback) {
       body: loginParameter,
     };
 
+
     fetching(params, result => {
       if (!result.status) {
-        getNotify('', result.error);
+        getNotify('', result.error_description);
         callback(true);
       } else {
         callback('', true);
