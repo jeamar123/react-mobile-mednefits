@@ -3,8 +3,34 @@ import { StatusBar, View } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import styles from '../components/BalanceComp/styles';
 import Navbar from '../components/common/Navbar';
+import * as Core from '../core';
 
 class Balance extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Balance: '0',
+      InNetwork_Credit_spent: '0',
+      Eclaim_Credit_spent: '0',
+    }
+  }
+
+  componentWillMount() {
+    this.getUserBalance();
+  }
+
+  getUserBalance() {
+    Core.GetBalance((error, result) => {
+      data = (typeof result.data == 'string') ? JSON.parse(result.data) : result.data;
+      console.warn(data)
+      this.setState({
+        Balance: data.balance,
+        InNetwork_Credit_spent: data.in_network_credits_spent,
+        Eclaim_Credit_spent: data.e_claim_credit_spent,
+      });
+    });
+  }
+
   render() {
     return (
       <Container>
@@ -47,7 +73,7 @@ class Balance extends Component {
                 marginTop: 10,
               }}
             >
-              S$ 1,000.00
+              S$ {this.state.Balance}
             </Text>
 
             <Text
@@ -95,7 +121,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ 68.00
+                S$ {(this.state.Eclaim_Credit_spent)}
               </Text>
             </View>
           </View>
@@ -134,7 +160,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ 140.00
+                S$ {(this.state.InNetwork_Credit_spent)}
               </Text>
             </View>
           </View>

@@ -10,8 +10,8 @@ import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
-import {Text} from '../common'
-import * as Config from '../config'
+import { Text } from '../common';
+import * as Config from '../config';
 
 const { width, height } = Dimensions.get('window');
 
@@ -60,7 +60,8 @@ class Home extends Component {
             >
               <Text
                 fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center' }}>
+                style={{ textAlign: 'center' }}
+              >
                 Benefits Category
               </Text>
             </View>
@@ -135,7 +136,7 @@ class Home extends Component {
                     fontFamily={Config.FONT_FAMILY_ROMAN}
                     style={{ textAlign: 'center' }}
                   >
-                    Traditional Chienese Medicine
+                    Traditional Chinese Medicine
                   </Text>
                 </View>
               </TouchableOpacity>
