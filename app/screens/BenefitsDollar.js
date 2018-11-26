@@ -5,6 +5,7 @@ import { DollarBenefits } from '../components/DollarBenefits';
 import { Buttons } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
+import * as Core from '../core';
 
 class BenefitsDollar extends Component {
   render() {

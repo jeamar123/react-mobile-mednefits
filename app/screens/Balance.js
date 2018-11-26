@@ -12,7 +12,7 @@ class Balance extends Component {
       Balance: '0',
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
-    }
+    };
   }
 
   componentWillMount() {
@@ -21,8 +21,9 @@ class Balance extends Component {
 
   getUserBalance() {
     Core.GetBalance((error, result) => {
-      data = (typeof result.data == 'string') ? JSON.parse(result.data) : result.data;
-      console.warn(data)
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
       this.setState({
         Balance: data.balance,
         InNetwork_Credit_spent: data.in_network_credits_spent,
@@ -121,7 +122,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ {(this.state.Eclaim_Credit_spent)}
+                S$ {this.state.Eclaim_Credit_spent}
               </Text>
             </View>
           </View>
@@ -160,7 +161,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ {(this.state.InNetwork_Credit_spent)}
+                S$ {this.state.InNetwork_Credit_spent}
               </Text>
             </View>
           </View>

@@ -4,16 +4,9 @@
  */
 
 import { AsyncStorage } from 'react-native';
-import {
-  AUTH_LOGIN,
-  CLIENT_SECRET,
-  CLIENT_ID,
-  AUTH_USER_PROFILE,
-  USER_CREDITS,
-} from '../config/variable';
-import * as Config from '../config';
 import { Actions } from 'react-native-router-flux';
 import { getAlert, getNotify } from './notify';
+import * as Config from '../config';
 import * as Core from './index';
 
 const headerLogin = {
@@ -49,14 +42,14 @@ export function LoginProcess(username, password, callback) {
   try {
     loginParameter = {
       grant_type: 'password',
-      client_secret: CLIENT_SECRET,
-      client_id: CLIENT_ID,
+      client_secret: Config.CLIENT_SECRET,
+      client_id: Config.CLIENT_ID,
       username: username,
       password: password,
     };
 
     params = {
-      url: AUTH_LOGIN,
+      url: Config.AUTH_LOGIN,
       method: 'POST',
       header: headerLogin,
       body: loginParameter,
@@ -100,7 +93,7 @@ export function UserDetail(callback) {
         Actions.Login({ type: 'reset' });
       } else {
         params = {
-          url: AUTH_USER_PROFILE,
+          url: Config.AUTH_USER_PROFILE,
           method: 'GET',
           header: {
             'Accept': 'application/json',
@@ -122,20 +115,42 @@ export function UserDetail(callback) {
 export function GetBalance(callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
-        params = {
-          url: USER_CREDITS,
-          method: 'GET',
-          header: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': result,
-          },
-        };
-        fetching(params, result => {
-          callback('', result);
-        });
+      params = {
+        url: Config.USER_CREDITS,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
     });
   } catch (e) {
+    console.warn('error get balance' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetHistoryTransaction(callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.USER_NETWORK_TRANSACTION,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch(e) {
     console.warn('error get balance' + e.message);
     getNotify('', 'Failed get data, try again');
   }
