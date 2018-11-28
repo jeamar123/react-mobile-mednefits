@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import {
   Content,
   ListItem,
@@ -33,14 +33,12 @@ const MenuSide = () => (
       <View style={{ marginTop: 20 }} />
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
-              Actions.home({
+              Actions.Home({
                 type: 'reset',
               })
-            }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
-          >
+            }>
             <Image
               style={{
                 justifyContent: 'center',
@@ -50,23 +48,28 @@ const MenuSide = () => (
               }}
               source={require('../../../assets/apps/home.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Home</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Home({
+                type: 'reset',
+              })
+            }>
+            <Text style={styles.text}>Home</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
               Actions.SettingWallet({
                 type: 'reset',
               })
-            }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
-          >
+            }>
             <Image
               style={{
                 justifyContent: 'center',
@@ -76,23 +79,28 @@ const MenuSide = () => (
               }}
               source={require('../../../assets/apps/wallet.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Wallet</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.SettingWallet({
+                type: 'reset',
+              })
+            }>
+            <Text style={styles.text}>Wallet</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
               Actions.DetailEclaim({
                 type: 'reset',
               })
-            }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
-          >
+            }>
             <Image
               style={{
                 justifyContent: 'center',
@@ -102,23 +110,30 @@ const MenuSide = () => (
               }}
               source={require('../../../assets/apps/receipt.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>E-Claim</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.DetailEclaim({
+                type: 'reset',
+              })
+            }>
+            <Text style={styles.text}>E-Claim</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
+
+      <ListItem
+        icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
               Actions.HistoryTransaction({
                 type: 'reset',
               })
-            }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
-          >
+            }>
             <Image
               style={{
                 justifyContent: 'center',
@@ -128,26 +143,33 @@ const MenuSide = () => (
               }}
               source={require('../../../assets/apps/history.png')}
             />
-          </Button>
+          </TouchableOpacity>
+
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.HistoryTransaction({
+                type: 'reset',
+              })
+            }>
           <Text style={styles.text}>History</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
+
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}>
-            <Image
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 30,
-                height: 30,
-              }}
-              source={require('../../../assets/apps/favorite.png')}
-            />
-          </Button>
+          <Image
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 30,
+              height: 30,
+            }}
+            source={require('../../../assets/apps/favorite.png')}
+          />
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
           <Text style={styles.text}>Favourites</Text>
@@ -156,17 +178,15 @@ const MenuSide = () => (
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}>
-            <Image
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 30,
-                height: 30,
-              }}
-              source={require('../../../assets/apps/user.png')}
-            />
-          </Button>
+          <Image
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 30,
+              height: 30,
+            }}
+            source={require('../../../assets/apps/user.png')}
+          />
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
           <Text style={styles.text}>Profile</Text>

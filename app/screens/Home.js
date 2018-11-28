@@ -40,6 +40,7 @@ class Home extends Component {
   render() {
     return (
       <Drawer
+        type="displace"
         ref={ref => {
           this._drawer = ref;
         }}
