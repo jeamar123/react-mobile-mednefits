@@ -16,11 +16,25 @@ import * as Config from '../config';
 const { width, height } = Dimensions.get('window');
 
 class Home extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.drawerActionCallback = this.drawerActionCallback.bind(this)
+  }
+
   closeDrawer() {
     this._drawer._root.close();
   }
+
   openDrawer() {
     this._drawer._root.open();
+  }
+
+  drawerActionCallback(callback){
+    if (callback == true) {
+      this.openDrawer()
+    }
   }
 
   render() {
@@ -34,7 +48,11 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <Navbar leftNav={true} rightNav={true} />
+          <Navbar
+            drawerAction={this.drawerActionCallback}
+            leftNav={true}
+            rightNav={true}
+          />
           {/* <Header style={{ backgroundColor: '#0392cf' }}>
             <Left>
               <Button transparent onPress={() => this.openDrawer()}>

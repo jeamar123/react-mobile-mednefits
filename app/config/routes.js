@@ -78,7 +78,7 @@ class RouterComponent extends Component {
           <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
           <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
           <Scene key="EmailSend" component={EmailSend} hideNavBar />
-          <Scene key="Barcode" component={Barcode} hideNavBar initial/>
+          <Scene key="Barcode" component={Barcode} hideNavBar />
         </Stack>
       </Router>
     );

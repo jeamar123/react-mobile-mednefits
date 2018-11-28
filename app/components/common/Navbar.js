@@ -155,7 +155,10 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-start',
           }}
         >
-          <TouchableOpacity style={{ paddingLeft: 15 }}>
+          <TouchableOpacity
+            style={{ paddingLeft: 15 }}
+            onPress={()=>this.props.drawerAction(true)}
+            >
             <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
           </TouchableOpacity>
         </View>
