@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 const options = {
   title: 'Choose you Pay Receipt',
@@ -68,7 +69,7 @@ class ScanPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => this.selectPhoto()}>
+          <TouchableOpacity onPress={() => Actions.Barcode()}>
             <Card>
               <CardItem>
                 <Body
@@ -88,7 +89,7 @@ class ScanPay extends Component {
               </CardItem>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.selectPhoto2()}>
+          <TouchableOpacity onPress={() => Actions.Barcode()}>
             <Card>
               <CardItem>
                 <Body

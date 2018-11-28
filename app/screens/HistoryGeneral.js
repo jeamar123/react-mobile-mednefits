@@ -95,21 +95,7 @@ class History extends Component {
             placeholder="Scaling & Polishing"
             clearButtonMode="while-editing"
           />
-          <GiftedForm.ModalWidget
-            title="Date & Time"
-            displayValue="Date & Time"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
 
-            <GiftedForm.DatePickerIOSWidget
-              name="birthday"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
           <GiftedForm.TextInputWidget
             underlineColorAndroid="transparent"
             name="member"

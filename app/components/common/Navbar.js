@@ -6,7 +6,7 @@ import {
   Image,
   Platform,
   StyleSheet,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import { Icon, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -47,7 +47,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={Actions.pop}
+            onPress={() => Actions.Home()}
             style={{
               paddingStart: 11,
               flexDirection: 'row',
@@ -60,11 +60,7 @@ export default class Navbar extends React.Component {
               style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{
-                color: '#fff',
-                fontSize: 14,
-                fontFamily: 'Helvetica',
-              }}
+              style={{ color: '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
             >
               Back
             </Text>
@@ -117,7 +113,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={Actions.pop}
+            onPress={() => Actions.Home()}
             style={{
               paddingStart: 15,
               flexDirection: 'row',
@@ -241,10 +237,10 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity style={{ paddingEnd: 15 }}>
+          <TouchableOpacity style={{ paddingEnd: '3%' }}>
             <Image
-              source={require('../../../assets/apps/gear.png')}
-              style={{ height: 55, resizeMode: 'center', width: 25 }}
+              source={require('../../../assets/apps/switch.png')}
+              style={{ height: 55, resizeMode: 'center', width: 75 }}
             />
           </TouchableOpacity>
         </View>
