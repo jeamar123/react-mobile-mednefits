@@ -12,16 +12,46 @@ import {
   Tabs,
 } from 'native-base';
 import Navbar from '../components/common/Navbar';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import * as Core from '../core';
 
 class HistoryTransaction extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      idTransaction: '0',
+      date: '',
+      customerName: '',
+      price: '',
+      status: '',
+    };
+  }
+
+  componentWillMount() {
+    this.getDataTransaction();
+  }
+
+  getDataTransaction() {
+    Core.GetHistoryTransaction((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      this.setState({
+        idTransaction: data.transaction_id,
+        date: data.date_of_transaction,
+        customerName: data.customer,
+        price: data.amount,
+        status: data.type,
+      });
+    });
+  }
+
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="History" />
         <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'transparant', }}
+          tabBarUnderlineStyle={{ backgroundColor: 'transparant' }}
           tabBarBackgroundColor="#0392cf"
         >
           <Tab
@@ -40,8 +70,10 @@ class HistoryTransaction extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{}}>Transaction #: IN74859204</Text>
-                  <Text style={{}}>20 October 2017, 09:30am</Text>
+                  <Text style={{}}>
+                    Transaction #: {this.state.idTransaction}
+                  </Text>
+                  <Text style={{}}>{this.state.date}</Text>
                 </CardItem>
                 <CardItem>
                   <Body
