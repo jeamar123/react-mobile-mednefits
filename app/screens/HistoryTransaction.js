@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import {
   Container,
   Content,
@@ -23,26 +23,100 @@ class HistoryTransaction extends Component {
       customerName: '',
       price: '',
       status: '',
+      resultData: [],
     };
   }
 
   componentWillMount() {
-    this.getDataTransaction();
+    this.getDataIn_Network();
   }
 
-  getDataTransaction() {
+  getDataIn_Network() {
     Core.GetHistoryTransaction((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
-        idTransaction: data.transaction_id,
-        date: data.date_of_transaction,
-        customerName: data.customer,
-        price: data.amount,
-        status: data.type,
-      });
+      this.setState({ resultData: data });
     });
+  }
+
+  renderTransactionIn_Network() {
+    return this.state.resultData.map(Data => (
+      <Card>
+        <CardItem
+          bordered
+          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text style={{ fontSize: 13 }}>
+            Transaction #: {Data.transaction_id}
+          </Text>
+          <Text style={{ fontSize: 13 }}>{Data.date_of_transaction}</Text>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ fontSize: 13 }}>{Data.clinic_type_and_service}</Text>
+            <Text />
+          </Body>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ fontSize: 13 }} />
+            <Text>S$ {Data.amount}</Text>
+          </Body>
+        </CardItem>
+        <CardItem
+          footer
+          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text style={{ fontSize: 13, color: '#0392cf' }}>
+            {Data.customer}
+          </Text>
+        </CardItem>
+      </Card>
+    ));
+  }
+
+  renderTransactionE_Claim() {
+    return this.state.resultData.map(Data => (
+      <Card>
+        <CardItem
+          bordered
+          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text style={{ fontSize: 13 }}>Claim #: {Data.transaction_id}</Text>
+          <Text style={{ fontSize: 13 }}>
+            Claim Date: {Data.date_of_transaction}
+          </Text>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ fontSize: 13 }}>{Data.clinic_type_and_service}</Text>
+            <Text />
+          </Body>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ fontSize: 13 }} />
+            <Text>S$ {Data.amount}</Text>
+          </Body>
+        </CardItem>
+        <CardItem
+          footer
+          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+        >
+          <Text style={{ fontSize: 13, color: '#0392cf' }}>
+            {Data.customer}
+          </Text>
+        </CardItem>
+      </Card>
+    ));
   }
 
   render() {
@@ -61,117 +135,7 @@ class HistoryTransaction extends Component {
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
             textStyle={{ color: '#fff', fontSize: 15 }}
           >
-            <Content padder>
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>
-                    Transaction #: {this.state.idTransaction}
-                  </Text>
-                  <Text style={{}}>{this.state.date}</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Pending</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>Transaction #: IN74859204</Text>
-                  <Text style={{}}>20 October 2017, 09:30am</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Pending</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>Transaction #: IN74859204</Text>
-                  <Text style={{}}>20 October 2017, 09:30am</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Pending</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-            </Content>
+            <Content padder>{this.renderTransactionIn_Network()}</Content>
           </Tab>
           <Tab
             heading="E-Claim Transactions"
@@ -180,115 +144,7 @@ class HistoryTransaction extends Component {
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
             textStyle={{ color: '#fff', fontSize: 15 }}
           >
-            <Content padder>
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>Claim #: IN74859204</Text>
-                  <Text style={{}}>Claim Date: 20 October 2017</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Approved</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>Claim #: IN74859204</Text>
-                  <Text style={{}}>Claim Date: 20 October 2017</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Approved</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-
-              <Card>
-                <CardItem
-                  bordered
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{}}>Transaction #: IN74859204</Text>
-                  <Text style={{}}>20 October 2017, 09:30am</Text>
-                </CardItem>
-                <CardItem>
-                  <Body
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Text>Filbert Tan</Text>
-                    <Text>S$ 188.00</Text>
-                  </Body>
-                </CardItem>
-                <CardItem
-                  footer
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text>Status</Text>
-                  <Button>
-                    <Text>Pending</Text>
-                  </Button>
-                </CardItem>
-              </Card>
-            </Content>
+            <Content padder>{this.renderTransactionE_Claim()}</Content>
           </Tab>
         </Tabs>
       </Container>

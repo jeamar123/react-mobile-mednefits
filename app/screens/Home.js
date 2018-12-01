@@ -16,11 +16,10 @@ import * as Config from '../config';
 const { width, height } = Dimensions.get('window');
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
 
-  constructor(props){
-    super(props)
-
-    this.drawerActionCallback = this.drawerActionCallback.bind(this)
+    this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
   closeDrawer() {
@@ -31,9 +30,9 @@ class Home extends Component {
     this._drawer._root.open();
   }
 
-  drawerActionCallback(callback){
+  drawerActionCallback(callback) {
     if (callback == true) {
-      this.openDrawer()
+      this.openDrawer();
     }
   }
 
@@ -73,7 +72,7 @@ class Home extends Component {
             </Right>
           </Header> */}
           <HomeContent />
-          <Content padder>
+          <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
             >
@@ -188,7 +187,7 @@ class Home extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-          </Content>
+          </View>
         </Container>
       </Drawer>
     );
