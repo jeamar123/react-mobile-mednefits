@@ -89,8 +89,8 @@ class Home extends Component {
                   <Image
                     style={{
                       marginBottom: 15,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/health.png')}
                   />
@@ -113,8 +113,8 @@ class Home extends Component {
                   <Image
                     style={{
                       margin: 10,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/general.png')}
                   />
@@ -137,8 +137,8 @@ class Home extends Component {
                   <Image
                     style={{
                       marginBottom: 20,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/tooth.png')}
                   />
@@ -161,14 +161,14 @@ class Home extends Component {
                   <Image
                     style={{
                       margin: 10,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/chienese.png')}
                   />
                   <Text
                     fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', width: '100%' }}
                   >
                     Traditional Chinese Medicine
                   </Text>
@@ -179,8 +179,8 @@ class Home extends Component {
                   <Image
                     style={{
                       margin: 10,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/Specialist.png')}
                   />
@@ -197,8 +197,8 @@ class Home extends Component {
                   <Image
                     style={{
                       margin: 10,
-                      width: 50,
-                      height: 50,
+                      width: 35,
+                      height: 35,
                     }}
                     source={require('../../assets/apps/Wellness.png')}
                   />
