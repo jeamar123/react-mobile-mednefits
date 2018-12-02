@@ -87,7 +87,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ marginBottom: 15 }}
+                    style={{
+                      marginBottom: 15,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/health.png')}
                   />
                   <Text
@@ -107,7 +111,11 @@ class Home extends Component {
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/general.png')}
                   />
                   <Text
@@ -127,7 +135,11 @@ class Home extends Component {
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ marginBottom: 20 }}
+                    style={{
+                      marginBottom: 20,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/tooth.png')}
                   />
                   <Text
@@ -147,7 +159,11 @@ class Home extends Component {
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/chienese.png')}
                   />
                   <Text
@@ -161,7 +177,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/Specialist.png')}
                   />
                   <Text
@@ -175,7 +195,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 50,
+                      height: 50,
+                    }}
                     source={require('../../assets/apps/Wellness.png')}
                   />
                   <Text

@@ -86,8 +86,8 @@ class HistoryTransaction extends Component {
           bordered
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
-          <Text style={{ fontSize: 13 }}>Claim #: {Data.transaction_id}</Text>
-          <Text style={{ fontSize: 13 }}>
+          <Text style={{ fontSize: 12 }}>Claim #: {Data.transaction_id}</Text>
+          <Text style={{ fontSize: 12 }}>
             Claim Date: {Data.date_of_transaction}
           </Text>
         </CardItem>

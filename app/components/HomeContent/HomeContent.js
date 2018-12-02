@@ -47,16 +47,14 @@ class HomeContent extends Component {
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
-                Actions.PayScan({
+                Actions.Barcode({
                   type: 'reset',
                 })
               }
             >
               <View style={styles.gridBox}>
                 <Image
-                  style={{
-                    marginBottom: 15,
-                  }}
+                  style={{ marginBottom: 15, width: 30, height: 30 }}
                   source={require('../../../assets/apps/Scan&Pay.png')}
                 />
                 <Text style={styles.title}>Scan & Pay</Text>
@@ -72,9 +70,7 @@ class HomeContent extends Component {
             >
               <View style={styles.gridBox}>
                 <Image
-                  style={{
-                    marginBottom: 15,
-                  }}
+                  style={{ marginBottom: 12, width: 26, height: 35 }}
                   source={require('../../../assets/apps/E-Card.png')}
                 />
                 <Text style={styles.title}>E-Card</Text>
@@ -83,7 +79,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.BenefitsDollar({
+                Actions.Balance({
                   type: 'reset',
                 })
               }
