@@ -15,27 +15,39 @@ const headerLogin = {
 };
 
 function fetching(params, callback) {
-fetch(params.url, {
-    method: params.method,
-    headers: params.header,
-    body: (params.body == '') ? '' : (typeof params.body == 'object') ? JSON.stringify(params.body) : params.body,
-  })
-  .then(response=>response.json())
-  .then(res => {
+  Core.CheckNetworkConnection((connection)=>{
+    try {
+      if (connection == "none") {
+        throw("No Internet Connection")
+      } else if (connection == "unknown") {
+        throw("Connection Unknown")
+      } else {
+        fetch(params.url, {
+          method: params.method,
+          headers: params.header,
+          body: (params.body == '') ? '' : (typeof params.body == 'object') ? JSON.stringify(params.body) : params.body,
+        })
+        .then(response=>response.json())
+        .then(res => {
 
-    if (!res.status) {
-      callback(res)
-    } else if (res.status) {
-      callback(res)
-    } else {
-      getNotify("","Please try again...")
+          if (!res.status) {
+            callback(res)
+          } else if (res.status) {
+            callback(res)
+          } else {
+            getNotify("","Please try again...")
+          }
+
+        })
+        .catch(error => {
+          // console.warn('error fetching' + error.message);
+          Core.getNotify('', 'Ooops, failed to get data...');
+        });
+      }
+    } catch (e) {
+      Core.getNotify('', e);
     }
-
   })
-  .catch(error => {
-    console.warn('error fetching' + error.message);
-    getNotify('', 'Ooops, failed to get data...');
-  });
 }
 
 export function LoginProcess(username, password, callback) {

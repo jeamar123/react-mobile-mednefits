@@ -11,6 +11,7 @@ import {
 import { Icon, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import * as Core from '../../core'
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -315,21 +316,24 @@ export default class Navbar extends React.Component {
   render() {
     // console.warn(this.props.rightNav);
     return (
-      <View
-        style={[
-          styles.container,
-          {
-            justifyContent:
-              !this.props.leftNav && !this.props.rightNav
-                ? 'center'
-                : 'space-between',
-          },
-        ]}
-      >
-        <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
-        {this.renderLeft()}
-        {this.renderMiddle()}
-        {this.renderRight()}
+      <View style={{flexDirection: 'column'}}>
+        <View
+          style={[
+            styles.container,
+            {
+              justifyContent:
+                !this.props.leftNav && !this.props.rightNav
+                  ? 'center'
+                  : 'space-between',
+            },
+          ]}
+        >
+          <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
+          {this.renderLeft()}
+          {this.renderMiddle()}
+          {this.renderRight()}
+        </View>
+        <Core.Network />
       </View>
     );
   }

@@ -33,6 +33,7 @@ class OfflineNotice extends PureComponent {
   };
 
   render() {
+    console.warn("isConnected "+this.state.isConnected);
     if (!this.state.isConnected) {
       return <MiniOfflineSign />;
     }
@@ -48,8 +49,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width,
-    position: 'absolute',
-    top: 30
   },
   offlineText: { color: '#fff' }
 });
