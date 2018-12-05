@@ -63,7 +63,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance({
+                Actions.ECardUser({
                   type: 'reset',
                 })
               }

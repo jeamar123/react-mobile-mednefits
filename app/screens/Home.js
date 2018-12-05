@@ -104,7 +104,7 @@ class Home extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
-                  Actions.HistoryGeneral({
+                  Actions.GeneralPractitioner({
                     type: 'reset',
                   })
                 }
