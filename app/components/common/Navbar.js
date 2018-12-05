@@ -258,7 +258,7 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.Home()}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',

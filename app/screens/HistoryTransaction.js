@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, TouchableOpacity } from 'react-native';
 import {
   Container,
   Content,
@@ -11,6 +11,7 @@ import {
   Tab,
   Tabs,
 } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 
@@ -51,89 +52,109 @@ class HistoryTransaction extends Component {
 
   renderTransactionIn_Network() {
     return this.state.resultData.map(Data => (
-      <Card>
-        <CardItem
-          bordered
-          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-        >
-          <Text style={{ fontSize: 12 }}>
-            Transaction #: {Data.transaction_id}
-          </Text>
-          <Text style={{ fontSize: 12 }}>{Data.date_of_transaction}</Text>
-        </CardItem>
-        <CardItem>
-          <Body
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+      <TouchableOpacity onPress={() => Actions.HistoryGeneral()}>
+        <Card>
+          <CardItem
+            bordered
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
           >
-            <Text style={{ fontSize: 12 }}>{Data.clinic_type_and_service}</Text>
-            <Text />
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            <Text style={{ fontSize: 12 }}>
+              Transaction #: {Data.transaction_id}
+            </Text>
+            <Text style={{ fontSize: 12 }}>{Data.date_of_transaction}</Text>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontSize: 12 }}>
+                {Data.clinic_type_and_service}
+              </Text>
+              <Text />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontSize: 12 }} />
+              <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
+            </Body>
+          </CardItem>
+          <CardItem
+            footer
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
           >
-            <Text style={{ fontSize: 12 }} />
-            <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
-          </Body>
-        </CardItem>
-        <CardItem
-          footer
-          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-        >
-          <Text style={{ fontSize: 12, color: '#0392cf' }}>
-            {Data.customer}
-          </Text>
-        </CardItem>
-      </Card>
+            <Text style={{ fontSize: 12, color: '#0392cf' }}>
+              {Data.customer}
+            </Text>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     ));
   }
 
   renderTransactionE_Claim() {
     return this.state.DataE_Claim.map(Data => (
-      <Card>
-        <CardItem
-          bordered
-          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-        >
-          <Text style={{ fontSize: 12 }}>Claim #: {Data.transaction_id}</Text>
-          <Text style={{ fontSize: 12 }}>Claim Date: {Data.claim_date}</Text>
-        </CardItem>
-        <CardItem>
-          <Body
+      <TouchableOpacity>
+        <Card>
+          <CardItem
+            bordered
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
-            <Text />
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body
+            <Text style={{ fontSize: 12 }}>Claim #: {Data.transaction_id}</Text>
+            <Text style={{ fontSize: 12 }}>Claim Date: {Data.claim_date}</Text>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
+              <Text />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <Text style={{ fontSize: 12, color: '#666666' }}>
+                {Data.service}
+              </Text>
+              <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <Text style={{ fontSize: 12, color: '#666666' }}>
+                {Data.visit_date}
+              </Text>
+              <Text />
+            </Body>
+          </CardItem>
+          <CardItem
+            footer
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 12, color: '#666666' }}>
-              {Data.service}
+            <Text style={{ fontSize: 11, color: '#0392cf' }}>
+              {Data.member}
             </Text>
-            <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
-          </Body>
-        </CardItem>
-        <CardItem>
-          <Body
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-          >
-            <Text style={{ fontSize: 12, color: '#666666' }}>
-              {Data.visit_date}
-            </Text>
-            <Text ></Text>
-          </Body>
-        </CardItem>
-        <CardItem
-          footer
-          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-        >
-          <Text style={{ fontSize: 11, color: '#0392cf' }}>{Data.member}</Text>
-        </CardItem>
-      </Card>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     ));
   }
 

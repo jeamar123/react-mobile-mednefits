@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { DollarBenefits } from '../components/DollarBenefits';
 import { Buttons } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
@@ -47,7 +48,7 @@ class BenefitsDollar extends Component {
               </Body>
             </CardItem>
 
-            <Buttons>Pay</Buttons>
+            <Buttons onPress={() => Actions.Summary()}>Pay</Buttons>
             <View style={{ marginBottom: 20 }} />
           </Card>
         </Content>

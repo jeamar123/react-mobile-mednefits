@@ -69,7 +69,7 @@ class ScanPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => Actions.Barcode()}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar()}>
             <Card>
               <CardItem>
                 <Body
@@ -89,7 +89,7 @@ class ScanPay extends Component {
               </CardItem>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => Actions.Barcode()}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar()}>
             <Card>
               <CardItem>
                 <Body
