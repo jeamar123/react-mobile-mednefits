@@ -21,12 +21,7 @@ class DetailEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar
-          leftNav="back-home"
-          title="E-Clain"
-          subtitle="File e-claim"
-          rightNav="next"
-        />
+        <Navbar leftNav="back-home" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
         <GiftedForm
           style={{
@@ -63,6 +58,7 @@ class DetailEclaim extends Component {
             clearButtonMode="while-editing"
           />
         </GiftedForm>
+        <Buttons>Submit</Buttons>
       </Container>
     );
   }

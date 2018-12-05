@@ -40,10 +40,17 @@ export const CLINIC_SEND_PAYMENT            = CLINIC + '/send_payment';
 export const CLINIC_PAYMENT_DIRECT          = CLINIC + '/payment_direct';
 
 /* USER VARIABLE */
-export const USER                       = MAIN+"/user"
-export const USER_CREDITS               = USER+"/credits"
-export const USER_NETWORK_TRANSACTION   = USER+"/in_network_transactions"
-export const USER_SPECIFIC_IN_NETWORK   = USER+"/specific_in_network"
+export const USER                           = MAIN+"/user"
+export const USER_CREDITS                   = USER+"/credits"
+export const USER_NETWORK_TRANSACTION       = USER+"/in_network_transactions"
+export const USER_SPECIFIC_IN_NETWORK       = USER+"/specific_in_network"
+export const USER_ECLAIM_TRANSACTION        = USER+"/e_claim_transactions"
+export const USER_SPECIFIC_E_CLAIM          = USER+"/specific_e_claim_transaction"
+export const USER_CREATE_E_CLAIM            = USER+"/create_e_claim"
+export const USER_HEALT_TYPE_LIST           = USER+"/health_type_lists"
+export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER+"/upload_in_network_receipt"
+export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt"
+
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN               = "access_token"

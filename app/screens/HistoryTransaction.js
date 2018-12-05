@@ -24,11 +24,13 @@ class HistoryTransaction extends Component {
       price: '',
       status: '',
       resultData: [],
+      DataE_Claim: [],
     };
   }
 
   componentWillMount() {
     this.getDataIn_Network();
+    this.getDataE_Claim();
   }
 
   getDataIn_Network() {
@@ -39,6 +41,14 @@ class HistoryTransaction extends Component {
     });
   }
 
+  getDataE_Claim() {
+    Core.GetEClaimTransaction((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      this.setState({ DataE_Claim: data });
+    });
+  }
+
   renderTransactionIn_Network() {
     return this.state.resultData.map(Data => (
       <Card>
@@ -46,16 +56,16 @@ class HistoryTransaction extends Component {
           bordered
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
-          <Text style={{ fontSize: 13 }}>
+          <Text style={{ fontSize: 12 }}>
             Transaction #: {Data.transaction_id}
           </Text>
-          <Text style={{ fontSize: 13 }}>{Data.date_of_transaction}</Text>
+          <Text style={{ fontSize: 12 }}>{Data.date_of_transaction}</Text>
         </CardItem>
         <CardItem>
           <Body
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 13 }}>{Data.clinic_type_and_service}</Text>
+            <Text style={{ fontSize: 12 }}>{Data.clinic_type_and_service}</Text>
             <Text />
           </Body>
         </CardItem>
@@ -63,15 +73,15 @@ class HistoryTransaction extends Component {
           <Body
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 13 }} />
-            <Text>S$ {Data.amount}</Text>
+            <Text style={{ fontSize: 12 }} />
+            <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
           </Body>
         </CardItem>
         <CardItem
           footer
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
-          <Text style={{ fontSize: 13, color: '#0392cf' }}>
+          <Text style={{ fontSize: 12, color: '#0392cf' }}>
             {Data.customer}
           </Text>
         </CardItem>
@@ -80,22 +90,20 @@ class HistoryTransaction extends Component {
   }
 
   renderTransactionE_Claim() {
-    return this.state.resultData.map(Data => (
+    return this.state.DataE_Claim.map(Data => (
       <Card>
         <CardItem
           bordered
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
           <Text style={{ fontSize: 12 }}>Claim #: {Data.transaction_id}</Text>
-          <Text style={{ fontSize: 12 }}>
-            Claim Date: {Data.date_of_transaction}
-          </Text>
+          <Text style={{ fontSize: 12 }}>Claim Date: {Data.claim_date}</Text>
         </CardItem>
         <CardItem>
           <Body
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 13 }}>{Data.clinic_type_and_service}</Text>
+            <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
             <Text />
           </Body>
         </CardItem>
@@ -103,17 +111,27 @@ class HistoryTransaction extends Component {
           <Body
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text style={{ fontSize: 13 }} />
-            <Text>S$ {Data.amount}</Text>
+            <Text style={{ fontSize: 12, color: '#666666' }}>
+              {Data.service}
+            </Text>
+            <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
+          </Body>
+        </CardItem>
+        <CardItem>
+          <Body
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text style={{ fontSize: 12, color: '#666666' }}>
+              {Data.visit_date}
+            </Text>
+            <Text ></Text>
           </Body>
         </CardItem>
         <CardItem
           footer
           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
         >
-          <Text style={{ fontSize: 13, color: '#0392cf' }}>
-            {Data.customer}
-          </Text>
+          <Text style={{ fontSize: 11, color: '#0392cf' }}>{Data.member}</Text>
         </CardItem>
       </Card>
     ));
