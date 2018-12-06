@@ -100,6 +100,31 @@ class HistoryTransaction extends Component {
             <Text style={{ fontSize: 12, color: '#0392cf' }}>
               {Data.customer}
             </Text>
+            {Data.health_provider_status == true && Data.type == 'cash' ? (
+              <View
+                style={{
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  width: '40%',
+                  backgroundColor: '#439057',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#fff',
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: 'center',
+                    color: '#fff',
+                  }}
+                >
+                  Cash
+                </Text>
+              </View>
+            ) : (
+              <Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>
+            )}
           </CardItem>
         </Card>
       </TouchableOpacity>
