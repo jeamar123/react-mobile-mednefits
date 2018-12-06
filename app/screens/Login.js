@@ -21,9 +21,14 @@ class Login extends Component {
 
   LoginHandler(){
     this.setState({isLoading: !this.state.isLoading})
+
     Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
-      this.setState({isLoading: !this.state.isLoading})
+
     })
+
+    setTimeout(()=>{
+      this.setState({isLoading: !this.state.isLoading})
+    },500)
   }
 
   render() {
