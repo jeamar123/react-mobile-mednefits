@@ -122,8 +122,14 @@ class HistoryTransaction extends Component {
                   Cash
                 </Text>
               </View>
+            ) : Data.health_provider_status == false &&
+              Data.type == 'credits' ? (
+              <Text />
             ) : (
-              <Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>
+              Data.health_provider_status == false &&
+              Data.type == 'credits' &&
+              Data.refunded ==
+                true(<Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>)
             )}
           </CardItem>
         </Card>
