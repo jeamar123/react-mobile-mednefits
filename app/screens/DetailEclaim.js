@@ -21,12 +21,7 @@ class DetailEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar
-          leftNav="back-home"
-          title="E-Clain"
-          subtitle="File e-claim"
-          rightNav="next"
-        />
+        <Navbar leftNav="back-home" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
         <GiftedForm
           style={{
@@ -51,63 +46,19 @@ class DetailEclaim extends Component {
             placeholder="Mednefits Pte Ltd"
             clearButtonMode="while-editing"
           />
-          <GiftedForm.ModalWidget
-            title="*Date of Visit"
-            displayValue="dateVisit"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="birthday"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
-          <GiftedForm.ModalWidget
-            title="Time of Visit"
-            displayValue="timeVisit"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="birthday"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
           <GiftedForm.TextInputWidget
             name="claimAmount"
             title="*Claim Amount"
             placeholder="SGD"
             clearButtonMode="while-editing"
           />
-          <GiftedForm.ModalWidget
-            title="*Member"
-            displayValue="member"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="Member"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
           <GiftedForm.TextInputWidget
             name="receipt"
             title="*Receipt"
             clearButtonMode="while-editing"
           />
         </GiftedForm>
+        <Buttons>Submit</Buttons>
       </Container>
     );
   }

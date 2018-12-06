@@ -162,8 +162,30 @@ export function GetHistoryTransaction(callback) {
         callback('', result);
       });
     });
-  } catch(e) {
-    console.warn('error get balance' + e.message);
+  } catch (e) {
+    console.warn('error get history transaction' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetEClaimTransaction(callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.USER_ECLAIM_TRANSACTION,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get Eclaim Transaction' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

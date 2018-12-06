@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 import { Button, Icon } from 'native-base';
@@ -28,6 +27,10 @@ import SelectService from '../screens/SelectService';
 import Homes from '../screens/Home';
 import Splash from '../screens/Splash';
 import Barcode from '../screens/Barcode';
+import GeneralPractitioner from '../screens/GeneralPractitioner';
+import ECardUser from '../screens/ECardUser';
+
+console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -79,6 +82,12 @@ class RouterComponent extends Component {
           <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
           <Scene key="EmailSend" component={EmailSend} hideNavBar />
           <Scene key="Barcode" component={Barcode} hideNavBar />
+          <Scene
+            key="GeneralPractitioner"
+            component={GeneralPractitioner}
+            hideNavBar
+          />
+          <Scene key="ECardUser" component={ECardUser} hideNavBar />
         </Stack>
       </Router>
     );

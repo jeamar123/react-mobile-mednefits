@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image } from 'react-native';
+import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
@@ -68,7 +68,13 @@ class History extends Component {
             }}
           >
             <Image
-              style={{ marginHorizontal: 30, marginRight: 30, marginLeft: 50 }}
+              style={{
+                width: 35,
+                height: 35,
+                marginHorizontal: 30,
+                marginRight: 30,
+                marginLeft: 50,
+              }}
               source={require('../../assets/apps/general.png')}
             />
             <Text
@@ -81,28 +87,25 @@ class History extends Component {
               General Practitioner
             </Text>
           </View>
-          <GiftedForm.TextInputWidget
-            underlineColorAndroid="transparent"
-            name="transaction"
-            title="Transaction #"
-            placeholder="IN44837820"
-            clearButtonMode="while-editing"
-          />
-          <GiftedForm.TextInputWidget
-            underlineColorAndroid="transparent"
-            name="service"
-            title="Service/s"
-            placeholder="Scaling & Polishing"
-            clearButtonMode="while-editing"
-          />
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
+              Transaction #
+            </Text>
+            <TextInput
+              placeholder="IN44837820"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%' }}
+            />
+          </View>
 
-          <GiftedForm.TextInputWidget
-            underlineColorAndroid="transparent"
-            name="member"
-            title="Member"
-            placeholder="Jelind Teo"
-            clearButtonMode="while-editing"
-          />
           <View
             style={{
               flex: 1,
@@ -113,9 +116,80 @@ class History extends Component {
           >
             <Text
               style={{
-                paddingHorizontal: 10,
-                marginRight: 30,
-                paddingVertical: 10,
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '6%',
+              }}
+            >
+              Services/s
+            </Text>
+            <TextInput
+              placeholder="Service/s"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%' }}
+            />
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '3%',
+              }}
+            >
+              Date & Time
+            </Text>
+            <TextInput
+              placeholder="Date & Time"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%' }}
+            />
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '10%' }}
+            >
+              Member
+            </Text>
+            <TextInput
+              placeholder="Member"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%' }}
+            />
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '10%',
               }}
             >
               Receipt

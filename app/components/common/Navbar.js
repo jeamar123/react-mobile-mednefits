@@ -158,8 +158,8 @@ export default class Navbar extends React.Component {
         >
           <TouchableOpacity
             style={{ paddingLeft: 15 }}
-            onPress={()=>this.props.drawerAction(true)}
-            >
+            onPress={() => this.props.drawerAction(true)}
+          >
             <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
           </TouchableOpacity>
         </View>
@@ -259,7 +259,7 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => Actions.Home()}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
@@ -270,6 +270,24 @@ export default class Navbar extends React.Component {
             >
               Done
             </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'search') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity>
+            <Image
+              source={require('../../../assets/apps/search.png')}
+              style={{ height: 55, resizeMode: 'center', width: 75 }}
+            />
           </TouchableOpacity>
         </View>
       );

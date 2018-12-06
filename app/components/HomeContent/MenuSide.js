@@ -38,7 +38,8 @@ const MenuSide = () => (
               Actions.Home({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
@@ -56,7 +57,8 @@ const MenuSide = () => (
               Actions.Home({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Text style={styles.text}>Home</Text>
           </TouchableOpacity>
         </Body>
@@ -66,10 +68,11 @@ const MenuSide = () => (
         <Left>
           <TouchableOpacity
             onPress={() =>
-              Actions.SettingWallet({
+              Actions.Balance({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
@@ -84,10 +87,11 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.SettingWallet({
+              Actions.Balance({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Text style={styles.text}>Wallet</Text>
           </TouchableOpacity>
         </Body>
@@ -100,7 +104,8 @@ const MenuSide = () => (
               Actions.DetailEclaim({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
@@ -118,22 +123,22 @@ const MenuSide = () => (
               Actions.DetailEclaim({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Text style={styles.text}>E-Claim</Text>
           </TouchableOpacity>
         </Body>
       </ListItem>
 
-
-      <ListItem
-        icon style={{ marginTop: 10 }}>
+      <ListItem icon style={{ marginTop: 10 }}>
         <Left>
           <TouchableOpacity
             onPress={() =>
               Actions.HistoryTransaction({
                 type: 'reset',
               })
-            }>
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
@@ -144,7 +149,6 @@ const MenuSide = () => (
               source={require('../../../assets/apps/history.png')}
             />
           </TouchableOpacity>
-
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
@@ -152,12 +156,12 @@ const MenuSide = () => (
               Actions.HistoryTransaction({
                 type: 'reset',
               })
-            }>
-          <Text style={styles.text}>History</Text>
+            }
+          >
+            <Text style={styles.text}>History</Text>
           </TouchableOpacity>
         </Body>
       </ListItem>
-
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>

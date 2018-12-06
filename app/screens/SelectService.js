@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Dimensions } from 'react-native';
 import { Container, Content, Text } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { Buttons } from '../components/common';
 import Navbar from '../components/common/Navbar';
 const { width, height } = Dimensions.get('window');
@@ -49,7 +50,9 @@ class SelectService extends Component {
           </View>
 
           <View style={{ marginTop: 50 }} />
-          <Buttons>Proceed</Buttons>
+          <Buttons onPress={() => Actions.PayScan({ type: 'reset' })}>
+            Proceed
+          </Buttons>
         </Content>
       </Container>
     );

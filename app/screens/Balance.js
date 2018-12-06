@@ -36,7 +36,7 @@ class Balance extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" rightNav={true} />
+        <Navbar leftNav="back-home" />
         <Content padder>
           <View style={styles.container}>
             <Text

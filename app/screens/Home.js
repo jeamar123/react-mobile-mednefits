@@ -16,11 +16,10 @@ import * as Config from '../config';
 const { width, height } = Dimensions.get('window');
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
 
-  constructor(props){
-    super(props)
-
-    this.drawerActionCallback = this.drawerActionCallback.bind(this)
+    this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
   closeDrawer() {
@@ -31,9 +30,9 @@ class Home extends Component {
     this._drawer._root.open();
   }
 
-  drawerActionCallback(callback){
+  drawerActionCallback(callback) {
     if (callback == true) {
-      this.openDrawer()
+      this.openDrawer();
     }
   }
 
@@ -73,7 +72,7 @@ class Home extends Component {
             </Right>
           </Header> */}
           <HomeContent />
-          <Content padder>
+          <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
             >
@@ -88,7 +87,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ marginBottom: 15 }}
+                    style={{
+                      marginBottom: 15,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/health.png')}
                   />
                   <Text
@@ -101,14 +104,18 @@ class Home extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
-                  Actions.HistoryGeneral({
+                  Actions.GeneralPractitioner({
                     type: 'reset',
                   })
                 }
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/general.png')}
                   />
                   <Text
@@ -128,7 +135,11 @@ class Home extends Component {
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ marginBottom: 20 }}
+                    style={{
+                      marginBottom: 20,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/tooth.png')}
                   />
                   <Text
@@ -148,12 +159,16 @@ class Home extends Component {
               >
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/chienese.png')}
                   />
                   <Text
                     fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', width: '100%' }}
                   >
                     Traditional Chinese Medicine
                   </Text>
@@ -162,7 +177,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/Specialist.png')}
                   />
                   <Text
@@ -176,7 +195,11 @@ class Home extends Component {
               <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
-                    style={{ margin: 10 }}
+                    style={{
+                      margin: 10,
+                      width: 35,
+                      height: 35,
+                    }}
                     source={require('../../assets/apps/Wellness.png')}
                   />
                   <Text
@@ -188,7 +211,7 @@ class Home extends Component {
                 </View>
               </TouchableOpacity>
             </View>
-          </Content>
+          </View>
         </Container>
       </Drawer>
     );
