@@ -47,7 +47,7 @@ class HomeContent extends Component {
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
-                Actions.Barcode({
+                Actions.SelectService({
                   type: 'reset',
                 })
               }
