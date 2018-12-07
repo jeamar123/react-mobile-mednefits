@@ -9,13 +9,14 @@ class ECardUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idTransaction: '0',
-      date: '',
-      customerName: '',
-      price: '',
-      status: '',
-      resultData: [],
-      DataE_Claim: [],
+      FullName: '',
+      MemberID: '',
+      Nric: '',
+      PlanType: '',
+      PlanAddon: '',
+      Company: '',
+      StartDate: '',
+      EndDate: '',
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -32,6 +33,28 @@ class ECardUser extends Component {
     if (callback == true) {
       this.openDrawer();
     }
+  }
+
+  componentWillMount() {
+    this.GetDataEcard();
+  }
+
+  GetDataEcard() {
+    Core.GetECardDetail((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      this.setState({
+        FullName: data.fullname,
+        MemberID: data.member_id,
+        Nric: data.nric,
+        PlanType: data.plan_type,
+        PlanAddon: data.plan_add_on,
+        Company: data.company_name,
+        StartDate: data.start_date,
+        EndDate: data.valid_date,
+      })
+    });
   }
 
   render() {
@@ -90,7 +113,7 @@ class ECardUser extends Component {
                       fontSize: 24,
                     }}
                   >
-                    dhonald johannes
+                    {this.state.FullName}
                   </Text>
                   <Text
                     style={{
@@ -99,7 +122,7 @@ class ECardUser extends Component {
                       fontSize: 24,
                     }}
                   >
-                    289
+                    {this.state.Nric}
                   </Text>
 
                   <Text
@@ -109,22 +132,22 @@ class ECardUser extends Component {
                       fontSize: 14,
                     }}
                   >
-                    Member ID
+                    Member ID {this.state.MemberID}
                   </Text>
                   <Text style={{ fontWeight: '600', fontSize: 14 }}>
-                    Mednefits Care:
+                    {this.state.PlanType}
                   </Text>
                   <Text style={{ fontWeight: '600', fontSize: 14 }}>
-                    Plan Add-on:
+                    Plan Add-on: {this.state.PlanAddon}
                   </Text>
                   <Text style={{ fontWeight: '600', fontSize: 14 }}>
-                    ABC Company Ltd
+                    {this.state.Company}
                   </Text>
                   <Text style={{ fontWeight: '600', fontSize: 14 }}>
-                    Start Date:
+                    Start Date: {this.state.StartDate}
                   </Text>
                   <Text style={{ fontWeight: '600', fontSize: 14 }}>
-                    End Date:
+                    End Date: {this.state.EndDate}
                   </Text>
 
                   <Text
@@ -178,8 +201,7 @@ class ECardUser extends Component {
                     width: '60%',
                   }}
                 >
-                  Consultation; Covered by us. Medicine & Treatment; Pay using
-                  your Medical Credits
+                  Consultation: S$0, covered by us. Medicine & Treatment: Pay using Medical Credits.
                 </Text>
               </View>
 
@@ -211,7 +233,7 @@ class ECardUser extends Component {
                     width: '60%',
                   }}
                 >
-                  30% off dental services
+                  30% off dental services.
                 </Text>
               </View>
 
@@ -243,10 +265,10 @@ class ECardUser extends Component {
                     width: '60%',
                   }}
                 >
-                  100% consultation covered by Mednefits. You only need to pay
-                  for medicine
+                  100% consultation covered by Mednefits. You only need to pay for medicine
                 </Text>
               </View>
+              
               <View
                 style={{
                   marginTop: '10%',

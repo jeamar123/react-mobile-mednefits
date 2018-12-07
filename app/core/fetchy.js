@@ -189,3 +189,25 @@ export function GetEClaimTransaction(callback) {
     getNotify('', 'Failed get data, try again');
   }
 }
+
+export function GetECardDetail(callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.AUTH_CARD_DETAILS,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get Ecard Detail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}

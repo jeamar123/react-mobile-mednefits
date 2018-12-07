@@ -11,7 +11,7 @@ import {
 import { Icon, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import * as Core from '../../core'
+import * as Core from '../../core';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -241,7 +241,10 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity style={{ paddingEnd: '3%' }}>
+          <TouchableOpacity
+            style={{ paddingEnd: '3%' }}
+            onPress={() => Actions.SwitchUser()}
+          >
             <Image
               source={require('../../../assets/apps/switch.png')}
               style={{ height: 55, resizeMode: 'center', width: 75 }}
@@ -334,7 +337,7 @@ export default class Navbar extends React.Component {
   render() {
     // console.warn(this.props.rightNav);
     return (
-      <View style={{flexDirection: 'column'}}>
+      <View style={{ flexDirection: 'column' }}>
         <View
           style={[
             styles.container,

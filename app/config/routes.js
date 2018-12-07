@@ -29,8 +29,9 @@ import Splash from '../screens/Splash';
 import Barcode from '../screens/Barcode';
 import GeneralPractitioner from '../screens/GeneralPractitioner';
 import ECardUser from '../screens/ECardUser';
+import SwitchUser from '../screens/SwitchUser';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -50,6 +51,7 @@ class RouterComponent extends Component {
             key="HistoryTransaction"
             component={HistoryTransaction}
             hideNavBar
+            initial
           />
           <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
           <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
@@ -88,6 +90,7 @@ class RouterComponent extends Component {
             hideNavBar
           />
           <Scene key="ECardUser" component={ECardUser} hideNavBar />
+          <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
         </Stack>
       </Router>
     );
