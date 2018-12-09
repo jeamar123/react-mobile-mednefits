@@ -48,21 +48,6 @@ const SettingWallet = () => (
         navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
       }}
     >
-      <GiftedForm.ModalWidget
-        title="*Bank"
-        displayValue="bank"
-        scrollEnabled={false}
-      >
-        <GiftedForm.SeparatorWidget />
-
-        <GiftedForm.DatePickerIOSWidget
-          name="bank"
-          mode="date"
-          getDefaultDate={() => {
-            return new Date(new Date().getFullYear() - 18 + '');
-          }}
-        />
-      </GiftedForm.ModalWidget>
       <GiftedForm.TextInputWidget
         name="yourName"
         title="*Your Name"

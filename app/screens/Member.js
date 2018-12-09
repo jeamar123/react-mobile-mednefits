@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Container, Content, List, ListItem, Text } from 'native-base';
 import Navbar from '../components/common/Navbar';
 
@@ -12,13 +13,19 @@ class Member extends Component {
         <Content>
           <List>
             <ListItem>
-              <Text>Filbert Tan</Text>
+              <TouchableOpacity onPress={() => Actions.ReceiptVerification()}>
+                <Text>Filbert Tan</Text>
+              </TouchableOpacity>
             </ListItem>
             <ListItem>
-              <Text>Jelind Teo</Text>
+              <TouchableOpacity onPress={() => Actions.ReceiptVerification()}>
+                <Text>Jelind Teo</Text>
+              </TouchableOpacity>
             </ListItem>
             <ListItem>
-              <Text>Edith Tan</Text>
+              <TouchableOpacity onPress={() => Actions.ReceiptVerification()}>
+                <Text>Edith Tan</Text>
+              </TouchableOpacity>
             </ListItem>
           </List>
         </Content>

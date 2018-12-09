@@ -41,7 +41,7 @@ class SwitchUser extends Component {
   renderTransactionIn_Network() {
     return (
       <View>
-        <TouchableOpacity onPress={() => Actions.Home()}>
+        <TouchableOpacity onPress={() => Actions.HomeStatic()}>
           <View
             style={{
               flex: 1,
@@ -97,7 +97,7 @@ class SwitchUser extends Component {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => Actions.Home()}>
+        <TouchableOpacity onPress={() => Actions.HomeStatic()}>
           <View
             style={{
               flex: 1,

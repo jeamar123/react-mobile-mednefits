@@ -101,7 +101,7 @@ const MenuSide = () => (
         <Left>
           <TouchableOpacity
             onPress={() =>
-              Actions.DetailEclaim({
+              Actions.EclaimSubmit({
                 type: 'reset',
               })
             }
@@ -120,7 +120,7 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.DetailEclaim({
+              Actions.EclaimSubmit({
                 type: 'reset',
               })
             }

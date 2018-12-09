@@ -30,6 +30,8 @@ import Barcode from '../screens/Barcode';
 import GeneralPractitioner from '../screens/GeneralPractitioner';
 import ECardUser from '../screens/ECardUser';
 import SwitchUser from '../screens/SwitchUser';
+import HomeStatic from '../screens/HomeStatic';
+import ECardUserStatic from '../screens/ECardUserStatic';
 
 // console.disableYellowBox = true;
 
@@ -51,7 +53,6 @@ class RouterComponent extends Component {
             key="HistoryTransaction"
             component={HistoryTransaction}
             hideNavBar
-            initial
           />
           <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
           <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
@@ -83,7 +84,7 @@ class RouterComponent extends Component {
           <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
           <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
           <Scene key="EmailSend" component={EmailSend} hideNavBar />
-          <Scene key="Barcode" component={Barcode} hideNavBar />
+          <Scene key="Barcode" component={Barcode} hideNavBar initial />
           <Scene
             key="GeneralPractitioner"
             component={GeneralPractitioner}
@@ -91,6 +92,8 @@ class RouterComponent extends Component {
           />
           <Scene key="ECardUser" component={ECardUser} hideNavBar />
           <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
+          <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
+          <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
         </Stack>
       </Router>
     );

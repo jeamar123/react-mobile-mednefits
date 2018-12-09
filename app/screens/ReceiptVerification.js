@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
-import {
-  Container,
-  Header,
-  Button,
-  Left,
-  Right,
-  Body,
-  Text,
-} from 'native-base';
+import { Container } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { VericicationReceipt } from '../components/VericicationReceipt';
 import { Buttons } from '../components/common';
 import Icons from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +19,7 @@ class ReceiptVerification extends Component {
           subtitle="E-Claim"
         />
         <VericicationReceipt />
-        <Buttons>
+        <Buttons onPress={() => Actions.DetailEclaim()}>
           <Icon name="camera" style={{ color: '#fff', fontSize: 36 }} />
         </Buttons>
       </Container>
