@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { StatusBar, View, StyleSheet, TouchableOpacity, ActivityIndicator,Image } from 'react-native';
-import { Container, Content, Text } from 'native-base';
+import { View, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { RNCamera, FaceDetector } from 'react-native-camera';
 
 const PendingView = () => (
-  <View
-    style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
-  >
+  <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
     <ActivityIndicator size="large" color="#fff" />
   </View>
 );
@@ -30,16 +28,18 @@ class Barcode extends Component {
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
           permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'}
+          permissionDialogMessage={
+            'We need your permission to use your camera phone'
+          }
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.warn(barcodes)
+            console.warn(barcodes);
           }}
         >
           {({ camera, status }) => {
             if (status !== 'READY') return <PendingView />;
             return (
               <Image
-                style={{height: "100%",width: "100%"}}
+                style={{ height: '100%', width: '100%' }}
                 source={require('../../assets/barcode.png')}
               />
             );

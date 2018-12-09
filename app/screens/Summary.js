@@ -50,39 +50,75 @@ class Summary extends Component {
             </CardItem>
             <CardItem cardBody>
               <Left>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   Service
                 </Text>
               </Left>
               <Body />
               <Right style={{ marginRight: 10 }}>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   Consultation
                 </Text>
               </Right>
             </CardItem>
             <CardItem cardBody>
               <Left>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   Transaction Time
                 </Text>
               </Left>
               <Body />
               <Right style={{ marginRight: 10 }}>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   01-10-2017 10:30
                 </Text>
               </Right>
             </CardItem>
             <CardItem cardBody>
               <Left>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   Trans-ID
                 </Text>
               </Left>
               <Body />
               <Right style={{ marginRight: 10 }}>
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text
+                  style={{
+                    fontSize: 13,
+                    marginTop: 20,
+                    fontFamily: 'helvetica',
+                  }}
+                >
                   IN74859204
                 </Text>
               </Right>

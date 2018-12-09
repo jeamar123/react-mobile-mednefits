@@ -105,7 +105,7 @@ class HistoryTransaction extends Component {
                 style={{
                   paddingTop: 5,
                   paddingBottom: 5,
-                  width: '40%',
+                  width: '20%',
                   backgroundColor: '#439057',
                   borderRadius: 10,
                   borderWidth: 1,
@@ -173,7 +173,79 @@ class HistoryTransaction extends Component {
               <Text style={{ fontSize: 12, color: '#666666' }}>
                 {Data.visit_date}
               </Text>
-              <Text />
+              {Data.status == 0 ? (
+                <View
+                  style={{
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                    width: '23%',
+                    backgroundColor: '#c4c4c4',
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: '#fff',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: '600',
+                      textAlign: 'center',
+                      color: '#fff',
+                    }}
+                  >
+                    Pending
+                  </Text>
+                </View>
+              ) : Data.status == 1 ? (
+                <View
+                  style={{
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                    width: '23%',
+                    backgroundColor: '#439057',
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: '#fff',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontWeight: '600',
+                      textAlign: 'center',
+                      color: '#fff',
+                    }}
+                  >
+                    Approve
+                  </Text>
+                </View>
+              ) : (
+                Data.status ==
+                2(
+                  <View
+                    style={{
+                      paddingTop: 5,
+                      paddingBottom: 5,
+                      width: '23%',
+                      backgroundColor: '#FF0000',
+                      borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: '#fff',
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontWeight: '600',
+                        fontSize: 12,
+                        textAlign: 'center',
+                        color: '#fff',
+                      }}
+                    >
+                      Rejected
+                    </Text>
+                  </View>
+                )
+              )}
             </Body>
           </CardItem>
           <CardItem

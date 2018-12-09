@@ -37,57 +37,12 @@ class RejectHistory extends Component {
             placeholder="SGD"
             clearButtonMode="while-editing"
           />
-          <GiftedForm.ModalWidget
-            title="Date & Time"
-            displayValue="dateTime"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="dateTime"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
-          <GiftedForm.ModalWidget
-            title="Claim Date"
-            displayValue="claimDate"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="claimDate"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
 
           <GiftedForm.TextInputWidget
             name="member"
             title="Member"
             clearButtonMode="while-editing"
           />
-          <GiftedForm.ModalWidget
-            title="Receipt"
-            displayValue="receipt"
-            scrollEnabled={false}
-          >
-            <GiftedForm.SeparatorWidget />
-
-            <GiftedForm.DatePickerIOSWidget
-              name="Member"
-              mode="date"
-              getDefaultDate={() => {
-                return new Date(new Date().getFullYear() - 18 + '');
-              }}
-            />
-          </GiftedForm.ModalWidget>
         </GiftedForm>
       </Container>
     );
