@@ -13,19 +13,7 @@ class HistoryUser extends Component {
   }
 
   componentWillMount() {
-    this.getUserBalance();
     this.getUserDetail();
-  }
-
-  getUserBalance() {
-    Core.GetBalance((error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
-        Balance: data.balance,
-      });
-    });
   }
 
   getUserDetail() {
@@ -63,7 +51,7 @@ class HistoryUser extends Component {
             adjustsFontSizeToFit={true}
             style={styles.amount}
           >
-            Total Amount: S$ {this.state.Balance}
+            Total Amount: S$ {this.props.Amount}
           </Text>
           <Text
             numberOfLines={2}

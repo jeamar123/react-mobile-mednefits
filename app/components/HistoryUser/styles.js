@@ -3,6 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
+import * as Config from '../../config';
 
 export default EStyleSheet.create({
   sectionHeader: {
@@ -33,9 +34,8 @@ export default EStyleSheet.create({
     alignContent: 'center',
   },
   amount: {
-    fontFamily: 'helvetica',
-    fontSize: 18,
-    fontWeight: '600',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 16,
     color: '#fff',
     textAlignVertical: 'center',
     paddingTop: 10,
@@ -43,9 +43,8 @@ export default EStyleSheet.create({
     paddingLeft: '5%',
   },
   detail: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     fontSize: 12,
-    fontWeight: '600',
     color: '#fff',
     textAlignVertical: 'center',
     paddingTop: 15,

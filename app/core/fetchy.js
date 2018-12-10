@@ -10,44 +10,47 @@ import * as Config from '../config';
 import * as Core from './index';
 
 const headerLogin = {
-  'Accept': 'application/json',
+  Accept: 'application/json',
   'Content-Type': 'application/json',
 };
 
 function fetching(params, callback) {
-  Core.CheckNetworkConnection((connection)=>{
+  Core.CheckNetworkConnection(connection => {
     try {
-      if (connection == "none") {
-        throw("No Internet Connection")
-      } else if (connection == "unknown") {
-        throw("Connection Unknown")
+      if (connection == 'none') {
+        throw 'No Internet Connection';
+      } else if (connection == 'unknown') {
+        throw 'Connection Unknown';
       } else {
         fetch(params.url, {
           method: params.method,
           headers: params.header,
-          body: (params.body == '') ? '' : (typeof params.body == 'object') ? JSON.stringify(params.body) : params.body,
+          body:
+            params.body == ''
+              ? ''
+              : typeof params.body == 'object'
+              ? JSON.stringify(params.body)
+              : params.body,
         })
-        .then(response=>response.json())
-        .then(res => {
-
-          if (!res.status) {
-            callback(res)
-          } else if (res.status) {
-            callback(res)
-          } else {
-            getNotify("","Please try again...")
-          }
-
-        })
-        .catch(error => {
-          console.warn('error fetching' + error.message);
-          Core.getNotify('', 'Ooops, failed to get data...');
-        });
+          .then(response => response.json())
+          .then(res => {
+            if (!res.status) {
+              callback(res);
+            } else if (res.status) {
+              callback(res);
+            } else {
+              getNotify('', 'Please try again...');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching' + error.message);
+            Core.getNotify('', 'Ooops, failed to get data...');
+          });
       }
     } catch (e) {
       Core.getNotify('', e);
     }
-  })
+  });
 }
 
 export function LoginProcess(username, password, callback) {
@@ -108,9 +111,9 @@ export function UserDetail(callback) {
           url: Config.AUTH_USER_PROFILE,
           method: 'GET',
           header: {
-            'Accept': 'application/json',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': result,
+            Authorization: result,
           },
         };
         fetching(params, result => {
@@ -131,9 +134,9 @@ export function GetBalance(callback) {
         url: Config.USER_CREDITS,
         method: 'GET',
         header: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': result,
+          Authorization: result,
         },
       };
       fetching(params, result => {
@@ -153,9 +156,9 @@ export function GetHistoryTransaction(callback) {
         url: Config.USER_NETWORK_TRANSACTION,
         method: 'GET',
         header: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': result,
+          Authorization: result,
         },
       };
       fetching(params, result => {
@@ -175,9 +178,9 @@ export function GetEClaimTransaction(callback) {
         url: Config.USER_ECLAIM_TRANSACTION,
         method: 'GET',
         header: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': result,
+          Authorization: result,
         },
       };
       fetching(params, result => {
@@ -190,24 +193,45 @@ export function GetEClaimTransaction(callback) {
   }
 }
 
-export function GetUserNetwork(tid, callback){
+export function GetUserNetwork(tid, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
-        url: Config.USER_SPECIFIC_IN_NETWORK+"/"+tid,
+        url: Config.USER_SPECIFIC_IN_NETWORK + '/' + tid,
         method: 'GET',
         header: {
-          'Authorization': result,
+          Authorization: result,
         },
       };
 
       fetching(params, result => {
         callback(result);
       });
-    })
-
+    });
   } catch (e) {
     console.warn('error get GetUserNetwork' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetECardDetail(callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.AUTH_CARD_DETAILS,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get Ecard Detail' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

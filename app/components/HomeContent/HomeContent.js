@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
 
+
 class HomeContent extends Component {
   constructor(props) {
     super(props);
