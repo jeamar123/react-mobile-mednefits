@@ -40,7 +40,7 @@ function fetching(params, callback) {
 
         })
         .catch(error => {
-          // console.warn('error fetching' + error.message);
+          console.warn('error fetching' + error.message);
           Core.getNotify('', 'Ooops, failed to get data...');
         });
       }
@@ -190,24 +190,24 @@ export function GetEClaimTransaction(callback) {
   }
 }
 
-export function GetECardDetail(callback) {
+export function GetUserNetwork(tid, callback){
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
-        url: Config.AUTH_CARD_DETAILS,
+        url: Config.USER_SPECIFIC_IN_NETWORK+"/"+tid,
         method: 'GET',
         header: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
           'Authorization': result,
         },
       };
+
       fetching(params, result => {
-        callback('', result);
+        callback(result);
       });
-    });
+    })
+
   } catch (e) {
-    console.warn('error get Ecard Detail' + e.message);
+    console.warn('error get GetUserNetwork' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

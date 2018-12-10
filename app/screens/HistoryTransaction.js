@@ -52,7 +52,7 @@ class HistoryTransaction extends Component {
 
   renderTransactionIn_Network() {
     return this.state.resultData.map(Data => (
-      <TouchableOpacity onPress={() => Actions.HistoryGeneral()}>
+      <TouchableOpacity onPress={() => Actions.HistoryGeneral({transaction_id: Data.transaction_id})}>
         <Card>
           <CardItem
             bordered

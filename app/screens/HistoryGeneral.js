@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 import { HistoryUser } from '../components/HistoryUser';
 import { Buttons } from '../components/common';
+import * as Core from '../core'
 import Navbar from '../components/common/Navbar';
 const options = {
   title: 'Upload Your Receipt',
@@ -21,6 +22,7 @@ class History extends Component {
       imageSource: {
         uri: '',
       },
+      data: false
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
@@ -46,12 +48,32 @@ class History extends Component {
     });
   }
 
+  componentWillMount(){
+    Core.GetUserNetwork(this.props.transaction_id, (result)=>{
+      data = (typeof result == "string") ? JSON.parse(result.data) : result.data
+
+      this.setState({
+        data: data
+      })
+    })
+
+    Core.UserDetail((err, result)=>{
+      this.setState({
+        user: result.data.profile.full_name
+      })
+    })
+  }
+
   render() {
+    console.warn("datanya "+(this.state.data.clinic_name) ? this.state.data.clinic_name : "");
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
-        <HistoryUser />
+        <HistoryUser
+          clinicname={this.state.data.clinic_name}
+          clinicimage={this.state.data.clinic_image}
+          />
         <GiftedForm
           style={{ backgroundColor: '#fff', paddingLeft: 5, paddingRight: 15 }}
           formName="signupForm"
@@ -75,7 +97,7 @@ class History extends Component {
                 marginRight: 30,
                 marginLeft: 50,
               }}
-              source={require('../../assets/apps/general.png')}
+              source={{uri: this.state.data.clinic_type_image}}
             />
             <Text
               style={{
@@ -84,7 +106,7 @@ class History extends Component {
                 paddingVertical: 10,
               }}
             >
-              General Practitioner
+              {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
             </Text>
           </View>
           <View
@@ -99,10 +121,11 @@ class History extends Component {
               Transaction #
             </Text>
             <TextInput
-              placeholder="IN44837820"
+              placeholder="Transaction ID"
               underlineColorAndroid="transparent"
               colo="#000"
               style={{ marginTop: '-3%', marginLeft: '4%' }}
+              value={this.props.transaction_id}
             />
           </View>
 
@@ -128,6 +151,7 @@ class History extends Component {
               underlineColorAndroid="transparent"
               colo="#000"
               style={{ marginTop: '-3%', marginLeft: '4%' }}
+              value={this.state.data.services}
             />
           </View>
 
@@ -153,6 +177,7 @@ class History extends Component {
               underlineColorAndroid="transparent"
               colo="#000"
               style={{ marginTop: '-3%', marginLeft: '4%' }}
+              value={this.state.data.date_of_transaction}
             />
           </View>
 
@@ -174,10 +199,11 @@ class History extends Component {
               underlineColorAndroid="transparent"
               colo="#000"
               style={{ marginTop: '-3%', marginLeft: '4%' }}
+              value={(this.state.user) ? this.state.user : "N/A"}
             />
           </View>
 
-          <View
+          {/*<View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -200,7 +226,7 @@ class History extends Component {
                 style={{ width: '40%', color: '#fff', fontSize: 24 }}
               />
             </Buttons>
-          </View>
+          </View>*/}
           <View
             style={{
               flex: 1,
