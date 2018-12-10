@@ -211,3 +211,23 @@ export function GetUserNetwork(tid, callback){
     getNotify('', 'Failed get data, try again');
   }
 }
+
+export function GetBarcodeData(url, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: url,
+        method: 'GET',
+        header: {
+          'Authorization': result,
+        },
+      };
+
+      fetching(params, result => {
+        callback(result);
+      });
+    })
+  } catch (e) {
+    getNotify('', 'Failed get data, try again');
+  }
+}

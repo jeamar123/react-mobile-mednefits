@@ -88,7 +88,7 @@ class Home extends Component {
                 <View style={styles.gridBox}>
                   <Image
                     style={{
-                      marginBottom: 15,
+                      margin: 10,
                       width: 35,
                       height: 35,
                     }}
@@ -136,7 +136,7 @@ class Home extends Component {
                 <View style={styles.gridBox}>
                   <Image
                     style={{
-                      marginBottom: 20,
+                      margin: 10,
                       width: 35,
                       height: 35,
                     }}
@@ -231,6 +231,7 @@ const styles = {
     margin: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10
   },
 };
 
