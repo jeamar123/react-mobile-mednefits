@@ -122,7 +122,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ {this.state.Eclaim_Credit_spent}
+                S$ {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
               </Text>
             </View>
           </View>

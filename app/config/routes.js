@@ -45,7 +45,7 @@ class RouterComponent extends Component {
           <Scene key="Forgot" component={Forgot} hideNavBar />
           <Scene key="Home" component={Homes} hideNavBar />
           <Scene key="SelectService" component={SelectService} hideNavBar />
-          <Scene key="Balance" component={Balance} hideNavBar />
+          <Scene key="Balance" component={Balance} hideNavBar  />
           <Scene key="Summary" component={Summary} hideNavBar />
           <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
           <Scene key="PayScan" component={ScanPay} hideNavBar />

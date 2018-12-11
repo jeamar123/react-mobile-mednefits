@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 import { HistoryUser } from '../components/HistoryUser';
 import { Buttons } from '../components/common';
-import * as Core from '../core'
+import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
 const options = {
   title: 'Upload Your Receipt',
@@ -71,6 +71,7 @@ class History extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
         <HistoryUser
+          Amount={this.state.data.amount}
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
           />

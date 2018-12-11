@@ -14,6 +14,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
+import * as Config from '../config';
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -275,7 +276,7 @@ class HistoryTransaction extends Component {
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
-            textStyle={{ color: '#fff', fontSize: 15 }}
+            textStyle={{fontFamily: Config.FONT_FAMILY_ROMAN, color: '#fff', fontSize: 15 }}
           >
             <Content padder>{this.renderTransactionIn_Network()}</Content>
           </Tab>
@@ -284,7 +285,7 @@ class HistoryTransaction extends Component {
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
-            textStyle={{ color: '#fff', fontSize: 15 }}
+            textStyle={{fontFamily: Config.FONT_FAMILY_ROMAN, color: '#fff', fontSize: 15 }}
           >
             <Content padder>{this.renderTransactionE_Claim()}</Content>
           </Tab>
