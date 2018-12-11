@@ -232,6 +232,24 @@ export function GetECardDetail(callback) {
     });
   } catch (e) {
     console.warn('error get Ecard Detail' + e.message);
+  }
+  
+export function GetBarcodeData(url, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: url,
+        method: 'GET',
+        header: {
+          'Authorization': result,
+        },
+      };
+
+      fetching(params, result => {
+        callback(result);
+      });
+    })
+  } catch (e) {
     getNotify('', 'Failed get data, try again');
   }
 }

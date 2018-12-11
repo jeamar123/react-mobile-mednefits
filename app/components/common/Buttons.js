@@ -7,11 +7,9 @@ const Buttons = ({ onPress, children }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
-    <View style={MainContainer}>
-      <TouchableOpacity onPress={onPress} style={ButtonStyle}>
-        <Text style={TextStyle}>{children}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onPress} style={ButtonStyle}>
+      <Text style={TextStyle}>{children}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -24,9 +22,9 @@ const styles = {
   ButtonStyle: {
     paddingTop: 10,
     paddingBottom: 10,
-    width: width / 1.46,
     backgroundColor: '#0392cf',
     borderRadius: 5,
+    margin: 10
   },
   TextStyle: {
     fontFamily: 'helvetica',

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
+import * as Core from '../core'
 import { RNCamera, FaceDetector } from 'react-native-camera';
+import { Actions } from 'react-native-router-flux'
 
 const PendingView = () => (
   <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
@@ -20,6 +22,16 @@ class Barcode extends Component {
     };
   }
 
+  barcodeHandler(data){
+    if (data) {
+      Core.GetBarcodeData(data[0].data, (result)=>{
+        if (result.status) {
+          Actions.SelectService({services: result.data.clinic_procedures})
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -32,11 +44,10 @@ class Barcode extends Component {
             'We need your permission to use your camera phone'
           }
           onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            console.warn(barcodes);
+            this.barcodeHandler(barcodes)
           }}
         >
           {({ camera, status }) => {
-            if (status !== 'READY') return <PendingView />;
             return (
               <Image
                 style={{ height: '100%', width: '100%' }}
