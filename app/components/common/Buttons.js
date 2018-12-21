@@ -15,16 +15,15 @@ const Buttons = ({ onPress, children }) => {
 
 const styles = {
   MainContainer: {
-    flex: 0.3,
+    flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
   },
   ButtonStyle: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
     backgroundColor: '#0392cf',
     borderRadius: 5,
-    margin: 10
+    width: "100%"
   },
   TextStyle: {
     fontFamily: 'helvetica',
