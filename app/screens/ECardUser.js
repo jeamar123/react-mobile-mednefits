@@ -4,6 +4,7 @@ import { Text, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
+import * as Config from '../config';
 
 class ECardUser extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class ECardUser extends Component {
       Company: '',
       StartDate: '',
       EndDate: '',
+      resultPackage: [],
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -53,8 +55,45 @@ class ECardUser extends Component {
         Company: data.company_name,
         StartDate: data.start_date,
         EndDate: data.valid_date,
-      })
+        resultPackage: data.packages,
+      });
     });
+  }
+
+  renderCoverage() {
+    return this.state.resultPackage.map(Data => (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginLeft: '5%',
+          marginRight: '5%',
+        }}
+      >
+        <Text
+          style={{
+            marginTop: '3%',
+            fontFamily: Config.FONT_FAMILY_ROMAN,
+            color: '#c4c4c4',
+            fontSize: 11,
+            marginRight: '10%',
+          }}
+        >
+          {Data.package_name}
+        </Text>
+        <Text
+          style={{
+            marginTop: '3%',
+            fontFamily: Config.FONT_FAMILY_ROMAN,
+            color: '#c4c4c4',
+            fontSize: 11,
+            width: '60%',
+          }}
+        >
+          {Data.package_description}
+        </Text>
+      </View>
+    ));
   }
 
   render() {
@@ -108,18 +147,18 @@ class ECardUser extends Component {
                 >
                   <Text
                     style={{
-                      fontWeight: '600',
                       color: '#0392cf',
                       fontSize: 24,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                     }}
                   >
                     {this.state.FullName}
                   </Text>
                   <Text
                     style={{
-                      fontWeight: '600',
                       color: '#0392cf',
                       fontSize: 24,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                     }}
                   >
                     {this.state.Nric}
@@ -128,32 +167,57 @@ class ECardUser extends Component {
                   <Text
                     style={{
                       marginTop: '15%',
-                      fontWeight: '600',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
                   >
                     Member ID {this.state.MemberID}
                   </Text>
-                  <Text style={{ fontWeight: '600', fontSize: 14 }}>
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                  >
                     {this.state.PlanType}
                   </Text>
-                  <Text style={{ fontWeight: '600', fontSize: 14 }}>
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                  >
                     Plan Add-on: {this.state.PlanAddon}
                   </Text>
-                  <Text style={{ fontWeight: '600', fontSize: 14 }}>
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                  >
                     {this.state.Company}
                   </Text>
-                  <Text style={{ fontWeight: '600', fontSize: 14 }}>
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                  >
                     Start Date: {this.state.StartDate}
                   </Text>
-                  <Text style={{ fontWeight: '600', fontSize: 14 }}>
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                  >
                     End Date: {this.state.EndDate}
                   </Text>
 
                   <Text
                     style={{
                       marginTop: '15%',
-                      fontWeight: '600',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
                   >
@@ -173,106 +237,10 @@ class ECardUser extends Component {
                 />
               </View>
 
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginLeft: '5%',
-                  marginRight: '5%',
-                }}
-              >
-                <Text
-                  style={{
-                    marginTop: '5%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    marginRight: '10%',
-                  }}
-                >
-                  Outpatient GP
-                </Text>
-                <Text
-                  style={{
-                    marginTop: '5%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    width: '60%',
-                  }}
-                >
-                  Consultation: S$0, covered by us. Medicine & Treatment: Pay using Medical Credits.
-                </Text>
-              </View>
+              <ScrollView>{this.renderCoverage()}</ScrollView>
 
               <View
                 style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginLeft: '5%',
-                  marginRight: '5%',
-                }}
-              >
-                <Text
-                  style={{
-                    marginTop: '2%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    marginRight: '10%',
-                  }}
-                >
-                  Dental Care
-                </Text>
-                <Text
-                  style={{
-                    marginTop: '2%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    width: '60%',
-                  }}
-                >
-                  30% off dental services.
-                </Text>
-              </View>
-
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginLeft: '5%',
-                  marginRight: '5%',
-                }}
-              >
-                <Text
-                  style={{
-                    marginTop: '2%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    marginRight: '10%',
-                  }}
-                >
-                  TCM
-                </Text>
-                <Text
-                  style={{
-                    marginTop: '2%',
-                    fontWeight: '600',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                    width: '60%',
-                  }}
-                >
-                  100% consultation covered by Mednefits. You only need to pay for medicine
-                </Text>
-              </View>
-              
-              <View
-                style={{
-                  marginTop: '10%',
-                  marginBottom: 10,
                   height: '15%',
                   backgroundColor: '#c4c4c4',
                   borderBottomLeftRadius: 14,
@@ -283,14 +251,15 @@ class ECardUser extends Component {
                 <View
                   style={{
                     flexDirection: 'column',
-                    marginTop: '2%',
+                    marginTop: '5%',
                     marginLeft: '5%',
                   }}
                 >
                   <Text
                     style={{
                       color: '#000',
-                      fontSize: 20,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 18,
                     }}
                   >
                     Need Help?
@@ -298,14 +267,25 @@ class ECardUser extends Component {
                   <Text
                     style={{
                       color: '#0392cf',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
                   >
-                    happinness@mednefits.com or +65 6254 7889
+                    happinness@mednefits.com{' '}
+                    <Text
+                      style={{
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                        fontSize: 14,
+                      }}
+                    >
+                      or
+                    </Text>{' '}
+                    +65 6254 7889
                   </Text>
                   <Text
                     style={{
                       color: '#0392cf',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
                   >
