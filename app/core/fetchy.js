@@ -214,6 +214,25 @@ export function GetUserNetwork(tid, callback) {
   }
 }
 
+export function GetSpesificEclaim(tid, callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.USER_SPECIFIC_E_CLAIM + '/' + tid,
+        method: 'GET',
+        header: { Authorization: result },
+      };
+
+      fetching(params, result => {
+        callback(result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get GetSpesificEclaim' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
 export function GetECardDetail(callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
@@ -233,23 +252,59 @@ export function GetECardDetail(callback) {
   } catch (e) {
     console.warn('error get Ecard Detail' + e.message);
   }
-  
-export function GetBarcodeData(url, callback){
+}
+
+export function GetBarcodeData(url, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
         url: url,
         method: 'GET',
         header: {
-          'Authorization': result,
+          Authorization: result,
         },
       };
 
       fetching(params, result => {
         callback(result);
       });
-    })
+    });
   } catch (e) {
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function SendPayment() {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: url,
+      method: 'POST',
+      header: {
+        Authorization: result,
+      },
+      body: params,
+    };
+  });
+}
+
+export function GetFavouritesClinic(callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.CLINIC_GET_FAVOURITE,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get favourites clinic' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

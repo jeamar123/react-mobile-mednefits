@@ -165,35 +165,67 @@ const MenuSide = () => (
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Image
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 30,
-              height: 30,
-            }}
-            source={require('../../../assets/apps/favorite.png')}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Favourites({
+                type: 'reset',
+              })
+            }
+          >
+            <Image
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: 30,
+                height: 30,
+              }}
+              source={require('../../../assets/apps/favorite.png')}
+            />
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Favourites</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Favourites({
+                type: 'reset',
+              })
+            }
+          >
+            <Text style={styles.text}>Favourites</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Image
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: 30,
-              height: 30,
-            }}
-            source={require('../../../assets/apps/user.png')}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Profile({
+                type: 'reset',
+              })
+            }
+          >
+            <Image
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: 30,
+                height: 30,
+              }}
+              source={require('../../../assets/apps/user.png')}
+            />
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Profile</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Profile({
+                type: 'reset',
+              })
+            }
+          >
+            <Text style={styles.text}>Profile</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
     </Content>

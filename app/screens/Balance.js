@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { StatusBar, View } from 'react-native';
-import { Container, Content, Text } from 'native-base';
+import { Container, Content, Text, Drawer } from 'native-base';
 import styles from '../components/BalanceComp/styles';
 import Navbar from '../components/common/Navbar';
+import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
 
 class Balance extends Component {
@@ -13,6 +14,21 @@ class Balance extends Component {
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
     };
+    this.drawerActionCallback = this.drawerActionCallback.bind(this);
+  }
+
+  closeDrawer() {
+    this._drawer._root.close();
+  }
+
+  openDrawer() {
+    this._drawer._root.open();
+  }
+
+  drawerActionCallback(callback) {
+    if (callback == true) {
+      this.openDrawer();
+    }
   }
 
   componentWillMount() {
@@ -34,9 +50,20 @@ class Balance extends Component {
 
   render() {
     return (
+      <Drawer
+        type="displace"
+        ref={ref => {
+          this._drawer = ref;
+        }}
+        content={<MenuSide navigator={this._navigator} />}
+        onClose={() => this.closeDrawer()}
+      >
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" />
+        <Navbar
+            drawerAction={this.drawerActionCallback}
+            leftNav={true}
+          />
         <Content padder>
           <View style={styles.container}>
             <Text
@@ -167,6 +194,7 @@ class Balance extends Component {
           </View>
         </Content>
       </Container>
+      </Drawer>
     );
   }
 }

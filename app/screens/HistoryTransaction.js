@@ -140,7 +140,7 @@ class HistoryTransaction extends Component {
 
   renderTransactionE_Claim() {
     return this.state.DataE_Claim.map(Data => (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => Actions.DetailEclaimTransaction({transaction_id: Data.transaction_id})}>
         <Card>
           <CardItem
             bordered
