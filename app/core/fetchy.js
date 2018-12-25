@@ -22,15 +22,17 @@ function fetching(params, callback) {
       } else if (connection == 'unknown') {
         throw 'Connection Unknown';
       } else {
+        console.warn(params.body);
+
         fetch(params.url, {
           method: params.method,
           headers: params.header,
           body:
             params.body == ''
               ? ''
-              : typeof params.body == 'object'
-              ? JSON.stringify(params.body)
-              : params.body,
+              : typeof params.body == 'object' && params.bodyType == 'object'
+              ? params.body
+              : JSON.stringify(params.body)
         })
           .then(response => response.json())
           .then(res => {
@@ -274,16 +276,21 @@ export function GetBarcodeData(url, callback) {
   }
 }
 
-export function SendPayment() {
+export function SendPayment(param, callback) {
   Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
     params = {
-      url: url,
+      url: Config.CLINIC_SEND_PAYMENT,
       method: 'POST',
       header: {
+       'Content-Type': 'application/json',
         Authorization: result,
       },
-      body: params,
+      body: param,
     };
+
+    fetching(params, result => {
+      callback('',result)
+    })
   });
 }
 
@@ -305,6 +312,50 @@ export function GetFavouritesClinic(callback) {
     });
   } catch (e) {
     console.warn('error get favourites clinic' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetClinicDetails(id, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.CLINIC_DETAILS+"/"+id,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetClinicDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetProcedureDetails(id, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.CLINIC_PROCEDURE_DETAILS+"/"+id,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetProcedureDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

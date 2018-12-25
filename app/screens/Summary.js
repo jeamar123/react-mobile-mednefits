@@ -37,14 +37,13 @@ class Summary extends Component {
                     fontFamily: 'helvetica',
                   }}
                 >
-                  Medicloud Family Clinic
+                  {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                 </Text>
                 <View
                   style={{ flexDirection: 'row', alignItems: 'flex-start' }}
                 >
-                  <Text style={styles.detailUp}>S$</Text>
-                  <Text style={styles.detail}>100</Text>
-                  <Text style={styles.detailUp}>00</Text>
+                  <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
+                  <Text style={styles.detail}>{(this.props.result.data.amount) ? this.props.result.data.amount : ""}</Text>
                 </View>
               </Body>
             </CardItem>
@@ -69,7 +68,7 @@ class Summary extends Component {
                     fontFamily: 'helvetica',
                   }}
                 >
-                  Consultation
+                  {(this.props.result.data.services) ? this.props.result.data.services : ""}
                 </Text>
               </Right>
             </CardItem>
@@ -94,7 +93,7 @@ class Summary extends Component {
                     fontFamily: 'helvetica',
                   }}
                 >
-                  01-10-2017 10:30
+                  {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
                 </Text>
               </Right>
             </CardItem>
@@ -119,7 +118,7 @@ class Summary extends Component {
                     fontFamily: 'helvetica',
                   }}
                 >
-                  IN74859204
+                  {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
                 </Text>
               </Right>
             </CardItem>

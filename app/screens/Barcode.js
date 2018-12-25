@@ -26,7 +26,7 @@ class Barcode extends Component {
     if (data) {
       Core.GetBarcodeData(data[0].data, (result)=>{
         if (result.status) {
-          Actions.SelectService({services: result.data.clinic_procedures})
+          Actions.SelectService({services: result.data.clinic_procedures, clinicid: result.data.clinic_id})
         }
       })
     }

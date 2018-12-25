@@ -13,7 +13,7 @@ class SelectService extends Component {
 
     this.state = {
       services: [],
-      total: []
+      clinic: false
     }
 
     this.selectedService = this.selectedService.bind(this)
@@ -49,12 +49,11 @@ class SelectService extends Component {
   selectedService(data){
     let serviceId = "services-"+data.procedureid
 
-    serviceArr = []
+    serviceArr  = []
     serviceArr2 = this.state.services
+    service     = [...serviceArr, ...serviceArr2]
 
-    service = [...serviceArr, ...serviceArr2]
-
-    isExist = service.includes(data);
+    isExist = service.includes(data.procedureid);
 
     if (!isExist) {
       this.refs[serviceId].setNativeProps({
@@ -62,7 +61,7 @@ class SelectService extends Component {
         borderWidth: 1
       });
 
-      service.push(data)
+      service.push(data.procedureid)
 
     } else {
       this.refs[serviceId].setNativeProps({
@@ -70,7 +69,7 @@ class SelectService extends Component {
         borderWidth: 1
       });
 
-      service.splice( service.indexOf(data), 1 )
+      service.splice( service.indexOf(data.procedureid), 1 )
     }
 
     this.setState({ services: service })
@@ -99,7 +98,7 @@ class SelectService extends Component {
             ))}
           </View>
 
-          <Buttons onPress={() => Actions.PayScan({ type: 'reset' })}>
+          <Buttons onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
             Proceed
           </Buttons>
         </Content>

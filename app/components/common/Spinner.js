@@ -5,7 +5,7 @@ let Spinner = ({ size }) => {
   let { spinnerStyle } = styles;
   return (
     <View style={spinnerStyle}>
-      <ActivityIndicator size={size || 'large'} />
+      <ActivityIndicator size={size || 'large'} color="#0392cf" />
     </View>
   );
 };

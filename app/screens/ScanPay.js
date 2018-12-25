@@ -14,62 +14,15 @@ const options = {
 class ScanPay extends Component {
   constructor(props) {
     super(props);
-    this.selectPhoto = this.selectPhoto.bind(this);
-    this.selectPhoto2 = this.selectPhoto2.bind(this);
-  }
-
-  selectPhoto() {
-    ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({ imageSource: source });
-      }
-    });
-  }
-
-  selectPhoto2() {
-    ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-        this.setState({ imageSource2: source });
-      }
-    });
   }
 
   render() {
-    const uri =
-      'https://facebook.github.io/react-native/docs/assets/favicon.png';
-
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar()}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar({services: this.props.services, clinicid: this.props.clinicid})}>
             <Card>
               <CardItem>
                 <Body
@@ -89,7 +42,7 @@ class ScanPay extends Component {
               </CardItem>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar()}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar({services: this.props.services, clinicid: this.props.clinicid})}>
             <Card>
               <CardItem>
                 <Body
