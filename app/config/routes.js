@@ -32,6 +32,10 @@ import ECardUser from '../screens/ECardUser';
 import SwitchUser from '../screens/SwitchUser';
 import HomeStatic from '../screens/HomeStatic';
 import ECardUserStatic from '../screens/ECardUserStatic';
+import ManageProfile from '../screens/manageProfile';
+import Profile from '../screens/Profile';
+import Favourites from '../screens/Favourites';
+import DetailEclaimTransaction from '../screens/DetailEClaim_Transaction';
 
 // console.disableYellowBox = true;
 
@@ -45,7 +49,7 @@ class RouterComponent extends Component {
           <Scene key="Forgot" component={Forgot} hideNavBar />
           <Scene key="Home" component={Homes} hideNavBar />
           <Scene key="SelectService" component={SelectService} hideNavBar />
-          <Scene key="Balance" component={Balance} hideNavBar  />
+          <Scene key="Balance" component={Balance} hideNavBar />
           <Scene key="Summary" component={Summary} hideNavBar />
           <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
           <Scene key="PayScan" component={ScanPay} hideNavBar />
@@ -94,6 +98,10 @@ class RouterComponent extends Component {
           <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
           <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
           <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
+          <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
+          <Scene key="Profile" component={Profile} hideNavBar />
+          <Scene key="Favourites" component={Favourites} hideNavBar />
+          <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar  />
         </Stack>
       </Router>
     );

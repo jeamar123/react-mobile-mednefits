@@ -1,18 +1,19 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import * as Config from '../../config';
 
 const INPUT_HEIGHT = 48;
 
 export default EStyleSheet.create({
   container: {
     backgroundColor: '$white',
-    width: '100%',
+    width: '80%',
     height: INPUT_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 11,
   },
   input: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_LIGHT,
     flex: 1,
     height: INPUT_HEIGHT,
     paddingHorizontal: 8,

@@ -126,13 +126,7 @@ class Home extends Component {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  Actions.HistoryDentalCare({
-                    type: 'reset',
-                  })
-                }
-              >
+              <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
                     style={{
@@ -150,13 +144,7 @@ class Home extends Component {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  Actions.HistoryChieneseMedicine({
-                    type: 'reset',
-                  })
-                }
-              >
+              <TouchableOpacity>
                 <View style={styles.gridBox}>
                   <Image
                     style={{
@@ -231,7 +219,7 @@ const styles = {
     margin: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10
+    padding: 10,
   },
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
@@ -15,22 +16,24 @@ const Buttons = ({ onPress, children }) => {
 
 const styles = {
   MainContainer: {
-    flex: 1,
+    flex: 0.3,
     justifyContent: 'center',
     alignSelf: 'center',
   },
   ButtonStyle: {
-    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: '#0392cf',
     borderRadius: 5,
-    width: "100%"
+    margin: 10,
+    alignSelf: 'center',
+    width: '75%'
   },
   TextStyle: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_LIGHT,
     color: '#fff',
     alignSelf: 'center',
     fontSize: 20,
-    fontWeight: '600',
   },
 };
 

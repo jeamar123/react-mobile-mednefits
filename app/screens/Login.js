@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TouchableOpacity, ActivityIndicator, View } from 'react-native';
+import { StatusBar, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
-import * as Common from '../components/common';
 import * as Core from '../core'
 
 class Login extends Component {
@@ -39,25 +38,18 @@ class Login extends Component {
           isVisible={this.state.isLoading}
         />
         <Logo />
-        <Common.Body
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-          >
-          <InputWithButton
-            onChangeText={(text)=>this.setState({username: text})}
-            placeholder="Email address"
-            />
-          <InputWithButton
-            onChangeText={(text)=>this.setState({password: text})}
-            placeholder="Enter password"
-            secureTextEntry={true}
-            />
-          <Buttons onPress={() => this.LoginHandler()}>
-            Log in
-          </Buttons>
-        </Common.Body>
+        <InputWithButton
+          onChangeText={(text)=>this.setState({username: text})}
+          placeholder="Email address"
+          />
+        <InputWithButton
+          onChangeText={(text)=>this.setState({password: text})}
+          placeholder="Enter password"
+          secureTextEntry={true}
+          />
+        <Buttons onPress={() => this.LoginHandler()}>
+          Log in
+        </Buttons>
         <TouchableOpacity onPress={() => Actions.Forgot({ type: 'reset' })}>
           <Text style={{ color: '#0392cf', fontFamily: 'helvetica' }}>
             Forgot password?
