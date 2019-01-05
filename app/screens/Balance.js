@@ -13,6 +13,7 @@ class Balance extends Component {
       Balance: '0',
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
+      currency: '',
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -33,6 +34,9 @@ class Balance extends Component {
 
   componentWillMount() {
     this.getUserBalance();
+    Core.GetBalance((err, result)=>{
+      this.setState({currency: result.data.currency_symbol})
+    })
   }
 
   getUserBalance() {
@@ -101,7 +105,7 @@ class Balance extends Component {
                 marginTop: 10,
               }}
             >
-              S$ {this.state.Balance}
+              {(this.state.currency) ? this.state.currency : " "} {this.state.Balance}
             </Text>
 
             <Text
@@ -149,7 +153,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
+                {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
               </Text>
             </View>
           </View>
@@ -188,7 +192,7 @@ class Balance extends Component {
                   fontFamily: 'HelveticaNeue-Roman',
                 }}
               >
-                S$ {this.state.InNetwork_Credit_spent}
+                {(this.state.currency) ? this.state.currency : " "} {this.state.InNetwork_Credit_spent}
               </Text>
             </View>
           </View>
