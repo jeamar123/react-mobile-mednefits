@@ -318,6 +318,33 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.rightNav == 'update-profile') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => this.props.updateProfile(true)}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#FFFFFF',
+                marginRight: '2%',
+                width: 65,
+              }}
+            >
+              UPDATE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else {
       return (
         <View

@@ -51,7 +51,6 @@ class Home extends Component {
           <Navbar
             drawerAction={this.drawerActionCallback}
             leftNav={true}
-            rightNav={true}
           />
           {/* <Header style={{ backgroundColor: '#0392cf' }}>
             <Left>

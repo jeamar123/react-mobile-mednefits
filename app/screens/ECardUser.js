@@ -93,7 +93,21 @@ class ECardUser extends Component {
           {Data.package_description}
         </Text>
       </View>
+      
     ));
+  }
+
+  _renderDivider() {
+    return (
+      <View
+        style={{
+          borderBottomColor: '#cccccc',
+          borderBottomWidth: 0.8,
+          marginTop: '-2%',
+          marginBottom: '5%',
+        }}
+      />
+    );
   }
 
   render() {
@@ -111,7 +125,6 @@ class ECardUser extends Component {
           <Navbar
             drawerAction={this.drawerActionCallback}
             leftNav={true}
-            rightNav="search"
           />
           <View
             style={{
@@ -242,7 +255,7 @@ class ECardUser extends Component {
               <View
                 style={{
                   height: '15%',
-                  backgroundColor: '#c4c4c4',
+                  backgroundColor: '#f2f2f2',
                   borderBottomLeftRadius: 14,
                   borderBottomRightRadius: 14,
                   opacity: 10000,
