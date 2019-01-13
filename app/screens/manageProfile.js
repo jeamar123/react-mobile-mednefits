@@ -17,7 +17,7 @@ const options = {
   chooseFromLibraryButtonTitle: 'Choose from Gallery',
   quality: 1,
 };
-import { getNotify } from '../components/common/Notify';
+import { getNotify, getAlert } from '../components/common/Notify';
 import * as Core from '../core';
 import * as Config from '../config';
 import * as Common from '../components/common';
@@ -29,11 +29,13 @@ class manageProfile extends Component {
     super(props);
     this.state = {
       FullName: '',
-      PhoneNumber: '',
+      email: '',
       nirc_number: '',
+      PhoneNumber: '',
       Dob: '',
       Weight: '',
       Height: '',
+      bmi: '',
       blodeType: '',
     };
     this.updateProfile = this.updateProfile.bind(this);
@@ -50,56 +52,69 @@ class manageProfile extends Component {
       console.warn(data);
       this.setState({
         Full_name: data.profile.full_name,
-        PhoneNumber: data.profile.mobile_phone,
         nirc_number: data.profile.nric,
+        email: data.profile.email,
+        PhoneNumber: data.profile.mobile_phone,
         Dob: data.profile.dob,
         Weight: data.profile.weight,
         Height: data.profile.height,
+        bmi: data.profile.bmi,
         blodeType: data.profile.blood_type,
-        clinicImage: data.profile.photo_url,
+        photo_url: data.profile.photo_url,
       });
     });
   }
 
   UpdateDataUser(callback) {
     full_name = this.state.Full_name;
-    mobile_phone = this.state.PhoneNumber;
+    email = this.state.email;
     nric = this.state.nirc_number;
+    mobile_phone = this.state.PhoneNumber;
     dob = this.state.Dob;
     weight = this.state.Weight;
     height = this.state.Height;
+    bmi = this.state.bmi;
     blood_type = this.state.blodeType;
     // photo_url = this.state.photo_url;
-
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
-      if (result) {
-        fetch(Config.AUTH_UPDATE, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': result,
-          },
-          body: JSON.stringify({
-            full_name: full_name,
-            mobile_phone: mobile_phone,
-            nric: nric,
-            dob: dob,
-            weight: weight,
-            height: height,
-            blood_type: blood_type,
-          }),
-        })
-          .then(response => response.json())
-          .then(res => {
-            callback(res)
+    try {
+      Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+        if (result) {
+          fetch(Config.AUTH_UPDATE, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': result,
+            },
+            body: JSON.stringify({
+              full_name: full_name,
+              email: email,
+              nric: nric,
+              mobile_phone: mobile_phone,
+              dob: dob,
+              weight: weight,
+              height: height,
+              bmi: bmi,
+              blood_type: blood_type,
+            }),
           })
-          .catch(error => {
-            console.warn('Mednefits', error.message);
+            .then(response => response.json())
+            .then(res => {
+              console.warn(res);
+              if (res.status == 'true');
+              Core.getNotify('', 'Success update data');
+            })
+            .catch(error => {
+            console.warn('error fetching', error.message);
           });
-      } else {
-        Actions.login({ type: 'reset' });
-      }
-    });
+        } else {
+          Actions.login({ type: 'reset' });
+        }
+      });
+    } catch (e) {
+      console.warn('error get history transaction' + e.message);
+      getNotify('', 'Failed get data, try again');
+    }
+
   }
 
   _renderDivider() {
@@ -151,10 +166,10 @@ class manageProfile extends Component {
           .then(response => {
             if (response.status == 201) {
               if (response.body.postResponse.location) {
-                if ((this.state.profil == "") || (this.state.profil == undefined) || (this.state.profil == null)) {
+                if ((this.state.photo_url == "") || (this.state.photo_url == undefined) || (this.state.photo_url == null)) {
                   photo = ""
                 } else {
-                  photo = this.state.profil
+                  photo = this.state.photo_url
                 }
 
                 idData = {
@@ -180,7 +195,7 @@ class manageProfile extends Component {
   }
 
   showPhotoProfile() {
-    console.warn("profil "+this.props.profil);
+    console.warn("profil "+this.props.photo_url);
     try {
       return (
         <TouchableOpacity
@@ -189,9 +204,9 @@ class manageProfile extends Component {
           <Image
             style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
             source={{
-              uri: ((this.props.profil == false) || (this.props.profil == "") || (this.props.profil == undefined))
+              uri: ((this.props.photo_url == false) || (this.props.photo_url == "") || (this.props.photo_url == undefined))
                 ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
-                : this.props.profil,
+                : this.props.photo_url,
             }}
             onError={()=>this.errorLoad()}
           />
@@ -242,7 +257,7 @@ class manageProfile extends Component {
         </View>
 
 
-        {/* <ProfileManage clinicimage={this.state.clinicImage} /> */}
+        {/* <ProfileManage photo_url={this.state.photo_url} /> */}
         <GiftedForm
           style={{
             backgroundColor: '#fff',
