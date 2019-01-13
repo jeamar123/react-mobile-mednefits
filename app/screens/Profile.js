@@ -41,6 +41,7 @@ class Profile extends Component {
                   color: '#b3b3b3',
                   marginLeft: '2%',
                   fontFamily: Config.FONT_FAMILY_LIGHT,
+                  fontSize: 14,
                 }}
               >
                 Manage Profile
@@ -66,6 +67,7 @@ class Profile extends Component {
                   color: '#b3b3b3',
                   marginLeft: '2%',
                   fontFamily: Config.FONT_FAMILY_LIGHT,
+                  fontSize: 14,
                 }}
               >
                 Update Password
@@ -91,6 +93,7 @@ class Profile extends Component {
                   color: '#b3b3b3',
                   marginLeft: '2%',
                   fontFamily: Config.FONT_FAMILY_LIGHT,
+                  fontSize: 14,
                 }}
               >
                 Disable Profile
@@ -116,6 +119,7 @@ class Profile extends Component {
                   color: '#b3b3b3',
                   marginLeft: '2%',
                   fontFamily: Config.FONT_FAMILY_LIGHT,
+                  fontSize: 14,
                 }}
               >
                 Logout
