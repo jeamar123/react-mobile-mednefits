@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import {
+  StatusBar,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { Container, Text } from 'native-base';
-import { ProfileManage } from '../components/ProfileManage';
+import { Actions } from 'react-native-router-flux';
+import { RNS3 } from 'react-native-aws3';
+import ImagePicker from 'react-native-image-picker';
+const options = {
+  title: 'Upload Foto Profil Anda',
+  takePhotoButtonTitle: 'Take a Photo',
+  chooseFromLibraryButtonTitle: 'Choose from Gallery',
+  quality: 1,
+};
+import { getNotify, getAlert } from '../components/common/Notify';
 import * as Core from '../core';
 import * as Config from '../config';
+import * as Common from '../components/common';
 import Navbar from '../components/common/Navbar';
 import { ButtonProfile } from '../components/common/ButtonProfile';
 
@@ -13,13 +29,16 @@ class manageProfile extends Component {
     super(props);
     this.state = {
       FullName: '',
-      PhoneNumber: '',
+      email: '',
       nirc_number: '',
+      PhoneNumber: '',
       Dob: '',
       Weight: '',
       Height: '',
+      bmi: '',
       blodeType: '',
     };
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   componentWillMount() {
@@ -32,170 +51,499 @@ class manageProfile extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
       this.setState({
-        Full_name : data.profile.full_name,
-        PhoneNumber : data.profile.mobile_phone,
-        nirc_number : data.profile.nric,
-        Dob : data.profile.dob,
-        Weight : data.profile.weight,
-        Height : data.profile.height,
-        blodeType : data.profile.blood_type,
-        clinicImage : data.profile.photo_url,
+        Full_name: data.profile.full_name,
+        nirc_number: data.profile.nric,
+        email: data.profile.email,
+        PhoneNumber: data.profile.mobile_phone,
+        Dob: data.profile.dob,
+        Weight: data.profile.weight,
+        Height: data.profile.height,
+        bmi: data.profile.bmi,
+        blodeType: data.profile.blood_type,
+        photo_url: data.profile.photo_url,
       });
     });
   }
 
-  _renderDivider(){
-    return(
-      <View style={{borderWidth: 1, borderColor: "#6c6c6c", marginTop: '-2%', marginBottom: '5%'}} />
-    )
+  UpdateDataUser(callback) {
+    full_name = this.state.Full_name;
+    email = this.state.email;
+    nric = this.state.nirc_number;
+    mobile_phone = this.state.PhoneNumber;
+    dob = this.state.Dob;
+    weight = this.state.Weight;
+    height = this.state.Height;
+    bmi = this.state.bmi;
+    blood_type = this.state.blodeType;
+    // photo_url = this.state.photo_url;
+    try {
+      Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+        if (result) {
+          fetch(Config.AUTH_UPDATE, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': result,
+            },
+            body: JSON.stringify({
+              full_name: full_name,
+              email: email,
+              nric: nric,
+              mobile_phone: mobile_phone,
+              dob: dob,
+              weight: weight,
+              height: height,
+              bmi: bmi,
+              blood_type: blood_type,
+            }),
+          })
+            .then(response => response.json())
+            .then(res => {
+              console.warn(res);
+              if (res.status == 'true');
+              Core.getNotify('', 'Success update data');
+            })
+            .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+        } else {
+          Actions.login({ type: 'reset' });
+        }
+      });
+    } catch (e) {
+      console.warn('error get history transaction' + e.message);
+      getNotify('', 'Failed get data, try again');
+    }
+
+  }
+
+  _renderDivider() {
+    return (
+      <View
+        style={{
+          borderBottomColor: '#cccccc',
+          borderBottomWidth: 0.8,
+          marginTop: '-2%',
+          marginBottom: '5%',
+        }}
+      />
+    );
+  }
+
+  selectPhoto() {
+    ImagePicker.showImagePicker(options, response => {
+      if (response.didCancel) {
+        console.warn('User cancelled image picker');
+      } else if (response.error) {
+        console.warn('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.warn('User tapped custom button: ', response.customButton);
+      } else {
+        let source = { uri: response.uri };
+        this.setState({ imageSource: source });
+
+        const file = {
+          uri: response.uri,
+          name: response.fileName,
+          type: response.type,
+        };
+
+        const options = {
+          keyPrefix: 'profile/',
+          bucket: Config.AWS_BUCKET,
+          region: Config.AWS_REGION,
+          accessKey: Config.AWS_KEY,
+          secretKey: Config.AWS_SECRET,
+          successActionStatus: 201,
+        };
+
+        RNS3.put(file, options)
+          .progress(e =>
+            this.setState({
+              profileProgress: ((e.loaded / e.total) * 100).toFixed(0),
+            })
+          )
+          .then(response => {
+            if (response.status == 201) {
+              if (response.body.postResponse.location) {
+                if ((this.state.photo_url == "") || (this.state.photo_url == undefined) || (this.state.photo_url == null)) {
+                  photo = ""
+                } else {
+                  photo = this.state.photo_url
+                }
+
+                idData = {
+                  photo: photo,
+                  ktp: response.body.postResponse.location,
+                };
+
+                this.setState({ foto: response.body.postResponse.location });
+
+                this.UpdateDataUser((response)=>{
+                  Common.getNotify("","update profile photo success")
+                });
+                // console.warn('selesai update');
+              } else {
+                console.warn('failed to get location');
+              }
+            } else {
+              getNotify("","Failed to update profile photo")
+            }
+          })
+      }
+    });
+  }
+
+  showPhotoProfile() {
+    console.warn("profil "+this.props.photo_url);
+    try {
+      return (
+        <TouchableOpacity
+          onPress={()=>this.selectPhoto()}
+          >
+          <Image
+            style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
+            source={{
+              uri: ((this.props.photo_url == false) || (this.props.photo_url == "") || (this.props.photo_url == undefined))
+                ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
+                : this.props.photo_url,
+            }}
+            onError={()=>this.errorLoad()}
+          />
+        </TouchableOpacity>
+      );
+    } catch (e) {
+      return(
+        <TouchableOpacity
+          onPress={()=>this.selectPhoto()}
+          >
+          <Image
+            style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
+            source={{
+              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp',
+            }}
+            onError={()=>this.errorLoad()}
+          />
+        </TouchableOpacity>
+      )
+    }
+  }
+
+  updateProfile(result) {
+    if (result) {
+      this.UpdateDataUser();
+    }
   }
 
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back" />
-        <ProfileManage
-        clinicimage={this.state.clinicImage}
+        <Navbar
+          leftNav="back"
+          rightNav="update-profile"
+          updateProfile={this.updateProfile}
         />
+        <View
+        style={{
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 20,
+          marginBottom: 20,
+        }}
+        >
+          {this.showPhotoProfile()}
+        </View>
+
+
+        {/* <ProfileManage photo_url={this.state.photo_url} /> */}
         <GiftedForm
-          style={{ backgroundColor: '#fff', paddingLeft: '5%', paddingRight: '5%' }}
+          style={{
+            backgroundColor: '#fff',
+            paddingLeft: '5%',
+            paddingRight: '5%',
+          }}
           formName="signupForm"
           openModal={route => {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
           }}
         >
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {this.state.Full_name}
-              onChangeText={text => this.setState({Full_name: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.Full_name ? this.state.Full_name : false}
+              onChangeText={text => this.setState({ Full_name: text })}
+              placeholder="Name"
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Name
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="Phone Number"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {this.state.PhoneNumber}
-              onChangeText={text => this.setState({PhoneNumber: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.PhoneNumber ? this.state.PhoneNumber : false}
+              onChangeText={text => this.setState({ PhoneNumber: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Phone
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="NIRC Number"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {this.state.nirc_number}
-              onChangeText={text => this.setState({nirc_number: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.nirc_number ? this.state.nirc_number : false}
+              onChangeText={text => this.setState({ nirc_number: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               NIRC Number
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="Date of Birth"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {this.state.Dob}
-              onChangeText={text => this.setState({Dob: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.Dob ? this.state.Dob : false}
+              onChangeText={text => this.setState({ Dob: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Date of Birth
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="0.0"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {`${this.state.Weight}`}
-              onChangeText={text => this.setState({Weight: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={`${this.state.Weight}` ? `${this.state.Weight}` : false}
+              onChangeText={text => this.setState({ Weight: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Weight (KG)
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="0.0"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {`${this.state.Height}`}
-              onChangeText={text => this.setState({Height: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={`${this.state.Height}` ? `${this.state.Height}` : false}
+              onChangeText={text => this.setState({ Height: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Height (CM)
             </Text>
           </View>
           {this._renderDivider()}
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="Blood Type"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-4%', width: '40%', fontFamily: Config.FONT_FAMILY_ROMAN, }}
-              value= {this.state.blodeType}
-              onChangeText={text => this.setState({blodeType: text})}
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.blodeType ? this.state.blodeType : false}
+              onChangeText={text => this.setState({ blodeType: text })}
             />
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontFamily: Config.FONT_FAMILY_ROMAN }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
               Blood Type
             </Text>
           </View>
-          {this._renderDivider()}          
-          
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: '3%'}}>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text style={{justifyContent: 'flex-end', fontSize: 36, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#8fd8f7'}}>1</Text>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: '3%',
+            }}
+          >
+            <Text />
+            <Text />
+            <Text />
+            <Text
+              style={{
+                justifyContent: 'flex-end',
+                fontSize: 36,
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#8fd8f7',
+              }}
+            >
+              1
+            </Text>
             <ButtonProfile>Medical History</ButtonProfile>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: '3%'}}>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text style={{justifyContent: 'flex-end', fontSize: 36, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#8fd8f7'}}>1</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: '3%',
+            }}
+          >
+            <Text />
+            <Text />
+            <Text />
+            <Text
+              style={{
+                justifyContent: 'flex-end',
+                fontSize: 36,
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#8fd8f7',
+              }}
+            >
+              1
+            </Text>
             <ButtonProfile>Alergies</ButtonProfile>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: '3%'}}>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text style={{justifyContent: 'flex-end', fontSize: 36, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#8fd8f7'}}>1</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: '3%',
+            }}
+          >
+            <Text />
+            <Text />
+            <Text />
+            <Text
+              style={{
+                justifyContent: 'flex-end',
+                fontSize: 36,
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#8fd8f7',
+              }}
+            >
+              1
+            </Text>
             <ButtonProfile>Medical Conditions</ButtonProfile>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingTop: '3%'}}>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text style={{justifyContent: 'flex-end', fontSize: 36, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#8fd8f7'}}>1</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingTop: '3%',
+            }}
+          >
+            <Text />
+            <Text />
+            <Text />
+            <Text
+              style={{
+                justifyContent: 'flex-end',
+                fontSize: 36,
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#8fd8f7',
+              }}
+            >
+              1
+            </Text>
             <ButtonProfile>Medications</ButtonProfile>
           </View>
         </GiftedForm>

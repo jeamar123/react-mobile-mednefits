@@ -11,12 +11,17 @@ class HomeContent extends Component {
     this.state = {
       Balance: '0',
       Full_name: '',
+      currency: false,
     };
   }
 
   componentWillMount() {
     this.getUserBalance();
     this.getUserDetail();
+    Core.GetBalance((err, result)=>{
+      this.setState({currency: result.data.currency_symbol})
+    })
+
   }
 
   getUserBalance() {
@@ -95,7 +100,7 @@ class HomeContent extends Component {
                   source={require('../../../assets/apps/wallet.png')}
                 />
                 <Text style={styles.title}>B-Dollars</Text>
-                <Text style={styles.detail}>S$ {this.state.Balance}</Text>
+                <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
               </View>
             </TouchableOpacity>
           </View>

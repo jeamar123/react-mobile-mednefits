@@ -10,7 +10,7 @@ import * as Config from '../config';
 import * as Core from './index';
 
 const headerLogin = {
-  Accept: 'application/json',
+  'Accept': 'application/json',
   'Content-Type': 'application/json',
 };
 
