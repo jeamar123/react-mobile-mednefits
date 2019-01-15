@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image,ImageBackground, TouchableOpacity } from 'react-native';
 import {
   Content,
   ListItem,
@@ -15,7 +15,10 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 
 const MenuSide = () => (
-  <View style={styles.DrawerContain}>
+  <ImageBackground
+    source={require('../../../assets/andriod_splash.png')}
+    style={styles.DrawerContain}
+    >
     <Content padder>
       <View style={{ marginTop: 50 }} />
       <Body>
@@ -229,7 +232,7 @@ const MenuSide = () => (
         </Body>
       </ListItem>
     </Content>
-  </View>
+  </ImageBackground>
 );
 
 export default MenuSide;
