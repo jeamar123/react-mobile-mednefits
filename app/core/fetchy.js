@@ -359,3 +359,25 @@ export function GetProcedureDetails(id, callback){
     getNotify('', 'Failed get data, try again');
   }
 }
+
+export function GetClinicType(callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.CLINIC_CLINIC_TYPE,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetProcedureDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}

@@ -5,6 +5,8 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  FlatList,
+  ActivityIndicator
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
@@ -12,13 +14,42 @@ import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import { Text } from '../common';
 import * as Config from '../config';
+import * as Core from '../core'
 
 const { width, height } = Dimensions.get('window');
+
+class ClinicList extends Component{
+  render(){
+    return(
+      <TouchableOpacity>
+        <View style={styles.gridBox}>
+          <Image
+            style={{
+              margin: 10,
+              width: 35,
+              height: 35,
+            }}
+            source={{uri: this.props.image}}
+          />
+          <Text
+            fontFamily={Config.FONT_FAMILY_ROMAN}
+            style={{ textAlign: 'center' }}
+          >
+            {this.props.name}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+}
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      data: false
+    }
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
@@ -36,6 +67,31 @@ class Home extends Component {
     }
   }
 
+  async getClinicType(){
+    await Core.GetClinicType((err, result)=>{
+      if (result) {
+        this.setState({
+          data: result.data.clinic_types,
+        })
+      }
+    })
+  }
+
+  componentDidMount(){
+    this.getClinicType()
+  }
+
+  _keyExtractor = (item, index) => item.cat;
+
+  _renderItem = ({ item }) => (
+    <ClinicList
+      key={item.ClinicTypeID}
+      id={item.ClinicTypeID}
+      name={item.Name}
+      image={item.clinic_type_image_url}
+    />
+  );
+
   render() {
     return (
       <Drawer
@@ -52,24 +108,6 @@ class Home extends Component {
             drawerAction={this.drawerActionCallback}
             leftNav={true}
           />
-          {/* <Header style={{ backgroundColor: '#0392cf' }}>
-            <Left>
-              <Button transparent onPress={() => this.openDrawer()}>
-                <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
-              </Button>
-            </Left>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <Image
-                source={require('../../assets/MednefitsLogo.png')}
-                style={{ height: 25, resizeMode: 'center', width: 155 }}
-              />
-            </View>
-            <Right>
-              <Button transparent onPress={() => this.openDrawer()}>
-                <Icons name="gear" style={{ color: '#fff', fontSize: 32 }} />
-              </Button>
-            </Right>
-          </Header> */}
           <HomeContent />
           <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
             <View
@@ -83,120 +121,22 @@ class Home extends Component {
               </Text>
             </View>
             <View style={styles.contain}>
-              <TouchableOpacity>
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/health.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Health Screening
-                  </Text>
+              {(!this.state.data) ? (
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+                >
+                  <ActivityIndicator size="large" color="#0392cf" />
                 </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() =>
-                  Actions.GeneralPractitioner({
-                    type: 'reset',
-                  })
-                }
-              >
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/general.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    General Practitioner
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/tooth.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Dental Care
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/chienese.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center', width: '100%' }}
-                  >
-                    Traditional Chinese Medicine
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/Specialist.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Health Specialist
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View style={styles.gridBox}>
-                  <Image
-                    style={{
-                      margin: 10,
-                      width: 35,
-                      height: 35,
-                    }}
-                    source={require('../../assets/apps/Wellness.png')}
-                  />
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Wellness
-                  </Text>
-                </View>
-              </TouchableOpacity>
+              ) : (
+                <FlatList
+                  data={this.state.data}
+                  extraData={this.state}
+                  keyExtractor={this._keyExtractor}
+                  renderItem={this._renderItem}
+                  horizontal={false}
+                  numColumns={3}
+                />
+              )}
             </View>
           </View>
         </Container>
@@ -207,15 +147,12 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 10,
   },
   gridBox: {
     width: width / 3.23,
     height: height / 6,
     backgroundColor: '#fff',
-    margin: 1,
+    margin: 2,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
