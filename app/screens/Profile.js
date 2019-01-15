@@ -58,7 +58,13 @@ class Profile extends Component {
           </TouchableOpacity>
           {this._renderDivider()}
 
-          <TouchableOpacity>
+          <TouchableOpacity 
+            onPress={() =>
+              Actions.Updatepassword({
+                type: 'reset',
+              })
+            }
+          >
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}
             >

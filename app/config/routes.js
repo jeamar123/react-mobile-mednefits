@@ -36,6 +36,7 @@ import ManageProfile from '../screens/manageProfile';
 import Profile from '../screens/Profile';
 import Favourites from '../screens/Favourites';
 import DetailEclaimTransaction from '../screens/DetailEClaim_Transaction';
+import Updatepassword from '../screens/Updatepassword';
 
 // console.disableYellowBox = true;
 
@@ -98,10 +99,11 @@ class RouterComponent extends Component {
           <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
           <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
           <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
-          <Scene key="ManageProfile" component={ManageProfile} hideNavBar initial/>
+          <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
           <Scene key="Profile" component={Profile} hideNavBar />
           <Scene key="Favourites" component={Favourites} hideNavBar />
           <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar  />
+          <Scene key="Updatepassword" component={Updatepassword} hideNavBar initial/>
         </Stack>
       </Router>
     );
