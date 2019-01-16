@@ -15,6 +15,7 @@ import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
+import { FONT_FAMILY_THIN, FONT_FAMILY_LIGHT } from '../config';
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -62,10 +63,10 @@ class HistoryTransaction extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontSize: 12 }}>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
               Transaction #: {Data.transaction_id}
             </Text>
-            <Text style={{ fontSize: 12 }}>{Data.date_of_transaction}</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{Data.date_of_transaction}</Text>
           </CardItem>
           <CardItem>
             <Body
@@ -74,7 +75,7 @@ class HistoryTransaction extends Component {
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ fontSize: 12 }}>
+              <Text style={{ fontSize: 12, color: '#868686' }}>
                 {Data.clinic_type_and_service}
               </Text>
               <Text />
@@ -98,7 +99,7 @@ class HistoryTransaction extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontSize: 12, color: '#0392cf' }}>
+            <Text style={{ fontSize: 12, fontWeight: '400', color: '#0392cf', fontFamily: Config.FONT_FAMILY_ROMAN }}>
               {Data.customer}
             </Text>
             {Data.health_provider_status == true && Data.type == 'cash' ? (
