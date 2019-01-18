@@ -1,146 +1,117 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity } from 'react-native';
+import { StatusBar, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import * as Config from '../config';
 import Navbar from '../components/common/Navbar';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import ActionSheet from 'react-native-actionsheet'
+import * as Core from '../core'
+
+class RenderList extends Component{
+  render(){
+    return(
+      <TouchableOpacity
+        onPress={this.props.action}
+        style={{
+          backgroundColor: 'white',
+          paddingTop: 15,
+          paddingBottom: 15,
+          marginBottom: 3
+        }}
+      >
+        <View
+          style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+        >
+          <Text
+            style={{
+              color: 'black',
+              marginLeft: 15,
+              fontFamily: Config.FONT_FAMILY_LIGHT,
+              fontSize: 14,
+            }}
+          >
+            {this.props.title}
+          </Text>
+          <Icons
+            name="angle-right"
+            style={{
+              color: '#0392cf',
+              fontSize: 25,
+              paddingRight: 15
+            }}
+          />
+        </View>
+      </TouchableOpacity>
+    )
+  }
+}
 
 class Profile extends Component {
-  _renderDivider() {
-    return (
-      <View
-        style={{
-          borderWidth: 0.5,
-          borderColor: '#6c6c6c',
-          marginBottom: '5%',
-          marginTop: '2%',
-        }}
-      />
-    );
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      isLoading: false
+    }
+  }
+
+  showActionSheet = () => {
+    this.ActionSheet.show()
+  }
+
+  async logoutProcess(index){
+    if (index == 0) {
+      try {
+        await AsyncStorage.removeItem('access_token');
+      }
+      catch(exception) {
+        Core.getNotify("","Failed logout, please try again")
+      }
+      finally{
+        Actions.Login({
+          type: 'reset',
+        })
+      }
+    }
   }
 
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
         <Navbar leftNav="back" />
-        <View style={{ marginTop: '5%' }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.ManageProfile({
-                type: 'reset',
-              })
-            }
-          >
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text
-                style={{
-                  color: '#b3b3b3',
-                  marginLeft: '2%',
-                  fontFamily: Config.FONT_FAMILY_LIGHT,
-                  fontSize: 14,
-                }}
-              >
-                Manage Profile
-              </Text>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#0392cf',
-                  fontSize: 25,
-                  paddingEnd: '4%',
-                }}
+        <View style={{flex:1, backgroundColor: "#EEEEEE" }}>
+          <View style={{marginTop: 50}}>
+            <RenderList
+              action={()=>Actions.ManageProfile()}
+              title="Manage Profile"
+            />
+            <RenderList
+              title="Update Password"
+            />
+            <RenderList
+              title="Disable Profile"
+            />
+            <View style={{marginTop: 50}}>
+              <RenderList
+                action={this.showActionSheet}
+                title="Logout"
+              />
+              <ActionSheet
+                ref={o => this.ActionSheet = o}
+                title={'You are about to logout?'}
+                options={['Yes, please', 'Cancel']}
+                cancelButtonIndex={1}
+                destructiveButtonIndex={0}
+                onPress={(index) => this.logoutProcess(index)}
               />
             </View>
-          </TouchableOpacity>
-          {this._renderDivider()}
-
-          <TouchableOpacity 
-            onPress={() =>
-              Actions.Updatepassword({
-                type: 'reset',
-              })
-            }
-          >
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text
-                style={{
-                  color: '#b3b3b3',
-                  marginLeft: '2%',
-                  fontFamily: Config.FONT_FAMILY_LIGHT,
-                  fontSize: 14,
-                }}
-              >
-                Update Password
-              </Text>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#0392cf',
-                  fontSize: 25,
-                  paddingEnd: '4%',
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-          {this._renderDivider()}
-
-          <TouchableOpacity>
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text
-                style={{
-                  color: '#b3b3b3',
-                  marginLeft: '2%',
-                  fontFamily: Config.FONT_FAMILY_LIGHT,
-                  fontSize: 14,
-                }}
-              >
-                Disable Profile
-              </Text>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#0392cf',
-                  fontSize: 25,
-                  paddingEnd: '4%',
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-          {this._renderDivider()}
-
-          <TouchableOpacity>
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Text
-                style={{
-                  color: '#b3b3b3',
-                  marginLeft: '2%',
-                  fontFamily: Config.FONT_FAMILY_LIGHT,
-                  fontSize: 14,
-                }}
-              >
-                Logout
-              </Text>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#0392cf',
-                  fontSize: 25,
-                  paddingEnd: '4%',
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-          {this._renderDivider()}
+          </View>
         </View>
       </Container>
     );
