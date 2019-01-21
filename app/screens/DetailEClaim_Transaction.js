@@ -4,7 +4,7 @@ import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
-import { HistoryUser } from '../components/HistoryUser';
+import { HistoryClaim } from '../components/HistoryClaim';
 import { Buttons } from '../components/common';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
@@ -22,7 +22,7 @@ class DetailEClaim_Transaction extends Component {
       imageSource: {
         uri: '',
       },
-      data: false
+      data: false,
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
@@ -48,33 +48,50 @@ class DetailEClaim_Transaction extends Component {
     });
   }
 
-  componentWillMount(){
-    Core.GetSpesificEclaim(this.props.transaction_id, (result)=>{
-      data = (typeof result == "string") ? JSON.parse(result.data) : result.data
+  componentWillMount() {
+    Core.GetSpesificEclaim(this.props.transaction_id, result => {
+      data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
       this.setState({
-        data: data
-      })
-    })
+        data: data,
+      });
+    });
 
-    Core.UserDetail((err, result)=>{
+    Core.UserDetail((err, result) => {
       this.setState({
-        user: result.data.profile.full_name
-      })
-    })
+        user: result.data.profile.full_name,
+      });
+    });
+  }
+
+  _renderDivider() {
+    return (
+      <View
+        style={{
+          borderBottomColor: '#cccccc',
+          borderBottomWidth: 0.8,
+          marginTop: '-2%',
+          marginBottom: '5%',
+        }}
+      />
+    );
   }
 
   render() {
-    console.warn("datanya "+(this.state.data.clinic_name) ? this.state.data.clinic_name : "");
+    console.warn(
+      'datanya ' + this.state.data.clinic_name
+        ? this.state.data.clinic_name
+        : ''
+    );
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
-        <HistoryUser
+        <HistoryClaim
+          Status={this.state.data.status_text}
+          Date={this.state.data.claim_date}
           Amount={this.state.data.amount}
-          clinicname={this.state.data.merchant}
-          clinicimage={this.state.data.clinic_image}
-          />
+        />
         <GiftedForm
           style={{ backgroundColor: '#fff', paddingLeft: 5, paddingRight: 15 }}
           formName="signupForm"
@@ -82,7 +99,7 @@ class DetailEClaim_Transaction extends Component {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
           }}
         >
-          <View
+          {/* <View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -98,7 +115,7 @@ class DetailEClaim_Transaction extends Component {
                 marginRight: 30,
                 marginLeft: 50,
               }}
-              source={{uri: this.state.data.clinic_type_image}}
+              source={{ uri: this.state.data.clinic_type_image }}
             />
             <Text
               style={{
@@ -107,9 +124,33 @@ class DetailEClaim_Transaction extends Component {
                 paddingVertical: 10,
               }}
             >
-              {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
+              {this.state.data.clinic_type
+                ? this.state.data.clinic_type
+                : 'N/A'}
             </Text>
+          </View> */}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+              marginTop: 30,
+            }}
+          >
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
+              Item/Service
+            </Text>
+            <TextInput
+              placeholder="Item/Service"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '7%' }}
+              value={this.state.data.service}
+            />
           </View>
+          {this._renderDivider()}
+
           <View
             style={{
               flex: 1,
@@ -119,16 +160,38 @@ class DetailEClaim_Transaction extends Component {
             }}
           >
             <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
-              Transaction #
+              Merchant
             </Text>
             <TextInput
-              placeholder="Transaction ID"
+              placeholder="Merchant"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={this.props.transaction_id}
+              style={{ marginTop: '-3%', marginLeft: '13%' }}
+              value={this.state.data.merchant}
             />
           </View>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
+              Claim #
+            </Text>
+            <TextInput
+              placeholder="Claim ID"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '17%' }}
+              value={this.state.data.transaction_id}
+            />
+          </View>
+          {this._renderDivider()}
 
           <View
             style={{
@@ -139,37 +202,7 @@ class DetailEClaim_Transaction extends Component {
             }}
           >
             <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '6%',
-              }}
-            >
-              Services/s
-            </Text>
-            <TextInput
-              placeholder="Service/s"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={this.state.data.service}
-            />
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '3%',
-              }}
+              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '3%' }}
             >
               Date & Time
             </Text>
@@ -177,10 +210,11 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
+              style={{ marginTop: '-3%', marginLeft: '5%' }}
               value={this.state.data.date}
             />
           </View>
+          {this._renderDivider()}
 
           <View
             style={{
@@ -191,7 +225,34 @@ class DetailEClaim_Transaction extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '10%' }}
+              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '6%' }}
+            >
+              Claim Date
+            </Text>
+            <TextInput
+              placeholder="Claim Date"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%' }}
+              value={this.state.data.claim_date}
+            />
+          </View>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '10%',
+              }}
             >
               Member
             </Text>
@@ -199,10 +260,11 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Member"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={(this.state.user) ? this.state.user : "N/A"}
+              style={{ marginTop: '-3%', marginLeft: '5%' }}
+              value={this.state.user ? this.state.user : 'N/A'}
             />
           </View>
+          {this._renderDivider()}
 
           {/*<View
             style={{

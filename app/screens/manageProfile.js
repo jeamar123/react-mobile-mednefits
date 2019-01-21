@@ -11,6 +11,7 @@ import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { RNS3 } from 'react-native-aws3';
 import ImagePicker from 'react-native-image-picker';
+import DatePicker from 'react-native-datepicker-latest';
 const options = {
   title: 'Upload Foto Profil Anda',
   takePhotoButtonTitle: 'Take a Photo',
@@ -83,7 +84,7 @@ class manageProfile extends Component {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': result,
+              Authorization: result,
             },
             body: JSON.stringify({
               full_name: full_name,
@@ -104,8 +105,8 @@ class manageProfile extends Component {
               Core.getNotify('', 'Success update data');
             })
             .catch(error => {
-            console.warn('error fetching', error.message);
-          });
+              console.warn('error fetching', error.message);
+            });
         } else {
           Actions.login({ type: 'reset' });
         }
@@ -114,7 +115,6 @@ class manageProfile extends Component {
       console.warn('error get history transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-
   }
 
   _renderDivider() {
@@ -166,10 +166,14 @@ class manageProfile extends Component {
           .then(response => {
             if (response.status == 201) {
               if (response.body.postResponse.location) {
-                if ((this.state.photo_url == "") || (this.state.photo_url == undefined) || (this.state.photo_url == null)) {
-                  photo = ""
+                if (
+                  this.state.photo_url == '' ||
+                  this.state.photo_url == undefined ||
+                  this.state.photo_url == null
+                ) {
+                  photo = '';
                 } else {
-                  photo = this.state.photo_url
+                  photo = this.state.photo_url;
                 }
 
                 idData = {
@@ -179,53 +183,53 @@ class manageProfile extends Component {
 
                 this.setState({ foto: response.body.postResponse.location });
 
-                this.UpdateDataUser((response)=>{
-                  Common.getNotify("","update profile photo success")
+                this.UpdateDataUser(response => {
+                  Common.getNotify('', 'update profile photo success');
                 });
                 // console.warn('selesai update');
               } else {
                 console.warn('failed to get location');
               }
             } else {
-              getNotify("","Failed to update profile photo")
+              getNotify('', 'Failed to update profile photo');
             }
-          })
+          });
       }
     });
   }
 
   showPhotoProfile() {
-    console.warn("profil "+this.props.photo_url);
+    console.warn('profil ' + this.props.photo_url);
     try {
       return (
-        <TouchableOpacity
-          onPress={()=>this.selectPhoto()}
-          >
+        <TouchableOpacity onPress={() => this.selectPhoto()}>
           <Image
             style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
             source={{
-              uri: ((this.props.photo_url == false) || (this.props.photo_url == "") || (this.props.photo_url == undefined))
-                ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
-                : this.props.photo_url,
+              uri:
+                this.props.photo_url == false ||
+                this.props.photo_url == '' ||
+                this.props.photo_url == undefined
+                  ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
+                  : this.props.photo_url,
             }}
-            onError={()=>this.errorLoad()}
+            onError={() => this.errorLoad()}
           />
         </TouchableOpacity>
       );
     } catch (e) {
-      return(
-        <TouchableOpacity
-          onPress={()=>this.selectPhoto()}
-          >
+      return (
+        <TouchableOpacity onPress={() => this.selectPhoto()}>
           <Image
             style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
             source={{
-              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp',
+              uri:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp',
             }}
-            onError={()=>this.errorLoad()}
+            onError={() => this.errorLoad()}
           />
         </TouchableOpacity>
-      )
+      );
     }
   }
 
@@ -245,17 +249,16 @@ class manageProfile extends Component {
           updateProfile={this.updateProfile}
         />
         <View
-        style={{
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 20,
-          marginBottom: 20,
-        }}
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 20,
+            marginBottom: 20,
+          }}
         >
           {this.showPhotoProfile()}
         </View>
-
 
         {/* <ProfileManage photo_url={this.state.photo_url} /> */}
         <GiftedForm
@@ -276,7 +279,7 @@ class manageProfile extends Component {
               underlineColorAndroid="transparent"
               style={{
                 marginTop: '-4%',
-                width: '40%',
+                width: '80%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
               value={this.state.Full_name ? this.state.Full_name : false}
@@ -353,7 +356,7 @@ class manageProfile extends Component {
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <TextInput
+            {/* <TextInput
               placeholder="Date of Birth"
               underlineColorAndroid="transparent"
               style={{
@@ -363,7 +366,50 @@ class manageProfile extends Component {
               }}
               value={this.state.Dob ? this.state.Dob : false}
               onChangeText={text => this.setState({ Dob: text })}
+            /> */}
+
+            <DatePicker
+              style={{
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              date={
+                this.state.Dob == '0000-00-00'
+                  ? '1993-08-30'
+                  : this.state.Dob
+              }
+              mode="date"
+              placeholder="00-00-0000"
+              format="DD-MM-YYYY"
+              minDate="30-01-1945"
+              maxDate="30-12-2002"
+              confirmBtnText="Oke"
+              cancelBtnText="Batal"
+              customStyles={{
+                dateIcon: { width: 0, height: 0 },
+                dateInput: {
+                  color: '#38424B',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  marginLeft: '4%',
+                  borderWidth: 0,
+                  marginBottom: 10,
+                },
+                placeholderText: {
+                  color: '#38424B',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  fontSize: 14,
+                  lineHeight: 30,
+                },
+                dateText: {
+                  color: '#38424B',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  fontSize: 14,
+                  lineHeight: 30,
+                },
+              }}
+              onDateChange={date => this.setState({Dob: date})}
             />
+
             <Text
               style={{
                 color: '#c4c4c4',

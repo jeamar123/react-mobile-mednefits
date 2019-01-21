@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity } from 'react-native';
+import { StatusBar, View, TouchableOpacity, Image } from 'react-native';
 import {
   Container,
   Content,
@@ -15,6 +15,7 @@ import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
+import { FONT_FAMILY_THIN, FONT_FAMILY_LIGHT } from '../config';
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -53,7 +54,11 @@ class HistoryTransaction extends Component {
 
   renderTransactionIn_Network() {
     return this.state.resultData.map(Data => (
-      <TouchableOpacity onPress={() => Actions.HistoryGeneral({transaction_id: Data.transaction_id})}>
+      <TouchableOpacity
+        onPress={() =>
+          Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+        }
+      >
         <Card>
           <CardItem
             bordered
@@ -62,10 +67,12 @@ class HistoryTransaction extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontSize: 12 }}>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
               Transaction #: {Data.transaction_id}
             </Text>
-            <Text style={{ fontSize: 12 }}>{Data.date_of_transaction}</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
+              {Data.date_of_transaction}
+            </Text>
           </CardItem>
           <CardItem>
             <Body
@@ -74,7 +81,7 @@ class HistoryTransaction extends Component {
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ fontSize: 12 }}>
+              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.clinic_type_and_service}
               </Text>
               <Text />
@@ -87,8 +94,16 @@ class HistoryTransaction extends Component {
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ fontSize: 12 }} />
-              <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
+              <Image
+                style={{
+                  margin: 10,
+                }}
+                source={require('../../assets/apps/dotted.png')}
+              />
+
+              <Text style={{ marginTop: '7%', color: '#0392cf' }}>
+                S$ {Data.amount}
+              </Text>
             </Body>
           </CardItem>
           <CardItem
@@ -98,7 +113,14 @@ class HistoryTransaction extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontSize: 12, color: '#0392cf' }}>
+            <Text
+              style={{
+                fontSize: 12,
+                fontWeight: '400',
+                color: '#0392cf',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+            >
               {Data.customer}
             </Text>
             {Data.health_provider_status == true && Data.type == 'cash' ? (
@@ -140,18 +162,34 @@ class HistoryTransaction extends Component {
 
   renderTransactionE_Claim() {
     return this.state.DataE_Claim.map(Data => (
-      <TouchableOpacity onPress={() => Actions.DetailEclaimTransaction({transaction_id: Data.transaction_id})}>
+      <TouchableOpacity
+        onPress={() =>
+          Actions.DetailEclaimTransaction({
+            transaction_id: Data.transaction_id,
+          })
+        }
+      >
         <Card>
           <CardItem
             bordered
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
           >
-            <Text style={{ fontSize: 12 }}>Claim #: {Data.transaction_id}</Text>
-            <Text style={{ fontSize: 12 }}>Claim Date: {Data.claim_date}</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
+              Claim #: {Data.transaction_id}
+            </Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
+              Claim Date: {Data.claim_date}
+            </Text>
           </CardItem>
           <CardItem>
             <Body
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
             >
               <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
               <Text />
@@ -159,9 +197,31 @@ class HistoryTransaction extends Component {
           </CardItem>
           <CardItem>
             <Body
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+              style={{
+                marginTop: '-9%',
+                marginBottom: '-6%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
             >
-              <Text style={{ fontSize: 12, color: '#666666' }}>
+              <Image
+                style={{
+                  margin: 10,
+                }}
+                source={require('../../assets/apps/dotted.png')}
+              />
+
+              <Text style={{ marginTop: '7%', color: '#0392cf' }} />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
               <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
@@ -169,9 +229,31 @@ class HistoryTransaction extends Component {
           </CardItem>
           <CardItem>
             <Body
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+              style={{
+                marginTop: '-9%',
+                marginBottom: '-6%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
             >
-              <Text style={{ fontSize: 12, color: '#666666' }}>
+              <Image
+                style={{
+                  margin: 10,
+                }}
+                source={require('../../assets/apps/dotted.png')}
+              />
+
+              <Text style={{ marginTop: '7%', color: '#0392cf' }} />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.visit_date}
               </Text>
               {Data.status == 0 ? (
@@ -251,9 +333,19 @@ class HistoryTransaction extends Component {
           </CardItem>
           <CardItem
             footer
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
           >
-            <Text style={{ fontSize: 11, color: '#0392cf' }}>
+            <Text
+              style={{
+                fontSize: 11,
+                fontWeight: '400',
+                color: '#0392cf',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+            >
               {Data.member}
             </Text>
           </CardItem>
@@ -276,7 +368,11 @@ class HistoryTransaction extends Component {
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
-            textStyle={{fontFamily: Config.FONT_FAMILY_ROMAN, color: '#fff', fontSize: 15 }}
+            textStyle={{
+              fontFamily: Config.FONT_FAMILY_ROMAN,
+              color: '#fff',
+              fontSize: 15,
+            }}
           >
             <Content padder>{this.renderTransactionIn_Network()}</Content>
           </Tab>
@@ -285,7 +381,11 @@ class HistoryTransaction extends Component {
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
             activeTextStyle={{ color: '#fff', fontSize: 16 }}
-            textStyle={{fontFamily: Config.FONT_FAMILY_ROMAN, color: '#fff', fontSize: 15 }}
+            textStyle={{
+              fontFamily: Config.FONT_FAMILY_ROMAN,
+              color: '#fff',
+              fontSize: 15,
+            }}
           >
             <Content padder>{this.renderTransactionE_Claim()}</Content>
           </Tab>
