@@ -15,12 +15,8 @@ export default EStyleSheet.create({
     width: width,
   },
   title: {
-    fontFamily: 'helvetica',
-    fontSize: 16,
     paddingLeft: 15,
     paddingRight: 15,
-    paddingTop: 20,
-    color: '#A5A5A5',
   },
   detail: {
     paddingLeft: 15,

@@ -123,9 +123,7 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.EclaimSubmit({
-                type: 'reset',
-              })
+              Actions.EclaimSubmit()
             }
           >
             <Text style={styles.text}>E-Claim</Text>
@@ -137,9 +135,7 @@ const MenuSide = () => (
         <Left>
           <TouchableOpacity
             onPress={() =>
-              Actions.HistoryTransaction({
-                type: 'reset',
-              })
+              Actions.HistoryTransaction()
             }
           >
             <Image
@@ -156,9 +152,7 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.HistoryTransaction({
-                type: 'reset',
-              })
+              Actions.HistoryTransaction()
             }
           >
             <Text style={styles.text}>History</Text>
@@ -170,9 +164,7 @@ const MenuSide = () => (
         <Left>
           <TouchableOpacity
             onPress={() =>
-              Actions.Favourites({
-                type: 'reset',
-              })
+              Actions.Favourites()
             }
           >
             <Image
@@ -189,9 +181,7 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.Favourites({
-                type: 'reset',
-              })
+              Actions.Favourites()
             }
           >
             <Text style={styles.text}>Favourites</Text>
@@ -203,9 +193,7 @@ const MenuSide = () => (
         <Left>
           <TouchableOpacity
             onPress={() =>
-              Actions.Profile({
-                type: 'reset',
-              })
+              Actions.Profile()
             }
           >
             <Image
@@ -222,9 +210,7 @@ const MenuSide = () => (
         <Body style={{ borderBottomWidth: 0 }}>
           <TouchableOpacity
             onPress={() =>
-              Actions.Profile({
-                type: 'reset',
-              })
+              Actions.Profile()
             }
           >
             <Text style={styles.text}>Profile</Text>
