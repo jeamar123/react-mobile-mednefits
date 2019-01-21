@@ -22,8 +22,6 @@ function fetching(params, callback) {
       } else if (connection == 'unknown') {
         throw 'Connection Unknown';
       } else {
-        console.warn(params.body);
-
         fetch(params.url, {
           method: params.method,
           headers: params.header,
@@ -32,12 +30,18 @@ function fetching(params, callback) {
               ? ''
               : typeof params.body == 'object' && params.bodyType == 'object'
               ? params.body
-              : JSON.stringify(params.body)
+              : JSON.stringify(params.body),
+          mode: (params.mode) ? params.mode : false,
+          cache: (params.cache) ? params.cache : false
         })
           .then(response => response.json())
           .then(res => {
             if (!res.status) {
-              callback(res);
+              getNotify('', res.message);
+
+              if (res.message == "Your token is expired" || res.message == "You have an invalid token. Please login again") {
+                Actions.Home({ type: 'reset' });
+              }
             } else if (res.status) {
               callback(res);
             } else {
@@ -46,7 +50,7 @@ function fetching(params, callback) {
           })
           .catch(error => {
             console.warn('error fetching' + error.message);
-            Core.getNotify('', 'Ooops, failed to get data...');
+            Core.getNotify('', 'Ooops, failed to process data...');
           });
       }
     } catch (e) {
@@ -378,6 +382,88 @@ export function GetClinicType(callback){
     });
   } catch (e) {
     console.warn('error GetProcedureDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetHealthTypeList(type, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.USER_HEALT_TYPE_LIST+"?spending_type="+type,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetProcedureDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function GetAllMember(callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.USER_MEMBERLIST,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetProcedureDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function SendEClaim(params, callback){
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      let myHeaders = new Headers();
+      let formdata = new FormData();
+
+      myHeaders.append('Authorization', result);
+      formdata.append("user_id", params.user_id)
+      formdata.append("service", params.service)
+      formdata.append("merchant", params.merchant)
+      formdata.append("file", {
+        uri: params.file.uri,
+        type: params.file.type,
+        name: params.file.fileName
+      })
+      formdata.append("amount", params.amount)
+      formdata.append("date", params.date)
+      formdata.append("spending_type", params.spending_type)
+      formdata.append("time", params.time);
+
+      params = {
+        url: Config.USER_CREATE_E_CLAIM,
+        method: 'POST',
+        header: myHeaders,
+        body: formdata,
+        mode: 'cors',
+        cache: 'default',
+      };
+      
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
     getNotify('', 'Failed get data, try again');
   }
 }

@@ -15,7 +15,9 @@ const Loader = ({ isVisible }) => {
         }}
       >
         <ActivityIndicator color="#fff" size="large" />
-        <Texti>Please wait...</Texti>
+        <Texti
+          fontColor="#FFFFFF"
+          >Just a sec...</Texti>
       </Modal>
     </View>
   );
