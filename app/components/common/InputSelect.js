@@ -62,6 +62,8 @@ export default class InputSelect extends Component{
           label = value.label
         }
       });
+    } else if (this.props.titleValue) {
+      label = this.props.titleValue
     } else {
       label = this.props.placeholder
     }

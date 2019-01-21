@@ -121,12 +121,14 @@ export default class EclaimForm extends Component{
     })
   }
 
-  setClaimValue(value){
+  setClaimValue(val){
+    console.warn("val"+val);
     this.state.claimType.map((value, index)=>{
       console.warn(value.value);
-      if (value == value.value) {
+      if (val == value.value) {
         console.warn(value.label);
         this.setState({claim: value.label})
+        console.warn("claim now"+this.state.claim);
       } else {
         console.warn('gada');
       }
@@ -217,7 +219,7 @@ export default class EclaimForm extends Component{
           <Common.InputSelect
             placeholder={this.state.claimTypeState}
             data={this.state.claimType}
-            value={this.state.claim}
+            titleValue={this.state.claim}
             onValueChange={(value)=>this.setClaimValue(value)}
           />
 
