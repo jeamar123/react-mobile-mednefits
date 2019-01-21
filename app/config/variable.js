@@ -22,6 +22,7 @@ export const AUTH_DELETE_MEDICATION         = AUTH + '/deletemedication';
 export const AUTH_DELETE_HISTORY            = AUTH + '/deletehistory';
 export const AUTH_UPDATE                    = AUTH + '/update';
 export const AUTH_CHANGE_PASSWORD           = AUTH + '/change-password';
+export const AUTH_RESET_PASSWORD            = AUTH + '/forgotpassword';
 
 /** CLINIC VARIABLE */
 export const CLINIC                         = MAIN + '/clinic';

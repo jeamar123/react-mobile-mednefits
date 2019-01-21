@@ -436,6 +436,7 @@ export function SendEClaim(params, callback){
       let myHeaders = new Headers();
       let formdata = new FormData();
 
+      myHeaders.append('Content-Type', 'multipart/form-data; boundary=f9ee3ac7-1b71-453c-bdb4-9a3e6d6b8089');
       myHeaders.append('Authorization', result);
       formdata.append("user_id", params.user_id)
       formdata.append("service", params.service)
@@ -458,12 +459,34 @@ export function SendEClaim(params, callback){
         mode: 'cors',
         cache: 'default',
       };
-      
-      fetching(params, result => {
-        callback('', result);
-      });
+
+      console.warn(params);
+
+      // fetching(params, result => {
+      //   callback('', result);
+      // });
     });
   } catch (e) {
     getNotify('', 'Failed get data, try again');
   }
+}
+
+export function ResetPassword(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.AUTH_RESET_PASSWORD,
+      method: 'POST',
+      header: {
+       'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: {
+        email: param
+      },
+    };
+
+    fetching(params, result => {
+      callback('',result)
+    })
+  });
 }
