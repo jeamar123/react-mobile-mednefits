@@ -230,7 +230,6 @@ export default class Navbar extends React.Component {
   }
 
   renderRight() {
-    console.warn(this.props.rightNav);
     if (this.props.rightNav == true) {
       return (
         <View
@@ -304,7 +303,7 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity onPress={() => Actions.Member()}>
+          <TouchableOpacity onPress={() => this.props.rightNavCallback(true)}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',

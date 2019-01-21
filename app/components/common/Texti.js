@@ -61,12 +61,14 @@ export default class Text extends Component {
         {...this.props}
         allowFontScaling={false}
         style={[this.props.style, {
-          color: (this.state.fontColor) ? this.state.fontColor : "#fff",
-          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeueLTStd-Lt",
+          color: (this.props.fontColor) ? this.props.fontColor : "black",
+          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeue-Reguler",
           fontSize: this.state.fontSize,
           marginBottom: 5,
           marginTop: 5
         }]}
+        ellipsizeMode={"tail"}
+        numberOfLines={(!this.props.numberOfLines) ? 10 : this.props.numberOfLines}
       >
         {this.props.children}
       </RNText>
