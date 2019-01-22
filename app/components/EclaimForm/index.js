@@ -10,6 +10,7 @@ import RNPickerSelect from 'react-native-picker-select'
 import {Icon} from 'native-base'
 import styles from './styles'
 import * as Core from '../../core'
+import { Actions } from 'react-native-router-flux'
 
 export default class EclaimForm extends Component{
   constructor(props){
@@ -66,6 +67,12 @@ export default class EclaimForm extends Component{
         }
 
         Core.SendEClaim(eclaimFile, (err, result)=>{
+          console.warn(result);
+          if (result.status) {
+            Core.getNotify("",result.message)
+            Actions.ThanksEclaim({type: 'reset'})
+          }
+
           this.setState({
             isLoading: false
           })
@@ -122,22 +129,17 @@ export default class EclaimForm extends Component{
   }
 
   setClaimValue(val){
-    console.warn("val"+val);
     this.state.claimType.map((value, index)=>{
-      console.warn(value.value);
       if (val == value.value) {
-        console.warn(value.label);
         this.setState({claim: value.label})
-        console.warn("claim now"+this.state.claim);
-      } else {
-        console.warn('gada');
       }
     })
   }
 
-  componentDidUpdate(prevProps, prevStates){
-    if (prevProps.submitForm !== this.props.submitForm) {
-      this.EclaimProcess()
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.submitForm)
+    {
+           this.EclaimProcess()
     }
   }
 

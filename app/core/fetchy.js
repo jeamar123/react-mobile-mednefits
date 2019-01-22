@@ -28,7 +28,7 @@ function fetching(params, callback) {
           body:
             params.body == ''
               ? ''
-              : typeof params.body == 'object' && params.bodyType == 'object'
+              : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
               ? params.body
               : JSON.stringify(params.body),
           mode: (params.mode) ? params.mode : false,
@@ -123,7 +123,7 @@ export function UserDetail(callback) {
           },
         };
         fetching(params, result => {
-          callback('', result);
+          callback('', result)
         });
       }
     });
@@ -436,7 +436,6 @@ export function SendEClaim(params, callback){
       let myHeaders = new Headers();
       let formdata = new FormData();
 
-      myHeaders.append('Content-Type', 'multipart/form-data; boundary=f9ee3ac7-1b71-453c-bdb4-9a3e6d6b8089');
       myHeaders.append('Authorization', result);
       formdata.append("user_id", params.user_id)
       formdata.append("service", params.service)
@@ -458,13 +457,12 @@ export function SendEClaim(params, callback){
         body: formdata,
         mode: 'cors',
         cache: 'default',
+        bodyType:'multipart'
       };
 
-      console.warn(params);
-
-      // fetching(params, result => {
-      //   callback('', result);
-      // });
+      fetching(params, result => {
+        callback('', result);
+      });
     });
   } catch (e) {
     getNotify('', 'Failed get data, try again');

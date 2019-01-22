@@ -17,18 +17,6 @@ class EclaimFormSubmit extends Component {
     this.setState({
       submitForm: cb
     })
-
-    setTimeout(()=>{
-      this.setState({
-        submitForm: !cb
-      })
-    },100)
-  }
-
-  submitFormCallback = (cb) => {
-    this.setState({
-      submitForm: cb
-    })
   }
 
   render() {
