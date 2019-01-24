@@ -14,12 +14,12 @@ class ReceiptVerification extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back-home"
+          leftNav="back"
           title="Receipt Verification"
           subtitle="E-Claim"
         />
         <VericicationReceipt />
-        <Buttons onPress={() => Actions.DetailEclaim()}>
+        <Buttons onPress={() => Actions.Camera({claimdata: this.props.claimdata})}>
           <Icon name="camera" style={{ color: '#fff', fontSize: 36 }} />
         </Buttons>
       </Container>

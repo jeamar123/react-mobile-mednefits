@@ -26,7 +26,7 @@ export default class EclaimForm extends Component{
           value: null
         }
       ],
-      claimTypeState: "Choose Claim Type",
+      claimTypeState: "Choose Service",
       claim:false,
       member: false,
       memberData: [],
@@ -44,50 +44,6 @@ export default class EclaimForm extends Component{
   componentWillMount(){
     this.getMember()
     this.selectSpending("medical")
-  }
-
-  EclaimProcess = () =>{
-    try {
-      if (!this.state.file) {
-        Common.getNotify("","Please input file")
-      } else {
-        this.setState({
-          isLoading: true
-        })
-
-        eclaimFile = {
-          'user_id': this.state.member,
-          'service': this.state.claim,
-          'merchant': this.state.provider,
-          'file': this.state.file,
-          'amount': this.state.amount,
-          'date': this.state.date,
-          'spending_type': this.state.type,
-          'time': this.state.time
-        }
-
-        Core.SendEClaim(eclaimFile, (err, result)=>{
-          console.warn(result);
-          if (result.status) {
-            Core.getNotify("",result.message)
-            Actions.ThanksEclaim({type: 'reset'})
-          }
-
-          this.setState({
-            isLoading: false
-          })
-        })
-      }
-    } catch (e) {
-      Common.getNotify("","Failed to send data")
-    } finally {
-      setTimeout(()=>{
-        this.setState({
-          isLoading: false
-        })
-      }, 5000)
-    }
-
   }
 
   async getMember(){
@@ -124,7 +80,7 @@ export default class EclaimForm extends Component{
         this.setState({claimType: dataClaim})
       }
 
-      this.setState({claimTypeState: "Choose Claim Type"})
+      this.setState({claimTypeState: "Choose Service"})
     })
   }
 
@@ -139,7 +95,22 @@ export default class EclaimForm extends Component{
   componentWillReceiveProps(nextProps) {
     if(nextProps.submitForm)
     {
-           this.EclaimProcess()
+           this.nextSnapPhoto()
+    }
+  }
+
+  nextSnapPhoto(){
+    if (
+      (!this.state.claim) ||
+      (!this.state.provider) ||
+      (!this.state.amount) ||
+      (!this.state.member) ||
+      (this.state.date == "Choose Date") ||
+      (this.state.time == "Choose Time")
+    ) {
+      Core.getNotify("","Please fill mandatory form")
+    } else {
+      Actions.ReceiptVerification({claimdata: {...this.state}})
     }
   }
 
@@ -152,30 +123,6 @@ export default class EclaimForm extends Component{
           isVisible={this.state.isLoading}
         />
         <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        >
-          <Common.Texti style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            *File
-          </Common.Texti>
-
-          <View style={{
-            width: "50%"
-          }}>
-            <Common.InputFile
-              onChangeFile={(file)=>this.setState({file: file})}
-            />
-          </View>
-        </View>
-
-        <Common.Divider />
 
         <View
           style={styles.sectionComponent}
@@ -215,7 +162,7 @@ export default class EclaimForm extends Component{
           }}
         >
           <Common.Texti>
-            *Claim Type
+            *Item/Service
           </Common.Texti>
 
           <Common.InputSelect
@@ -240,12 +187,12 @@ export default class EclaimForm extends Component{
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            *Provider
+            *Merchant
           </Common.Texti>
           <Common.InputText
             value={this.state.provider}
             onChangeText={text => this.setState({provider: text})}
-            placeholder="Provider"
+            placeholder="Merchant"
           />
         </View>
 

@@ -440,11 +440,12 @@ export function SendEClaim(params, callback){
       formdata.append("user_id", params.user_id)
       formdata.append("service", params.service)
       formdata.append("merchant", params.merchant)
-      formdata.append("file", {
-        uri: params.file.uri,
-        type: params.file.type,
-        name: params.file.fileName
-      })
+      formdata.append("files[]", {
+        uri: params.file,
+        type: params.filetype,
+        name: params.filename
+      }
+      )
       formdata.append("amount", params.amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
@@ -463,6 +464,7 @@ export function SendEClaim(params, callback){
       fetching(params, result => {
         callback('', result);
       });
+
     });
   } catch (e) {
     getNotify('', 'Failed get data, try again');

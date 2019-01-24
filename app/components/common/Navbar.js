@@ -48,7 +48,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.Home()}
+            onPress={() => Actions.pop()}
             style={{
               paddingStart: 11,
               flexDirection: 'row',
@@ -58,10 +58,10 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{ color: '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
             >
               Back
             </Text>
@@ -180,7 +180,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
-              color: '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
               fontSize: 18,
             }}
           >
@@ -189,7 +189,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Roman',
-              color: '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
               fontSize: 14,
             }}
           >
@@ -209,7 +209,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
-              color: '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
               fontSize: 18,
             }}
           >
@@ -399,6 +399,7 @@ export default class Navbar extends React.Component {
                 !this.props.leftNav && !this.props.rightNav
                   ? 'center'
                   : 'space-between',
+              backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#0392cf',
             },
           ]}
         >
@@ -418,7 +419,6 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 64 : 54,
     flexDirection: 'row',
     paddingTop: 2,
-    backgroundColor: '#0392cf',
   },
   navBarItem: {
     justifyContent: 'center',

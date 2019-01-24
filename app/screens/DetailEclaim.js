@@ -13,14 +13,74 @@ import { Actions } from 'react-native-router-flux';
 import { ClaimDetail } from '../components/ClaimDetail';
 import { ButtonFooter } from '../components/common';
 import Navbar from '../components/common/Navbar';
+import * as Core from '../core'
 
 class DetailEclaim extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      isLoading: false
+    }
+  }
+
+  EclaimProcess = () =>{
+
+    try {
+      this.setState({
+        isLoading: true
+      })
+
+      eclaimFile = {
+        'user_id': this.props.claimdata.member,
+        'service': this.props.claimdata.claim,
+        'merchant': this.props.claimdata.provider,
+        'file': this.props.claimdata.uri,
+        'filename': this.props.claimdata.filename,
+        'filetype': this.props.claimdata.filetype,
+        'amount': this.props.claimdata.amount,
+        'date': this.props.claimdata.date,
+        'spending_type': this.props.claimdata.type,
+        'time': this.props.claimdata.time
+      }
+
+      Core.SendEClaim(eclaimFile, (err, result)=>{
+        if (result.status) {
+          Core.getNotify("",result.message)
+          Actions.ThanksEclaim({type: 'reset'})
+        }
+
+        this.setState({
+          isLoading: false
+        })
+      })
+    } catch (e) {
+      Core.getNotify("", "Failed to send e claim")
+
+      this.setState({
+        isLoading: false
+      })
+    } finally {
+      setTimeout(()=>{
+        this.setState({
+          isLoading: false
+        })
+      },10000)
+    }
+
+  }
+
   render() {
+    console.warn(this.props.claimdata);
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" title="E-Claim" subtitle="File e-claim" />
+        <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
         <ScrollView>
           <GiftedForm
             style={{
@@ -46,7 +106,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="Spectacle"
+                placeholder={(this.props.claimdata.claim) ? this.props.claimdata.claim : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '20%' }}
@@ -68,7 +128,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="Spectacle Hut"
+                placeholder={(this.props.claimdata.provider) ? this.props.claimdata.provider : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '20%' }}
@@ -90,7 +150,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="25 April 2017"
+                placeholder={(this.props.claimdata.date) ? this.props.claimdata.date : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '19%' }}
@@ -112,7 +172,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="3:30pm"
+                placeholder={(this.props.claimdata.time) ? this.props.claimdata.time : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '18%' }}
@@ -134,7 +194,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="S$188.00"
+                placeholder={(this.props.claimdata.amount) ? "S$"+this.props.claimdata.amount : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '15%' }}
@@ -160,7 +220,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder="Filber Tan"
+                placeholder={(this.props.claimdata.memberData[0].label) ? this.props.claimdata.memberData[0].label : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '19%' }}
@@ -200,7 +260,7 @@ class DetailEclaim extends Component {
                 <Image
                   resizeMode="cover"
                   style={{ width: '50%', height: 130 }}
-                  source={require('../../assets/apps/mednefits.png')}
+                  source={{uri: this.props.claimdata.uri}}
                 />
               </View>
             </View>
@@ -215,7 +275,7 @@ class DetailEclaim extends Component {
               <Text style={{ width: '38%' }} />
             </View>
           </GiftedForm>
-          <ButtonFooter onPress={() => Actions.ThanksEclaim()}>
+          <ButtonFooter onPress={this.EclaimProcess}>
             Submit
           </ButtonFooter>
         </ScrollView>
