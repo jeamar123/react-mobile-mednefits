@@ -39,8 +39,9 @@ import DetailEclaimTransaction from '../screens/DetailEClaim_Transaction';
 import Updatepassword from '../screens/Updatepassword';
 import DetailClinic from '../screens/Detailclinic';
 import Camera from '../screens/Camera';
+import Paycash from '../screens/PayCash';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -108,6 +109,7 @@ class RouterComponent extends Component {
           <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
           <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
           <Scene key="Camera" component={Camera} hideNavBar />
+          <Scene key="Paycash" component={Paycash} hideNavBar />
         </Stack>
       </Router>
     );

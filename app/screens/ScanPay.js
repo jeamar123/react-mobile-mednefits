@@ -22,7 +22,7 @@ class ScanPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar({services: this.props.services, clinicid: this.props.clinicid})}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar({ services: this.props.services, clinicid: this.props.clinicid })}>
             <Card>
               <CardItem>
                 <Body
@@ -42,7 +42,7 @@ class ScanPay extends Component {
               </CardItem>
             </Card>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar({services: this.props.services, clinicid: this.props.clinicid})}>
+          <TouchableOpacity onPress={() => Actions.Paycash({ services: this.props.services, clinicid: this.props.clinicid })}>
             <Card>
               <CardItem>
                 <Body

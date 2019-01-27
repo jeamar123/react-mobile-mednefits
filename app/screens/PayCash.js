@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons, Spinner } from '../components/common';
+import { ButtonDone, Spinner } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
 import styles from '../components/DollarBenefits';
 const { width, height } = Dimensions.get('window');
 import * as Core from '../core';
 
-class BenefitsDollar extends Component {
+class PayCash extends Component {
   constructor(props) {
     super(props);
 
@@ -47,29 +47,7 @@ class BenefitsDollar extends Component {
   }
 
   SendPayment() {
-    this.setState({ isLoading: true });
-
-    params = {
-      amount: this.state.amount,
-      services: this.props.services,
-      clinic_id: this.props.clinicid,
-    };
-
-    Core.SendPayment(params, (err, result) => {
-      if (result.status) {
-        Core.getNotify('', result.message);
-
-        Actions.Summary({ result: result });
-      } else if (!result.status) {
-        Core.getNotify('', result.message);
-      } else {
-        Core.getNotify('', 'Failed to send payment, please try again');
-      }
-
-      if (result) {
-        this.setState({ isLoading: false });
-      }
-    });
+    Actions.Home();
   }
 
   render() {
@@ -77,43 +55,9 @@ class BenefitsDollar extends Component {
       <Container>
         <Core.Loader isVisible={this.state.isLoading} />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Benefits Dollars" />
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View
-            style={{
-              backgroundColor: '#626E82',
-              height: height / 9,
-              width: width,
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'helvetica',
-                fontSize: 16,
-                paddingTop: 10,
-                paddingBottom: 15,
-                color: '#fff',
-              }}
-            >
-              Current Balance
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Text
-                style={{
-                  fontFamily: 'helvetica',
-                  fontSize: 20,
-                  lineHeight: 20,
-                  color: '#fff',
-                  fontWeight: '600',
-                }}
-              >
-                {this.state.Balance}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <Content padder>
+        <Navbar leftNav="cancel" title="Health Provider" rightNav="done" />
+
+        <Content padder style={{ backgroundColor: '#439057' }}>
           <Card>
             <CardItem style={{ backgroundColor: '#E8E7EE' }}>
               <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -140,41 +84,26 @@ class BenefitsDollar extends Component {
             <CardItem cardBody>
               <Body
                 style={{
-                  height: 150,
+                  height: 200,
+                  width: 200,
                   flex: 1,
                   justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  marginLeft: 50,
+                  alignItems: 'center',
                 }}
               >
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
-                  Payment Amount
+                <Image source={require('../../assets/apps/byCash.png')} />
+                <Text style={{ marginTop: 20, fontFamily: 'helvetica', width: '80%', fontWeight: 'bold', alignSelf: 'center' }}>
+                  Pay directly to health provider using any preferred payment method onsite
                 </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{ marginTop: '7%', fontFamily: 'helvetica' }}>
-                    {this.state.currency ? this.state.currency : ' '}
-                  </Text>
-                  <InputWithButton
-                    keyboardType="numeric"
-                    placeholder="0.00"
-                    value={this.state.amount}
-                    onChangeText={number => this.setState({ amount: number })}
-                  />
-                </View>
               </Body>
             </CardItem>
 
-            <Buttons
+            <ButtonDone
               onPress={() => this.SendPayment()}
               isLoading={this.state.isLoading}
             >
-              Pay
-            </Buttons>
+              Done
+            </ButtonDone>
             <View style={{ marginBottom: 20 }} />
           </Card>
         </Content>
@@ -182,4 +111,4 @@ class BenefitsDollar extends Component {
     );
   }
 }
-export default BenefitsDollar;
+export default PayCash;
