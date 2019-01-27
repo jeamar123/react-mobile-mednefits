@@ -1,7 +1,8 @@
 export * from './Buttons';
 export * from './Spinner';
 export * from './ButtonFooter';
-export * from './Notify'
+export * from './Notify';
+export * from './ButtonCall';
 
 import Texti from './Texti'
 import Body from './Body';
