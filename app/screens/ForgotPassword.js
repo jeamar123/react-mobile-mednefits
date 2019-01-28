@@ -9,7 +9,7 @@ import * as Core from '../core'
 
 class ForgotPass extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -19,15 +19,15 @@ class ForgotPass extends Component {
 
   resetPassword = () => {
     try {
-      Core.ResetPassword(this.state.email, (err, result)=>{
+      Core.ResetPassword(this.state.email, (err, result) => {
         if (result) {
-          Core.getNotify("",result.message)
+          Actions.EmailSend({ Email: this.state.email })
         } else {
           throw result.message;
         }
       })
     } catch (e) {
-      Core.getNotify("",e)
+      Core.getNotify("", e)
     }
   }
 
@@ -37,10 +37,10 @@ class ForgotPass extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <ForgotPassword />
-        <InputWithButton placeholder="Email address" onChangeText={(text)=>this.setState({email: text})}/>
+        <InputWithButton placeholder="Email address" onChangeText={(text) => this.setState({ email: text })} />
         <Buttons
           onPress={this.resetPassword}
-          >Reset password</Buttons>
+        >Reset password</Buttons>
         <TouchableOpacity onPress={() => Actions.Login({ type: 'reset' })}>
           <Text style={{ fontFamily: 'helvetica' }}>Back to Login</Text>
         </TouchableOpacity>

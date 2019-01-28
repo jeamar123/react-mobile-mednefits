@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Text, Drawer } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -55,7 +56,11 @@ class Favourites extends Component {
 
   renderTransactionIn_Network() {
     return this.state.resultData.map(Data => (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          Actions.DetailClinic({ clinic_id: Data.clinic_id, StatusOpen: Data.open_status })
+        }
+      >
         <View
           style={{
             flex: 1,

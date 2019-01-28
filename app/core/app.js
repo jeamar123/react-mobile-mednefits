@@ -5,13 +5,13 @@
 
 import {
   AsyncStorage
-} from 'react-native'
-import {Actions} from 'react-native-router-flux'
+} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import {
   getAlert,
   getNotify
-} from './notify'
-import * as Core from './index'
+} from './notify';
+import * as Core from './index';
 import * as Config from '../config'
 
 const headerLogin = {
