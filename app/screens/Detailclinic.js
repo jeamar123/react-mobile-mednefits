@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, Image } from 'react-native';
+import { StatusBar, View, TouchableOpacity, Image, Linking } from 'react-native';
 import {
   Container,
   Text,
@@ -253,7 +253,7 @@ class HistoryTransaction extends Component {
         <Text />
         <Text />
         <View style={{ width: '30%', marginTop: '3%' }}>
-          <ButtonCall >
+          <ButtonCall onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
             CALL
           </ButtonCall>
         </View>
@@ -342,6 +342,7 @@ class HistoryTransaction extends Component {
           clinicimage={this.state.resultData.image_url}
           clinicname={this.state.resultData.name}
           Address={this.state.resultData.address}
+          CallPhon={this.state.resultData.telephone}
         />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparant' }}
