@@ -146,6 +146,35 @@ export default class Navbar extends React.Component {
           }}
         />
       );
+    } else if (this.props.leftNav == 'close') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center'
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 15,
+              flexDirection: 'row',
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 16,
+                fontFamily: 'HelveticaNeue-Roman',
+                width: 55,
+              }}
+            >
+              Close
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else {
       return (
         <View

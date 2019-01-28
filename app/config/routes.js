@@ -37,6 +37,8 @@ import Profile from '../screens/Profile';
 import Favourites from '../screens/Favourites';
 import DetailEclaimTransaction from '../screens/DetailEClaim_Transaction';
 import Updatepassword from '../screens/Updatepassword';
+import Camera from '../screens/Camera'
+import Search from '../screens/Search'
 
 // console.disableYellowBox = true;
 
@@ -80,6 +82,7 @@ class RouterComponent extends Component {
             key="ReceiptVerification"
             component={ReceiptVerification}
             hideNavBar
+
           />
           <Scene
             key="InNetworkBenefits"
@@ -104,6 +107,8 @@ class RouterComponent extends Component {
           <Scene key="Favourites" component={Favourites} hideNavBar />
           <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar  />
           <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
+          <Scene key="Camera" component={Camera} hideNavBar />
+          <Scene key="Search" component={Search} hideNavBar />
         </Stack>
       </Router>
     );

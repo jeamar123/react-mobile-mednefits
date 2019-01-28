@@ -490,3 +490,26 @@ export function ResetPassword(param, callback) {
     })
   });
 }
+
+export function Search(query){
+  return new Promise((resolve, reject)=>{
+    try {
+      Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+        params = {
+          url: Config.CLINIC_SEARCH+"/?search="+query,
+          method: 'GET',
+          header: {
+           'Content-Type': 'application/json',
+            Authorization: result,
+          },
+        };
+
+        fetching(params, result => {
+          resolve(result)
+        })
+      });
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
