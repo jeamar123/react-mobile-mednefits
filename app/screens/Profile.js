@@ -8,9 +8,9 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import ActionSheet from 'react-native-actionsheet'
 import * as Core from '../core'
 
-class RenderList extends Component{
-  render(){
-    return(
+class RenderList extends Component {
+  render() {
+    return (
       <TouchableOpacity
         onPress={this.props.action}
         style={{
@@ -49,7 +49,7 @@ class RenderList extends Component{
 
 class Profile extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -61,15 +61,15 @@ class Profile extends Component {
     this.ActionSheet.show()
   }
 
-  async logoutProcess(index){
+  async logoutProcess(index) {
     if (index == 0) {
       try {
         await AsyncStorage.removeItem('access_token');
       }
-      catch(exception) {
-        Core.getNotify("","Failed logout, please try again")
+      catch (exception) {
+        Core.getNotify("", "Failed logout, please try again")
       }
-      finally{
+      finally {
         Actions.Login({
           type: 'reset',
         })
@@ -85,19 +85,20 @@ class Profile extends Component {
           isVisible={this.state.isLoading}
         />
         <Navbar leftNav="back" />
-        <View style={{flex:1, backgroundColor: "#EEEEEE" }}>
-          <View style={{marginTop: 50}}>
+        <View style={{ flex: 1, backgroundColor: "#EEEEEE" }}>
+          <View style={{ marginTop: 50 }}>
             <RenderList
-              action={()=>Actions.ManageProfile()}
+              action={() => Actions.ManageProfile()}
               title="Manage Profile"
             />
             <RenderList
+              action={() => Actions.Updatepassword()}
               title="Update Password"
             />
             <RenderList
               title="Disable Profile"
             />
-            <View style={{marginTop: 50}}>
+            <View style={{ marginTop: 50 }}>
               <RenderList
                 action={this.showActionSheet}
                 title="Logout"

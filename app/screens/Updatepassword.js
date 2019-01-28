@@ -42,8 +42,8 @@ class Updatepassword extends Component {
               'Authorization': result,
             },
             body: JSON.stringify({
-                oldpassword: oldpassword,
-                password: password,
+              oldpassword: oldpassword,
+              password: password,
             }),
           })
             .then(response => response.json())
@@ -51,6 +51,7 @@ class Updatepassword extends Component {
               console.warn(res);
               if (res.status == 'true');
               Core.getNotify('', 'Success change password');
+              Actions.Home();
             })
             .catch(error => {
               console.warn('error fetching', error.message);

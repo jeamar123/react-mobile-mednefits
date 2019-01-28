@@ -7,10 +7,13 @@ import { Buttons } from '../components/common';
 
 class EmailSend extends Component {
   render() {
+    console.warn("datanya" + (this.props.Email))
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Email />
+        <Email
+          email={this.props.Email}
+        />
         <Buttons onPress={() => Actions.Login()}>Back to Login</Buttons>
       </Container>
     );
