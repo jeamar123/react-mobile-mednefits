@@ -109,14 +109,12 @@ class RouterComponent extends Component {
           <Scene key="Favourites" component={Favourites} hideNavBar />
           <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
           <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
-<<<<<<< HEAD
           <Scene key="Camera" component={Camera} hideNavBar />
           <Scene key="Search" component={Search} hideNavBar />
-=======
           <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
           <Scene key="Camera" component={Camera} hideNavBar />
           <Scene key="Paycash" component={Paycash} hideNavBar />
->>>>>>> 64cbcfdb4ac53653b1ca0bc97e7532a75652b2ff
+
         </Stack>
       </Router>
     );
