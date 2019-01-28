@@ -122,16 +122,16 @@ class Favourites extends Component {
                   Open
                 </Text>
               ) : (
-                <Text
-                  style={{
-                    fontFamily: Config.FONT_FAMILY_LIGHT,
-                    fontSize: 10,
-                    color: '#8c8b7f',
-                  }}
-                >
-                  Closed
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_LIGHT,
+                      fontSize: 10,
+                      color: '#8c8b7f',
+                    }}
+                  >
+                    Closed
                 </Text>
-              )}
+                )}
             </View>
             <Image
               source={require('../../assets/apps/like_fav.png')}

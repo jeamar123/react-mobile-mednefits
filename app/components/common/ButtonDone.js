@@ -4,7 +4,7 @@ import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
-const ButtonCall = ({ onPress, children, color }) => {
+const ButtonDone = ({ onPress, children }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
@@ -15,20 +15,27 @@ const ButtonCall = ({ onPress, children, color }) => {
 };
 
 const styles = {
-  ButtonStyle: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    backgroundColor: '#21bf3f',
-    borderRadius: 5,
+  MainContainer: {
+    flex: 0.3,
+    justifyContent: 'center',
     alignSelf: 'center',
-    width: '45%'
+  },
+  ButtonStyle: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#08bb08',
+    borderRadius: 5,
+    margin: 10,
+    alignSelf: 'center',
+    width: '75%'
   },
   TextStyle: {
-    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontFamily: Config.FONT_FAMILY_LIGHT,
     color: '#fff',
     alignSelf: 'center',
-    fontSize: 14,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
 };
 
-export { ButtonCall };
+export { ButtonDone };
