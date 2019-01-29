@@ -81,7 +81,7 @@ class Home extends Component {
     this.getClinicType()
   }
 
-  _keyExtractor = (item, index) => item.cat;
+  _keyExtractor = (item, index) => item.ClinicTypeID;
 
   _renderItem = ({ item }) => (
     <ClinicList
@@ -96,6 +96,8 @@ class Home extends Component {
     return (
       <Drawer
         type="displace"
+        openDrawerOffset={0.4}
+        panCloseMask={0.4}
         ref={ref => {
           this._drawer = ref;
         }}
@@ -131,7 +133,7 @@ class Home extends Component {
                 <FlatList
                   data={this.state.data}
                   extraData={this.state}
-                  keyExtractor={this._keyExtractor}
+                  keyExtractor={this.data}
                   renderItem={this._renderItem}
                   horizontal={false}
                   numColumns={3}

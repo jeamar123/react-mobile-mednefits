@@ -116,12 +116,13 @@ class Balance extends Component {
               />
               <Common.Texti
                 fontColor={'#0392cf'}
+                fontSize={14}
                 style={{
                   textAlign: 'center',
                   lineHeight: 20
                 }}
                 >
-                Benefits credit added via corporate employees benefits or gift code
+                Mednefits credit added via corporate employees benefits or gift code
               </Common.Texti>
             </View>
             <View style={{width: "20%", justifyContent: 'center', alignItems: 'center', padding: 20}}>
@@ -144,25 +145,26 @@ class Balance extends Component {
               />
               <Common.Texti
                 fontColor={'#0392cf'}
-                fontSize={16}
+                fontSize={14}
                 style={{
                   textAlign: 'center',
                   lineHeight: 20
                 }}
                 >
-                Benefits credit gets auto deducted after end of the service
+                Mednefits credit gets auto deducted after end of the service
               </Common.Texti>
             </View>
           </View>
         </Modal>
           <View style={styles.container}>
             <View style={styles.wrapperTop}>
-              <TouchableOpacity onPress={()=>this.refs.modal2.open()}>
+              <TouchableOpacity onPress={()=>this.refs.modal2.open()} style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 10, borderLeftWidth: 1, borderRightWidth: 1, borderBottomWidth: 1, borderLeftColor: '#c8c8c8', borderRightColor: '#c8c8c8', borderBottomColor: '#c8c8c8' }}>
                 <Text
                   style={{
                     fontFamily: 'HelveticaNeue-Roman',
-                    fontSize: 20,
+                    fontSize: 16,
                     color: '#666666',
+                    fontWeight: 'bold',
                     marginTop: 10
                   }}
                 >
@@ -173,10 +175,10 @@ class Balance extends Component {
                 style={{
                   fontSize: 18,
                   fontFamily: 'HelveticaNeue-Medium',
-                  marginTop: 60,
+                  marginTop: 40,
                 }}
               >
-                Your Benefits Credits
+                Your Medical Spending Credits
               </Text>
               <Text
                 style={{
@@ -219,40 +221,6 @@ class Balance extends Component {
                       fontFamily: 'HelveticaNeue-Roman',
                     }}
                   >
-                    E-Claim Account
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#fff',
-                      fontSize: 12,
-                      marginTop: 10,
-                      marginBottom: 10,
-                      fontFamily: 'HelveticaNeue-Roman',
-                    }}
-                  >
-                    Spent
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#fff',
-                      fontSize: 20,
-                      fontWeight: '600',
-                      fontFamily: 'HelveticaNeue-Roman',
-                    }}
-                  >
-                    {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                  </Text>
-                </View>
-              </View>
-              <View style={[{backgroundColor: '#626E82'},styles.panelBottom]}>
-                <View style={styles.sectionTextPanel}>
-                  <Text
-                    style={{
-                      color: '#fff',
-                      fontSize: 18,
-                      fontFamily: 'HelveticaNeue-Roman',
-                    }}
-                  >
                     In-Network Account
                   </Text>
                   <Text
@@ -274,90 +242,46 @@ class Balance extends Component {
                       fontFamily: 'HelveticaNeue-Roman',
                     }}
                   >
-                    {(this.state.currency) ? this.state.currency : " "} {this.state.InNetwork_Credit_spent}
+                    {(this.state.currency) ? this.state.currency : " "} {(this.state.InNetwork_Credit_spent) ? this.state.InNetwork_Credit_spent : "0"}
+                  </Text>
+                </View>
+              </View>
+              <View style={[{backgroundColor: '#626E82'},styles.panelBottom]}>
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontSize: 18,
+                      fontFamily: 'HelveticaNeue-Roman',
+                    }}
+                  >
+                    E-Claim Account
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontSize: 12,
+                      marginTop: 10,
+                      marginBottom: 10,
+                      fontFamily: 'HelveticaNeue-Roman',
+                    }}
+                  >
+                    Spent
+                  </Text>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontSize: 20,
+                      fontWeight: '600',
+                      fontFamily: 'HelveticaNeue-Roman',
+                    }}
+                  >
+                    {(this.state.currency) ? this.state.currency : " "} {this.state.Eclaim_Credit_spent}
                   </Text>
                 </View>
               </View>
             </View>
           </View>
-          {/*<View style={styles.ButtonStyle}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 10,
-              }}
-            >
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 18,
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                E-Claim Account
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 12,
-                  marginTop: 10,
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                Spent
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 20,
-                  fontWeight: '600',
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.ButtonStyle2}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 10,
-              }}
-            >
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 18,
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                In-Network Account
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 12,
-                  marginTop: 10,
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                Spent
-              </Text>
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 20,
-                  fontWeight: '600',
-                  fontFamily: 'HelveticaNeue-Roman',
-                }}
-              >
-                {(this.state.currency) ? this.state.currency : " "} {this.state.InNetwork_Credit_spent}
-              </Text>
-            </View>
-          </View>*/}
       </Container>
       </Drawer>
     );

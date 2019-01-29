@@ -40,7 +40,7 @@ import Updatepassword from '../screens/Updatepassword';
 import Camera from '../screens/Camera'
 import Search from '../screens/Search'
 import DetailClinic from '../screens/Detailclinic';
-import Camera from '../screens/Camera';
+// import Camera from '../screens/Camera';
 import Paycash from '../screens/PayCash';
 console.disableYellowBox = true;
 

@@ -101,8 +101,11 @@ class manageProfile extends Component {
             .then(response => response.json())
             .then(res => {
               console.warn(res);
-              if (res.status == 'true');
-              Core.getNotify('', 'Success update data');
+              if (res.status == true) {
+                Core.getNotify('', res.message);
+              } else {
+              	Core.getAlert('Ooops', res.message, null, true);
+              }
             })
             .catch(error => {
               console.warn('error fetching', error.message);
@@ -140,7 +143,7 @@ class manageProfile extends Component {
         console.warn('User tapped custom button: ', response.customButton);
       } else {
         let source = { uri: response.uri };
-        this.setState({ imageSource: source });
+        this.setState({ imageSource: source, photo_url: response.uri });
 
         const file = {
           uri: response.uri,
@@ -157,49 +160,86 @@ class manageProfile extends Component {
           successActionStatus: 201,
         };
 
-        RNS3.put(file, options)
-          .progress(e =>
-            this.setState({
-              profileProgress: ((e.loaded / e.total) * 100).toFixed(0),
+        Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+          let myHeaders = new Headers();
+          let formdata = new FormData();
+
+          myHeaders.append('Authorization', result);
+          // myHeaders.append('Content-Type', 'multipart/form-data');
+          formdata.append("file", file)
+
+          params = {
+            url: Config.AUTH_UPDATE,
+            method: 'POST',
+            header: myHeaders,
+            body: formdata,
+            mode: 'cors',
+            cache: 'default',
+            bodyType:'multipart'
+          };
+          
+          fetch(Config.AUTH_UPDATE, {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+          })
+            .then(response => response.json())
+            .then(res => {
+              console.warn(res);
+              // if (res.status == true) {
+              //   Core.getNotify('', 'Success update data');
+              // } else {
+              	Core.getNotify('', res.message);
+              // }
             })
-          )
-          .then(response => {
-            if (response.status == 201) {
-              if (response.body.postResponse.location) {
-                if (
-                  this.state.photo_url == '' ||
-                  this.state.photo_url == undefined ||
-                  this.state.photo_url == null
-                ) {
-                  photo = '';
-                } else {
-                  photo = this.state.photo_url;
-                }
+            .catch(error => {
+              console.warn('error fetching', error.message);
+            });
+        });
 
-                idData = {
-                  photo: photo,
-                  ktp: response.body.postResponse.location,
-                };
+        // RNS3.put(file, options)
+        //   .progress(e =>
+        //     this.setState({
+        //       profileProgress: ((e.loaded / e.total) * 100).toFixed(0),
+        //     })
+        //   )
+        //   .then(response => {
+        //     if (response.status == 201) {
+        //       if (response.body.postResponse.location) {
+        //         if (
+        //           this.state.photo_url == '' ||
+        //           this.state.photo_url == undefined ||
+        //           this.state.photo_url == null
+        //         ) {
+        //           photo = '';
+        //         } else {
+        //           photo = this.state.photo_url;
+        //         }
 
-                this.setState({ foto: response.body.postResponse.location });
+        //         idData = {
+        //           photo: photo,
+        //           ktp: response.body.postResponse.location,
+        //         };
 
-                this.UpdateDataUser(response => {
-                  Common.getNotify('', 'update profile photo success');
-                });
-                // console.warn('selesai update');
-              } else {
-                console.warn('failed to get location');
-              }
-            } else {
-              getNotify('', 'Failed to update profile photo');
-            }
-          });
+        //         this.setState({ foto: response.body.postResponse.location });
+
+        //         this.UpdateDataUser(response => {
+        //           Common.getNotify('', 'update profile photo success');
+        //         });
+        //         // console.warn('selesai update');
+        //       } else {
+        //         console.warn('failed to get location');
+        //       }
+        //     } else {
+        //       getNotify('', 'Failed to update profile photo');
+        //     }
+        //   });
       }
     });
   }
 
   showPhotoProfile() {
-    console.warn('profil ' + this.props.photo_url);
+    console.warn('profil ' + this.state.photo_url);
     try {
       return (
         <TouchableOpacity onPress={() => this.selectPhoto()}>
@@ -207,11 +247,11 @@ class manageProfile extends Component {
             style={{ height: 100, width: 100, borderRadius: 100 / 2 }}
             source={{
               uri:
-                this.props.photo_url == false ||
-                this.props.photo_url == '' ||
-                this.props.photo_url == undefined
+                this.state.photo_url == false ||
+                this.state.photo_url == '' ||
+                this.state.photo_url == undefined
                   ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
-                  : this.props.photo_url,
+                  : this.state.photo_url,
             }}
             onError={() => this.errorLoad()}
           />
@@ -282,7 +322,7 @@ class manageProfile extends Component {
                 width: '80%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.Full_name ? this.state.Full_name : false}
+              value={this.state.Full_name ? this.state.Full_name : ''}
               onChangeText={text => this.setState({ Full_name: text })}
               placeholder="Name"
             />
@@ -310,7 +350,7 @@ class manageProfile extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.PhoneNumber ? this.state.PhoneNumber : false}
+              value={this.state.PhoneNumber ? this.state.PhoneNumber : ''}
               onChangeText={text => this.setState({ PhoneNumber: text })}
             />
             <Text
@@ -337,7 +377,7 @@ class manageProfile extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.nirc_number ? this.state.nirc_number : false}
+              value={this.state.nirc_number ? this.state.nirc_number : ''}
               onChangeText={text => this.setState({ nirc_number: text })}
             />
             <Text
@@ -356,18 +396,6 @@ class manageProfile extends Component {
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            {/* <TextInput
-              placeholder="Date of Birth"
-              underlineColorAndroid="transparent"
-              style={{
-                marginTop: '-4%',
-                width: '40%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-              }}
-              value={this.state.Dob ? this.state.Dob : false}
-              onChangeText={text => this.setState({ Dob: text })}
-            /> */}
-
             <DatePicker
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -434,7 +462,7 @@ class manageProfile extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={`${this.state.Weight}` ? `${this.state.Weight}` : false}
+              value={`${this.state.Weight}` ? `${this.state.Weight}` : ''}
               onChangeText={text => this.setState({ Weight: text })}
             />
             <Text
@@ -461,7 +489,7 @@ class manageProfile extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={`${this.state.Height}` ? `${this.state.Height}` : false}
+              value={`${this.state.Height}` ? `${this.state.Height}` : ''}
               onChangeText={text => this.setState({ Height: text })}
             />
             <Text
@@ -488,7 +516,7 @@ class manageProfile extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.blodeType ? this.state.blodeType : false}
+              value={this.state.blodeType ? this.state.blodeType : ''}
               onChangeText={text => this.setState({ blodeType: text })}
             />
             <Text
