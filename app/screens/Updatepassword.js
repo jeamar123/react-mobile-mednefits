@@ -22,6 +22,7 @@ class Updatepassword extends Component {
     this.state = {
       oldpassword: '',
       password: '',
+      new_password: ''
     };
     this.updatePassword = this.updatePassword.bind(this);
   }
@@ -30,6 +31,12 @@ class Updatepassword extends Component {
     // console.warn('update');
     oldpassword = this.state.oldpassword;
     password = this.state.password;
+    new_password = this.state.new_password;
+
+    if (password != new_password) {
+      Core.getNotify('', 'New Password and Re-Type New Password should be the same.');
+      return false;
+    }
 
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
@@ -49,9 +56,12 @@ class Updatepassword extends Component {
             .then(response => response.json())
             .then(res => {
               console.warn(res);
-              if (res.status == 'true');
-              Core.getNotify('', 'Success change password');
-              Actions.Home();
+              if (res.status == true) {
+                Core.getNotify('', res.web_message);
+                Actions.Home();
+              } else {
+                Core.getNotify('', res.web_message);
+              }
             })
             .catch(error => {
               console.warn('error fetching', error.message);
@@ -117,9 +127,10 @@ class Updatepassword extends Component {
                 width: '50%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.oldpassword ? this.state.oldpassword : false}
+              value={this.state.oldpassword ? this.state.oldpassword : ''}
               onChangeText={text => this.setState({ oldpassword: text })}
               placeholder=""
+              secureTextEntry={true}
             />
             <Text
               style={{
@@ -145,8 +156,9 @@ class Updatepassword extends Component {
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
-              value={this.state.password ? this.state.password : false}
+              value={this.state.password ? this.state.password : ''}
               onChangeText={text => this.setState({ password: text })}
+              secureTextEntry={true}
             />
             <Text
               style={{
@@ -157,6 +169,33 @@ class Updatepassword extends Component {
               }}
             >
               New Password
+            </Text>
+          </View>
+          {this._renderDivider()}
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <TextInput
+              placeholder=""
+              underlineColorAndroid="transparent"
+              style={{
+                marginTop: '-4%',
+                width: '40%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+              value={this.state.new_password ? this.state.new_password : ''}
+              onChangeText={text => this.setState({ new_password: text })}
+              secureTextEntry={true}
+            />
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 13,
+              }}
+            >
+              Re-Type New Password
             </Text>
           </View>
           {this._renderDivider()}

@@ -514,15 +514,15 @@ export function GetDetailClinic(id, callback) {
   }
 }
 
-export function Search(query){
-  return new Promise((resolve, reject)=>{
+export function Search(query) {
+  return new Promise((resolve, reject) => {
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
         params = {
-          url: Config.CLINIC_SEARCH+"/?search="+query,
+          url: Config.CLINIC_SEARCH + "/?search=" + query,
           method: 'GET',
           header: {
-           'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             Authorization: result,
           },
         };
@@ -535,4 +535,22 @@ export function Search(query){
       reject(e)
     }
   })
+}
+
+export function PayDirect(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CLINIC_PAYMENT_DIRECT,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param,
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
 }

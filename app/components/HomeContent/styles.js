@@ -56,7 +56,7 @@ export default EStyleSheet.create({
   },
   text: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 10,
     paddingTop: 5,
     color: '#fff',

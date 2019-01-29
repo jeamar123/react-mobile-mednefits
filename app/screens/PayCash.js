@@ -47,7 +47,27 @@ class PayCash extends Component {
   }
 
   SendPayment() {
-    Actions.Home();
+    this.setState({ isLoading: true });
+
+    params = {
+      services: this.props.services,
+      clinic_id: this.props.clinicid,
+    };
+
+    Core.PayDirect(params, (err, result) => {
+      if (result.status) {
+        Core.getNotify('', result.message);
+        Actions.Home({ result: result });
+      } else if (!result.status) {
+        Core.getNotify('', result.message);
+      } else {
+        Core.getNotify('', 'Failed to payment, please try again');
+      }
+
+      if (result) {
+        this.setState({ isLoading: false });
+      }
+    });
   }
 
   render() {
