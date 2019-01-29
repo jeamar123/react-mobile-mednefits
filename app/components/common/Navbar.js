@@ -314,7 +314,11 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Search()
+            }
+          >
             <Image
               source={require('../../../assets/apps/search.png')}
               style={{ height: 55, resizeMode: 'center', width: 75 }}
