@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, Image, Linking } from 'react-native';
+import { View, Text, ImageBackground, Image, Linking, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import * as Core from '../../core';
 import { ButtonCall } from '../common';
@@ -34,6 +34,23 @@ class HistoryClaim extends Component {
     });
   }
 
+  AddFavClinic() {
+    params = {
+      status: '1',
+      clinicid: this.props.clinicid
+    }
+
+    Core.AddFavouriteClinic(params, (err, result) => {
+      if (result.status) {
+        Core.getNotify('', 'Success Add Favourite Clinic');
+      } else if (!result.status) {
+        Core.getNotify('', result.message);
+      } else {
+        Core.getNotify('', 'Failed to Add Favourite Clinic, please try again');
+      }
+    });
+  }
+
   render() {
     return (
       <View>
@@ -48,7 +65,7 @@ class HistoryClaim extends Component {
               <View />
               <View style={{ flexDirection: 'column', width: '65%' }}>
                 <Text numberOfLines={3} style={styles.Title}>
-                  {this.props.clinicname}{this.props.CallPhon}
+                  {this.props.clinicname}
                 </Text>
                 <Text numberOfLines={2} style={styles.details}>
                   {this.props.Address}
@@ -72,9 +89,11 @@ class HistoryClaim extends Component {
                 <ButtonCall onPress={this._pressCall} >
                   CALL
                 </ButtonCall>
-                <Image
-                  source={require('../../../assets/apps/likes.png')}
-                  style={styles.like} />
+                <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic()}>
+                  <Image
+                    source={require('../../../assets/apps/likes.png')}
+                    style={styles.like} />
+                </TouchableOpacity>
               </View>
             </View>
 

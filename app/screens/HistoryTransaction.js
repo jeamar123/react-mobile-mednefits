@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, Image } from 'react-native';
+import { StatusBar, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import {
   Container,
   Content,
@@ -53,13 +53,14 @@ class HistoryTransaction extends Component {
   }
 
   renderTransactionIn_Network() {
-    return this.state.resultData.map(Data => (
+    return this.state.resultData.map((Data, index) => (
       <TouchableOpacity
+        key={index}
         onPress={() =>
           Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
         }
       >
-        <Card>
+        <Card key={index}>
           <CardItem
             bordered
             style={{
@@ -67,10 +68,10 @@ class HistoryTransaction extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
-              Transaction #: {Data.transaction_id}
+            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>
+              Transaction #: <Text style={{ fontWeight: '400', fontSize: 14 }}>{Data.transaction_id}</Text>
             </Text>
-            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
+            <Text style={{ fontSize: 14, fontWeight: '500' }}>
               {Data.date_of_transaction}
             </Text>
           </CardItem>
@@ -81,7 +82,7 @@ class HistoryTransaction extends Component {
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
+              <Text style={{ fontSize: 16, color: '#616161' }}>
                 {Data.clinic_type_and_service}
               </Text>
               <Text />
@@ -96,7 +97,9 @@ class HistoryTransaction extends Component {
             >
               <Image
                 style={{
-                  margin: 10,
+                  marginTop: -10,
+                  marginLeft: 10,
+                  marginRight: 10,
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
@@ -106,11 +109,24 @@ class HistoryTransaction extends Component {
               </Text>
             </Body>
           </CardItem>
+          <CardItem style={{ marginTop: -10 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '400',
+                color: '#616161',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+              }}
+            >
+              {Data.clinic_name}
+            </Text>
+          </CardItem>
           <CardItem
             footer
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              marginTop: -10,
             }}
           >
             <Text
@@ -147,13 +163,13 @@ class HistoryTransaction extends Component {
               </View>
             ) : Data.health_provider_status == false &&
               Data.type == 'credits' ? (
-              <Text />
-            ) : (
-              Data.health_provider_status == false &&
-              Data.type == 'credits' &&
-              Data.refunded ==
-                true(<Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>)
-            )}
+                  <Text />
+                ) : (
+                  Data.health_provider_status == false &&
+                  Data.type == 'credits' &&
+                  Data.refunded ==
+                  true(<Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>)
+                )}
           </CardItem>
         </Card>
       </TouchableOpacity>
@@ -161,15 +177,16 @@ class HistoryTransaction extends Component {
   }
 
   renderTransactionE_Claim() {
-    return this.state.DataE_Claim.map(Data => (
+    return this.state.DataE_Claim.map((Data, index) => (
       <TouchableOpacity
+        key={index}
         onPress={() =>
           Actions.DetailEclaimTransaction({
             transaction_id: Data.transaction_id,
           })
         }
       >
-        <Card>
+        <Card key={index}>
           <CardItem
             bordered
             style={{
@@ -198,15 +215,15 @@ class HistoryTransaction extends Component {
           <CardItem>
             <Body
               style={{
-                marginTop: '-9%',
-                marginBottom: '-6%',
+                marginTop: '-7%',
+                marginBottom: '-4%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
             >
               <Image
                 style={{
-                  margin: 10,
+                  margin: 8,
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
@@ -230,15 +247,15 @@ class HistoryTransaction extends Component {
           <CardItem>
             <Body
               style={{
-                marginTop: '-9%',
-                marginBottom: '-6%',
+                marginTop: '-7%',
+                marginBottom: '-4%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
             >
               <Image
                 style={{
-                  margin: 10,
+                  margin: 8,
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
@@ -303,32 +320,32 @@ class HistoryTransaction extends Component {
                   </Text>
                 </View>
               ) : (
-                Data.status ==
-                2(
-                  <View
-                    style={{
-                      paddingTop: 5,
-                      paddingBottom: 5,
-                      width: '23%',
-                      backgroundColor: '#FF0000',
-                      borderRadius: 10,
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontWeight: '600',
-                        fontSize: 12,
-                        textAlign: 'center',
-                        color: '#fff',
-                      }}
-                    >
-                      Rejected
+                    Data.status ==
+                    2(
+                      <View
+                        style={{
+                          paddingTop: 5,
+                          paddingBottom: 5,
+                          width: '23%',
+                          backgroundColor: '#FF0000',
+                          borderRadius: 10,
+                          borderWidth: 1,
+                          borderColor: '#fff',
+                        }}
+                      >
+                        <Text
+                          style={{
+                            fontWeight: '600',
+                            fontSize: 12,
+                            textAlign: 'center',
+                            color: '#fff',
+                          }}
+                        >
+                          Rejected
                     </Text>
-                  </View>
-                )
-              )}
+                      </View>
+                    )
+                  )}
             </Body>
           </CardItem>
           <CardItem
@@ -360,34 +377,58 @@ class HistoryTransaction extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="History" />
         <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'transparant' }}
+          tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
           tabBarBackgroundColor="#0392cf"
         >
           <Tab
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
-            activeTextStyle={{ color: '#fff', fontSize: 16 }}
+            activeTabStyle={{ color: '#3497d7', backgroundColor: '#efeff5' }}
+            activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
               fontSize: 15,
             }}
           >
-            <Content padder>{this.renderTransactionIn_Network()}</Content>
+            <Content>
+              {(this.state.resultData.length == 0) ? (
+                <View style={{ flex: 1 }}>
+                  <View
+                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
+                  >
+                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+                  </View>
+                </View>
+              ) : (
+                  this.renderTransactionIn_Network()
+                )}
+            </Content>
           </Tab>
           <Tab
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#fff', backgroundColor: '#0392cf' }}
-            activeTextStyle={{ color: '#fff', fontSize: 16 }}
+            activeTabStyle={{ color: '#3497d7', backgroundColor: '#efeff5' }}
+            activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
               fontSize: 15,
             }}
           >
-            <Content padder>{this.renderTransactionE_Claim()}</Content>
+            <Content>
+              {(this.state.resultData.length == 0) ? (
+                <View style={{ flex: 1 }}>
+                  <View
+                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
+                  >
+                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+                  </View>
+                </View>
+              ) : (
+                  this.renderTransactionE_Claim()
+                )}
+            </Content>
           </Tab>
         </Tabs>
       </Container>

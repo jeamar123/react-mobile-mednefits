@@ -3,23 +3,20 @@ import {
   StatusBar,
   View,
   Dimensions,
-  Image,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { Actions } from 'react-native-router-flux';
 import * as Common from '../components/common';
-import * as Config from '../config';
 import * as Core from '../core'
 
 const { width, height } = Dimensions.get('window');
 
-class DefaultList extends Component{
-  render(){
-    return(
+class DefaultList extends Component {
+  render() {
+    return (
       <View>
         <Common.Texti
           fontColor={"#A7A7A7"}
@@ -34,9 +31,9 @@ class DefaultList extends Component{
   }
 }
 
-class DefaultContent extends Component{
-  render(){
-    return(
+class DefaultContent extends Component {
+  render() {
+    return (
       <View>
         <DefaultList
           title="By Speciality"
@@ -71,32 +68,37 @@ class DefaultContent extends Component{
   }
 }
 
-class ResultList extends Component{
-  render(){
-    return(
-      <View style={{flex:1, flexDirection: 'column'}}>
-        <View style={{
+class ResultList extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, flexDirection: 'column' }}>
+        <TouchableOpacity
+          onPress={() =>
+            Actions.DetailClinic({ clinic_id: this.props.id })
+          }>
+          <View style={{
             flexDirection: 'row',
             justifyContent: 'space-between'
           }}>
-          <Common.Texti
-            fontColor={"black"}
+            <Common.Texti
+              fontColor={"black"}
             >
-            {this.props.title}
-          </Common.Texti>
-          <Common.Texti
-            fontColor={"black"}
+              {this.props.title}
+            </Common.Texti>
+            <Common.Texti
+              fontColor={"black"}
             >
-            CLINIC
+              CLINIC
           </Common.Texti>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Common.Texti
-            fontColor={(this.props.isOpen == 0) ? "red" : "green"}
+          </View>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Common.Texti
+              fontColor={(this.props.isOpen == 0) ? "red" : "green"}
             >
-            {(this.props.isOpen == 0) ? "Closed" : "Open"}
-          </Common.Texti>
-        </View>
+              {(this.props.isOpen == 0) ? "Closed" : "Open"}
+            </Common.Texti>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -114,7 +116,7 @@ class Home extends Component {
 
   }
 
-  onQuery = async(query) => {
+  onQuery = async (query) => {
     this.setState({
       isClearSearch: true,
       query: query
@@ -128,7 +130,7 @@ class Home extends Component {
     })
   }
 
-  processQuery = async() => {
+  processQuery = async () => {
     this.setState({
       isLoading: true
     })
@@ -141,12 +143,12 @@ class Home extends Component {
         isLoading: false
       })
     } catch (e) {
-      Common.getNotify("",e.message)
+      Common.getNotify("", e.message)
       this.setState({
         isLoading: false
       })
     } finally {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.setState({
           isLoading: false
         })
@@ -173,11 +175,11 @@ class Home extends Component {
           drawerAction={this.drawerActionCallback}
           leftNav="close"
         />
-        <View style={{backgroundColor: "#DBDBDB"}}>
+        <View style={{ backgroundColor: "#DBDBDB" }}>
           <Common.InputText
             value={this.state.query}
             returnKeyType="search"
-            onSubmitEditing={()=>this.processQuery()}
+            onSubmitEditing={() => this.processQuery()}
             onChangeText={query => this.onQuery(query)}
             placeholder="Search"
             placeholderStyle={{
@@ -196,7 +198,7 @@ class Home extends Component {
             }}
           />
         </View>
-        <View style={{flex: 1, marginTop: 10, marginLeft: 15, marginRight: 15}}>
+        <View style={{ flex: 1, marginTop: 10, marginLeft: 15, marginRight: 15 }}>
 
           {
             (this.state.isLoading) ? (
@@ -209,8 +211,8 @@ class Home extends Component {
                 renderItem={this._renderItem}
               />
             ) : (
-              <DefaultContent />
-            )
+                  <DefaultContent />
+                )
           }
 
         </View>

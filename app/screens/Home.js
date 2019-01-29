@@ -18,9 +18,9 @@ import * as Core from '../core'
 
 const { width, height } = Dimensions.get('window');
 
-class ClinicList extends Component{
-  render(){
-    return(
+class ClinicList extends Component {
+  render() {
+    return (
       <TouchableOpacity>
         <View style={styles.gridBox}>
           <Image
@@ -29,7 +29,7 @@ class ClinicList extends Component{
               width: 35,
               height: 35,
             }}
-            source={{uri: this.props.image}}
+            source={{ uri: this.props.image }}
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
@@ -67,8 +67,8 @@ class Home extends Component {
     }
   }
 
-  async getClinicType(){
-    await Core.GetClinicType((err, result)=>{
+  async getClinicType() {
+    await Core.GetClinicType((err, result) => {
       if (result) {
         this.setState({
           data: result.data.clinic_types,
@@ -77,11 +77,11 @@ class Home extends Component {
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getClinicType()
   }
 
-  _keyExtractor = (item, index) => item.cat;
+  _keyExtractor = (item, index) => item.ClinicTypeID;
 
   _renderItem = ({ item }) => (
     <ClinicList
@@ -96,6 +96,8 @@ class Home extends Component {
     return (
       <Drawer
         type="displace"
+        openDrawerOffset={0.4}
+        panCloseMask={0.4}
         ref={ref => {
           this._drawer = ref;
         }}
@@ -128,15 +130,15 @@ class Home extends Component {
                   <ActivityIndicator size="large" color="#0392cf" />
                 </View>
               ) : (
-                <FlatList
-                  data={this.state.data}
-                  extraData={this.state}
-                  keyExtractor={this._keyExtractor}
-                  renderItem={this._renderItem}
-                  horizontal={false}
-                  numColumns={3}
-                />
-              )}
+                  <FlatList
+                    data={this.state.data}
+                    extraData={this.state}
+                    keyExtractor={this.data}
+                    renderItem={this._renderItem}
+                    horizontal={false}
+                    numColumns={3}
+                  />
+                )}
             </View>
           </View>
         </Container>
