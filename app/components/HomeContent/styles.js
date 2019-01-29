@@ -12,7 +12,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: height / 5,
+    height: height / 4,
     width: width,
     alignItems: 'center',
   },
@@ -36,6 +36,12 @@ export default EStyleSheet.create({
     fontWeight: '600',
     paddingTop: 5,
     color: '#fff',
+  },
+  searchtext: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,

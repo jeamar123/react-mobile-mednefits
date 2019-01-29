@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
-
+import Icons from 'react-native-vector-icons/FontAwesome';
 
 class HomeContent extends Component {
   constructor(props) {
@@ -50,6 +50,28 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
+          <TouchableOpacity
+            onPress={()=>Actions.Search()}
+            style={{
+              width: "91%",
+              borderRadius: 5,
+              backgroundColor: '#0A6186',
+              marginLeft: 15,
+              marginRight: 15,
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Icons
+              name="search"
+              style={{
+                color: '#ffff',
+                fontSize: 12,
+                paddingLeft: 15,
+                paddingRight: 15
+              }}
+            />
+          <Text style={styles.searchtext}>Search</Text>
+          </TouchableOpacity>
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
