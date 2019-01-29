@@ -122,16 +122,16 @@ class Favourites extends Component {
                   Open
                 </Text>
               ) : (
-                <Text
-                  style={{
-                    fontFamily: Config.FONT_FAMILY_LIGHT,
-                    fontSize: 10,
-                    color: '#8c8b7f',
-                  }}
-                >
-                  Closed
+                  <Text
+                    style={{
+                      fontFamily: Config.FONT_FAMILY_LIGHT,
+                      fontSize: 10,
+                      color: '#8c8b7f',
+                    }}
+                  >
+                    Closed
                 </Text>
-              )}
+                )}
             </View>
             <Image
               source={require('../../assets/apps/like_fav.png')}
@@ -146,6 +146,7 @@ class Favourites extends Component {
       </TouchableOpacity>
     ));
   }
+
 
   render() {
     return (
@@ -172,7 +173,71 @@ class Favourites extends Component {
               marginTop: '2%',
             }}
           >
-            <ScrollView>{this.renderTransactionIn_Network()}</ScrollView>
+            <ScrollView>
+              {this.renderTransactionIn_Network()}
+              <TouchableOpacity>
+                <View
+                  style={{
+                    flex: 1,
+                    marginTop: 5,
+                    marginBottom: 10,
+                    height: 90,
+                    backgroundColor: '#fff',
+                    opacity: 10000,
+                  }}
+                >
+                  <View
+                    style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                  >
+                    <Image
+                      source={require('../../assets/apps/plus.png')}
+                      style={{
+                        height: 70,
+                        width: 70,
+                        resizeMode: 'center',
+                        alignItem: 'center',
+                        marginTop: '2%',
+                        marginLeft: '2%',
+                        marginRight: '-5%',
+                      }}
+                    />
+                    <View
+                      style={{
+                        flexDirection: 'column',
+                        marginTop: '4%',
+                        width: '45%',
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontFamily: Config.FONT_FAMILY_ROMAN,
+                          fontSize: 14,
+                          width: '100%',
+                        }}
+                      >
+                        Add Your Clinic
+                      </Text>
+                      <Text
+                        style={{
+                          color: '#8c8b7f',
+                          fontSize: 9,
+                          fontFamily: Config.FONT_FAMILY_LIGHT,
+                        }}
+                      >
+                        Tap here to search and add your favourite clinic to the list
+                      </Text>
+                    </View>
+                    <Image
+                      style={{
+                        height: 100,
+                        width: 100,
+                        resizeMode: 'center',
+                      }}
+                    />
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </ScrollView>
           </View>
         </View>
       </Drawer>

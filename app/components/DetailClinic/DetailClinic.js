@@ -17,11 +17,17 @@ class HistoryClaim extends Component {
     this.getUserDetail();
   }
 
+  _pressCall = () => {
+    const url = 'tel:' + this.props.CallPhon
+    console.warn(url)
+    Linking.openURL(url)
+  }
+
   getUserDetail() {
     Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      // console.warn(data);
       this.setState({
         Full_name: data.profile.full_name,
       });
@@ -42,7 +48,7 @@ class HistoryClaim extends Component {
               <View />
               <View style={{ flexDirection: 'column', width: '65%' }}>
                 <Text numberOfLines={3} style={styles.Title}>
-                  {this.props.clinicname}
+                  {this.props.clinicname}{this.props.CallPhon}
                 </Text>
                 <Text numberOfLines={2} style={styles.details}>
                   {this.props.Address}
@@ -63,7 +69,7 @@ class HistoryClaim extends Component {
             <View style={{ flexDirection: 'row', marginBottom: '5%', justifyContent: 'space-between', }}>
               <View style={{ width: '60%' }} />
               <View style={{ flexDirection: 'row' }}>
-                <ButtonCall >
+                <ButtonCall onPress={this._pressCall} >
                   CALL
                 </ButtonCall>
                 <Image
