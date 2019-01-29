@@ -27,13 +27,13 @@ const MenuSide = () => (
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: 15,
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
           }}
           source={require('../../../assets/apps/LogoMednefits.png')}
         />
       </Body>
-      <View style={{ marginTop: 20 }} />
+      <View style={{ marginTop: 10 }} />
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
           <TouchableOpacity
@@ -47,8 +47,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/home.png')}
             />
@@ -80,8 +80,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/wallet.png')}
             />
@@ -113,8 +113,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/receipt.png')}
             />
@@ -142,8 +142,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/history.png')}
             />
@@ -171,8 +171,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/favorite.png')}
             />
@@ -200,8 +200,8 @@ const MenuSide = () => (
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/user.png')}
             />

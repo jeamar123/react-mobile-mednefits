@@ -4,7 +4,7 @@ import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
-const ButtonCall = ({ onPress, children }) => {
+const ButtonCall = ({ onPress, children, color }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (

@@ -29,8 +29,8 @@ function fetching(params, callback) {
             params.body == ''
               ? ''
               : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
-              ? params.body
-              : JSON.stringify(params.body),
+                ? params.body
+                : JSON.stringify(params.body),
           mode: (params.mode) ? params.mode : false,
           cache: (params.cache) ? params.cache : false
         })
@@ -286,14 +286,14 @@ export function SendPayment(param, callback) {
       url: Config.CLINIC_SEND_PAYMENT,
       method: 'POST',
       header: {
-       'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: result,
       },
       body: param,
     };
 
     fetching(params, result => {
-      callback('',result)
+      callback('', result)
     })
   });
 }
@@ -320,11 +320,11 @@ export function GetFavouritesClinic(callback) {
   }
 }
 
-export function GetClinicDetails(id, callback){
+export function GetClinicDetails(id, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
-        url: Config.CLINIC_DETAILS+"/"+id,
+        url: Config.CLINIC_DETAILS + "/" + id,
         method: 'GET',
         header: {
           Accept: 'application/json',
@@ -342,11 +342,11 @@ export function GetClinicDetails(id, callback){
   }
 }
 
-export function GetProcedureDetails(id, callback){
+export function GetProcedureDetails(id, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
-        url: Config.CLINIC_PROCEDURE_DETAILS+"/"+id,
+        url: Config.CLINIC_PROCEDURE_DETAILS + "/" + id,
         method: 'GET',
         header: {
           Accept: 'application/json',
@@ -364,7 +364,7 @@ export function GetProcedureDetails(id, callback){
   }
 }
 
-export function GetClinicType(callback){
+export function GetClinicType(callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
@@ -386,11 +386,11 @@ export function GetClinicType(callback){
   }
 }
 
-export function GetHealthTypeList(type, callback){
+export function GetHealthTypeList(type, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
-        url: Config.USER_HEALT_TYPE_LIST+"?spending_type="+type,
+        url: Config.USER_HEALT_TYPE_LIST + "?spending_type=" + type,
         method: 'GET',
         header: {
           Accept: 'application/json',
@@ -408,7 +408,7 @@ export function GetHealthTypeList(type, callback){
   }
 }
 
-export function GetAllMember(callback){
+export function GetAllMember(callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       params = {
@@ -430,7 +430,7 @@ export function GetAllMember(callback){
   }
 }
 
-export function SendEClaim(params, callback){
+export function SendEClaim(params, callback) {
   try {
     Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
       let myHeaders = new Headers();
@@ -458,7 +458,7 @@ export function SendEClaim(params, callback){
         body: formdata,
         mode: 'cors',
         cache: 'default',
-        bodyType:'multipart'
+        bodyType: 'multipart'
       };
 
       fetching(params, result => {
@@ -477,7 +477,7 @@ export function ResetPassword(param, callback) {
       url: Config.AUTH_RESET_PASSWORD,
       method: 'POST',
       header: {
-       'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: result,
       },
       body: {
@@ -486,20 +486,43 @@ export function ResetPassword(param, callback) {
     };
 
     fetching(params, result => {
-      callback('',result)
+      callback('', result)
     })
   });
 }
 
-export function Search(query){
-  return new Promise((resolve, reject)=>{
+
+export function GetDetailClinic(id, callback) {
+  try {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      params = {
+        url: Config.CLINIC_CLINIC_DETAILS + "/" + id,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      fetching(params, result => {
+        callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error GetClinicDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export function Search(query) {
+  return new Promise((resolve, reject) => {
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
         params = {
-          url: Config.CLINIC_SEARCH+"/?search="+query,
+          url: Config.CLINIC_SEARCH + "/?search=" + query,
           method: 'GET',
           header: {
-           'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             Authorization: result,
           },
         };
@@ -512,4 +535,40 @@ export function Search(query){
       reject(e)
     }
   })
+}
+
+export function PayDirect(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CLINIC_PAYMENT_DIRECT,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param,
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
+}
+
+export function AddFavouriteClinic(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CLINIC_SET_FAVOURITE,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param,
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, ScrollView } from 'react-native';
+import { StatusBar, View, Image, ScrollView, Linking } from 'react-native';
 import { Text, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
@@ -93,7 +93,7 @@ class ECardUser extends Component {
           {Data.package_description}
         </Text>
       </View>
-      
+
     ));
   }
 
@@ -284,7 +284,15 @@ class ECardUser extends Component {
                       fontSize: 14,
                     }}
                   >
-                    happinness@mednefits.com{' '}
+                    <Text style={{
+                      color: '#0392cf',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }}
+                      onPress={() => Linking.openURL('mailto:happinness@mednefits.com')}>
+                      happinness@mednefits.com
+                    </Text>
+                    {' '}
                     <Text
                       style={{
                         fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -292,8 +300,13 @@ class ECardUser extends Component {
                       }}
                     >
                       or
-                    </Text>{' '}
-                    +65 6254 7889
+                    </Text>
+                    {' '}
+                    <Text style={{
+                      color: '#0392cf',
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      fontSize: 14,
+                    }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
                   </Text>
                   <Text
                     style={{
