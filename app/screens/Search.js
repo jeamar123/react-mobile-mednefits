@@ -3,16 +3,13 @@ import {
   StatusBar,
   View,
   Dimensions,
-  Image,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { Actions } from 'react-native-router-flux';
 import * as Common from '../components/common';
-import * as Config from '../config';
 import * as Core from '../core'
 
 const { width, height } = Dimensions.get('window');
