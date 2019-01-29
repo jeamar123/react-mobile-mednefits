@@ -554,3 +554,21 @@ export function PayDirect(param, callback) {
     })
   });
 }
+
+export function AddFavouriteClinic(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CLINIC_SET_FAVOURITE,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param,
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
+}

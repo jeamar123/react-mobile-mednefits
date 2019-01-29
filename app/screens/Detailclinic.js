@@ -30,7 +30,7 @@ class HistoryTransaction extends Component {
     Core.GetDetailClinic(this.props.clinic_id, (err, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data.telephone);
+      console.warn(data);
       this.setState({
         resultData: data,
         procedure: data.clinic_procedures,
@@ -339,6 +339,7 @@ class HistoryTransaction extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" />
         <DetailClinic
+          clinicid={this.state.resultData.clinic_id}
           clinicimage={this.state.resultData.image_url}
           clinicname={this.state.resultData.name}
           Address={this.state.resultData.address}
