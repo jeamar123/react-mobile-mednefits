@@ -35,7 +35,6 @@ class HistoryTransaction extends Component {
 
   componentWillMount() {
     this.getDataIn_Network();
-    this.getDataE_Claim();
   }
 
   getDataIn_Network() {
@@ -44,6 +43,7 @@ class HistoryTransaction extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ resultData: data, in_network: true });
     });
+    this.getDataE_Claim();
   }
 
   getDataE_Claim() {

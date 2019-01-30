@@ -76,7 +76,7 @@ class History extends Component {
           clinicimage={this.state.data.clinic_image}
           />
         <GiftedForm
-          style={{ backgroundColor: '#fff', paddingLeft: 5, paddingRight: 15 }}
+          style={{ backgroundColor: 'white' }}
           formName="signupForm"
           openModal={route => {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
@@ -88,6 +88,8 @@ class History extends Component {
               flexDirection: 'row',
               alignContent: 'space-between',
               marginVertical: 10,
+              borderBottomWidth: 1,
+              borderColor: '#efeff1'
             }}
           >
             <Image
@@ -116,18 +118,16 @@ class History extends Component {
               flexDirection: 'row',
               alignContent: 'space-between',
               marginVertical: 10,
+              borderBottomWidth: 1,
+              borderColor: '#efeff1'
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%', padding: 5, }}>
               Transaction #
             </Text>
-            <TextInput
-              placeholder="Transaction ID"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={this.props.transaction_id}
-            />
+            <Text style={{ marginLeft: '4%', padding: 5, }}>
+              {this.props.transaction_id}
+            </Text>
           </View>
 
           <View
@@ -143,17 +143,14 @@ class History extends Component {
                 color: '#c4c4c4',
                 marginLeft: '2%',
                 marginRight: '6%',
+                padding: 5,
               }}
             >
               Services/s
             </Text>
-            <TextInput
-              placeholder="Service/s"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={this.state.data.services}
-            />
+            <Text style={{ padding: 5, marginLeft: '4%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+              {this.state.data.services}
+            </Text>
           </View>
 
           <View
@@ -169,17 +166,14 @@ class History extends Component {
                 color: '#c4c4c4',
                 marginLeft: '2%',
                 marginRight: '3%',
+                padding: 5,
               }}
             >
               Date & Time
             </Text>
-            <TextInput
-              placeholder="Date & Time"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={this.state.data.date_of_transaction}
-            />
+            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+              {this.state.data.date_of_transaction}
+            </Text>
           </View>
 
           <View
@@ -191,17 +185,13 @@ class History extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '10%' }}
+              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '10%', padding: 5 }}
             >
               Member
             </Text>
-            <TextInput
-              placeholder="Member"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
-              value={(this.state.user) ? this.state.user : "N/A"}
-            />
+            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+              {(this.state.user) ? this.state.user : "N/A"}
+            </Text>
           </View>
 
           {/*<View

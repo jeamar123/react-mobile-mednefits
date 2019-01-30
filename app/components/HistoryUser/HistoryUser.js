@@ -56,7 +56,7 @@ class HistoryUser extends Component {
           <Text
             numberOfLines={2}
             adjustsFontSizeToFit={true}
-            style={styles.detail}
+            style={styles.in_network}
           >
             In-Network
           </Text>

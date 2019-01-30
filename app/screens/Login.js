@@ -41,11 +41,13 @@ class Login extends Component {
         <InputWithButton
           onChangeText={(text)=>this.setState({username: text})}
           placeholder="Email address"
+          autoCapitalize='none'
           />
         <InputWithButton
           onChangeText={(text)=>this.setState({password: text})}
           placeholder="Enter password"
           secureTextEntry={true}
+          autoCapitalize='none'
           />
         <Buttons onPress={() => this.LoginHandler()}>
           Log in

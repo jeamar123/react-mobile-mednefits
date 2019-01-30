@@ -32,6 +32,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignContent: 'center',
+    padding: 10
   },
   amount: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -50,5 +51,20 @@ export default EStyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     paddingRight: '5%',
+  },
+  in_network: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 12,
+    color: '#c6c7cd',
+    textAlignVertical: 'center',
+    // padding: 10,
+    marginRight: 20,
+    marginTop: 7,
+    marginBottom: 7,
+    paddingRight: '3%',
+    paddingLeft: '3%',
+    borderColor: '#c6c7cd',
+    borderWidth: 1,
+    borderRadius: 5
   },
 });

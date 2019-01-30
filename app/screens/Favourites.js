@@ -26,6 +26,7 @@ class Favourites extends Component {
       status: '',
       resultData: [],
       DataE_Claim: [],
+      data: false,
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -52,7 +53,7 @@ class Favourites extends Component {
     Core.GetFavouritesClinic((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ resultData: data });
+      this.setState({ resultData: data, data: true });
     });
   }
 
@@ -166,6 +167,8 @@ class Favourites extends Component {
     return (
       <Drawer
         type="displace"
+        openDrawerOffset={0.4}
+        panCloseMask={0.4}
         ref={ref => {
           this._drawer = ref;
         }}
@@ -180,7 +183,7 @@ class Favourites extends Component {
             rightNav="search"
           />
           
-          {(this.state.resultData.length == 0) ? (
+          {(!this.state.data) ? (
             <View
               style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
             >
