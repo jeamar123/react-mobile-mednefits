@@ -28,6 +28,8 @@ class HistoryTransaction extends Component {
       status: '',
       resultData: [],
       DataE_Claim: [],
+      in_network: false,
+      out_network: false
     };
   }
 
@@ -40,7 +42,7 @@ class HistoryTransaction extends Component {
     Core.GetHistoryTransaction((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ resultData: data });
+      this.setState({ resultData: data, in_network: true });
     });
   }
 
@@ -48,7 +50,7 @@ class HistoryTransaction extends Component {
     Core.GetEClaimTransaction((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ DataE_Claim: data });
+      this.setState({ DataE_Claim: data, out_network: true });
     });
   }
 
@@ -176,6 +178,86 @@ class HistoryTransaction extends Component {
     ));
   }
 
+  renderEclaimStatus(data) {
+  	console.log(data);
+  	if(data.status == 0) {
+  		return (
+        <View
+          style={{
+            paddingTop: 5,
+            paddingBottom: 5,
+            width: '23%',
+            backgroundColor: '#c4c4c4',
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: '#fff',
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: '600',
+              textAlign: 'center',
+              color: '#fff',
+            }}
+          >
+            Pending
+          </Text>
+        </View>
+      );
+  	} else if(data.status == 1) {
+  		return (
+        <View
+          style={{
+            paddingTop: 5,
+            paddingBottom: 5,
+            width: '23%',
+            backgroundColor: '#439057',
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: '#fff',
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: '600',
+              textAlign: 'center',
+              color: '#fff',
+            }}
+          >
+            Approve
+          </Text>
+        </View>
+      );
+  	} else if(data.status == 2) {
+  		return (
+        <View
+          style={{
+            paddingTop: 5,
+            paddingBottom: 5,
+            width: '23%',
+            backgroundColor: '#FF0000',
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: '#fff',
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: '600',
+              fontSize: 12,
+              textAlign: 'center',
+              color: '#fff',
+            }}
+          >
+            Rejected
+          </Text>
+        </View>
+      )
+  	}
+  }
+
   renderTransactionE_Claim() {
     return this.state.DataE_Claim.map((Data, index) => (
       <TouchableOpacity
@@ -273,79 +355,7 @@ class HistoryTransaction extends Component {
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.visit_date}
               </Text>
-              {Data.status == 0 ? (
-                <View
-                  style={{
-                    paddingTop: 5,
-                    paddingBottom: 5,
-                    width: '23%',
-                    backgroundColor: '#c4c4c4',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#fff',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontWeight: '600',
-                      textAlign: 'center',
-                      color: '#fff',
-                    }}
-                  >
-                    Pending
-                  </Text>
-                </View>
-              ) : Data.status == 1 ? (
-                <View
-                  style={{
-                    paddingTop: 5,
-                    paddingBottom: 5,
-                    width: '23%',
-                    backgroundColor: '#439057',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#fff',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontWeight: '600',
-                      textAlign: 'center',
-                      color: '#fff',
-                    }}
-                  >
-                    Approve
-                  </Text>
-                </View>
-              ) : (
-                Data.status ==
-                2(
-                  <View
-                    style={{
-                      paddingTop: 5,
-                      paddingBottom: 5,
-                      width: '23%',
-                      backgroundColor: '#FF0000',
-                      borderRadius: 10,
-                      borderWidth: 1,
-                      borderColor: '#fff',
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontWeight: '600',
-                        fontSize: 12,
-                        textAlign: 'center',
-                        color: '#fff',
-                      }}
-                    >
-                      Rejected
-                    </Text>
-                  </View>
-                )
-              )}
+              {this.renderEclaimStatus(Data)}
             </Body>
           </CardItem>
           <CardItem
@@ -392,7 +402,7 @@ class HistoryTransaction extends Component {
             }}
           >
             <Content>
-              {(this.state.resultData.length == 0) ? (
+              {(!this.state.in_network) ? (
               	<View style={{ flex: 1 }}>
                   <View
                     style={{ flex: 1, marginTop:240, justifyContent: 'center', alignItems:'center' }}
@@ -417,7 +427,7 @@ class HistoryTransaction extends Component {
             }}
           >
             <Content>
-            {(this.state.resultData.length == 0) ? (
+            {(!this.state.out_network) ? (
                 <View style={{ flex: 1 }}>
                   <View
                     style={{ flex: 1, marginTop:240, justifyContent: 'center', alignItems:'center' }}
