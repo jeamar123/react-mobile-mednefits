@@ -42,6 +42,7 @@ function fetching(params, callback) {
               if (res.message == "Your token is expired" || res.message == "You have an invalid token. Please login again") {
                 Actions.Home({ type: 'reset' });
               }
+              callback(res);
             } else if (res.status) {
               callback(res);
             } else {

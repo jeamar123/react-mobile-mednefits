@@ -388,12 +388,12 @@ class HistoryTransaction extends Component {
         <Navbar leftNav="back-home" title="History" />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          tabBarBackgroundColor="#0392cf"
+          tabContainerStyle={{ elevation:0 }}
         >
           <Tab
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#3497d7', backgroundColor: '#efeff5' }}
+            activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -418,7 +418,7 @@ class HistoryTransaction extends Component {
           <Tab
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#3497d7', backgroundColor: '#efeff5' }}
+            activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
