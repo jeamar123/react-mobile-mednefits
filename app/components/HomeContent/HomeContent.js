@@ -18,25 +18,26 @@ class HomeContent extends Component {
   componentWillMount() {
     this.getUserBalance();
     this.getUserDetail();
-    Core.GetBalance((err, result)=>{
-      this.setState({currency: result.data.currency_symbol})
-    })
+    // Core.GetBalance((err, result)=>{
+    //   this.setState({currency: result.data.currency_symbol})
+    // })
 
   }
 
-  getUserBalance() {
-    Core.GetBalance((error, result) => {
+  async getUserBalance() {
+    await Core.GetBalance((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
       this.setState({
         Balance: data.balance,
+        currency: result.data.currency_symbolpro
       });
     });
   }
 
-  getUserDetail() {
-    Core.UserDetail((error, result) => {
+  async getUserDetail() {
+    await Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
