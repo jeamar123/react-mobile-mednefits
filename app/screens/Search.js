@@ -209,6 +209,8 @@ class Home extends Component {
                 extraData={this.state}
                 keyExtractor={this._keyExtractor}
                 renderItem={this._renderItem}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
               />
             ) : (
                   <DefaultContent />

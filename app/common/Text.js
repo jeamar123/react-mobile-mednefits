@@ -57,9 +57,10 @@ export default class Text extends Component {
         allowFontScaling={false}
         style={[this.props.style, {
           fontFamily: (this.state.fontFamily) ? this.state.fontFamily : Config.FONT_FAMILY_REGULAR,
-          fontSize: this.state.fontSize,
+          fontSize: this.props.fontSize,
           marginBottom: 5,
-          marginTop: 5
+          marginTop: 5,
+          textTransform: "capitalize"
         }]}
       >
         {this.props.children}

@@ -40,7 +40,6 @@ import Updatepassword from '../screens/Updatepassword';
 import Camera from '../screens/Camera'
 import Search from '../screens/Search'
 import DetailClinic from '../screens/Detailclinic';
-import Camera from '../screens/Camera';
 import Paycash from '../screens/PayCash';
 console.disableYellowBox = true;
 
@@ -112,7 +111,6 @@ class RouterComponent extends Component {
           <Scene key="Camera" component={Camera} hideNavBar />
           <Scene key="Search" component={Search} hideNavBar />
           <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
-          <Scene key="Camera" component={Camera} hideNavBar />
           <Scene key="Paycash" component={Paycash} hideNavBar />
 
         </Stack>

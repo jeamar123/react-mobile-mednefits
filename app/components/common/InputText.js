@@ -7,7 +7,6 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 export default class InputText extends Component {
 
   render(){
-    console.warn(this.props.backgroundColor);
     return(
       <View
         {...this.props}
@@ -27,7 +26,7 @@ export default class InputText extends Component {
           <Icons
             name="search"
             style={{
-              color: '#cccccc',
+              color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
               fontSize: 14,
               paddingLeft: 10,
               paddingRight: 10
@@ -42,9 +41,9 @@ export default class InputText extends Component {
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
-            color: '#0392cf',
+            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
           },this.props.placeholderStyle]}
-          style={style.inputStyle}
+          style={[style.inputStyle, {color: (this.props.style.color) ? this.props.style.color : '#0392cf'}]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
@@ -53,7 +52,7 @@ export default class InputText extends Component {
             <Icons
               name="remove"
               style={{
-                color: '#cccccc',
+                color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
                 fontSize: 14,
                 paddingLeft: 10,
                 paddingRight: 10,
@@ -70,7 +69,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    color: '#0392cf',
     paddingBottom: 5,
+    fontFamily: Config.FONT_FAMILY_ROMAN
   },
 };
