@@ -46,7 +46,7 @@ export function getModal() {
 }
 
 export function notifIos(title, message, action, cancelable) {
-  alerty(title, message, action, cancelable);
+  // alerty(title, message, action, cancelable);
 }
 
 export function notifDroid(message) {

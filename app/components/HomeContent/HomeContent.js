@@ -15,33 +15,32 @@ class HomeContent extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getUserBalance();
-    this.getUserDetail();
-    // Core.GetBalance((err, result)=>{
-    //   this.setState({currency: result.data.currency_symbol})
-    // })
-
+  async componentWillMount() {
+    await this.getUserDetail();
+    await this.getUserBalance();
   }
 
   async getUserBalance() {
-    await Core.GetBalance((error, result) => {
+  	// console.log('in progress fetching getUserBalance')
+    await Core.GetBalance(async (error, result) => {
+    	// console.log('fetching done for getUserBalance');
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
         Balance: data.balance,
-        currency: result.data.currency_symbolpro
+        currency: result.data.currency_symbol
       });
     });
   }
 
   async getUserDetail() {
-    await Core.UserDetail((error, result) => {
+  	console.log('in progress fetching getUserDetail')
+    await Core.UserDetail(async (error, result) => {
+    	console.log('fetching done for getUserDetail');
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
-      this.setState({
+      await this.setState({
         Full_name: data.profile.full_name,
       });
     });

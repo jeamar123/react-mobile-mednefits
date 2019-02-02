@@ -33,23 +33,23 @@ class HistoryTransaction extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getDataIn_Network();
+  async componentWillMount() {
+    await this.getDataIn_Network();
+    await this.getDataE_Claim();
   }
 
-  getDataIn_Network() {
-    Core.GetHistoryTransaction((error, result) => {
+  async getDataIn_Network() {
+    await Core.GetHistoryTransaction(async (error, result) => {
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ resultData: data, in_network: true });
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({ resultData: data, in_network: true });
     });
-    this.getDataE_Claim();
   }
 
-  getDataE_Claim() {
-    Core.GetEClaimTransaction((error, result) => {
+  async getDataE_Claim() {
+    await Core.GetEClaimTransaction(async (error, result) => {
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ DataE_Claim: data, out_network: true });
     });
   }
@@ -62,18 +62,22 @@ class HistoryTransaction extends Component {
           Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
         }
       >
-        <Card key={index}>
+        <Card key={index} style={{ marginLeft: -5, marginRight: -5}}>
           <CardItem
-            bordered
+            
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              borderBottomWidth: 0.5,
+              borderColor: 'grey',
+              marginLeft: 10,
+              marginRight: 10
             }}
           >
-            <Text style={{ fontSize: 14, fontWeight: 'bold' }}>
-              Transaction #: <Text style={{ fontWeight: '400', fontSize: 14 }}>{Data.transaction_id}</Text>
+            <Text style={{ fontSize: 13, fontWeight: 'bold', marginLeft: -10 }}>
+              Transaction #: <Text style={{ fontWeight: '400', fontSize: 13 }}>{Data.transaction_id}</Text>
             </Text>
-            <Text style={{ fontSize: 14, fontWeight: '500' }}>
+            <Text style={{ fontSize: 13, fontWeight: '500', marginRight: -10 }}>
               {Data.date_of_transaction}
             </Text>
           </CardItem>
@@ -102,16 +106,18 @@ class HistoryTransaction extends Component {
                   marginTop: -10,
                   marginLeft: 10,
                   marginRight: 10,
+                  aspectRatio: 0.4, 
+                  resizeMode: 'contain',
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
 
-              <Text style={{ marginTop: '7%', color: '#0392cf' }}>
+              <Text style={{ marginTop: '5%', color: '#0392cf' }}>
                 S$ {Data.amount}
               </Text>
             </Body>
           </CardItem>
-          <CardItem style={{ marginTop: -10 }}>
+          <CardItem style={{ marginTop: -20, backgroundColor: 'transparent' }}>
             <Text
               style={{
                 fontSize: 16,
@@ -394,7 +400,7 @@ class HistoryTransaction extends Component {
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
+            activeTextStyle={{ color: '#3497d7', fontSize: 14 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
@@ -419,7 +425,7 @@ class HistoryTransaction extends Component {
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: 16 }}
+            activeTextStyle={{ color: '#3497d7', fontSize: 14 }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',

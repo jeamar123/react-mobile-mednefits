@@ -68,17 +68,18 @@ class Home extends Component {
   }
 
   async getClinicType(){
-    await Core.GetClinicType((err, result)=>{
+    await Core.GetClinicType(async (err, result)=>{
       if (result) {
-        this.setState({
+        await this.setState({
           data: result.data.clinic_types,
         })
       }
     })
   }
 
-  componentDidMount(){
-    this.getClinicType()
+  async componentDidMount(){
+  	console.log('Home is mounted');
+    await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;

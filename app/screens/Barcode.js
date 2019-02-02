@@ -24,7 +24,7 @@ class Barcode extends Component {
 
   barcodeHandler(data){
     if (data) {
-      Core.GetBarcodeData(data[0].data, (result)=>{
+      Core.GetBarcodeData(data.data, (result)=>{
         if (result.status) {
           Actions.SelectService({services: result.data.clinic_procedures, clinicid: result.data.clinic_id})
         }
@@ -38,14 +38,14 @@ class Barcode extends Component {
         <Navbar leftNav="back-home" />
         <RNCamera
           style={styles.preview}
-          type={RNCamera.Constants.Type.back}
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          flashMode={RNCamera.Constants.FlashMode.on}
           permissionDialogTitle={'Permission to use camera'}
           permissionDialogMessage={
             'We need your permission to use your camera phone'
           }
-          onGoogleVisionBarcodesDetected={({ barcodes }) => {
-            this.barcodeHandler(barcodes)
-          }}
+          onBarCodeRead={this.barcodeHandler}
+          ref={cam => (this.camera = cam)}
         >
           {({ camera, status }) => {
             return (

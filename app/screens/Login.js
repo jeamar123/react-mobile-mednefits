@@ -18,17 +18,20 @@ class Login extends Component {
       isLoading: false
     }
   }
+  
+  async LoginHandler(){
+    await this.setState({isLoading: true})
 
-  LoginHandler(){
-    this.setState({isLoading: !this.state.isLoading})
-
-    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
-
+    await Core.LoginProcess(this.state.username, this.state.password, async (err, result)=>{
+      await this.setState({isLoading: false})
+    	if(result) {
+        await Actions.Home({ type: 'reset' });
+    	}
     })
 
-    setTimeout(()=>{
-      this.setState({isLoading: !this.state.isLoading})
-    },500)
+    // setTimeout(()=>{
+    //   this.setState({isLoading: !this.state.isLoading})
+    // },500)
   }
 
   render() {

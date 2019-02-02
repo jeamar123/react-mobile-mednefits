@@ -230,6 +230,7 @@ class Favourites extends Component {
                         style={{
                           flexDirection: 'column',
                           marginTop: '4%',
+                          marginLeft: '4%',
                           width: '45%',
                         }}
                       >

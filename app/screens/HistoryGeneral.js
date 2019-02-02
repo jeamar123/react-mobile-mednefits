@@ -56,12 +56,6 @@ class History extends Component {
         data: data
       })
     })
-
-    Core.UserDetail((err, result)=>{
-      this.setState({
-        user: result.data.profile.full_name
-      })
-    })
   }
 
   render() {
@@ -190,7 +184,7 @@ class History extends Component {
               Member
             </Text>
             <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
-              {(this.state.user) ? this.state.user : "N/A"}
+              {(this.state.data.customer) ? this.state.data.customer : "N/A"}
             </Text>
           </View>
 

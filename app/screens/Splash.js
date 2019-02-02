@@ -9,9 +9,13 @@ import * as Config from '../config';
 
 class Splash extends Component {
 
-  componentWillMount() {
-    setTimeout(() => {
-      Core.AppStatus()
+  async componentWillMount() {
+    setTimeout(async () => {
+      await Core.AppStatus(this.state.username, this.state.password, async (err, result)=>{
+    	if(err) {
+        await Actions.Login();
+    	}
+    })
     }, 500);
   }
 
