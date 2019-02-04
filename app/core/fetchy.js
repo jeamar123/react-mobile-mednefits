@@ -81,8 +81,8 @@ export async function LoginProcess(username, password, callback) {
 
     await fetching(params, async result => {
       if (!result.status) {
-        getNotify('', result.error_description);
-        await callback(true);
+        // getNotify('', result.error_description);
+        await callback(result);
       } else {
         getNotify('', 'Success! Wait a second...');
 

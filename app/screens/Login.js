@@ -6,6 +6,7 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
 import * as Core from '../core'
+import Toast from 'react-native-simple-toast';
 
 class Login extends Component {
 
@@ -20,12 +21,17 @@ class Login extends Component {
   }
   
   LoginHandler(){
-    this.setState({isLoading: true})
+    // this.setState({isLoading: true})
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
-      this.setState({isLoading: false})
+    	// console.log(err)
+    	// console.log(result);
+      // this.setState({isLoading: false})
     	if(result) {
         Actions.Home({ type: 'reset' });
+    	} else {
+    		Toast.show(err.error_description, Toast.LONG);
+        // Core.getNotify('', err.error_description);
     	}
     })
 

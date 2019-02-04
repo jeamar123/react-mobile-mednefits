@@ -50,13 +50,12 @@ export function notifDroid(message){
 }
 
 export function alerty(title, message, action, cancelable){
-	alert(message)
-  // Alert.alert(
-  //   title,
-  //   message,
-  //   action,
-  //   { cancelable: cancelable }
-  // )
+  Alert.alert(
+    title,
+    message,
+    action,
+    { cancelable: cancelable }
+  )
 }
 
 const styles = StyleSheet.create({
