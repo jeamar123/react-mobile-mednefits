@@ -33,7 +33,7 @@ class HistoryUser extends Component {
         <View style={styles.sectionHeader}>
           <View style={styles.contentHeader}>
             <View />
-            <View style={{flexDirection:'column'}}>
+            <View style={{flexDirection:'column', alignItems: 'center'}}>
               <Image
                 source={{uri: this.props.clinicimage }}
                 style={styles.imageHeader} />

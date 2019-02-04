@@ -21,10 +21,12 @@ const headerLogin = {
 
 export function AppStatus(){
   Core.UserDetail((err, result)=>{
-    if (result.login_status) {
-      Actions.Home({type: 'reset'})
+  	console.log(err)
+  	console.log(result);
+    if (result.expired) {
+    	Actions.Login({type: 'reset'})
     } else {
-      Actions.Login({type: 'reset'})
+      Actions.Home({type: 'reset'})
     }
   })
 }

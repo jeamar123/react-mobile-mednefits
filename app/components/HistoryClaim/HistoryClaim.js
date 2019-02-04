@@ -55,7 +55,7 @@ class HistoryClaim extends Component {
           <Text
             numberOfLines={2}
             adjustsFontSizeToFit={true}
-            style={styles.detail}
+            style={styles.out_of_network}
           >
             E-Claim
           </Text>

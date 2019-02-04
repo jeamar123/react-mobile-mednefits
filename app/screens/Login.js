@@ -19,13 +19,13 @@ class Login extends Component {
     }
   }
   
-  async LoginHandler(){
-    await this.setState({isLoading: true})
+  LoginHandler(){
+    this.setState({isLoading: true})
 
-    await Core.LoginProcess(this.state.username, this.state.password, async (err, result)=>{
-      await this.setState({isLoading: false})
+    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
+      this.setState({isLoading: false})
     	if(result) {
-        await Actions.Home({ type: 'reset' });
+        Actions.Home({ type: 'reset' });
     	}
     })
 

@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
+import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 import * as Config from '../../config';
@@ -20,7 +21,7 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 10,
+    marginTop: 10
   },
   gridBox: {
     width: width / 3.23,
@@ -32,7 +33,7 @@ export default EStyleSheet.create({
   title: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: RF(2.6),
     fontWeight: '600',
     paddingTop: 5,
     color: '#fff',
@@ -46,7 +47,7 @@ export default EStyleSheet.create({
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: RF(2.2),
     color: '#fff',
   },
   DrawerContain: {
