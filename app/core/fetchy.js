@@ -37,11 +37,12 @@ function fetching(params, callback) {
           .then(response => response.json())
           .then(res => {
             console.log('done fetching execution');
+            console.log(res);
             if (!res.status) {
               // getAlert('', res.message);
 
-              if (res.message == "Your token is expired" || res.message == "You have an invalid token. Please login again") {
-                Actions.Home({ type: 'reset' });
+              if (res.expired) {
+                Actions.Login({ type: 'reset' });
               }
               callback(res);
             } else if (res.status) {

@@ -9,7 +9,7 @@ export default EStyleSheet.create({
   sectionHeader: {
     justifyContent: 'space-between',
     backgroundColor: '#efeff5',
-    height: height / 5,
+    height: height / 4,
   },
   contentHeader: {
     flex: 1,
@@ -57,4 +57,18 @@ export default EStyleSheet.create({
     textAlignVertical: 'center',
     paddingBottom: 5,
   },
+  out_of_network: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 12,
+    color: '#c6c7cd',
+    textAlignVertical: 'center',
+    marginRight: 20,
+    marginTop: '4%',
+    marginBottom: 7,
+    paddingRight: '3%',
+    paddingLeft: '3%',
+    borderColor: '#c6c7cd',
+    borderWidth: 1,
+    borderRadius: 5
+  }
 });

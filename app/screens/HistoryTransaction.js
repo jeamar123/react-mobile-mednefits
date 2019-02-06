@@ -16,6 +16,7 @@ import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
 import { FONT_FAMILY_THIN, FONT_FAMILY_LIGHT } from '../config';
+import RF from "react-native-responsive-fontsize";
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.log(data);
       await this.setState({ resultData: data, in_network: true });
     });
   }
@@ -52,6 +54,38 @@ class HistoryTransaction extends Component {
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ DataE_Claim: data, out_network: true });
     });
+  }
+
+  renderInNetworkStatus(data) {
+    if (data.health_provider_status == true && data.type == 'cash') {
+      return (
+        <View
+          style={{
+            paddingTop: 5,
+            paddingBottom: 5,
+            width: '20%',
+            backgroundColor: '#439057',
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: '#fff',
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              textAlign: 'center',
+              color: '#fff',
+            }}
+          >
+            Cash
+          </Text>
+        </View>
+      );
+    } else if (data.health_provider_status == false && data.type == 'credits' && data.refunded == true) {
+      return (
+        <Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>
+      );
+    }
   }
 
   renderTransactionIn_Network() {
@@ -147,37 +181,7 @@ class HistoryTransaction extends Component {
             >
               {Data.customer}
             </Text>
-            {Data.health_provider_status == true && Data.type == 'cash' ? (
-              <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#439057',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Cash
-                </Text>
-              </View>
-            ) : Data.health_provider_status == false &&
-              Data.type == 'credits' ? (
-                  <Text />
-                ) : (
-                  Data.health_provider_status == false &&
-                  Data.type == 'credits' &&
-                  Data.refunded ==
-                  true(<Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>)
-                )}
+            {this.renderInNetworkStatus(Data)}
           </CardItem>
         </Card>
       </TouchableOpacity>
@@ -312,6 +316,8 @@ class HistoryTransaction extends Component {
               <Image
                 style={{
                   margin: 8,
+                  aspectRatio: 0.4,
+                  resizeMode: 'contain',
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
@@ -344,6 +350,8 @@ class HistoryTransaction extends Component {
               <Image
                 style={{
                   margin: 8,
+                  aspectRatio: 0.4,
+                  resizeMode: 'contain',
                 }}
                 source={require('../../assets/apps/dotted.png')}
               />
@@ -369,6 +377,7 @@ class HistoryTransaction extends Component {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              marginTop: -10
             }}
           >
             <Text
@@ -400,11 +409,11 @@ class HistoryTransaction extends Component {
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: 14 }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.5) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: 15,
+              fontSize: RF(2.5),
             }}
           >
             <Content>
@@ -425,11 +434,11 @@ class HistoryTransaction extends Component {
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: 14 }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.5) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: 15,
+              fontSize: RF(2.5),
             }}
           >
             <Content>

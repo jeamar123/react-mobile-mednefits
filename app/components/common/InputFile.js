@@ -6,30 +6,30 @@ import {
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
 import * as Common from './index'
 
-export default class InputFile extends Component{
+export default class InputFile extends Component {
 
   state = {
     fileName: false,
   };
 
-  getFile = () =>{
+  getFile = () => {
     try {
       DocumentPicker.show({
         filetype: [DocumentPickerUtil.images()],
-      },(error,res) => {
+      }, (error, res) => {
         if (!error) {
           this.props.onChangeFile(res)
 
-          this.setState({fileName: res.fileName})
+          this.setState({ fileName: res.fileName })
         }
       });
     } catch (e) {
-      Common.getNotify("","Failed to get file")
+      Common.getNotify("", "Failed to get file")
     }
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <TouchableOpacity
         onPress={this.getFile}
         style={{

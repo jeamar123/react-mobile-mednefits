@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import RF from "react-native-responsive-fontsize";
 
 class HomeContent extends Component {
   constructor(props) {

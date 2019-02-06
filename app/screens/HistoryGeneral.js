@@ -81,6 +81,7 @@ class History extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
+              alignItems: 'center',
               marginVertical: 10,
               borderBottomWidth: 1,
               borderColor: '#efeff1'
@@ -116,7 +117,7 @@ class History extends Component {
               borderColor: '#efeff1'
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%', padding: 5, }}>
+            <Text style={{ color: '#c4c4c4', marginLeft: 20, padding: 5, }}>
               Transaction #
             </Text>
             <Text style={{ marginLeft: '4%', padding: 5, }}>
@@ -135,7 +136,7 @@ class History extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                marginLeft: '2%',
+                marginLeft: 20,
                 marginRight: '6%',
                 padding: 5,
               }}
@@ -158,7 +159,7 @@ class History extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                marginLeft: '2%',
+                marginLeft: 20,
                 marginRight: '3%',
                 padding: 5,
               }}
@@ -179,7 +180,7 @@ class History extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '10%', padding: 5 }}
+              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '10%', padding: 5 }}
             >
               Member
             </Text>
