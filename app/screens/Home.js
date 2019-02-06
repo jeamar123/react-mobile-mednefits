@@ -19,6 +19,23 @@ import * as Core from '../core'
 const { width, height } = Dimensions.get('window');
 
 class ClinicList extends Component {
+
+  componentWillMount() {
+    console.warn("datanya")
+    Core.GetLocation();
+    Core.GetClinicMapList((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        console.warn(data);
+      // this.setState({
+      //   Balance: data.balance,
+      //   InNetwork_Credit_spent: data.in_network_credits_spent,
+      //   Eclaim_Credit_spent: data.e_claim_credits_spent,
+      //   currency: result.data.currency_symbol
+      // });
+    });
+  }
+
   render() {
     return (
       <TouchableOpacity>

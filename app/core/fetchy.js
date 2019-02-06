@@ -3,7 +3,7 @@
  * @year 2018
  */
 
-import { AsyncStorage } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { getAlert, getNotify } from './notify';
 import * as Config from '../config';

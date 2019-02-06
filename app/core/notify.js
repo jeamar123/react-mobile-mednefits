@@ -40,7 +40,7 @@ export function getModal() {
           borderColor: 'rgba(0, 0, 0, 0.1)',
         }}
       >
-        <Text>Empat Kali</Text>
+        <Text>Mednefits</Text>
         <Text>Progress Download: {progress}</Text>
       </View>
     </Modal>

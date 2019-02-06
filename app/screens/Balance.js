@@ -55,9 +55,9 @@ class Balance extends Component {
 
   componentWillMount() {
     this.getUserBalance();
-    Core.GetBalance((err, result) => {
-      this.setState({ currency: result.data.currency_symbol })
-    })
+    // Core.GetBalance((err, result) => {
+    //   this.setState({ currency: result.data.currency_symbol })
+    // })
   }
 
   getUserBalance() {
@@ -68,6 +68,7 @@ class Balance extends Component {
         Balance: data.balance,
         InNetwork_Credit_spent: data.in_network_credits_spent,
         Eclaim_Credit_spent: data.e_claim_credits_spent,
+        currency: result.data.currency_symbol
       });
     });
   }
@@ -80,6 +81,8 @@ class Balance extends Component {
     return (
       <Drawer
         type="displace"
+        openDrawerOffset={0.4}
+        panCloseMask={0.4}
         ref={ref => {
           this._drawer = ref;
         }}
