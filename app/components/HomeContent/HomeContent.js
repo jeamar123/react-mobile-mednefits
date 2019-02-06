@@ -4,7 +4,6 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import * as Common from '../common'
 
 class HomeContent extends Component {
   constructor(props) {
@@ -13,66 +12,32 @@ class HomeContent extends Component {
       Balance: '0',
       Full_name: '',
       currency: false,
-      isClearSearch: false,
-      isLoadingSearch: false
     };
   }
 
   componentWillMount() {
     this.getUserBalance();
     this.getUserDetail();
-    Core.GetBalance((err, result)=>{
-      this.setState({currency: result.data.currency_symbol})
-    })
+    // Core.GetBalance((err, result)=>{
+    //   this.setState({currency: result.data.currency_symbol})
+    // })
+
   }
 
-  onQuery = async (query) => {
-    this.setState({
-      isClearSearch: true,
-      query: query
-    })
-  }
-
-  clearProcess = (state) => {
-    this.props.clearProcess("true")
-    this.setState({
-      query: "",
-      isClearSearch: false
-    })
-  }
-
-  processQuery = async () => {
-    this.props.isLoadingSearch("true")
-
-    try {
-      result = await Core.MainSearch(this.state.query)
-
-      this.props.onUpdateSearch(result.data)
-      this.props.isLoadingSearch("false")
-
-    } catch (e) {
-      Common.getNotify("", e.message)
-      this.props.isLoadingSearch("false")
-    } finally {
-      setTimeout(() => {
-        this.props.isLoadingSearch("false")
-      }, 10000)
-    }
-  }
-
-  getUserBalance() {
-    Core.GetBalance((error, result) => {
+  async getUserBalance() {
+    await Core.GetBalance((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
       this.setState({
         Balance: data.balance,
+        currency: result.data.currency_symbolpro
       });
     });
   }
 
-  getUserDetail() {
-    Core.UserDetail((error, result) => {
+  async getUserDetail() {
+    await Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
@@ -86,32 +51,28 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <Common.InputText
-            value={this.state.query}
-            returnKeyType="search"
-            onSubmitEditing={() => this.processQuery()}
-            onChangeText={query => this.onQuery(query)}
-            placeholder="Search"
-            placeholderTextColor="#fff"
-            placeholderStyle={{
-              color: "#fff"
-            }}
-            type="search"
-            isClearSearch={this.state.isClearSearch}
-            isClearSearchChange={this.clearProcess}
-            iconColor="#fff"
-            alignItems="center"
-            justifyContent="flex-start"
+          <TouchableOpacity
+            onPress={() => Actions.Search()}
             style={{
-              color: "#fff",
+              width: "91%",
+              borderRadius: 5,
               backgroundColor: '#0A6186',
               marginLeft: 15,
               marginRight: 15,
-              width: "91%",
-              padding: 3,
-              borderRadius: 5,
-            }}
-          />
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
+            <Icons
+              name="search"
+              style={{
+                color: '#ffff',
+                fontSize: 12,
+                paddingLeft: 15,
+                paddingRight: 15
+              }}
+            />
+            <Text style={styles.searchtext}>Search</Text>
+          </TouchableOpacity>
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
