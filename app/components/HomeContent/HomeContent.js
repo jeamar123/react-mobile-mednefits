@@ -29,7 +29,6 @@ class HomeContent extends Component {
     await Core.GetBalance((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
       this.setState({
         Balance: data.balance,
         currency: result.data.currency_symbolpro
@@ -41,7 +40,6 @@ class HomeContent extends Component {
     await Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
       this.setState({
         Full_name: data.profile.full_name,
       });

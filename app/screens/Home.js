@@ -20,13 +20,12 @@ const { width, height } = Dimensions.get('window');
 
 class ClinicList extends Component {
 
-  componentWillMount() {
-    console.warn("datanya")
-    Core.GetLocation();
-    Core.GetClinicMapList((error, result) => {
+  async getClinicMap(clinic_type_id) {
+    console.log('clinic_type_id', clinic_type_id);
+    Core.GetClinicMapList(clinic_type_id, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-        console.warn(data);
+        console.log(data);
       // this.setState({
       //   Balance: data.balance,
       //   InNetwork_Credit_spent: data.in_network_credits_spent,
@@ -38,7 +37,7 @@ class ClinicList extends Component {
 
   render() {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={ () => { this.getClinicMap(this.props.id) }}>
         <View style={styles.gridBox}>
           <Image
             style={{
@@ -92,6 +91,10 @@ class Home extends Component {
         })
       }
     })
+  }
+  
+  async componentWillMount() {
+    await Core.GetLocation();
   }
 
   async componentDidMount() {

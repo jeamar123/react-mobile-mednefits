@@ -36,8 +36,6 @@ function fetching(params, callback) {
         })
           .then(response => response.json())
           .then(res => {
-            console.log('done fetching execution');
-            console.log(res);
             if (!res.status) {
               // getAlert('', res.message);
 
@@ -127,10 +125,8 @@ export async function UserDetail(callback) {
             },
           };
           await fetching(params, async result => {
-            console.log('done fetching in UserDetail');
             await callback('', result)
           });
-          console.log('fetching executed');
         }
       });
     } catch (e) {
@@ -603,33 +599,59 @@ function GetCurrentLocation(callback) {
   );
 }
 
-function requestLocationPermission() {
-  return new Promise((resolve, reject) => {
-    try {
-      const granted = PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          'title': 'Location Permission Device',
-          'message': 'Wee need this permission to look nearby location of clinic'
-        }
-      )
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        resolve()
-      } else {
-        throw "denied"
+async function requestLocationPermission() {
+	console.log('request permission')
+  // return new Promise((resolve, reject) => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //       {
+  //         'title': 'Location Permission Device',
+  //         'message': 'Wee need this permission to look nearby location of clinic'
+  //       }
+  //     )
+  //     console.log(granted);
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //     	console.log('granted');
+  //       resolve()
+  //     } else {
+  //       throw "denied"
+  //     }
+  //   } catch (err) {
+  //     reject()
+  //   }
+  // })
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      {
+        'title': 'Location Permission Device',
+        'message': 'Wee need this permission to look nearby location of clinic'
       }
-    } catch (err) {
-      reject()
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    	console.log('granted');
+      console.log('You can use location');
+      return true;
+    } else {
+      console.log('location denied');
+      return false;
     }
-  })
+  } catch (err) {
+    console.warn(err);
+  }
 }
 
 export async function GetLocation() {
-
+  console.log('get location');
   permissionLocation = await requestLocationPermission()
-
-  navigator.geolocation.watchPosition(
+  // GetCurrentLocation((err, result) => {
+  // 	console.log(err);
+  //   console.log(result);
+  // });
+  await navigator.geolocation.watchPosition( 
     (position) => {
+    	// console.log('position', position);
       latitude = {
         key: Config.LATITUDE,
         value: JSON.stringify(position.coords.latitude)
@@ -639,6 +661,9 @@ export async function GetLocation() {
         key: Config.LONGITUDE,
         value: JSON.stringify(position.coords.longitude)
       }
+
+      console.log('latitude', latitude)
+      console.log('longitude', longitude)
 
       Core.SetDataLocal(latitude, (err, result) => {
         if (result) {
@@ -653,9 +678,17 @@ export async function GetLocation() {
         }
       })
     },
-    (error) => Common.getNotify("", error.message),
+    (error) => Core.getNotify("", error.message),
     { enableHighAccuracy: false, timeout: 20000, maximumAge: 5000 },
   );
+  // await navigator.geolocation.getCurrentPosition(
+  //   (position) => {
+  //   	console.log(position)
+  //     // callback(position)
+  //   },
+  //   (error) => Common.getNotify("", error.message),
+  //   { enableHighAccuracy: false, timeout: 20000, maximumAge: 5000 },
+  // );
 }
 
 // export async function GetClinicMapList(callback) {
@@ -682,13 +715,16 @@ export async function GetLocation() {
 //   }
 // }
 
-export function GetClinicMapList(callback) {
+export async function GetClinicMapList(clinic_type_id, callback) {
   try {
-    latitude = Core.GetDataLocalReturn(Config.LATITUDE)
-    longitude = Core.GetDataLocalReturn(Config.LONGITUDE)
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    latitude = await Core.GetDataLocalReturn(Config.LATITUDE)
+    longitude = await Core.GetDataLocalReturn(Config.LONGITUDE)
+   
+    console.log('list clinic_type_id', clinic_type_id)
+    console.log(Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1");
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
-        url: Config.CLINIC_PAGE_NEARBY + "/?lat=" + latitude + "/&lng=" + longitude + "/&type=1&page=1",
+        url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1",
         method: 'GET',
         header: {
           Accept: 'application/json',
@@ -696,8 +732,9 @@ export function GetClinicMapList(callback) {
           Authorization: result,
         },
       };
-      fetching(params, result => {
-        callback('', result);
+      await fetching(params, async result => {
+      	console.log(result);
+        await callback('', result);
       });
     });
   } catch (e) {
