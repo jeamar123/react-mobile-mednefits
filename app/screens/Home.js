@@ -101,8 +101,10 @@ class Home extends Component {
     })
   }
 
+
   async componentDidMount(){
   	console.log('Home is mounted');
+  	await Core.GetLocation()
     await this.getClinicType()
   }
 
