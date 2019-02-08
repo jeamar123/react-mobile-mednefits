@@ -44,7 +44,7 @@ import DetailClinic from '../screens/Detailclinic';
 // import Camera from '../screens/Camera';
 import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic'
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -117,7 +117,7 @@ class RouterComponent extends Component {
             <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
             <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Paycash" component={Paycash} hideNavBar />
-
+            <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

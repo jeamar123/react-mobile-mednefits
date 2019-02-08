@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
 import { RNCamera, FaceDetector } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
+import {Spinner, Text} from '../components/common/Spinner'
+import * as Config from '../config'
 
 const PendingView = () => (
-  <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
+  <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position:'absolute' }}>
     <ActivityIndicator size="large" color="#fff" />
   </View>
 );
@@ -19,43 +21,89 @@ class Barcode extends Component {
     this.state = {
       torchMode: 'off',
       cameraType: 'back',
+      data: false,
+      isLoading: false
     };
+
+    this.scanBarcode = this.scanBarcode.bind(this)
+    this.barcodeHandler = this.barcodeHandler.bind(this)
   }
 
-  barcodeHandler(data) {
-    if (data) {
-      Core.GetBarcodeData(data.data, (result)=>{
-        if (result.status) {
-          Actions.SelectService({ services: result.data.clinic_procedures, clinicid: result.data.clinic_id })
-        }
+  componentDidUpdate(prevProps, prevStates){
+    if (prevStates.data !== this.state.data) {
+      this.scanBarcode()
+      this.setState({
+        data: false
       })
     }
   }
 
+  scanBarcode=()=>{
+    barcodeData = this.state.data
+
+    Core.GetBarcodeData(barcodeData.data, (result)=>{
+      if (result.status) {
+        Actions.SelectService({
+          type:'reset',
+          services: result.data.clinic_procedures,
+          clinicid: result.data.clinic_id
+        })
+      }
+
+      this.setState({
+        isLoading: false
+      })
+    })
+
+  }
+
+  barcodeHandler(data) {
+    console.warn('setdata');
+    console.warn(data);
+    if (data) {
+      this.setState({data: data, isLoading: true})
+    }
+  }
+
+  onBarCodeRead = async obj => {
+    if (this.state.data == obj.data) return;
+    this.setState({data: obj, isLoading: true})
+  }
+
   render() {
+    console.warn(this.state.data);
     return (
       <Container>
         <Navbar leftNav="back-home" />
-        <RNCamera
-          style={styles.preview}
-          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={
-            'We need your permission to use your camera phone'
-          }
-          onBarCodeRead={this.barcodeHandler}
-          ref={cam => (this.camera = cam)}
-        >
-          {({ camera, status }) => {
-            return (
-              <Image
-                style={{ height: '100%', width: '100%' }}
-                source={require('../../assets/barcode.png')}
-              />
-            );
-          }}
-        </RNCamera>
+
+          {(this.state.isLoading) ? (
+            <Spinner />
+          ) : (
+            <RNCamera
+              style={styles.preview}
+              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+              flashMode={RNCamera.Constants.FlashMode.on}
+              permissionDialogTitle={'Permission to use camera'}
+              permissionDialogMessage={
+                'We need your permission to use your camera phone'
+              }
+              onBarCodeRead={this.onBarCodeRead}
+              ref={cam => (this.camera = cam)}
+            >
+              {({ camera, status }) => {
+                if (status !== 'READY') return <PendingView />;
+                return(
+                  <ImageBackground
+                    style={{ height: '100%', width: '100%' }}
+                    source={require('../../assets/barcode.png')}
+                  >
+
+                  </ImageBackground>
+                )
+              }}
+            </RNCamera>
+          )}
+
       </Container>
     );
   }

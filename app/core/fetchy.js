@@ -294,6 +294,7 @@ export function GetBarcodeData(url, callback) {
       });
     });
   } catch (e) {
+    console.warn(e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
