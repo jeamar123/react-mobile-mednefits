@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>MednefitsMobile</string>
+	<string>Mednefits</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -44,6 +44,28 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>staging.medicloud.sg</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSAllowsArbitraryLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>medicloud.local</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSAllowsArbitraryLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -51,10 +73,17 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Helvetica.otf</string>
 		<string>HelveticaNeue-Light.otf</string>
+		<string>HelveticaNeue-Bold.otf</string>
+		<string>HelveticaNeue-Regular.ttf</string>
+		<string>HelveticaNeue-Roman.otf</string>
 		<string>HelveticaNeue-Medium.otf</string>
 		<string>HelveticaNeueLT-UltraLigExtObl.otf</string>
 		<string>HelveticaNeueLTStd-Lt.otf</string>

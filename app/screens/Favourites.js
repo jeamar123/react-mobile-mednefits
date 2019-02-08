@@ -118,12 +118,12 @@ class Favourites extends Component {
               </Text>
               {Data.open_status === 1 ? (
                 <Text style={{ marginTop: 5 }}>
-                  <Icons
-                    name="circle"
-                    style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
-                  />
-                  {' '}
-                  <Text style={{
+                <Icons
+                  name="circle"
+                  style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
+                />
+                {' '}
+                <Text style={{
                     fontFamily: Config.FONT_FAMILY_LIGHT,
                     fontSize: 10,
                     marginTop: 5,
@@ -132,20 +132,20 @@ class Favourites extends Component {
                   }}>Now Open</Text>
                 </Text>
               ) : (
-                  <Text style={{ marginTop: 5 }}>
-                    <Icons
-                      name="circle"
-                      style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
-                    />
-                    {' '}
-                    <Text style={{
-                      fontFamily: Config.FONT_FAMILY_LIGHT,
-                      fontSize: 10,
-                      marginTop: 5,
-                      marginLeft: 10,
-                      color: '#616161',
-                    }}>Closed</Text>
-                  </Text>
+                <Text style={{ marginTop: 5 }}>
+                <Icons
+                  name="circle"
+                  style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
+                />
+                {' '}
+                <Text style={{
+                    fontFamily: Config.FONT_FAMILY_LIGHT,
+                    fontSize: 10,
+                    marginTop: 5,
+                    marginLeft: 10,
+                    color: '#616161',
+                  }}>Closed</Text>
+                </Text>
                 )}
             </View>
             <Image
@@ -190,83 +190,83 @@ class Favourites extends Component {
               <ActivityIndicator size="large" color="#0392cf" />
             </View>
           ) : (
-              <View
-                style={{
-                  flex: 1,
-                  marginLeft: '2%',
-                  marginRight: '2%',
-                  marginTop: '2%',
-                }}
-              >
-                <ScrollView>
-                  {this.renderTransactionIn_Network()}
-                  <TouchableOpacity onPress={() => Actions.Search()}>
+            <View
+              style={{
+                flex: 1,
+                marginLeft: '2%',
+                marginRight: '2%',
+                marginTop: '2%',
+              }}
+            >
+              <ScrollView>
+                {this.renderTransactionIn_Network()}
+                <TouchableOpacity>
+                  <View
+                    style={{
+                      flex: 1,
+                      marginTop: 5,
+                      marginBottom: 10,
+                      height: 90,
+                      backgroundColor: '#fff',
+                      opacity: 10000,
+                    }}
+                  >
                     <View
-                      style={{
-                        flex: 1,
-                        marginTop: 5,
-                        marginBottom: 10,
-                        height: 90,
-                        backgroundColor: '#fff',
-                        opacity: 10000,
-                      }}
+                      style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                     >
+                      <Image
+                        source={require('../../assets/apps/plus.png')}
+                        style={{
+                          height: 70,
+                          width: 70,
+                          resizeMode: 'center',
+                          alignItem: 'center',
+                          marginTop: '2%',
+                          marginLeft: '2%',
+                          marginRight: '-5%',
+                        }}
+                      />
                       <View
-                        style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                        style={{
+                          flexDirection: 'column',
+                          marginTop: '4%',
+                          marginLeft: '4%',
+                          width: '45%',
+                        }}
                       >
-                        <Image
-                          source={require('../../assets/apps/plus.png')}
+                        <Text
                           style={{
-                            height: 70,
-                            width: 70,
-                            resizeMode: 'center',
-                            alignItem: 'center',
-                            marginTop: '2%',
-                            marginLeft: '2%',
-                            marginRight: '-5%',
-                          }}
-                        />
-                        <View
-                          style={{
-                            flexDirection: 'column',
-                            marginTop: '4%',
-                            marginLeft: '4%',
-                            width: '45%',
+                            fontFamily: Config.FONT_FAMILY_ROMAN,
+                            fontSize: 14,
+                            width: '100%',
                           }}
                         >
-                          <Text
-                            style={{
-                              fontFamily: Config.FONT_FAMILY_ROMAN,
-                              fontSize: 14,
-                              width: '100%',
-                            }}
-                          >
-                            Add Your Clinic
+                          Add Your Clinic
                         </Text>
-                          <Text
-                            style={{
-                              color: '#8c8b7f',
-                              fontSize: 9,
-                              fontFamily: Config.FONT_FAMILY_LIGHT,
-                            }}
-                          >
-                            Tap here to search and add your favourite clinic to the list
-                        </Text>
-                        </View>
-                        <Image
+                        <Text
                           style={{
-                            height: 100,
-                            width: 100,
-                            resizeMode: 'center',
+                            color: '#8c8b7f',
+                            fontSize: 9,
+                            fontFamily: Config.FONT_FAMILY_LIGHT,
                           }}
-                        />
+                        >
+                          Tap here to search and add your favourite clinic to the list
+                        </Text>
                       </View>
+                      <Image
+                        style={{
+                          height: 100,
+                          width: 100,
+                          resizeMode: 'center',
+                        }}
+                      />
                     </View>
-                  </TouchableOpacity>
-                </ScrollView>
-              </View>
+                  </View>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
 
-            )}
+          )}
 
         </View>
       </Drawer>

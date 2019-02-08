@@ -286,14 +286,14 @@ class ECardUser extends Component {
                       fontSize: 14,
                     }}
                   >
-                    <Text style={{
+                  <Text style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
-                      onPress={() => Linking.openURL('mailto:happinness@mednefits.com')}>
-                      happinness@mednefits.com
-                    </Text>
+                    onPress={() => Linking.openURL('mailto:happinness@mednefits.com')}>
+                    happinness@mednefits.com
+                  </Text>
                     {' '}
                     <Text
                       style={{

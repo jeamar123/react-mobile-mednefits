@@ -56,11 +56,6 @@ class History extends Component {
         data: data
       })
     })
-    Core.UserDetail((err, result) => {
-      this.setState({
-        user: result.data.profile.full_name
-      })
-    })
   }
 
   render() {
