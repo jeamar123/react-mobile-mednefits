@@ -33,7 +33,7 @@ class HistoryUser extends Component {
         <View style={styles.sectionHeader}>
           <View style={styles.contentHeader}>
             <View />
-            <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+            <View style={{flexDirection:'column', alignItems: 'center'}}>
               <Image
                 source={{ uri: this.props.clinicimage }}
                 style={styles.imageHeader} />
@@ -56,7 +56,7 @@ class HistoryUser extends Component {
           <Text
             numberOfLines={2}
             adjustsFontSizeToFit={true}
-            style={styles.detail}
+            style={styles.in_network}
           >
             In-Network
           </Text>

@@ -43,7 +43,7 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log(data);
+        console.log(data);
       await this.setState({ resultData: data, in_network: true });
     });
   }
@@ -57,9 +57,9 @@ class HistoryTransaction extends Component {
   }
 
   renderInNetworkStatus(data) {
-    if (data.health_provider_status == true && data.type == 'cash') {
-      return (
-        <View
+    if(data.health_provider_status == true && data.type == 'cash') {
+    	return (
+         <View
           style={{
             paddingTop: 5,
             paddingBottom: 5,
@@ -80,11 +80,11 @@ class HistoryTransaction extends Component {
             Cash
           </Text>
         </View>
-      );
-    } else if (data.health_provider_status == false && data.type == 'credits' && data.refunded == true) {
-      return (
+    	);
+    } else if(data.health_provider_status == false && data.type == 'credits' && data.refunded == true ) {
+    	return (
         <Text style={{ fontSize: 11 }}>Cancelled - Refunded</Text>
-      );
+    	);
     }
   }
 
@@ -96,7 +96,7 @@ class HistoryTransaction extends Component {
           Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
         }
       >
-        <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>
+        <Card key={index} style={{ marginLeft: -5, marginRight: -5}}>
           <CardItem
 
             style={{
@@ -181,7 +181,7 @@ class HistoryTransaction extends Component {
             >
               {Data.customer}
             </Text>
-            {this.renderInNetworkStatus(Data)}
+            { this.renderInNetworkStatus(Data) }
           </CardItem>
         </Card>
       </TouchableOpacity>
@@ -189,9 +189,9 @@ class HistoryTransaction extends Component {
   }
 
   renderEclaimStatus(data) {
-    console.log(data);
-    if (data.status == 0) {
-      return (
+  	console.log(data);
+  	if(data.status == 0) {
+  		return (
         <View
           style={{
             paddingTop: 5,
@@ -215,8 +215,8 @@ class HistoryTransaction extends Component {
           </Text>
         </View>
       );
-    } else if (data.status == 1) {
-      return (
+  	} else if(data.status == 1) {
+  		return (
         <View
           style={{
             paddingTop: 5,
@@ -240,8 +240,8 @@ class HistoryTransaction extends Component {
           </Text>
         </View>
       );
-    } else if (data.status == 2) {
-      return (
+  	} else if(data.status == 2) {
+  		return (
         <View
           style={{
             paddingTop: 5,
@@ -265,7 +265,7 @@ class HistoryTransaction extends Component {
           </Text>
         </View>
       )
-    }
+  	}
   }
 
   renderTransactionE_Claim() {
@@ -403,7 +403,7 @@ class HistoryTransaction extends Component {
         <Navbar leftNav="back-home" title="History" />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          tabContainerStyle={{ elevation: 0 }}
+          tabContainerStyle={{ elevation:0 }}
         >
           <Tab
             heading="In-Network Transactions"
@@ -418,17 +418,17 @@ class HistoryTransaction extends Component {
           >
             <Content>
               {(!this.state.in_network) ? (
-                <View style={{ flex: 1 }}>
+              	<View style={{ flex: 1 }}>
                   <View
-                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
+                    style={{ flex: 1, marginTop:240, justifyContent: 'center', alignItems:'center' }}
                   >
-                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf:'center' }}/>
                   </View>
-                </View>
+              	</View>
               ) : (
-                  this.renderTransactionIn_Network()
-                )}
-            </Content>
+                this.renderTransactionIn_Network()
+              )}
+              </Content>
           </Tab>
           <Tab
             heading="E-Claim Transactions"
@@ -442,17 +442,17 @@ class HistoryTransaction extends Component {
             }}
           >
             <Content>
-              {(!this.state.out_network) ? (
+            {(!this.state.out_network) ? (
                 <View style={{ flex: 1 }}>
                   <View
-                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
+                    style={{ flex: 1, marginTop:240, justifyContent: 'center', alignItems:'center' }}
                   >
-                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf:'center' }}/>
                   </View>
-                </View>
+              	</View>
               ) : (
-                  this.renderTransactionE_Claim()
-                )}
+                this.renderTransactionE_Claim()
+              )}
             </Content>
           </Tab>
         </Tabs>

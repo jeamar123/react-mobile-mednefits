@@ -55,8 +55,8 @@ class Balance extends Component {
 
   componentWillMount() {
     this.getUserBalance();
-    // Core.GetBalance((err, result) => {
-    //   this.setState({ currency: result.data.currency_symbol })
+    // Core.GetBalance((err, result)=>{
+    //   this.setState({currency: result.data.currency_symbol})
     // })
   }
 
@@ -108,60 +108,60 @@ class Balance extends Component {
               flexDirection: 'row',
               justifyContent: 'space-around'
             }}>
-              <View style={{ width: "40%", justifyContent: 'center', alignItems: 'center', padding: 10 }}>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="wallet"
-                  style={{
-                    fontSize: 52,
-                    color: '#0392cf'
-                  }}
-                />
-                <Common.Texti
-                  fontColor={'#0392cf'}
-                  fontSize={14}
-                  style={{
-                    textAlign: 'center',
-                    lineHeight: 20
-                  }}
+            <View style={{width: "40%", justifyContent: 'center', alignItems: 'center', padding: 10}}>
+              <Icon
+                type="SimpleLineIcons"
+                name="wallet"
+                style={{
+                  fontSize: 52,
+                  color: '#0392cf'
+                }}
+              />
+              <Common.Texti
+                fontColor={'#0392cf'}
+                fontSize={14}
+                style={{
+                  textAlign: 'center',
+                  lineHeight: 20
+                }}
                 >
-                  Mednefits credit added via corporate employees benefits or gift code
+                Mednefits credit added via corporate employees benefits or gift code
               </Common.Texti>
-              </View>
-              <View style={{ width: "20%", justifyContent: 'center', alignItems: 'center', padding: 20 }}>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
-                  style={{
-                    color: '#0392cf'
-                  }}
-                />
-              </View>
-              <View style={{ width: "40%", justifyContent: 'center', alignItems: 'center', padding: 20 }}>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="calendar"
-                  style={{
-                    fontSize: 52,
-                    color: '#0392cf'
-                  }}
-                />
-                <Common.Texti
-                  fontColor={'#0392cf'}
-                  fontSize={14}
-                  style={{
-                    textAlign: 'center',
-                    lineHeight: 20
-                  }}
+            </View>
+            <View style={{width: "20%", justifyContent: 'center', alignItems: 'center', padding: 20}}>
+              <Icon
+                type="SimpleLineIcons"
+                name="arrow-right"
+                style={{
+                  color: '#0392cf'
+                }}
+              />
+            </View>
+            <View style={{width: "40%", justifyContent: 'center', alignItems: 'center', padding: 20}}>
+              <Icon
+                type="SimpleLineIcons"
+                name="calendar"
+                style={{
+                  fontSize: 52,
+                  color: '#0392cf'
+                }}
+              />
+              <Common.Texti
+                fontColor={'#0392cf'}
+                fontSize={14}
+                style={{
+                  textAlign: 'center',
+                  lineHeight: 20
+                }}
                 >
-                  Mednefits credit gets auto deducted after end of the service
+                Mednefits credit gets auto deducted after end of the service
               </Common.Texti>
               </View>
             </View>
           </Modal>
           <View style={styles.container}>
             <View style={styles.wrapperTop}>
-              <TouchableOpacity onPress={() => this.refs.modal2.open()} style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 10, borderLeftWidth: 1, borderRightWidth: 1, borderBottomWidth: 1, borderLeftColor: '#c8c8c8', borderRightColor: '#c8c8c8', borderBottomColor: '#c8c8c8' }}>
+              <TouchableOpacity onPress={()=>this.refs.modal2.open()} style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 10, borderLeftWidth: 1, borderRightWidth: 1, borderBottomWidth: 1, borderLeftColor: '#c8c8c8', borderRightColor: '#c8c8c8', borderBottomColor: '#c8c8c8' }}>
                 <Text
                   style={{
                     fontFamily: 'HelveticaNeue-Roman',
@@ -285,7 +285,7 @@ class Balance extends Component {
               </View>
             </View>
           </View>
-        </Container>
+      </Container>
       </Drawer>
     );
   }

@@ -104,7 +104,7 @@ class manageProfile extends Component {
               if (res.status == true) {
                 Core.getNotify('', res.message);
               } else {
-                Core.getAlert('Ooops', res.message, null, true);
+              	Core.getAlert('Ooops', res.message, null, true);
               }
             })
             .catch(error => {
@@ -175,7 +175,7 @@ class manageProfile extends Component {
             body: formdata,
             mode: 'cors',
             cache: 'default',
-            bodyType: 'multipart'
+            bodyType:'multipart'
           };
 
           fetch(Config.AUTH_UPDATE, {
@@ -189,7 +189,7 @@ class manageProfile extends Component {
               // if (res.status == true) {
               //   Core.getNotify('', 'Success update data');
               // } else {
-              Core.getNotify('', res.message);
+              	Core.getNotify('', res.message);
               // }
             })
             .catch(error => {
@@ -248,8 +248,8 @@ class manageProfile extends Component {
             source={{
               uri:
                 this.state.photo_url == false ||
-                  this.state.photo_url == '' ||
-                  this.state.photo_url == undefined
+                this.state.photo_url == '' ||
+                this.state.photo_url == undefined
                   ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
                   : this.state.photo_url,
             }}

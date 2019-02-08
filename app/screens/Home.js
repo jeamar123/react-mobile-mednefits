@@ -87,8 +87,8 @@ class Home extends Component {
     }
   }
 
-  async getClinicType() {
-    await Core.GetClinicType(async (err, result) => {
+  async getClinicType(){
+    await Core.GetClinicType(async (err, result)=>{
       if (result) {
         await this.setState({
           data: result.data.clinic_types,
@@ -97,12 +97,8 @@ class Home extends Component {
     })
   }
 
-  async componentWillMount() {
-    await Core.GetLocation();
-  }
-
-  async componentDidMount() {
-    console.warn('Home is mounted');
+  async componentDidMount(){
+  	console.log('Home is mounted');
     await this.getClinicType()
   }
 
@@ -155,15 +151,15 @@ class Home extends Component {
                   <ActivityIndicator size="large" color="#0392cf" />
                 </View>
               ) : (
-                  <FlatList
-                    data={this.state.data}
-                    extraData={this.state}
-                    keyExtractor={this.data}
-                    renderItem={this._renderItem}
-                    horizontal={false}
-                    numColumns={3}
-                  />
-                )}
+                <FlatList
+                  data={this.state.data}
+                  extraData={this.state}
+                  keyExtractor={this.data}
+                  renderItem={this._renderItem}
+                  horizontal={false}
+                  numColumns={3}
+                />
+              )}
             </View>
           </View>
         </Container>

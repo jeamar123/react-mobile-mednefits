@@ -6,6 +6,7 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
 import * as Core from '../core'
+import Toast from 'react-native-simple-toast';
 
 class Login extends Component {
 
@@ -19,14 +20,19 @@ class Login extends Component {
     }
   }
 
-  async LoginHandler() {
-    await this.setState({ isLoading: true })
+  LoginHandler(){
+    // this.setState({isLoading: true})
 
-    await Core.LoginProcess(this.state.username, this.state.password, async (err, result) => {
-      await this.setState({ isLoading: false })
-      if (result) {
-        await Actions.Home({ type: 'reset' });
-      }
+    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
+    	// console.log(err)
+    	// console.log(result);
+      // this.setState({isLoading: false})
+    	if(result) {
+        Actions.Home({ type: 'reset' });
+    	} else {
+    		Toast.show(err.error_description, Toast.LONG);
+        // Core.getNotify('', err.error_description);
+    	}
     })
 
     // setTimeout(()=>{
@@ -45,13 +51,13 @@ class Login extends Component {
           onChangeText={(text) => this.setState({ username: text })}
           placeholder="Email address"
           autoCapitalize='none'
-        />
+          />
         <InputWithButton
           onChangeText={(text) => this.setState({ password: text })}
           placeholder="Enter password"
           secureTextEntry={true}
           autoCapitalize='none'
-        />
+          />
         <Buttons onPress={() => this.LoginHandler()}>
           Log in
         </Buttons>

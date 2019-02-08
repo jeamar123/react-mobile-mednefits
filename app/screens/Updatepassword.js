@@ -33,9 +33,9 @@ class Updatepassword extends Component {
     password = this.state.password;
     new_password = this.state.new_password;
 
-    if (password != new_password) {
-      Core.getNotify('', 'New Password and Re-Type New Password should be the same.');
-      return false;
+    if(password != new_password) {
+    	Core.getNotify('', 'New Password and Re-Type New Password should be the same.');
+    	return false;
     }
 
     try {
@@ -60,7 +60,7 @@ class Updatepassword extends Component {
                 Core.getNotify('', res.web_message);
                 Actions.Home();
               } else {
-                Core.getNotify('', res.web_message);
+              	Core.getNotify('', res.web_message);
               }
             })
             .catch(error => {

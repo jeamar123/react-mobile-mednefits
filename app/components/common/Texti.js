@@ -62,7 +62,7 @@ export default class Text extends Component {
         allowFontScaling={false}
         style={[this.props.style, {
           color: (this.props.fontColor) ? this.props.fontColor : "black",
-          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeue-Reguler",
+          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeue-Medium",
           fontSize: this.state.fontSize,
           marginBottom: 5,
           marginTop: 5
