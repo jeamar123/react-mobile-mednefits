@@ -4,6 +4,7 @@ export * from './Spinner';
 export * from './ButtonFooter';
 export * from './Notify';
 export * from './ButtonCall';
+export * from './Modaly';
 
 import Texti from './Texti'
 import Body from './Body';
