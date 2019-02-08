@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text as RNText } from 'react-native';
+import * as Config from '../../config/';
 
 export default class Text extends Component {
 
@@ -8,8 +9,7 @@ export default class Text extends Component {
 
     this.state = {
       fontSize: 18,
-      fontFamily: false,
-      fontColor: false
+      fontFamily: false
     }
   }
 
@@ -43,16 +43,12 @@ export default class Text extends Component {
 
   setFontFamily() {
     this.setState({ fontFamily: this.props.fontFamily, fontSize: this.props.fontSize })
-  }
 
-  setFontColor() {
-    this.setState({ fontColor: this.props.color })
   }
 
   componentWillMount() {
     this.isHeader()
     this.setFontFamily()
-    this.setFontColor()
   }
 
   render() {
@@ -61,14 +57,11 @@ export default class Text extends Component {
         {...this.props}
         allowFontScaling={false}
         style={[this.props.style, {
-          color: (this.props.fontColor) ? this.props.fontColor : "black",
-          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeue-Medium",
+          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : Config.FONT_FAMILY_BOLD,
           fontSize: this.state.fontSize,
-          marginBottom: 5,
-          marginTop: 5
+          marginBottom: (!this.props.marginBottom) ? 0 : 5,
+          marginTop: (!this.props.marginTop) ? 0 : 5,
         }]}
-        ellipsizeMode={"tail"}
-        numberOfLines={(!this.props.numberOfLines) ? 10 : this.props.numberOfLines}
       >
         {this.props.children}
       </RNText>
