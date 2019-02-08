@@ -3,17 +3,17 @@ package com.mednefitsmobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.ninty.system.setting.SystemSettingPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.rnfs.RNFSPackage;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
-
-import com.airbnb.android.react.maps.MapsPackage;
-import com.imagepicker.ImagePickerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,12 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNFSPackage(),
-            new RNCameraPackage(),
             new VectorIconsPackage(),
-            new ImagePickerPackage(),
+            new SystemSettingPackage(),
             new MapsPackage(),
-            new ReactNativeDocumentPicker()
+            new ImagePickerPackage(),
+            new RNFSPackage(),
+            new ReactNativeDocumentPicker(),
+            new RNCameraPackage()
       );
     }
 

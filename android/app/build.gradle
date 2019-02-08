@@ -149,6 +149,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-system-setting')
+    compile project(':react-native-maps')
+    compile project(':react-native-image-picker')
+    compile project(':react-native-fs')
+    compile project(':react-native-document-picker')
+    compile project(':react-native-camera')
     implementation project(':react-native-fs')
     implementation (project(':react-native-camera')) {
       exclude group: "com.google.android.gms"
