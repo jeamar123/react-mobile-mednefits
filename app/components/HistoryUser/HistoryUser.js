@@ -33,14 +33,14 @@ class HistoryUser extends Component {
         <View style={styles.sectionHeader}>
           <View style={styles.contentHeader}>
             <View />
-            <View style={{flexDirection:'column'}}>
+            <View style={{ flexDirection: 'column', alignItems: 'center' }}>
               <Image
-                source={{uri: this.props.clinicimage }}
+                source={{ uri: this.props.clinicimage }}
                 style={styles.imageHeader} />
-                <Text
-                  numberOfLines={2}
-                  style={styles.detail}
-                >{this.props.clinicname}</Text>
+              <Text
+                numberOfLines={2}
+                style={styles.detail}
+              >{this.props.clinicname}</Text>
             </View>
             <View />
           </View>

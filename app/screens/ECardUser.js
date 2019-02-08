@@ -114,6 +114,8 @@ class ECardUser extends Component {
     return (
       <Drawer
         type="displace"
+        openDrawerOffset={0.4}
+        panCloseMask={0.4}
         ref={ref => {
           this._drawer = ref;
         }}

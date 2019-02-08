@@ -37,7 +37,10 @@
     "react-native-modalbox": "^1.6.0",
     "react-native-offline": "^3.14.1",
     "react-native-picker-select": "^5.2.1",
+    "react-native-responsive-fontsize": "^0.1.8",
     "react-native-router-flux": "^4.0.1",
+    "react-native-simple-toast": "0.0.8",
+    "react-native-system-setting": "^1.7.1",
     "react-native-vector-icons": "^4.6.0",
     "save": "^2.3.2"
   },

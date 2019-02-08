@@ -17,12 +17,32 @@ export function GetDataLocal(key, callback) {
   }
 }
 
+export function GetDataLocalReturn(key) {
+  return new Promise((resolve, reject) => {
+    try {
+      AsyncStorage.getItem(key, (err, result) => {
+        if (result) {
+          resolve(result)
+        } else {
+          throw err
+        }
+      });
+    } catch (e) {
+      reject(e)
+    }
+  })
+}
+
+export async function GetDataLocalReturnNew(key) {
+  return await AsyncStorage.getItem(key);
+}
+
 export function SetDataLocal(params, callback) {
   try {
     AsyncStorage.setItem(params.key, params.value);
     callback('', true);
   } catch (error) {
-    console.warn(error.message);
+    // console.warn(error.message);
     Core.getNotify('', 'Gagal set data lokal');
   }
 }

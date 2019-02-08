@@ -9,7 +9,7 @@ import * as Core from '../core'
 
 class Login extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -19,16 +19,19 @@ class Login extends Component {
     }
   }
 
-  LoginHandler(){
-    this.setState({isLoading: !this.state.isLoading})
+  async LoginHandler() {
+    await this.setState({ isLoading: true })
 
-    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
-
+    await Core.LoginProcess(this.state.username, this.state.password, async (err, result) => {
+      await this.setState({ isLoading: false })
+      if (result) {
+        await Actions.Home({ type: 'reset' });
+      }
     })
 
-    setTimeout(()=>{
-      this.setState({isLoading: !this.state.isLoading})
-    },500)
+    // setTimeout(()=>{
+    //   this.setState({isLoading: !this.state.isLoading})
+    // },500)
   }
 
   render() {
@@ -39,14 +42,16 @@ class Login extends Component {
         />
         <Logo />
         <InputWithButton
-          onChangeText={(text)=>this.setState({username: text})}
+          onChangeText={(text) => this.setState({ username: text })}
           placeholder="Email address"
-          />
+          autoCapitalize='none'
+        />
         <InputWithButton
-          onChangeText={(text)=>this.setState({password: text})}
+          onChangeText={(text) => this.setState({ password: text })}
           placeholder="Enter password"
           secureTextEntry={true}
-          />
+          autoCapitalize='none'
+        />
         <Buttons onPress={() => this.LoginHandler()}>
           Log in
         </Buttons>

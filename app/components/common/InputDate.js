@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import ModalDatePicker from 'react-native-datepicker-modal'
 import * as Common from './index'
 
-export default class InputDate extends Component{
-  render(){
-    return(
+export default class InputDate extends Component {
+  render() {
+    return (
       <ModalDatePicker
         style={[style.containerDatePicker]}
         startDate={new Date()}
         minDate={new Date()}
-        onError={()=>Common.getNotify("","Error loading, please try again")}
+        onError={() => Common.getNotify("", "Error loading, please try again")}
         renderDate={({ year, month, day, date }) => {
           if (!date) {
             return <Common.Texti fontColor={this.props.color}>{this.props.placeholder}</Common.Texti>
@@ -17,7 +17,7 @@ export default class InputDate extends Component{
           const dateStr = `${day}-${month}-${year}`
           return <Common.Texti fontColor={this.props.color} >{dateStr}</Common.Texti>
         }}
-        onDateChanged={({year, month, day, date}) => this.props.onChangeDate(`${day}-${month}-${year}`)}
+        onDateChanged={({ year, month, day, date }) => this.props.onChangeDate(`${day}-${month}-${year}`)}
       />
     )
   }

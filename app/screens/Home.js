@@ -6,23 +6,42 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator,
-  ScrollView
+  ActivityIndicator
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
-import { Text, Divider } from '../common';
+import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
 
 const { width, height } = Dimensions.get('window');
 
 class ClinicList extends Component {
+
+  async getClinicMap(clinic_type_id) {
+    // console.warn('clinic_type_id', clinic_type_id);
+    Core.GetClinicMapList(clinic_type_id, (error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      // this.setState({
+      //   Balance: data.balance,
+      //   InNetwork_Credit_spent: data.in_network_credits_spent,
+      //   Eclaim_Credit_spent: data.e_claim_credits_spent,
+      //   currency: result.data.currency_symbol
+      // });
+    });
+  }
+
   render() {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+        }
+      >
         <View style={styles.gridBox}>
           <Image
             style={{
@@ -44,139 +63,14 @@ class ClinicList extends Component {
   }
 }
 
-class SearchResult extends Component {
-
-  render(){
-    const arr = this.props.searchdata
-    const arry = []
-
-    return(
-      <ScrollView
-        showHorizontalScrollIndicator={false}
-        showVerticalScrollIndicator={false}
-        >
-        <View style={{padding: 10}}>
-          {Object.entries(this.props.searchdata).map(([key,v])=>{
-              if ((key !== 'clinics') || (key !== 'doctors')) {
-                if (Array.isArray(v.data) && (v.data.length > 0)) {
-                  return <View >
-                    {v.data.map((ke, va)=>{
-                      return <View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                          <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20}}>{ke.name}</Text>
-                          <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{color: '#cccccc', letterSpacing: 3}}>{key.toUpperCase()}</Text>
-                        </View>
-                        <View
-                          style={{
-                            borderBottomColor: '#cccccc',
-                            borderBottomWidth: 0.8,
-                            marginTop: 15,
-                            marginBottom: 15,
-                            marginRight: -15
-                          }}
-                        />
-                      </View>
-                    })}
-
-                  </View>
-                }
-              }
-
-
-          })}
-
-          {Object.entries(this.props.searchdata).map(([key,v])=>{
-            if ((key == 'clinics') || (key == 'doctors')) {
-              if (Array.isArray(v) && (v.length > 0)) {
-                return <View >
-                  {v.map((ke, va)=>{
-                    return <View>
-                      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20}}>{ke.name}</Text>
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{color: '#cccccc', letterSpacing: 3}}>{key.toUpperCase()}</Text>
-                      </View>
-                      <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{color: '#cccccc', letterSpacing: 3}}>{ke.address}</Text>
-                      {(ke.open_status == 0) ? (
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{color: 'red', letterSpacing: 1}}>
-                          closed
-                        </Text>
-                      ) : (
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{color: 'green'}}>
-                          open
-                        </Text>
-                      )}
-                      <View
-                        style={{
-                          borderBottomColor: '#cccccc',
-                          borderBottomWidth: 0.8,
-                          marginTop: 15,
-                          marginBottom: 15,
-                          marginRight: -15
-                        }}
-                      />
-                    </View>
-                  })}
-                </View>
-              }
-            }
-          })}
-        </View>
-      </ScrollView>
-    )
-  }
-}
-
-class ResultList extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, flexDirection: 'column' }}>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between'
-        }}>
-          <Common.Texti
-            fontColor={"black"}
-          >
-            {this.props.title}
-          </Common.Texti>
-          <Common.Texti
-            fontColor={"black"}
-          >
-            {this.props.type}
-          </Common.Texti>
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Common.Texti
-            >
-            {this.props.address}
-          </Common.Texti>
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Common.Texti
-            fontColor={(this.props.isOpen == 0) ? "red" : "green"}
-          >
-            {(this.props.isOpen == 0) ? "Closed" : "Open"}
-          </Common.Texti>
-        </View>
-      </View>
-    )
-  }
-}
-
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: false,
-      searchdata: false,
-      isLoadingSearch: false
+      data: false
     }
-
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
-    this.onUpdateSearch = this.onUpdateSearch.bind(this)
-    this.isLoadingSearch = this.isLoadingSearch.bind(this)
-    this.clearSearch = this.clearSearch.bind(this)
   }
 
   closeDrawer() {
@@ -194,17 +88,22 @@ class Home extends Component {
   }
 
   async getClinicType() {
-    await Core.GetClinicType((err, result) => {
+    await Core.GetClinicType(async (err, result) => {
       if (result) {
-        this.setState({
+        await this.setState({
           data: result.data.clinic_types,
         })
       }
     })
   }
 
-  componentDidMount() {
-    this.getClinicType()
+  async componentWillMount() {
+    await Core.GetLocation();
+  }
+
+  async componentDidMount() {
+    console.warn('Home is mounted');
+    await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -217,31 +116,6 @@ class Home extends Component {
       image={item.clinic_type_image_url}
     />
   );
-
-  onUpdateSearch(result){
-    this.setState({searchdata: result})
-  }
-
-  isLoadingSearch(state){
-    console.warn("state "+state);
-    switch (state) {
-      case 'true':
-        this.setState({
-          isLoadingSearch: true
-        })
-        break;
-      case 'false':
-        this.setState({
-          isLoadingSearch: false
-        })
-        break;
-      default:
-    }
-  }
-
-  clearSearch(state){
-    this.setState({searchdata: false})
-  }
 
   render() {
     return (
@@ -261,47 +135,26 @@ class Home extends Component {
             drawerAction={this.drawerActionCallback}
             leftNav={true}
           />
-          <HomeContent
-            onUpdateSearch={this.onUpdateSearch}
-            isLoadingSearch={this.isLoadingSearch}
-            clearProcess={this.clearSearch}
-          />
+          <HomeContent />
           <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
-            {(!this.state.data || this.state.isLoadingSearch) ? (
-              <View
-                style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+            <View
+              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+            >
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center' }}
               >
-                <ActivityIndicator size="large" color="#0392cf" />
-              </View>
-            ) : (this.state.searchdata) ? (
-              <View>
+                Benefits Category
+              </Text>
+            </View>
+            <View style={styles.contain}>
+              {(!this.state.data) ? (
                 <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+                  style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
                 >
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Search Result
-                  </Text>
+                  <ActivityIndicator size="large" color="#0392cf" />
                 </View>
-                <SearchResult
-                  searchdata={this.state.searchdata}
-                />
-              </View>
-            ) : (
-              <View style={{flex:1}}>
-                <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start' }}
-                >
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
-                  >
-                    Benefits Category
-                  </Text>
-                </View>
-                <View style={styles.contain}>
+              ) : (
                   <FlatList
                     data={this.state.data}
                     extraData={this.state}
@@ -310,9 +163,8 @@ class Home extends Component {
                     horizontal={false}
                     numColumns={3}
                   />
-                </View>
-              </View>
-            )}
+                )}
+            </View>
           </View>
         </Container>
       </Drawer>

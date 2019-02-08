@@ -9,6 +9,8 @@ import {
   Text,
 } from 'react-native';
 
+import Toast from 'react-native-simple-toast';
+
 export function getNotify(title, message, action, cancelable) {
   Platform.OS == 'ios'
     ? notifIos(title, message, action, cancelable)
@@ -38,7 +40,7 @@ export function getModal() {
           borderColor: 'rgba(0, 0, 0, 0.1)',
         }}
       >
-        <Text>Empat Kali</Text>
+        <Text>Mednefits</Text>
         <Text>Progress Download: {progress}</Text>
       </View>
     </Modal>
@@ -46,7 +48,8 @@ export function getModal() {
 }
 
 export function notifIos(title, message, action, cancelable) {
-  alerty(title, message, action, cancelable);
+	Toast.show(message, Toast.SHORT);
+  // alerty(title, message, action, cancelable);
 }
 
 export function notifDroid(message) {

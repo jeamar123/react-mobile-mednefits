@@ -6,20 +6,20 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 
 export default class InputText extends Component {
 
-  render(){
-    return(
+  render() {
+    return (
       <View
         {...this.props}
         style={[{
           flexDirection: 'row',
           justifyContent: (this.props.justifyContent) ? this.props.justifyContent : 'center',
           alignItems: (this.props.alignItems) ? this.props.alignItems : 'center',
-        },this.props.style]}
-        >
+        }, this.props.style]}
+      >
         {(this.props.type == 'currency') ? (
           <Common.Texti
             fontColor={"#0392cf"}
-            >
+          >
             S$
           </Common.Texti>
         ) : (this.props.type == 'search') ? (
@@ -33,8 +33,8 @@ export default class InputText extends Component {
             }}
           />
         ) : (
-          <View />
-        )}
+              <View />
+            )}
         <TextInput
           {...this.props}
           value={this.props.value}
@@ -42,13 +42,13 @@ export default class InputText extends Component {
           placeholder={this.props.placeholder}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
-          },this.props.placeholderStyle]}
-          style={[style.inputStyle, {color: (this.props.style.color) ? this.props.style.color : '#0392cf'}]}
+          }, this.props.placeholderStyle]}
+          style={style.inputStyle}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
-            onPress={()=>this.props.isClearSearchChange(true)}
-            style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+            onPress={() => this.props.isClearSearchChange(true)}
+            style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
             <Icons
               name="remove"
               style={{
@@ -60,8 +60,8 @@ export default class InputText extends Component {
             />
           </TouchableOpacity>
         ) : (
-          <View />
-        )}
+            <View />
+          )}
       </View>
     )
   }

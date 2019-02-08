@@ -4,6 +4,7 @@
 */
 
 export const MAIN                           = 'http://staging.medicloud.sg/v2';
+// export const MAIN                           = 'http://medicloud.local/v2';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
 
@@ -39,6 +40,7 @@ export const CLINIC_SET_FAVOURITE           = CLINIC + '/favourite';
 export const CLINIC_GET_FAVOURITE           = CLINIC + '/get_favourite_clinics';
 export const CLINIC_SEND_PAYMENT            = CLINIC + '/send_payment';
 export const CLINIC_PAYMENT_DIRECT          = CLINIC + '/payment_direct';
+export const CLINIC_PAGE_NEARBY             = CLINIC + '/paginate_nearby';
 
 /* USER VARIABLE */
 export const USER                           = MAIN+"/user"
@@ -55,6 +57,9 @@ export const USER_MEMBERLIST                = USER+"/member_lists"
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN                   = "access_token"
+export const LATITUDE                       = 'latitude'
+export const LONGITUDE                      = 'longitude'
+
 
 /* AWS VARIABLE */
 export const AWS_KEY                        = "AKIAI7NRA4S54ZAGYH5A"

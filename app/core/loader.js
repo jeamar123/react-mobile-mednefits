@@ -5,22 +5,26 @@ import Texti from "../components/common/Texti"
 const { height, width } = Dimensions.get('window');
 
 const Loader = ({ isVisible }) => {
-  return (
-    <View>
-      <Modal
-        isVisible={isVisible}
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <ActivityIndicator color="#fff" size="large" />
-        <Texti
-          fontColor="#FFFFFF"
-          >Just a sec...</Texti>
-      </Modal>
-    </View>
-  );
+	if(isVisible) {
+    return (
+      <View>
+        <Modal
+          isVisible={isVisible}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+            >Just a sec...</Texti>
+        </Modal>
+      </View>
+    );
+	} else {
+		return null;
+	}
 };
 
 export { Loader };
