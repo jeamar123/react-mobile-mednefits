@@ -117,6 +117,7 @@ class RouterComponent extends Component {
             <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
             <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Paycash" component={Paycash} hideNavBar />
+            <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
 
           </Stack>
         </Router>
