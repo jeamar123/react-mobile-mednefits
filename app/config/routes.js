@@ -26,6 +26,23 @@ import Balance from '../screens/Balance';
 import SelectService from '../screens/SelectService';
 import Homes from '../screens/Home';
 import Splash from '../screens/Splash';
+import Barcode from '../screens/Barcode';
+import GeneralPractitioner from '../screens/GeneralPractitioner';
+import ECardUser from '../screens/ECardUser';
+import SwitchUser from '../screens/SwitchUser';
+import HomeStatic from '../screens/HomeStatic';
+import ECardUserStatic from '../screens/ECardUserStatic';
+import ManageProfile from '../screens/manageProfile';
+import Profile from '../screens/Profile';
+import Favourites from '../screens/Favourites';
+import DetailEclaimTransaction from '../screens/DetailEClaim_Transaction';
+import Updatepassword from '../screens/Updatepassword';
+import Camera from '../screens/Camera'
+import Search from '../screens/Search'
+import DetailClinic from '../screens/Detailclinic';
+import Paycash from '../screens/PayCash';
+import NearbyClinic from '../screens/NearbyClinic'
+console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -33,14 +50,14 @@ class RouterComponent extends Component {
       <Router>
         <Stack key="root">
           <Scene key="Splash" component={Splash} hideNavBar />
-          <Scene key="Login" component={Logins} hideNavBar initial/>
-          <Scene key="forgot" component={Forgot} hideNavBar />
-          <Scene key="home" component={Homes} hideNavBar />
+          <Scene key="Login" component={Logins} hideNavBar />
+          <Scene key="Forgot" component={Forgot} hideNavBar />
+          <Scene key="Home" component={Homes} hideNavBar />
           <Scene key="SelectService" component={SelectService} hideNavBar />
           <Scene key="Balance" component={Balance} hideNavBar />
           <Scene key="Summary" component={Summary} hideNavBar />
           <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
-          <Scene key="ScanPay" component={ScanPay} hideNavBar />
+          <Scene key="PayScan" component={ScanPay} hideNavBar />
           <Scene
             key="HistoryTransaction"
             component={HistoryTransaction}
@@ -67,6 +84,7 @@ class RouterComponent extends Component {
             key="ReceiptVerification"
             component={ReceiptVerification}
             hideNavBar
+
           />
           <Scene
             key="InNetworkBenefits"
@@ -76,6 +94,26 @@ class RouterComponent extends Component {
           <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
           <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
           <Scene key="EmailSend" component={EmailSend} hideNavBar />
+          <Scene key="Barcode" component={Barcode} hideNavBar />
+          <Scene
+            key="GeneralPractitioner"
+            component={GeneralPractitioner}
+            hideNavBar
+          />
+          <Scene key="ECardUser" component={ECardUser} hideNavBar />
+          <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
+          <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
+          <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
+          <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
+          <Scene key="Profile" component={Profile} hideNavBar />
+          <Scene key="Favourites" component={Favourites} hideNavBar />
+          <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
+          <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
+          <Scene key="Camera" component={Camera} hideNavBar />
+          <Scene key="Search" component={Search} hideNavBar />
+          <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
+          <Scene key="Paycash" component={Paycash} hideNavBar />
+          <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
         </Stack>
       </Router>
     );

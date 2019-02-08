@@ -21,10 +21,9 @@ export default EStyleSheet.create({
     marginRight: '7%',
   },
   textHeader: {
-    fontFamily: 'helvetica',
+    fontFamily: 'HelveticaNeue-Bold',
     textAlign: 'center', // <-- the magic
-    fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 26,
   },
   text: {
     fontFamily: 'helvetica',

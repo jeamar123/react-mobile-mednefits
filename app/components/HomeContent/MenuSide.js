@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image,ImageBackground, TouchableOpacity } from 'react-native';
 import {
   Content,
   ListItem,
@@ -15,7 +15,10 @@ import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 
 const MenuSide = () => (
-  <View style={styles.DrawerContain}>
+  <ImageBackground
+    source={require('../../../assets/andriod_splash.png')}
+    style={styles.DrawerContain}
+    >
     <Content padder>
       <View style={{ marginTop: 50 }} />
       <Body>
@@ -24,156 +27,198 @@ const MenuSide = () => (
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: 15,
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
           }}
           source={require('../../../assets/apps/LogoMednefits.png')}
         />
       </Body>
-      <View style={{ marginTop: 20 }} />
+      <View style={{ marginTop: 10 }} />
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
-              Actions.home({
+              Actions.Home({
                 type: 'reset',
               })
             }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
           >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/home.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Home</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Home({
+                type: 'reset',
+              })
+            }
+          >
+            <Text style={styles.text}>Home</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
-              Actions.SettingWallet({
+              Actions.Balance({
                 type: 'reset',
               })
             }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
           >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/wallet.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Wallet</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Balance({
+                type: 'reset',
+              })
+            }
+          >
+            <Text style={styles.text}>Wallet</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
-              Actions.DetailEclaim({
+              Actions.EclaimSubmit({
                 type: 'reset',
               })
             }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
           >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/receipt.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>E-Claim</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.EclaimSubmit()
+            }
+          >
+            <Text style={styles.text}>E-Claim</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button
+          <TouchableOpacity
             onPress={() =>
-              Actions.HistoryTransaction({
-                type: 'reset',
-              })
+              Actions.HistoryTransaction()
             }
-            style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}
           >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/history.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>History</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.HistoryTransaction()
+            }
+          >
+            <Text style={styles.text}>History</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Favourites()
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/favorite.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Favourites</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Favourites()
+            }
+          >
+            <Text style={styles.text}>Favourites</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }}>
         <Left>
-          <Button style={{ backgroundColor: 'rgba(52, 52, 52, 0.0)' }}>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Profile()
+            }
+          >
             <Image
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               }}
               source={require('../../../assets/apps/user.png')}
             />
-          </Button>
+          </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <Text style={styles.text}>Profile</Text>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.Profile()
+            }
+          >
+            <Text style={styles.text}>Profile</Text>
+          </TouchableOpacity>
         </Body>
       </ListItem>
     </Content>
-  </View>
+  </ImageBackground>
 );
 
 export default MenuSide;

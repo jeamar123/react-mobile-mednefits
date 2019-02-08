@@ -1,66 +1,106 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Dimensions } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Left,
-  Right,
-  Button,
-  Title,
-  Text,
-  Body,
-} from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
+import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
+import { Container, Content, Text } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import { Buttons } from '../components/common';
+import Navbar from '../components/common/Navbar';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      services: [],
+      clinic: false
+    }
+
+    this.selectedService = this.selectedService.bind(this)
+  }
+
+  remove(array, element) {
+    for( var i = 0; i < array.length-1; i++){
+       if ( array[i] === element) {
+         array.splice(i, 1);
+       }
+    }
+
+    return array
+  }
+
+  sum(input){
+
+    if (toString.call(input) !== "[object Array]")
+      return false;
+
+      var total =  0;
+      for(var i=0;i<input.length;i++)
+      {
+        if(isNaN(input[i])){
+        continue;
+         }
+          total += Number(input[i]);
+      }
+
+      return total;
+  }
+
+  selectedService(data){
+    let serviceId = "services-"+data.procedureid
+
+    serviceArr  = []
+    serviceArr2 = this.state.services
+    service     = [...serviceArr, ...serviceArr2]
+
+    isExist = service.includes(data.procedureid);
+
+    if (!isExist) {
+      this.refs[serviceId].setNativeProps({
+        borderColor: '#0392CF',
+        borderWidth: 1
+      });
+
+      service.push(data.procedureid)
+
+    } else {
+      this.refs[serviceId].setNativeProps({
+        borderColor: '#FFFFFF',
+        borderWidth: 1
+      });
+
+      service.splice( service.indexOf(data.procedureid), 1 )
+    }
+
+    this.setState({ services: service })
+  }
+
   render() {
     return (
-      <Container style={{ backgroundColor: '#EEEEEE' }}>
+      <Container style={{ backgroundColor: '#eeeeee' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Header style={{ backgroundColor: '#EEEEEE' }}>
-          <Left>
-            <Button transparent>
-              <Icons
-                name="angle-left"
-                style={{ color: '#000', fontSize: 32 }}
-              />
-              <Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}>
-                Home
-              </Text>
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{ color: '#000' }}>Select Service/s</Title>
-            <Text style={{ color: '#000' }}>Scan & Pay</Text>
-          </Body>
-          <Right />
-        </Header>
+        <Navbar
+          leftNav="back-home"
+          title="Select Service/s"
+          subtitle="Scan & Pay"
+        />
         <Content padder>
           <View style={styles.contain}>
-            <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Consultation</Text>
-            </View>
-            <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>
-                Scaling & Polishing
-              </Text>
-            </View>
-            <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Fillings</Text>
-            </View>
-            <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>Extraction</Text>
-            </View>
-            <View style={styles.gridBox}>
-              <Text style={{ fontFamily: 'helvetica' }}>X-Ray</Text>
-            </View>
+            {this.props.services.map((data, key)=>(
+              <TouchableOpacity
+                key={key}
+                ref={"services-"+data.procedureid}
+                style={styles.gridBox} onPress={()=>this.selectedService(data)}>
+                <Text style={{ fontFamily: 'HelveticaNeue-Thin', textAlign: 'center', fontSize: 12 }}>
+                  {data.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
 
-          <View style={{ marginTop: 50 }} />
-          <Buttons>Proceed</Buttons>
+          <Buttons onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
+            Proceed
+          </Buttons>
         </Content>
       </Container>
     );
@@ -74,11 +114,23 @@ const styles = {
   },
   gridBox: {
     width: width / 3.9,
-    height: height / 8,
+    height: height / 7,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
+  },
+  gridBoxActive: {
+    width: width / 3.9,
+    height: height / 7,
+    backgroundColor: '#fff',
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#0392CF"
   },
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
+import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
@@ -7,11 +8,9 @@ const Buttons = ({ onPress, children }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
-    <View style={MainContainer}>
-      <TouchableOpacity onPress={onPress} style={ButtonStyle}>
-        <Text style={TextStyle}>{children}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={onPress} style={ButtonStyle}>
+      <Text style={TextStyle}>{children}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -24,16 +23,17 @@ const styles = {
   ButtonStyle: {
     paddingTop: 10,
     paddingBottom: 10,
-    width: width / 1.46,
     backgroundColor: '#0392cf',
     borderRadius: 5,
+    margin: 10,
+    alignSelf: 'center',
+    width: '75%'
   },
   TextStyle: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_LIGHT,
     color: '#fff',
     alignSelf: 'center',
     fontSize: 20,
-    fontWeight: '600',
   },
 };
 

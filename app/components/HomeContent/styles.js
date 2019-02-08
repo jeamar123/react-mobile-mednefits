@@ -1,8 +1,10 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
+import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
+import * as Config from '../../config';
 
 export default EStyleSheet.create({
   container: {
@@ -11,7 +13,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: height / 5,
+    height: height / 4,
     width: width,
     alignItems: 'center',
   },
@@ -19,7 +21,7 @@ export default EStyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 10,
+    marginTop: 10
   },
   gridBox: {
     width: width / 3.23,
@@ -29,17 +31,23 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '900',
+    fontSize: RF(2.6),
+    fontWeight: '600',
     paddingTop: 5,
     color: '#fff',
   },
+  searchtext: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
   detail: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: RF(2.2),
     color: '#fff',
   },
   DrawerContain: {
@@ -48,10 +56,9 @@ export default EStyleSheet.create({
     height: '100%',
   },
   text: {
-    fontFamily: 'helvetica',
-    fontSize: 20,
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 16,
     marginLeft: 10,
-    fontWeight: '900',
     paddingTop: 5,
     color: '#fff',
   },

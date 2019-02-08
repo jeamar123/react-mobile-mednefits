@@ -16,7 +16,7 @@ export default EStyleSheet.create({
   },
   title: {
     fontFamily: 'helvetica',
-    fontSize: 16,
+    fontSize: 14,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 20,
@@ -26,8 +26,7 @@ export default EStyleSheet.create({
     paddingLeft: 15,
     paddingBottom: 8,
     fontFamily: 'helvetica',
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 16,
     color: '#565656',
     alignItems: 'flex-end',
   },

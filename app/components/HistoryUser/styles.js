@@ -3,10 +3,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
+import * as Config from '../../config';
 
 export default EStyleSheet.create({
   sectionHeader: {
     justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#0392cf',
     height: height / 4,
     width: width,
@@ -31,11 +33,11 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignContent: 'center',
+    padding: 8
   },
   amount: {
-    fontFamily: 'helvetica',
-    fontSize: 18,
-    fontWeight: '600',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 16,
     color: '#fff',
     textAlignVertical: 'center',
     paddingTop: 10,
@@ -43,13 +45,29 @@ export default EStyleSheet.create({
     paddingLeft: '5%',
   },
   detail: {
-    fontFamily: 'helvetica',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: '#fff',
-    textAlignVertical: 'center',
+    // textAlignVertical: 'center',
     paddingTop: 15,
     paddingBottom: 15,
-    paddingRight: '5%',
+    // paddingRight: '5%',
+  },
+  in_network: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontSize: 12,
+    color: '#c6c7cd',
+    textAlignVertical: 'center',
+    // padding: 10,
+    marginRight: 20,
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 10,
+    // paddingRight: '3%',
+    // paddingLeft: '3%',
+    borderColor: '#c6c7cd',
+    borderWidth: 1,
+    borderRadius: 5
   },
 });

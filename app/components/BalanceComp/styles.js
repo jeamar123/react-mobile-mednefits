@@ -6,6 +6,21 @@ const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  wrapperTop: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  wrapperBottom: {
+    width: "100%",
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  panelBottom: {
+    width: "100%",
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -50,4 +65,8 @@ export default EStyleSheet.create({
     backgroundColor: '#626E82',
     borderRadius: 14,
   },
+  sectionTextPanel: {
+    alignItems: 'center',
+    height: '50%'
+  }
 });

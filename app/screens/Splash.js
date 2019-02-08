@@ -3,18 +3,20 @@ import { StatusBar, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
-import { InputWithButton } from '../components/TextInput';
-import { Buttons } from '../components/common';
-import { UserDetail } from '../core'
+import { ACCESS_TOKEN } from '../config/variable';
+import * as Core from '../core';
+import * as Config from '../config';
 
 class Splash extends Component {
 
-  constructor(props){
-    super(props)
-  }
-
-  componentWillMount(){
-    UserDetail()
+  async componentWillMount() {
+    setTimeout(() => {
+      Core.AppStatus()
+    }, 500);
+    await AsyncStorage.removeItem('latitude');
+    await AsyncStorage.removeItem('longitude');
+    console.log('removed latitude')
+    console.log('removed longitude')
   }
 
   render() {

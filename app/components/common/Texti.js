@@ -3,7 +3,7 @@ import { Text as RNText } from 'react-native';
 
 export default class Text extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -13,7 +13,7 @@ export default class Text extends Component {
     }
   }
 
-  isHeader(){
+  isHeader() {
     if (this.props.h1) {
       this.setState({
         fontSize: 42
@@ -41,15 +41,15 @@ export default class Text extends Component {
     }
   }
 
-  setFontFamily(){
-    this.setState({fontFamily: this.props.fontFamily, fontSize: this.props.fontSize})
+  setFontFamily() {
+    this.setState({ fontFamily: this.props.fontFamily, fontSize: this.props.fontSize })
   }
 
-  setFontColor(){
-    this.setState({fontColor: this.props.color})
+  setFontColor() {
+    this.setState({ fontColor: this.props.color })
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.isHeader()
     this.setFontFamily()
     this.setFontColor()
@@ -61,12 +61,14 @@ export default class Text extends Component {
         {...this.props}
         allowFontScaling={false}
         style={[this.props.style, {
-          color: (this.state.fontColor) ? this.state.fontColor : "#fff",
-          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeueLTStd-Lt",
+          color: (this.props.fontColor) ? this.props.fontColor : "black",
+          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : "HelveticaNeue-Reguler",
           fontSize: this.state.fontSize,
           marginBottom: 5,
           marginTop: 5
         }]}
+        ellipsizeMode={"tail"}
+        numberOfLines={(!this.props.numberOfLines) ? 10 : this.props.numberOfLines}
       >
         {this.props.children}
       </RNText>
