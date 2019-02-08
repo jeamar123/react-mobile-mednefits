@@ -9,10 +9,14 @@ import * as Config from '../config';
 
 class Splash extends Component {
 
-  componentWillMount() {
+  async componentWillMount() {
     setTimeout(() => {
       Core.AppStatus()
     }, 500);
+    await AsyncStorage.removeItem('latitude');
+    await AsyncStorage.removeItem('longitude');
+    console.log('removed latitude')
+    console.log('removed longitude')
   }
 
   render() {

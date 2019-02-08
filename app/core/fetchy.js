@@ -620,7 +620,7 @@
   const chckLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
   if (chckLocationPermission === PermissionsAndroid.RESULTS.GRANTED) {
   	console.log('granted');
-  	await this.enableLocationDevice( );
+  	await enableLocationDevice( );
   	return true;
   } else {
   	try {
@@ -662,9 +662,6 @@ export async function GetLocation() {
     		value: JSON.stringify(position.coords.longitude)
     	}
 
-    	console.log('latitude', latitude)
-    	console.log('longitude', longitude)
-
     	await Core.SetDataLocal(latitude, (err, result) => {
     		if (result) {
           // console.warn("Set a new latitude");
@@ -677,8 +674,13 @@ export async function GetLocation() {
           // console.warn("Set a new longitude");
         }
       })
+
+      return 
     },
-    (error) => Core.getNotify("", error.message),
+    function(error) {
+      Core.getNotify("", error.message);
+      // requestLocationPermission()
+    },
     { enableHighAccuracy: false, timeout: 20000, maximumAge: 5000 },
     );
 }
@@ -708,31 +710,37 @@ export async function GetLocation() {
 // }
 
 export async function GetClinicMapList(clinic_type_id, callback) {
-	try {
-		latitude = await Core.GetDataLocalReturn(Config.LATITUDE)
-		longitude = await Core.GetDataLocalReturn(Config.LONGITUDE)
-    
-    // getNotify("", "latitude: " + latitude)
-    // getNotify("", "longitude: " + longitude)
-		console.log('list clinic_type_id', clinic_type_id)
-		console.log(Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1");
-		await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
-			params = {
-				url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1",
-				method: 'GET',
-				header: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: result,
-				},
-			};
-			await fetching(params, async result => {
-				console.log(result);
-				await callback('', result);
-			});
-		});
-	} catch (e) {
-		console.warn(e.message);
-		getNotify('', 'Failed get data, try again');
-	}
+	await enableLocationDevice( );
+	// try {
+		latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+		longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+
+		if(!latitude || !longitude) {
+			getNotify('', 'Waiting to get device location');
+			return false;
+		} else {
+      console.log('latitude', latitude)
+    	console.log('longitude', longitude)
+		  console.log('list clinic_type_id', clinic_type_id)
+		  console.log(Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1");
+		  await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+			  params = {
+				  url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type="+ clinic_type_id + "&page=1",
+				  method: 'GET',
+				  header: {
+					  Accept: 'application/json',
+					  'Content-Type': 'application/json',
+					  Authorization: result,
+				  },
+			  };
+			  await fetching(params, async result => {
+				  console.log(result);
+				  await callback('', result);
+			  });
+		  });
+		}
+	// } catch (e) {
+	// 	console.warn(e);
+	// 	getNotify('', 'Failed get data, try again');
+	// }
 }

@@ -33,6 +33,10 @@ export function GetDataLocalReturn(key) {
   })
 }
 
+export async function GetDataLocalReturnNew(key) {
+  return await AsyncStorage.getItem(key);
+}
+
 export function SetDataLocal(params, callback) {
   try {
     AsyncStorage.setItem(params.key, params.value);

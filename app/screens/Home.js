@@ -21,7 +21,7 @@ const { width, height } = Dimensions.get('window');
 class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
-    console.log('clinic_type_id', clinic_type_id);
+    // console.log('clinic_type_id', clinic_type_id);
     Core.GetClinicMapList(clinic_type_id, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
