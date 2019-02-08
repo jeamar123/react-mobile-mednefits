@@ -137,6 +137,7 @@ class HistoryTransaction extends Component {
 
     return (
       <TabHeading
+        
         style={{
           backgroundColor: '#7bd3f7',
           justifyContent: 'center',
@@ -337,7 +338,7 @@ class HistoryTransaction extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" />
+        <Navbar leftNav="previous" />
         <DetailClinic
           clinicid={this.state.resultData.clinic_id}
           clinicimage={this.state.resultData.image_url}

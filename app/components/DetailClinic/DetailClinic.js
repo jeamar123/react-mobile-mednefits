@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Image, Linking, TouchableOpacity } from 'react-native';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import * as Core from '../../core';
+import * as Config from '../../config';
 import { ButtonCall } from '../common';
 
 class HistoryClaim extends Component {
@@ -32,6 +34,44 @@ class HistoryClaim extends Component {
         Full_name: data.profile.full_name,
       });
     });
+  }
+
+  renderOpenStatus(status) {
+  	if(status == 1) {
+      return (
+        <Text style={{ marginTop: 5 }}>
+          <Icons
+            name="circle"
+            style={{ color: '#51e500', fontSize: 12, marginRight: 15 }}
+          />
+          {' '}
+          <Text style={{
+            fontFamily: Config.FONT_FAMILY_LIGHT,
+            fontSize: 10,
+            marginTop: 5,
+            marginLeft: 12,
+            color: 'black',
+          }}>Open</Text>
+        </Text>
+      )
+  	} else {
+      return (
+         <Text style={{ marginTop: 5 }}>
+            <Icons
+              name="circle"
+              style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
+            />
+            {' '}
+            <Text style={{
+              fontFamily: Config.FONT_FAMILY_LIGHT,
+              fontSize: 12,
+              marginTop: 5,
+              marginLeft: 10,
+              color: 'black',
+            }}>Closed</Text>
+          </Text>
+      )
+  	}
   }
 
   AddFavClinic() {
@@ -70,15 +110,7 @@ class HistoryClaim extends Component {
                 <Text numberOfLines={2} style={styles.details}>
                   {this.props.Address}
                 </Text>
-                {this.props.StatusOpen === 1 ? (
-                  <Text numberOfLines={1} style={styles.statusCLinic} >
-                    OPEN
-                </Text>
-                ) : (
-                    <Text numberOfLines={1} style={styles.statusCLinic} >
-                      CLOSED
-                </Text>
-                  )}
+                {this.renderOpenStatus(this.props.StatusOpen)}
               </View>
               <View />
             </View>

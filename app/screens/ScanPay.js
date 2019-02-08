@@ -34,7 +34,7 @@ class ScanPay extends Component {
                     alignItems: 'center',
                   }}
                 >
-                  <Image source={require('../../assets/apps/byCredit.png')} />
+                  <Image style={{ width: 70, height: 70 }} source={require('../../assets/apps/byCredit.png')} />
                   <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
                     Pay by Benefits Credit
                   </Text>
@@ -54,7 +54,7 @@ class ScanPay extends Component {
                     alignItems: 'center',
                   }}
                 >
-                  <Image source={require('../../assets/apps/byCash.png')} />
+                  <Image style={{ width: 70, height: 70 }} source={require('../../assets/apps/byCash.png')} />
                   <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
                     Pay by Cash
                   </Text>

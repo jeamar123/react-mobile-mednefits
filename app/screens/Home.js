@@ -22,24 +22,28 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     // console.warn('clinic_type_id', clinic_type_id);
-    Core.GetClinicMapList(clinic_type_id, (error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      // this.setState({
-      //   Balance: data.balance,
-      //   InNetwork_Credit_spent: data.in_network_credits_spent,
-      //   Eclaim_Credit_spent: data.e_claim_credits_spent,
-      //   currency: result.data.currency_symbol
-      // });
+    Core.checkLocation((error, result) => {
+    	if(result) {
+        Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name });
+    	} 
+    	// else {
+     //    data = await
+     //      typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+    		
+    	// }
+      console.log('error', error)
+      console.log('result', result);
+      
+      
     });
   }
 
   render() {
     return (
       <TouchableOpacity
+        key={this.props.id}
         onPress={() =>
-          Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+          this.getClinicMap(this.props.id)
         }
       >
         <View style={styles.gridBox}>

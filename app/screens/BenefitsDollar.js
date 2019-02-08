@@ -81,7 +81,7 @@ class BenefitsDollar extends Component {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View
             style={{
-              backgroundColor: '#626E82',
+              backgroundColor: '#518cb0',
               height: height / 9,
               width: width,
               alignItems: 'center',
