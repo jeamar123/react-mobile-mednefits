@@ -20,16 +20,19 @@ class BenefitsDollar extends Component {
       currency: false,
       isLoading: false,
       Balance: '0',
+      placeholder: null
     };
   }
 
   componentDidMount() {
     Core.GetClinicDetails(this.props.clinicid, (err, result) => {
+    	console.log(result)
       this.setState({
         clinic_name: result.data.name,
         clinic_image: result.data.image_url,
         currency: result.data.currency_symbol,
         Balance: result.data.current_balance,
+        placeholder: result.data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
       });
     });
 
@@ -161,7 +164,7 @@ class BenefitsDollar extends Component {
                   </Text>
                   <InputWithButton
                     keyboardType="numeric"
-                    placeholder="0.00"
+                    placeholder={this.state.placeholder}
                     value={this.state.amount}
                     onChangeText={number => this.setState({ amount: number })}
                   />

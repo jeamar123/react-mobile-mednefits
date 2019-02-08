@@ -21,5 +21,6 @@ export default EStyleSheet.create({
     fontSize: 18,
     borderBottomWidth: 1,
     borderBottomColor: '#dbdbdb',
+    textAlign: 'right'
   },
 });

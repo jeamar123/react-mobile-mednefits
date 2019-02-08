@@ -166,6 +166,7 @@ class HistoryTransaction extends Component {
   renderProcedure() {
     return this.state.procedure.map(Data => (
       <View
+        key={Data.procedureid}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -219,6 +220,7 @@ class HistoryTransaction extends Component {
   renderDoctors() {
     return this.state.DoctorList.map(ListData => (
       <View
+        key={ListData.doctor_id}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -265,6 +267,7 @@ class HistoryTransaction extends Component {
   renderInformation() {
     return this.state.openClinic.map(Data => (
       <View
+        key={Data.timeid}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -345,9 +348,10 @@ class HistoryTransaction extends Component {
           clinicname={this.state.resultData.name}
           Address={this.state.resultData.address}
           CallPhon={this.state.resultData.telephone}
+          favourite={this.state.resultData.favourite}
         />
         <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'transparant' }}
+          tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
           tabBarBackgroundColor="#7bd3f7"
         >
           <Tab

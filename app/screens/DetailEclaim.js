@@ -46,8 +46,8 @@ class DetailEclaim extends Component {
       }
 
       Core.SendEClaim(eclaimFile, (err, result)=>{
+        Core.getNotify("",result.message)
         if (result.status) {
-          Core.getNotify("",result.message)
           Actions.ThanksEclaim({type: 'reset'})
         }
 

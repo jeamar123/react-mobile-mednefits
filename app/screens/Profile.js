@@ -97,9 +97,6 @@ class Profile extends Component {
               action={() => Actions.Updatepassword()}
               title="Update Password"
             />
-            <RenderList
-              title="Disable Profile"
-            />
             <View style={{ marginTop: 50 }}>
               <RenderList
                 action={this.showActionSheet}

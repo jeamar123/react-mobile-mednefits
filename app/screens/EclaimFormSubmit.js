@@ -24,7 +24,7 @@ class EclaimFormSubmit extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back"
+          leftNav="back-eclaim"
           title="E-Claim"
           subtitle="File e-claim"
           rightNav="next"

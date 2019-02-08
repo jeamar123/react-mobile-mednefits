@@ -59,13 +59,10 @@ export default EStyleSheet.create({
     fontSize: 12,
     color: '#c6c7cd',
     textAlignVertical: 'center',
-    // padding: 10,
     marginRight: 20,
     marginTop: 5,
     marginBottom: 5,
     padding: 10,
-    // paddingRight: '3%',
-    // paddingLeft: '3%',
     borderColor: '#c6c7cd',
     borderWidth: 1,
     borderRadius: 5
