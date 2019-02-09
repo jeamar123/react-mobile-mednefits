@@ -45,38 +45,44 @@ class MedicalHistory extends Component {
     }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     this.getFavorites_Clinic();
-    this.GetMedicalHistory();
+    await Core.UserDetail(async (error, result) => {
+      // console.log(error);
+      // console.log(result);
+      if (result.status) {
+        data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await this.setState({
+          Full_name: data.profile.full_name,
+          nirc_number: data.profile.nric,
+          email: data.profile.email,
+          PhoneNumber: data.profile.mobile_phone,
+          Dob: data.profile.dob,
+          Weight: data.profile.weight,
+          Height: data.profile.height,
+          bmi: data.profile.bmi,
+          blodeType: data.profile.blood_type,
+          photo_url: data.profile.photo_url,
+          history: data.history,
+          allergies: data.allergies,
+          medCondition: data.conditions,
+          medication: data.medications
+        });
+      } else {
+        setTimeout(function () {
+          Actions.pop();
+          Core.getNotifyLong('', 'Sorry, no Data here ');
+        }, 20000);
+      }
+      // console.log(data);
+    });
   }
+
   getFavorites_Clinic() {
     Core.GetFavouritesClinic((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ resultData: data, data: true });
-    });
-  }
-  GetMedicalHistory() {
-    Core.UserDetail((error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
-        Full_name: data.profile.full_name,
-        nirc_number: data.profile.nric,
-        email: data.profile.email,
-        PhoneNumber: data.profile.mobile_phone,
-        Dob: data.profile.dob,
-        Weight: data.profile.weight,
-        Height: data.profile.height,
-        bmi: data.profile.bmi,
-        blodeType: data.profile.blood_type,
-        photo_url: data.profile.photo_url,
-        history: data.history,
-        allergies: data.allergies,
-        medCondition: data.conditions,
-        medication: data.medications
-      });
     });
   }
 
