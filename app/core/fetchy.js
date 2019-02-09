@@ -657,7 +657,7 @@ export async function GetLocation() {
   console.warn('permissionLocation', permissionLocation);
   await navigator.geolocation.getCurrentPosition(
     async (position) => {
-      // console.warn('position', position);
+      console.warn('position', position);
       latitude = await {
         key: Config.LATITUDE,
         value: JSON.stringify(position.coords.latitude)
@@ -687,7 +687,7 @@ export async function GetLocation() {
       Core.getNotify("", error.message);
       // requestLocationPermission()
     },
-    { enableHighAccuracy: true, timeout: 100000, maximumAge: 5000 },
+    { enableHighAccuracy: true, timeout: 2000 },
   );
 }
 
@@ -715,8 +715,21 @@ export async function GetLocation() {
 //   }
 // }
 
+export async function checkLocationFirst(clinic_type_id, callback) {
+  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+
+  if (!latitude || !longitude) {
+    getNotify('', 'Waiting to get device location');
+    return callback(false);
+  } else {
+    return callback('', true);
+  }
+}
+
+
 export async function GetClinicMapList(clinic_type_id, callback) {
-  await enableLocationDevice();
+  await GetLocation();
   // try {
   latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)

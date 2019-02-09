@@ -44,7 +44,7 @@ import DetailClinic from '../screens/Detailclinic';
 import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic';
 import ConfirmPay from '../screens/ConfirmPay';
-import MapView from '../components/MapView/MapView';
+// import MapView from '../components/MapView/MapView';
 
 console.disableYellowBox = true;
 
@@ -121,7 +121,7 @@ class RouterComponent extends Component {
             <Scene key="Paycash" component={Paycash} hideNavBar />
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
             <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
-            <Scene key="MapView" component={MapView} hideNavBar />
+            {/*<Scene key="MapView" component={MapView} hideNavBar />*/}
           </Stack>
         </Router>
       </SafeAreaView>

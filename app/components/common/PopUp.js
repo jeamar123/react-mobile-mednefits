@@ -16,6 +16,16 @@ export default class Popup extends Component {
     };
   }
 
+  componentDidMount() {
+  	console.log(this.props);
+    this.setState({ isVisible: this.props.isVisible })
+  }
+
+  componentWillMount( ) {
+  	this.setState({ isVisible: this.props.isVisible });
+  	console.log(this.state.isVisible);
+  }
+
   renderBody() {
     if (this.props.kind == 'loginFailed') {
       return (

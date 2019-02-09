@@ -16,7 +16,8 @@ class Login extends Component {
     this.state = {
       username: false,
       password: false,
-      isLoading: false
+      isLoading: false,
+      failed: false
     }
   }
 
@@ -31,6 +32,7 @@ class Login extends Component {
         Actions.Home({ type: 'reset' });
     	} else {
     		Toast.show(err.error_description, Toast.LONG);
+    		this.setState({ failed: true })
         // Core.getNotify('', err.error_description);
     	}
     })
@@ -45,6 +47,13 @@ class Login extends Component {
       <Container>
         <Core.Loader
           isVisible={this.state.isLoading}
+        />
+        <Popup
+          kind="loginFailed"
+          //just for example the right parameter is like this isVisible={this.props.isVisible}
+          isVisible={this.state.failed}
+          closeSection={true}
+          onRequestClose={() => { this.visibleModal(false); }}
         />
         <Logo />
         <InputWithButton
