@@ -16,15 +16,10 @@ export default class Popup extends Component {
     };
   }
 
-  componentDidMount() {
-  	console.log(this.props);
-    this.setState({ isVisible: this.props.isVisible })
-  }
-
-  componentWillMount( ) {
-  	this.setState({ isVisible: this.props.isVisible });
-  	console.log(this.state.isVisible);
-  }
+  // componentWillReceiveProps(nextProps) {
+  // 	console.log(nextProps);
+  //   this.setState({ isVisible: nextProps.isVisible })
+  // }
 
   renderBody() {
     if (this.props.kind == 'loginFailed') {
@@ -147,7 +142,7 @@ export default class Popup extends Component {
   render() {
     return (
       <View style={{ backgroundColor: '#000' }}>
-        <Modal isVisible={this.props.isVisible}>
+        <Modal isVisible={this.state.isVisible}>
           <TouchableOpacity
             onPress={() => this.setState({ isVisible: false })}
             style={{
