@@ -43,6 +43,7 @@ import Search from '../screens/Search'
 import DetailClinic from '../screens/Detailclinic';
 import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic';
+import NearbyClinicMaps from '../screens/NearbyClinicMaps';
 import ConfirmPay from '../screens/ConfirmPay';
 // import MapView from '../components/MapView/MapView';
 import MedicalCondition from '../screens/MedicalCondition';
@@ -124,6 +125,7 @@ class RouterComponent extends Component {
             <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Paycash" component={Paycash} hideNavBar />
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
+            <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
             <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
             {/* <Scene key="MapView" component={MapView} hideNavBar /> */}
             <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
