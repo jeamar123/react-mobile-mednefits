@@ -45,6 +45,10 @@ import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic';
 import ConfirmPay from '../screens/ConfirmPay';
 // import MapView from '../components/MapView/MapView';
+import MedicalCondition from '../screens/MedicalCondition';
+import MedicalAllergies from '../screens/MedicalAllergies';
+import MedicalHistory from '../screens/MedicalHistory';
+import MedicalMedications from '../screens/MedicalMedications';
 
 console.disableYellowBox = true;
 
@@ -122,6 +126,12 @@ class RouterComponent extends Component {
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
             <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
             {/* <Scene key="MapView" component={MapView} hideNavBar /> */}
+            <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
+            <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
+            <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />
+            <Scene key="MedicalMedications" component={MedicalMedications} hideNavBar />
+
+
           </Stack>
         </Router>
       </SafeAreaView>

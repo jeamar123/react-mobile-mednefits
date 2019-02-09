@@ -38,6 +38,10 @@ class manageProfile extends Component {
       Height: '',
       bmi: '',
       blodeType: '',
+      history: [],
+      allergies: [],
+      medCondition: [],
+      medication: [],
     };
     this.updateProfile = this.updateProfile.bind(this);
   }
@@ -62,6 +66,10 @@ class manageProfile extends Component {
         bmi: data.profile.bmi,
         blodeType: data.profile.blood_type,
         photo_url: data.profile.photo_url,
+        history: data.history,
+        allergies: data.allergies,
+        medCondition: data.conditions,
+        medication: data.medications
       });
     });
   }
@@ -104,7 +112,7 @@ class manageProfile extends Component {
               if (res.status == true) {
                 Core.getNotify('', res.message);
               } else {
-              	Core.getAlert('Ooops', res.message, null, true);
+                Core.getAlert('Ooops', res.message, null, true);
               }
             })
             .catch(error => {
@@ -175,7 +183,7 @@ class manageProfile extends Component {
             body: formdata,
             mode: 'cors',
             cache: 'default',
-            bodyType:'multipart'
+            bodyType: 'multipart'
           };
 
           fetch(Config.AUTH_UPDATE, {
@@ -189,7 +197,7 @@ class manageProfile extends Component {
               // if (res.status == true) {
               //   Core.getNotify('', 'Success update data');
               // } else {
-              	Core.getNotify('', res.message);
+              Core.getNotify('', res.message);
               // }
             })
             .catch(error => {
@@ -248,8 +256,8 @@ class manageProfile extends Component {
             source={{
               uri:
                 this.state.photo_url == false ||
-                this.state.photo_url == '' ||
-                this.state.photo_url == undefined
+                  this.state.photo_url == '' ||
+                  this.state.photo_url == undefined
                   ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8PrT2WeBH8Y0D1s_IwjZpzva_q5Z6oujfJuSgzGhCBmd7sSlp'
                   : this.state.photo_url,
             }}
@@ -550,9 +558,9 @@ class manageProfile extends Component {
                 color: '#8fd8f7',
               }}
             >
-              1
+              {this.state.history !== null ? this.state.history.length : '0'}
             </Text>
-            <ButtonProfile>Medical History</ButtonProfile>
+            <ButtonProfile onPress={() => Actions.MedicalHistory()}>Medical History</ButtonProfile>
           </View>
           <View
             style={{
@@ -572,9 +580,9 @@ class manageProfile extends Component {
                 color: '#8fd8f7',
               }}
             >
-              1
+              {this.state.allergies !== null ? this.state.allergies.length : '0'}
             </Text>
-            <ButtonProfile>Alergies</ButtonProfile>
+            <ButtonProfile onPress={() => Actions.MedicalAllergies()}>Alergies</ButtonProfile>
           </View>
           <View
             style={{
@@ -594,9 +602,9 @@ class manageProfile extends Component {
                 color: '#8fd8f7',
               }}
             >
-              1
+              {this.state.medCondition !== null ? this.state.medCondition.length : '0'}
             </Text>
-            <ButtonProfile>Medical Conditions</ButtonProfile>
+            <ButtonProfile onPress={() => Actions.MedicalCondition()} >Medical Conditions</ButtonProfile>
           </View>
           <View
             style={{
@@ -616,9 +624,9 @@ class manageProfile extends Component {
                 color: '#8fd8f7',
               }}
             >
-              1
+              {this.state.medication !== null ? this.state.medication.length : '0'}
             </Text>
-            <ButtonProfile>Medications</ButtonProfile>
+            <ButtonProfile onPress={() => Actions.MedicalMedications()}>Medications</ButtonProfile>
           </View>
         </GiftedForm>
       </Container>
