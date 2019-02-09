@@ -17,7 +17,8 @@ class Login extends Component {
       username: false,
       password: false,
       isLoading: false,
-      failed: false
+      failed: false,
+      close: false,
     }
   }
 
@@ -54,6 +55,7 @@ class Login extends Component {
           isVisible={this.state.failed}
           closeSection={true}
           onRequestClose={() => { this.visibleModal(false); }}
+          onPress={() => { this.setState({ close: true }) }}
         />
         <Logo />
         <InputWithButton
