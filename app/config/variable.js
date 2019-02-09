@@ -41,6 +41,7 @@ export const CLINIC_GET_FAVOURITE           = CLINIC + '/get_favourite_clinics';
 export const CLINIC_SEND_PAYMENT            = CLINIC + '/send_payment';
 export const CLINIC_PAYMENT_DIRECT          = CLINIC + '/payment_direct';
 export const CLINIC_PAGE_NEARBY             = CLINIC + '/paginate_nearby';
+export const CLINIC_ALL_NEARBY              = CLINIC + '/all_nearby';
 
 /* USER VARIABLE */
 export const USER                           = MAIN+"/user"

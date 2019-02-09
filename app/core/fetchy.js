@@ -54,7 +54,11 @@ function fetching(params, callback) {
           })
           .catch(error => {
             console.warn('error fetching' + error.message);
-            Core.getNotify('', 'Ooops, failed to process data...');
+            error = (typeof error.message !== 'undefined') ? error : error.message
+            if (error == 'Network request failed') {
+              error = 'Please check your connection'
+            }
+            callback("",error)
           });
       }
     } catch (e) {
@@ -606,18 +610,22 @@ export function AddFavouriteClinic(param, callback) {
 // }
 
 async function enableLocationDevice() {
-  console.warn('switch location');
-  await SystemSetting.isLocationEnabled().then(async (enable) => {
-    if (!enable) {
-      await SystemSetting.switchLocation(async () => {
-        console.warn('switch location successfully');
-        await GetLocation();
+  try {
+    console.warn('switch location');
+    await SystemSetting.isLocationEnabled().then(async (enable) => {
+      if (!enable) {
+        await SystemSetting.switchLocation(async () => {
+          console.warn('switch location successfully');
+          await GetLocation();
+          return true;
+        })
+      } else {
         return true;
-      })
-    } else {
-      return true;
-    }
-  })
+      }
+    })
+  } catch (e) {
+    console.warn(e.message+"error enableLocationDevice");
+  }
 }
 
 async function requestLocationPermission() {
@@ -721,6 +729,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
 
   if (!latitude || !longitude) {
+    console.warn('Waiting to get device location');
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
@@ -771,4 +780,34 @@ export function MainSearch(query) {
       reject(e)
     }
   })
+}
+
+export async function GetClinicMap(clinic_type_id, callback) {
+  await enableLocationDevice();
+  // try {
+  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+
+  if (!latitude || !longitude) {
+    console.warn('Waiting to get device location');
+    getNotify('', 'Waiting to get device location');
+    return false;
+  } else {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      params = {
+        url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+
+      fetching(params, result => {
+        console.warn(result.data.clinics);
+        callback('',result.data.clinics);
+      });
+    });
+  }
 }

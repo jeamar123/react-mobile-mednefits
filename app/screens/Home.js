@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  ImageBackground
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
@@ -16,6 +17,7 @@ import { Actions } from 'react-native-router-flux';
 import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
+import * as Common from '../components/common'
 
 const { width, height } = Dimensions.get('window');
 
@@ -225,9 +227,9 @@ class Home extends Component {
     })
   }
 
-  async componentDidMount(){
-  	console.log('Home is mounted');
-    await this.getClinicType()
+  async componentDidMount() {
+   await Core.GetLocation()
+   await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
