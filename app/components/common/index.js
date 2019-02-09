@@ -14,5 +14,10 @@ import InputTime from './InputTime'
 import InputSelect from './InputSelect'
 import InputText from './InputText'
 import InputFile from './InputFile'
+import Error from './Error'
 
+<<<<<<< HEAD
 export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup }
+=======
+export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Error }
+>>>>>>> origin/master
