@@ -44,6 +44,7 @@ import DetailClinic from '../screens/Detailclinic';
 // import Camera from '../screens/Camera';
 import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic'
+import ConfirmPay from '../screens/ConfirmPay'
 console.disableYellowBox = true;
 
 class RouterComponent extends Component {
@@ -118,6 +119,7 @@ class RouterComponent extends Component {
             <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Paycash" component={Paycash} hideNavBar />
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
+            <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
 
           </Stack>
         </Router>

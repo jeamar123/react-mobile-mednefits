@@ -38,8 +38,10 @@ class Barcode extends Component {
     }
   }
 
-  scanBarcode = () => {
-    barcodeData = this.state.data
+  scanBarcode = (data) => {
+  	this.setState({ isLoading: true })
+    barcodeData = data
+    console.log(barcodeData);
 
     Core.GetBarcodeData(barcodeData.data, (result) => {
       if (result.status) {
@@ -87,7 +89,7 @@ class Barcode extends Component {
               permissionDialogMessage={
                 'We need your permission to use your camera phone'
               }
-              onBarCodeRead={this.onBarCodeRead}
+              onBarCodeRead={this.scanBarcode}
               ref={cam => (this.camera = cam)}
             >
               {({ camera, status }) => {

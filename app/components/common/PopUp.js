@@ -87,6 +87,41 @@ export default class Popup extends Component {
 
         </View>
       );
+    } else if (this.props.kind == 'eClaimError') {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <ImageBackground
+            style={{ width: 250, height: 100 }}
+            source={require('../../../assets/modalAsset/loginFailed.png')}
+            resizeMode="center"
+          />
+
+          <View style={{ margin: 10 }}>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_MEDIUM}
+              fontSize={20}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.title}
+            </Common.Texti>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_REGULAR}
+              fontSize={14}
+              numberOfLines={10}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.message}
+            </Common.Texti>
+          </View>
+
+        </View>
+      );
     }
   }
 

@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
-import { Buttons } from '../components/common';
+import { Buttons, Popup } from '../components/common';
 import * as Core from '../core'
 import Toast from 'react-native-simple-toast';
 

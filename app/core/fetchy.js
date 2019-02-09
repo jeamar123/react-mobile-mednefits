@@ -290,6 +290,7 @@ export function GetBarcodeData(url, callback) {
       };
 
       fetching(params, result => {
+      	console.log(result);
         callback(result);
       });
     });
