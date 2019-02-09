@@ -16,9 +16,14 @@ export default class Popup extends Component {
     };
   }
 
-  // componentWillReceiveProps(nextProps) {
-  // 	console.log(nextProps);
-  //   this.setState({ isVisible: nextProps.isVisible })
+  // componentDidMount() {
+  //   console.log(this.props);
+  //   this.setState({ isVisible: this.props.isVisible })
+  // }
+
+  // componentWillMount() {
+  //   this.setState({ isVisible: this.props.isVisible });
+  //   console.log(this.state.isVisible);
   // }
 
   renderBody() {
@@ -31,7 +36,7 @@ export default class Popup extends Component {
             resizeMode="center"
           />
 
-          <View style={{ margin: 10 }}>
+          <View style={{ marginTop: 5, marginBottom: 20 }}>
             <Common.Texti
               fontFamily={Config.FONT_FAMILY_REGULAR}
               fontSize={22}
@@ -40,7 +45,7 @@ export default class Popup extends Component {
                 textAlign: 'center'
               }}
             >
-              Login Failed
+              {this.props.title}
             </Common.Texti>
             <Common.Texti
               fontFamily={Config.FONT_FAMILY_MEDIUM}
@@ -51,7 +56,7 @@ export default class Popup extends Component {
                 textAlign: 'center'
               }}
             >
-              Please check your username and password you enter
+              {this.props.message}
             </Common.Texti>
           </View>
 
@@ -75,7 +80,7 @@ export default class Popup extends Component {
                 textAlign: 'center'
               }}
             >
-              You have insufficient medical credit in your account
+              {this.props.title}
             </Common.Texti>
             <Common.Texti
               fontFamily={Config.FONT_FAMILY_REGULAR}
@@ -86,7 +91,7 @@ export default class Popup extends Component {
                 textAlign: 'center'
               }}
             >
-              You may choose to pay directly to health provider
+              {this.props.message}
             </Common.Texti>
           </View>
 
@@ -142,9 +147,9 @@ export default class Popup extends Component {
   render() {
     return (
       <View style={{ backgroundColor: '#000' }}>
-        <Modal isVisible={this.state.isVisible}>
+        <Modal isVisible={this.props.isVisible}>
           <TouchableOpacity
-            onPress={() => this.setState({ isVisible: false })}
+            onPress={() => this.props.closeSectionUpdate(true)}
             style={{
               justifyContent: 'center',
               alignItems: 'flex-end',

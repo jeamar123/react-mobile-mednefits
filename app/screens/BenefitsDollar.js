@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, Dimensions } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons, Spinner } from '../components/common';
+import { Buttons, Spinner, Popup } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
 import styles from '../components/DollarBenefits';
@@ -20,8 +20,17 @@ class BenefitsDollar extends Component {
       currency: false,
       isLoading: false,
       Balance: '0',
-      placeholder: null
+      placeholder: null,
+      failed: false,
+      title: null,
+      message: null
     };
+
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
+
+  isVisibleUpdate() {
+    this.setState({ failed: false })
   }
 
   componentDidMount() {
@@ -58,14 +67,17 @@ class BenefitsDollar extends Component {
     };
 
     Core.SendPayment(params, (err, result) => {
+    	console.log(result);
       if (result.status) {
         Core.getNotify('', result.message);
 
         Actions.Summary({ result: result });
       } else if (!result.status) {
-        Core.getNotify('', result.message);
+        // Core.getNotify('', result.message);
+        this.setState({ title: result.message, message: result.sub_mesage, failed: true })
       } else {
-        Core.getNotify('', 'Failed to send payment, please try again');
+        // Core.getNotify('', 'Failed to send payment, please try again');
+        this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true })
       }
 
       if (result) {
@@ -78,6 +90,14 @@ class BenefitsDollar extends Component {
     return (
       <Container>
         <Core.Loader isVisible={this.state.isLoading} />
+        <Popup
+          kind="insufficientCredit"
+          isVisible={this.state.failed}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="cancel" title="Benefits Dollars" />
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>

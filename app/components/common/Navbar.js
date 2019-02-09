@@ -166,6 +166,42 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'cancel-credits') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 15,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+          <Icons
+            name="angle-left"
+            style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+          />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'HelveticaNeue-Roman',
+                width: 50,
+              }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'cancel-cash') {
       return (
         <View

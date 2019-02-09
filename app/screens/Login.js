@@ -18,24 +18,30 @@ class Login extends Component {
       password: false,
       isLoading: false,
       failed: false,
-      close: false,
-    }
+      title: null,
+      message: null
+    };
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
-  LoginHandler(){
+  isVisibleUpdate() {
+    this.setState({ failed: false })
+  }
+
+  LoginHandler() {
     // this.setState({isLoading: true})
 
-    Core.LoginProcess(this.state.username, this.state.password, (err, result)=>{
-    	// console.log(err)
-    	// console.log(result);
+    Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
+      // console.log(err)
+      // console.log(result);
       // this.setState({isLoading: false})
-    	if(result) {
+      if (result) {
         Actions.Home({ type: 'reset' });
-    	} else {
-    		Toast.show(err.error_description, Toast.LONG);
-    		this.setState({ failed: true })
+      } else {
+        // Toast.show(err.error_description, Toast.LONG);
+        this.setState({ failed: true, title: 'Login Failed', message: err.error_description })
         // Core.getNotify('', err.error_description);
-    	}
+      }
     })
 
     // setTimeout(()=>{
@@ -54,21 +60,23 @@ class Login extends Component {
           //just for example the right parameter is like this isVisible={this.props.isVisible}
           isVisible={this.state.failed}
           closeSection={true}
-          onRequestClose={() => { this.visibleModal(false); }}
-          onPress={() => { this.setState({ close: true }) }}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
         />
         <Logo />
         <InputWithButton
           onChangeText={(text) => this.setState({ username: text })}
           placeholder="Email address"
           autoCapitalize='none'
-          />
+          returnKeyType={"next"}
+        />
         <InputWithButton
           onChangeText={(text) => this.setState({ password: text })}
           placeholder="Enter password"
           secureTextEntry={true}
           autoCapitalize='none'
-          />
+        />
         <Buttons onPress={() => this.LoginHandler()}>
           Log in
         </Buttons>

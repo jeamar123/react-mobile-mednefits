@@ -11,7 +11,7 @@ import {
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { ClaimDetail } from '../components/ClaimDetail';
-import { ButtonFooter } from '../components/common';
+import { ButtonFooter, Popup } from '../components/common';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
 
@@ -21,8 +21,13 @@ class DetailEclaim extends Component {
     super(props)
 
     this.state = {
-      isLoading: false
+      isLoading: false,
+      failed: false,
+      title: null,
+      message: null
     }
+
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
   EclaimProcess = () =>{
@@ -46,9 +51,11 @@ class DetailEclaim extends Component {
       }
 
       Core.SendEClaim(eclaimFile, (err, result)=>{
-        Core.getNotify("",result.message)
+        // Core.getNotify("",result.message)
         if (result.status) {
           Actions.ThanksEclaim({type: 'reset'})
+        } else {
+          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true })
         }
 
         this.setState({
@@ -68,7 +75,10 @@ class DetailEclaim extends Component {
         })
       },10000)
     }
+  }
 
+  isVisibleUpdate() {
+    this.setState({ failed: false })
   }
 
   render() {
@@ -78,6 +88,14 @@ class DetailEclaim extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
+        <Popup
+          kind="eClaimError"
+          isVisible={this.state.failed}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         <Core.Loader
           isVisible={this.state.isLoading}
         />
