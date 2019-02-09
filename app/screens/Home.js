@@ -229,14 +229,9 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-<<<<<<< app/screens/Home.js
     console.log('Home is mounted');
     await Core.GetLocation()
     await this.getClinicType()
-=======
-   await Core.GetLocation()
-   await this.getClinicType()
->>>>>>> app/screens/Home.js
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
