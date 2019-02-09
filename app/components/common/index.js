@@ -13,5 +13,6 @@ import InputTime from './InputTime'
 import InputSelect from './InputSelect'
 import InputText from './InputText'
 import InputFile from './InputFile'
+import Error from './Error'
 
-export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile }
+export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Error }
