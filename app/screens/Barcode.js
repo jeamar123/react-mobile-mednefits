@@ -43,19 +43,32 @@ class Barcode extends Component {
     barcodeData = data
     console.log(barcodeData);
 
-    Core.GetBarcodeData(barcodeData.data, (result) => {
-      if (result.status) {
-        Actions.SelectService({
-          type: 'reset',
-          services: result.data.clinic_procedures,
-          clinicid: result.data.clinic_id
-        })
-      }
+    try {
+      Core.GetBarcodeData(barcodeData.data, (result)=>{
+        console.warn("res "+result);
+        if (result.status) {
+          Actions.SelectService({
+            type:'reset',
+            services: result.data.clinic_procedures,
+            clinicid: result.data.clinic_id
+          })
+        }
 
+        this.setState({
+          isLoading: false
+        })
+      })
+    } catch (e) {
       this.setState({
         isLoading: false
       })
-    })
+    } finally {
+      setTimeout(()=>{
+        this.setState({
+          isLoading: false
+        })
+      }, 10000)
+    }
 
   }
 

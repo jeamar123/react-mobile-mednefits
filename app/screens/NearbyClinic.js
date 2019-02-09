@@ -88,7 +88,6 @@ class NearbyClinic extends Component {
   }
 
   renderTransactionIn_Network() {
-    console.warn(this.props.ClinicTypeID);
     return this.state.DataClinic.map((Data, index) => (
       <TouchableOpacity
         key={index}
@@ -260,8 +259,12 @@ class NearbyClinic extends Component {
                   <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>Map View</Text>
+              <TouchableOpacity
+                onPress={()=>Actions.NearbyClinicMaps({
+                  clinicType: this.props.ClinicTypeID
+                })}
+                >
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8 }}>MapView</Text>
               </TouchableOpacity>
 
             </View>
