@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, Image, Linking, TouchableOpacity } from 'react-native';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import * as Core from '../../core';
+import * as Config from '../../config';
 import { ButtonCall } from '../common';
 
 class HistoryClaim extends Component {
@@ -10,7 +12,13 @@ class HistoryClaim extends Component {
     this.state = {
       Balance: '0',
       Full_name: '',
+      favourite: null
     };
+  }
+    
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps);
+    this.setState({ favourite: nextProps.favourite });
   }
 
   componentWillMount() {
@@ -34,21 +42,81 @@ class HistoryClaim extends Component {
     });
   }
 
+  renderOpenStatus(status) {
+  	if(status == 1) {
+      return (
+        <Text style={{ marginTop: 5 }}>
+          <Icons
+            name="circle"
+            style={{ color: '#51e500', fontSize: 12, marginRight: 15 }}
+          />
+          {' '}
+          <Text style={{
+            fontFamily: Config.FONT_FAMILY_LIGHT,
+            fontSize: 10,
+            marginTop: 5,
+            marginLeft: 12,
+            color: 'black',
+          }}>Open</Text>
+        </Text>
+      )
+  	} else {
+      return (
+         <Text style={{ marginTop: 5 }}>
+            <Icons
+              name="circle"
+              style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
+            />
+            {' '}
+            <Text style={{
+              fontFamily: Config.FONT_FAMILY_LIGHT,
+              fontSize: 12,
+              marginTop: 5,
+              marginLeft: 10,
+              color: 'black',
+            }}>Closed</Text>
+          </Text>
+      )
+  	}
+  }
+
   AddFavClinic() {
     params = {
-      status: '1',
+      status: this.state.favourite == 1 ? 0 : 1,
       clinicid: this.props.clinicid
     }
 
     Core.AddFavouriteClinic(params, (err, result) => {
       if (result.status) {
-        Core.getNotify('', 'Success Add Favourite Clinic');
+      	if(this.state.favourite == 1) {
+          Core.getNotify('', 'Success Remove Favourite Clinic');
+      	  this.setState({ favourite: 0 });
+      	} else {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 1 });
+      	}
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {
         Core.getNotify('', 'Failed to Add Favourite Clinic, please try again');
       }
     });
+  }
+
+  renderFavourite( ) {
+    if(this.state.favourite == 1) {
+      return (
+        <Image
+          source={require('../../../assets/apps/like_fav.png')}
+          style={styles.like} />
+      )
+    } else {
+      return (
+        <Image
+          source={require('../../../assets/apps/likes.png')}
+          style={styles.like} />
+      )
+    }
   }
 
   render() {
@@ -70,15 +138,7 @@ class HistoryClaim extends Component {
                 <Text numberOfLines={2} style={styles.details}>
                   {this.props.Address}
                 </Text>
-                {this.props.StatusOpen === 1 ? (
-                  <Text numberOfLines={1} style={styles.statusCLinic} >
-                    OPEN
-                </Text>
-                ) : (
-                    <Text numberOfLines={1} style={styles.statusCLinic} >
-                      CLOSED
-                </Text>
-                  )}
+                {this.renderOpenStatus(this.props.StatusOpen)}
               </View>
               <View />
             </View>
@@ -90,9 +150,7 @@ class HistoryClaim extends Component {
                   CALL
                 </ButtonCall>
                 <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic()}>
-                  <Image
-                    source={require('../../../assets/apps/likes.png')}
-                    style={styles.like} />
+                  {this.renderFavourite()}
                 </TouchableOpacity>
               </View>
             </View>

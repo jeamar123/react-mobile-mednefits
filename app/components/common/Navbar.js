@@ -68,6 +68,37 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'back-eclaim') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home()}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'back-home') {
       return (
         <View
@@ -135,6 +166,74 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'cancel-credits') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 15,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+          <Icons
+            name="angle-left"
+            style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+          />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'HelveticaNeue-Roman',
+                width: 50,
+              }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'cancel-cash') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 15,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'HelveticaNeue-Roman',
+                width: 50,
+              }}
+            >
+              Cancel
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'null') {
       return (
         <View
@@ -171,6 +270,41 @@ export default class Navbar extends React.Component {
               }}
             >
               Close
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'previous') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 14,
+                fontFamily: 'HelveticaNeue-Roman',
+              }}
+            >
+              Home
             </Text>
           </TouchableOpacity>
         </View>

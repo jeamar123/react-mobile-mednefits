@@ -33,7 +33,7 @@ class HistoryClaim extends Component {
         <View style={styles.sectionHeader}>
           <View style={styles.contentHeader}>
             <View />
-            <View style={{ flexDirection: 'column' }}>
+            <View style={{ flexDirection: 'column', alignItems: 'center', textAlignVertical: 'center' }}>
               <Text numberOfLines={2} style={styles.Title}>
                 {this.props.Status}
               </Text>

@@ -8,6 +8,7 @@ import * as Config from '../../config';
 export default EStyleSheet.create({
   sectionHeader: {
     justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#efeff5',
     height: height / 4,
   },
@@ -17,12 +18,14 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    textAlignVertical: 'center',
   },
   sectionDetail: {
     backgroundColor: '#666666',
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignContent: 'center',
+    padding: 8
   },
   amount: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -55,6 +58,7 @@ export default EStyleSheet.create({
     fontSize: 14,
     color: '#000',
     textAlignVertical: 'center',
+    alignItems: 'center',
     paddingBottom: 5,
   },
   out_of_network: {
@@ -63,10 +67,9 @@ export default EStyleSheet.create({
     color: '#c6c7cd',
     textAlignVertical: 'center',
     marginRight: 20,
-    marginTop: '4%',
-    marginBottom: 7,
-    paddingRight: '3%',
-    paddingLeft: '3%',
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 10,
     borderColor: '#c6c7cd',
     borderWidth: 1,
     borderRadius: 5

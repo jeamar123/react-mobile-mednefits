@@ -5,11 +5,11 @@ import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
 import { RNCamera, FaceDetector } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
-import {Spinner, Text} from '../components/common/Spinner'
+import { Spinner, Text } from '../components/common/Spinner'
 import * as Config from '../config'
 
 const PendingView = () => (
-  <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position:'absolute' }}>
+  <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position: 'absolute' }}>
     <ActivityIndicator size="large" color="#fff" />
   </View>
 );
@@ -29,7 +29,7 @@ class Barcode extends Component {
     this.barcodeHandler = this.barcodeHandler.bind(this)
   }
 
-  componentDidUpdate(prevProps, prevStates){
+  componentDidUpdate(prevProps, prevStates) {
     if (prevStates.data !== this.state.data) {
       this.scanBarcode()
       this.setState({
@@ -38,8 +38,10 @@ class Barcode extends Component {
     }
   }
 
-  scanBarcode=()=>{
-    barcodeData = this.state.data
+  scanBarcode = (data) => {
+  	this.setState({ isLoading: true })
+    barcodeData = data
+    console.log(barcodeData);
 
     try {
       Core.GetBarcodeData(barcodeData.data, (result)=>{
@@ -74,13 +76,13 @@ class Barcode extends Component {
     console.warn('setdata');
     console.warn(data);
     if (data) {
-      this.setState({data: data, isLoading: true})
+      this.setState({ data: data, isLoading: true })
     }
   }
 
   onBarCodeRead = async obj => {
     if (this.state.data == obj.data) return;
-    this.setState({data: obj, isLoading: true})
+    this.setState({ data: obj, isLoading: true })
   }
 
   render() {
@@ -89,9 +91,9 @@ class Barcode extends Component {
       <Container>
         <Navbar leftNav="back-home" />
 
-          {(this.state.isLoading) ? (
-            <Spinner />
-          ) : (
+        {(this.state.isLoading) ? (
+          <Spinner />
+        ) : (
             <RNCamera
               style={styles.preview}
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
@@ -100,12 +102,12 @@ class Barcode extends Component {
               permissionDialogMessage={
                 'We need your permission to use your camera phone'
               }
-              onBarCodeRead={this.onBarCodeRead}
+              onBarCodeRead={this.scanBarcode}
               ref={cam => (this.camera = cam)}
             >
               {({ camera, status }) => {
                 if (status !== 'READY') return <PendingView />;
-                return(
+                return (
                   <ImageBackground
                     style={{ height: '100%', width: '100%' }}
                     source={require('../../assets/barcode.png')}

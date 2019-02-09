@@ -12,6 +12,7 @@ import { DetailClinic } from '../components/DetailClinic';
 import * as Core from '../core';
 import * as Config from '../config';
 import { ButtonCall } from '../components/common/ButtonCall';
+import { ActionConst } from 'react-native-router-flux';
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class HistoryTransaction extends Component {
       openClinic: [],
       Telphone: '',
       Email: '',
+      latMap: '',
+      lngMap: '',
     };
   }
 
@@ -30,14 +33,16 @@ class HistoryTransaction extends Component {
     Core.GetDetailClinic(this.props.clinic_id, (err, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      console.warn(data.lattitude + ',' + data.longitude);
       this.setState({
         resultData: data,
         procedure: data.clinic_procedures,
         DoctorList: data.doctors,
         openClinic: data.open,
         Telphone: data.telephone,
-        Email: data.email
+        Email: data.email,
+        latMap: data.lattitude,
+        lngMap: data.longitude
       });
     });
   }
@@ -137,6 +142,7 @@ class HistoryTransaction extends Component {
 
     return (
       <TabHeading
+
         style={{
           backgroundColor: '#7bd3f7',
           justifyContent: 'center',
@@ -144,20 +150,22 @@ class HistoryTransaction extends Component {
           flexDirection: 'column',
         }}
       >
-        <Image
-          source={icon}
-          style={{ height: 20, resizeMode: 'center' }}
-        />
-        <Text
-          fontFamily={Config.FONT_V2_BOLD}
-          fontSize={5}
-          style={{
-            color: (this.state.index == '0') ? "#fff" : "#fff",
-            fontSize: 13
-          }}
-        >
-          Direction
+        <TouchableOpacity onPress={() => Linking.openURL('http://maps.google.com/maps?daddr=' + this.state.latMap + ',' + this.state.lngMap)}>
+          <Image
+            source={icon}
+            style={{ height: 20, resizeMode: 'center' }}
+          />
+          <Text
+            fontFamily={Config.FONT_V2_BOLD}
+            fontSize={5}
+            style={{
+              color: (this.state.index == '0') ? "#fff" : "#fff",
+              fontSize: 13
+            }}
+          >
+            Direction
         </Text>
+        </TouchableOpacity>
       </TabHeading>
     );
   }
@@ -165,6 +173,7 @@ class HistoryTransaction extends Component {
   renderProcedure() {
     return this.state.procedure.map(Data => (
       <View
+        key={Data.procedureid}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -218,6 +227,7 @@ class HistoryTransaction extends Component {
   renderDoctors() {
     return this.state.DoctorList.map(ListData => (
       <View
+        key={ListData.doctor_id}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -264,6 +274,7 @@ class HistoryTransaction extends Component {
   renderInformation() {
     return this.state.openClinic.map(Data => (
       <View
+        key={Data.timeid}
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -332,21 +343,69 @@ class HistoryTransaction extends Component {
     </View>
   }
 
+  renderDoctors() {
+    return this.state.DoctorList.map(ListData => (
+      <View
+        key={ListData.doctor_id}
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          backgroundColor: '#fff',
+          paddingTop: 15,
+          paddingBottom: 15,
+          marginBottom: 3,
+          borderWidth: 2,
+          borderColor: "#fff"
+        }}
+      >
+        <Image
+          source={{ uri: ListData.image_url }}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 5,
+            backgroundColor: '#fff',
+            marginLeft: '3%'
+          }} />
+        <Text
+          style={{
+            color: 'black',
+            marginTop: '3%',
+            fontFamily: Config.FONT_FAMILY_LIGHT,
+            fontSize: 16,
+            fontWeight: 'bold'
+          }}
+        >
+          {ListData.name}
+        </Text>
+        <Text />
+        <Text />
+        <Text />
+        <View style={{ width: '30%', marginTop: '3%' }}>
+          <ButtonCall onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
+            CALL
+          </ButtonCall>
+        </View>
+      </View>
+    ));
+  }
+
   render() {
     console.warn("datanya" + (this.props.clinic_id))
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" />
+        <Navbar leftNav="previous" />
         <DetailClinic
           clinicid={this.state.resultData.clinic_id}
           clinicimage={this.state.resultData.image_url}
           clinicname={this.state.resultData.name}
           Address={this.state.resultData.address}
           CallPhon={this.state.resultData.telephone}
+          favourite={this.state.resultData.favourite}
         />
         <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'transparant' }}
+          tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
           tabBarBackgroundColor="#7bd3f7"
         >
           <Tab

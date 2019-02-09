@@ -20,6 +20,6 @@ export default EStyleSheet.create({
     color: '$inputText',
     fontSize: 18,
     borderBottomWidth: 1,
-    borderBottomColor: '#dbdbdb',
+    borderBottomColor: '#dbdbdb'
   },
 });

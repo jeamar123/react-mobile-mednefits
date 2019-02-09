@@ -75,27 +75,27 @@ class PayCash extends Component {
       <Container>
         <Core.Loader isVisible={this.state.isLoading} />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Health Provider" rightNav="done" />
+        <Navbar leftNav="cancel-cash" title="Health Provider" rightNav="done" />
 
         <Content padder style={{ backgroundColor: '#439057' }}>
           <Card>
-            <CardItem style={{ backgroundColor: '#E8E7EE' }}>
+            <CardItem style={{ backgroundColor: 'white' }}>
               <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                 {!this.state.clinic_image ? (
                   <Image
                     source={require('../../assets/apps/mednefits.png')}
-                    style={{ height: 55, resizeMode: 'center', width: 155 }}
+                    style={{ height: 60, resizeMode: 'contain', width: 160 }}
                   />
                 ) : (
                     <Image
                       source={{ uri: this.state.clinic_image }}
-                      style={{ height: 55, resizeMode: 'center', width: 155 }}
+                      style={{ height: 60, resizeMode: 'contain', width: 160 }}
                     />
                   )}
                 {!this.state.clinic_name ? (
                   <Spinner size="small" />
                 ) : (
-                    <Text style={{ marginTop: 10, fontFamily: 'helvetica' }}>
+                    <Text style={{ marginTop: 10, fontFamily: 'helvetica', color: '#4b4b4b' }}>
                       {this.state.clinic_name}
                     </Text>
                   )}
@@ -109,10 +109,11 @@ class PayCash extends Component {
                   flex: 1,
                   justifyContent: 'center',
                   alignItems: 'center',
+                  textAlign: 'center',
                 }}
               >
-                <Image source={require('../../assets/apps/byCash.png')} />
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica', width: '80%', fontWeight: 'bold', alignSelf: 'center' }}>
+                <Image style={{ width: 70, height: 70 }} source={require('../../assets/apps/byCash.png')} />
+                <Text style={{ marginTop: 20, fontFamily: 'helvetica', width: '80%', fontWeight: 'bold', textAlign: 'center', }}>
                   Pay directly to health provider using any preferred payment method onsite
                 </Text>
               </Body>

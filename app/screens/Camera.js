@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   },
   preview: {
     flex: 1,
-    marginTop: 25,
+    marginTop: 50,
     width: "100%"
   },
   actionPanel: {

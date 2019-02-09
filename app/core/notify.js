@@ -17,6 +17,12 @@ export function getNotify(title, message, action, cancelable) {
     : notifDroid(message);
 }
 
+export function getNotifyLong(title, message, action, cancelable) {
+  Platform.OS == 'ios'
+    ? notifIos(title, message, action, cancelable)
+    : notifDroidLong(message);
+}
+
 export function getAlert(title, message, action, cancelable) {
   alerty(title, message, action, cancelable);
 }
@@ -54,6 +60,10 @@ export function notifIos(title, message, action, cancelable) {
 
 export function notifDroid(message) {
   ToastAndroid.show(message, ToastAndroid.SHORT);
+}
+
+export function notifDroidLong(message) {
+  ToastAndroid.show(message, ToastAndroid.LONG);
 }
 
 export function alerty(title, message, action, cancelable) {

@@ -44,13 +44,47 @@ class NearbyClinic extends Component {
     }
   }
 
-  componentWillMount() {
-    Core.GetClinicMapList(this.props.ClinicTypeID, (error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ DataClinic: data.clinics, data: true });
-      console.warn(data);
+  async componentWillMount() {
+    await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
+    	// console.log(error);
+    	// console.log(result);
+    	if(result.status) {
+        data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await this.setState({ DataClinic: data.clinics, data: true });
+    	} else {
+    		setTimeout(function() {
+    		  Actions.pop();
+    		  Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+    		}, 2000);
+    	}
+      // console.log(data);
     });
+  }
+
+  renderFavourite(favourite) {
+    if(favourite == 1) {
+      return (
+        <Image
+          source={require('../../assets/apps/like_fav.png')}
+          style={{
+            height: 100,
+            width: 100,
+            resizeMode: 'center',
+          }}
+        />
+      )
+    } else {
+      return (
+        <Image
+          source={require('../../assets/apps/likes.png')}
+          style={{
+            height: 100,
+            width: 100,
+            resizeMode: 'center',
+          }}
+        />
+      )
+    }
   }
 
   renderTransactionIn_Network() {
@@ -144,14 +178,7 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-            <Image
-              source={require('../../assets/apps/like_fav.png')}
-              style={{
-                height: 100,
-                width: 100,
-                resizeMode: 'center',
-              }}
-            />
+            { this.renderFavourite(Data.favourite) }
           </View>
         </View>
       </TouchableOpacity>
@@ -183,7 +210,17 @@ class NearbyClinic extends Component {
             <View
               style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
             >
-              <ActivityIndicator size="large" color="#0392cf" />
+              <Image
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: 15,
+                  width: 80,
+                  height: 80,
+                }}
+                source={require('../../assets/apps/search_empty.png')}
+              />
+              <Text>We are looking  for health partners near you.</Text>
             </View>
           ) : (
               <View
@@ -201,7 +238,7 @@ class NearbyClinic extends Component {
 
             )}
           <View style={{
-            height: 35,
+            height: 50,
             backgroundColor: '#0392cf'
           }}>
             <View style={{
@@ -210,6 +247,7 @@ class NearbyClinic extends Component {
               marginRight: '3%',
               marginLeft: '3%',
               marginBottom: 5,
+              marginTop: 5,
               alignItem: 'center'
             }}>
               <TouchableOpacity onPress={() => Actions.Home()}>
@@ -217,8 +255,8 @@ class NearbyClinic extends Component {
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                 }}>
-                  <Text style={{ color: '#fff', fontSize: 10, marginTop: 2 }}>I am looking for</Text>
-                  <Text style={{ color: '#fff', fontSize: 14 }}>{this.props.NameCategory}</Text>
+                  <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
+                  <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity

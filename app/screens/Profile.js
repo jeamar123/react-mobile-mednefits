@@ -7,6 +7,7 @@ import Navbar from '../components/common/Navbar';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ActionSheet from 'react-native-actionsheet'
 import * as Core from '../core'
+import * as Common from '../components/common'
 
 class RenderList extends Component {
   render() {
@@ -87,6 +88,13 @@ class Profile extends Component {
           isVisible={this.state.isLoading}
         />
         <Navbar leftNav="back" />
+        {/* <Common.Popup
+          kind="insufficientCredit"
+          //just for example the right parameter is like this isVisible={this.props.isVisible}
+          isVisible={true}
+          closeSection={true}
+          onRequestClose={() => { this.visibleModal(false); }}
+        /> */}
         <View style={{ flex: 1, backgroundColor: "#EEEEEE" }}>
           <View style={{ marginTop: 50 }}>
             <RenderList
@@ -96,9 +104,6 @@ class Profile extends Component {
             <RenderList
               action={() => Actions.Updatepassword()}
               title="Update Password"
-            />
-            <RenderList
-              title="Disable Profile"
             />
             <View style={{ marginTop: 50 }}>
               <RenderList

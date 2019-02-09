@@ -37,8 +37,8 @@ function fetching(params, callback) {
         })
           .then(response => response.json())
           .then(res => {
-          	console.log('done fetching execution');
-          	console.log(res);
+            console.log('done fetching execution');
+            console.log(res);
             if (!res.status) {
               // getAlert('', res.message);
 
@@ -102,7 +102,7 @@ export async function LoginProcess(username, password, callback) {
 
         await Core.SetDataLocal(params, async (err, result) => {
           if (result) {
-          	await callback('', true);
+            await callback('', true);
             // Actions.Home({ type: 'reset' });
           } else {
             getNotify('', 'Failed login, try again');
@@ -116,7 +116,7 @@ export async function LoginProcess(username, password, callback) {
 }
 
 export async function UserDetail(callback) {
-	await setTimeout(async function() {
+  await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         if (err || result == undefined) {
@@ -132,7 +132,7 @@ export async function UserDetail(callback) {
             },
           };
           await fetching(params, async result => {
-        	  console.log('done fetching in UserDetail');
+            console.log('done fetching in UserDetail');
             await callback('', result)
           });
           console.log('fetching executed');
@@ -142,11 +142,11 @@ export async function UserDetail(callback) {
       console.warn('error user detail' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 100);
+  }, 100);
 }
 
 export async function GetBalance(callback) {
-	await setTimeout(async function() {
+  await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
@@ -166,11 +166,11 @@ export async function GetBalance(callback) {
       console.warn('error get balance' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 100);
+  }, 100);
 }
 
 export async function GetHistoryTransaction(callback) {
-	await setTimeout(async function() {
+  await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
@@ -190,11 +190,11 @@ export async function GetHistoryTransaction(callback) {
       console.warn('error get history transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 10);
+  }, 10);
 }
 
 export async function GetEClaimTransaction(callback) {
-	await setTimeout(async function() {
+  await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
@@ -207,7 +207,7 @@ export async function GetEClaimTransaction(callback) {
           },
         };
         await fetching(params, async result => {
-        	console.log('GetEClaimTransaction')
+          console.log('GetEClaimTransaction')
           await callback('', result);
         });
       });
@@ -215,11 +215,11 @@ export async function GetEClaimTransaction(callback) {
       console.warn('error get Eclaim Transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 100);
+  }, 100);
 }
 
 export function GetUserNetwork(tid, callback) {
-	setTimeout(function() {
+  setTimeout(function () {
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
         params = {
@@ -231,7 +231,7 @@ export function GetUserNetwork(tid, callback) {
         };
 
         fetching(params, result => {
-        	// console.log(result);
+          // console.log(result);
           callback(result);
         });
       });
@@ -239,7 +239,7 @@ export function GetUserNetwork(tid, callback) {
       console.warn('error get GetUserNetwork' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 100);
+  }, 100);
 }
 
 export function GetSpesificEclaim(tid, callback) {
@@ -294,6 +294,7 @@ export function GetBarcodeData(url, callback) {
       };
 
       fetching(params, result => {
+      	console.log(result);
         callback(result);
       });
     });
@@ -388,7 +389,7 @@ export function GetProcedureDetails(id, callback) {
 }
 
 export async function GetClinicType(callback) {
-	setTimeout(async function() {
+  setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
@@ -408,7 +409,7 @@ export async function GetClinicType(callback) {
       console.warn('error GetProcedureDetails' + e.message);
       getNotify('', 'Failed get data, try again');
     }
-	}, 100);
+  }, 100);
 }
 
 export function GetHealthTypeList(type, callback) {
@@ -664,7 +665,7 @@ export async function GetLocation() {
   console.warn('permissionLocation', permissionLocation);
   await navigator.geolocation.getCurrentPosition(
     async (position) => {
-      // console.warn('position', position);
+      console.warn('position', position);
       latitude = await {
         key: Config.LATITUDE,
         value: JSON.stringify(position.coords.latitude)
@@ -694,7 +695,7 @@ export async function GetLocation() {
       Core.getNotify("", error.message);
       // requestLocationPermission()
     },
-    { enableHighAccuracy: true, timeout: 100000, maximumAge: 5000 },
+    { enableHighAccuracy: true, timeout: 2000 },
   );
 }
 
@@ -722,8 +723,21 @@ export async function GetLocation() {
 //   }
 // }
 
+export async function checkLocationFirst(clinic_type_id, callback) {
+  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+
+  if (!latitude || !longitude) {
+    getNotify('', 'Waiting to get device location');
+    return callback(false);
+  } else {
+    return callback('', true);
+  }
+}
+
+
 export async function GetClinicMapList(clinic_type_id, callback) {
-  await enableLocationDevice();
+  await GetLocation();
   // try {
   latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
