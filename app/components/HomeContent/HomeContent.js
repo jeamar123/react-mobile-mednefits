@@ -5,6 +5,7 @@ import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
+import * as Common from '../common'
 
 class HomeContent extends Component {
   constructor(props) {
@@ -13,6 +14,8 @@ class HomeContent extends Component {
       Balance: '0',
       Full_name: '',
       currency: false,
+      isClearSearch: false,
+      isLoadingSearch: false
     };
   }
 
@@ -22,9 +25,9 @@ class HomeContent extends Component {
   }
 
   async getUserBalance() {
-  	// console.log('in progress fetching getUserBalance')
+    // console.log('in progress fetching getUserBalance')
     await Core.GetBalance(async (error, result) => {
-    	// console.log('fetching done for getUserBalance');
+      // console.log('fetching done for getUserBalance');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
@@ -34,10 +37,45 @@ class HomeContent extends Component {
     });
   }
 
+  onQuery = async (query) => {
+    this.setState({
+      isClearSearch: true,
+      query: query
+    })
+  }
+
+  clearProcess = (state) => {
+    this.props.clearProcess("true")
+    this.setState({
+      query: "",
+      isClearSearch: false
+    })
+  }
+
+  processQuery = async () => {
+    this.props.isLoadingSearch("true")
+
+    try {
+      result = await Core.MainSearch(this.state.query)
+
+      this.props.onUpdateSearch(result.data)
+      this.props.isLoadingSearch("false")
+
+    } catch (e) {
+      Common.getNotify("", e.message)
+      this.props.isLoadingSearch("false")
+    } finally {
+      setTimeout(() => {
+        this.props.isLoadingSearch("false")
+      }, 10000)
+    }
+  }
+
+
   async getUserDetail() {
-  	console.log('in progress fetching getUserDetail')
+    console.log('in progress fetching getUserDetail')
     await Core.UserDetail(async (error, result) => {
-    	console.log('fetching done for getUserDetail');
+      console.log('fetching done for getUserDetail');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
@@ -51,28 +89,34 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <TouchableOpacity
-            onPress={() => Actions.Search()}
+          <Common.InputText
+            value={this.state.query}
+            returnKeyType="search"
+            onSubmitEditing={() => this.processQuery()}
+            onChangeText={query => this.onQuery(query)}
+            placeholder="Search"
+            placeholderTextColor="#fff"
+            placeholderStyle={{
+              color: "#fff"
+            }}
+            type="search"
+            isClearSearch={this.state.isClearSearch}
+            isClearSearchChange={this.clearProcess}
+            iconColor="#fff"
+            alignItems="center"
+            justifyContent="flex-start"
             style={{
               width: "91%",
               borderRadius: 5,
+              color: "#fff",
+              padding: 3,
               backgroundColor: '#0A6186',
               marginLeft: 15,
               marginRight: 15,
               flexDirection: 'row',
               alignItems: 'center'
-            }}>
-            <Icons
-              name="search"
-              style={{
-                color: '#ffff',
-                fontSize: 12,
-                paddingLeft: 15,
-                paddingRight: 15
-              }}
-            />
-            <Text style={styles.searchtext}>Search</Text>
-          </TouchableOpacity>
+            }}
+          />
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
