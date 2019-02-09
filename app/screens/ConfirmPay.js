@@ -9,7 +9,7 @@ import styles from '../components/DollarBenefits';
 const { width, height } = Dimensions.get('window');
 import * as Core from '../core';
 
-class BenefitsDollar extends Component {
+class ConfirmPay extends Component {
   constructor(props) {
     super(props);
 
@@ -32,6 +32,7 @@ class BenefitsDollar extends Component {
         clinic_image: result.data.image_url,
         currency: result.data.currency_symbol,
         Balance: result.data.current_balance,
+        placeholder: result.data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
       });
     });
 
@@ -52,7 +53,7 @@ class BenefitsDollar extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      amount: this.state.amount,
+      amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
     };
@@ -159,20 +160,17 @@ class BenefitsDollar extends Component {
                   }}
                 >
                   <Text style={{ marginTop: '7%', fontFamily: 'helvetica' }}>
-                    {this.state.currency ? this.state.currency : ' '}
+                    {this.state.currency ? this.state.currency : ' '} {this.props.amount}
                   </Text>
-                  <InputWithButton
-                    keyboardType="numeric"
-                    placeholder="0.00"
-                    value={this.state.amount}
-                    onChangeText={number => this.setState({ amount: number })}
-                  />
                 </View>
               </Body>
             </CardItem>
 
-            <Buttons onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount })}>
-              Pay {this.state.amount}
+            <Buttons
+              onPress={() => this.SendPayment()}
+              isLoading={this.state.isLoading}
+            >
+              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
             </Buttons>
             <View style={{ marginBottom: 20 }} />
           </Card>
@@ -181,4 +179,4 @@ class BenefitsDollar extends Component {
     );
   }
 }
-export default BenefitsDollar;
+export default ConfirmPay;
