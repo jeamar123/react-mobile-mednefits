@@ -49,7 +49,6 @@ class MedicalHistory extends Component {
     this.getFavorites_Clinic();
     this.GetMedicalHistory();
   }
-
   getFavorites_Clinic() {
     Core.GetFavouritesClinic((error, result) => {
       data =
@@ -57,7 +56,6 @@ class MedicalHistory extends Component {
       this.setState({ resultData: data, data: true });
     });
   }
-
   GetMedicalHistory() {
     Core.UserDetail((error, result) => {
       data =
@@ -79,6 +77,37 @@ class MedicalHistory extends Component {
         medCondition: data.conditions,
         medication: data.medications
       });
+    });
+  }
+
+  DelMedical_History(history_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_HISTORY + '?value=' + history_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(history_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalHistory();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
     });
   }
 
@@ -113,7 +142,7 @@ class MedicalHistory extends Component {
               width: '100%',
             }}
           >
-            {Data.clinic_name}
+            {Data.clinic_name} {Data.record_id}
           </Text>
           <Text
             style={{
@@ -127,6 +156,9 @@ class MedicalHistory extends Component {
             {Data.date}
           </Text>
           <TouchableOpacity
+            onPress={() =>
+              this.DelMedical_History(Data.record_id)
+            }
             style={{
               paddingTop: 2,
               paddingBottom: 4,
@@ -159,6 +191,7 @@ class MedicalHistory extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-MedHistory"
         />
 
         {(!this.state.data) ? (

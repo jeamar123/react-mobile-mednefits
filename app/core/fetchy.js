@@ -58,7 +58,7 @@ function fetching(params, callback) {
             if (error == 'Network request failed') {
               error = 'Please check your connection'
             }
-            callback("",error)
+            callback("", error)
           });
       }
     } catch (e) {
@@ -294,7 +294,7 @@ export function GetBarcodeData(url, callback) {
       };
 
       fetching(params, result => {
-      	console.log(result);
+        console.log(result);
         callback(result);
       });
     });
@@ -625,7 +625,7 @@ async function enableLocationDevice() {
       }
     })
   } catch (e) {
-    console.warn(e.message+"error enableLocationDevice");
+    console.warn(e.message + "error enableLocationDevice");
   }
 }
 
@@ -820,7 +820,7 @@ export async function GetClinicMap(clinic_type_id, callback) {
 
       fetching(params, result => {
         console.warn(result.data.clinics);
-        callback('',result.data.clinics);
+        callback('', result.data.clinics);
       });
     });
   }

@@ -185,10 +185,10 @@ export default class Navbar extends React.Component {
               alignItems: 'center',
             }}
           >
-          <Icons
-            name="angle-left"
-            style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
-          />
+            <Icons
+              name="angle-left"
+              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
             <Text
               style={{
                 color: '#fff',
@@ -534,6 +534,210 @@ export default class Navbar extends React.Component {
               }}
             >
               DONE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'add-MedHistory') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => this.props.addMedicalHistory(true)}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#FFFFFF',
+                marginRight: '2%',
+                width: 65,
+              }}
+            >
+              DONE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'add-MedAllergies') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => this.props.AddAllergies(true)}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#FFFFFF',
+                marginRight: '2%',
+                width: 65,
+              }}
+            >
+              DONE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'add-MedCondition') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => this.props.AddMedCondition(true)}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#FFFFFF',
+                marginRight: '2%',
+                width: 65,
+              }}
+            >
+              DONE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'add-Medication') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => this.props.AddMedication(true)}
+          >
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#FFFFFF',
+                marginRight: '2%',
+                width: 65,
+              }}
+            >
+              DONE
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Adding-MedAllergies') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.MedicalAllergiesAdd()}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 16,
+                color: '#FFFFFF',
+                marginRight: 10,
+              }}
+            >
+              Add
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Adding-Medications') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.MedicalMedicationsAdd()}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 16,
+                color: '#FFFFFF',
+                marginRight: 10,
+              }}
+            >
+              Add
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Adding-MedCondition') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.MedicalConditionAdd()}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 16,
+                color: '#FFFFFF',
+                marginRight: 10,
+              }}
+            >
+              Add
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Adding-MedHistory') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.MedicalHistoryAdd()}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 16,
+                color: '#FFFFFF',
+                marginRight: 10,
+              }}
+            >
+              Add
             </Text>
           </TouchableOpacity>
         </View>

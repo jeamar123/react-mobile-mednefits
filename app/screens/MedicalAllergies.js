@@ -82,6 +82,37 @@ class MedicalAllergies extends Component {
     });
   }
 
+  delMedical_Allergies(allergies_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_ALLERGY + '?value=' + allergies_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(allergies_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalAllergies();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
+    });
+  }
+
   renderMedicalAllergies() {
     return this.state.allergies.map((Data, index) => (
 
@@ -127,6 +158,9 @@ class MedicalAllergies extends Component {
             {Data.date}
           </Text>
           <TouchableOpacity
+            onPress={() =>
+              this.delMedical_Allergies(Data.allergy_id)
+            }
             style={{
               paddingTop: 2,
               paddingBottom: 4,
@@ -159,6 +193,7 @@ class MedicalAllergies extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-MedAllergies"
         />
 
         {(!this.state.data) ? (

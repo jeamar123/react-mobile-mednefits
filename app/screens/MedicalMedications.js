@@ -82,6 +82,37 @@ class MedicalMedications extends Component {
     });
   }
 
+  delMedical_Medication(medication_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_MEDICATION + '?value=' + medication_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(medication_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalMedications();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
+    });
+  }
+
   renderMedicalMedications() {
     return this.state.medication.map((Data, index) => (
 
@@ -127,6 +158,9 @@ class MedicalMedications extends Component {
             {Data.dosage}
           </Text>
           <TouchableOpacity
+            onPress={() =>
+              this.delMedical_Medication(Data.medication_id)
+            }
             style={{
               paddingTop: 2,
               paddingBottom: 4,
@@ -159,6 +193,7 @@ class MedicalMedications extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-Medications"
         />
 
         {(!this.state.data) ? (

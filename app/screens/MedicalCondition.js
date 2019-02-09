@@ -82,6 +82,37 @@ class MedicalCondition extends Component {
     });
   }
 
+  delMedical_Condition(condition_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_CONDITION + '?value=' + condition_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(condition_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalCondition();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
+    });
+  }
+
   renderMedicalCondition() {
     return this.state.medCondition.map((Data, index) => (
 
@@ -127,6 +158,9 @@ class MedicalCondition extends Component {
             {Data.date}
           </Text>
           <TouchableOpacity
+            onPress={() =>
+              this.delMedical_Condition(Data.condition_id)
+            }
             style={{
               paddingTop: 2,
               paddingBottom: 4,
@@ -159,6 +193,7 @@ class MedicalCondition extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-MedCondition"
         />
 
         {(!this.state.data) ? (
