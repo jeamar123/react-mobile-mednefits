@@ -43,7 +43,7 @@ export default class InputText extends Component {
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
           }, this.props.placeholderStyle]}
-          style={style.inputStyle}
+          style={[style.inputStyle, {color: (this.props.style.color) ? this.props.style.color : '#0392cf'}]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
