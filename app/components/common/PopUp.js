@@ -17,13 +17,13 @@ export default class Popup extends Component {
   }
 
   componentDidMount() {
-  	console.log(this.props);
+    console.log(this.props);
     this.setState({ isVisible: this.props.isVisible })
   }
 
-  componentWillMount( ) {
-  	this.setState({ isVisible: this.props.isVisible });
-  	console.log(this.state.isVisible);
+  componentWillMount() {
+    this.setState({ isVisible: this.props.isVisible });
+    console.log(this.state.isVisible);
   }
 
   renderBody() {
@@ -149,7 +149,7 @@ export default class Popup extends Component {
       <View style={{ backgroundColor: '#000' }}>
         <Modal isVisible={this.props.isVisible}>
           <TouchableOpacity
-            onPress={() => this.setState({ isVisible: false })}
+            onPress={() => this.props.closeSectionUpdate(true)}
             style={{
               justifyContent: 'center',
               alignItems: 'flex-end',
