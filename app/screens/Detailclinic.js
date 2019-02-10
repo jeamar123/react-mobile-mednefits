@@ -411,51 +411,51 @@ class HistoryTransaction extends Component {
           <Tab
             heading={this.headingOne()}
           >
-          <ScrollView
+            <ScrollView
               showHorizontalScrollIndicator={false}
               showVerticalScrollIndicator={false}
             >
-            <View style={{ backgroundColor: '#EEEEEE' }}>
-              <View
-                style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
-              >
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    textAlign: 'center', fontSize: 12, marginStart: '2%', color: '#327EC2', paddingTop: 10,
-                    paddingBottom: 10,
-                  }}
+              <View style={{ backgroundColor: '#EEEEEE' }}>
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
                 >
-                  Health Service Menu
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      textAlign: 'center', fontSize: 12, marginStart: '2%', color: '#327EC2', paddingTop: 10,
+                      paddingBottom: 10,
+                    }}
+                  >
+                    Health Service Menu
               </Text>
+                </View>
+                {this.renderProcedure()}
               </View>
-              {this.renderProcedure()}
-            </View>
             </ScrollView>
           </Tab>
           <Tab
             heading={this.headingTwo()}
           >
-          <ScrollView
+            <ScrollView
               showHorizontalScrollIndicator={false}
               showVerticalScrollIndicator={false}
             >
-            <View style={{ backgroundColor: '#EEEEEE' }}>
-              <View
-                style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
-              >
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
-                    paddingBottom: 10,
-                  }}
+              <View style={{ backgroundColor: '#EEEEEE' }}>
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
                 >
-                  You may call our health partner to set appointment or walk in and present your e-card
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
+                      paddingBottom: 10,
+                    }}
+                  >
+                    You may call our health partner to set appointment or walk in and present your e-card
               </Text>
+                </View>
+                {this.renderDoctors()}
               </View>
-              {this.renderDoctors()}
-            </View>
             </ScrollView>
           </Tab>
           <Tab
@@ -465,98 +465,98 @@ class HistoryTransaction extends Component {
               showHorizontalScrollIndicator={false}
               showVerticalScrollIndicator={false}
             >
-            <View style={{ backgroundColor: '#EEEEEE' }}>
-              <View
-                style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
-              >
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
-                    paddingBottom: 10,
-                  }}
+              <View style={{ backgroundColor: '#EEEEEE' }}>
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
                 >
-                  Opening Times
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
+                      paddingBottom: 10,
+                    }}
+                  >
+                    Opening Times
               </Text>
-              </View>
-              {this.renderInformation()}
-              <View
-                style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
-              >
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
-                    paddingBottom: 10,
-                  }}
+                </View>
+                {this.renderInformation()}
+                <View
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
                 >
-                  Contact Information
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      fontSize: 10, marginStart: '2%', color: '#327EC2', paddingTop: 10,
+                      paddingBottom: 10,
+                    }}
+                  >
+                    Contact Information
               </Text>
-              </View>
+                </View>
 
-              <View
-                style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  backgroundColor: '#fff',
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                }}
-              >
-                <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  marginBottom: 10
-                }}>
-                  <Text
-                    style={{
-                      color: '#8c8b7f',
-                      marginLeft: 15,
-                      fontFamily: Config.FONT_FAMILY_LIGHT,
-                      fontSize: 12,
-                    }}
-                  >
-                    Phone
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    backgroundColor: '#fff',
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                  }}
+                >
+                  <View style={{
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    marginBottom: 10
+                  }}>
+                    <Text
+                      style={{
+                        color: '#8c8b7f',
+                        marginLeft: 15,
+                        fontFamily: Config.FONT_FAMILY_LIGHT,
+                        fontSize: 12,
+                      }}
+                    >
+                      Phone
                   </Text>
-                  <Text
-                    style={{
-                      color: 'black',
-                      marginLeft: 15,
-                      fontFamily: Config.FONT_FAMILY_LIGHT,
-                      fontSize: 13,
-                    }}
-                  >
-                    {this.state.Telphone}
+                    <Text
+                      style={{
+                        color: 'black',
+                        marginLeft: 15,
+                        fontFamily: Config.FONT_FAMILY_LIGHT,
+                        fontSize: 13,
+                      }}
+                    >
+                      {this.state.Telphone}
+                    </Text>
+                  </View>
+                  <View style={{
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    marginBottom: 10
+                  }}>
+                    <Text
+                      style={{
+                        color: '#8c8b7f',
+                        marginLeft: 15,
+                        fontFamily: Config.FONT_FAMILY_LIGHT,
+                        fontSize: 12,
+                      }}
+                    >
+                      Email
                   </Text>
-                </View>
-                <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  marginBottom: 10
-                }}>
-                  <Text
-                    style={{
-                      color: '#8c8b7f',
-                      marginLeft: 15,
-                      fontFamily: Config.FONT_FAMILY_LIGHT,
-                      fontSize: 12,
-                    }}
-                  >
-                    Email
-                  </Text>
-                  <Text
-                    style={{
-                      color: 'black',
-                      marginLeft: 15,
-                      fontFamily: Config.FONT_FAMILY_LIGHT,
-                      fontSize: 13,
-                    }}
-                  >
-                    {this.state.Email}
-                  </Text>
+                    <Text
+                      style={{
+                        color: 'black',
+                        marginLeft: 15,
+                        fontFamily: Config.FONT_FAMILY_LIGHT,
+                        fontSize: 13,
+                      }}
+                    >
+                      {this.state.Email}
+                    </Text>
+                  </View>
                 </View>
               </View>
-            </View>
             </ScrollView>
           </Tab>
           <Tab

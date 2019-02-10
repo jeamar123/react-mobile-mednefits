@@ -45,7 +45,7 @@ class MedicalHistory extends Component {
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.getFavorites_Clinic();
     await Core.UserDetail(async (error, result) => {
       // console.log(error);
@@ -68,7 +68,7 @@ class MedicalHistory extends Component {
           medCondition: data.conditions,
           medication: data.medications
         });
-      } else {
+      } else if (result.history == null) {
         setTimeout(function () {
           Actions.pop();
           Core.getNotifyLong('', 'Sorry, no Data here ');
@@ -118,75 +118,82 @@ class MedicalHistory extends Component {
   }
 
   renderMedicalHistory() {
-    return this.state.history.map((Data, index) => (
+    if (this.state.history == null) {
+      return (
+        <View />
+      )
+    }
+    else if (this.state.history) {
+      return this.state.history.map((Data, index) => (
 
-      <View
-        style={{
-          flex: 1,
-          marginTop: 5,
-          marginBottom: 10,
-          height: 50,
-          backgroundColor: '#fff',
-          opacity: 10000,
-        }}
-      >
         <View
           style={{
-            flexDirection: 'row',
-            marginTop: '2%',
-            width: '38%',
-            marginLeft: 5,
-            marginRight: 5
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            height: 50,
+            backgroundColor: '#fff',
+            opacity: 10000,
           }}
         >
-          <Text
+          <View
             style={{
-              fontFamily: Config.FONT_FAMILY_ROMAN,
-              fontSize: 16,
-              marginTop: 5,
+              flexDirection: 'row',
+              marginTop: '2%',
+              width: '38%',
               marginLeft: 5,
-              width: '100%',
-            }}
-          >
-            {Data.clinic_name} {Data.record_id}
-          </Text>
-          <Text
-            style={{
-              fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 14,
-              paddingLeft: '15%',
-              marginTop: 5,
-              width: '100%',
-            }}
-          >
-            {Data.date}
-          </Text>
-          <TouchableOpacity
-            onPress={() =>
-              this.DelMedical_History(Data.record_id)
-            }
-            style={{
-              paddingTop: 2,
-              paddingBottom: 4,
-              backgroundColor: '#ED153F',
-              borderRadius: 5,
-              alignSelf: 'center',
-              width: '45%'
+              marginRight: 5
             }}
           >
             <Text
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
-                color: '#fff',
-                alignSelf: 'center',
-                fontSize: 14,
+                fontSize: 16,
+                marginTop: 5,
+                marginLeft: 5,
+                width: '100%',
               }}
-            > DELETE
+            >
+              {Data.clinic_name} {Data.record_id}
             </Text>
-          </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 14,
+                paddingLeft: '15%',
+                marginTop: 5,
+                width: '100%',
+              }}
+            >
+              {Data.date}
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                this.DelMedical_History(Data.record_id)
+              }
+              style={{
+                paddingTop: 2,
+                paddingBottom: 4,
+                backgroundColor: '#ED153F',
+                borderRadius: 5,
+                alignSelf: 'center',
+                width: '45%'
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#fff',
+                  alignSelf: 'center',
+                  fontSize: 14,
+                }}
+              > DELETE
+            </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    ));
+      ));
+    }
   }
 
 

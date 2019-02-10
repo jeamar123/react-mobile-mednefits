@@ -18,7 +18,7 @@ import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
 import * as Core from '../core';
-import MapView, {Callout, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, { Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 const { width, height } = Dimensions.get('window');
 import * as Common from '../components/common'
 const ASPECT_RATIO = width / height;
@@ -65,14 +65,14 @@ class NearbyClinic extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getClinics()
   }
 
-  getClinics = async()=>{
-  	console.log(this.props);
-    await Core.GetClinicMap(this.props.clinicType, (err, result)=>{
-    	// console.log('result', result)
+  getClinics = async () => {
+    console.warn(this.props);
+    await Core.GetClinicMap(this.props.clinicType, (err, result) => {
+      console.warn('result', result)
       if (result) {
         this.setState({
           clinics: result
@@ -82,7 +82,7 @@ class NearbyClinic extends Component {
     })
   }
 
-  getCurrentPosition=async()=>{
+  getCurrentPosition = async () => {
     latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
     longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
 
@@ -119,85 +119,100 @@ class NearbyClinic extends Component {
             rightNav="search"
           />
           <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{
-            paddingTop: 52,
-            height: '85%'
-          }}
-          // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
-          region={this.state.region}
-          initialRegion={this.state.region}
-          // showsUserLocation={true}
-          loadingEnabled={true}
-          moveOnMarkerPress={true}
-          onPress={this.onMapPress}
+            provider={PROVIDER_GOOGLE}
+            style={{
+              paddingTop: 52,
+              height: '85%'
+            }}
+            // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
+            region={this.state.region}
+            initialRegion={this.state.region}
+            // showsUserLocation={true}
+            loadingEnabled={true}
+            moveOnMarkerPress={true}
+            onPress={this.onMapPress}
           >
 
-          {(this.state.clinics) ? (
-            this.state.clinics.map(marker => (
-              <MapView.Marker
-                title={marker.custom_title}
-                image={marker.annotation_url}
-                key={marker.clinic_id}
-                coordinate={{latitude: Number(marker.lattitude),
-                longitude: Number(marker.longitude)}}
-                description={marker.description}
-                onPress={this.onMarkerPress}
-              >
-                <Callout
-                tooltip
-                style={{
-                  backgroundColor: 'white'
-                }}  
-                onPress={()=>Actions.DetailClinic({ clinic_id: marker.clinic_id, StatusOpen: marker.open_status })}>
-                <View style={{
-                    flex: 1,
-                    padding:0,
-                    backgroundColor: "#caeafd",
-                    borderRadius: 3,
-                    flexDirection: 'column',
-                    minWidth: 100, maxWidth: 300
-                  }}>
-                    <View style={{justifyContent: 'space-between', flexDirection: 'row', width: '100%', margin: 10}}>
-                      <Image
-                        source={{uri: marker.image_url}}
-                        style={{
-                          width: 50,
-                          height: 50,
-                          margin: 5
-                        }}
-                      />
-                      <View style={{flexDirection: 'column'}}>
-                        <Common.Texti
-                          fontFamily={Config.FONT_FAMILY_BOLD}
-                          fontSize={16}
-                          style={{ fontWeight: 'bold', color: '#0f4279' }}
-                        >
-                          {marker.name}
-                        </Common.Texti>
-                        <Common.Texti
-                          fontSize={12}
-                          fontFamily={Config.FONT_FAMILY_BOLD}
-                          fontColor={"#389bd8"}
-                          style={{ color: '#389bd8', fontWeight: 'bold', marginTop: 10, width: '50%' }}
-                        >
-                          {marker.address}
-                        </Common.Texti>
+            {(this.state.clinics) ? (
+              this.state.clinics.map(dataMarker => (
+                <MapView.Marker
+                  title={dataMarker.custom_title}
+                  image={dataMarker.annotation_url}
+                  key={dataMarker.clinic_id}
+                  coordinate={{
+                    latitude: Number(dataMarker.lattitude),
+                    longitude: Number(dataMarker.longitude)
+                  }}
+                  description={dataMarker.description}
+                  onPress={this.onMarkerPress}
+                >
+                  <Callout
+                    tooltip
+                    style={{
+                      backgroundColor: 'white'
+                    }}
+                    onPress={() => Actions.DetailClinic({ clinic_id: dataMarker.clinic_id, StatusOpen: dataMarker.open_status })}>
+                    <View style={{
+                      flex: 1,
+                      padding: 0,
+                      backgroundColor: "#caeafd",
+                      borderRadius: 3,
+                      flexDirection: 'column',
+                      minWidth: 100, maxWidth: 300
+                    }}>
+                      <View style={{ justifyContent: 'space-between', flexDirection: 'row', width: '100%', margin: 10 }}>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            borderRadius: 5,
+                            backgroundColor: '#fff',
+                            paddingTop: 10,
+                            paddingBottom: 10,
+                            marginBottom: 3,
+                            borderWidth: 2,
+                            borderColor: "#fff"
+                          }}>
+                          <Image
+                            source={{ uri: dataMarker.image_url }}
+                            style={{
+                              width: 50,
+                              height: 50,
+                            }}
+                            resizeMode="contain"
+                          />
+                        </View>
+                        <View style={{ flexDirection: 'column' }}>
+                          <Common.Texti
+                            fontFamily={Config.FONT_FAMILY_BOLD}
+                            fontSize={16}
+                            style={{ fontWeight: 'bold', color: '#0f4279' }}
+                          >
+                            {dataMarker.name}
+                          </Common.Texti>
+                          <Common.Texti
+                            fontSize={12}
+                            fontFamily={Config.FONT_FAMILY_BOLD}
+                            fontColor={"#389bd8"}
+                            style={{ color: '#389bd8', fontWeight: 'bold', marginTop: 10, width: '50%' }}
+                          >
+                            {dataMarker.address}
+                          </Common.Texti>
+                        </View>
                       </View>
-                    </View>
-                    <View style={{justifyContent: 'space-between', flexDirection: 'row', width: '100%', flex: 1, backgroundColor: "#62b9eb", alignItems: 'center'}}>
-                      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginRight: 10}}>
-                        <Icons
-                          name="circle"
-                          style={{ color: (marker.open_status == 1 ) ? '#51e500' : '#e83637', fontSize: 10, marginRight: 5 }}
-                        />
-                        <Common.Texti
-                          fontColor={'#616161'}
-                          fontSize={10}
-                        >
-                        {(marker.open_status == 1) ? 'OPEN' : 'CLOSED'}
-                        </Common.Texti>
-                      </View>
+                      <View style={{ justifyContent: 'space-between', flexDirection: 'row', width: '100%', flex: 1, backgroundColor: "#62b9eb", alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginRight: 10 }}>
+                          <Icons
+                            name="circle"
+                            style={{ color: (dataMarker.open_status == 1) ? '#51e500' : '#e83637', fontSize: 10, marginRight: 5 }}
+                          />
+                          <Common.Texti
+                            fontColor={'#616161'}
+                            fontSize={10}
+                          >
+                            {(dataMarker.open_status == 1) ? 'OPEN' : 'CLOSED'}
+                          </Common.Texti>
+                        </View>
                         <TouchableOpacity
                           style={{
                             backgroundColor: '#134c74',
@@ -220,12 +235,12 @@ class NearbyClinic extends Component {
                             BOOK NOW
                           </Common.Texti>
                         </TouchableOpacity>
+                      </View>
                     </View>
-                  </View>
-                </Callout>
-              </MapView.Marker>
-            ))
-          ): (<View />)}
+                  </Callout>
+                </MapView.Marker>
+              ))
+            ) : (<View />)}
           </MapView>
           <View style={{
             height: 50,
@@ -250,8 +265,8 @@ class NearbyClinic extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={()=>Actions.pop()}
-                >
+                onPress={() => Actions.pop()}
+              >
                 <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST VIEW</Text>
               </TouchableOpacity>
 
