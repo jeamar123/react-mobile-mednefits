@@ -9,6 +9,7 @@ import { getAlert, getNotify } from './notify';
 import * as Config from '../config';
 import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
+import Geolocation from 'react-native-geolocation-service';
 
 const headerLogin = {
   'Accept': 'application/json',
@@ -663,7 +664,7 @@ export async function GetLocation() {
   console.warn('get location');
   permissionLocation = await requestLocationPermission()
   console.warn('permissionLocation', permissionLocation);
-  await navigator.geolocation.getCurrentPosition(
+  await Geolocation.getCurrentPosition(
     async (position) => {
       console.warn('position', position);
       latitude = await {
@@ -688,14 +689,15 @@ export async function GetLocation() {
           // console.warn("Set a new longitude");
         }
       })
-
-      return
+      
+      // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
+      return true;
     },
     function (error) {
       Core.getNotify("", error.message);
       // requestLocationPermission()
     },
-    { enableHighAccuracy: true, timeout: 2000 },
+    { enableHighAccuracy: false, timeout: 3000 },
   );
 }
 
@@ -807,6 +809,8 @@ export async function GetClinicMap(clinic_type_id, callback) {
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
+  	console.warn('latitude', latitude)
+    console.warn('longitude', longitude)
     Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
         url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, Image, Linking } from 'react-native';
+import { StatusBar, View, TouchableOpacity, Image, Linking, ScrollView } from 'react-native';
 import {
   Container,
   Text,
@@ -410,7 +410,15 @@ class HistoryTransaction extends Component {
         >
           <Tab
             heading={this.headingOne()}
+            activeTextStyle={{ color: '#fff' }}
+            textStyle={{
+              color: '#ccc'
+            }}
           >
+          <ScrollView
+              showHorizontalScrollIndicator={false}
+              showVerticalScrollIndicator={false}
+            >
             <View style={{ backgroundColor: '#EEEEEE' }}>
               <View
                 style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
@@ -427,10 +435,15 @@ class HistoryTransaction extends Component {
               </View>
               {this.renderProcedure()}
             </View>
+            </ScrollView>
           </Tab>
           <Tab
             heading={this.headingTwo()}
           >
+          <ScrollView
+              showHorizontalScrollIndicator={false}
+              showVerticalScrollIndicator={false}
+            >
             <View style={{ backgroundColor: '#EEEEEE' }}>
               <View
                 style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
@@ -447,10 +460,15 @@ class HistoryTransaction extends Component {
               </View>
               {this.renderDoctors()}
             </View>
+            </ScrollView>
           </Tab>
           <Tab
             heading={this.headingThree()}
           >
+            <ScrollView
+              showHorizontalScrollIndicator={false}
+              showVerticalScrollIndicator={false}
+            >
             <View style={{ backgroundColor: '#EEEEEE' }}>
               <View
                 style={{ justifyContent: 'center', alignItems: 'flex-start', backgroundColor: '#B9F0F5' }}
@@ -542,8 +560,8 @@ class HistoryTransaction extends Component {
                   </Text>
                 </View>
               </View>
-
             </View>
+            </ScrollView>
           </Tab>
           <Tab
             heading={this.headingFour()}

@@ -29,12 +29,12 @@ class Login extends Component {
   }
 
   LoginHandler() {
-    // this.setState({isLoading: true})
+    this.setState({isLoading: true})
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
       // console.log(err)
       // console.log(result);
-      // this.setState({isLoading: false})
+      this.setState({isLoading: false})
       if (result) {
         Actions.Home({ type: 'reset' });
       } else {
