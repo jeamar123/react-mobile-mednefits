@@ -66,9 +66,9 @@ class SearchResult extends Component {
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key == 'clinics') || (key == 'doctors')) {
               if (Array.isArray(v) && (v.length > 0)) {
-                return <View >
+                return <View key={v}>
                   {v.map((ke, va) => {
-                    return <TouchableOpacity onPress={() =>
+                    return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
                     }><View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

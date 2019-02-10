@@ -546,7 +546,7 @@ export function Search(query) {
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
         params = {
-          url: Config.CLINIC_SEARCH + "/?search=" + query,
+          url: Config.CLINIC_MAIN_SEARCH + "/?search=" + query,
           method: 'GET',
           header: {
             'Content-Type': 'application/json',

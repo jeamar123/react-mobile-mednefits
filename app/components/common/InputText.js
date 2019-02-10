@@ -71,6 +71,5 @@ const style = {
   inputStyle: {
     paddingBottom: 5,
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    color: '#fff'
   },
 };

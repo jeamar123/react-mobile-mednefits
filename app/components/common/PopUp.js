@@ -36,7 +36,7 @@ export default class Popup extends Component {
             resizeMode="center"
           />
 
-          <View style={{ marginTop: 5, marginBottom: 20 }}>
+          <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
             <Common.Texti
               fontFamily={Config.FONT_FAMILY_REGULAR}
               fontSize={22}

@@ -70,6 +70,7 @@ class NearbyClinic extends Component {
   }
 
   getClinics = async()=>{
+  	console.log(this.props);
     await Core.GetClinicMap(this.props.clinicType, (err, result)=>{
     	// console.log('result', result)
       if (result) {
@@ -97,20 +98,6 @@ class NearbyClinic extends Component {
     })
   }
 
-  renderImage(image) {
-  	console.log(image);
-  	return (
-      <Image
-        source={{uri: image}}
-        style={{
-          width: 50,
-          height: 50,
-          margin: 5
-        }}
-      />
-  	)
-  }
-
   render() {
     // console.warn("clinisc "+JSON.stringify(this.state.clinics));
     return (
@@ -135,7 +122,7 @@ class NearbyClinic extends Component {
           provider={PROVIDER_GOOGLE}
           style={{
             paddingTop: 52,
-            height: '100%'
+            height: '85%'
           }}
           // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
           region={this.state.region}
@@ -158,7 +145,7 @@ class NearbyClinic extends Component {
                 onPress={this.onMarkerPress}
               >
                 <Callout
-                tooltip={true}
+                tooltip
                 style={{
                   backgroundColor: 'white'
                 }}  
@@ -172,7 +159,14 @@ class NearbyClinic extends Component {
                     minWidth: 100, maxWidth: 300
                   }}>
                     <View style={{justifyContent: 'space-between', flexDirection: 'row', width: '100%', margin: 10}}>
-                      {this.renderImage(marker.image_url)}
+                      <Image
+                        source={{uri: marker.image_url}}
+                        style={{
+                          width: 50,
+                          height: 50,
+                          margin: 5
+                        }}
+                      />
                       <View style={{flexDirection: 'column'}}>
                         <Common.Texti
                           fontFamily={Config.FONT_FAMILY_BOLD}
@@ -185,7 +179,7 @@ class NearbyClinic extends Component {
                           fontSize={12}
                           fontFamily={Config.FONT_FAMILY_BOLD}
                           fontColor={"#389bd8"}
-                          style={{ color: '#389bd8', fontWeight: 'bold', marginTop: 10, width: '80%' }}
+                          style={{ color: '#389bd8', fontWeight: 'bold', marginTop: 10, width: '50%' }}
                         >
                           {marker.address}
                         </Common.Texti>
@@ -233,6 +227,36 @@ class NearbyClinic extends Component {
             ))
           ): (<View />)}
           </MapView>
+          <View style={{
+            height: 50,
+            backgroundColor: '#0392cf'
+          }}>
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginRight: '3%',
+              marginLeft: '3%',
+              marginBottom: 5,
+              marginTop: 5,
+              alignItem: 'center'
+            }}>
+              <TouchableOpacity onPress={() => Actions.Home()}>
+                <View style={{
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                }}>
+                  <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
+                  <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={()=>Actions.pop()}
+                >
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST VIEW</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
         </View>
       </Drawer>
     );
