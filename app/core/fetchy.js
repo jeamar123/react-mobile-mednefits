@@ -861,7 +861,6 @@ export async function paginateClinicResults(clinic_type_id, page, callback) {
 }
 
 export async function GetClinicMap(clinic_type_id, callback) {
-  await enableLocationDevice();
   // try {
   latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
@@ -871,23 +870,27 @@ export async function GetClinicMap(clinic_type_id, callback) {
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
-  	console.warn('latitude', latitude)
-    console.warn('longitude', longitude)
-    Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
-      params = {
-        url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
-        method: 'GET',
-        header: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: result,
-        },
-      };
+  	await enableLocationDevice( async function(error, result) {
+      if(result) {
+  	    // console.warn('latitude', latitude)
+        // console.warn('longitude', longitude)
+        Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+          params = {
+            url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
+            method: 'GET',
+            header: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: result,
+            },
+          };
 
-      fetching(params, result => {
-        console.warn(result.data.clinics);
-        callback('', result.data.clinics);
-      });
-    });
+          fetching(params, result => {
+            // console.warn(result.data.clinics);
+            callback('', result.data.clinics);
+          });
+        });
+      }
+  	})
   }
 }
