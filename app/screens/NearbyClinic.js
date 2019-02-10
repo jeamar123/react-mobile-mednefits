@@ -15,6 +15,12 @@ import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
 import * as Core from '../core';
 
+const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+  const paddingToBottom = 5;
+  return layoutMeasurement.height + contentOffset.y >=
+    contentSize.height - paddingToBottom;
+};
+
 class NearbyClinic extends Component {
   constructor(props) {
     super(props);
@@ -90,20 +96,26 @@ class NearbyClinic extends Component {
   		console.log(this.state.last_page);
   	  var current_page = await this.state.current_page + 1;
   	  console.log(current_page);
-  	  if(current_page != this.state.last_page) {
+  	  // if(current_page != this.state.last_page) {
   		  console.log('query more')
   		  this.setState({ processing: true });
-  		  await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async function(error, result){
-          if(result) {
+  		  await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async (error, result) => {
+  		  	if(result) {
           	console.log(result);
-  		      this.setState({ current_page: this.state.current_page + 1, processing: false});
+          	if(result.status) {
+          	  data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+          	  var new_data = this.state.DataClinic.concat(data.clinics);
+  		        this.setState({ DataClinic: new_data, current_page: current_page, processing: false});
+          	} else {
+          		this.setState({ processing: false });
+          	}
           } else {
           	this.setState({ processing: false });
           }
   		  })
-  	  } else {
-  	  	console.log('stop');
-  	  }
+  	  // } else {
+  	  // 	console.log('stop');
+  	  // }
   	}
   }
 
@@ -174,6 +186,8 @@ class NearbyClinic extends Component {
               }}
             >
               <Text
+                ellipsizeMode='tail' 
+                numberOfLines={3}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
                   fontSize: 14,
@@ -184,6 +198,8 @@ class NearbyClinic extends Component {
                 {Data.name}
               </Text>
               <Text
+                ellipsizeMode='tail' 
+                numberOfLines={3}
                 style={{
                   color: '#8c8b7f',
                   fontSize: 10,
@@ -277,9 +293,16 @@ class NearbyClinic extends Component {
                   marginTop: '2%',
                 }}
               >
-                <ScrollView pagingEnabled={true} onScrollEndDrag={this.paginateClinicResults} scrollEventThrottle={10}>
-                  {this.renderTransactionIn_Network()}
+                <ScrollView onScroll={({nativeEvent}) => {
+                  if (isCloseToBottom(nativeEvent)) {
+                    this.paginateClinicResults();
+                  }
+                }}>
+                  { 
+                    this.renderTransactionIn_Network()
+                  }
                 </ScrollView>
+                
               </View>
 
             )}

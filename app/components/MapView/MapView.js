@@ -138,7 +138,6 @@ class ForYou extends React.Component {
       if (fetchData.data == '{}') {
       } else {
         const getValue = fetchData;
-        console.log('getValue', getValue)
         var count = Object.keys(getValue).length;
         this.setState({
           placeCount: count,
