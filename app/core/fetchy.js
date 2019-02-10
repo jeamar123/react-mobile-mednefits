@@ -9,6 +9,7 @@ import { getAlert, getNotify } from './notify';
 import * as Config from '../config';
 import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
+import Geolocation from 'react-native-geolocation-service';
 
 const headerLogin = {
   'Accept': 'application/json',
@@ -610,22 +611,23 @@ export function AddFavouriteClinic(param, callback) {
 //   );
 // }
 
-async function enableLocationDevice() {
+async function enableLocationDevice(callback) {
   try {
     console.warn('switch location');
     await SystemSetting.isLocationEnabled().then(async (enable) => {
       if (!enable) {
         await SystemSetting.switchLocation(async () => {
           console.warn('switch location successfully');
-          await GetLocation();
-          return true;
+          // await GetLocation();
+          return callback('', true);
         })
       } else {
-        return true;
+        return callback('', true);
       }
     })
   } catch (e) {
     console.warn(e.message + "error enableLocationDevice");
+    callback(true);
   }
 }
 
@@ -633,70 +635,82 @@ async function requestLocationPermission() {
   console.warn('request permission')
   const chckLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
   if (chckLocationPermission === PermissionsAndroid.RESULTS.GRANTED) {
-    console.warn('granted');
-    await enableLocationDevice();
+    console.warn('already granted');
+    // await enableLocationDevice();
     return true;
   } else {
     try {
       const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
           'title': 'Location Permission Device',
-          'message': 'We need this permission to look for nearby location of clinic'
+          'message': 'We need this permission to look for nearby location for clinic'
         }
       )
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.warn('granted');
         console.warn('You can use location');
-        await enableLocationDevice();
+        // await enableLocationDevice();
+        // getNotify('', 'Location Permission Granted.');
         return true;
       } else {
-        console.warn('location denied');
+        console.log('location denied');
+        getNotify('', 'Location Permission Denied.');
         return false;
       }
     } catch (err) {
-      console.warn(err);
+      console.log(err);
+      getNotify('', err);
+      return false;
     }
   }
 }
 
-export async function GetLocation() {
+export async function GetLocationPermission(callback) {
   console.warn('get location');
-  permissionLocation = await requestLocationPermission()
-  console.warn('permissionLocation', permissionLocation);
-  await navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      console.warn('position', position);
-      latitude = await {
-        key: Config.LATITUDE,
-        value: JSON.stringify(position.coords.latitude)
-      }
+  let result = await requestLocationPermission();
+  console.log('result permission', result);
+  if(result) {
+  	callback('', result);
+  } else {
+  	callback(result);
+  }
+  // permissionLocation = await requestLocationPermission()
+  // console.warn('permissionLocation', permissionLocation);
+  // await Geolocation.getCurrentPosition(
+  //   async (position) => {
+  //     console.warn('position', position);
+  //     latitude = await {
+  //       key: Config.LATITUDE,
+  //       value: JSON.stringify(position.coords.latitude)
+  //     }
 
-      longitude = await {
-        key: Config.LONGITUDE,
-        value: JSON.stringify(position.coords.longitude)
-      }
+  //     longitude = await {
+  //       key: Config.LONGITUDE,
+  //       value: JSON.stringify(position.coords.longitude)
+  //     }
 
-      await Core.SetDataLocal(latitude, (err, result) => {
-        if (result) {
-          // console.warn("Set a new latitude");
-        }
-      })
+  //     await Core.SetDataLocal(latitude, (err, result) => {
+  //       if (result) {
+  //         // console.warn("Set a new latitude");
+  //       }
+  //     })
 
-      await Core.SetDataLocal(longitude, (err, result) => {
-        // Common.getNotify("","")
-        if (result) {
-          // console.warn("Set a new longitude");
-        }
-      })
-
-      return
-    },
-    function (error) {
-      Core.getNotify("", error.message);
-      // requestLocationPermission()
-    },
-    { enableHighAccuracy: true, timeout: 2000 },
-  );
+  //     await Core.SetDataLocal(longitude, (err, result) => {
+  //       // Common.getNotify("","")
+  //       if (result) {
+  //         // console.warn("Set a new longitude");
+  //       }
+  //     })
+      
+  //     // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
+  //     return;
+  //   },
+  //   function (error) {
+  //     Core.getNotify("", error.message);
+  //     // requestLocationPermission()
+  //   },
+  //   { enableHighAccuracy: false, timeout: 3000 },
+  // );
 }
 
 // export async function GetClinicMapList(callback) {
@@ -737,40 +751,68 @@ export async function checkLocationFirst(clinic_type_id, callback) {
 
 
 export async function GetClinicMapList(clinic_type_id, callback) {
-  await GetLocation();
-  // try {
-  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
-  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+  // final code flow
+  await enableLocationDevice( async function(error, result) {
+    console.log(error);
+    console.log(result);
+    if(result) {
+    	console.log('get location clinics')
+      Geolocation.getCurrentPosition(
+        async (position) => {
+          console.log('position', position);
+          latitude = await {
+            key: Config.LATITUDE,
+            value: JSON.stringify(position.coords.latitude)
+          }
 
-  if (!latitude || !longitude) {
-    console.warn('Waiting to get device location');
-    getNotify('', 'Waiting to get device location');
-    return false;
-  } else {
-    console.warn('latitude', latitude)
-    console.warn('longitude', longitude)
-    console.warn('list clinic_type_id', clinic_type_id)
-    console.warn(Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1");
-    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
-      params = {
-        url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
-        method: 'GET',
-        header: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: result,
+          longitude = await {
+            key: Config.LONGITUDE,
+            value: JSON.stringify(position.coords.longitude)
+          }
+
+          await Core.SetDataLocal(latitude, (err, result) => {
+            if (result) {
+              // console.warn("Set a new latitude");
+            }
+          })
+
+          await Core.SetDataLocal(longitude, (err, result) => {
+            // Common.getNotify("","")
+            if (result) {
+              // console.warn("Set a new longitude");
+            }
+          })
+          
+          // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
+          // query location
+          await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
+          	console.log('querying location clinics')
+            params = {
+              url: Config.CLINIC_PAGE_NEARBY + "?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&type=" + clinic_type_id + "&page=1",
+              method: 'GET',
+              header: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: token,
+              },
+            };
+            await fetching(params, async result => {
+              console.warn(result);
+              await callback('', result);
+            });
+          });
+          return;
         },
-      };
-      await fetching(params, async result => {
-        console.warn(result);
-        await callback('', result);
-      });
-    });
-  }
-  // } catch (e) {
-  // 	console.warn(e);
-  // 	getNotify('', 'Failed get data, try again');
-  // }
+        function (error) {
+        	console.log(error);
+          callback(error, '');
+        },
+        { enableHighAccuracy: false, timeout: 3000 },
+      );
+    } else {
+    	return callback(false);
+    }
+  });
 }
 
 export function MainSearch(query) {
@@ -796,6 +838,28 @@ export function MainSearch(query) {
   })
 }
 
+export async function paginateClinicResults(clinic_type_id, page, callback) {
+	latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+
+  await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
+    console.log('querying location clinics paginate')
+    params = {
+      url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=" + page,
+      method: 'GET',
+      header: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+    };
+    await fetching(params, async result => {
+      console.warn(result);
+      await callback('', result);
+    });
+  });
+}
+
 export async function GetClinicMap(clinic_type_id, callback) {
   await enableLocationDevice();
   // try {
@@ -807,6 +871,8 @@ export async function GetClinicMap(clinic_type_id, callback) {
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
+  	console.warn('latitude', latitude)
+    console.warn('longitude', longitude)
     Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
         url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",

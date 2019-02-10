@@ -147,15 +147,12 @@ class ResultList extends Component {
 class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
-    Core.checkLocationFirst(clinic_type_id, (error, result) => {
+    Core.GetLocationPermission((error, result) => {
     	console.log(error)
     	console.log(result)
     	if(result) {
     		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
     	}
-      // data =
-      //   typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      // console.warn(data);
     });
   }
 
@@ -229,9 +226,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log('Home is mounted');
-    await Core.GetLocation()
-    await this.getClinicType()
+   await Core.GetLocationPermission(function(error, result){
+
+   });
+   await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;

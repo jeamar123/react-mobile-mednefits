@@ -26,8 +26,12 @@ class NearbyClinic extends Component {
       status: '',
       DataClinic: [],
       data: false,
+      current_page: null,
+      last_page: null,
+      processing: false,
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
+    this.paginateClinicResults = this.paginateClinicResults.bind(this);
   }
 
   closeDrawer() {
@@ -46,19 +50,61 @@ class NearbyClinic extends Component {
 
   async componentWillMount() {
     await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
-    	// console.log(error);
-    	// console.log(result);
-    	if(result.status) {
-        data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-        await this.setState({ DataClinic: data.clinics, data: true });
+    	console.log(error);
+    	console.log(result);
+    	if(result) {
+    	  if(result.status) {
+          data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+          // console.log(data.current_page);
+          // console.log(data.last_page);
+          await this.setState({ DataClinic: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
+    	  } else {
+    		  setTimeout(function() {
+    		    Actions.pop();
+    		    Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+    		  }, 2000);
+    	  }
     	} else {
-    		setTimeout(function() {
-    		  Actions.pop();
-    		  Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-    		}, 2000);
+    		if(error.code === 3) {
+    		  setTimeout(function() {
+    		    Actions.pop();
+    		    Core.getNotifyLong("", 'Unable to get location. Please try again.');
+    		  }, 1000);
+    	  } else {
+    		  setTimeout(function() {
+    		    Actions.pop();
+    		    Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+    		  }, 2000);
+    	  }
     	}
       // console.log(data);
     });
+  }
+
+  async paginateClinicResults(event) {
+  	console.log('paginate');
+  	// console.log(this.state);
+  	// console.log(event)
+  	if(!this.state.processing) {
+  		console.log(this.state.current_page);
+  		console.log(this.state.last_page);
+  	  var current_page = await this.state.current_page + 1;
+  	  console.log(current_page);
+  	  if(current_page != this.state.last_page) {
+  		  console.log('query more')
+  		  this.setState({ processing: true });
+  		  await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async function(error, result){
+          if(result) {
+          	console.log(result);
+  		      this.setState({ current_page: this.state.current_page + 1, processing: false});
+          } else {
+          	this.setState({ processing: false });
+          }
+  		  })
+  	  } else {
+  	  	console.log('stop');
+  	  }
+  	}
   }
 
   renderFavourite(favourite) {
@@ -114,7 +160,7 @@ class NearbyClinic extends Component {
                 height: 80,
                 width: 80,
                 resizeMode: 'center',
-                alignItem: 'center',
+                alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
                 marginRight: '-5%',
@@ -231,7 +277,7 @@ class NearbyClinic extends Component {
                   marginTop: '2%',
                 }}
               >
-                <ScrollView>
+                <ScrollView pagingEnabled={true} onScrollEndDrag={this.paginateClinicResults} scrollEventThrottle={10}>
                   {this.renderTransactionIn_Network()}
                 </ScrollView>
               </View>

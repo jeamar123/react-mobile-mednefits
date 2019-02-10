@@ -67,7 +67,7 @@ class HomeContent extends Component {
     } finally {
       setTimeout(() => {
         this.props.isLoadingSearch("false")
-      }, 10000)
+      }, 2000)
     }
   }
 

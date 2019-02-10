@@ -53,27 +53,27 @@ class DetailEclaim extends Component {
       Core.SendEClaim(eclaimFile, (err, result)=>{
         // Core.getNotify("",result.message)
         if (result.status) {
+          this.setState({
+            isLoading: false
+          })
           Actions.ThanksEclaim({type: 'reset'})
         } else {
-          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true })
+          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
         }
 
-        this.setState({
-          isLoading: false
-        })
       })
     } catch (e) {
       Core.getNotify("", "Failed to send e claim")
 
       this.setState({
-        isLoading: false
+        message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false
       })
     } finally {
       setTimeout(()=>{
         this.setState({
           isLoading: false
         })
-      },10000)
+      }, 2000)
     }
   }
 

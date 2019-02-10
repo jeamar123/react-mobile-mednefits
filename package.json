@@ -26,6 +26,7 @@
     "react-native-document-picker": "^2.2.0",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-fs": "^2.13.3",
+    "react-native-geolocation-service": "^2.0.0",
     "react-native-gifted-form": "^0.1.1",
     "react-native-image-picker": "^0.27.1",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",

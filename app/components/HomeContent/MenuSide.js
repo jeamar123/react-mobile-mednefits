@@ -34,15 +34,13 @@ const MenuSide = () => (
         />
       </Body>
       <View style={{ marginTop: 10 }} />
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.Home({
                 type: 'reset',
               })
-            }
-          >
+            }>
+        <Left>
+          <TouchableOpacity>
             <Image
               style={{
                 justifyContent: 'center',
@@ -55,26 +53,18 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.Home({
-                type: 'reset',
-              })
-            }
-          >
-            <Text style={styles.text}>Home</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>Home</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.Balance({
                 type: 'reset',
               })
-            }
+            }>
+        <Left>
+          <TouchableOpacity
+            
           >
             <Image
               style={{
@@ -88,27 +78,17 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.Balance({
-                type: 'reset',
-              })
-            }
-          >
-            <Text style={styles.text}>Wallet</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>Wallet</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.EclaimSubmit({
                 type: 'reset',
               })
-            }
-          >
+            }>
+        <Left>
+          <TouchableOpacity>
             <Image
               style={{
                 justifyContent: 'center',
@@ -121,23 +101,15 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.EclaimSubmit()
-            }
-          >
-            <Text style={styles.text}>E-Claim</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>E-Claim</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.HistoryTransaction()
-            }
-          >
+            }>
+        <Left>
+          <TouchableOpacity>
             <Image
               style={{
                 justifyContent: 'center',
@@ -150,23 +122,15 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.HistoryTransaction()
-            }
-          >
-            <Text style={styles.text}>History</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>History</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.Favourites()
-            }
-          >
+            }>
+        <Left>
+          <TouchableOpacity>
             <Image
               style={{
                 justifyContent: 'center',
@@ -179,23 +143,15 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.Favourites()
-            }
-          >
-            <Text style={styles.text}>Favourites</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>Favourites</Text>
         </Body>
       </ListItem>
 
-      <ListItem icon style={{ marginTop: 10 }}>
-        <Left>
-          <TouchableOpacity
-            onPress={() =>
+      <ListItem icon style={{ marginTop: 10 }} onPress={() =>
               Actions.Profile()
-            }
-          >
+            }>
+        <Left>
+          <TouchableOpacity>
             <Image
               style={{
                 justifyContent: 'center',
@@ -208,13 +164,7 @@ const MenuSide = () => (
           </TouchableOpacity>
         </Left>
         <Body style={{ borderBottomWidth: 0 }}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.Profile()
-            }
-          >
-            <Text style={styles.text}>Profile</Text>
-          </TouchableOpacity>
+          <Text style={styles.text}>Profile</Text>
         </Body>
       </ListItem>
     </Content>
