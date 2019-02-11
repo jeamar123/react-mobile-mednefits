@@ -180,7 +180,7 @@ class NearbyClinic extends Component {
                               width: 50,
                               height: 50,
                             }}
-                            resizeMode="contain"
+                            resizeMode="cover"
                           />
                         </View>
                         <View style={{ flexDirection: 'column' }}>
