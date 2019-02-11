@@ -24,7 +24,8 @@ class DetailEclaim extends Component {
       isLoading: false,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      member: null
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -77,12 +78,22 @@ class DetailEclaim extends Component {
     }
   }
 
+  componentDidMount( ) {
+    this.renderMember();
+  }
+
   isVisibleUpdate() {
     this.setState({ failed: false })
   }
 
-  render() {
-    console.warn(this.props.claimdata);
+  async renderMember( ) {
+    const user = await this.props.claimdata.memberData.find(item => item.value === this.props.claimdata.member)
+    if(user) {
+    	this.setState({ member: user.label })
+    }
+  }
+
+  render() {    
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -238,7 +249,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.memberData[0].label) ? this.props.claimdata.memberData[0].label : ""}
+                placeholder={(this.state.member) ? this.state.member : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '19%' }}

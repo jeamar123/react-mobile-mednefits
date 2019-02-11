@@ -807,7 +807,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
         	console.log(error);
           callback(error, '');
         },
-        { enableHighAccuracy: false, timeout: 3000 },
+        { enableHighAccuracy: true, timeout: 3000 },
       );
     } else {
     	return callback(false);

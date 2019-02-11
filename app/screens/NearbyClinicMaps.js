@@ -170,6 +170,7 @@ class NearbyClinic extends Component {
                             paddingTop: 10,
                             paddingBottom: 10,
                             marginBottom: 3,
+                            marginRight: 5,
                             borderWidth: 2,
                             borderColor: "#fff"
                           }}>
