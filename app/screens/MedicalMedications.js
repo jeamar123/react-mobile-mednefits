@@ -82,73 +82,115 @@ class MedicalMedications extends Component {
     });
   }
 
-  renderMedicalMedications() {
-    return this.state.medication.map((Data, index) => (
+  delMedical_Medication(medication_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_MEDICATION + '?value=' + medication_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(medication_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalMedications();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
+    });
+  }
 
-      <View
-        style={{
-          flex: 1,
-          marginTop: 5,
-          marginBottom: 10,
-          height: 50,
-          backgroundColor: '#fff',
-          opacity: 10000,
-        }}
-      >
+  renderMedicalMedications() {
+    if (this.state.medication == null) {
+      return (
+        <View />
+      )
+    } else if (this.state.medication) {
+
+
+      return this.state.medication.map((Data, index) => (
+
         <View
           style={{
-            flexDirection: 'row',
-            marginTop: '2%',
-            width: '38%',
-            marginLeft: 5,
-            marginRight: 5
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            height: 50,
+            backgroundColor: '#fff',
+            opacity: 10000,
           }}
         >
-          <Text
+          <View
             style={{
-              fontFamily: Config.FONT_FAMILY_ROMAN,
-              fontSize: 16,
-              marginTop: 5,
+              flexDirection: 'row',
+              marginTop: '2%',
+              width: '38%',
               marginLeft: 5,
-              width: '100%',
-            }}
-          >
-            {Data.name}
-          </Text>
-          <Text
-            style={{
-              fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 14,
-              paddingLeft: '15%',
-              marginTop: 5,
-              width: '100%',
-            }}
-          >
-            {Data.dosage}
-          </Text>
-          <TouchableOpacity
-            style={{
-              paddingTop: 2,
-              paddingBottom: 4,
-              backgroundColor: '#ED153F',
-              borderRadius: 5,
-              alignSelf: 'center',
-              width: '45%'
+              marginRight: 5
             }}
           >
             <Text
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
-                color: '#fff',
-                alignSelf: 'center',
-                fontSize: 14,
+                fontSize: 16,
+                marginTop: 5,
+                marginLeft: 5,
+                width: '100%',
               }}
-            > DELETE
+            >
+              {Data.name}
             </Text>
-          </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 14,
+                paddingLeft: '15%',
+                marginTop: 5,
+                width: '100%',
+              }}
+            >
+              {Data.dosage}
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                this.delMedical_Medication(Data.medication_id)
+              }
+              style={{
+                paddingTop: 2,
+                paddingBottom: 4,
+                backgroundColor: '#ED153F',
+                borderRadius: 5,
+                alignSelf: 'center',
+                width: '45%'
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#fff',
+                  alignSelf: 'center',
+                  fontSize: 14,
+                }}
+              > DELETE
+            </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    ));
+      ));
+    }
   }
 
 
@@ -159,6 +201,7 @@ class MedicalMedications extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-Medications"
         />
 
         {(!this.state.data) ? (

@@ -216,7 +216,6 @@ export default class EclaimForm extends Component {
               style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
             >
               <Common.InputDate
-                // color={"#0392cf"}
                 placeholder={this.state.date}
                 onChangeDate={(value) => this.setState({ date: value })}
                 value={this.state.date}

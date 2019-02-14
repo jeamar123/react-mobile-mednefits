@@ -2,6 +2,7 @@ package com.mednefitsmobile;
 
 import android.app.Application;
 
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
@@ -36,7 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
             new ImagePickerPackage(),
             new RNFSPackage(),
             new ReactNativeDocumentPicker(),
-            new RNCameraPackage()
+            new RNCameraPackage(),
+            new RNFusedLocationPackage()
       );
     }
 

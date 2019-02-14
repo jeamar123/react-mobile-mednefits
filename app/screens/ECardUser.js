@@ -291,8 +291,8 @@ class ECardUser extends Component {
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }}
-                    onPress={() => Linking.openURL('mailto:happinness@mednefits.com')}>
-                    happinness@mednefits.com
+                    onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
+                    happiness@mednefits.com
                   </Text>
                     {' '}
                     <Text

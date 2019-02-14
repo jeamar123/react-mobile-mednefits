@@ -12,11 +12,12 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#EFEFF4',
     height: height / 6,
-    width: width,
+    width: width
   },
   title: {
     paddingLeft: 15,
     paddingRight: 15,
+    marginTop: 10
   },
   detail: {
     paddingLeft: 15,

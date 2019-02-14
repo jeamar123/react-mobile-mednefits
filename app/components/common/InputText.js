@@ -70,6 +70,6 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     paddingBottom: 5,
-    fontFamily: Config.FONT_FAMILY_ROMAN
+    fontFamily: Config.FONT_FAMILY_ROMAN,
   },
 };

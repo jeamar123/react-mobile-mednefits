@@ -45,9 +45,37 @@ class MedicalAllergies extends Component {
     }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     this.getFavorites_Clinic();
-    this.GetMedicalAllergies();
+    await Core.UserDetail(async (error, result) => {
+      // console.log(error);
+      // console.log(result);
+      if (result.status) {
+        data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await this.setState({
+          Full_name: data.profile.full_name,
+          nirc_number: data.profile.nric,
+          email: data.profile.email,
+          PhoneNumber: data.profile.mobile_phone,
+          Dob: data.profile.dob,
+          Weight: data.profile.weight,
+          Height: data.profile.height,
+          bmi: data.profile.bmi,
+          blodeType: data.profile.blood_type,
+          photo_url: data.profile.photo_url,
+          history: data.history,
+          allergies: data.allergies,
+          medCondition: data.conditions,
+          medication: data.medications
+        });
+      } else {
+        setTimeout(function () {
+          Actions.pop();
+          Core.getNotifyLong('', 'Sorry, no Data here ');
+        }, 20000);
+      }
+      // console.log(data);
+    });
   }
 
   getFavorites_Clinic() {
@@ -58,97 +86,113 @@ class MedicalAllergies extends Component {
     });
   }
 
-  GetMedicalAllergies() {
-    Core.UserDetail((error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
-        Full_name: data.profile.full_name,
-        nirc_number: data.profile.nric,
-        email: data.profile.email,
-        PhoneNumber: data.profile.mobile_phone,
-        Dob: data.profile.dob,
-        Weight: data.profile.weight,
-        Height: data.profile.height,
-        bmi: data.profile.bmi,
-        blodeType: data.profile.blood_type,
-        photo_url: data.profile.photo_url,
-        history: data.history,
-        allergies: data.allergies,
-        medCondition: data.conditions,
-        medication: data.medications
-      });
+  delMedical_Allergies(allergies_id) {
+    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+      console.warn(result)
+      if (result) {
+        fetch(Config.AUTH_DELETE_ALLERGY + '?value=' + allergies_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': result,
+          }
+        })
+          .then(response => response.json())
+          .then(res => {
+            console.warn(allergies_id);
+            if (res.status == true) {
+              Core.getNotify('', 'Success Delete Data');
+              Actions.MedicalAllergies();
+            } else {
+              Core.getNotify('', 'Failed Delete Data');
+            }
+          })
+          .catch(error => {
+            console.warn('error fetching', error.message);
+          });
+      } else {
+        console.warn("else");
+        // Actions.login({ type: 'reset' });
+      }
     });
   }
 
   renderMedicalAllergies() {
-    return this.state.allergies.map((Data, index) => (
+    if (this.state.allergies == null) {
+      return (
+        <View />
+      )
+    } else if (this.state.allergies) {
+      return this.state.allergies.map((Data, index) => (
 
-      <View
-        style={{
-          flex: 1,
-          marginTop: 5,
-          marginBottom: 10,
-          height: 50,
-          backgroundColor: '#fff',
-          opacity: 10000,
-        }}
-      >
         <View
           style={{
-            flexDirection: 'row',
-            marginTop: '2%',
-            width: '38%',
-            marginLeft: 5,
-            marginRight: 5
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            height: 50,
+            backgroundColor: '#fff',
+            opacity: 10000,
           }}
         >
-          <Text
+          <View
             style={{
-              fontFamily: Config.FONT_FAMILY_ROMAN,
-              fontSize: 16,
-              marginTop: 5,
+              flexDirection: 'row',
+              marginTop: '2%',
+              width: '38%',
               marginLeft: 5,
-              width: '100%',
-            }}
-          >
-            {Data.name}
-          </Text>
-          <Text
-            style={{
-              fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 14,
-              paddingLeft: '15%',
-              marginTop: 5,
-              width: '100%',
-            }}
-          >
-            {Data.date}
-          </Text>
-          <TouchableOpacity
-            style={{
-              paddingTop: 2,
-              paddingBottom: 4,
-              backgroundColor: '#ED153F',
-              borderRadius: 5,
-              alignSelf: 'center',
-              width: '45%'
+              marginRight: 5
             }}
           >
             <Text
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
-                color: '#fff',
-                alignSelf: 'center',
-                fontSize: 14,
+                fontSize: 16,
+                marginTop: 5,
+                marginLeft: 5,
+                width: '100%',
               }}
-            > DELETE
+            >
+              {Data.name}
             </Text>
-          </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: Config.FONT_FAMILY_LIGHT,
+                fontSize: 14,
+                paddingLeft: '15%',
+                marginTop: 5,
+                width: '100%',
+              }}
+            >
+              {Data.date}
+            </Text>
+            <TouchableOpacity
+              onPress={() =>
+                this.delMedical_Allergies(Data.allergy_id)
+              }
+              style={{
+                paddingTop: 2,
+                paddingBottom: 4,
+                backgroundColor: '#ED153F',
+                borderRadius: 5,
+                alignSelf: 'center',
+                width: '45%'
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#fff',
+                  alignSelf: 'center',
+                  fontSize: 14,
+                }}
+              > DELETE
+            </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    ));
+      ));
+    }
   }
 
 
@@ -159,6 +203,7 @@ class MedicalAllergies extends Component {
         <Navbar
           drawerAction={this.drawerActionCallback}
           leftNav="back"
+          rightNav="Adding-MedAllergies"
         />
 
         {(!this.state.data) ? (

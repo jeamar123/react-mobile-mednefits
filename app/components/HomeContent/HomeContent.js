@@ -67,7 +67,7 @@ class HomeContent extends Component {
     } finally {
       setTimeout(() => {
         this.props.isLoadingSearch("false")
-      }, 10000)
+      }, 2000)
     }
   }
 
@@ -103,10 +103,10 @@ class HomeContent extends Component {
             isClearSearch={this.state.isClearSearch}
             isClearSearchChange={this.clearProcess}
             iconColor="#fff"
-            alignItems="center"
+            // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "91%",
+              width: "87%",
               borderRadius: 5,
               color: "#fff",
               padding: 3,

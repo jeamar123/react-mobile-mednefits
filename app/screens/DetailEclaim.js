@@ -24,7 +24,8 @@ class DetailEclaim extends Component {
       isLoading: false,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      member: null
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -53,36 +54,46 @@ class DetailEclaim extends Component {
       Core.SendEClaim(eclaimFile, (err, result)=>{
         // Core.getNotify("",result.message)
         if (result.status) {
+          this.setState({
+            isLoading: false
+          })
           Actions.ThanksEclaim({type: 'reset'})
         } else {
-          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true })
+          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
         }
 
-        this.setState({
-          isLoading: false
-        })
       })
     } catch (e) {
       Core.getNotify("", "Failed to send e claim")
 
       this.setState({
-        isLoading: false
+        message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false
       })
     } finally {
       setTimeout(()=>{
         this.setState({
           isLoading: false
         })
-      },10000)
+      }, 2000)
     }
+  }
+
+  componentDidMount( ) {
+    this.renderMember();
   }
 
   isVisibleUpdate() {
     this.setState({ failed: false })
   }
 
-  render() {
-    console.warn(this.props.claimdata);
+  async renderMember( ) {
+    const user = await this.props.claimdata.memberData.find(item => item.value === this.props.claimdata.member)
+    if(user) {
+    	this.setState({ member: user.label })
+    }
+  }
+
+  render() {    
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -238,7 +249,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.memberData[0].label) ? this.props.claimdata.memberData[0].label : ""}
+                placeholder={(this.state.member) ? this.state.member : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '19%' }}

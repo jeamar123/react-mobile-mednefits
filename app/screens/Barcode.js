@@ -6,6 +6,7 @@ import * as Core from '../core'
 import { RNCamera, FaceDetector } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
 import { Spinner, Text } from '../components/common/Spinner'
+import { Popup } from '../components/common';
 import * as Config from '../config'
 
 const PendingView = () => (
@@ -22,11 +23,15 @@ class Barcode extends Component {
       torchMode: 'off',
       cameraType: 'back',
       data: false,
-      isLoading: false
+      isLoading: false,
+      failed: false,
+      title: null,
+      message: null
     };
 
     this.scanBarcode = this.scanBarcode.bind(this)
     this.barcodeHandler = this.barcodeHandler.bind(this)
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
   componentDidUpdate(prevProps, prevStates) {
@@ -38,6 +43,10 @@ class Barcode extends Component {
     }
   }
 
+  isVisibleUpdate() {
+    this.setState({ failed: false })
+  }
+
   scanBarcode = (data) => {
   	this.setState({ isLoading: true })
     barcodeData = data
@@ -46,17 +55,27 @@ class Barcode extends Component {
     try {
       Core.GetBarcodeData(barcodeData.data, (result)=>{
         console.warn("res "+result);
+        console.log(result)
         if (result.status) {
           Actions.SelectService({
             type:'reset',
             services: result.data.clinic_procedures,
             clinicid: result.data.clinic_id
           })
+          this.setState({
+            isLoading: false,
+            failed: false,
+          })
+        } else {
+          this.setState({
+            isLoading: false,
+            failed: true,
+            title: 'Clinic Scan Error',
+            message: result.message
+          })
         }
 
-        this.setState({
-          isLoading: false
-        })
+        
       })
     } catch (e) {
       this.setState({
@@ -90,7 +109,14 @@ class Barcode extends Component {
     return (
       <Container>
         <Navbar leftNav="back-home" />
-
+        <Popup
+          kind="loginFailed"
+          isVisible={this.state.failed}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         {(this.state.isLoading) ? (
           <Spinner />
         ) : (

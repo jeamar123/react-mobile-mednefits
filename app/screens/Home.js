@@ -66,9 +66,9 @@ class SearchResult extends Component {
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key == 'clinics') || (key == 'doctors')) {
               if (Array.isArray(v) && (v.length > 0)) {
-                return <View >
+                return <View key={v}>
                   {v.map((ke, va) => {
-                    return <TouchableOpacity onPress={() =>
+                    return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
                     }><View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -147,15 +147,12 @@ class ResultList extends Component {
 class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
-    Core.checkLocationFirst(clinic_type_id, (error, result) => {
+    Core.GetLocationPermission((error, result) => {
     	console.log(error)
     	console.log(result)
     	if(result) {
     		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
     	}
-      // data =
-      //   typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      // console.warn(data);
     });
   }
 
@@ -229,9 +226,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log('Home is mounted');
-    await Core.GetLocation()
-    await this.getClinicType()
+   await Core.GetLocationPermission(function(error, result){
+
+   });
+   await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;

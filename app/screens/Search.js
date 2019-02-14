@@ -91,13 +91,35 @@ class ResultList extends Component {
               CLINIC
           </Common.Texti>
           </View>
+          <View style={{
+              flexDirection: 'row'
+            }}>
+           <Common.Texti
+              fontColor={"black"}
+              fontSize={10}
+              marginTop={5}
+              marginBottom={5}
+            >
+              {this.props.address}
+            </Common.Texti>
+          </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Common.Texti
+              fontSize={10}
               fontColor={(this.props.isOpen == 0) ? "red" : "green"}
             >
               {(this.props.isOpen == 0) ? "Closed" : "Open"}
             </Common.Texti>
           </View>
+          <View
+            style={{
+              borderBottomColor: '#cccccc',
+              borderBottomWidth: 0.8,
+              marginTop: 15,
+              marginBottom: 15,
+              marginRight: -15
+            }}
+          />
         </TouchableOpacity>
       </View>
     )
@@ -137,7 +159,7 @@ class Home extends Component {
 
     try {
       result = await Core.Search(this.state.query)
-
+      console.log(result);
       this.setState({
         result: result.data.clinics,
         isLoading: false
@@ -163,6 +185,7 @@ class Home extends Component {
       key={item.clinic_id}
       id={item.clinic_id}
       title={item.name}
+      address={item.address}
       isOpen={item.open_status}
     />
   );

@@ -70,18 +70,14 @@ class ConfirmPay extends Component {
     Core.SendPayment(params, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
-
         Actions.Summary({ result: result });
+        this.setState({ isLoading: false });
       } else if (!result.status) {
         // Core.getNotify('', result.message);
-        this.setState({ title: result.message, message: result.sub_mesage, failed: true })
+        this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false  })
       } else {
-      	this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true })
+      	this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true, isLoading: false  })
         // Core.getNotify('', 'Failed to send payment, please try again');
-      }
-
-      if (result) {
-        this.setState({ isLoading: false });
       }
     });
   }
