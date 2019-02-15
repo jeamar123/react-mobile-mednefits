@@ -395,7 +395,7 @@ class HistoryTransaction extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="previous" />
+        <Navbar leftNav="back" />
         <DetailClinic
           clinicid={this.state.resultData.clinic_id}
           clinicimage={this.state.resultData.image_url}
