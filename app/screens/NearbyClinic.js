@@ -15,7 +15,7 @@ import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
 import * as Core from '../core';
 
-const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
   const paddingToBottom = 5;
   return layoutMeasurement.height + contentOffset.y >=
     contentSize.height - paddingToBottom;
@@ -56,71 +56,71 @@ class NearbyClinic extends Component {
 
   async componentWillMount() {
     await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
-    	console.log(error);
-    	console.log(result);
-    	if(result) {
-    	  if(result.status) {
+      console.log(error);
+      console.log(result);
+      if (result) {
+        if (result.status) {
           data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
           // console.log(data.current_page);
           // console.log(data.last_page);
           await this.setState({ DataClinic: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
-    	  } else {
-    		  setTimeout(function() {
-    		    Actions.pop();
-    		    Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-    		  }, 2000);
-    	  }
-    	} else {
-    		if(error.code === 3) {
-    		  setTimeout(function() {
-    		    Actions.pop();
-    		    Core.getNotifyLong("", 'Unable to get location. Please try again.');
-    		  }, 1000);
-    	  } else {
-    		  setTimeout(function() {
-    		    Actions.pop();
-    		    Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-    		  }, 2000);
-    	  }
-    	}
+        } else {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+          }, 2000);
+        }
+      } else {
+        if (error.code === 3) {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong("", 'Unable to get location. Please try again.');
+          }, 1000);
+        } else {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+          }, 2000);
+        }
+      }
       // console.log(data);
     });
   }
 
   async paginateClinicResults(event) {
-  	console.log('paginate');
-  	// console.log(this.state);
-  	// console.log(event)
-  	if(!this.state.processing) {
-  		console.log(this.state.current_page);
-  		console.log(this.state.last_page);
-  	  var current_page = await this.state.current_page + 1;
-  	  console.log(current_page);
-  	  // if(current_page != this.state.last_page) {
-  		  console.log('query more')
-  		  this.setState({ processing: true });
-  		  await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async (error, result) => {
-  		  	if(result) {
-          	console.log(result);
-          	if(result.status) {
-          	  data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-          	  var new_data = this.state.DataClinic.concat(data.clinics);
-  		        this.setState({ DataClinic: new_data, current_page: current_page, processing: false});
-          	} else {
-          		this.setState({ processing: false });
-          	}
+    console.log('paginate');
+    // console.log(this.state);
+    // console.log(event)
+    if (!this.state.processing) {
+      console.log(this.state.current_page);
+      console.log(this.state.last_page);
+      var current_page = await this.state.current_page + 1;
+      console.log(current_page);
+      // if(current_page != this.state.last_page) {
+      console.log('query more')
+      this.setState({ processing: true });
+      await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async (error, result) => {
+        if (result) {
+          console.log(result);
+          if (result.status) {
+            data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+            var new_data = this.state.DataClinic.concat(data.clinics);
+            this.setState({ DataClinic: new_data, current_page: current_page, processing: false });
           } else {
-          	this.setState({ processing: false });
+            this.setState({ processing: false });
           }
-  		  })
-  	  // } else {
-  	  // 	console.log('stop');
-  	  // }
-  	}
+        } else {
+          this.setState({ processing: false });
+        }
+      })
+      // } else {
+      // 	console.log('stop');
+      // }
+    }
   }
 
   renderFavourite(favourite) {
-    if(favourite == 1) {
+    if (favourite == 1) {
       return (
         <Image
           source={require('../../assets/apps/like_fav.png')}
@@ -175,22 +175,22 @@ class NearbyClinic extends Component {
                 alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                marginRight: '-5%',
+                marginRight: '2%',
               }}
             />
             <View
               style={{
                 flexDirection: 'column',
-                marginTop: '4%',
-                width: '45%',
+                marginTop: '2%',
+                width: '50%',
               }}
             >
               <Text
-                ellipsizeMode='tail' 
-                numberOfLines={3}
+                ellipsizeMode='tail'
+                numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 14,
+                  fontSize: 12,
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -198,7 +198,7 @@ class NearbyClinic extends Component {
                 {Data.name}
               </Text>
               <Text
-                ellipsizeMode='tail' 
+                ellipsizeMode='tail'
                 numberOfLines={3}
                 style={{
                   color: '#8c8b7f',
@@ -209,7 +209,7 @@ class NearbyClinic extends Component {
                 {Data.address}
               </Text>
               {Data.open_status === 1 ? (
-                <Text style={{ marginTop: 5 }}>
+                <Text style={{ marginTop: 1 }}>
                   <Icons
                     name="circle"
                     style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
@@ -218,13 +218,13 @@ class NearbyClinic extends Component {
                   <Text style={{
                     fontFamily: Config.FONT_FAMILY_LIGHT,
                     fontSize: 10,
-                    marginTop: 5,
+                    marginTop: 2,
                     marginLeft: 10,
                     color: '#616161',
                   }}>Now Open</Text>
                 </Text>
               ) : (
-                  <Text style={{ marginTop: 5 }}>
+                  <Text style={{ marginTop: 1 }}>
                     <Icons
                       name="circle"
                       style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
@@ -233,14 +233,14 @@ class NearbyClinic extends Component {
                     <Text style={{
                       fontFamily: Config.FONT_FAMILY_LIGHT,
                       fontSize: 10,
-                      marginTop: 5,
+                      marginTop: 2,
                       marginLeft: 10,
                       color: '#616161',
                     }}>Closed</Text>
                   </Text>
                 )}
             </View>
-            { this.renderFavourite(Data.favourite) }
+            {this.renderFavourite(Data.favourite)}
           </View>
         </View>
       </TouchableOpacity>
@@ -264,7 +264,7 @@ class NearbyClinic extends Component {
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
             drawerAction={this.drawerActionCallback}
-            leftNav={true}
+            leftNav="back-home"
             rightNav="search"
           />
 
@@ -293,16 +293,16 @@ class NearbyClinic extends Component {
                   marginTop: '2%',
                 }}
               >
-                <ScrollView onScroll={({nativeEvent}) => {
+                <ScrollView onScroll={({ nativeEvent }) => {
                   if (isCloseToBottom(nativeEvent)) {
                     this.paginateClinicResults();
                   }
                 }}>
-                  { 
+                  {
                     this.renderTransactionIn_Network()
                   }
                 </ScrollView>
-                
+
               </View>
 
             )}
@@ -329,12 +329,12 @@ class NearbyClinic extends Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={()=>Actions.NearbyClinicMaps({
+                onPress={() => Actions.NearbyClinicMaps({
                   clinicType: this.props.ClinicTypeID,
                   NameCategory: this.props.NameCategory
                 })}
-                >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8 , fontWeight: 'bold'}}>MAP VIEW</Text>
+              >
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
               </TouchableOpacity>
 
             </View>

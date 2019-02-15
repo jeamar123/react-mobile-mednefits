@@ -115,7 +115,7 @@ class NearbyClinic extends Component {
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
             drawerAction={this.drawerActionCallback}
-            leftNav={true}
+            leftNav="back"
             rightNav="search"
           />
           <MapView
@@ -268,7 +268,7 @@ class NearbyClinic extends Component {
               <TouchableOpacity
                 onPress={() => Actions.pop()}
               >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST VIEW</Text>
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST</Text>
               </TouchableOpacity>
 
             </View>
