@@ -19,7 +19,7 @@ class DefaultList extends Component {
     return (
       <View>
         <Common.Texti
-          fontColor={"#A7A7A7"}
+          fontColor={"#A9A9A9"}
           style={{
             color: "#cccccc"
           }}>
@@ -92,9 +92,9 @@ class ResultList extends Component {
           </Common.Texti>
           </View>
           <View style={{
-              flexDirection: 'row'
-            }}>
-           <Common.Texti
+            flexDirection: 'row'
+          }}>
+            <Common.Texti
               fontColor={"black"}
               fontSize={10}
               marginTop={5}
@@ -198,7 +198,7 @@ class Home extends Component {
           drawerAction={this.drawerActionCallback}
           leftNav="close"
         />
-        <View style={{ backgroundColor: "#DBDBDB" }}>
+        <View style={{ backgroundColor: "#0000" }}>
           <Common.InputText
             value={this.state.query}
             returnKeyType="search"
@@ -216,7 +216,6 @@ class Home extends Component {
             style={{
               backgroundColor: '#fff',
               margin: 15,
-              padding: 5,
               borderRadius: 5,
             }}
           />
