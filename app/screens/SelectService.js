@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons } from '../components/common';
-import Navbar from '../components/common/Navbar';
+import { Buttons } from '../components/common/Buttons2';
+import Navbar from '../components/common/NavbarGrey';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -20,38 +20,37 @@ class SelectService extends Component {
   }
 
   remove(array, element) {
-    for( var i = 0; i < array.length-1; i++){
-       if ( array[i] === element) {
-         array.splice(i, 1);
-       }
+    for (var i = 0; i < array.length - 1; i++) {
+      if (array[i] === element) {
+        array.splice(i, 1);
+      }
     }
 
     return array
   }
 
-  sum(input){
+  sum(input) {
 
     if (toString.call(input) !== "[object Array]")
       return false;
 
-      var total =  0;
-      for(var i=0;i<input.length;i++)
-      {
-        if(isNaN(input[i])){
+    var total = 0;
+    for (var i = 0; i < input.length; i++) {
+      if (isNaN(input[i])) {
         continue;
-         }
-          total += Number(input[i]);
       }
+      total += Number(input[i]);
+    }
 
-      return total;
+    return total;
   }
 
-  selectedService(data){
-    let serviceId = "services-"+data.procedureid
+  selectedService(data) {
+    let serviceId = "services-" + data.procedureid
 
-    serviceArr  = []
+    serviceArr = []
     serviceArr2 = this.state.services
-    service     = [...serviceArr, ...serviceArr2]
+    service = [...serviceArr, ...serviceArr2]
 
     isExist = service.includes(data.procedureid);
 
@@ -69,7 +68,7 @@ class SelectService extends Component {
         borderWidth: 1
       });
 
-      service.splice( service.indexOf(data.procedureid), 1 )
+      service.splice(service.indexOf(data.procedureid), 1)
     }
 
     this.setState({ services: service })
@@ -77,7 +76,7 @@ class SelectService extends Component {
 
   render() {
     return (
-      <Container style={{ backgroundColor: '#eeeeee' }}>
+      <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="back-home"
@@ -86,19 +85,19 @@ class SelectService extends Component {
         />
         <Content padder>
           <View style={styles.contain}>
-            {this.props.services.map((data, key)=>(
+            {this.props.services.map((data, key) => (
               <TouchableOpacity
                 key={key}
-                ref={"services-"+data.procedureid}
-                style={styles.gridBox} onPress={()=>this.selectedService(data)}>
-                <Text style={{ fontFamily: 'HelveticaNeue-Thin', textAlign: 'center', fontSize: 12 }}>
+                ref={"services-" + data.procedureid}
+                style={styles.gridBox} onPress={() => this.selectedService(data)}>
+                <Text style={{ fontFamily: 'HelveticaNeue-Roman', textAlign: 'center', fontSize: 14 }}>
                   {data.name}
                 </Text>
               </TouchableOpacity>
             ))}
           </View>
 
-          <Buttons onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
+          <Buttons style={{ width: '100%' }} onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
             Proceed
           </Buttons>
         </Content>
@@ -114,7 +113,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.9,
-    height: height / 7,
+    height: height / 8,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
@@ -123,7 +122,7 @@ const styles = {
   },
   gridBoxActive: {
     width: width / 3.9,
-    height: height / 7,
+    height: height / 8,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
