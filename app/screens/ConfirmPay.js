@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Buttons, Spinner, Popup } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
+import * as Config from '../config';
 import styles from '../components/DollarBenefits';
 const { width, height } = Dimensions.get('window');
 import * as Core from '../core';
@@ -74,9 +75,9 @@ class ConfirmPay extends Component {
         this.setState({ isLoading: false });
       } else if (!result.status) {
         // Core.getNotify('', result.message);
-        this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false  })
+        this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false })
       } else {
-      	this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true, isLoading: false  })
+        this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true, isLoading: false })
         // Core.getNotify('', 'Failed to send payment, please try again');
       }
     });
@@ -84,7 +85,7 @@ class ConfirmPay extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
         <Popup
           kind="insufficientCredit"
@@ -158,14 +159,14 @@ class ConfirmPay extends Component {
             <CardItem cardBody>
               <Body
                 style={{
-                  height: 150,
+                  height: 120,
                   flex: 1,
                   justifyContent: 'center',
                   alignItems: 'flex-start',
                   marginLeft: 50,
                 }}
               >
-                <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
+                <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
                   Payment Amount
                 </Text>
                 <View
@@ -174,21 +175,23 @@ class ConfirmPay extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ marginTop: '7%', fontFamily: 'helvetica' }}>
-                    {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 22 }}>
+                    {this.state.currency ? this.state.currency : ' '} {' '}
+                  </Text>
+                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 30 }}>
+                    {this.props.amount}
                   </Text>
                 </View>
               </Body>
             </CardItem>
 
-            <Buttons
-              onPress={() => this.SendPayment()}
-              isLoading={this.state.isLoading}
-            >
-              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-            </Buttons>
-            <View style={{ marginBottom: 20 }} />
           </Card>
+          <Buttons
+            onPress={() => this.SendPayment()}
+            isLoading={this.state.isLoading}
+          >
+            Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+          </Buttons>
         </Content>
       </Container>
     );

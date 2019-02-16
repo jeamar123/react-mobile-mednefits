@@ -67,7 +67,7 @@ class BenefitsDollar extends Component {
     };
 
     Core.SendPayment(params, (err, result) => {
-    	console.log(result);
+      console.log(result);
       if (result.status) {
         Core.getNotify('', result.message);
 
@@ -88,7 +88,7 @@ class BenefitsDollar extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
         <Popup
           kind="insufficientCredit"
