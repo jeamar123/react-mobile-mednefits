@@ -150,9 +150,9 @@ class ClinicList extends Component {
     Core.GetLocationPermission((error, result) => {
     	console.log(error)
     	console.log(result)
-    	if(result) {
+    	// if(result) {
     		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
-    	}
+    	// }
     });
   }
 

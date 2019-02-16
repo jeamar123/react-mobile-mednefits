@@ -39,7 +39,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string>We need this permission to look for nearby location for clinic</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need this permission to look for nearby location for clinic</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
