@@ -372,7 +372,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
-              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 18,
             }}
           >
