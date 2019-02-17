@@ -15,7 +15,7 @@ export default class InputDate extends Component {
             return <Common.Texti fontColor={"#cccccc"}>{this.props.placeholder}</Common.Texti>
           }
           const dateStr = `${day}-${month}-${year}`
-          return <Common.Texti fontColor={"#cccccc"} >{dateStr}</Common.Texti>
+          return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
         }}
         onDateChanged={({ year, month, day, date }) => this.props.onChangeDate(`${day}-${month}-${year}`)}
       />
