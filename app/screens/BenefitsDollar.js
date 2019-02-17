@@ -99,7 +99,7 @@ class BenefitsDollar extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Benefits Dollars" />
+        <Navbar leftNav="cancel" title="Mednefits Credits" />
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View
             style={{
