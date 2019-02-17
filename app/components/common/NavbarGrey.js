@@ -17,7 +17,7 @@ export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Empat Kali',
+      title: 'Mednefits',
       loading: false,
       right: false,
       left: false,
