@@ -71,7 +71,7 @@ class DetailEClaim_Transaction extends Component {
           borderBottomColor: '#cccccc',
           borderBottomWidth: 0.8,
           marginTop: '-2%',
-          marginBottom: '5%',
+          marginBottom: '1%',
         }}
       />
     );
@@ -138,14 +138,14 @@ class DetailEClaim_Transaction extends Component {
               marginTop: 30,
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
-              Item/Service
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
+              Claim Type
             </Text>
             <TextInput
-              placeholder="Item/Service"
+              placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '7%' }}
+              style={{ marginTop: '-3%', marginLeft: '18%', fontSize: 13 }}
               value={this.state.data.service}
             />
           </View>
@@ -159,14 +159,14 @@ class DetailEClaim_Transaction extends Component {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
-              Merchant
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
+              Provider
             </Text>
             <TextInput
-              placeholder="Merchant"
+              placeholder="Provider"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '13%' }}
+              style={{ marginTop: '-3%', marginLeft: '23%', fontSize: 13 }}
               value={this.state.data.merchant}
             />
           </View>
@@ -180,14 +180,14 @@ class DetailEClaim_Transaction extends Component {
               marginVertical: 10,
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: '2%' }}>
+            <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Claim #
             </Text>
             <TextInput
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '17%' }}
+              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13 }}
               value={this.state.data.transaction_id}
             />
           </View>
@@ -202,7 +202,7 @@ class DetailEClaim_Transaction extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '3%' }}
+              style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13, marginRight: '3%' }}
             >
               Date & Time
             </Text>
@@ -210,7 +210,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '5%' }}
+              style={{ marginTop: '-3%', marginLeft: '14%', fontSize: 13 }}
               value={this.state.data.date}
             />
           </View>
@@ -225,7 +225,7 @@ class DetailEClaim_Transaction extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: '2%', marginRight: '6%' }}
+              style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13, marginRight: '6%' }}
             >
               Claim Date
             </Text>
@@ -233,7 +233,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%' }}
+              style={{ marginTop: '-3%', marginLeft: '12%', fontSize: 13 }}
               value={this.state.data.claim_date}
             />
           </View>
@@ -251,7 +251,8 @@ class DetailEClaim_Transaction extends Component {
               style={{
                 color: '#c4c4c4',
                 marginLeft: '2%',
-                marginRight: '10%',
+                marginRight: '16%',
+                fontSize: 13
               }}
             >
               Member
@@ -260,8 +261,36 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Member"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '5%' }}
+              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
               value={this.state.user ? this.state.user : 'N/A'}
+            />
+          </View>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '2%',
+                fontSize: 13
+              }}
+            >
+              Spending Account
+            </Text>
+            <TextInput
+              placeholder="Spending Account"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '4%', fontSize: 13 }}
+              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>
           {this._renderDivider()}
