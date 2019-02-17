@@ -38,7 +38,7 @@ export default class Popup extends Component {
 
           <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
             <Common.Texti
-              fontFamily={Config.FONT_FAMILY_REGULAR}
+              fontFamily={Config.FONT_FAMILY_ROMAN}
               fontSize={22}
               style={{
                 color: '#38424B',
@@ -83,7 +83,7 @@ export default class Popup extends Component {
               {this.props.title}
             </Common.Texti>
             <Common.Texti
-              fontFamily={Config.FONT_FAMILY_REGULAR}
+              fontFamily={Config.FONT_FAMILY_ROMAN}
               fontSize={14}
               numberOfLines={10}
               style={{
@@ -118,7 +118,7 @@ export default class Popup extends Component {
               {this.props.title}
             </Common.Texti>
             <Common.Texti
-              fontFamily={Config.FONT_FAMILY_REGULAR}
+              fontFamily={Config.FONT_FAMILY_ROMAN}
               fontSize={14}
               numberOfLines={10}
               style={{
