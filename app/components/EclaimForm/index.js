@@ -17,8 +17,8 @@ export default class EclaimForm extends Component {
     super(props)
 
     this.state = {
-      date: "Choose Date",
-      time: "Choose Time",
+      date: "Input Date",
+      time: "Input Time",
       type: "medical",
       claimType: [
         {
@@ -26,11 +26,11 @@ export default class EclaimForm extends Component {
           value: null
         }
       ],
-      claimTypeState: "Choose Service",
+      claimTypeState: "Select",
       claim: false,
       member: false,
       memberData: [],
-      memberState: "Choose Member",
+      memberState: "Select",
       isDateTimePickerVisible: false,
       amount: false,
       provider: false,
@@ -58,7 +58,7 @@ export default class EclaimForm extends Component {
         });
 
         this.setState({
-          memberState: "Choose member",
+          memberState: "Select",
           memberData: dataMember,
         })
 
@@ -80,7 +80,7 @@ export default class EclaimForm extends Component {
         this.setState({ claimType: dataClaim })
       }
 
-      this.setState({ claimTypeState: "Choose Service" })
+      this.setState({ claimTypeState: "Select" })
     })
   }
 
@@ -104,8 +104,8 @@ export default class EclaimForm extends Component {
       (!this.state.provider) ||
       (!this.state.amount) ||
       (!this.state.member) ||
-      (this.state.date == "Choose Date") ||
-      (this.state.time == "Choose Time")
+      (this.state.Idate == "nput Date") ||
+      (this.state.time == "Input Time")
     ) {
       Core.getNotify("", "Please fill mandatory form")
     } else {
@@ -161,7 +161,7 @@ export default class EclaimForm extends Component {
             }}
           >
             <Common.Texti>
-              *Item/Service
+              *Claim Type
           </Common.Texti>
 
             <Common.InputSelect
@@ -186,12 +186,12 @@ export default class EclaimForm extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-              *Merchant
+              *Provider
           </Common.Texti>
             <Common.InputText
               value={this.state.provider}
               onChangeText={text => this.setState({ provider: text })}
-              placeholder="Merchant"
+              placeholder="Name of Provider"
             />
           </View>
 
@@ -225,7 +225,7 @@ export default class EclaimForm extends Component {
                 type="SimpleLineIcons"
                 name="arrow-right"
                 style={{
-                  // color: "#cccccc",
+                  color: "#cccccc",
                   marginLeft: 10,
                   fontSize: 18
                 }}
@@ -262,7 +262,7 @@ export default class EclaimForm extends Component {
                 type="SimpleLineIcons"
                 name="arrow-right"
                 style={{
-                  // color: "#cccccc",
+                  color: "#cccccc",
                   marginLeft: 10,
                   fontSize: 18
                 }}
