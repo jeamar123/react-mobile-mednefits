@@ -106,13 +106,12 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "87%",
+              width: "90%",
               borderRadius: 5,
               color: "#fff",
-              padding: 3,
               backgroundColor: '#0A6186',
-              marginLeft: 15,
-              marginRight: 15,
+              marginLeft: 10,
+              marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center'
             }}
@@ -166,7 +165,7 @@ class HomeContent extends Component {
                   }}
                   source={require('../../../assets/apps/wallet.png')}
                 />
-                <Text style={styles.title}>B-Dollars</Text>
+                <Text style={styles.title}>Wallet</Text>
                 <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
               </View>
             </TouchableOpacity>

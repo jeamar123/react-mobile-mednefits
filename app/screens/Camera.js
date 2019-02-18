@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { StatusBar, View, StyleSheet, TouchableOpacity, ActivityIndicator,ImageBackground,Platform, Dimensions,PermissionsAndroid } from 'react-native';
-import { Container, Content, Icon } from 'native-base';
-import Navbar from '../components/common/Navbar';
-import { RNCamera, FaceDetector } from 'react-native-camera';
-import {Text} from '../common'
-import * as Common from '../components/common'
-import * as Config from '../config'
-import * as Core from '../core'
+import { View, StyleSheet, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
+import { RNCamera } from 'react-native-camera';
+import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
-import {Actions} from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
+import Navbar from '../components/common/NavbarGrey';
+import { Text } from '../common';
+import * as Common from '../components/common';
+import * as Core from '../core';
+import * as Config from '../config';
 import * as mime from 'react-native-mime-types';
 
 const options = {
@@ -56,7 +56,7 @@ class Camera extends Component {
           preview: data.uri,
           previewHeight: data.height * ratio,
           previewWidth: data.width * ratio,
-          filename: 'receipt'+this.props.member+'.jpg',
+          filename: 'receipt' + this.props.member + '.jpg',
           filetype: 'images/jpg'
         })
       }
@@ -67,31 +67,31 @@ class Camera extends Component {
     }
   }
 
-  retakeAction=()=>{
+  retakeAction = () => {
     this.setState({
       preview: false
     })
   }
 
-  async requestPermission(){
-    if(Platform.OS === 'android') {
-        const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
-        return result === PermissionsAndroid.RESULTS.GRANTED || result === true
+  async requestPermission() {
+    if (Platform.OS === 'android') {
+      const result = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA)
+      return result === PermissionsAndroid.RESULTS.GRANTED || result === true
     }
     return true;
   }
 
-  renderCamera=()=>{
+  renderCamera = () => {
     if (this.state.preview) {
-      return(
+      return (
         <ImageBackground
-          source={{uri: this.state.preview}}
+          source={{ uri: this.state.preview }}
           style={styles.preview}
           resizeMode="contain"
         />
       )
     } else {
-      return(
+      return (
         <RNCamera
           ref={ref => {
             this.camera = ref;
@@ -102,7 +102,7 @@ class Camera extends Component {
           permissionDialogTitle={'Permission to use camera'}
           permissionDialogMessage={'We need your permission to use your camera phone'}
         >
-        {({ camera, status, recordAudioPermissionStatus }) => {
+          {({ camera, status, recordAudioPermissionStatus }) => {
 
             if (status !== 'READY') this.requestPermission()
 
@@ -112,9 +112,9 @@ class Camera extends Component {
     }
   }
 
-  changeFlash=()=>{
+  changeFlash = () => {
     if (!this.state.flashMode) {
-      Core.getNotify("","Flash is on")
+      Core.getNotify("", "Flash is on")
     }
 
     this.setState({
@@ -123,7 +123,7 @@ class Camera extends Component {
 
   }
 
-  openGallery=()=>{
+  openGallery = () => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
 
@@ -143,20 +143,20 @@ class Camera extends Component {
     });
   }
 
-  finishReceipt=()=>{
-    Core.getNotify("","Receipt attached")
+  finishReceipt = () => {
+    Core.getNotify("", "Receipt attached")
 
     this.setState({
       attachedPanel: true
     })
   }
 
-  renderAction=()=>{
-    return(
+  renderAction = () => {
+    return (
       <View style={styles.actionPanel}>
         <TouchableOpacity
-          onPress={()=>Actions.DetailEclaim({claimdata: Object.assign({},{uri:this.state.preview, filename: this.state.filename, filetype:this.state.filetype}, this.props.claimdata)})}
-          style={{width: "100%", backgroundColor: "#0392cf", justifyContent: 'center', alignItems: 'center', display: (this.state.attachedPanel) ? 'flex' : 'none',paddingTop: 15,paddingBottom: 15}}>
+          onPress={() => Actions.DetailEclaim({ claimdata: Object.assign({}, { uri: this.state.preview, filename: this.state.filename, filetype: this.state.filetype }, this.props.claimdata) })}
+          style={{ width: "100%", backgroundColor: "#0392cf", justifyContent: 'center', alignItems: 'center', display: (this.state.attachedPanel) ? 'flex' : 'none', paddingTop: 15, paddingBottom: 15 }}>
           <Icon
             type="SimpleLineIcons"
             name="check"
@@ -165,14 +165,14 @@ class Camera extends Component {
             }}
           />
         </TouchableOpacity>
-        <View style={{width: "100%",backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex'}}>
+        <View style={{ width: "100%", backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex' }}>
           <TouchableOpacity
             onPress={this.changeFlash}
             style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 5,
-                marginLeft: 15
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 5,
+              marginLeft: 15
             }}>
             <ImageBackground
               source={(this.state.flashMode) ? require("../../assets/apps/flash-active.png") : require("../../assets/apps/flash.png")}
@@ -186,10 +186,10 @@ class Camera extends Component {
           <TouchableOpacity
             onPress={this.openGallery}
             style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 5,
-                marginRight: 15
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 5,
+              marginRight: 15
             }}>
             <ImageBackground
               source={require('../../assets/apps/gallery-round.png')}
@@ -201,13 +201,13 @@ class Camera extends Component {
             />
           </TouchableOpacity>
         </View>
-        <View style={{width: "100%",backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', paddingTop: 15, paddingBottom: 15, display: (this.state.attachedPanel) ? 'none' : 'flex'}}>
+        <View style={{ width: "100%", backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', paddingTop: '7%', paddingBottom: 15, display: (this.state.attachedPanel) ? 'none' : 'flex' }}>
           <TouchableOpacity
             onPress={this.retakeAction}
             style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: 15
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: '4%'
             }}>
             <Common.Texti
               fontColor={"#0392cf"}
@@ -215,40 +215,40 @@ class Camera extends Component {
               Retake
             </Common.Texti>
           </TouchableOpacity>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-              <Icon type="Feather" name="camera"  style={{color: 'white', fontSize: 20, justifyContent: 'center'}} />
+              <Icon type="Feather" name="camera" style={{ color: 'white', fontSize: 26, justifyContent: 'center' }} />
             </TouchableOpacity>
           </View>
           {
             (this.state.preview) ?
-            (
-              <TouchableOpacity
-                onPress={this.finishReceipt}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginRight: 15
-              }}>
-                <Common.Texti
-                  fontColor={"#0392cf"}
-                >
-                  Finish
+              (
+                <TouchableOpacity
+                  onPress={this.finishReceipt}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginRight: '4%'
+                  }}>
+                  <Common.Texti
+                    fontColor={"#0392cf"}
+                  >
+                    Finish
                 </Common.Texti>
-              </TouchableOpacity>
-            ) : (
-              <Text
-                style={{
-                  fontFamily: 'HelveticaNeue-Roman',
-                  fontSize: 14,
-                  color: '#FFFFFF',
-                  marginRight: 15,
-                  opacity: 0
-                }}
-              >
-                DONE
+                </TouchableOpacity>
+              ) : (
+                <Text
+                  style={{
+                    fontFamily: 'HelveticaNeue-Roman',
+                    fontSize: 14,
+                    color: '#FFFFFF',
+                    marginRight: 15,
+                    opacity: 0
+                  }}
+                >
+                  DONE
               </Text>
-            )
+              )
           }
         </View>
       </View>
@@ -257,13 +257,11 @@ class Camera extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1, backgroundColor: '#efeff4' }}>
         <Navbar
           leftNav="back"
           title="Receipt Verification"
           subtitle="E-Claim"
-          backgroundColor={"#efeff4"}
-          fontColor={"#2d3436"}
         />
         <Core.Loader
           isVisible={this.state.isLoading}
@@ -282,16 +280,16 @@ const styles = StyleSheet.create({
   },
   preview: {
     flex: 1,
-    marginTop: 50,
+    marginTop: '6%',
     width: "100%"
   },
   actionPanel: {
-
+    height: '21%'
   },
   capture: {
-    height: 50,
-    width: 50,
-    borderRadius: 50/2,
+    height: 60,
+    width: 60,
+    borderRadius: 60 / 2,
     backgroundColor: "#0392cf",
     padding: 10,
     justifyContent: 'center',

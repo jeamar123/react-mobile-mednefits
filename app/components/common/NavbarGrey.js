@@ -17,7 +17,7 @@ export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Empat Kali',
+      title: 'Mednefits',
       loading: false,
       right: false,
       left: false,
@@ -58,10 +58,10 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 14, fontFamily: 'Helvetica' }}
             >
               Back
             </Text>
@@ -120,11 +120,11 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: '#000', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
               style={{
-                color: '#fff',
+                color: '#000',
                 fontSize: 14,
                 fontFamily: 'HelveticaNeue-Roman',
               }}
@@ -145,7 +145,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.pop()}
+            onPress={() => Actions.Home()}
             style={{
               paddingStart: 15,
               flexDirection: 'row',
@@ -343,7 +343,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
-              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 18,
             }}
           >
@@ -352,7 +352,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Roman',
-              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 14,
             }}
           >
@@ -372,7 +372,7 @@ export default class Navbar extends React.Component {
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
-              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 18,
             }}
           >
@@ -770,11 +770,11 @@ export default class Navbar extends React.Component {
                 !this.props.leftNav && !this.props.rightNav
                   ? 'center'
                   : 'space-between',
-              backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#0392cf',
+              backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#efeff4',
             },
           ]}
         >
-          <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
+          <StatusBar backgroundColor="#efeff4" barStyle="light-content" />
           {this.renderLeft()}
           {this.renderMiddle()}
           {this.renderRight()}

@@ -6,7 +6,7 @@ import {
 import * as Common from './index'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 
-export default class InputTime extends Component{
+export default class InputTime extends Component {
   state = {
     isDateTimePickerVisible: false,
   };
@@ -33,13 +33,13 @@ export default class InputTime extends Component{
     this._hideDateTimePicker();
   };
 
-  render(){
-    return(
+  render() {
+    return (
       <TouchableOpacity
-        onPress={()=>this._showDateTimePicker()}
-        >
+        onPress={() => this._showDateTimePicker()}
+      >
         <Common.Texti
-          fontColor={"#0392cf"}
+          fontColor={"#D3D3D3"}
         >
           {this.props.placeholder}
         </Common.Texti>

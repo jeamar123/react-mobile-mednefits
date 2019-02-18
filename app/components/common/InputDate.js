@@ -12,7 +12,7 @@ export default class InputDate extends Component {
         onError={() => Common.getNotify("", "Error loading, please try again")}
         renderDate={({ year, month, day, date }) => {
           if (!date) {
-            return <Common.Texti fontColor={"#0392cf"}>{this.props.placeholder}</Common.Texti>
+            return <Common.Texti fontColor={"#cccccc"}>{this.props.placeholder}</Common.Texti>
           }
           const dateStr = `${day}-${month}-${year}`
           return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>

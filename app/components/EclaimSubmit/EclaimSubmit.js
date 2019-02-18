@@ -9,7 +9,7 @@ const EclaimSubmit = () => (
       <Common.Texti
         color={"#A5A5A5"}
         style={styles.title}>
-        Only 1 item/service is allow to file per claim submission. After claim
+        Only 1 claim type is allow to file per claim submission. After claim
         is filed, you may track your claim status under History.
       </Common.Texti>
       <Common.Texti

@@ -5,6 +5,7 @@ import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
 import * as Config from '../config';
+import * as Common from '../components/common';
 
 class ECardUser extends Component {
   constructor(props) {
@@ -62,36 +63,46 @@ class ECardUser extends Component {
 
   renderCoverage() {
     return this.state.resultPackage.map(Data => (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginLeft: '5%',
-          marginRight: '5%',
-        }}
-      >
-        <Text
+      <View>
+        <View
           style={{
-            marginTop: '3%',
-            fontFamily: Config.FONT_FAMILY_ROMAN,
-            color: '#c4c4c4',
-            fontSize: 11,
-            marginRight: '10%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginLeft: '5%',
+            marginRight: '5%',
           }}
         >
-          {Data.package_name}
-        </Text>
-        <Text
+          <Text
+            style={{
+              marginTop: '3%',
+              fontFamily: Config.FONT_FAMILY_ROMAN,
+              color: '#808080',
+              fontSize: 11,
+              marginRight: '10%',
+            }}
+          >
+            {Data.package_name}
+          </Text>
+          <Text
+            style={{
+              marginTop: '3%',
+              fontFamily: Config.FONT_FAMILY_ROMAN,
+              color: '#808080',
+              fontSize: 11,
+              width: '60%',
+            }}
+          >
+            {Data.package_description}
+          </Text>
+
+        </View>
+        <View
           style={{
-            marginTop: '3%',
-            fontFamily: Config.FONT_FAMILY_ROMAN,
-            color: '#c4c4c4',
-            fontSize: 11,
-            width: '60%',
-          }}
-        >
-          {Data.package_description}
-        </Text>
+            marginLeft: '5%',
+            marginRight: '5%',
+          }}>
+          <Common.Divider />
+        </View>
       </View>
 
     ));
@@ -126,7 +137,7 @@ class ECardUser extends Component {
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
             drawerAction={this.drawerActionCallback}
-            leftNav={true}
+            leftNav="back-home"
           />
           <View
             style={{
@@ -286,13 +297,14 @@ class ECardUser extends Component {
                       fontSize: 14,
                     }}
                   >
-                  <Text style={{
+                    <Text style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
+                      textDecorationLine: 'underline'
                     }}
-                    onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
-                    happiness@mednefits.com
+                      onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
+                      happiness@mednefits.com
                   </Text>
                     {' '}
                     <Text
@@ -305,7 +317,6 @@ class ECardUser extends Component {
                     </Text>
                     {' '}
                     <Text style={{
-                      color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
                     }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
