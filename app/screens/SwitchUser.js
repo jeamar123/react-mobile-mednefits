@@ -5,12 +5,117 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
+  FlatList
 } from 'react-native';
 import { Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { UserSwitch } from '../components/UserSwitch';
 import * as Core from '../core';
+import * as Config from '../config';
+
+class FamilyList extends Component{
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isLoading: false
+    }
+  }
+
+  SwitchProcess=()=>{
+    this.setState({
+      isLoading: true
+    })
+
+    param = {
+      user_id: this.props.id,
+      client_id: Config.CLIENT_ID
+    }
+
+    Core.SwitchAccount(param, (err, result)=>{
+      console.warn(err);
+      if (err) {
+        Core.getNotify('','Failed login, try again')
+      }
+
+      this.setState({isLoading: false})
+    })
+  }
+
+  render(){
+    return(
+      <View>
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
+        <TouchableOpacity onPress={this.SwitchProcess}>
+        <View
+          style={{
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            height: 120,
+            backgroundColor: '#fff',
+          }}
+        >
+          <View
+            style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center' }}
+          >
+            <View style={{justifyContent: 'center', alignItem: 'center'}}>
+              <Image
+                source={require('../../assets/apps/mednefits.png')}
+                style={{
+                  height: 80,
+                  width: 80,
+                  resizeMode: 'center',
+                  alignItem: 'center',
+                  marginTop: '5%',
+                  marginLeft: '5%',
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'column',
+                marginRight: 5,
+                width: '60%',
+                justifyContent: 'center',
+                alignItem:'center'
+              }}
+            >
+              <Text style={{ fontWeight: '600' }}>{this.props.name}</Text>
+              <Text
+                style={{
+                  marginTop: '5%',
+                  color: '#c4c4c4',
+                  fontSize: 11,
+                }}
+              >
+                {this.props.nric}
+              </Text>
+              <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
+            </View>
+            <View style={{justifyContent: 'center', alignItem: 'center'}}>
+              <Image
+                source={require('../../assets/apps/next-btn.png')}
+                style={{
+                  height: 25,
+                  width: 25,
+                  resizeMode: 'center',
+                  marginTop: '3%',
+                }}
+              />
+            </View>
+          </View>
+        </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
 
 class SwitchUser extends Component {
   constructor(props) {
@@ -23,135 +128,43 @@ class SwitchUser extends Component {
       status: '',
       resultData: [],
       DataE_Claim: [],
+      data: false
     };
   }
 
   componentWillMount() {
-    this.getDataIn_Network();
+    this.getFamilyCoverage();
   }
 
-  getDataIn_Network() {
-    Core.GetHistoryTransaction((error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ resultData: data });
+  getFamilyCoverage() {
+    Core.GetFamilyCoverage((error, result) => {
+      this.setState({
+        data: result.data.users
+      })
     });
   }
+
+  _keyExtractor = (item, index) => item.user_id;
+
+  _renderItem = ({ item }) => (
+    <FamilyList
+      key={item.user_id}
+      id={item.user_id}
+      name={item.name}
+      nric={item.nric}
+      type={item.type}
+    />
+  );
 
   renderTransactionIn_Network() {
     return (
       <View>
-        <TouchableOpacity onPress={() => Actions.HomeStatic()}>
-          <View
-            style={{
-              flex: 1,
-              marginTop: 5,
-              marginBottom: 10,
-              height: 120,
-              backgroundColor: '#fff',
-            }}
-          >
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Image
-                source={require('../../assets/apps/mednefits.png')}
-                style={{
-                  height: 80,
-                  width: 80,
-                  resizeMode: 'center',
-                  alignItem: 'center',
-                  marginTop: '5%',
-                  marginLeft: '5%',
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: 'column',
-                  marginTop: '8%',
-                  marginLeft: '-20%',
-                }}
-              >
-                <Text style={{ fontWeight: '600' }}>Alice Ng</Text>
-                <Text
-                  style={{
-                    marginTop: '5%',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                  }}
-                >
-                  G847835I
-                </Text>
-                <Text style={{ color: '#c4c4c4', fontSize: 11 }}>Spouse</Text>
-              </View>
-              <Image
-                source={require('../../assets/apps/next-btn.png')}
-                style={{
-                  height: 100,
-                  width: 100,
-                  resizeMode: 'center',
-                  marginTop: '3%',
-                }}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => Actions.HomeStatic()}>
-          <View
-            style={{
-              flex: 1,
-              marginTop: 5,
-              marginBottom: 10,
-              height: 120,
-              backgroundColor: '#fff',
-            }}
-          >
-            <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-            >
-              <Image
-                source={require('../../assets/apps/mednefits.png')}
-                style={{
-                  height: 80,
-                  width: 80,
-                  resizeMode: 'center',
-                  alignItem: 'center',
-                  marginTop: '5%',
-                  marginLeft: '5%',
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: 'column',
-                  marginTop: '8%',
-                  marginLeft: '-18%',
-                }}
-              >
-                <Text style={{ fontWeight: '600' }}>Emma Lee</Text>
-                <Text
-                  style={{
-                    marginTop: '5%',
-                    color: '#c4c4c4',
-                    fontSize: 11,
-                  }}
-                >
-                  T0588888J
-                </Text>
-                <Text style={{ color: '#c4c4c4', fontSize: 11 }}>Child</Text>
-              </View>
-              <Image
-                source={require('../../assets/apps/next-btn.png')}
-                style={{
-                  height: 100,
-                  width: 100,
-                  resizeMode: 'center',
-                  marginTop: '3%',
-                }}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
+        <FlatList
+          data={this.state.data}
+          extraData={this.state}
+          keyExtractor={this.data}
+          renderItem={this._renderItem}
+        />
       </View>
     );
   }
@@ -170,7 +183,13 @@ class SwitchUser extends Component {
             marginTop: '2%',
           }}
         >
-          <ScrollView>{this.renderTransactionIn_Network()}</ScrollView>
+          {(!this.state.data) ? (
+            <View
+              style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+            >
+              <ActivityIndicator size="large" color="#0392cf" />
+            </View>
+          ): this.renderTransactionIn_Network()}
         </View>
       </View>
     );
