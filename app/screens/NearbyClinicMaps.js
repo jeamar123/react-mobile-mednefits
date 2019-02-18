@@ -166,20 +166,17 @@ class NearbyClinic extends Component {
                           style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                            borderRadius: 5,
-                            backgroundColor: '#fff',
                             paddingTop: 10,
                             paddingBottom: 10,
                             marginBottom: 3,
-                            marginRight: 5,
-                            borderWidth: 2,
-                            borderColor: "#fff"
+                            marginRight: 5
                           }}>
                           <Image
                             source={{ uri: dataMarker.image_url }}
                             style={{
                               width: 50,
                               height: 50,
+                              borderRadius: 2,
                             }}
                             resizeMode="cover"
                           />

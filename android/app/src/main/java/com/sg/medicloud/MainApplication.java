@@ -1,7 +1,7 @@
 package com.mednefitsmobile;
 
 import android.app.Application;
-
+import com.facebook.react.BuildConfig;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
