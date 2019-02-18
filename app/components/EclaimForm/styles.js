@@ -7,18 +7,18 @@ const imageWidth = Dimensions.get('window').width / 2;
 export default EStyleSheet.create({
   container: {
     flex: 1,
-    margin: 10
+    margin: '5%'
   },
-  sectionComponent:{
+  sectionComponent: {
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center'
   },
-  title:{
+  title: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  spendingActive:{
+  spendingActive: {
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: 10,
@@ -27,7 +27,7 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: "#0392cf",
   },
-  spendingNotactive:{
+  spendingNotactive: {
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: 10,
@@ -36,7 +36,7 @@ export default EStyleSheet.create({
     borderWidth: 1,
     borderColor: "#cccccc",
   },
-  inputClaimType:{
+  inputClaimType: {
     fontSize: 16,
     color: 'black',
     width: "100%"

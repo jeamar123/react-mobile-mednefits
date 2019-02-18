@@ -57,6 +57,32 @@ class Favourites extends Component {
     });
   }
 
+  renderFavourite(favourite) {
+    if (favourite == 1) {
+      return (
+        <Image
+          source={require('../../assets/apps/like_fav.png')}
+          style={{
+            height: 100,
+            width: 100,
+            resizeMode: 'center',
+          }}
+        />
+      )
+    } else {
+      return (
+        <Image
+          source={require('../../assets/apps/likes.png')}
+          style={{
+            height: 100,
+            width: 100,
+            resizeMode: 'center',
+          }}
+        />
+      )
+    }
+  }
+
   renderTransactionIn_Network() {
     return this.state.resultData.map((Data, index) => (
       <TouchableOpacity
@@ -87,20 +113,22 @@ class Favourites extends Component {
                 alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                marginRight: '-5%',
+                marginRight: '2%',
               }}
             />
             <View
               style={{
                 flexDirection: 'column',
-                marginTop: '4%',
-                width: '45%',
+                marginTop: '2%',
+                width: '50%',
               }}
             >
               <Text
+                ellipsizeMode='tail'
+                numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 14,
+                  fontSize: 12,
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -108,6 +136,8 @@ class Favourites extends Component {
                 {Data.name}
               </Text>
               <Text
+                ellipsizeMode='tail'
+                numberOfLines={3}
                 style={{
                   color: '#8c8b7f',
                   fontSize: 10,
@@ -117,7 +147,7 @@ class Favourites extends Component {
                 {Data.address}
               </Text>
               {Data.open_status === 1 ? (
-                <Text style={{ marginTop: 5 }}>
+                <Text style={{ marginTop: 1 }}>
                   <Icons
                     name="circle"
                     style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
@@ -126,13 +156,13 @@ class Favourites extends Component {
                   <Text style={{
                     fontFamily: Config.FONT_FAMILY_LIGHT,
                     fontSize: 10,
-                    marginTop: 5,
+                    marginTop: 2,
                     marginLeft: 10,
                     color: '#616161',
                   }}>Now Open</Text>
                 </Text>
               ) : (
-                  <Text style={{ marginTop: 5 }}>
+                  <Text style={{ marginTop: 1 }}>
                     <Icons
                       name="circle"
                       style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
@@ -141,21 +171,14 @@ class Favourites extends Component {
                     <Text style={{
                       fontFamily: Config.FONT_FAMILY_LIGHT,
                       fontSize: 10,
-                      marginTop: 5,
+                      marginTop: 2,
                       marginLeft: 10,
                       color: '#616161',
                     }}>Closed</Text>
                   </Text>
                 )}
             </View>
-            <Image
-              source={require('../../assets/apps/like_fav.png')}
-              style={{
-                height: 100,
-                width: 100,
-                resizeMode: 'center',
-              }}
-            />
+            {this.renderFavourite(Data.favourite)}
           </View>
         </View>
       </TouchableOpacity>

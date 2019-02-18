@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import IconR from 'react-native-vector-icons/Feather';
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
@@ -115,7 +116,7 @@ class NearbyClinic extends Component {
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
             drawerAction={this.drawerActionCallback}
-            leftNav={true}
+            leftNav="back"
             rightNav="search"
           />
           <MapView
@@ -183,7 +184,7 @@ class NearbyClinic extends Component {
                             resizeMode="cover"
                           />
                         </View>
-                        <View style={{ flexDirection: 'column' }}>
+                        <View style={{ flexDirection: 'column', width: '80%' }}>
                           <Common.Texti
                             fontFamily={Config.FONT_FAMILY_BOLD}
                             fontSize={16}
@@ -192,50 +193,53 @@ class NearbyClinic extends Component {
                             {dataMarker.name}
                           </Common.Texti>
                           <Common.Texti
+                            ellipsizeMode='tail'
+                            numberOfLines={2}
                             fontSize={12}
-                            fontFamily={Config.FONT_FAMILY_BOLD}
+                            fontFamily={Config.FONT_FAMILY_ROMAN}
                             fontColor={"#389bd8"}
-                            style={{ color: '#389bd8', fontWeight: 'bold', marginTop: 10, width: '50%' }}
+                            style={{ color: '#389bd8', marginTop: 10, width: '50%' }}
                           >
                             {dataMarker.address}
                           </Common.Texti>
+                          {dataMarker.open_status === 1 ? (
+                            <Text style={{ marginTop: 1 }}>
+                              <Icons
+                                name="circle"
+                                style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
+                              />
+                              {' '}
+                              <Text style={{
+                                fontFamily: Config.FONT_FAMILY_LIGHT,
+                                fontSize: 10,
+                                marginTop: 2,
+                                marginLeft: 10,
+                                color: '#616161',
+                              }}>Now Open</Text>
+                            </Text>
+                          ) : (
+                              <Text style={{ marginTop: 1 }}>
+                                <Icons
+                                  name="circle"
+                                  style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
+                                />
+                                {' '}
+                                <Text style={{
+                                  fontFamily: Config.FONT_FAMILY_LIGHT,
+                                  fontSize: 10,
+                                  marginTop: 2,
+                                  marginLeft: 10,
+                                  color: '#616161',
+                                }}>Closed</Text>
+                              </Text>
+                            )}
                         </View>
-                      </View>
-                      <View style={{ justifyContent: 'space-between', flexDirection: 'row', width: '100%', flex: 1, backgroundColor: "#62b9eb", alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginRight: 10 }}>
-                          <Icons
-                            name="circle"
-                            style={{ color: (dataMarker.open_status == 1) ? '#51e500' : '#e83637', fontSize: 10, marginRight: 5 }}
+                        <View style={{ marginLeft: '-30%', marginTop: '8%' }}>
+                          <IconR
+                            name="chevron-right"
+                            style={{ color: '#616161', fontSize: 40, marginRight: '3%' }}
                           />
-                          <Common.Texti
-                            fontColor={'#616161'}
-                            fontSize={10}
-                          >
-                            {(dataMarker.open_status == 1) ? 'OPEN' : 'CLOSED'}
-                          </Common.Texti>
                         </View>
-                        <TouchableOpacity
-                          style={{
-                            backgroundColor: '#134c74',
-                            borderRadius: 5,
-                            margin: 10
-                          }}
-                        >
-                          <Common.Texti
-                            fontColor={'white'}
-                            fontSize={10}
-                            style={{
-                              paddingTop: 10,
-                              paddingBottom: 10,
-                              paddingLeft: 20,
-                              paddingRight: 20,
-                              color: 'white',
-                              fontSize: 10
-                            }}
-                          >
-                            BOOK NOW
-                          </Common.Texti>
-                        </TouchableOpacity>
                       </View>
                     </View>
                   </Callout>
@@ -268,7 +272,7 @@ class NearbyClinic extends Component {
               <TouchableOpacity
                 onPress={() => Actions.pop()}
               >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST VIEW</Text>
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST</Text>
               </TouchableOpacity>
 
             </View>

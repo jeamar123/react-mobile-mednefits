@@ -6,15 +6,15 @@ import {
   Dimensions,
   ScrollView
 } from 'react-native'
-import {Icon} from 'native-base'
+import { Icon } from 'native-base'
 import Modal from 'react-native-modal'
 import * as Common from './index'
 import * as Config from '../../config'
 const { height, width } = Dimensions.get('window');
 
-export default class InputSelect extends Component{
+export default class InputSelect extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -25,7 +25,7 @@ export default class InputSelect extends Component{
     this.renderChildComponent = this.renderChildComponent.bind(this)
   }
 
-  changeValue(value){
+  changeValue(value) {
 
     this.setState({
       isVisible: false
@@ -35,11 +35,11 @@ export default class InputSelect extends Component{
 
   }
 
-  renderChildComponent(){
-    return(
-      this.props.data.map((value, index)=>
+  renderChildComponent() {
+    return (
+      this.props.data.map((value, index) =>
         <TouchableOpacity
-          onPress={()=>this.changeValue(value.value)}
+          onPress={() => this.changeValue(value.value)}
           style={{
             justifyContent: 'space-evenly',
             marginTop: 15,
@@ -55,7 +55,7 @@ export default class InputSelect extends Component{
     )
   }
 
-  setTitle(){
+  setTitle() {
     if (this.props.value) {
       this.props.data.filter((value, index) => {
         if (value.value == this.props.value) {
@@ -71,8 +71,8 @@ export default class InputSelect extends Component{
     return label
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <View>
         <Modal
           isVisible={this.state.isVisible}
@@ -83,7 +83,7 @@ export default class InputSelect extends Component{
           animationOut="zoomOut"
           useNativeDriver={true}
         >
-          <View style={{ backgroundColor: "white",borderRadius: 5, padding: 15 }}>
+          <View style={{ backgroundColor: "white", borderRadius: 5, padding: 15 }}>
             <ScrollView
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
@@ -94,7 +94,7 @@ export default class InputSelect extends Component{
         </Modal>
 
         <TouchableOpacity
-          onPress={()=>this.setState({isVisible: true})}
+          onPress={() => this.setState({ isVisible: true })}
           style={{
             flexDirection: "row",
             alignItems: 'center',
@@ -102,8 +102,9 @@ export default class InputSelect extends Component{
           }}
         >
           <Common.Texti
-            fontColor="#0392cf"
-            >
+            style={{ fontFamily: Config.FONT_FAMILY_ROMAN, }}
+            fontColor="#cccccc"
+          >
             {this.setTitle()}
           </Common.Texti>
 

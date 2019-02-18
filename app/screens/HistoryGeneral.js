@@ -51,7 +51,7 @@ class History extends Component {
   componentWillMount() {
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-
+      console.warn(data)
       this.setState({
         data: data
       })
@@ -100,8 +100,9 @@ class History extends Component {
             <Text
               style={{
                 paddingHorizontal: 10,
-                marginRight: 30,
+                marginLeft: '2%',
                 paddingVertical: 10,
+                fontSize: 13
               }}
             >
               {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
@@ -117,10 +118,17 @@ class History extends Component {
               borderColor: '#efeff1'
             }}
           >
-            <Text style={{ color: '#c4c4c4', marginLeft: 20, padding: 5, }}>
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: 20,
+                padding: 5,
+                fontSize: 13
+              }}
+            >
               Transaction #
             </Text>
-            <Text style={{ marginLeft: '4%', padding: 5, }}>
+            <Text style={{ marginLeft: '4%', padding: 5, fontSize: 13 }}>
               {this.props.transaction_id}
             </Text>
           </View>
@@ -139,11 +147,12 @@ class History extends Component {
                 marginLeft: 20,
                 marginRight: '6%',
                 padding: 5,
+                fontSize: 13
               }}
             >
               Services/s
             </Text>
-            <Text style={{ padding: 5, marginLeft: '4%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+            <Text style={{ padding: 5, marginLeft: '3%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {this.state.data.services}
             </Text>
           </View>
@@ -162,11 +171,12 @@ class History extends Component {
                 marginLeft: 20,
                 marginRight: '3%',
                 padding: 5,
+                fontSize: 13
               }}
             >
               Date & Time
             </Text>
-            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {this.state.data.date_of_transaction}
             </Text>
           </View>
@@ -180,12 +190,30 @@ class History extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '10%', padding: 5 }}
+              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '9%', padding: 5, fontSize: 13 }}
             >
               Member
             </Text>
-            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%' }}>
+            <Text style={{ marginLeft: '4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {(this.state.data.customer) ? this.state.data.customer : "N/A"}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+            >
+              Payment Type
+            </Text>
+            <Text style={{ marginLeft: '1%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
             </Text>
           </View>
 

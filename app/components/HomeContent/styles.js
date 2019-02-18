@@ -33,7 +33,7 @@ export default EStyleSheet.create({
   title: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: RF(2.6),
+    fontSize: RF(2.3),
     fontWeight: '600',
     paddingTop: 5,
     color: '#fff',
@@ -47,7 +47,7 @@ export default EStyleSheet.create({
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: RF(2.2),
+    fontSize: RF(1.9),
     color: '#fff',
   },
   DrawerContain: {

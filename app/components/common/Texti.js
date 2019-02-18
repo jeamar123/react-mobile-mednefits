@@ -57,7 +57,7 @@ export default class Text extends Component {
         {...this.props}
         allowFontScaling={false}
         style={[this.props.style, {
-          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : Config.FONT_FAMILY_BOLD,
+          fontFamily: (this.state.fontFamily) ? this.state.fontFamily : Config.FONT_FAMILY_ROMAN,
           fontSize: this.state.fontSize,
           marginBottom: (!this.props.marginBottom) ? 0 : 5,
           marginTop: (!this.props.marginTop) ? 0 : 5,

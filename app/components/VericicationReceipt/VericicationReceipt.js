@@ -5,13 +5,16 @@ import styles from './styles';
 
 const VericicationReceipt = () => (
   <View style={styles.container}>
-    <ImageBackground resizeMode="contain" style={styles.containerImage}>
-      <Image
-        resizeMode="contain"
-        style={styles.image}
-        source={require('./images/Verification.png')}
-      />
-    </ImageBackground>
+    <Image
+      style={{
+        height: 90,
+        resizeMode: 'contain',
+        width: 90,
+        marginTop: '20%',
+        marginBottom: '10%',
+      }}
+      source={require('./images/Verification.png')}
+    />
     <Text style={styles.text}>
       Snap a photo of your physical receipt given by the merchant for claim
       reimbursement.

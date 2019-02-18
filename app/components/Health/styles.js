@@ -26,5 +26,6 @@ export default EStyleSheet.create({
     fontFamily: 'HelveticaNeue-Roman',
     width: width / 1.3,
     textAlign: 'center',
+    marginBottom: '5%',
   },
 });

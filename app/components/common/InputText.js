@@ -18,7 +18,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={"#0392cf"}
+            fontColor={"#cccccc"}
           >
             S$
           </Common.Texti>
@@ -69,7 +69,8 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    paddingBottom: 5,
+    paddingBottom: '2%',
+    color: '#0392cf',
     fontFamily: Config.FONT_FAMILY_ROMAN,
   },
 };

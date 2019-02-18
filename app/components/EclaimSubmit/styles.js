@@ -15,13 +15,13 @@ export default EStyleSheet.create({
     width: width
   },
   title: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginTop: 10
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    paddingTop: '5%'
   },
   detail: {
-    paddingLeft: 15,
-    paddingBottom: 8,
+    paddingLeft: '5%',
+    paddingBottom: '2%',
     fontFamily: 'helvetica',
     fontSize: 18,
     fontWeight: '600',
