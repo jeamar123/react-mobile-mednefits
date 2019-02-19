@@ -49,12 +49,12 @@ export default class EclaimForm extends Component {
   async getMember() {
     this.setState({ memberState: "Loading..." })
 
-    await Core.GetAllMember((err, result) => {
+    await Core.GetAllMember(async (err, result) => {
       if (result) {
         dataMember = []
 
-        result.data.users.map((member) => {
-          dataMember.push({ label: member.name, value: member.user_id })
+        await result.data.users.map( async (member) => {
+          await dataMember.push({ label: member.name, value: member.user_id })
         });
 
         this.setState({
@@ -212,7 +212,6 @@ export default class EclaimForm extends Component {
           </Common.Texti>
 
             <TouchableOpacity
-              onPress={() => this._showDateTimePicker()}
               style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
             >
               <Common.InputDate

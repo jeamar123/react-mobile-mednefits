@@ -7,13 +7,13 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   textTitle: {
-    fontFamily: 'helvetica',
+    fontFamily: 'Helvetica',
     fontSize: 32,
     fontWeight: '300',
     marginBottom: 120,
   },
   text: {
-    fontFamily: 'helvetica',
+    fontFamily: 'Helvetica',
     width: width / 1.3,
     textAlign: 'center',
   },

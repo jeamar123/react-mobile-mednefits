@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StatusBar,
   View,
-  Image,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
@@ -14,6 +13,7 @@ import {
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import IconR from 'react-native-vector-icons/Feather';
+import Svg, { Image } from 'react-native-svg'
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
@@ -99,6 +99,43 @@ class NearbyClinic extends Component {
     })
   }
 
+  renderCallOut = async (image_url) => {
+    if(Platform.OS == "ios") {
+      return (
+        <View>
+          <Image
+          source={{ uri: image_url }}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: 2,
+          }}
+          resizeMode="cover"
+        />
+      </View>
+      );
+    } else {
+      return (
+        <View>
+          <Svg width={50} height={50}>
+            <Image
+              x="5%"
+              y="5%"
+              width="100%"
+              height="100%"
+              preserveAspectRatio="xMidYMid slice"
+              href={{ uri: image_url }}
+              style={{
+                borderRadius: 2
+              }}
+              resizeMode="contain"
+            />
+          </Svg>
+        </View>
+      );
+    }
+  }
+
   render() {
     // console.warn("clinisc "+JSON.stringify(this.state.clinics));
     return (
@@ -171,15 +208,20 @@ class NearbyClinic extends Component {
                             marginBottom: 3,
                             marginRight: 5
                           }}>
-                          <Image
-                            source={{ uri: dataMarker.image_url }}
-                            style={{
-                              width: 50,
-                              height: 50,
-                              borderRadius: 2,
-                            }}
-                            resizeMode="cover"
-                          />
+                            <Svg width={50} height={50}>
+                              <Image
+                                x="5%"
+                                y="5%"
+                                width="100%"
+                                height="100%"
+                                preserveAspectRatio="xMidYMid slice"
+                                href={{ uri: dataMarker.image_url }}
+                                style={{
+                                  borderRadius: 2
+                                }}
+                                resizeMode="contain"
+                              />
+                            </Svg>
                         </View>
                         <View style={{ flexDirection: 'column', width: '80%' }}>
                           <Common.Texti

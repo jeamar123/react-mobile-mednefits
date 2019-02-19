@@ -37,7 +37,7 @@ class ForgotPass extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <ForgotPassword />
-        <InputWithButton placeholder="Email address" onChangeText={(text) => this.setState({ email: text })} />
+        <InputWithButton autoCapitalize='none' placeholder="Email address" onChangeText={(text) => this.setState({ email: text })} />
         <Buttons
           onPress={this.resetPassword}
         >Reset password</Buttons>

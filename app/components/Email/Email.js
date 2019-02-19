@@ -17,7 +17,7 @@ class Email extends Component {
         <Text style={styles.textTitle}>Email Sent!</Text>
         <Text style={styles.text}>
           We've sent an email to{' '}
-          <Text style={{ fontFamily: 'helveticabold' }}>{this.props.email}</Text>{' '}
+          <Text style={{ fontFamily: 'HelveticaNeue-Bold' }}>{this.props.email}</Text>{' '}
           with a link to reset your password
         </Text>
       </View>
