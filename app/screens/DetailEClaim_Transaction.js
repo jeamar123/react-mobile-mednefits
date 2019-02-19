@@ -57,11 +57,11 @@ class DetailEClaim_Transaction extends Component {
       });
     });
 
-    Core.UserDetail((err, result) => {
-      this.setState({
-        user: result.data.profile.full_name,
-      });
-    });
+    // Core.UserDetail((err, result) => {
+    //   this.setState({
+    //     user: result.data.profile.full_name,
+    //   });
+    // });
   }
 
   _renderDivider() {
@@ -142,6 +142,7 @@ class DetailEClaim_Transaction extends Component {
               Claim Type
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
@@ -163,6 +164,7 @@ class DetailEClaim_Transaction extends Component {
               Provider
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Provider"
               underlineColorAndroid="transparent"
               colo="#000"
@@ -184,6 +186,7 @@ class DetailEClaim_Transaction extends Component {
               Claim #
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
               colo="#000"
@@ -207,6 +210,7 @@ class DetailEClaim_Transaction extends Component {
               Date & Time
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
               colo="#000"
@@ -230,6 +234,7 @@ class DetailEClaim_Transaction extends Component {
               Claim Date
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
               colo="#000"
@@ -258,11 +263,12 @@ class DetailEClaim_Transaction extends Component {
               Member
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Member"
               underlineColorAndroid="transparent"
               colo="#000"
               style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
-              value={this.state.user ? this.state.user : 'N/A'}
+              value={this.state.data.member ? this.state.data.member : 'N/A'}
             />
           </View>
           {this._renderDivider()}
@@ -286,6 +292,7 @@ class DetailEClaim_Transaction extends Component {
               Spending Account
             </Text>
             <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               colo="#000"

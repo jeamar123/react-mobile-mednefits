@@ -1,4 +1,4 @@
-package com.mednefitsmobile;
+package com.sg.medicloud;
 
 import com.facebook.react.ReactActivity;
 
