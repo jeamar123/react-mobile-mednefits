@@ -55,7 +55,7 @@ import MedicalMedicationsAdd from '../screens/MedicalMedicationsAdd';
 import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {

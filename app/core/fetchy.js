@@ -701,7 +701,7 @@ export async function GetLocationPermission(callback) {
   //         // console.warn("Set a new longitude");
   //       }
   //     })
-      
+
   //     // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
   //     return;
   //   },
@@ -782,7 +782,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
               // console.warn("Set a new longitude");
             }
           })
-          
+
           // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
           // query location
           await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
@@ -893,4 +893,61 @@ export async function GetClinicMap(clinic_type_id, callback) {
       }
   	})
   }
+}
+
+export function GetFamilyCoverage(callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.FAMILY_COVERAGE,
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      }
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
+}
+
+export function SwitchAccount(param, callback){
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.ONE_TAP_LOGIN,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param
+    };
+
+    fetching(params, result => {
+      if (!result.error) {
+        callback(result);
+      } else {
+        getNotify('', 'Success! Wait a second...');
+
+        data = result.data;
+        data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+        access_token = data_parse.access_token;
+
+        params = {
+          key: 'access_token',
+          value: access_token,
+        };
+
+        Core.SetDataLocal(params, async (err, result) => {
+          if (result) {
+            callback('', true);
+            Actions.Home({ type: 'reset' });
+          } else {
+            getNotify('', 'Failed login, try again');
+          }
+        });
+      }
+    })
+  });
 }

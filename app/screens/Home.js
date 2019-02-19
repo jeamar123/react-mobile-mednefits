@@ -286,6 +286,7 @@ class Home extends Component {
           <Navbar
             drawerAction={this.drawerActionCallback}
             leftNav={true}
+            rightNav={true}
           />
           <HomeContent
             onUpdateSearch={this.onUpdateSearch}

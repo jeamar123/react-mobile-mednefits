@@ -24,6 +24,7 @@ export const AUTH_DELETE_HISTORY            = AUTH + '/deletehistory';
 export const AUTH_UPDATE                    = AUTH + '/update';
 export const AUTH_CHANGE_PASSWORD           = AUTH + '/change-password';
 export const AUTH_RESET_PASSWORD            = AUTH + '/forgotpassword';
+export const ONE_TAP_LOGIN                  = AUTH + '/one_tap/login';
 
 /** CLINIC VARIABLE */
 export const CLINIC                         = MAIN + '/clinic';
@@ -55,6 +56,7 @@ export const USER_HEALT_TYPE_LIST           = USER+"/health_type_lists"
 export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER+"/upload_in_network_receipt"
 export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt"
 export const USER_MEMBERLIST                = USER+"/member_lists"
+export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN                   = "access_token"
