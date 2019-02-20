@@ -192,7 +192,7 @@ class BenefitsDollar extends Component {
             </CardItem>
 
             <Buttons onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount })}>
-              Pay {this.state.amount}
+              Next
             </Buttons>
             <View style={{ marginBottom: 20 }} />
           </Card>

@@ -15,8 +15,8 @@ class HistoryClaim extends Component {
       favourite: null
     };
   }
-    
-  componentWillReceiveProps(nextProps){
+
+  componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     this.setState({ favourite: nextProps.favourite });
   }
@@ -43,7 +43,7 @@ class HistoryClaim extends Component {
   }
 
   renderOpenStatus(status) {
-  	if(status == 1) {
+    if (status == 1) {
       return (
         <Text style={{ marginTop: 5 }}>
           <Icons
@@ -60,24 +60,24 @@ class HistoryClaim extends Component {
           }}>Open</Text>
         </Text>
       )
-  	} else {
+    } else {
       return (
-         <Text style={{ marginTop: 5 }}>
-            <Icons
-              name="circle"
-              style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
-            />
-            {' '}
-            <Text style={{
-              fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 12,
-              marginTop: 5,
-              marginLeft: 10,
-              color: 'black',
-            }}>Closed</Text>
-          </Text>
+        <Text style={{ marginTop: 5 }}>
+          <Icons
+            name="circle"
+            style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
+          />
+          {' '}
+          <Text style={{
+            fontFamily: Config.FONT_FAMILY_LIGHT,
+            fontSize: 12,
+            marginTop: 5,
+            marginLeft: 10,
+            color: 'black',
+          }}>Closed</Text>
+        </Text>
       )
-  	}
+    }
   }
 
   AddFavClinic() {
@@ -88,13 +88,13 @@ class HistoryClaim extends Component {
 
     Core.AddFavouriteClinic(params, (err, result) => {
       if (result.status) {
-      	if(this.state.favourite == 1) {
+        if (this.state.favourite == 1) {
           Core.getNotify('', 'Success Remove Favourite Clinic');
-      	  this.setState({ favourite: 0 });
-      	} else {
+          this.setState({ favourite: 0 });
+        } else {
           Core.getNotify('', 'Success Add Favourite Clinic');
           this.setState({ favourite: 1 });
-      	}
+        }
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {
@@ -103,8 +103,8 @@ class HistoryClaim extends Component {
     });
   }
 
-  renderFavourite( ) {
-    if(this.state.favourite == 1) {
+  renderFavourite() {
+    if (this.state.favourite == 1) {
       return (
         <Image
           source={require('../../../assets/apps/like_fav.png')}
