@@ -61,7 +61,7 @@ class HistoryTransaction extends Component {
       >
         <Image
           source={icon}
-          style={{ height: 20, resizeMode: 'center' }}
+          style={{ height: 20, resizeMode: 'contain' }}
         />
         <Text
           fontFamily={Config.FONT_V2_BOLD}
@@ -91,7 +91,7 @@ class HistoryTransaction extends Component {
       >
         <Image
           source={icon}
-          style={{ height: 20, resizeMode: 'center' }}
+          style={{ height: 20, resizeMode: 'contain' }}
         />
         <Text
           fontFamily={Config.FONT_V2_BOLD}
@@ -121,7 +121,7 @@ class HistoryTransaction extends Component {
       >
         <Image
           source={icon}
-          style={{ height: 20, resizeMode: 'center' }}
+          style={{ height: 20, resizeMode: 'contain' }}
         />
         <Text
           fontFamily={Config.FONT_V2_BOLD}
@@ -153,7 +153,7 @@ class HistoryTransaction extends Component {
         <TouchableOpacity onPress={() => Linking.openURL('http://maps.google.com/maps?daddr=' + this.state.latMap + ',' + this.state.lngMap)}>
           <Image
             source={icon}
-            style={{ height: 20, resizeMode: 'center' }}
+            style={{ height: 20, resizeMode: 'contain' }}
           />
           <Text
             fontFamily={Config.FONT_V2_BOLD}

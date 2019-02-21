@@ -409,7 +409,7 @@ export default class Navbar extends React.Component {
           >
             <Image
               source={require('../../../assets/apps/switch.png')}
-              style={{ height: 55, resizeMode: 'center', width: 75 }}
+              style={{ height: 55, resizeMode: 'contain', width: 75 }}
             />
           </TouchableOpacity>
         </View>
@@ -455,7 +455,7 @@ export default class Navbar extends React.Component {
           >
             <Image
               source={require('../../../assets/apps/search.png')}
-              style={{ height: 55, resizeMode: 'center', width: 75 }}
+              style={{ height: 55, resizeMode: 'contain', width: 75 }}
             />
           </TouchableOpacity>
         </View>

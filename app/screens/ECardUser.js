@@ -255,7 +255,7 @@ class ECardUser extends Component {
                   style={{
                     height: 55,
                     width: 55,
-                    resizeMode: 'center',
+                    resizeMode: 'contain',
                     alignItem: 'center',
                     marginTop: '5%',
                     marginRight: '5%',
