@@ -133,7 +133,7 @@ export default class EclaimForm extends Component {
               <TouchableOpacity
                 onPress={() => this.selectSpending("medical")}
                 refs="medical"
-                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { marginRight: 15 }]}
+                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive]}
               >
                 <Common.Texti>
                   Medical
@@ -142,7 +142,7 @@ export default class EclaimForm extends Component {
               <TouchableOpacity
                 onPress={() => this.selectSpending("wellness")}
                 refs="wellness"
-                style={(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive}
+                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { marginRight: '10%' }]}
               >
                 <Common.Texti>
                   Wellness

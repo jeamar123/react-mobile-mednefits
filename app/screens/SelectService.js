@@ -113,7 +113,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.9,
-    height: height / 8,
+    height: height / 7.5,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
@@ -122,7 +122,7 @@ const styles = {
   },
   gridBoxActive: {
     width: width / 3.9,
-    height: height / 8,
+    height: height / 7.5,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',

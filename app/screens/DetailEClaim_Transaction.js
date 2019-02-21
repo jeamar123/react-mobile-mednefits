@@ -22,7 +22,9 @@ class DetailEClaim_Transaction extends Component {
       imageSource: {
         uri: '',
       },
+      filesData: [],
       data: false,
+      File: false
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
@@ -54,7 +56,9 @@ class DetailEClaim_Transaction extends Component {
 
       this.setState({
         data: data,
+        filesData: data.files
       });
+      console.warn(this.state.filesData);
     });
 
     // Core.UserDetail((err, result) => {
@@ -78,12 +82,7 @@ class DetailEClaim_Transaction extends Component {
   }
 
   render() {
-    console.warn(
-      'datanya ' + this.state.data.clinic_name
-        ? this.state.data.clinic_name
-        : ''
-    );
-    return (
+    return this.state.filesData.map(Data => (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
@@ -302,6 +301,40 @@ class DetailEClaim_Transaction extends Component {
           </View>
           {this._renderDivider()}
 
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '11%',
+                fontSize: 13
+              }}
+            >
+              Receipt
+            </Text>
+            <Image
+              style={{
+                width: 120,
+                height: 150,
+                marginHorizontal: 30,
+                marginRight: 30,
+                marginLeft: 50,
+              }}
+              source={{
+                uri: !Data.file
+                  ? '../../assets/photo.png'
+                  : Data.file,
+              }}
+            />
+          </View>
+
           {/*<View
             style={{
               flex: 1,
@@ -326,42 +359,9 @@ class DetailEClaim_Transaction extends Component {
               />
             </Buttons>
           </View>*/}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text style={{ width: '38%' }} />
-            <View
-              style={{
-                height: 180,
-                width: '50%',
-                borderTopLeftRadius: 5,
-                borderTopRightRadius: 5,
-                borderBottomLeftRadius: 5,
-                borderBottomRightRadius: 5,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Image
-                resizeMode="cover"
-                style={{ width: '80%', height: 180 }}
-                source={{
-                  uri: !this.state.imageSource.uri
-                    ? '../../assets/photo.png'
-                    : this.state.imageSource.uri,
-                }}
-              />
-            </View>
-          </View>
         </GiftedForm>
       </Container>
-    );
+    ));
   }
 }
 
