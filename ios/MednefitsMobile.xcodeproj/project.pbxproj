@@ -14,6 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* MednefitsMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MednefitsMobileTests.m */; };
 		01D2DA42EAFE47EA8ECC0663 /* HelveticaNeue-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BDD6FE708A8E44CFAAAB2C07 /* HelveticaNeue-Light.otf */; };
+		071F9079221EE4F800B96431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 071F9078221EE4F800B96431 /* Default-568h@2x.png */; };
 		075E3919A84846D9A4C9A365 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B54FE810E546D289139414 /* libRNVectorIcons.a */; };
 		07A594612218E82F00D16994 /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A594372218E82F00D16994 /* AIRDummyView.m */; settings = {COMPILER_FLAGS = "-DHAVE_GOOGLE_MAPS=1"; }; };
 		07A594622218E82F00D16994 /* AIRGoogleMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A594392218E82F00D16994 /* AIRGoogleMapUrlTile.m */; settings = {COMPILER_FLAGS = "-DHAVE_GOOGLE_MAPS=1"; }; };
@@ -495,6 +496,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* MednefitsMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MednefitsMobileTests.m; sourceTree = "<group>"; };
 		044AB7B8EBDC418BB571953E /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
+		071F9078221EE4F800B96431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		075412252218155800455254 /* Philippines.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Philippines.gpx; sourceTree = "<group>"; };
 		07A594372218E82F00D16994 /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
 		07A594382218E82F00D16994 /* AIRGoogleMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRGoogleMapPolyline.h; sourceTree = "<group>"; };
@@ -1114,6 +1116,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				071F9078221EE4F800B96431 /* Default-568h@2x.png */,
 				07CE93BD221BD9A900EF98C3 /* fonts */,
 				07A594362218E82F00D16994 /* AirGoogleMaps */,
 				075412252218155800455254 /* Philippines.gpx */,
@@ -1776,6 +1779,7 @@
 				58A94EDE968947709E2B177D /* Roboto_medium.ttf in Resources */,
 				A8E31CB5898B421B8959029D /* Roboto.ttf in Resources */,
 				07CE93E6221BD9AA00EF98C3 /* HelveticaNeue-Bold.otf in Resources */,
+				071F9079221EE4F800B96431 /* Default-568h@2x.png in Resources */,
 				560FC016BFF441C8B7F1EC19 /* rubicon-icon-font.ttf in Resources */,
 				07CE93DD221BD9A900EF98C3 /* HelveticaNeue-Medium.otf in Resources */,
 				51F5A08F53354BDB84638D4A /* SimpleLineIcons.ttf in Resources */,
@@ -2101,7 +2105,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BB42S6H242;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..",
@@ -2139,7 +2143,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BB42S6H242;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..",
