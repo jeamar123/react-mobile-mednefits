@@ -27,26 +27,25 @@ export default class EclaimForm extends Component {
         }
       ],
       claimTypeState: "Select",
-      claim: false,
-      member: false,
+      claim: null,
+      member: null,
       memberData: [],
       memberState: "Select",
       isDateTimePickerVisible: false,
-      amount: false,
-      provider: false,
-      file: false,
+      amount: null,
+      provider: null,
+      file: null,
       isLoading: false
     }
 
     this.selectSpending = this.selectSpending.bind(this)
   }
 
-  componentWillMount() {
-    this.getMember()
-    this.selectSpending("medical")
+  componentWillMount = async () => {
+    await this.selectSpending("medical")
   }
 
-  async getMember() {
+  getMember = async () => {
     this.setState({ memberState: "Loading..." })
 
     await Core.GetAllMember(async (err, result) => {
@@ -57,7 +56,7 @@ export default class EclaimForm extends Component {
           await dataMember.push({ label: member.name, value: member.user_id })
         });
 
-        this.setState({
+        await this.setState({
           memberState: "Select",
           memberData: dataMember,
         })
@@ -69,11 +68,11 @@ export default class EclaimForm extends Component {
   async selectSpending(type) {
     this.setState({ type: type, claimTypeState: "Loading...", claim: false })
 
-    await Core.GetHealthTypeList(type, (err, result) => {
+    await Core.GetHealthTypeList(type, async (err, result) => {
       if (result) {
         dataClaim = []
 
-        result.data.map((claim) => {
+        await result.data.map((claim) => {
           dataClaim.push({ label: claim.name, value: claim.health_type_id })
         });
 
@@ -81,6 +80,7 @@ export default class EclaimForm extends Component {
       }
 
       this.setState({ claimTypeState: "Select" })
+      await this.getMember()
     })
   }
 

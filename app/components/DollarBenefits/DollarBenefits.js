@@ -11,16 +11,15 @@ class DollarBenefits extends Component {
     };
   }
 
-  componentWillMount() {
-    this.getUserBalance();
+  componentWillMount = async () => {
+    await this.getUserBalance();
   }
 
-  getUserBalance() {
-    Core.GetBalance((error, result) => {
-      data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+  getUserBalance = async () => {
+    await Core.GetBalance(async (error, result) => {
+      data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
-      this.setState({
+      await this.setState({
         Balance: data.balance,
       });
     });

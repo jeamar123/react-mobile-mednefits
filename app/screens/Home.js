@@ -215,7 +215,7 @@ class Home extends Component {
     }
   }
 
-  async getClinicType() {
+  getClinicType = async () => {
     await Core.GetClinicType(async (err, result) => {
       if (result) {
         await this.setState({
@@ -226,10 +226,9 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-   await Core.GetLocationPermission(function(error, result){
-
+   await Core.GetLocationPermission(async (error, result) => {
+    await this.getClinicType()
    });
-   await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;

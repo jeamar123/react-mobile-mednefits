@@ -41,7 +41,7 @@ export default class InputText extends Component {
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+            color: (this.props.placeholderStyle) ? this.props.placeholderStyle : '#cccccc',
           }, this.props.placeholderStyle]}
           style={[style.inputStyle]}
         />
@@ -69,6 +69,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
+    marginTop: 5,
     paddingBottom: '2%',
     color: '#0392cf',
     fontFamily: Config.FONT_FAMILY_ROMAN,

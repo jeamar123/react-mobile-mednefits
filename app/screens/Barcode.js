@@ -22,7 +22,7 @@ class Barcode extends Component {
     this.state = {
       torchMode: 'off',
       cameraType: 'back',
-      data: false,
+      data: null,
       isLoading: false,
       failed: false,
       title: null,
@@ -38,7 +38,7 @@ class Barcode extends Component {
     if (prevStates.data !== this.state.data) {
       this.scanBarcode()
       this.setState({
-        data: false
+        data: null
       })
     }
   }
@@ -60,7 +60,8 @@ class Barcode extends Component {
           Actions.SelectService({
             type:'reset',
             services: result.data.clinic_procedures,
-            clinicid: result.data.clinic_id
+            clinicid: result.data.clinic_id,
+            clinic_data: result.data
           })
           this.setState({
             isLoading: false,
@@ -100,6 +101,7 @@ class Barcode extends Component {
   }
 
   onBarCodeRead = async obj => {
+    console.log('reading...');
     if (this.state.data == obj.data) return;
     this.setState({ data: obj, isLoading: true })
   }
@@ -122,7 +124,12 @@ class Barcode extends Component {
         ) : (
             <RNCamera
               style={styles.preview}
-              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+              barCodeTypes={[
+                RNCamera.Constants.BarCodeType.qr,
+                RNCamera.Constants.BarCodeType.ean13,
+                RNCamera.Constants.BarCodeType.upce,
+                RNCamera.Constants.BarCodeType.code128
+              ]}
               flashMode={RNCamera.Constants.FlashMode.on}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={

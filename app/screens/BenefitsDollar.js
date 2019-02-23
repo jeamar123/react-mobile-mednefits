@@ -19,7 +19,7 @@ class BenefitsDollar extends Component {
       amount: 0,
       currency: false,
       isLoading: false,
-      Balance: '0',
+      Balance: 0,
       placeholder: null,
       failed: false,
       title: null,
@@ -33,16 +33,25 @@ class BenefitsDollar extends Component {
     this.setState({ failed: false })
   }
 
-  componentDidMount() {
-    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      console.log(result)
-      this.setState({
-        clinic_name: result.data.name,
-        clinic_image: result.data.image_url,
-        currency: result.data.currency_symbol,
-        Balance: result.data.current_balance,
-      });
+  componentDidMount = async () => {
+    console.log('-----')
+    console.log(this.props.clinic_data);
+    await this.setState({
+      clinic_name: this.props.clinic_data.name,
+      clinic_image: this.props.clinic_data.image_url,
+      currency: this.props.clinic_data.currency_symbol,
+      Balance: this.props.clinic_data.current_balance,
     });
+    console.log('-----')
+    // await Core.GetClinicDetails(this.props.clinicid, async (err, result) => {
+    //   console.log(result)
+    //   await this.setState({
+    //     clinic_name: result.data.name,
+    //     clinic_image: result.data.image_url,
+    //     currency: result.data.currency_symbol,
+    //     Balance: result.data.current_balance,
+    //   });
+    // });
 
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
@@ -191,7 +200,7 @@ class BenefitsDollar extends Component {
               </Body>
             </CardItem>
 
-            <Buttons onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount })}>
+            <Buttons onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount, clinic_data: this.props.clinic_data })}>
               Next
             </Buttons>
             <View style={{ marginBottom: 20 }} />

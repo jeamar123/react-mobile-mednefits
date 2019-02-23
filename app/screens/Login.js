@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StatusBar, Text, TouchableOpacity, ActivityIndicator, Platform, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
@@ -19,7 +19,8 @@ class Login extends Component {
       isLoading: false,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      button: 'Log in'
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -29,17 +30,17 @@ class Login extends Component {
   }
 
   LoginHandler() {
-    this.setState({isLoading: true})
+    this.setState({isLoading: true, button: 'Logging in...'})
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
       // console.log(err)
       // console.log(result);
-      this.setState({isLoading: false})
       if (result) {
+        this.setState({isLoading: false, failed: false, button: 'Log in'})
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
-        this.setState({ failed: true, title: 'Login Failed', message: err.error_description })
+        this.setState({ failed: true, title: 'Login Failed', message: err.error_description, isLoading: false, button: 'Log in' })
         // Core.getNotify('', err.error_description);
       }
     })
@@ -49,21 +50,40 @@ class Login extends Component {
     // },500)
   }
 
+  renderError = () => {
+    if(this.state.isLoading) {
+      if(Platform.OS == "ios") {
+        return (
+          <View/>
+        )
+      } else {
+        return (
+          <Core.Loader
+            isVisible={this.state.isLoading}
+          />
+        )
+      }
+    } else if(this.state.failed) {
+        console.log('called')
+        return (
+          <Popup
+            kind="loginFailed"
+            //just for example the right parameter is like this isVisible={this.props.isVisible}
+            isVisible={this.state.failed}
+            closeSection={true}
+            closeSectionUpdate={this.isVisibleUpdate}
+            title={this.state.title}
+            message={this.state.message}
+          >
+          </Popup>
+        )
+    }
+  }
+
   render() {
     return (
       <Container>
-        <Core.Loader
-          isVisible={this.state.isLoading}
-        />
-        <Popup
-          kind="loginFailed"
-          //just for example the right parameter is like this isVisible={this.props.isVisible}
-          isVisible={this.state.failed}
-          closeSection={true}
-          closeSectionUpdate={this.isVisibleUpdate}
-          title={this.state.title}
-          message={this.state.message}
-        />
+        {this.renderError()}
         <Logo />
         <InputWithButton
           onChangeText={(text) => this.setState({ username: text })}
@@ -77,8 +97,8 @@ class Login extends Component {
           secureTextEntry={true}
           autoCapitalize='none'
         />
-        <Buttons onPress={() => this.LoginHandler()}>
-          Log in
+        <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
+          {this.state.button}
         </Buttons>
         <TouchableOpacity onPress={() => Actions.Forgot({ type: 'reset' })}>
           <Text style={{ color: '#0392cf', fontFamily: 'helvetica' }}>

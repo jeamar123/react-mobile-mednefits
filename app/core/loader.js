@@ -10,6 +10,8 @@ const Loader = ({ isVisible }) => {
       <View>
         <Modal
           isVisible={isVisible}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
           style={{
             justifyContent: 'center',
             alignItems: 'center'

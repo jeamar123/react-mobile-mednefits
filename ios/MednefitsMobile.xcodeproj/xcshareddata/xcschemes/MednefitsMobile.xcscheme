@@ -102,7 +102,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../Philippines.gpx"
+         identifier = "../Singapore.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

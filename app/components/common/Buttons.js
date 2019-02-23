@@ -4,11 +4,11 @@ import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
-const Buttons = ({ onPress, children }) => {
+const Buttons = ({ onPress, children, props }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
-    <TouchableOpacity onPress={onPress} style={ButtonStyle}>
+    <TouchableOpacity onPress={onPress} style={ButtonStyle} {...props}>
       <Text style={TextStyle}>{children}</Text>
     </TouchableOpacity>
   );

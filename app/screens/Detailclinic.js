@@ -29,7 +29,7 @@ class HistoryTransaction extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Core.GetDetailClinic(this.props.clinic_id, (err, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
@@ -345,7 +345,7 @@ class HistoryTransaction extends Component {
 
   renderDoctors() {
     return this.state.DoctorList.map(ListData => (
-      <TouchableOpacity onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
+      <TouchableOpacity onPress={() => Linking.openURL("tel:" + ListData.DocPhone)} key={ListData.doctor_id}>
         <View
           key={ListData.doctor_id}
           style={{

@@ -307,8 +307,8 @@ class HistoryTransaction extends Component {
           <CardItem>
             <Body
               style={{
-                marginTop: '-8%',
-                marginBottom: '-8%',
+                marginTop: '-6%',
+                marginBottom: '-4%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}

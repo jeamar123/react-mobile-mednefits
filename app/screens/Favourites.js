@@ -208,7 +208,7 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic()}>
+            <TouchableOpacity style={{ marginLeft: '2%' }} onPress={() => this.AddFavClinic()}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>

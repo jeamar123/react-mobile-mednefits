@@ -11,7 +11,7 @@ class HomeContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Balance: '0',
+      Balance: '0.00',
       Full_name: '',
       currency: false,
       isClearSearch: false,
@@ -19,15 +19,24 @@ class HomeContent extends Component {
     };
   }
 
-  async componentDidMount() {
-    await this.getUserDetail();
-    await this.getUserBalance();
+  getUserDetail = async () => {
+    console.log('in progress fetching getUserDetail')
+    await Core.UserDetail(async (error, result) => {
+      console.log('fetching done for getUserDetail');
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      await this.setState({
+        Full_name: data.profile.full_name,
+      });
+      this.getUserBalance();
+    });
   }
 
-  async getUserBalance() {
-    // console.log('in progress fetching getUserBalance')
+  getUserBalance = async () => {
+    console.log('in progress fetching getUserBalance')
     await Core.GetBalance(async (error, result) => {
-      // console.log('fetching done for getUserBalance');
+      console.log('fetching done for getUserBalance');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
@@ -35,6 +44,10 @@ class HomeContent extends Component {
         currency: result.data.currency_symbol
       });
     });
+  }
+
+  componentDidMount = async () => {
+    await this.getUserDetail();
   }
 
   onQuery = async (query) => {
@@ -71,20 +84,6 @@ class HomeContent extends Component {
     }
   }
 
-
-  async getUserDetail() {
-    console.log('in progress fetching getUserDetail')
-    await Core.UserDetail(async (error, result) => {
-      console.log('fetching done for getUserDetail');
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      await this.setState({
-        Full_name: data.profile.full_name,
-      });
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -97,7 +96,7 @@ class HomeContent extends Component {
             placeholder="Search"
             placeholderTextColor="#fff"
             placeholderStyle={{
-              color: "#fff"
+              color: "#fff",
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -113,7 +112,8 @@ class HomeContent extends Component {
               marginLeft: 10,
               marginRight: 10,
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              padding: 10
             }}
           />
           <View style={styles.contain}>

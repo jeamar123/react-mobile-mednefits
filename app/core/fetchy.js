@@ -3,47 +3,44 @@
  * @year 2018
  */
 
-import { PermissionsAndroid, Platform } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { getAlert, getNotify } from './notify';
-import * as Config from '../config';
-import * as Core from './index';
-import SystemSetting from 'react-native-system-setting'
-import Geolocation from 'react-native-geolocation-service';
-import Permissions from 'react-native-permissions';
+ import { PermissionsAndroid, Platform } from 'react-native';
+ import { Actions } from 'react-native-router-flux';
+ import { getAlert, getNotify } from './notify';
+ import * as Config from '../config';
+ import * as Core from './index';
+ import SystemSetting from 'react-native-system-setting'
+ import Geolocation from 'react-native-geolocation-service';
+ import Permissions from 'react-native-permissions';
 
-const headerLogin = {
+ const headerLogin = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
 };
 
-function fetching(params, callback) {
-  Core.CheckNetworkConnection(connection => {
+async function fetching(params, callback) {
+  await Core.CheckNetworkConnection(async connection => {
     try {
       if (connection == 'none') {
         throw 'No Internet Connection';
       } else if (connection == 'unknown') {
         throw 'Connection Unknown';
       } else {
-        fetch(params.url, {
+        await fetch(params.url, {
           method: params.method,
           headers: params.header,
           body:
-            params.body == ''
-              ? ''
-              : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
-                ? params.body
-                : JSON.stringify(params.body),
+          params.body == ''
+          ? ''
+          : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
+          ? params.body
+          : JSON.stringify(params.body),
           mode: (params.mode) ? params.mode : false,
           cache: (params.cache) ? params.cache : false
         })
-          .then(response => response.json())
-          .then(res => {
-            console.log('done fetching execution');
-            console.log(res);
-            if (!res.status) {
+        .then(async response => response.json())
+        .then(async res => {
+          if (!res.status) {
               // getAlert('', res.message);
-
               if (res.expired) {
                 Actions.Login({ type: 'reset' });
               }
@@ -51,20 +48,21 @@ function fetching(params, callback) {
             } else if (res.status) {
               callback(res);
             } else {
+              callback(res)
               // getAlert('', 'Please try again...');
             }
           })
-          .catch(error => {
-            console.warn('error fetching' + error.message);
-            error = (typeof error.message !== 'undefined') ? error : error.message
-            if (error == 'Network request failed') {
-              error = 'Please check your connection'
-            }
-            callback("", error)
-          });
+        .catch(error => {
+          error = (typeof error.message !== 'undefined') ? error : error.message
+          if (error == 'Network request failed') {
+            error = 'Please check your connection'
+          }
+          callback("", error)
+        });
       }
     } catch (e) {
       Core.getNotify('', e);
+      callback("", e)
     }
   });
 }
@@ -117,42 +115,16 @@ export async function LoginProcess(username, password, callback) {
   }
 }
 
-export async function UserDetail(callback) {
-  await setTimeout(async function () {
-    try {
-      await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
-        if (err || result == undefined) {
-          Actions.Login({ type: 'reset' });
-        } else {
-          params = {
-            url: Config.AUTH_USER_PROFILE,
-            method: 'GET',
-            header: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              Authorization: result,
-            },
-          };
-          await fetching(params, async result => {
-            console.log('done fetching in UserDetail');
-            await callback('', result)
-          });
-          console.log('fetching executed');
-        }
-      });
-    } catch (e) {
-      console.warn('error user detail' + e.message);
-      getNotify('', 'Failed get data, try again');
-    }
-  }, 100);
-}
-
-export async function GetBalance(callback) {
-  await setTimeout(async function () {
-    try {
-      await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+export const UserDetail = async (callback) => {
+  console.log('UserDetail called in function')
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      console.log('GetDataLocal called in function')
+      if (err || result == undefined) {
+        Actions.Login({ type: 'reset' });
+      } else {
         params = {
-          url: Config.USER_CREDITS,
+          url: Config.AUTH_USER_PROFILE,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -161,14 +133,38 @@ export async function GetBalance(callback) {
           },
         };
         await fetching(params, async result => {
-          await callback('', result);
+          console.log('done fetching in UserDetail');
+          await callback('', result)
         });
+        console.log('fetching executed');
+      }
+    });
+  } catch (e) {
+    console.warn('error user detail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }  
+}
+
+export const GetBalance = async (callback) => {
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      params = {
+        url: Config.USER_CREDITS,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      await fetching(params, async result => {
+        await callback('', result);
       });
-    } catch (e) {
-      console.warn('error get balance' + e.message);
-      getNotify('', 'Failed get data, try again');
-    }
-  }, 100);
+    });
+  } catch (e) {
+    console.warn('error get balance' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
 }
 
 export async function GetHistoryTransaction(callback) {
@@ -346,9 +342,10 @@ export function GetFavouritesClinic(callback) {
   }
 }
 
-export function GetClinicDetails(id, callback) {
+export const GetClinicDetails = async (id, callback) => {
   try {
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    console.log('triggered GetClinicDetails')
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
         url: Config.CLINIC_DETAILS + "/" + id,
         method: 'GET',
@@ -358,8 +355,9 @@ export function GetClinicDetails(id, callback) {
           Authorization: result,
         },
       };
-      fetching(params, result => {
-        callback('', result);
+      await fetching(params, async result => {
+        console.log('done GetClinicDetails');
+        await callback('', result);
       });
     });
   } catch (e) {
@@ -390,28 +388,26 @@ export function GetProcedureDetails(id, callback) {
   }
 }
 
-export async function GetClinicType(callback) {
-  setTimeout(async function () {
-    try {
-      await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
-        params = {
-          url: Config.CLINIC_CLINIC_TYPE,
-          method: 'GET',
-          header: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: result,
-          },
-        };
-        await fetching(params, async result => {
-          await callback('', result);
-        });
+export const GetClinicType = async (callback) => {
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      params = {
+        url: Config.CLINIC_CLINIC_TYPE,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      await fetching(params, async result => {
+        await callback('', result);
       });
-    } catch (e) {
-      console.warn('error GetProcedureDetails' + e.message);
-      getNotify('', 'Failed get data, try again');
-    }
-  }, 100);
+    });
+  } catch (e) {
+    console.warn('error GetProcedureDetails' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
 }
 
 export function GetHealthTypeList(type, callback) {
@@ -436,7 +432,7 @@ export function GetHealthTypeList(type, callback) {
   }
 }
 
-export async function GetAllMember(callback) {
+export const GetAllMember = async (callback) =>{
   try {
     await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
@@ -632,7 +628,7 @@ async function enableLocationDevice(callback) {
         }
       })
 
-     
+
     } else {
       await SystemSetting.isLocationEnabled().then(async (enable) => {
         if (!enable) {
@@ -794,7 +790,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
           callback(error, '');
         },
         { enableHighAccuracy: true, timeout: 3000 },
-      );
+        );
     } else {
     	return callback(false);
     }
@@ -848,15 +844,15 @@ export async function paginateClinicResults(clinic_type_id, page, callback) {
 
 export async function GetClinicMap(clinic_type_id, callback) {
   // try {
-  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
-  longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+    latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+    longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
 
-  if (!latitude || !longitude) {
-    console.warn('Waiting to get device location');
-    getNotify('', 'Waiting to get device location');
-    return false;
-  } else {
-  	await enableLocationDevice( async function(error, result) {
+    if (!latitude || !longitude) {
+      console.warn('Waiting to get device location');
+      getNotify('', 'Waiting to get device location');
+      return false;
+    } else {
+     await enableLocationDevice( async function(error, result) {
       if(result) {
   	    // console.warn('latitude', latitude)
         // console.warn('longitude', longitude)
@@ -877,11 +873,11 @@ export async function GetClinicMap(clinic_type_id, callback) {
           });
         });
       }
-  	})
-  }
-}
+    })
+   }
+ }
 
-export function GetFamilyCoverage(callback) {
+ export function GetFamilyCoverage(callback) {
   Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
     params = {
       url: Config.FAMILY_COVERAGE,

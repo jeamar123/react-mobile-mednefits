@@ -22,7 +22,7 @@ class HistoryClaim extends Component {
   }
 
   componentWillMount() {
-    this.getUserDetail();
+    // this.getUserDetail();
   }
 
   _pressCall = () => {

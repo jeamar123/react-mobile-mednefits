@@ -334,7 +334,15 @@ class NearbyClinic extends Component {
                   NameCategory: this.props.NameCategory
                 })}
               >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
+              {
+                (this.state.processing) ? 
+                (
+                  <View>
+                    <ActivityIndicator size="small" color="white" style={{ marginTop: 5 }} />
+                  </View>
+                )
+                : (<Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>)
+              }
               </TouchableOpacity>
 
             </View>

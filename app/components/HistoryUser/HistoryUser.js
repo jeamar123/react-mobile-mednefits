@@ -13,7 +13,7 @@ class HistoryUser extends Component {
   }
 
   componentWillMount() {
-    this.getUserDetail();
+    // this.getUserDetail();
   }
 
   getUserDetail() {
@@ -51,7 +51,7 @@ class HistoryUser extends Component {
             adjustsFontSizeToFit={true}
             style={styles.amount}
           >
-            Total Amount: S$ {this.props.Amount}
+            Total Amount: S$ {this.props.Amount ? this.props.Amount : '0.00'}
           </Text>
           <Text
             numberOfLines={2}
