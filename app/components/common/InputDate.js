@@ -12,7 +12,7 @@ export default class InputDate extends Component {
         onError={() => Common.getNotify("", "Error loading, please try again")}
         renderDate={({ year, month, day, date }) => {
           if (!date) {
-            return <Common.Texti fontColor={"#cccccc"}>{this.props.placeholder}</Common.Texti>
+            return <Common.Texti fontColor={"#bcbcbc"}>{this.props.placeholder}</Common.Texti>
           }
           const dateStr = `${day}-${month}-${year}`
           return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
@@ -26,7 +26,7 @@ export default class InputDate extends Component {
 const style = {
   containerDatePicker: {
     backgroundColor: "white",
-    borderBottomColor: "#cccccc",
+    borderBottomColor: "#bcbcbc",
     borderBottomWidth: 0,
     justifyContent: 'center',
     borderRadius: 2,

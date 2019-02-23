@@ -148,11 +148,11 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-    	console.log(error)
-    	console.log(result)
-    	if(result) {
-    		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
-    	}
+      console.log(error)
+      console.log(result)
+      if (result) {
+        Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+      }
     });
   }
 
@@ -166,18 +166,26 @@ class ClinicList extends Component {
         <View style={styles.gridBox}>
           <Image
             style={{
-              margin: 10,
-              width: 35,
-              height: 35,
+              marginTop: '5%',
+              paddingBottom: '2%',
+              width: '35%',
+              height: '35%',
             }}
             source={{ uri: this.props.image }}
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: 'center', width: '61%' }}
           >
             {this.props.name}
           </Text>
+          {/* <Text
+            fontFamily={Config.FONT_FAMILY_ROMAN}
+            style={{ textAlign: 'center', paddingTop: '10%', paddingLeft: 8, paddingRight: 8, }}
+          >
+            {this.props.name}
+          </Text> */}
+
         </View>
       </TouchableOpacity>
     )
@@ -226,10 +234,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-   await Core.GetLocationPermission(function(error, result){
+    await Core.GetLocationPermission(function (error, result) {
 
-   });
-   await this.getClinicType()
+    });
+    await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -357,7 +365,6 @@ const styles = {
     margin: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
 };
 

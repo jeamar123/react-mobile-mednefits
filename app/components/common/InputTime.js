@@ -39,7 +39,7 @@ export default class InputTime extends Component {
         onPress={() => this._showDateTimePicker()}
       >
         <Common.Texti
-          fontColor={"#D3D3D3"}
+          fontColor={"#bcbcbc"}
         >
           {this.props.placeholder}
         </Common.Texti>

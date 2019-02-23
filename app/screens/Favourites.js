@@ -27,6 +27,7 @@ class Favourites extends Component {
       resultData: [],
       DataE_Claim: [],
       data: false,
+      favourite: null
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -45,6 +46,11 @@ class Favourites extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    this.setState({ favourite: nextProps.favourite });
+  }
+
   componentWillMount() {
     this.getFavorites_Clinic();
   }
@@ -54,6 +60,29 @@ class Favourites extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ resultData: data, data: true });
+    });
+  }
+
+  AddFavClinic(id_clinic) {
+    params = {
+      status: this.state.favourite == 1 ? 0 : 1,
+      clinicid: id_clinic
+    }
+
+    Core.AddFavouriteClinic(params, (err, result) => {
+      if (result.status) {
+        if (this.state.favourite == 1) {
+          Core.getNotify('', 'Success Remove Favourite Clinic');
+          this.setState({ favourite: 0 });
+        } else {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 1 });
+        }
+      } else if (!result.status) {
+        Core.getNotify('', result.message);
+      } else {
+        Core.getNotify('', 'Failed to Add Favourite Clinic, please try again');
+      }
     });
   }
 
@@ -84,6 +113,7 @@ class Favourites extends Component {
   }
 
   renderTransactionIn_Network() {
+    console.warn("datanya" + (this.state.clinic_id))
     return this.state.resultData.map((Data, index) => (
       <TouchableOpacity
         key={index}
@@ -178,7 +208,9 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            {this.renderFavourite(Data.favourite)}
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
+              {this.renderFavourite(Data.favourite)}
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>

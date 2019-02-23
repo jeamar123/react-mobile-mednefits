@@ -320,7 +320,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            style={{ paddingLeft: 15 }}
+            style={{ paddingLeft: '20%' }}
             onPress={() => this.props.drawerAction(true)}
           >
             <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
@@ -404,7 +404,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            style={{ paddingEnd: '3%' }}
+            style={{ paddingEnd: '15%' }}
             onPress={() => Actions.SwitchUser()}
           >
             <Image
