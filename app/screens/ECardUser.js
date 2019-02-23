@@ -317,8 +317,10 @@ class ECardUser extends Component {
                     </Text>
                     {' '}
                     <Text style={{
+                      color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: 14,
+                      textDecorationLine: 'underline'
                     }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
                   </Text>
                   <Text

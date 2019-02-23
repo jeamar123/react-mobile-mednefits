@@ -1,4 +1,5 @@
 export * from './Buttons';
+export * from './ButtonPay';
 export * from './ButtonDone';
 export * from './Spinner';
 export * from './ButtonFooter';

@@ -57,7 +57,7 @@ class SelectService extends Component {
     if (!isExist) {
       this.refs[serviceId].setNativeProps({
         borderColor: '#0392CF',
-        borderWidth: 1
+        borderWidth: 2
       });
 
       service.push(data.procedureid)
@@ -65,7 +65,7 @@ class SelectService extends Component {
     } else {
       this.refs[serviceId].setNativeProps({
         borderColor: '#FFFFFF',
-        borderWidth: 1
+        borderWidth: 2
       });
 
       service.splice(service.indexOf(data.procedureid), 1)
@@ -128,7 +128,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    borderWidth: 1,
+    borderWidth: 4,
     borderColor: "#0392CF"
   },
 };

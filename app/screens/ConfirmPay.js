@@ -138,7 +138,7 @@ class ConfirmPay extends Component {
         { this.renderPopUp() }
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="cancel-cash" title="Mednefits Credits" />
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View
             style={{
               backgroundColor: '#518cb0',
@@ -172,31 +172,78 @@ class ConfirmPay extends Component {
               </Text>
             </View>
           </View>
-        </View>
+        </View> */}
         <Content padder>
-          <Card>
-            <CardItem style={{ backgroundColor: '#E8E7EE' }}>
-              <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
-                {!this.state.clinic_image ? (
+
+          <View style={{ backgroundColor: '#f8f8fa' }}>
+            <View
+              style={{
+                justifyContent: 'center', alignItems: 'center',
+                marginTop: '2%',
+                marginBottom: '10%'
+              }}
+            >
+              {!this.state.clinic_image ? (
+                <Image
+                  source={require('../../assets/apps/mednefits.png')}
+                  style={{ height: 55, resizeMode: 'center', width: 155 }}
+                />
+              ) : (
                   <Image
-                    source={require('../../assets/apps/mednefits.png')}
+                    source={{ uri: this.state.clinic_image }}
                     style={{ height: 55, resizeMode: 'center', width: 155 }}
                   />
-                ) : (
-                    <Image
-                      source={{ uri: this.state.clinic_image }}
-                      style={{ height: 55, resizeMode: 'center', width: 155 }}
-                    />
-                  )}
-                {!this.state.clinic_name ? (
-                  <Spinner size="small" />
-                ) : (
-                    <Text style={{ marginTop: 10, fontFamily: 'helvetica' }}>
-                      {this.state.clinic_name}
-                    </Text>
-                  )}
-              </Body>
-            </CardItem>
+                )}
+              {!this.state.clinic_name ? (
+                <Spinner size="small" />
+              ) : (
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginTop: '3%' }}>
+                    {this.state.clinic_name}
+                  </Text>
+                )}
+
+            </View>
+          </View>
+          <View style={{ backgroundColor: '#fff' }}>
+            <View
+              style={{
+                flex: 1,
+                height: 100,
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                marginLeft: 50,
+                marginTop: '2%',
+                marginBottom: '5%'
+              }}
+            >
+              <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
+                Payment Amount
+                </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
+                  {this.state.currency ? this.state.currency : ' '} {' '}
+                </Text>
+                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 38 }}>
+                  {this.props.amount}
+                </Text>
+              </View>
+
+            </View>
+          </View>
+          <View style={{ flex: 1, marginBottom: '20%' }}>
+            <Buttons
+              onPress={() => this.SendPayment()}
+              isLoading={this.state.isLoading}
+            >
+              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+            </Buttons>
+          </View>
+          {/* <Card>
             <CardItem cardBody>
               <Body
                 style={{
@@ -226,13 +273,8 @@ class ConfirmPay extends Component {
               </Body>
             </CardItem>
 
-          </Card>
-          <Buttons
-            onPress={() => this.SendPayment()}
-            isLoading={this.state.isLoading}
-          >
-            Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-          </Buttons>
+          </Card> */}
+
         </Content>
       </Container>
     );

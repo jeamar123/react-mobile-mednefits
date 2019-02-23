@@ -15,9 +15,9 @@ import { UserSwitch } from '../components/UserSwitch';
 import * as Core from '../core';
 import * as Config from '../config';
 
-class FamilyList extends Component{
+class FamilyList extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -25,7 +25,7 @@ class FamilyList extends Component{
     }
   }
 
-  SwitchProcess=()=>{
+  SwitchProcess = () => {
     this.setState({
       isLoading: true
     })
@@ -35,82 +35,82 @@ class FamilyList extends Component{
       client_id: Config.CLIENT_ID
     }
 
-    Core.SwitchAccount(param, (err, result)=>{
+    Core.SwitchAccount(param, (err, result) => {
       console.warn(err);
       if (err) {
-        Core.getNotify('','Failed login, try again')
+        Core.getNotify('', 'Failed login, try again')
       }
 
-      this.setState({isLoading: false})
+      this.setState({ isLoading: false })
     })
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <View>
         <Core.Loader
           isVisible={this.state.isLoading}
         />
         <TouchableOpacity onPress={this.SwitchProcess}>
-        <View
-          style={{
-            flex: 1,
-            marginTop: 5,
-            marginBottom: 10,
-            height: 120,
-            backgroundColor: '#fff',
-          }}
-        >
           <View
-            style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center' }}
+            style={{
+              flex: 1,
+              marginTop: 5,
+              marginBottom: 10,
+              height: 120,
+              backgroundColor: '#fff',
+            }}
           >
-            <View style={{justifyContent: 'center', alignItem: 'center'}}>
-              <Image
-                source={require('../../assets/apps/mednefits.png')}
-                style={{
-                  height: 80,
-                  width: 80,
-                  resizeMode: 'center',
-                  alignItem: 'center',
-                  marginTop: '5%',
-                  marginLeft: '5%',
-                }}
-              />
-            </View>
             <View
-              style={{
-                flexDirection: 'column',
-                marginRight: 5,
-                width: '60%',
-                justifyContent: 'center',
-                alignItem:'center'
-              }}
+              style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center' }}
             >
-              <Text style={{ fontWeight: '600' }}>{this.props.name}</Text>
-              <Text
+              <View style={{ justifyContent: 'center', alignItem: 'center' }}>
+                <Image
+                  source={require('../../assets/apps/userAccount.png')}
+                  style={{
+                    height: 70,
+                    width: 70,
+                    resizeMode: 'center',
+                    alignItem: 'center',
+                    marginTop: '5%',
+                    marginLeft: '15%',
+                  }}
+                />
+              </View>
+              <View
                 style={{
-                  marginTop: '5%',
-                  color: '#c4c4c4',
-                  fontSize: 11,
+                  flexDirection: 'column',
+                  marginRight: 5,
+                  width: '60%',
+                  justifyContent: 'center',
+                  alignItem: 'center'
                 }}
               >
-                {this.props.nric}
-              </Text>
-              <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
-            </View>
-            <View style={{justifyContent: 'center', alignItem: 'center'}}>
-              <Image
-                source={require('../../assets/apps/next-btn.png')}
-                style={{
-                  height: 25,
-                  width: 25,
-                  resizeMode: 'center',
-                  marginTop: '3%',
-                }}
-              />
+                <Text style={{ fontWeight: '600' }}>{this.props.name}</Text>
+                <Text
+                  style={{
+                    marginTop: '5%',
+                    color: '#c4c4c4',
+                    fontSize: 11,
+                  }}
+                >
+                  {this.props.nric}
+                </Text>
+                <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
+              </View>
+              <View style={{ justifyContent: 'center', alignItem: 'center' }}>
+                <Image
+                  source={require('../../assets/apps/next-btn.png')}
+                  style={{
+                    height: 25,
+                    width: 25,
+                    resizeMode: 'center',
+                    marginTop: '3%',
+                  }}
+                />
+              </View>
             </View>
           </View>
-        </View>
         </TouchableOpacity>
       </View>
     )
@@ -189,7 +189,7 @@ class SwitchUser extends Component {
             >
               <ActivityIndicator size="large" color="#0392cf" />
             </View>
-          ): this.renderTransactionIn_Network()}
+          ) : this.renderTransactionIn_Network()}
         </View>
       </View>
     );

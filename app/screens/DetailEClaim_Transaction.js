@@ -55,16 +55,10 @@ class DetailEClaim_Transaction extends Component {
       console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
-      if(data.files) {
-        this.setState({
-          data: data,
-          filesData: data.files
-        });
-      } else {
-        this.setState({
-          data: data
-        });
-      }
+      this.setState({
+        data: data,
+        filesData: data.files
+      });
       console.warn(this.state.filesData);
     });
 
@@ -160,7 +154,36 @@ class DetailEClaim_Transaction extends Component {
               flexDirection: 'row',
               alignContent: 'space-between',
               marginVertical: 10,
-              marginTop: 30,
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '2%',
+                fontSize: 13
+              }}
+            >
+              Spending Account
+            </Text>
+            <TextInput
+              placeholder="Spending Account"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-4%', marginLeft: '6%', fontSize: 13 }}
+              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
+            />
+          </View>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+
             }}
           >
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
@@ -171,7 +194,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '18%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '19%', fontSize: 13 }}
               value={this.state.data.service}
             />
           </View>
@@ -310,11 +333,11 @@ class DetailEClaim_Transaction extends Component {
               style={{
                 color: '#c4c4c4',
                 marginLeft: '2%',
-                marginRight: '2%',
+                marginRight: '11%',
                 fontSize: 13
               }}
             >
-              Spending Account
+              Receipt
             </Text>
             <TextInput
               editable={false} selectTextOnFocus={false}
@@ -325,7 +348,6 @@ class DetailEClaim_Transaction extends Component {
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>
-          {this._renderDivider()}
 
           <View
             style={{
@@ -374,7 +396,7 @@ class DetailEClaim_Transaction extends Component {
           </View>*/}
         </GiftedForm>
       </Container>
-    );
+    ));
   }
 }
 
