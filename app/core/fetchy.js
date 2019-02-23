@@ -488,6 +488,8 @@ export function SendEClaim(params, callback) {
         bodyType: 'multipart'
       };
 
+      console.log(params);
+
       fetching(params, result => {
         callback('', result);
       });
