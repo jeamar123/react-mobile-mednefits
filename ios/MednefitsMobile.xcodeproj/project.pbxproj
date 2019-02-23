@@ -14,7 +14,6 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* MednefitsMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MednefitsMobileTests.m */; };
 		01D2DA42EAFE47EA8ECC0663 /* HelveticaNeue-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BDD6FE708A8E44CFAAAB2C07 /* HelveticaNeue-Light.otf */; };
-		070A04572220DEC60065B0A4 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070A04562220DEC60065B0A4 /* Launch Screen.storyboard */; };
 		071F9079221EE4F800B96431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 071F9078221EE4F800B96431 /* Default-568h@2x.png */; };
 		075E3919A84846D9A4C9A365 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B54FE810E546D289139414 /* libRNVectorIcons.a */; };
 		07A594612218E82F00D16994 /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A594372218E82F00D16994 /* AIRDummyView.m */; settings = {COMPILER_FLAGS = "-DHAVE_GOOGLE_MAPS=1"; }; };
@@ -497,7 +496,6 @@
 		00E356F21AD99517003FC87E /* MednefitsMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MednefitsMobileTests.m; sourceTree = "<group>"; };
 		044AB7B8EBDC418BB571953E /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
 		070A04552220CF5B0065B0A4 /* Singapore.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Singapore.gpx; sourceTree = "<group>"; };
-		070A04562220DEC60065B0A4 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		071F9078221EE4F800B96431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		075412252218155800455254 /* Philippines.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Philippines.gpx; sourceTree = "<group>"; };
 		07A594372218E82F00D16994 /* AIRDummyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDummyView.m; sourceTree = "<group>"; };
@@ -1116,7 +1114,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				070A04562220DEC60065B0A4 /* Launch Screen.storyboard */,
 				070A04552220CF5B0065B0A4 /* Singapore.gpx */,
 				071F9078221EE4F800B96431 /* Default-568h@2x.png */,
 				07CE93BD221BD9A900EF98C3 /* fonts */,
@@ -1767,7 +1764,6 @@
 				3772FF0876F14D64ABEF4BF2 /* HelveticaNeue-Thin.otf in Resources */,
 				07CE93DF221BD9A900EF98C3 /* Foundation.ttf in Resources */,
 				D1A0AB89AB1C4C98B4F946ED /* HelveticaNeue.ttf in Resources */,
-				070A04572220DEC60065B0A4 /* Launch Screen.storyboard in Resources */,
 				08406C3E72D4448C86A17664 /* HelveticaNeueLT-UltraLigExtObl.otf in Resources */,
 				F47B27542E9D4B928E989967 /* HelveticaNeueLTStd-Lt.otf in Resources */,
 				07CE93EB221BD9AA00EF98C3 /* HelveticaNeue-Thin.otf in Resources */,
