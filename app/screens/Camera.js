@@ -45,7 +45,7 @@ class Camera extends Component {
   takePicture = async () => {
     try {
       if (this.camera) {
-        const options = { quality: 0.5, base64: false };
+        const options = { quality: 0.1, base64: false };
         const data = await this.camera.takePictureAsync(options);
         const maxHeight = Dimensions.get('window').height;
         const maxWidth = Dimensions.get('window').width;

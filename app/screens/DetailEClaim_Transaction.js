@@ -52,12 +52,19 @@ class DetailEClaim_Transaction extends Component {
 
   componentWillMount() {
     Core.GetSpesificEclaim(this.props.transaction_id, result => {
+      console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
-      this.setState({
-        data: data,
-        filesData: data.files
-      });
+      if(data.files) {
+        this.setState({
+          data: data,
+          filesData: data.files
+        });
+      } else {
+        this.setState({
+          data: data
+        });
+      }
       console.warn(this.state.filesData);
     });
 
@@ -81,8 +88,27 @@ class DetailEClaim_Transaction extends Component {
     );
   }
 
-  render() {
+  redenderReceipt = (data) => {
     return this.state.filesData.map(Data => (
+      <Image
+        style={{
+          width: 120,
+          height: 150,
+          marginHorizontal: 30,
+          marginRight: 30,
+          marginLeft: 50,
+        }}
+        source={{
+          uri: !Data.file
+            ? '../../assets/photo.png'
+            : Data.file,
+        }}
+      />
+    ));
+  }
+
+  render() {
+    return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
@@ -319,20 +345,7 @@ class DetailEClaim_Transaction extends Component {
             >
               Receipt
             </Text>
-            <Image
-              style={{
-                width: 120,
-                height: 150,
-                marginHorizontal: 30,
-                marginRight: 30,
-                marginLeft: 50,
-              }}
-              source={{
-                uri: !Data.file
-                  ? '../../assets/photo.png'
-                  : Data.file,
-              }}
-            />
+            { this.redenderReceipt(this.state.filesData) }
           </View>
 
           {/*<View
@@ -361,7 +374,7 @@ class DetailEClaim_Transaction extends Component {
           </View>*/}
         </GiftedForm>
       </Container>
-    ));
+    );
   }
 }
 

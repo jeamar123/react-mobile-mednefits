@@ -39,6 +39,7 @@ async function fetching(params, callback) {
         })
         .then(async response => response.json())
         .then(async res => {
+          console.log(res)
           if (!res.status) {
               // getAlert('', res.message);
               if (res.expired) {
@@ -488,6 +489,7 @@ export const SendEClaim = async (params, callback) => {
       console.log(params);
 
       fetching(params, result => {
+        console.log(result)
         callback('', result);
       });
 

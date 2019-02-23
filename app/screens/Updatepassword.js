@@ -83,7 +83,7 @@ class Updatepassword extends Component {
         style={{
           borderBottomColor: '#cccccc',
           borderBottomWidth: 0.8,
-          marginTop: '-2%',
+          // marginTop: '-2%',
           marginBottom: '5%',
         }}
       />
@@ -123,7 +123,7 @@ class Updatepassword extends Component {
             <TextInput
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '50%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -152,7 +152,7 @@ class Updatepassword extends Component {
               placeholder=""
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -179,7 +179,7 @@ class Updatepassword extends Component {
               placeholder=""
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}

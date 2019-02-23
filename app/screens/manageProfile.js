@@ -134,7 +134,7 @@ class manageProfile extends Component {
         style={{
           borderBottomColor: '#cccccc',
           borderBottomWidth: 0.8,
-          marginTop: '-2%',
+          // marginTop: '-2%',
           marginBottom: '5%',
         }}
       />
@@ -326,7 +326,6 @@ class manageProfile extends Component {
             <TextInput
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
                 width: '80%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -354,7 +353,7 @@ class manageProfile extends Component {
               placeholder="Phone Number"
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -381,7 +380,7 @@ class manageProfile extends Component {
               placeholder="NIRC Number"
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -466,7 +465,7 @@ class manageProfile extends Component {
               placeholder="0.0"
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -493,7 +492,7 @@ class manageProfile extends Component {
               placeholder="0.0"
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -520,7 +519,7 @@ class manageProfile extends Component {
               placeholder="Blood Type"
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}

@@ -7,11 +7,14 @@ import {
   TextInput,
   Image,
   ScrollView,
+  ActivityIndicator
 } from 'react-native';
+import Modal from 'react-native-modal';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { ClaimDetail } from '../components/ClaimDetail';
 import { ButtonFooter, Popup } from '../components/common';
+import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
 
@@ -25,7 +28,8 @@ class DetailEclaim extends Component {
       failed: false,
       title: null,
       message: null,
-      member: null
+      member: null,
+      showPopUp: false
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -55,10 +59,12 @@ class DetailEclaim extends Component {
         // Core.getNotify("",result.message)
         if (result.status) {
           this.setState({
-            isLoading: false
+            isLoading: false,
+            failed: false
           })
           Actions.ThanksEclaim({type: 'reset'})
         } else {
+          console.log('failed to submit')
           this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
         }
 
@@ -83,7 +89,7 @@ class DetailEclaim extends Component {
   }
 
   isVisibleUpdate() {
-    this.setState({ failed: false })
+    this.setState({ failed: false, showPopUp: false })
   }
 
   async renderMember( ) {
@@ -93,23 +99,59 @@ class DetailEclaim extends Component {
     }
   }
 
+  statusModal = () => {
+    console.log('modal hide completely')
+    if(this.state.failed) {
+      this.setState({ showPopUp: true });
+      console.log('this.state.showPopUp', this.state.showPopUp);
+    } else {
+      this.setState({ showPopUp: false });
+    }
+  }
+
+  renderPopUp = () => {
+    return (
+      <Popup
+        kind="eClaimError"
+        isVisible={this.state.showPopUp}
+        closeSection={true}
+        closeSectionUpdate={this.isVisibleUpdate}
+        title={this.state.title}
+        message={this.state.message}
+      />
+    )
+  }
+
+  customLoader = () => {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+            >Just a sec...</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
   render() {    
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
-        <Popup
-          kind="eClaimError"
-          isVisible={this.state.failed}
-          closeSection={true}
-          closeSectionUpdate={this.isVisibleUpdate}
-          title={this.state.title}
-          message={this.state.message}
-        />
-        <Core.Loader
-          isVisible={this.state.isLoading}
-        />
+        { this.customLoader() }
+        { this.renderPopUp() }
         <ScrollView>
           <GiftedForm
             style={{
