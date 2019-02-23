@@ -485,7 +485,7 @@ export const SendEClaim = async (params, callback) => {
         bodyType: 'multipart'
       };
 
-      console.log(params)
+      console.log(params);
 
       fetching(params, result => {
         callback('', result);
