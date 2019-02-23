@@ -454,9 +454,9 @@ export const GetAllMember = async (callback) =>{
   }
 }
 
-export function SendEClaim(params, callback) {
+export const SendEClaim = async (params, callback) => {
   try {
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       let myHeaders = new Headers();
       let formdata = new FormData();
 
@@ -484,6 +484,8 @@ export function SendEClaim(params, callback) {
         cache: 'default',
         bodyType: 'multipart'
       };
+
+      console.log(params)
 
       fetching(params, result => {
         callback('', result);

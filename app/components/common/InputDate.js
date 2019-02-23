@@ -8,7 +8,7 @@ export default class InputDate extends Component {
       <ModalDatePicker
         style={[style.containerDatePicker]}
         startDate={new Date()}
-        minDate={new Date()}
+        maxDate={new Date()}
         onError={() => Common.getNotify("", "Error loading, please try again")}
         renderDate={({ year, month, day, date }) => {
           if (!date) {

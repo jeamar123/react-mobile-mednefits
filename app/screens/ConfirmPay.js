@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, Dimensions } from 'react-native';
+import { StatusBar, Image, View, Dimensions, ActivityIndicator } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import Modal from 'react-native-modal';
 import { Buttons, Spinner, Popup } from '../components/common';
 import { InputWithButton } from '../components/TextInput';
+import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
 import styles from '../components/DollarBenefits';
@@ -24,19 +26,20 @@ class ConfirmPay extends Component {
       placeholder: null,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      showPopUp: false,
     };
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
   isVisibleUpdate() {
-    this.setState({ failed: false })
+    this.setState({ showPopUp: false })
   }
 
   componentDidMount() {
     // Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-    //   console.log(result)
+      // console.log(result)
       this.setState({
         clinic_name: this.props.clinic_data.name,
         clinic_image: this.props.clinic_data.image_url,
@@ -84,18 +87,55 @@ class ConfirmPay extends Component {
     });
   }
 
+  statusModal = () => {
+    console.log('modal hide completely')
+    if(this.state.failed) {
+      this.setState({ showPopUp: true });
+    } else {
+      this.setState({ showPopUp: false });
+    }
+  }
+
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+            >Just a sec...</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
+  renderPopUp() {
+    return (
+      <Popup
+        kind="insufficientCredit"
+        isVisible={this.state.showPopUp}
+        closeSection={true}
+        closeSectionUpdate={this.isVisibleUpdate}
+        title={this.state.title}
+        message={this.state.message}
+      />
+    )
+  }
+
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
-        <Core.Loader isVisible={this.state.isLoading} />
-        <Popup
-          kind="insufficientCredit"
-          isVisible={this.state.failed}
-          closeSection={true}
-          closeSectionUpdate={() => this.isVisibleUpdate()}
-          title={this.state.title}
-          message={this.state.message}
-        />
+        { this.customLoader() }
+        { this.renderPopUp() }
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="cancel-cash" title="Mednefits Credits" />
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
