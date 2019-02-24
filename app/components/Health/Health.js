@@ -7,9 +7,9 @@ const Health = () => (
   <View style={styles.container}>
     <Image
       style={{
-        height: 90,
+        height: 85,
         resizeMode: 'contain',
-        width: 90,
+        width: 85,
         marginTop: '20%',
         marginBottom: '10%',
       }}
