@@ -49,6 +49,7 @@ export default EStyleSheet.create({
     textAlign: 'center',
     fontSize: RF(1.9),
     color: '#fff',
+    width: '90%',
   },
   DrawerContain: {
     backgroundColor: '#0392cf',

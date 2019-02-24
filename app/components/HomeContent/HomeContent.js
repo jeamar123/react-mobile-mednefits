@@ -143,11 +143,11 @@ class HomeContent extends Component {
             >
               <View style={styles.gridBox}>
                 <Image
-                  style={{ marginBottom: 12, width: 26, height: 35 }}
+                  style={{ marginBottom: '12%', width: 26, height: 35 }}
                   source={require('../../../assets/apps/E-Card.png')}
                 />
                 <Text style={styles.title}>E-Card</Text>
-                <Text style={styles.detail}>{this.state.Full_name}</Text>
+                <Text numberOfLines={2} style={styles.detail}>{this.state.Full_name}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
