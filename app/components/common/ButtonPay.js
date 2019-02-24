@@ -29,7 +29,7 @@ const styles = {
     borderColor: '#0392cf',
     margin: 10,
     alignSelf: 'center',
-    width: '62%'
+    width: '42%'
   },
   TextStyle: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
