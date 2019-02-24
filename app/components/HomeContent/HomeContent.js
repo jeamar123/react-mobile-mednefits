@@ -97,7 +97,8 @@ class HomeContent extends Component {
             placeholder="Search"
             placeholderTextColor="#fff"
             placeholderStyle={{
-              color: "#fff"
+              color: "#fff",
+              width: '90%'
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}

@@ -14,6 +14,8 @@ import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
@@ -164,18 +166,17 @@ class ClinicList extends Component {
         }
       >
         <View style={styles.gridBox}>
-          <Image
+          <ResponsiveImage
             style={{
               marginTop: '5%',
               paddingBottom: '2%',
-              width: '35%',
-              height: '35%',
             }}
             source={{ uri: this.props.image }}
+            initWidth="35" initHeight="35"
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', width: '61%' }}
+            style={{ textAlign: 'center', width: '61%', fontSize: RF(2.2), }}
           >
             {this.props.name}
           </Text>
