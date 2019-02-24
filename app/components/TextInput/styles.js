@@ -7,7 +7,7 @@ export default EStyleSheet.create({
   container: {
     backgroundColor: '$white',
     width: '80%',
-    height: INPUT_HEIGHT,
+    height: 48,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 11,
@@ -15,7 +15,7 @@ export default EStyleSheet.create({
   input: {
     fontFamily: Config.FONT_FAMILY_LIGHT,
     flex: 1,
-    height: INPUT_HEIGHT,
+    height: 48,
     paddingHorizontal: 8,
     color: '$inputText',
     fontSize: 18,
