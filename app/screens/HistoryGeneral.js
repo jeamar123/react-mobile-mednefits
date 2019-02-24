@@ -252,9 +252,9 @@ class History extends Component {
                 Medicine & Treatment
                 </Text>
               <Text style={{ marginLeft: '-7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
-                {(this.state.data.service_credits) ? this.state.data.service_credits : "0.00"}
+                {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
               </Text>
-              {(this.state.data.service_credits == true) ? this.state.data.service_credits : <View
+              {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
                 style={{
                   paddingTop: 5,
                   paddingBottom: 5,
