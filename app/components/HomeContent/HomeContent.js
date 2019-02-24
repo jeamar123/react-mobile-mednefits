@@ -144,7 +144,7 @@ class HomeContent extends Component {
                   source={require('../../../assets/apps/E-Card.png')}
                 />
                 <Text style={styles.title}>E-Card</Text>
-                <Text numberOfLines={2} style={styles.detail}>Dhonald Johannes CH Sihotang Widajskdajsdkjasd</Text>
+                <Text numberOfLines={2} style={styles.detail}>{this.state.Full_name}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
