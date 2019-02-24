@@ -112,7 +112,7 @@ class NearbyClinic extends Component {
         content={<MenuSide navigator={this._navigator} />}
         onClose={() => this.closeDrawer()}
       >
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: '#0392cf' }}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
             drawerAction={this.drawerActionCallback}
@@ -166,21 +166,10 @@ class NearbyClinic extends Component {
                           style={{
                             flexDirection: 'row',
                             justifyContent: 'space-between',
-                            borderRadius: 5,
-                            backgroundColor: '#fff',
-                            paddingTop: 10,
-                            paddingBottom: 10,
-                            marginBottom: 3,
-                            marginRight: 5,
-                            borderWidth: 2,
-                            borderColor: "#fff"
                           }}>
                           <Image
-                            source={{ uri: dataMarker.image_url }}
-                            style={{
-                              width: 50,
-                              height: 50,
-                            }}
+                            source={require('../../assets/apps/LogoMednefits.png')}
+                            style={{ width: 40, height: 40, alignSelf: 'center', margin: 5, backgroundColor: 'red' }}
                             resizeMode="cover"
                           />
                         </View>
