@@ -63,10 +63,10 @@ class Favourites extends Component {
     });
   }
 
-  AddFavClinic(id_clinic) {
+  AddFavClinic(id_Clinic) {
     params = {
       status: this.state.favourite == 1 ? 0 : 1,
-      clinicid: id_clinic
+      clinicid: id_Clinic
     }
 
     Core.AddFavouriteClinic(params, (err, result) => {
@@ -208,7 +208,7 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
