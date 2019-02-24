@@ -39,15 +39,18 @@ class HomeContent extends Component {
       console.log('fetching done for getUserBalance');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      await this.setState({
-        Balance: data.balance,
-        currency: result.data.currency_symbol
-      });
+        setTimeout(async () => {
+          await this.setState({
+            Balance: data.balance,
+            Full_name: data.profile.Name,
+            currency: result.data.currency_symbol
+          });
+        }, 500);
     });
   }
 
   componentDidMount = async () => {
-    await this.getUserDetail();
+    await this.getUserBalance();
   }
 
   onQuery = async (query) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, TouchableOpacity, Keyboard } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { ButtonPay, Spinner, Popup } from '../components/common/';
+import { ButtonPay, Spinner, Popup, Buttons } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
@@ -57,13 +57,13 @@ class BenefitsDollar extends Component {
     //   this.setState({currency: result.data.currency_symbol})
     // })
 
-    this.props.services.map(value =>
-      Core.GetProcedureDetails(value, (err, result) => {
-        this.setState({
-          amount: Number(result.data.price) + Number(this.state.amount),
-        });
-      })
-    );
+    // this.props.services.map(value =>
+    //   Core.GetProcedureDetails(value, (err, result) => {
+    //     this.setState({
+    //       amount: Number(result.data.price) + Number(this.state.amount),
+    //     });
+    //   })
+    // );
   }
 
   SendPayment() {
@@ -171,8 +171,7 @@ class BenefitsDollar extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
-                marginLeft: '5%',
-                marginRight: '5%'
+               
               }}
             >
               <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
@@ -290,9 +289,9 @@ class BenefitsDollar extends Component {
               </Body>
             </CardItem>
           </Card> */}
-            <Buttons onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount, clinic_data: this.props.clinic_data })}>
+            <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount.replace(/^,/,''), clinic_data: this.props.clinic_data })}>
               Next
-            </Buttons>
+            </ButtonPay>
             <View style={{ marginBottom: 20 }} />
         </Content>
       </Container>

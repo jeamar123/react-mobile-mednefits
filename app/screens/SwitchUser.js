@@ -67,10 +67,11 @@ class FamilyList extends Component {
               <View style={{ justifyContent: 'center', alignItem: 'center' }}>
                 <Image
                   source={require('../../assets/apps/userAccount.png')}
+                  resizeMode="contain"
                   style={{
+                    flex: 1,
                     height: 70,
                     width: 70,
-                    resizeMode: 'center',
                     alignItem: 'center',
                     marginTop: '5%',
                     marginLeft: '15%',
@@ -101,11 +102,12 @@ class FamilyList extends Component {
               <View style={{ justifyContent: 'center', alignItem: 'center' }}>
                 <Image
                   source={require('../../assets/apps/next-btn.png')}
+                  resizeMode="contain"
                   style={{
-                    height: 25,
-                    width: 25,
-                    resizeMode: 'center',
-                    marginTop: '3%',
+                    flex: 1,
+                    height: 12,
+                    width: 12,
+                    marginTop: '3%'
                   }}
                 />
               </View>

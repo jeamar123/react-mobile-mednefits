@@ -18,13 +18,13 @@
 };
 
 async function fetching(params, callback) {
-  await Core.CheckNetworkConnection(async connection => {
+  // await Core.CheckNetworkConnection(async connection => {
     try {
-      if (connection == 'none') {
-        throw 'No Internet Connection';
-      } else if (connection == 'unknown') {
-        throw 'Connection Unknown';
-      } else {
+      // if (connection == 'none') {
+      //   throw 'No Internet Connection';
+      // } else if (connection == 'unknown') {
+      //   throw 'Connection Unknown';
+      // } else {
         await fetch(params.url, {
           method: params.method,
           headers: params.header,
@@ -60,12 +60,12 @@ async function fetching(params, callback) {
           }
           callback("", error)
         });
-      }
+      // }
     } catch (e) {
       Core.getNotify('', e);
       callback("", e)
     }
-  });
+  // });
 }
 
 export async function LoginProcess(username, password, callback) {

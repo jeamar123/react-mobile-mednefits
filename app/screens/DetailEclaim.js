@@ -35,10 +35,10 @@ class DetailEclaim extends Component {
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
-  EclaimProcess = () =>{
+  EclaimProcess = async () => {
 
     try {
-      this.setState({
+      await this.setState({
         isLoading: true
       })
 
@@ -55,17 +55,16 @@ class DetailEclaim extends Component {
         'time': this.props.claimdata.time
       }
 
-      Core.SendEClaim(eclaimFile, (err, result)=>{
+      await Core.SendEClaim(eclaimFile, async (err, result)=>{
         // Core.getNotify("",result.message)
         if (result.status) {
           this.setState({
-            isLoading: false,
-            failed: false
+            isLoading: false
           })
           Actions.ThanksEclaim({type: 'reset'})
         } else {
           console.log('failed to submit')
-          this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
+          await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
         }
 
       })
@@ -104,8 +103,6 @@ class DetailEclaim extends Component {
     if(this.state.failed) {
       this.setState({ showPopUp: true });
       console.log('this.state.showPopUp', this.state.showPopUp);
-    } else {
-      this.setState({ showPopUp: false });
     }
   }
 

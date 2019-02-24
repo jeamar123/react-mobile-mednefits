@@ -160,7 +160,7 @@ class NearbyClinic extends Component {
             provider={PROVIDER_GOOGLE}
             style={{
               paddingTop: 52,
-              height: '85%'
+              height: '84.8%'
             }}
             // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
             region={this.state.region}
@@ -296,7 +296,6 @@ class NearbyClinic extends Component {
               marginRight: '3%',
               marginLeft: '3%',
               marginBottom: 5,
-              marginTop: 5,
               alignItem: 'center'
             }}>
               <TouchableOpacity onPress={() => Actions.Home()}>

@@ -55,10 +55,16 @@ class DetailEClaim_Transaction extends Component {
       console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
-      this.setState({
-        data: data,
-        filesData: data.files
-      });
+      if(data.files) {
+        this.setState({
+          data: data,
+          filesData: data.files
+        });
+      } else {
+        this.setState({
+          data: data
+        });
+      }
       console.warn(this.state.filesData);
     });
 
@@ -85,6 +91,7 @@ class DetailEClaim_Transaction extends Component {
   redenderReceipt = (data) => {
     return this.state.filesData.map(Data => (
       <Image
+        key={Data.e_claim_doc_id}
         style={{
           width: 120,
           height: 150,
@@ -337,18 +344,18 @@ class DetailEClaim_Transaction extends Component {
                 fontSize: 13
               }}
             >
-              Receipt
+              Spending Account
             </Text>
             <TextInput
               editable={false} selectTextOnFocus={false}
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '-4%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>
-
+          {this._renderDivider()}
           <View
             style={{
               flex: 1,
@@ -396,7 +403,7 @@ class DetailEClaim_Transaction extends Component {
           </View>*/}
         </GiftedForm>
       </Container>
-    ));
+    );
   }
 }
 

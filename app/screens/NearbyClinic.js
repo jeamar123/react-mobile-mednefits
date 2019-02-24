@@ -107,6 +107,7 @@ class NearbyClinic extends Component {
             var new_data = this.state.DataClinic.concat(data.clinics);
             this.setState({ DataClinic: new_data, current_page: current_page, processing: false });
           } else {
+            Core.getNotifyLong('', 'No more clinics to show');
             this.setState({ processing: false });
           }
         } else {
@@ -123,22 +124,24 @@ class NearbyClinic extends Component {
     if (favourite == 1) {
       return (
         <Image
+          resizeMode="contain"
           source={require('../../assets/apps/like_fav.png')}
           style={{
-            height: 100,
-            width: 100,
-            resizeMode: 'center',
+            flex: 1,
+            height: 25,
+            width: 25
           }}
         />
       )
     } else {
       return (
         <Image
+          resizeMode="contain"
           source={require('../../assets/apps/likes.png')}
           style={{
-            height: 100,
-            width: 100,
-            resizeMode: 'center',
+            flex: 1,
+            height: 25,
+            width: 25
           }}
         />
       )
@@ -175,14 +178,15 @@ class NearbyClinic extends Component {
                 alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                marginRight: '2%',
+                // marginRight: '2%',
               }}
             />
             <View
               style={{
                 flexDirection: 'column',
                 marginTop: '2%',
-                width: '50%',
+                width: '55%',
+                marginLeft: '-4%'
               }}
             >
               <Text
@@ -240,7 +244,9 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-            {this.renderFavourite(Data.favourite)}
+            <View style={{ flex: 0.5 }}>
+              {this.renderFavourite(Data.favourite)}
+            </View>
           </View>
         </View>
       </TouchableOpacity>

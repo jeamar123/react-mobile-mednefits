@@ -31,9 +31,9 @@ export default class Popup extends Component {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <ImageBackground
-            style={{ width: 250, height: 100 }}
+            style={{ width: 80, height: 80 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
-            resizeMode="center"
+            resizeMode="contain"
           />
 
           <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
@@ -66,9 +66,9 @@ export default class Popup extends Component {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <ImageBackground
-            style={{ width: 250, height: 100 }}
+            style={{ width: 850, height: 80 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
-            resizeMode="center"
+            resizeMode="contain"
           />
 
           <View style={{ margin: 10 }}>
@@ -101,9 +101,9 @@ export default class Popup extends Component {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <ImageBackground
-            style={{ width: 250, height: 100 }}
+            style={{ width: 80, height: 80 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
-            resizeMode="center"
+            resizeMode="contain"
           />
 
           <View style={{ margin: 10 }}>

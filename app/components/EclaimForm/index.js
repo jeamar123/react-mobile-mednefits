@@ -104,7 +104,7 @@ export default class EclaimForm extends Component {
       (!this.state.provider) ||
       (!this.state.amount) ||
       (!this.state.member) ||
-      (this.state.Idate == "nput Date") ||
+      (this.state.Idate == "Input Date") ||
       (this.state.time == "Input Time")
     ) {
       Core.getNotify("", "Please fill mandatory form")

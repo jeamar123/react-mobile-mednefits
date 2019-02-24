@@ -19,7 +19,7 @@ import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
 
-const { width, height } = Dimensions.get('window');
+const { width, height, fontScale } = Dimensions.get('window');
 
 class SearchResult extends Component {
 
@@ -168,14 +168,14 @@ class ClinicList extends Component {
             style={{
               marginTop: '5%',
               paddingBottom: '2%',
-              width: '35%',
-              height: '35%',
+              width: 50,
+              height: 50,
             }}
             source={{ uri: this.props.image }}
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', width: '61%' }}
+            style={{ textAlign: 'center', width: '61%', fontSize: 14 / fontScale}}
           >
             {this.props.name}
           </Text>
@@ -356,13 +356,14 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
+    justifyContent: 'center'
   },
   gridBox: {
     width: width / 3.23,
     height: height / 6,
     backgroundColor: '#fff',
     margin: 2,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
 };

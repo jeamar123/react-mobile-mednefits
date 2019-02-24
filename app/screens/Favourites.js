@@ -91,10 +91,11 @@ class Favourites extends Component {
       return (
         <Image
           source={require('../../assets/apps/like_fav.png')}
+          resizeMode="contain"
           style={{
-            height: 100,
-            width: 100,
-            resizeMode: 'center',
+            flex: 1,
+            height: 25,
+            width: 25
           }}
         />
       )
@@ -102,10 +103,11 @@ class Favourites extends Component {
       return (
         <Image
           source={require('../../assets/apps/likes.png')}
+          resizeMode="contain"
           style={{
-            height: 100,
-            width: 100,
-            resizeMode: 'center',
+            flex: 1,
+            height: 25,
+            width: 25
           }}
         />
       )
@@ -143,14 +145,14 @@ class Favourites extends Component {
                 alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                marginRight: '2%',
+                // marginRight: '2%',
               }}
             />
             <View
               style={{
                 flexDirection: 'column',
                 marginTop: '2%',
-                width: '50%',
+                width: '70%',
               }}
             >
               <Text
@@ -208,7 +210,7 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
+            <TouchableOpacity style={{ marginRight: '6%' }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
@@ -248,7 +250,6 @@ class Favourites extends Component {
               <View
                 style={{
                   flex: 1,
-                  marginLeft: '2%',
                   marginRight: '2%',
                   marginTop: '2%',
                 }}
@@ -267,25 +268,26 @@ class Favourites extends Component {
                       }}
                     >
                       <View
-                        style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                        style={{ flexDirection: 'row'}}
                       >
                         <Image
                           source={require('../../assets/apps/plus.png')}
+                          resizeMode="contain"
                           style={{
-                            height: 70,
-                            width: 70,
-                            resizeMode: 'center',
-                            alignItems: 'center',
+                            // flex: 1,
+                            height: 60,
+                            width: 60,
+                            // alignItems: 'center',
                             marginTop: '2%',
-                            marginLeft: '2%',
-                            marginRight: '-5%',
+                            marginLeft: '4%',
+                            // marginRight: '-5%',
                           }}
                         />
                         <View
                           style={{
                             flexDirection: 'column',
                             marginTop: '4%',
-                            marginLeft: '4%',
+                            marginLeft: '2%',
                             width: '45%',
                           }}
                         >
@@ -308,13 +310,6 @@ class Favourites extends Component {
                             Tap here to search and add your favourite clinic to the list
                         </Text>
                         </View>
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            resizeMode: 'center',
-                          }}
-                        />
                       </View>
                     </View>
                   </TouchableOpacity>

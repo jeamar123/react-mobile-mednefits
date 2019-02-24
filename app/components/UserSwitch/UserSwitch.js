@@ -7,10 +7,11 @@ const UserSwitch = () => (
     <View style={styles.sectionTitle}>
       <Image
         source={require('../../../assets/apps/coverage.png')}
+        resizeMode="contain"
         style={{
+          flex: 1,
           height: 80,
           width: 80,
-          resizeMode: 'center',
           marginTop: '5%',
           marginLeft: '5%',
         }}

@@ -56,7 +56,7 @@ class Camera extends Component {
           preview: data.uri,
           previewHeight: data.height * ratio,
           previewWidth: data.width * ratio,
-          filename: 'receipt' + this.props.member + '.jpg',
+          filename: 'receipt' + new Date() + '.jpg',
           filetype: 'images/jpg'
         })
       }
@@ -98,7 +98,7 @@ class Camera extends Component {
           }}
           style={styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.on}
+          flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.torch}
           permissionDialogTitle={'Permission to use camera'}
           permissionDialogMessage={'We need your permission to use your camera phone'}
         >
@@ -180,7 +180,7 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -197,7 +197,7 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
