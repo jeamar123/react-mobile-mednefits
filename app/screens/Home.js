@@ -331,10 +331,10 @@ class Home extends Component {
                     >
                       <Text
                         fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center' }}
+                        style={{ textAlign: 'center', marginLeft: '0.5%' }}
                       >
                         Benefits Category
-                </Text>
+                      </Text>
                     </View>
                     <View style={styles.contain}>
                       <FlatList
