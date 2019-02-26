@@ -98,7 +98,7 @@ class HomeContent extends Component {
             placeholderTextColor="#fff"
             placeholderStyle={{
               color: "#fff",
-              width: '90%'
+              width: '100%'
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -107,14 +107,15 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "90%",
+              width: '90%',
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
               marginLeft: 10,
               marginRight: 10,
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              height: '20%'
             }}
           />
           <View style={styles.contain}>

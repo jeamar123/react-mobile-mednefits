@@ -37,5 +37,6 @@ export default EStyleSheet.create({
     paddingHorizontal: 8,
     color: '$inputText',
     fontSize: 46,
+    width: '80%'
   },
 });

@@ -10,6 +10,7 @@ import {
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -89,24 +90,26 @@ class Favourites extends Component {
   renderFavourite(favourite) {
     if (favourite == 1) {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
           style={{
-            height: 100,
-            width: 100,
             resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     } else {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
           style={{
-            height: 100,
-            width: 100,
             resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     }

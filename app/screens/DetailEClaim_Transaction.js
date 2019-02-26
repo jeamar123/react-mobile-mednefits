@@ -151,7 +151,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-4%', marginLeft: '6%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>

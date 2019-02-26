@@ -162,8 +162,7 @@ class BenefitsDollar extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
-                marginLeft: '5%',
-                marginRight: '5%'
+                width: '100%'
               }}
             >
               <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>

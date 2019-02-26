@@ -176,7 +176,7 @@ class ClinicList extends Component {
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', width: '61%', fontSize: RF(2.2), }}
+            style={{ textAlign: 'center', width: '61%', fontSize: RF(2.0), }}
           >
             {this.props.name}
           </Text>
@@ -361,7 +361,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.23,
-    height: height / 6,
+    height: height / 5.9,
     backgroundColor: '#fff',
     margin: 2,
     justifyContent: 'center',
