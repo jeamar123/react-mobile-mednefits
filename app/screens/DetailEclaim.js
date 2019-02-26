@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  ImageBackground
 } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -14,6 +15,7 @@ import { ClaimDetail } from '../components/ClaimDetail';
 import { ButtonFooter, Popup } from '../components/common';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
+import * as Common from '../components/common';
 
 class DetailEclaim extends Component {
 
@@ -42,9 +44,7 @@ class DetailEclaim extends Component {
         'user_id': this.props.claimdata.member,
         'service': this.props.claimdata.claim,
         'merchant': this.props.claimdata.provider,
-        'file': this.props.claimdata.uri,
-        'filename': this.props.claimdata.filename,
-        'filetype': this.props.claimdata.filetype,
+        'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type,
@@ -93,7 +93,9 @@ class DetailEclaim extends Component {
     }
   }
 
-  render() {    
+  render() {
+    console.warn(this.props.claimdata);
+    console.warn(this.props.claimdata.images);
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -275,7 +277,6 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{
-                  height: 130,
                   width: '50%',
                   borderTopLeftRadius: 5,
                   borderTopRightRadius: 5,
@@ -286,11 +287,21 @@ class DetailEclaim extends Component {
                   alignItems: 'center',
                 }}
               >
-                <Image
-                  resizeMode="cover"
-                  style={{ width: '50%', height: 130 }}
-                  source={{uri: this.props.claimdata.uri}}
-                />
+                {(typeof this.props.claimdata.images !== 'undefined') ? (
+                  this.props.claimdata.images.map((value, index)=>(
+                    <View
+                      key={index}
+                      style={{flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around'}}>
+                      <ImageBackground
+                        resizeMode="cover"
+                        style={{ width: '100%', height: 80 }}
+                        source={{uri: value.preview}}
+                      />
+                    </View>
+                  ))
+                ) : (
+                  <View />
+                )}
               </View>
             </View>
             <View
