@@ -81,8 +81,27 @@ class DetailEClaim_Transaction extends Component {
     );
   }
 
-  render() {
+  _renderReceipt() {
     return this.state.filesData.map(Data => (
+
+      <Image
+        style={{
+          width: 70,
+          height: 80,
+
+        }}
+        source={{
+          uri: !Data.file
+            ? '../../assets/photo.png'
+            : Data.file,
+        }}
+      />
+    ));
+  }
+
+  render() {
+    // this.state.filesData.map(Data =>
+    return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
@@ -313,20 +332,13 @@ class DetailEClaim_Transaction extends Component {
             >
               Receipt
             </Text>
-            <Image
-              style={{
-                width: 120,
-                height: 150,
-                marginHorizontal: 30,
-                marginRight: 30,
-                marginLeft: 50,
-              }}
-              source={{
-                uri: !Data.file
-                  ? '../../assets/photo.png'
-                  : Data.file,
-              }}
-            />
+            <View
+              style={{ marginLeft: 50 }}
+            >
+              {this._renderReceipt()}
+            </View>
+
+
           </View>
 
           {/*<View
@@ -355,7 +367,7 @@ class DetailEClaim_Transaction extends Component {
           </View>*/}
         </GiftedForm>
       </Container>
-    ));
+    );
   }
 }
 
