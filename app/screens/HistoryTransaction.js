@@ -338,7 +338,7 @@ class HistoryTransaction extends Component {
               <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
             </Body>
           </CardItem>
-          <CardItem>
+          {/* <CardItem>
             <Body
               style={{
                 marginTop: '-8%',
@@ -358,7 +358,7 @@ class HistoryTransaction extends Component {
 
               <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
             </Body>
-          </CardItem>
+          </CardItem> */}
           <CardItem>
             <Body
               style={{

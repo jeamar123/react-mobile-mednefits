@@ -10,6 +10,7 @@ import {
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -27,6 +28,7 @@ class Favourites extends Component {
       resultData: [],
       DataE_Claim: [],
       data: false,
+      favourite: null
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -45,6 +47,11 @@ class Favourites extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    this.setState({ favourite: nextProps.favourite });
+  }
+
   componentWillMount() {
     this.getFavorites_Clinic();
   }
@@ -57,33 +64,59 @@ class Favourites extends Component {
     });
   }
 
+  AddFavClinic(id_Clinic) {
+    params = {
+      status: this.state.favourite == 1 ? 0 : 1,
+      clinicid: id_Clinic
+    }
+
+    Core.AddFavouriteClinic(params, (err, result) => {
+      if (result.status) {
+        if (this.state.favourite == 1) {
+          Core.getNotify('', 'Success Remove Favourite Clinic');
+          this.setState({ favourite: 0 });
+        } else {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 1 });
+        }
+      } else if (!result.status) {
+        Core.getNotify('', result.message);
+      } else {
+        Core.getNotify('', 'Failed to Add Favourite Clinic, please try again');
+      }
+    });
+  }
+
   renderFavourite(favourite) {
     if (favourite == 1) {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
           style={{
-            height: 100,
-            width: 100,
             resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     } else {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
           style={{
-            height: 100,
-            width: 100,
             resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     }
   }
 
   renderTransactionIn_Network() {
+    console.warn("datanya" + (this.state.clinic_id))
     return this.state.resultData.map((Data, index) => (
       <TouchableOpacity
         key={index}
@@ -178,7 +211,9 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            {this.renderFavourite(Data.favourite)}
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+              {this.renderFavourite(Data.favourite)}
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>

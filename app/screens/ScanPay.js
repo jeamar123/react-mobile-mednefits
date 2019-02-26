@@ -20,7 +20,7 @@ class ScanPay extends Component {
               <CardItem>
                 <Body
                   style={{
-                    height: 270,
+                    height: 290,
                     width: '95%',
                     flex: 1,
                     justifyContent: 'center',
@@ -29,7 +29,7 @@ class ScanPay extends Component {
                 >
                   <Image style={{ width: 50, height: 50 }} source={require('../../assets/apps/byCredit.png')} />
                   <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
-                    Pay by Mednefits Credit
+                    Pay by Mednefits Credits
                   </Text>
                 </Body>
               </CardItem>
@@ -40,7 +40,7 @@ class ScanPay extends Component {
               <CardItem>
                 <Body
                   style={{
-                    height: 270,
+                    height: 290,
                     width: '95%',
                     flex: 1,
                     justifyContent: 'center',

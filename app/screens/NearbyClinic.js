@@ -119,6 +119,29 @@ class NearbyClinic extends Component {
     }
   }
 
+  AddFavClinic(idClinic) {
+    params = {
+      status: this.state.favourite == 1 ? 0 : 1,
+      clinicid: idClinic
+    }
+
+    Core.AddFavouriteClinic(params, (err, result) => {
+      if (result.status) {
+        if (this.state.favourite == 1) {
+          Core.getNotify('', 'Success Remove Favourite Clinic');
+          this.setState({ favourite: 0 });
+        } else {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 1 });
+        }
+      } else if (!result.status) {
+        Core.getNotify('', result.message);
+      } else {
+        Core.getNotify('', 'Failed to Add Favourite Clinic, please try again');
+      }
+    });
+  }
+
   renderFavourite(favourite) {
     if (favourite == 1) {
       return (
@@ -240,7 +263,9 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-            {this.renderFavourite(Data.favourite)}
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+              {this.renderFavourite(Data.favourite)}
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>

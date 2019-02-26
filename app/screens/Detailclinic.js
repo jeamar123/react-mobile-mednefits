@@ -12,7 +12,7 @@ import { DetailClinic } from '../components/DetailClinic';
 import * as Core from '../core';
 import * as Config from '../config';
 import { ButtonCall } from '../components/common/ButtonCall';
-import { ActionConst } from 'react-native-router-flux';
+import RF from "react-native-responsive-fontsize";
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -71,7 +71,7 @@ class HistoryTransaction extends Component {
             fontSize: 13
           }}
         >
-          Procedure
+          Procedures
         </Text>
       </TabHeading>
     );
@@ -194,7 +194,7 @@ class HistoryTransaction extends Component {
               color: 'black',
               marginLeft: 15,
               fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 18,
+              fontSize: RF(2.4),
               fontWeight: 'bold'
             }}
           >
@@ -204,7 +204,7 @@ class HistoryTransaction extends Component {
               color: 'black',
               marginLeft: 15,
               fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 10,
+              fontSize: RF(1.7)
             }}
           >
             {Data.duration}
@@ -215,7 +215,7 @@ class HistoryTransaction extends Component {
           color: 'black',
           marginRight: 15,
           fontFamily: Config.FONT_FAMILY_LIGHT,
-          fontSize: 20,
+          fontSize: RF(2.4),
           fontWeight: 'bold'
         }}>
           {Data.price}
@@ -345,48 +345,50 @@ class HistoryTransaction extends Component {
 
   renderDoctors() {
     return this.state.DoctorList.map(ListData => (
-      <View
-        key={ListData.doctor_id}
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          backgroundColor: '#fff',
-          paddingTop: 15,
-          paddingBottom: 15,
-          marginBottom: 3,
-          borderWidth: 2,
-          borderColor: "#fff"
-        }}
-      >
-        <Image
-          source={{ uri: ListData.image_url }}
+      <TouchableOpacity onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
+        <View
+          key={ListData.doctor_id}
           style={{
-            width: 50,
-            height: 50,
-            borderRadius: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
             backgroundColor: '#fff',
-            marginLeft: '3%'
-          }} />
-        <Text
-          style={{
-            color: 'black',
-            marginTop: '3%',
-            fontFamily: Config.FONT_FAMILY_LIGHT,
-            fontSize: 16,
-            fontWeight: 'bold'
+            paddingTop: 15,
+            paddingBottom: 15,
+            marginBottom: 3,
+            borderWidth: 2,
+            borderColor: "#fff"
           }}
         >
-          {ListData.name}
-        </Text>
-        <Text />
-        <Text />
-        <Text />
-        <View style={{ width: '30%', marginTop: '3%' }}>
-          <ButtonCall onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
-            CALL
+          <Image
+            source={{ uri: ListData.image_url }}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 5,
+              backgroundColor: '#fff',
+              marginLeft: '3%'
+            }} />
+          <Text
+            style={{
+              color: 'black',
+              marginTop: '3%',
+              fontFamily: Config.FONT_FAMILY_LIGHT,
+              fontSize: 16,
+              fontWeight: 'bold'
+            }}
+          >
+            {ListData.name}
+          </Text>
+          <Text />
+          <Text />
+          <Text />
+          <View style={{ width: '30%', marginTop: '3%' }}>
+            <ButtonCall onPress={() => Linking.openURL("tel:" + ListData.DocPhone)}>
+              CALL
           </ButtonCall>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     ));
   }
 

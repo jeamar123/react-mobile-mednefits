@@ -8,9 +8,10 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { Icon, Button } from 'native-base';
+import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import ResponsiveImage from 'react-native-responsive-image';
 import * as Core from '../../core';
 
 export default class Navbar extends React.Component {
@@ -320,7 +321,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            style={{ paddingLeft: 15 }}
+            style={{ paddingLeft: '20%' }}
             onPress={() => this.props.drawerAction(true)}
           >
             <Icons name="bars" style={{ color: '#fff', fontSize: 32 }} />
@@ -404,12 +405,13 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            style={{ paddingEnd: '3%' }}
+            style={{ paddingEnd: '15%' }}
             onPress={() => Actions.SwitchUser()}
           >
-            <Image
+            <ResponsiveImage
               source={require('../../../assets/apps/switch.png')}
-              style={{ height: 55, resizeMode: 'center', width: 75 }}
+              style={{ resizeMode: 'center', }}
+              initWidth="62" initHeight="38"
             />
           </TouchableOpacity>
         </View>
@@ -446,6 +448,8 @@ export default class Navbar extends React.Component {
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
+            marginRight: '2.5%',
+            marginTop: '0.5%',
           }}
         >
           <TouchableOpacity
@@ -453,9 +457,10 @@ export default class Navbar extends React.Component {
               Actions.Search()
             }
           >
-            <Image
+            <ResponsiveImage
               source={require('../../../assets/apps/search.png')}
-              style={{ height: 55, resizeMode: 'center', width: 75 }}
+              style={{ resizeMode: 'center' }}
+              initWidth="25" initHeight="25"
             />
           </TouchableOpacity>
         </View>

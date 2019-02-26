@@ -582,7 +582,7 @@ class manageProfile extends Component {
             >
               {this.state.allergies !== null ? this.state.allergies.length : '0'}
             </Text>
-            <ButtonProfile onPress={() => Actions.MedicalAllergies()}>Alergies</ButtonProfile>
+            <ButtonProfile onPress={() => Actions.MedicalAllergies()}>Allergies</ButtonProfile>
           </View>
           <View
             style={{

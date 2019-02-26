@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Container, Text } from 'native-base';
+import { Container, Text, Right } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { getNotify, getAlert } from '../components/common/Notify';
 import * as Core from '../core';
@@ -33,9 +33,9 @@ class Updatepassword extends Component {
     password = this.state.password;
     new_password = this.state.new_password;
 
-    if(password != new_password) {
-    	Core.getNotify('', 'New Password and Re-Type New Password should be the same.');
-    	return false;
+    if (password != new_password) {
+      Core.getNotify('', 'New Password and Re-Type New Password should be the same.');
+      return false;
     }
 
     try {
@@ -60,7 +60,7 @@ class Updatepassword extends Component {
                 Core.getNotify('', res.web_message);
                 Actions.Home();
               } else {
-              	Core.getNotify('', res.web_message);
+                Core.getNotify('', res.web_message);
               }
             })
             .catch(error => {
@@ -135,9 +135,9 @@ class Updatepassword extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                width: '23%',
                 fontFamily: Config.FONT_FAMILY_LIGHT,
                 fontSize: 13,
+                alignItems: 'flex-end',
               }}
             >
               Old Password

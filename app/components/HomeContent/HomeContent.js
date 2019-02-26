@@ -89,7 +89,7 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <Common.InputText
+          <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}
@@ -97,7 +97,8 @@ class HomeContent extends Component {
             placeholder="Search"
             placeholderTextColor="#fff"
             placeholderStyle={{
-              color: "#fff"
+              color: "#fff",
+              width: '100%'
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -106,14 +107,15 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "90%",
+              width: '90%',
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
               marginLeft: 10,
               marginRight: 10,
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              height: '20%'
             }}
           />
           <View style={styles.contain}>
@@ -140,11 +142,11 @@ class HomeContent extends Component {
             >
               <View style={styles.gridBox}>
                 <Image
-                  style={{ marginBottom: 12, width: 26, height: 35 }}
+                  style={{ marginBottom: '12%', width: 26, height: 35, marginTop: '12%' }}
                   source={require('../../../assets/apps/E-Card.png')}
                 />
                 <Text style={styles.title}>E-Card</Text>
-                <Text style={styles.detail}>{this.state.Full_name}</Text>
+                <Text numberOfLines={2} style={styles.detail}>{this.state.Full_name}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity

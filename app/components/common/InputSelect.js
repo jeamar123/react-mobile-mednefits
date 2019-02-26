@@ -102,8 +102,7 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Texti
-            style={{ fontFamily: Config.FONT_FAMILY_ROMAN, }}
-            fontColor="#cccccc"
+            fontColor="#bcbcbc"
           >
             {this.setTitle()}
           </Common.Texti>

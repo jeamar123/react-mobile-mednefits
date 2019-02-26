@@ -22,7 +22,9 @@ class DetailEClaim_Transaction extends Component {
       imageSource: {
         uri: '',
       },
+      filesData: [],
       data: false,
+      File: false
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
@@ -54,7 +56,9 @@ class DetailEClaim_Transaction extends Component {
 
       this.setState({
         data: data,
+        filesData: data.files
       });
+      console.warn(this.state.filesData);
     });
 
     Core.UserDetail((err, result) => {
@@ -77,12 +81,26 @@ class DetailEClaim_Transaction extends Component {
     );
   }
 
+  _renderReceipt() {
+    return this.state.filesData.map(Data => (
+
+      <Image
+        style={{
+          width: 70,
+          height: 80,
+
+        }}
+        source={{
+          uri: !Data.file
+            ? '../../assets/photo.png'
+            : Data.file,
+        }}
+      />
+    ));
+  }
+
   render() {
-    console.warn(
-      'datanya ' + this.state.data.clinic_name
-        ? this.state.data.clinic_name
-        : ''
-    );
+    // this.state.filesData.map(Data =>
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -135,7 +153,36 @@ class DetailEClaim_Transaction extends Component {
               flexDirection: 'row',
               alignContent: 'space-between',
               marginVertical: 10,
-              marginTop: 30,
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '2%',
+                fontSize: 13
+              }}
+            >
+              Spending Account
+            </Text>
+            <TextInput
+              placeholder="Spending Account"
+              underlineColorAndroid="transparent"
+              colo="#000"
+              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
+              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
+            />
+          </View>
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 10,
+
             }}
           >
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
@@ -145,7 +192,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '18%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '19%', fontSize: 13 }}
               value={this.state.data.service}
             />
           </View>
@@ -279,21 +326,20 @@ class DetailEClaim_Transaction extends Component {
               style={{
                 color: '#c4c4c4',
                 marginLeft: '2%',
-                marginRight: '2%',
+                marginRight: '11%',
                 fontSize: 13
               }}
             >
-              Spending Account
+              Receipt
             </Text>
-            <TextInput
-              placeholder="Spending Account"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '4%', fontSize: 13 }}
-              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
-            />
+            <View
+              style={{ marginLeft: 50 }}
+            >
+              {this._renderReceipt()}
+            </View>
+
+
           </View>
-          {this._renderDivider()}
 
           {/*<View
             style={{
@@ -319,39 +365,6 @@ class DetailEClaim_Transaction extends Component {
               />
             </Buttons>
           </View>*/}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text style={{ width: '38%' }} />
-            <View
-              style={{
-                height: 180,
-                width: '50%',
-                borderTopLeftRadius: 5,
-                borderTopRightRadius: 5,
-                borderBottomLeftRadius: 5,
-                borderBottomRightRadius: 5,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Image
-                resizeMode="cover"
-                style={{ width: '80%', height: 180 }}
-                source={{
-                  uri: !this.state.imageSource.uri
-                    ? '../../assets/photo.png'
-                    : this.state.imageSource.uri,
-                }}
-              />
-            </View>
-          </View>
         </GiftedForm>
       </Container>
     );

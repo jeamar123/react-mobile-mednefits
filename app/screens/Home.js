@@ -14,6 +14,8 @@ import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
@@ -148,11 +150,11 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-    	console.log(error)
-    	console.log(result)
-    	if(result) {
-    		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
-    	}
+      console.log(error)
+      console.log(result)
+      if (result) {
+        Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+      }
     });
   }
 
@@ -164,20 +166,27 @@ class ClinicList extends Component {
         }
       >
         <View style={styles.gridBox}>
-          <Image
+          <ResponsiveImage
             style={{
-              margin: 10,
-              width: 35,
-              height: 35,
+              marginTop: '5%',
+              paddingBottom: '2%',
             }}
             source={{ uri: this.props.image }}
+            initWidth="35" initHeight="35"
           />
           <Text
             fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: 'center', width: '61%', fontSize: RF(2.0), }}
           >
             {this.props.name}
           </Text>
+          {/* <Text
+            fontFamily={Config.FONT_FAMILY_ROMAN}
+            style={{ textAlign: 'center', paddingTop: '10%', paddingLeft: 8, paddingRight: 8, }}
+          >
+            {this.props.name}
+          </Text> */}
+
         </View>
       </TouchableOpacity>
     )
@@ -226,10 +235,10 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-   await Core.GetLocationPermission(function(error, result){
+    await Core.GetLocationPermission(function (error, result) {
 
-   });
-   await this.getClinicType()
+    });
+    await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -323,10 +332,10 @@ class Home extends Component {
                     >
                       <Text
                         fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center' }}
+                        style={{ textAlign: 'center', marginLeft: '0.5%' }}
                       >
                         Benefits Category
-                </Text>
+                      </Text>
                     </View>
                     <View style={styles.contain}>
                       <FlatList
@@ -352,12 +361,11 @@ const styles = {
   },
   gridBox: {
     width: width / 3.23,
-    height: height / 6,
+    height: height / 5.9,
     backgroundColor: '#fff',
     margin: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
 };
 
