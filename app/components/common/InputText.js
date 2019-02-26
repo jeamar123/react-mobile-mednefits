@@ -42,8 +42,9 @@ export default class InputText extends Component {
           placeholder={this.props.placeholder}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+            fontFamily: Config.FONT_FAMILY_ROMAN,
           }, this.props.placeholderStyle]}
-          style={[style.inputStyle]}
+          style={[style.inputStyle, {textAlign: (this.props.leftToRight) ? 'right' : 'left'}]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
@@ -71,6 +72,6 @@ const style = {
   inputStyle: {
     paddingBottom: '2%',
     color: '#0392cf',
-    fontFamily: Config.FONT_FAMILY_ROMAN,
+    fontFamily: Config.FONT_FAMILY_ROMAN
   },
 };

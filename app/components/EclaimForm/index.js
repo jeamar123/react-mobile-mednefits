@@ -39,6 +39,7 @@ export default class EclaimForm extends Component {
     }
 
     this.selectSpending = this.selectSpending.bind(this)
+    this.inputDate = {};
   }
 
   componentWillMount() {
@@ -192,6 +193,7 @@ export default class EclaimForm extends Component {
               value={this.state.provider}
               onChangeText={text => this.setState({ provider: text })}
               placeholder="Name of Provider"
+              leftToRight
             />
           </View>
 
@@ -211,27 +213,29 @@ export default class EclaimForm extends Component {
               *Date of Visit
           </Common.Texti>
 
-            <TouchableOpacity
-              onPress={() => this._showDateTimePicker()}
-              style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
-            >
-              <Common.InputDate
-                placeholder={this.state.date}
-                onChangeDate={(value) => this.setState({ date: value })}
-                value={this.state.date}
-              />
+          <Common.InputDateCustom
+            style={{
+              backgroundColor: "white",
+              borderBottomColor: "#bcbcbc",
+              borderBottomWidth: 0,
+              justifyContent: 'center',
+              borderRadius: 2,
+              height: 50
+            }}
+            startDate={new Date()}
+            minDate={new Date()}
+            onError={() => Common.getNotify("", "Error loading, please try again")}
+            renderDate={({ year, month, day, date }) => {
+              if (!date) {
+                return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
+              }
+              const dateStr = `${day}-${month}-${year}`
+              return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
+            }}
+            onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` }) }
+            rightIcon="arrow-right"
+          />
 
-              <Icon
-                type="SimpleLineIcons"
-                name="arrow-right"
-                style={{
-                  color: "#cccccc",
-                  marginLeft: 10,
-                  fontSize: 18
-                }}
-              />
-
-            </TouchableOpacity>
           </View>
 
           <Common.Divider />

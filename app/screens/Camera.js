@@ -93,22 +93,25 @@ class Camera extends Component {
 
   renderCamera = () => {
     return (
-      <RNCamera
-        ref={ref => {
-          this.camera = ref;
-        }}
-        style={styles.camera}
-        type={RNCamera.Constants.Type.back}
-        flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.on}
-        permissionDialogTitle={'Permission to use camera'}
-        permissionDialogMessage={'We need your permission to use your camera phone'}
-      >
-        {({ camera, status, recordAudioPermissionStatus }) => {
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <RNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={styles.camera}
+          type={RNCamera.Constants.Type.back}
+          captureAudio={false}
+          flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.on}
+          permissionDialogTitle={'Permission to use camera'}
+          permissionDialogMessage={'We need your permission to use your camera phone'}
+        >
+          {({ camera, status, recordAudioPermissionStatus }) => {
 
-          if (status !== 'READY') this.requestPermission()
+            if (status !== 'READY') this.requestPermission()
 
-        }}
-      </RNCamera>
+          }}
+        </RNCamera>
+      </View>
     )
   }
 
@@ -300,43 +303,44 @@ class Camera extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#efeff4' }}>
-        <Navbar
-          leftNav="back"
-          title="Receipt Verification"
-          subtitle="E-Claim"
-        />
-        <Core.Loader
-          isVisible={this.state.isLoading}
-        />
-        {((this.state.images.length > 0) && (this.state.preview !== false)) ? (
-          this.state.images.map((value, index)=>(
-            (this.state.shootType == 'single') ? (
-              <View
-                key={index}
-                style={{flex: 1}}
-                >
-                <ImageBackground
-                  source={{uri: value.preview}}
-                  style={styles.preview}
-                />
-              </View>
-            ) : (
-              <View
-                key={index}
-                style={{flex: 1, marginLeft: 15, marginRight: 15}}
-                >
-                <Common.Texti>{index+1}</Common.Texti>
-                <ImageBackground
-                  source={{uri: value.preview}}
-                  style={styles.preview}
-                />
-                <Common.Divider />
-              </View>
-            )
-          ))
-        ) : this.renderCamera()}
-        {this.renderAction()}
+      <View style={{flex: 1, flexDirection:'column', justifyContent: 'space-between'}}>
+        <View style={{flex: 0.2}}>
+          <Navbar
+            leftNav="back"
+            title="Receipt Verification"
+            subtitle="E-Claim"
+          />
+        </View>
+        <View style={{ flex: 0.8, backgroundColor: '#efeff4' }}>
+          {((this.state.images.length > 0) && (this.state.preview !== false)) ? (
+            this.state.images.map((value, index)=>(
+              (this.state.shootType == 'single') ? (
+                <View
+                  key={index}
+                  style={{flex: 0.85}}
+                  >
+                  <ImageBackground
+                    source={{uri: value.preview}}
+                    style={styles.preview}
+                  />
+                </View>
+              ) : (
+                <View
+                  key={index}
+                  style={{flex: 0.85, marginLeft: 15, marginRight: 15}}
+                  >
+                  <Common.Texti>{index+1}</Common.Texti>
+                  <ImageBackground
+                    source={{uri: value.preview}}
+                    style={styles.preview}
+                  />
+                  <Common.Divider />
+                </View>
+              )
+            ))
+          ) : this.renderCamera()}
+          {this.renderAction()}
+        </View>
       </View>
     );
   }
@@ -348,16 +352,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   camera: {
-    flex: 1,
-    marginTop: '9%',
-    width: "100%"
+    flex: 0.85,
+    flexDirection: 'column'
   },
   preview: {
     flex: 1,
-    width: '100%'
+    flexDirection: 'column'
   },
   actionPanel: {
-    height: '20%'
+    flex: 0.3,
+    backgroundColor: '#efeff4'
   },
   capture: {
     height: 60,

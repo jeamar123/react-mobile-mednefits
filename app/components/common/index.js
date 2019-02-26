@@ -17,5 +17,6 @@ import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
 import InputSearch from './InputSearch'
+import InputDateCustom from './InputDateCustom'
 
-export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup, Error, InputSearch }
+export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup, Error, InputSearch, InputDateCustom }
