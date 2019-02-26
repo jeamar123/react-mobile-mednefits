@@ -89,7 +89,7 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <Common.InputText
+          <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}

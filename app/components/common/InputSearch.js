@@ -72,5 +72,6 @@ const style = {
     paddingBottom: '2%',
     color: '#0392cf',
     fontFamily: Config.FONT_FAMILY_ROMAN,
+    width: '100%'
   },
 };
