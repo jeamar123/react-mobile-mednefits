@@ -98,6 +98,7 @@ class DetailEClaim_Transaction extends Component {
           marginHorizontal: 30,
           marginRight: 30,
           marginLeft: 50,
+          backgroundColor: "#cccccc"
         }}
         source={{
           uri: !Data.file

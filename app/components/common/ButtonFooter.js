@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const ButtonFooter = ({ onPress, children }) => {
+const ButtonFooter = ({ onPress, children, props }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
     <View style={MainContainer}>
-      <TouchableOpacity onPress={onPress} style={ButtonStyle}>
+      <TouchableOpacity onPress={onPress} style={ButtonStyle} {...props}>
         <Text style={TextStyle}>{children}</Text>
       </TouchableOpacity>
     </View>

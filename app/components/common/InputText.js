@@ -7,6 +7,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 export default class InputText extends Component {
 
   render() {
+    console.log((this.props.placeholderStyle) ? this.props.placeholderStyle : '#cccccc');
     return (
       <View
         {...this.props}
@@ -18,7 +19,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={"#cccccc"}
+            fontColor={(this.props.fontColor) ? this.props.fontColor : "#cccccc"}
           >
             S$
           </Common.Texti>
@@ -40,10 +41,11 @@ export default class InputText extends Component {
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
+          placeholderTextColor={(this.props.placeholderTextColor) ? this.props.placeholderTextColor : '#cccccc'}
           placeholderStyle={[{
             color: (this.props.placeholderStyle) ? this.props.placeholderStyle : '#cccccc',
-          }, this.props.placeholderStyle]}
-          style={[style.inputStyle]}
+          }]}
+          style={[style.inputStyle, this.props.style]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity

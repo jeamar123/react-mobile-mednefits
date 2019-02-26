@@ -29,7 +29,8 @@ class DetailEclaim extends Component {
       title: null,
       message: null,
       member: null,
-      showPopUp: false
+      showPopUp: false,
+      button: 'Submit'
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -39,7 +40,8 @@ class DetailEclaim extends Component {
 
     try {
       await this.setState({
-        isLoading: true
+        isLoading: true,
+        button: 'Submitting...'
       })
 
       eclaimFile = {
@@ -59,12 +61,13 @@ class DetailEclaim extends Component {
         // Core.getNotify("",result.message)
         if (result.status) {
           this.setState({
-            isLoading: false
+            isLoading: true,
+            button: 'DONE'
           })
           Actions.ThanksEclaim({type: 'reset'})
         } else {
           console.log('failed to submit')
-          await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false })
+          await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit' })
         }
 
       })
@@ -72,14 +75,16 @@ class DetailEclaim extends Component {
       Core.getNotify("", "Failed to send e claim")
 
       this.setState({
-        message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false
+        message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit'
       })
     } finally {
-      setTimeout(()=>{
-        this.setState({
-          isLoading: false
-        })
-      }, 2000)
+      console.log('finally called')
+      // setTimeout(()=>{
+      //   this.setState({
+      //     isLoading: false,
+      //     button: 'Log in'
+      //   })
+      // }, 2000)
     }
   }
 
@@ -147,8 +152,14 @@ class DetailEclaim extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
-        { this.customLoader() }
-        { this.renderPopUp() }
+        <Popup
+          kind="eClaimError"
+          isVisible={this.state.failed}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         <ScrollView>
           <GiftedForm
             style={{
@@ -343,8 +354,8 @@ class DetailEclaim extends Component {
               <Text style={{ width: '38%' }} />
             </View>
           </GiftedForm>
-          <ButtonFooter onPress={this.EclaimProcess}>
-            Submit
+          <ButtonFooter onPress={this.EclaimProcess} disabled={this.state.isLoading} activeOpacity={this.state.isLoading ? 0.2 : 1}>
+            {this.state.button}
           </ButtonFooter>
         </ScrollView>
       </Container>

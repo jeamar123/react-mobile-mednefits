@@ -112,11 +112,11 @@ class HomeContent extends Component {
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
-              marginLeft: 10,
-              marginRight: 10,
+              marginLeft: 0,
+              // marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              padding: 10
+              padding: 8
             }}
           />
           <View style={styles.contain}>

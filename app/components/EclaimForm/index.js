@@ -169,6 +169,7 @@ export default class EclaimForm extends Component {
               data={this.state.claimType}
               titleValue={this.state.claim}
               onValueChange={(value) => this.setClaimValue(value)}
+              style={{ fontWeight: '500' }}
             />
 
           </View>
@@ -192,6 +193,8 @@ export default class EclaimForm extends Component {
               value={this.state.provider}
               onChangeText={text => this.setState({ provider: text })}
               placeholder="Name of Provider"
+              placeholderTextColor="#2c3e50"
+              style={{ color: "#2c3e50", fontWeight: '500' }}
             />
           </View>
 
@@ -218,6 +221,8 @@ export default class EclaimForm extends Component {
                 placeholder={this.state.date}
                 onChangeDate={(value) => this.setState({ date: value })}
                 value={this.state.date}
+                style={{ fontWeight: '500' }}
+                fontColor="#2c3e50"
               />
 
               <Icon
@@ -255,6 +260,8 @@ export default class EclaimForm extends Component {
               <Common.InputTime
                 placeholder={this.state.time}
                 onTimeChange={(time) => this.setState({ time: time })}
+                fontColor="#2c3e50"
+                style={{ fontWeight: '500' }}
               />
 
               <Icon
@@ -291,7 +298,10 @@ export default class EclaimForm extends Component {
               keyboardType="numeric"
               onChangeText={text => this.setState({ amount: text })}
               placeholder="Amount"
+              placeholderTextColor="#2c3e50"
+              fontColor="#2c3e50"
               type={"currency"}
+              style={{ fontWeight: '500' }}
             />
           </View>
 
@@ -306,7 +316,7 @@ export default class EclaimForm extends Component {
           >
             <Common.Texti style={{
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'center'
             }}>
               *Member
           </Common.Texti>
@@ -316,6 +326,7 @@ export default class EclaimForm extends Component {
               data={this.state.memberData}
               value={this.state.member}
               onValueChange={(value) => this.setState({ member: value })}
+              style={{fontWeight: '500'}}
             />
           </View>
 

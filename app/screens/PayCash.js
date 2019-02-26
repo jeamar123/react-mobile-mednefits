@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, Dimensions } from 'react-native';
+import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { ButtonDone, Spinner } from '../components/common';
-import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
-import styles from '../components/DollarBenefits';
-const { width, height } = Dimensions.get('window');
+import * as Config from '../config';
 import * as Core from '../core';
 
 class PayCash extends Component {
@@ -79,7 +77,7 @@ class PayCash extends Component {
 
         <Content padder style={{ backgroundColor: '#439057' }}>
           <Card>
-            <CardItem style={{ backgroundColor: 'white' }}>
+            <CardItem style={{ backgroundColor: '#f8f8fa' }}>
               <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
                 {!this.state.clinic_image ? (
                   <Image
@@ -95,7 +93,7 @@ class PayCash extends Component {
                 {!this.state.clinic_name ? (
                   <Spinner size="small" />
                 ) : (
-                    <Text style={{ marginTop: 10, fontFamily: 'helvetica', color: '#4b4b4b' }}>
+                    <Text style={{ marginTop: 10, fontFamily: Config.FONT_FAMILY_LIGHT, color: '#9e9e9e' }}>
                       {this.state.clinic_name}
                     </Text>
                   )}
@@ -112,7 +110,7 @@ class PayCash extends Component {
                   textAlign: 'center',
                 }}
               >
-                <Image style={{ width: 70, height: 70 }} source={require('../../assets/apps/byCash.png')} />
+                <Image style={{ width: 55 , height: 55  }} source={require('../../assets/apps/byCash.png')} />
                 <Text style={{ marginTop: 20, fontFamily: 'helvetica', width: '80%', fontWeight: 'bold', textAlign: 'center', }}>
                   Pay directly to health provider using any preferred payment method onsite
                 </Text>

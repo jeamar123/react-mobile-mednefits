@@ -39,6 +39,7 @@ export default class InputSelect extends Component {
     return (
       this.props.data.map((value, index) =>
         <TouchableOpacity
+          key={index}
           onPress={() => this.changeValue(value.value)}
           style={{
             justifyContent: 'space-evenly',
@@ -102,7 +103,8 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Texti
-            fontColor="#bcbcbc"
+            fontColor="#2c3e50"
+            style={this.props.style}
           >
             {this.setTitle()}
           </Common.Texti>

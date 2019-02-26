@@ -289,10 +289,11 @@ class BenefitsDollar extends Component {
               </Body>
             </CardItem>
           </Card> */}
-            <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount.replace(/^,/,''), clinic_data: this.props.clinic_data })}>
-              Next
-            </ButtonPay>
-            <View style={{ marginBottom: 20 }} />
+
+          <View style={{ marginBottom: '5%' }} />
+          <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount.replace(/^,/,''), clinic_data: this.props.clinic_data })}>
+            Next
+          </ButtonPay>
         </Content>
       </Container>
     );
