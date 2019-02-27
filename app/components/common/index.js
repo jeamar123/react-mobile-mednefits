@@ -11,12 +11,12 @@ import Texti from './Texti'
 import Body from './Body';
 import Divider from './Divider'
 import InputDate from './InputDate'
+import InputDateCustom from './InputDateCustom'
 import InputTime from './InputTime'
 import InputSelect from './InputSelect'
+import InputSearch from './InputSearch'
 import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
-import InputSearch from './InputSearch'
-import InputDateCustom from './InputDateCustom'
 
-export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup, Error, InputSearch, InputDateCustom }
+export { Body, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect, InputSearch, InputText, InputFile, Popup, Error }

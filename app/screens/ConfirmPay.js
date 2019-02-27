@@ -187,7 +187,7 @@ class ConfirmPay extends Component {
                 <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
                   {this.state.currency ? this.state.currency : ' '} {' '}
                 </Text>
-                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 38 }}>
+                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44 }}>
                   {this.props.amount}
                 </Text>
               </View>
