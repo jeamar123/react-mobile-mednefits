@@ -23,6 +23,11 @@ class HistoryClaim extends Component {
 
   componentWillMount() {
     // this.getUserDetail();
+    Core.GetFavouritesClinic((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      this.setState({ resultData: data, data: true });
+    });
   }
 
   _pressCall = () => {

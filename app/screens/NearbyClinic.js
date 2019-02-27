@@ -10,6 +10,7 @@ import {
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -217,7 +218,7 @@ class NearbyClinic extends Component {
                 numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 14,
+                  fontSize: RF(1.9),
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -229,7 +230,7 @@ class NearbyClinic extends Component {
                 numberOfLines={2}
                 style={{
                   color: '#8c8b7f',
-                  fontSize: 12,
+                  fontSize: RF(1.7),
                   fontFamily: Config.FONT_FAMILY_LIGHT,
                 }}
               >
@@ -363,15 +364,15 @@ class NearbyClinic extends Component {
                   NameCategory: this.props.NameCategory
                 })}
               >
-              {
-                (this.state.processing) ? 
-                (
-                  <View>
-                    <ActivityIndicator size="small" color="white" style={{ marginTop: 5 }} />
-                  </View>
-                )
-                : (<Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>)
-              }
+                {
+                  (this.state.processing) ?
+                    (
+                      <View>
+                        <ActivityIndicator size="small" color="white" style={{ marginTop: 5 }} />
+                      </View>
+                    )
+                    : (<Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>)
+                }
               </TouchableOpacity>
 
             </View>

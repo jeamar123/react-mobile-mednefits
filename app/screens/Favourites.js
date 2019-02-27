@@ -11,6 +11,7 @@ import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -105,7 +106,8 @@ class Favourites extends Component {
         <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
           resizeMode="contain"
-          style={{            marginRight: '5%',
+          style={{
+            marginRight: '5%',
             marginTop: '50%'
           }}
           initWidth="25" initHeight="25"
@@ -158,7 +160,7 @@ class Favourites extends Component {
                 numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 12,
+                  fontSize: RF(1.9),
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -170,7 +172,7 @@ class Favourites extends Component {
                 numberOfLines={2}
                 style={{
                   color: '#8c8b7f',
-                  fontSize: 10,
+                  fontSize: RF(1.7),
                   fontFamily: Config.FONT_FAMILY_LIGHT,
                 }}
               >
@@ -266,7 +268,7 @@ class Favourites extends Component {
                       }}
                     >
                       <View
-                        style={{ flexDirection: 'row'}}
+                        style={{ flexDirection: 'row' }}
                       >
                         <Image
                           source={require('../../assets/apps/plus.png')}

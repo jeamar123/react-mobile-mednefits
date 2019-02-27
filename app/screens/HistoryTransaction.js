@@ -146,7 +146,7 @@ class HistoryTransaction extends Component {
                 source={require('../../assets/apps/dotted.png')}
               />
 
-              <Text style={{ marginTop: '-2%', color: '#0392cf' }}>
+              <Text style={{ color: '#0392cf' }}>
                 S$ {Data.amount}
               </Text>
             </Body>
@@ -336,8 +336,9 @@ class HistoryTransaction extends Component {
               <Text style={{ marginTop: '-2%', fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf', 
-              marginTop: '-8%' 
+              <Text style={{
+                color: '#0392cf',
+                marginTop: '-0.5%'
               }}>S$ {Data.amount}</Text>
             </Body>
           </CardItem>
@@ -392,11 +393,11 @@ class HistoryTransaction extends Component {
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: RF(2.1),
+              fontSize: RF(1.9),
             }}
           >
             <Content>
@@ -417,11 +418,11 @@ class HistoryTransaction extends Component {
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: RF(2.1),
+              fontSize: RF(1.9),
             }}
           >
             <Content>

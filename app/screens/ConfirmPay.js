@@ -3,13 +3,11 @@ import { StatusBar, Image, View, Dimensions, ActivityIndicator } from 'react-nat
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modal';
+import ResponsiveImage from 'react-native-responsive-image';
 import { Buttons, Spinner, Popup } from '../components/common';
-import { InputWithButton } from '../components/TextInput';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
-import styles from '../components/DollarBenefits';
-const { width, height } = Dimensions.get('window');
 import * as Core from '../core';
 
 class ConfirmPay extends Component {
@@ -39,14 +37,14 @@ class ConfirmPay extends Component {
 
   componentDidMount() {
     // Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      // console.log(result)
-      this.setState({
-        clinic_name: this.props.clinic_data.name,
-        clinic_image: this.props.clinic_data.image_url,
-        currency: this.props.clinic_data.currency_symbol,
-        Balance: this.props.clinic_data.current_balance,
-        placeholder: this.props.clinic_data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
-      });
+    // console.log(result)
+    this.setState({
+      clinic_name: this.props.clinic_data.name,
+      clinic_image: this.props.clinic_data.image_url,
+      currency: this.props.clinic_data.currency_symbol,
+      Balance: this.props.clinic_data.current_balance,
+      placeholder: this.props.clinic_data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
+    });
     // });
 
     // Core.GetBalance((err, result)=>{
@@ -89,7 +87,7 @@ class ConfirmPay extends Component {
 
   statusModal = () => {
     console.log('modal hide completely')
-    if(this.state.failed) {
+    if (this.state.failed) {
       this.setState({ showPopUp: true });
     } else {
       this.setState({ showPopUp: false });
@@ -112,7 +110,7 @@ class ConfirmPay extends Component {
           <ActivityIndicator color="#fff" size="large" />
           <Texti
             fontColor="#FFFFFF"
-            >Just a sec...</Texti>
+          >Just a sec...</Texti>
         </Modal>
       </View>
     );
@@ -134,8 +132,8 @@ class ConfirmPay extends Component {
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
-        { this.customLoader() }
-        { this.renderPopUp() }
+        {this.customLoader()}
+        {this.renderPopUp()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="cancel-cash" title="Mednefits Credits" />
         {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -184,14 +182,16 @@ class ConfirmPay extends Component {
               }}
             >
               {!this.state.clinic_image ? (
-                <Image
+                <ResponsiveImage
                   source={require('../../assets/apps/mednefits.png')}
-                  style={{ height: 55, resizeMode: 'center', width: 155 }}
+                  style={{ resizeMode: 'center' }}
+                  initWidth="70" initHeight="70"
                 />
               ) : (
-                  <Image
+                  <ResponsiveImage
                     source={{ uri: this.state.clinic_image }}
-                    style={{ height: 55, resizeMode: 'center', width: 155 }}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="70" initHeight="70"
                   />
                 )}
               {!this.state.clinic_name ? (
