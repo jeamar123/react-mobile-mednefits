@@ -5,6 +5,7 @@ export * from './Spinner';
 export * from './ButtonFooter';
 export * from './Notify';
 export * from './ButtonCall';
+export * from './Buttons2';
 
 import Popup from './PopUp'
 import Texti from './Texti'
