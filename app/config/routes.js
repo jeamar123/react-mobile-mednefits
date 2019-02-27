@@ -60,7 +60,7 @@ console.disableYellowBox = true;
 class RouterComponent extends Component {
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white', elevation: 0, shadowOpacity: 0, borderWidth: 0 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf', elevation: 0, shadowOpacity: 0, borderWidth: 0 }}>
         <Router
           navigationBarStyle={{ ...Platform.select({
               ios: {
