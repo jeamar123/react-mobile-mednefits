@@ -11,7 +11,7 @@ class HomeContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Balance: '0.00',
+      Balance: '0',
       Full_name: '',
       currency: false,
       isClearSearch: false,
@@ -19,36 +19,22 @@ class HomeContent extends Component {
     };
   }
 
-  getUserDetail = async () => {
-    console.log('in progress fetching getUserDetail')
-    await Core.UserDetail(async (error, result) => {
-      console.log('fetching done for getUserDetail');
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      await this.setState({
-        Full_name: data.profile.full_name,
-      });
-      this.getUserBalance();
-    });
-  }
-
-  getUserBalance = async () => {
-    console.log('in progress fetching getUserBalance')
-    await Core.GetBalance(async (error, result) => {
-      console.log('fetching done for getUserBalance');
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-        await this.setState({
-          Balance: data.balance,
-          Full_name: data.profile.Name,
-          currency: result.data.currency_symbol
-        });
-    });
-  }
-
-  componentDidMount = async () => {
+  async componentWillMount() {
+    await this.getUserDetail();
     await this.getUserBalance();
+  }
+
+  async getUserBalance() {
+    // console.log('in progress fetching getUserBalance')
+    await Core.GetBalance(async (error, result) => {
+      // console.log('fetching done for getUserBalance');
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
+      });
+    });
   }
 
   onQuery = async (query) => {
@@ -85,6 +71,20 @@ class HomeContent extends Component {
     }
   }
 
+
+  async getUserDetail() {
+    console.log('in progress fetching getUserDetail')
+    await Core.UserDetail(async (error, result) => {
+      console.log('fetching done for getUserDetail');
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      await this.setState({
+        Full_name: data.profile.full_name,
+      });
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -98,8 +98,7 @@ class HomeContent extends Component {
             placeholderTextColor="#fff"
             placeholderStyle={{
               color: "#fff",
-              width: '100%',
-              marginTop: 10
+              width: '100%'
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -108,15 +107,14 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "90%",
+              width: '90%',
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
-              marginLeft: 0,
-              // marginRight: 10,
+              marginLeft: 10,
+              marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              // padding: 10,
               height: '20%'
             }}
           />
@@ -134,7 +132,7 @@ class HomeContent extends Component {
                       source={require('../../../assets/apps/Scan&Pay.png')}
                     />
                   </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '80%' }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                     <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text>
                   </View>
@@ -149,12 +147,18 @@ class HomeContent extends Component {
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{ marginBottom: '12%', width: 26, height: 35 }}
-                  source={require('../../../assets/apps/E-Card.png')}
-                />
-                <Text style={styles.title}>E-Card</Text>
-                <Text numberOfLines={2} style={styles.detail}>{this.state.Full_name}</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                    <Image
+                      style={{ marginBottom: 15, width: 26, height: 35, }}
+                      source={require('../../../assets/apps/E-Card.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                    <Text style={styles.title}>E-Card</Text>
+                    <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -165,18 +169,24 @@ class HomeContent extends Component {
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{
-                    marginBottom: 15,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 30,
-                    height: 30,
-                  }}
-                  source={require('../../../assets/apps/wallet.png')}
-                />
-                <Text style={styles.title}>Wallet</Text>
-                <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                    <Image
+                      style={{
+                        marginBottom: 15,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: 30,
+                        height: 30,
+                      }}
+                      source={require('../../../assets/apps/wallet.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+                    <Text style={styles.title}>Wallet</Text>
+                    <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
           </View>

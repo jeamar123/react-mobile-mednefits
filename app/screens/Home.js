@@ -173,7 +173,7 @@ class ClinicList extends Component {
                 initWidth="40" initHeight="40"
               />
             </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
               <Text
                 fontFamily={Config.FONT_FAMILY_ROMAN}
                 style={{ textAlign: 'center', fontSize: RF(1.7), }}
