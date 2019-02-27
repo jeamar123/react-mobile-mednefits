@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Image, ScrollView, Linking } from 'react-native';
 import { Text, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
+import RF from "react-native-responsive-fontsize";
 import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
 import * as Config from '../config';
@@ -267,7 +268,7 @@ class ECardUser extends Component {
 
               <View
                 style={{
-                  height: '15%',
+                  height: '13%',
                   backgroundColor: '#f2f2f2',
                   borderBottomLeftRadius: 14,
                   borderBottomRightRadius: 14,
@@ -277,7 +278,7 @@ class ECardUser extends Component {
                 <View
                   style={{
                     flexDirection: 'column',
-                    marginTop: '5%',
+                    marginTop: '4%',
                     marginLeft: '5%',
                   }}
                 >
@@ -285,7 +286,7 @@ class ECardUser extends Component {
                     style={{
                       color: '#000',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 18,
+                      fontSize: RF(2.4)
                     }}
                   >
                     Need Help?
@@ -294,13 +295,13 @@ class ECardUser extends Component {
                     style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
+                      fontSize: RF(2.0)
                     }}
                   >
                     <Text style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
+                      fontSize: RF(2.0),
                       textDecorationLine: 'underline'
                     }}
                       onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
@@ -310,7 +311,7 @@ class ECardUser extends Component {
                     <Text
                       style={{
                         fontFamily: Config.FONT_FAMILY_ROMAN,
-                        fontSize: 14,
+                        fontSize: RF(2.0)
                       }}
                     >
                       or
@@ -319,7 +320,7 @@ class ECardUser extends Component {
                     <Text style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
+                      fontSize: RF(2.0),
                       textDecorationLine: 'underline'
                     }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
                   </Text>
@@ -327,7 +328,7 @@ class ECardUser extends Component {
                     style={{
                       color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
+                      fontSize: RF(2.0)
                     }}
                   >
                     mednefits.com

@@ -39,13 +39,11 @@ class HomeContent extends Component {
       console.log('fetching done for getUserBalance');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-        setTimeout(async () => {
-          await this.setState({
-            Balance: data.balance,
-            Full_name: data.profile.Name,
-            currency: result.data.currency_symbol
-          });
-        }, 500);
+        await this.setState({
+          Balance: data.balance,
+          Full_name: data.profile.Name,
+          currency: result.data.currency_symbol
+        });
     });
   }
 
@@ -91,7 +89,7 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <Common.InputText
+          <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}
@@ -100,6 +98,7 @@ class HomeContent extends Component {
             placeholderTextColor="#fff"
             placeholderStyle={{
               color: "#fff",
+              width: '100%'
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -108,7 +107,7 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: "90%",
+              width: '90%',
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
@@ -116,7 +115,8 @@ class HomeContent extends Component {
               // marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              padding: 8
+              padding: 10,
+              height: '20%'
             }}
           />
           <View style={styles.contain}>
@@ -126,12 +126,18 @@ class HomeContent extends Component {
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{ marginBottom: 15, width: 30, height: 30 }}
-                  source={require('../../../assets/apps/Scan&Pay.png')}
-                />
-                <Text style={styles.title}>Scan & Pay</Text>
-                <Text style={styles.detail}>In-Network</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                    <Image
+                      style={{ marginBottom: 15, width: 30, height: 30 }}
+                      source={require('../../../assets/apps/Scan&Pay.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '80%' }}>
+                    <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -142,12 +148,18 @@ class HomeContent extends Component {
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{ marginBottom: '12%', width: 26, height: 35 }}
-                  source={require('../../../assets/apps/E-Card.png')}
-                />
-                <Text style={styles.title}>E-Card</Text>
-                <Text numberOfLines={2} style={styles.detail}>{this.state.Full_name}</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                    <Image
+                      style={{ marginBottom: 15, width: 26, height: 35, }}
+                      source={require('../../../assets/apps/E-Card.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                    <Text style={styles.title}>E-Card</Text>
+                    <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
@@ -158,18 +170,24 @@ class HomeContent extends Component {
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{
-                    marginBottom: 15,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 30,
-                    height: 30,
-                  }}
-                  source={require('../../../assets/apps/wallet.png')}
-                />
-                <Text style={styles.title}>Wallet</Text>
-                <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                    <Image
+                      style={{
+                        marginBottom: 15,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: 30,
+                        height: 30,
+                      }}
+                      source={require('../../../assets/apps/wallet.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+                    <Text style={styles.title}>Wallet</Text>
+                    <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
           </View>

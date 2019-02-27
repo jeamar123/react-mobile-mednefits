@@ -31,11 +31,12 @@ export default EStyleSheet.create({
     marginVertical: 11,
   },
   inputPay: {
-    fontFamily: Config.FONT_FAMILY_LIGHT,
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     flex: 1,
     height: INPUT_HEIGHT,
     paddingHorizontal: 8,
     color: '$inputText',
     fontSize: 46,
+    width: '80%'
   },
 });

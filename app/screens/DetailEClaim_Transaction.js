@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
 import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 import { HistoryClaim } from '../components/HistoryClaim';
-import { Buttons } from '../components/common';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
 const options = {
@@ -88,16 +86,14 @@ class DetailEClaim_Transaction extends Component {
     );
   }
 
-  redenderReceipt = (data) => {
+  _renderReceipt() {
     return this.state.filesData.map(Data => (
+
       <Image
-        key={Data.e_claim_doc_id}
         style={{
-          width: 120,
-          height: 150,
-          marginHorizontal: 30,
-          marginRight: 30,
-          marginLeft: 50,
+          width: 70,
+          height: 80,
+          margin: 2,
           backgroundColor: "#cccccc"
         }}
         source={{
@@ -120,42 +116,13 @@ class DetailEClaim_Transaction extends Component {
           Amount={this.state.data.amount}
         />
         <GiftedForm
-          style={{ backgroundColor: '#fff', paddingLeft: 5, paddingRight: 15 }}
+          style={{ backgroundColor: '#fff' }}
           formName="signupForm"
           openModal={route => {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
           }}
         >
-          {/* <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Image
-              style={{
-                width: 35,
-                height: 35,
-                marginHorizontal: 30,
-                marginRight: 30,
-                marginLeft: 50,
-              }}
-              source={{ uri: this.state.data.clinic_type_image }}
-            />
-            <Text
-              style={{
-                paddingHorizontal: 10,
-                marginRight: 30,
-                paddingVertical: 10,
-              }}
-            >
-              {this.state.data.clinic_type
-                ? this.state.data.clinic_type
-                : 'N/A'}
-            </Text>
-          </View> */}
+
           <View
             style={{
               flex: 1,
@@ -179,7 +146,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-4%', marginLeft: '6%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>
@@ -327,81 +294,40 @@ class DetailEClaim_Transaction extends Component {
               value={this.state.data.member ? this.state.data.member : 'N/A'}
             />
           </View>
-          {this._renderDivider()}
-
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
+            }}>
+            <View
               style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '11%',
-                fontSize: 13
-              }}
-            >
-              Spending Account
-            </Text>
-            <TextInput
-              editable={false} selectTextOnFocus={false}
-              placeholder="Spending Account"
-              underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '-4%', fontSize: 13 }}
-              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
-            />
-          </View>
-          {this._renderDivider()}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '11%',
-                fontSize: 13
-              }}
-            >
-              Receipt
-            </Text>
-            { this.redenderReceipt(this.state.filesData) }
+                backgroundColor: '#efeff4'
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginLeft: '2%',
+                    marginRight: '11%',
+                    fontSize: 13
+                  }}
+                >
+                  Receipt
+                </Text>
+                <View
+                  style={{ marginLeft: 50 }}
+                >
+                  {this._renderReceipt()}
+                </View>
+              </View>
+            </View>
           </View>
 
-          {/*<View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '10%',
-              }}
-            >
-              Receipt
-            </Text>
-            <Buttons onPress={() => this.selectPhoto()}>
-              <Icon
-                name="camera"
-                style={{ width: '40%', color: '#fff', fontSize: 24 }}
-              />
-            </Buttons>
-          </View>*/}
         </GiftedForm>
       </Container>
     );

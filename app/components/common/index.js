@@ -5,6 +5,7 @@ export * from './Spinner';
 export * from './ButtonFooter';
 export * from './Notify';
 export * from './ButtonCall';
+export * from './Buttons2';
 
 import Popup from './PopUp'
 import Texti from './Texti'
@@ -16,5 +17,7 @@ import InputSelect from './InputSelect'
 import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
+import InputSearch from './InputSearch'
+import InputDateCustom from './InputDateCustom'
 
-export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup, Error }
+export { Body, Texti, Divider, InputDate, InputTime, InputSelect, InputText, InputFile, Popup, Error, InputSearch, InputDateCustom }

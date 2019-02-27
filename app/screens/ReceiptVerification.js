@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { VericicationReceipt } from '../components/VericicationReceipt';
-import { Buttons } from '../components/common/Buttons2';
+import { Buttons2 } from '../components/common/Buttons2';
 import Icon from 'react-native-vector-icons/Feather';
 import Navbar from '../components/common/NavbarGrey';
 
@@ -18,9 +18,9 @@ class ReceiptVerification extends Component {
           subtitle="E-Claim"
         />
         <VericicationReceipt />
-        <Buttons onPress={() => Actions.Camera({ claimdata: this.props.claimdata })}>
+        <Buttons2 onPress={() => Actions.Camera({ claimdata: this.props.claimdata })}>
           <Icon name="camera" style={{ color: '#fff', fontSize: 36 }} />
-        </Buttons>
+        </Buttons2>
       </Container>
     );
   }

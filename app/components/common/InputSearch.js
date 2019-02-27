@@ -7,7 +7,6 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 export default class InputText extends Component {
 
   render() {
-    console.log((this.props.placeholderStyle) ? this.props.placeholderStyle : '#cccccc');
     return (
       <View
         {...this.props}
@@ -19,7 +18,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={(this.props.fontColor) ? this.props.fontColor : "#cccccc"}
+            fontColor={"#cccccc"}
           >
             S$
           </Common.Texti>
@@ -41,13 +40,10 @@ export default class InputText extends Component {
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
-          placeholderTextColor={(this.props.placeholderTextColor) ? this.props.placeholderTextColor : '#cccccc'}
-          style={[style.inputStyle, this.props.style]}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
-            fontFamily: Config.FONT_FAMILY_ROMAN,
           }, this.props.placeholderStyle]}
-          style={[style.inputStyle, {textAlign: (this.props.leftToRight) ? 'right' : 'left'}]}
+          style={[style.inputStyle]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
@@ -73,9 +69,9 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    marginTop: 5,
     paddingBottom: '2%',
     color: '#0392cf',
-    fontFamily: Config.FONT_FAMILY_ROMAN
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    width: '100%'
   },
 };

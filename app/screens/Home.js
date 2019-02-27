@@ -14,6 +14,8 @@ import { Container, Content, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
@@ -164,30 +166,24 @@ class ClinicList extends Component {
         }
       >
         <View style={styles.gridBox}>
-          <Image
-            style={{
-              marginTop: '5%',
-              paddingBottom: '2%',
-              width: 50,
-              height: 50,
-            }}
-            source={{ uri: this.props.image }}
-          />
-          <Text
-            fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', width: '61%', fontSize: 14 / fontScale}}
-          >
-            {this.props.name}
-          </Text>
-          {/* <Text
-            fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', paddingTop: '10%', paddingLeft: 8, paddingRight: 8, }}
-          >
-            {this.props.name}
-          </Text> */}
-
+          <View style={{ flex: 1 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+              <ResponsiveImage
+                source={{ uri: this.props.image }}
+                initWidth="40" initHeight="40"
+              />
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', fontSize: RF(1.7), }}
+              >
+                {this.props.name}
+              </Text>
+            </View>
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity >
     )
   }
 }
@@ -360,7 +356,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.23,
-    height: height / 6,
+    height: height / 5.9,
     backgroundColor: '#fff',
     margin: 2,
     justifyContent: 'space-around',

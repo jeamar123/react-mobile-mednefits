@@ -39,6 +39,7 @@ export default class EclaimForm extends Component {
     }
 
     this.selectSpending = this.selectSpending.bind(this)
+    this.inputDate = {};
   }
 
   componentWillMount = async () => {
@@ -133,7 +134,7 @@ export default class EclaimForm extends Component {
               <TouchableOpacity
                 onPress={() => this.selectSpending("medical")}
                 refs="medical"
-                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive]}
+                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { marginRight: '1%' }]}
               >
                 <Common.Texti>
                   Medical
@@ -142,7 +143,7 @@ export default class EclaimForm extends Component {
               <TouchableOpacity
                 onPress={() => this.selectSpending("wellness")}
                 refs="wellness"
-                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { marginRight: '10%' }]}
+                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { marginRight: '5%' }]}
               >
                 <Common.Texti>
                   Wellness
@@ -195,6 +196,7 @@ export default class EclaimForm extends Component {
               placeholder="Name of Provider"
               placeholderTextColor="#2c3e50"
               style={{ color: "#2c3e50", fontWeight: '500' }}
+              leftToRight
             />
           </View>
 
@@ -214,28 +216,29 @@ export default class EclaimForm extends Component {
               *Date of Visit
           </Common.Texti>
 
-            <TouchableOpacity
-              style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
-            >
-              <Common.InputDate
-                placeholder={this.state.date}
-                onChangeDate={(value) => this.setState({ date: value })}
-                value={this.state.date}
-                style={{ fontWeight: '500' }}
-                fontColor="#2c3e50"
-              />
+            <Common.InputDateCustom
+              style={{
+                backgroundColor: "white",
+                borderBottomColor: "#bcbcbc",
+                borderBottomWidth: 0,
+                justifyContent: 'center',
+                borderRadius: 2,
+                height: 50
+              }}
+              startDate={new Date()}
+              minDate={new Date()}
+              onError={() => Common.getNotify("", "Error loading, please try again")}
+              renderDate={({ year, month, day, date }) => {
+                if (!date) {
+                  return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
+                }
+                const dateStr = `${day}-${month}-${year}`
+                return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
+              }}
+              onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
+              rightIcon="arrow-right"
+            />
 
-              <Icon
-                type="SimpleLineIcons"
-                name="arrow-right"
-                style={{
-                  color: "#cccccc",
-                  marginLeft: 10,
-                  fontSize: 18
-                }}
-              />
-
-            </TouchableOpacity>
           </View>
 
           <Common.Divider />

@@ -10,6 +10,7 @@ import {
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -63,10 +64,10 @@ class Favourites extends Component {
     });
   }
 
-  AddFavClinic(id_clinic) {
+  AddFavClinic(id_Clinic) {
     params = {
       status: this.state.favourite == 1 ? 0 : 1,
-      clinicid: id_clinic
+      clinicid: id_Clinic
     }
 
     Core.AddFavouriteClinic(params, (err, result) => {
@@ -89,26 +90,28 @@ class Favourites extends Component {
   renderFavourite(favourite) {
     if (favourite == 1) {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
           resizeMode="contain"
           style={{
-            flex: 1,
-            height: 25,
-            width: 25
+            resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     } else {
       return (
-        <Image
+        <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
           resizeMode="contain"
           style={{
-            flex: 1,
-            height: 25,
-            width: 25
+            resizeMode: 'center',
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     }
@@ -210,7 +213,7 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginRight: '6%' }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>

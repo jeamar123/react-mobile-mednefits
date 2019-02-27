@@ -4,7 +4,7 @@ import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
-const Buttons = ({ onPress, children }) => {
+const Buttons2 = ({ onPress, children}) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
@@ -37,4 +37,4 @@ const styles = {
   },
 };
 
-export { Buttons };
+export { Buttons2 };

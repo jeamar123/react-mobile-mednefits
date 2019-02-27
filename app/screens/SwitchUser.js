@@ -107,7 +107,8 @@ class FamilyList extends Component {
                     flex: 1,
                     height: 12,
                     width: 12,
-                    marginTop: '3%'
+                    marginTop: '3%',
+                    marginRight: '8%'
                   }}
                 />
               </View>

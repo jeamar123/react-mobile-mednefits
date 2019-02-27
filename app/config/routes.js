@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Platform } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 import { Button, Icon } from 'native-base';
 
@@ -60,8 +60,18 @@ console.disableYellowBox = true;
 class RouterComponent extends Component {
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
-        <Router>
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white', elevation: 0, shadowOpacity: 0, borderWidth: 0 }}>
+        <Router
+          navigationBarStyle={{ ...Platform.select({
+              ios: {
+                elevation: 0,
+                shadowOpacity: 0,
+                borderWidth: 0,
+                borderWidth: 0
+              }
+            })
+          }}
+          >
           <Stack key="root">
             <Scene key="Splash" component={Splash} hideNavBar />
             <Scene key="Login" component={Logins} hideNavBar />

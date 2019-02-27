@@ -465,12 +465,14 @@ export const SendEClaim = async (params, callback) => {
       formdata.append("user_id", params.user_id)
       formdata.append("service", params.service)
       formdata.append("merchant", params.merchant)
-      formdata.append("files[]", {
-        uri: params.file,
-        type: params.filetype,
-        name: params.filename
-      }
-      )
+      params.images.map((value, index)=>{
+          formdata.append("files[]", {
+            uri: value.preview,
+            type: value.filetype,
+            name: value.filename
+          }
+        )
+      })
       formdata.append("amount", params.amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)

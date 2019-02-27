@@ -112,8 +112,8 @@ const styles = {
     flexWrap: 'wrap',
   },
   gridBox: {
-    width: width / 3.9,
-    height: height / 7.5,
+    width: width / 3.8,
+    height: height / 6.2,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
@@ -121,14 +121,14 @@ const styles = {
     padding: 10,
   },
   gridBoxActive: {
-    width: width / 3.9,
-    height: height / 7.5,
+    width: width / 3.8,
+    height: height / 6.2,
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "#0392CF"
   },
 };

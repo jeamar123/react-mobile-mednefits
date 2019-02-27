@@ -7,7 +7,8 @@ import {
   TextInput,
   Image,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  ImageBackground
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Container } from 'native-base';
@@ -17,6 +18,7 @@ import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
+import * as Common from '../components/common';
 
 class DetailEclaim extends Component {
 
@@ -48,9 +50,7 @@ class DetailEclaim extends Component {
         'user_id': this.props.claimdata.member,
         'service': this.props.claimdata.claim,
         'merchant': this.props.claimdata.provider,
-        'file': this.props.claimdata.uri,
-        'filename': this.props.claimdata.filename,
-        'filetype': this.props.claimdata.filetype,
+        'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type,
@@ -152,14 +152,16 @@ class DetailEclaim extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
         <ClaimDetail />
-        <Popup
+        {/*<Popup
           kind="eClaimError"
           isVisible={this.state.failed}
           closeSection={true}
           closeSectionUpdate={this.isVisibleUpdate}
           title={this.state.title}
           message={this.state.message}
-        />
+        />*/}
+        {this.customLoader()}
+        {this.renderPopUp()}
         <ScrollView>
           <GiftedForm
             style={{
@@ -325,7 +327,6 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{
-                  height: 130,
                   width: '50%',
                   borderTopLeftRadius: 5,
                   borderTopRightRadius: 5,
@@ -336,11 +337,21 @@ class DetailEclaim extends Component {
                   alignItems: 'center',
                 }}
               >
-                <Image
-                  resizeMode="cover"
-                  style={{ width: '50%', height: 130 }}
-                  source={{uri: this.props.claimdata.uri}}
-                />
+                {(typeof this.props.claimdata.images !== 'undefined') ? (
+                  this.props.claimdata.images.map((value, index)=>(
+                    <View
+                      key={index}
+                      style={{flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around'}}>
+                      <ImageBackground
+                        resizeMode="cover"
+                        style={{ width: '100%', height: 80 }}
+                        source={{uri: value.preview}}
+                      />
+                    </View>
+                  ))
+                ) : (
+                  <View />
+                )}
               </View>
             </View>
             <View

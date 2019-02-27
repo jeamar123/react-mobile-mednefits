@@ -12,7 +12,7 @@ import { DetailClinic } from '../components/DetailClinic';
 import * as Core from '../core';
 import * as Config from '../config';
 import { ButtonCall } from '../components/common/ButtonCall';
-import { ActionConst } from 'react-native-router-flux';
+import RF from "react-native-responsive-fontsize";
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -194,7 +194,7 @@ class HistoryTransaction extends Component {
               color: 'black',
               marginLeft: 15,
               fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 18,
+              fontSize: RF(2.4),
               fontWeight: 'bold'
             }}
           >
@@ -204,7 +204,7 @@ class HistoryTransaction extends Component {
               color: 'black',
               marginLeft: 15,
               fontFamily: Config.FONT_FAMILY_LIGHT,
-              fontSize: 10,
+              fontSize: RF(1.7)
             }}
           >
             {Data.duration}
@@ -215,7 +215,7 @@ class HistoryTransaction extends Component {
           color: 'black',
           marginRight: 15,
           fontFamily: Config.FONT_FAMILY_LIGHT,
-          fontSize: 20,
+          fontSize: RF(2.4),
           fontWeight: 'bold'
         }}>
           {Data.price}

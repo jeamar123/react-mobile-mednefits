@@ -120,10 +120,10 @@ class NearbyClinic extends Component {
     }
   }
 
-  AddFavClinic(id_clinic) {
+  AddFavClinic(idClinic) {
     params = {
       status: this.state.favourite == 1 ? 0 : 1,
-      clinicid: id_clinic
+      clinicid: idClinic
     }
 
     Core.AddFavouriteClinic(params, (err, result) => {
@@ -267,9 +267,9 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-              <TouchableOpacity style={{ flex: 0.5 }} onPress={() => this.AddFavClinic(Data.clinic_id)}>
-                {this.renderFavourite(Data.favourite)}
-              </TouchableOpacity>
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+              {this.renderFavourite(Data.favourite)}
+            </TouchableOpacity>
           </View>
         </View>
       </TouchableOpacity>

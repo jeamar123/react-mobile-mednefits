@@ -330,12 +330,13 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                marginTop: '-4%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf' }}>S$ {Data.amount}</Text>
+              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>S$ {Data.amount}</Text>
             </Body>
           </CardItem>
           {/* <CardItem>
@@ -364,6 +365,7 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                marginTop: '-6%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
@@ -377,7 +379,7 @@ class HistoryTransaction extends Component {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: -10
+              marginTop: '-3.5%'
             }}
           >
             <Text
