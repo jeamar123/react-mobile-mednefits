@@ -52,65 +52,67 @@ class FamilyList extends Component {
           isVisible={this.state.isLoading}
         />
         <TouchableOpacity onPress={this.SwitchProcess}>
-          <View
-            style={{
-              flex: 1,
-              marginTop: 5,
-              marginBottom: 0,
-              height: 120,
-              backgroundColor: '#fff',
-            }}
-          >
+          <View style={{ flex: 1 }}>
             <View
-              style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center' }}
+              style={{
+                flex: 1,
+                marginTop: 5,
+                marginBottom: 0,
+                height: 65,
+                backgroundColor: '#fff',
+              }}
             >
-              <View style={{ justifyContent: 'center', alignItem: 'center' }}>
-                <Image
-                  source={require('../../assets/apps/userAccount.png')}
-                  resizeMode="contain"
-                  style={{
-                    flex: 1,
-                    height: 70,
-                    width: 70,
-                    alignItem: 'center',
-                    marginTop: '5%',
-                    marginLeft: '15%',
-                  }}
-                />
-              </View>
               <View
-                style={{
-                  flexDirection: 'column',
-                  marginRight: 5,
-                  width: '60%',
-                  justifyContent: 'center',
-                  alignItem: 'center'
-                }}
+                style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center' }}
               >
-                <Text style={{ fontWeight: '600' }}>{this.props.name}</Text>
-                <Text
+                <View style={{ justifyContent: 'center', alignItem: 'center' }}>
+                  <Image
+                    source={require('../../assets/apps/userAccount.png')}
+                    resizeMode="contain"
+                    style={{
+                      flex: 1,
+                      height: 70,
+                      width: 70,
+                      alignItem: 'center',
+                      marginTop: '5%',
+                      marginLeft: '10%',
+                    }}
+                  />
+                </View>
+                <View
                   style={{
-                    marginTop: '5%',
-                    color: '#c4c4c4',
-                    fontSize: 11,
+                    flexDirection: 'column',
+                    marginRight: 5,
+                    width: '60%',
+                    justifyContent: 'center',
+                    alignItem: 'center'
                   }}
                 >
-                  {this.props.nric}
-                </Text>
-                <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
-              </View>
-              <View style={{ justifyContent: 'center', alignItem: 'center' }}>
-                <Image
-                  source={require('../../assets/apps/next-btn.png')}
-                  resizeMode="contain"
-                  style={{
-                    flex: 1,
-                    height: 12,
-                    width: 12,
-                    marginTop: '3%',
-                    marginRight: '8%'
-                  }}
-                />
+                  <Text style={{ fontWeight: '600' }}>{this.props.name}</Text>
+                  <Text
+                    style={{
+                      marginTop: '5%',
+                      color: '#c4c4c4',
+                      fontSize: 11,
+                    }}
+                  >
+                    {this.props.nric}
+                  </Text>
+                  <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
+                </View>
+                <View style={{ justifyContent: 'center', alignItem: 'center' }}>
+                  <Image
+                    source={require('../../assets/apps/next-btn.png')}
+                    resizeMode="contain"
+                    style={{
+                      flex: 1,
+                      height: 12,
+                      width: 12,
+                      marginTop: '3%',
+                      marginRight: 100
+                    }}
+                  />
+                </View>
               </View>
             </View>
           </View>

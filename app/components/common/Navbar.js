@@ -12,7 +12,10 @@ import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
+import * as Config from '../../config';
+
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -93,7 +96,7 @@ export default class Navbar extends React.Component {
               style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: Config.FONT_FAMILY_ROMAN, }}
             >
               Back
             </Text>
@@ -121,13 +124,14 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: '#fff', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
             />
             <Text
               style={{
                 color: '#fff',
-                fontSize: 14,
-                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold'
               }}
             >
               Home
