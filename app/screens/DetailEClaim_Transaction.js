@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
 import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 import { HistoryClaim } from '../components/HistoryClaim';
-import { Buttons } from '../components/common';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
 const options = {
@@ -88,7 +86,7 @@ class DetailEClaim_Transaction extends Component {
         style={{
           width: 70,
           height: 80,
-
+          margin: 2
         }}
         source={{
           uri: !Data.file
@@ -111,42 +109,13 @@ class DetailEClaim_Transaction extends Component {
           Amount={this.state.data.amount}
         />
         <GiftedForm
-          style={{ backgroundColor: '#fff', paddingLeft: 5, paddingRight: 15 }}
+          style={{ backgroundColor: '#fff' }}
           formName="signupForm"
           openModal={route => {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
           }}
         >
-          {/* <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Image
-              style={{
-                width: 35,
-                height: 35,
-                marginHorizontal: 30,
-                marginRight: 30,
-                marginLeft: 50,
-              }}
-              source={{ uri: this.state.data.clinic_type_image }}
-            />
-            <Text
-              style={{
-                paddingHorizontal: 10,
-                marginRight: 30,
-                paddingVertical: 10,
-              }}
-            >
-              {this.state.data.clinic_type
-                ? this.state.data.clinic_type
-                : 'N/A'}
-            </Text>
-          </View> */}
+
           <View
             style={{
               flex: 1,
@@ -312,59 +281,41 @@ class DetailEClaim_Transaction extends Component {
               value={this.state.user ? this.state.user : 'N/A'}
             />
           </View>
-          {this._renderDivider()}
-
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '11%',
-                fontSize: 13
-              }}
-            >
-              Receipt
-            </Text>
+            }}>
             <View
-              style={{ marginLeft: 50 }}
-            >
-              {this._renderReceipt()}
+              style={{
+                backgroundColor: '#efeff4'
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginLeft: '2%',
+                    marginRight: '11%',
+                    fontSize: 13
+                  }}
+                >
+                  Receipt
+                </Text>
+                <View
+                  style={{ marginLeft: 50 }}
+                >
+                  {this._renderReceipt()}
+                </View>
+              </View>
             </View>
-
 
           </View>
 
-          {/*<View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginLeft: '2%',
-                marginRight: '10%',
-              }}
-            >
-              Receipt
-            </Text>
-            <Buttons onPress={() => this.selectPhoto()}>
-              <Icon
-                name="camera"
-                style={{ width: '40%', color: '#fff', fontSize: 24 }}
-              />
-            </Buttons>
-          </View>*/}
         </GiftedForm>
       </Container>
     );

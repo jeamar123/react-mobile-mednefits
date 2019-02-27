@@ -166,29 +166,24 @@ class ClinicList extends Component {
         }
       >
         <View style={styles.gridBox}>
-          <ResponsiveImage
-            style={{
-              marginTop: '5%',
-              paddingBottom: '2%',
-            }}
-            source={{ uri: this.props.image }}
-            initWidth="35" initHeight="35"
-          />
-          <Text
-            fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', width: '61%', fontSize: RF(2.0), }}
-          >
-            {this.props.name}
-          </Text>
-          {/* <Text
-            fontFamily={Config.FONT_FAMILY_ROMAN}
-            style={{ textAlign: 'center', paddingTop: '10%', paddingLeft: 8, paddingRight: 8, }}
-          >
-            {this.props.name}
-          </Text> */}
-
+          <View style={{ flex: 1 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+              <ResponsiveImage
+                source={{ uri: this.props.image }}
+                initWidth="40" initHeight="40"
+              />
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', fontSize: RF(1.7), }}
+              >
+                {this.props.name}
+              </Text>
+            </View>
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity >
     )
   }
 }
