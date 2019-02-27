@@ -3,7 +3,6 @@ import {
   StatusBar,
   View,
   Dimensions,
-  Image,
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
@@ -11,6 +10,8 @@ import {
   ImageBackground
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
+import Icons from 'react-native-vector-icons/FontAwesome';
+import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
@@ -72,12 +73,100 @@ class SearchResult extends Component {
                   {v.map((ke, va) => {
                     return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
-                    }><View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    }>
+                      <View
+                        style={{
+                          flex: 1,
+                          marginTop: 5,
+                          marginBottom: 10,
+                          height: 110,
+                          backgroundColor: '#fff',
+                          opacity: 10000,
+                        }}
+                      >
+                        <View
+                          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                        >
+                          <Image
+                            source={{ uri: ke.image_url }}
+                            resizeMode="contain"
+                            style={{
+                              marginTop: '2%',
+                              marginLeft: '2%',
+                              marginRight: '2%',
+                            }}
+
+                          />
+                          <View
+                            style={{
+                              flexDirection: 'column',
+                              marginTop: '2%',
+                              width: '60%',
+                            }}
+                          >
+                            <Text
+                              ellipsizeMode='tail'
+                              numberOfLines={2}
+                              style={{
+                                fontFamily: Config.FONT_FAMILY_ROMAN,
+                                fontSize: RF(1.7),
+                                marginTop: 5,
+                                width: '100%',
+                              }}
+                            >
+                              {ke.name}
+                            </Text>
+                            <Text
+                              ellipsizeMode='tail'
+                              numberOfLines={2}
+                              style={{
+                                color: '#8c8b7f',
+                                fontSize: RF(1.4),
+                                fontFamily: Config.FONT_FAMILY_LIGHT,
+                              }}
+                            >
+                              {ke.address}
+                            </Text>
+                            {ke.open_status === 1 ? (
+                              <Text style={{ marginTop: 1 }}>
+                                <Icons
+                                  name="circle"
+                                  style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
+                                />
+                                {' '}
+                                <Text style={{
+                                  fontFamily: Config.FONT_FAMILY_LIGHT,
+                                  fontSize: 10,
+                                  marginTop: 2,
+                                  marginLeft: 10,
+                                  color: '#616161',
+                                }}>Now Open</Text>
+                              </Text>
+                            ) : (
+                                <Text style={{ marginTop: 1 }}>
+                                  <Icons
+                                    name="circle"
+                                    style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
+                                  />
+                                  {' '}
+                                  <Text style={{
+                                    fontFamily: Config.FONT_FAMILY_LIGHT,
+                                    fontSize: 10,
+                                    marginTop: 2,
+                                    marginLeft: 10,
+                                    color: '#616161',
+                                  }}>Closed</Text>
+                                </Text>
+                              )}
+                          </View>
+
+
+                        </View>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                           <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
                           <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
-                        </View>
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
+                        </View> */}
+                        {/* <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
                         {(ke.open_status == 0) ? (
                           <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
                             closed
@@ -86,8 +175,8 @@ class SearchResult extends Component {
                             <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
                               open
                         </Text>
-                          )}
-                        <View
+                          )} */}
+                        {/* <View
                           style={{
                             borderBottomColor: '#cccccc',
                             borderBottomWidth: 0.8,
@@ -95,8 +184,9 @@ class SearchResult extends Component {
                             marginBottom: 15,
                             marginRight: -15
                           }}
-                        />
-                      </View></TouchableOpacity>
+                        /> */}
+                      </View>
+                    </TouchableOpacity>
                   })}
                 </View>
               }
@@ -150,11 +240,11 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-    	console.log(error)
-    	console.log(result)
-    	// if(result) {
-    		Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
-    	// }
+      console.log(error)
+      console.log(result)
+      // if(result) {
+      Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+      // }
     });
   }
 
@@ -230,9 +320,9 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-   await Core.GetLocationPermission(async (error, result) => {
-    await this.getClinicType()
-   });
+    await Core.GetLocationPermission(async (error, result) => {
+      await this.getClinicType()
+    });
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
