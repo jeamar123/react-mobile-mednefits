@@ -65,10 +65,15 @@ class Camera extends Component {
           filetype: 'images/jpg'
         }
 
-        this.setState({
-          images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
-          preview: true
-        })
+        if (this.state.images.length !== 3) {
+          this.setState({
+            images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
+            preview: true
+          })
+        } else {
+          Core.getNotify("","Only 3 images can be upload")
+        }
+
       }
     } catch (e) {
       console.warn(e.message);
@@ -78,9 +83,13 @@ class Camera extends Component {
   }
 
   retakeAction = () => {
-    this.setState({
-      preview: false
-    })
+    if (this.state.images.length == 3) {
+      Core.getNotify("","Only 3 images can be upload")
+    } else {
+      this.setState({
+        preview: false
+      })
+    }
   }
 
   async requestPermission() {
@@ -93,25 +102,23 @@ class Camera extends Component {
 
   renderCamera = () => {
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <RNCamera
-          ref={ref => {
-            this.camera = ref;
-          }}
-          style={styles.camera}
-          type={RNCamera.Constants.Type.back}
-          captureAudio={false}
-          flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.on}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'}
-        >
-          {({ camera, status, recordAudioPermissionStatus }) => {
+      <RNCamera
+        ref={ref => {
+          this.camera = ref;
+        }}
+        style={styles.camera}
+        type={RNCamera.Constants.Type.back}
+        captureAudio={false}
+        flashMode={(!this.state.flashMode) ? RNCamera.Constants.FlashMode.off : RNCamera.Constants.FlashMode.on}
+        permissionDialogTitle={'Permission to use camera'}
+        permissionDialogMessage={'We need your permission to use your camera phone'}
+      >
+        {({ camera, status, recordAudioPermissionStatus }) => {
 
-            if (status !== 'READY') this.requestPermission()
+          if (status !== 'READY') this.requestPermission()
 
-          }}
-        </RNCamera>
-      </View>
+        }}
+      </RNCamera>
     )
   }
 
@@ -143,10 +150,14 @@ class Camera extends Component {
           filetype: response.type,
         }
 
-        this.setState({
-          images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
-          preview: true
-        })
+        if (this.state.images.length !== 3) {
+          this.setState({
+            images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
+            preview: true
+          })
+        } else {
+          Core.getNotify("","Only 3 images can be upload")
+        }
       }
     });
   }
@@ -301,10 +312,38 @@ class Camera extends Component {
     )
   }
 
+  _closeSection() {
+    return (
+      <ImageBackground
+        style={{ width: 30, height: 30 }}
+        source={require('../../assets/close.png')}
+      />
+    )
+  }
+
+  removeImage(index){
+    arr = this.state.images
+    remove = arr.splice(index,1)
+
+    console.warn(arr);
+
+    Core.getNotify("","image removed")
+
+    if (this.state.images.length > 0) {
+      this.setState({
+        preview: true
+      })
+    } else {
+      this.setState({
+        preview: false
+      })
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1, flexDirection:'column', justifyContent: 'space-between'}}>
-        <View style={{flex: 0.2}}>
+        <View style={{zIndex: 99}}>
           <Navbar
             leftNav="back"
             title="Receipt Verification"
@@ -327,9 +366,23 @@ class Camera extends Component {
               ) : (
                 <View
                   key={index}
-                  style={{flex: 0.85, marginLeft: 15, marginRight: 15}}
-                  >
+                  style={{flex: 0.85, paddingLeft: 15, paddingRight: 15}}
+                >
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Common.Texti>{index+1}</Common.Texti>
+                    <TouchableOpacity
+                      onPress={() => this.removeImage(index)}
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'flex-end',
+                        marginBottom: -20,
+                        marginRight: -15,
+                        zIndex: 99,
+                      }}
+                    >
+                      {this._closeSection()}
+                    </TouchableOpacity>
+                  </View>
                   <ImageBackground
                     source={{uri: value.preview}}
                     style={styles.preview}
@@ -339,8 +392,8 @@ class Camera extends Component {
               )
             ))
           ) : this.renderCamera()}
-          {this.renderAction()}
         </View>
+        {this.renderAction()}
       </View>
     );
   }
@@ -357,10 +410,11 @@ const styles = StyleSheet.create({
   },
   preview: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    borderRadius: 10
   },
   actionPanel: {
-    flex: 0.3,
+    flex: 0.23,
     backgroundColor: '#efeff4'
   },
   capture: {
