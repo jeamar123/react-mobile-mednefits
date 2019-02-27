@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { VericicationReceipt } from '../components/VericicationReceipt';
-import { Buttons } from '../components/common/Buttons2';
+import { Buttons } from '../components/common/Buttons';
 import Icon from 'react-native-vector-icons/Feather';
 import Navbar from '../components/common/NavbarGrey';
 

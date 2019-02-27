@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons } from '../components/common/Buttons2';
+import { Buttons } from '../components/common/Buttons';
 import Navbar from '../components/common/NavbarGrey';
 const { width, height } = Dimensions.get('window');
 
