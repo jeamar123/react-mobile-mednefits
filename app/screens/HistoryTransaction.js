@@ -297,7 +297,7 @@ class HistoryTransaction extends Component {
             <Body
               style={{
                 flexDirection: 'row',
-                justifyContent: 'space-between',
+                justifyContent: 'space-between'
               }}
             >
               <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
@@ -330,45 +330,26 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-4%'
+                // marginTop: '-4%'
               }}
             >
-              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
+              <Text style={{ marginTop: '-2%', fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>S$ {Data.amount}</Text>
+              <Text style={{ color: '#0392cf', 
+              marginTop: '-8%' 
+              }}>S$ {Data.amount}</Text>
             </Body>
           </CardItem>
-          {/* <CardItem>
+          <CardItem style={{ backgroundColor: 'transparent' }}>
             <Body
               style={{
-                marginTop: '-8%',
-                marginBottom: '-8%',
+                backgroundColor: 'transparent',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
             >
-              <Image
-                style={{
-                  margin: 8,
-                  aspectRatio: 0.4,
-                  resizeMode: 'contain',
-                }}
-                source={require('../../assets/apps/dotted.png')}
-              />
-
-              <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
-            </Body>
-          </CardItem> */}
-          <CardItem>
-            <Body
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: '-6%'
-              }}
-            >
-              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
+              <Text style={{ marginTop: '-4%', fontSize: 12, color: '#B5B5B5' }}>
                 {Data.visit_date}
               </Text>
               {this.renderEclaimStatus(Data)}
@@ -379,11 +360,11 @@ class HistoryTransaction extends Component {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: '-3.5%'
             }}
           >
             <Text
               style={{
+                marginTop: '-10%',
                 fontSize: 11,
                 fontWeight: '400',
                 color: '#0392cf',

@@ -6,8 +6,8 @@ const SummaryComp = () => (
   <View style={styles.container}>
     <View style={styles.sectionTitle}>
       <Image
-        style={{ marginLeft: 10, marginRight: 10 }}
-        source={require('../../../assets/apps/checklist.png')}
+        style={{ marginLeft: 10, marginRight: 10, width: 25, height: 25 }}
+        source={require('../../../assets/apps/payment_successful.png')}
       />
       <Text style={styles.title}>Payment Successful</Text>
     </View>

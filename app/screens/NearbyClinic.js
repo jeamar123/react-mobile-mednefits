@@ -217,7 +217,7 @@ class NearbyClinic extends Component {
                 numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 12,
+                  fontSize: 14,
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -226,10 +226,10 @@ class NearbyClinic extends Component {
               </Text>
               <Text
                 ellipsizeMode='tail'
-                numberOfLines={3}
+                numberOfLines={2}
                 style={{
                   color: '#8c8b7f',
-                  fontSize: 10,
+                  fontSize: 12,
                   fontFamily: Config.FONT_FAMILY_LIGHT,
                 }}
               >
@@ -244,7 +244,7 @@ class NearbyClinic extends Component {
                   {' '}
                   <Text style={{
                     fontFamily: Config.FONT_FAMILY_LIGHT,
-                    fontSize: 10,
+                    fontSize: 12,
                     marginTop: 2,
                     marginLeft: 10,
                     color: '#616161',
@@ -254,7 +254,7 @@ class NearbyClinic extends Component {
                   <Text style={{ marginTop: 1 }}>
                     <Icons
                       name="circle"
-                      style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
+                      style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
                     />
                     {' '}
                     <Text style={{
@@ -267,7 +267,7 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+            <TouchableOpacity style={{ marginTop: '4%', marginRight: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>

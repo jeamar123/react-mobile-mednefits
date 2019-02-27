@@ -13,7 +13,7 @@ import * as Common from '../components/common';
 class Summary extends Component {
   render() {
     return (
-      <Container style={{ backgroundColor: '#f8f8fa' }}>
+      <Container style={{ backgroundColor: '#E8E7EE' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="null"

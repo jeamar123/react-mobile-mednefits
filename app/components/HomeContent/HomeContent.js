@@ -89,7 +89,7 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <Common.InputText
+          <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}
@@ -98,6 +98,8 @@ class HomeContent extends Component {
             placeholderTextColor="#fff"
             placeholderStyle={{
               color: "#fff",
+              width: '100%',
+              marginTop: 10
             }}
             type="search"
             isClearSearch={this.state.isClearSearch}
@@ -114,7 +116,7 @@ class HomeContent extends Component {
               // marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              padding: 10,
+              // padding: 10,
               height: '20%'
             }}
           />

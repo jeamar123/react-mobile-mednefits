@@ -97,9 +97,11 @@ class Login extends Component {
           secureTextEntry={true}
           autoCapitalize='none'
         />
+        <View style={{ width: '75%' }}>
         <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
           {this.state.button}
         </Buttons>
+        </View>
         <TouchableOpacity onPress={() => Actions.Forgot({ type: 'reset' })}>
           <Text style={{ color: '#0392cf', fontFamily: 'helvetica' }}>
             Forgot password?

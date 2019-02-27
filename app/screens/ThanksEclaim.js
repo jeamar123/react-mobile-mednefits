@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { EclaimThanks } from '../components/EclaimThanks';

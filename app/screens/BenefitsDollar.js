@@ -179,7 +179,7 @@ class BenefitsDollar extends Component {
                 keyboardType="numeric"
                 placeholder="0.00"
                 value={this.state.amount}
-                onChangeText={number => this.state({ amount: number })}
+                onChangeText={number => this.setState({ amount: number })}
               />
             </View>
 

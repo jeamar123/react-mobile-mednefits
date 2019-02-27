@@ -94,7 +94,6 @@ class Favourites extends Component {
           source={require('../../assets/apps/like_fav.png')}
           resizeMode="contain"
           style={{
-            resizeMode: 'center',
             marginRight: '5%',
             marginTop: '50%'
           }}
@@ -106,9 +105,7 @@ class Favourites extends Component {
         <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
           resizeMode="contain"
-          style={{
-            resizeMode: 'center',
-            marginRight: '5%',
+          style={{            marginRight: '5%',
             marginTop: '50%'
           }}
           initWidth="25" initHeight="25"
@@ -139,23 +136,21 @@ class Favourites extends Component {
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Image
+            <ResponsiveImage
               source={{ uri: Data.image_url }}
+              resizeMode="contain"
               style={{
-                height: 80,
-                width: 80,
-                resizeMode: 'center',
-                alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                // marginRight: '2%',
+                marginRight: '2%',
               }}
+              initWidth="80" initHeight="80"
             />
             <View
               style={{
                 flexDirection: 'column',
                 marginTop: '2%',
-                width: '70%',
+                width: '60%',
               }}
             >
               <Text
@@ -172,7 +167,7 @@ class Favourites extends Component {
               </Text>
               <Text
                 ellipsizeMode='tail'
-                numberOfLines={3}
+                numberOfLines={2}
                 style={{
                   color: '#8c8b7f',
                   fontSize: 10,
@@ -213,7 +208,7 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+            <TouchableOpacity style={{ marginTop: '4%', marginRight: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
