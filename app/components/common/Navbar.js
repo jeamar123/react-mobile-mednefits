@@ -12,7 +12,10 @@ import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
+import * as Config from '../../config';
+
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -93,7 +96,7 @@ export default class Navbar extends React.Component {
               style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
             />
             <Text
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: Config.FONT_FAMILY_ROMAN, }}
             >
               Back
             </Text>
@@ -121,13 +124,14 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: '#fff', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: '#fff', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
             />
             <Text
               style={{
                 color: '#fff',
-                fontSize: 14,
-                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold'
               }}
             >
               Home
@@ -157,9 +161,12 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#fff',
-                fontSize: 14,
-                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold',
                 width: 50,
+                paddingStart: 2,
+                paddingEnd: 2
               }}
             >
               Cancel
@@ -410,7 +417,7 @@ export default class Navbar extends React.Component {
           >
             <ResponsiveImage
               source={require('../../../assets/apps/switch.png')}
-              style={{ resizeMode: 'center', }}
+              style={{ resizeMode: 'contain', }}
               initWidth="62" initHeight="38"
             />
           </TouchableOpacity>
@@ -459,7 +466,8 @@ export default class Navbar extends React.Component {
           >
             <ResponsiveImage
               source={require('../../../assets/apps/search.png')}
-              style={{ resizeMode: 'center' }}
+              style={{ flex: 1, height: 25, width: 25, marginRight: 10 }}
+              resizeMode="contain"
               initWidth="25" initHeight="25"
             />
           </TouchableOpacity>
@@ -779,7 +787,7 @@ export default class Navbar extends React.Component {
             },
           ]}
         >
-          <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
+          <StatusBar backgroundColor="#0392cf" />
           {this.renderLeft()}
           {this.renderMiddle()}
           {this.renderRight()}
@@ -795,6 +803,9 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 64 : 54,
     flexDirection: 'row',
     paddingTop: 2,
+    elevation: 0,
+    shadowOpacity: 0,
+    borderWidth: 0
   },
   navBarItem: {
     justifyContent: 'center',

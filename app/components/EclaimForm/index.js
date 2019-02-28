@@ -297,6 +297,7 @@ export default class EclaimForm extends Component {
               onChangeText={text => this.setState({ amount: text })}
               placeholder="Amount"
               type={"currency"}
+              leftToRight
             />
           </View>
 

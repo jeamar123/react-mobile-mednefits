@@ -405,6 +405,7 @@ class HistoryTransaction extends Component {
           Address={this.state.resultData.address}
           CallPhon={this.state.resultData.telephone}
           favourite={this.state.resultData.favourite}
+          StatusOpen={this.state.resultData.open_status}
         />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}

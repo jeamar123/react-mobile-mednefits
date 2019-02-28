@@ -3,7 +3,6 @@ import {
   StatusBar,
   View,
   Dimensions,
-  Image,
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
@@ -11,6 +10,8 @@ import {
   ImageBackground
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
+import Icons from 'react-native-vector-icons/FontAwesome';
+import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
 import { HomeContent, MenuSide } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
@@ -21,7 +22,7 @@ import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
 
-const { width, height } = Dimensions.get('window');
+const { width, height, fontScale } = Dimensions.get('window');
 
 class SearchResult extends Component {
 
@@ -72,12 +73,99 @@ class SearchResult extends Component {
                   {v.map((ke, va) => {
                     return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
-                    }><View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    }>
+                      <View
+                        style={{
+                          flex: 1,
+                          marginTop: 5,
+                          marginBottom: 10,
+                          height: 110,
+                          backgroundColor: '#fff',
+                          opacity: 10000,
+                        }}
+                      >
+                        <View
+                          style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                        >
+                          <Image
+                            source={{ uri: ke.image_url }}
+                            resizeMode="contain"
+                            style={{
+                              marginLeft: '2%',
+                              marginRight: '2%',
+                            }}
+
+                          />
+                          <View
+                            style={{
+                              flexDirection: 'column',
+                              marginTop: 2,
+                              width: '65%',
+                              marginRight: '1%',
+                              marginLeft: '1%'
+                            }}
+                          >
+                            <Text
+
+                              numberOfLines={2}
+                              style={{
+                                fontFamily: Config.FONT_FAMILY_ROMAN,
+                                fontSize: RF(1.6),
+                                width: '100%',
+                                fontWeight: 'bold'
+                              }}
+                            >
+                              {ke.name}
+                            </Text>
+                            <Text
+
+                              numberOfLines={2}
+                              style={{
+                                color: '#8c8b7f',
+                                fontSize: RF(1.4),
+                                fontFamily: Config.FONT_FAMILY_ROMAN,
+                              }}
+                            >
+                              {ke.address}
+                            </Text>
+                            {ke.open_status === 1 ? (
+                              <Text style={{ marginTop: 1 }}>
+                                <Icons
+                                  name="circle"
+                                  style={{ color: '#51e500', fontSize: 10, marginRight: 15 }}
+                                />
+                                {' '}
+                                <Text style={{
+                                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                                  fontSize: 8,
+                                  marginLeft: 10,
+                                  color: '#616161',
+                                }}>Now Open</Text>
+                              </Text>
+                            ) : (
+                                <Text style={{ marginTop: 1 }}>
+                                  <Icons
+                                    name="circle"
+                                    style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
+                                  />
+                                  {' '}
+                                  <Text style={{
+                                    fontFamily: Config.FONT_FAMILY_LIGHT,
+                                    fontSize: 8,
+                                    marginLeft: 10,
+                                    color: '#616161',
+                                  }}>Closed</Text>
+                                </Text>
+                              )}
+                          </View>
+
+
+                        </View>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                           <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
                           <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
-                        </View>
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
+                        </View> */}
+                        {/* <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
                         {(ke.open_status == 0) ? (
                           <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
                             closed
@@ -86,8 +174,8 @@ class SearchResult extends Component {
                             <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
                               open
                         </Text>
-                          )}
-                        <View
+                          )} */}
+                        {/* <View
                           style={{
                             borderBottomColor: '#cccccc',
                             borderBottomWidth: 0.8,
@@ -95,8 +183,9 @@ class SearchResult extends Component {
                             marginBottom: 15,
                             marginRight: -15
                           }}
-                        />
-                      </View></TouchableOpacity>
+                        /> */}
+                      </View>
+                    </TouchableOpacity>
                   })}
                 </View>
               }
@@ -152,9 +241,9 @@ class ClinicList extends Component {
     Core.GetLocationPermission((error, result) => {
       console.log(error)
       console.log(result)
-      if (result) {
-        Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
-      }
+      // if(result) {
+      Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
+      // }
     });
   }
 
@@ -173,7 +262,7 @@ class ClinicList extends Component {
                 initWidth="40" initHeight="40"
               />
             </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
               <Text
                 fontFamily={Config.FONT_FAMILY_ROMAN}
                 style={{ textAlign: 'center', fontSize: RF(1.7), }}
@@ -219,7 +308,7 @@ class Home extends Component {
     }
   }
 
-  async getClinicType() {
+  getClinicType = async () => {
     await Core.GetClinicType(async (err, result) => {
       if (result) {
         await this.setState({
@@ -230,10 +319,9 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    await Core.GetLocationPermission(function (error, result) {
-
+    await Core.GetLocationPermission(async (error, result) => {
+      await this.getClinicType()
     });
-    await this.getClinicType()
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -353,13 +441,14 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
+    justifyContent: 'center'
   },
   gridBox: {
     width: width / 3.23,
     height: height / 5.9,
     backgroundColor: '#fff',
     margin: 2,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
 };

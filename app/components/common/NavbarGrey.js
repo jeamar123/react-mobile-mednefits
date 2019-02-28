@@ -8,10 +8,12 @@ import {
   StyleSheet,
   StatusBar,
 } from 'react-native';
-import { Icon, Button } from 'native-base';
+import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
+import * as Config from '../../config';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -120,13 +122,14 @@ export default class Navbar extends React.Component {
           >
             <Icons
               name="angle-left"
-              style={{ color: '#000', fontSize: 32, paddingEnd: 5 }}
+              style={{ color: '#000', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
             />
             <Text
               style={{
                 color: '#000',
-                fontSize: 14,
-                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold'
               }}
             >
               Home
@@ -145,7 +148,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.Home()}
+            onPress={() => Actions.pop()}
             style={{
               paddingStart: 15,
               flexDirection: 'row',
@@ -155,10 +158,13 @@ export default class Navbar extends React.Component {
           >
             <Text
               style={{
-                color: '#fff',
-                fontSize: 14,
-                fontFamily: 'HelveticaNeue-Roman',
+                color: '#000',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold',
                 width: 50,
+                paddingStart: 2,
+                paddingEnd: 2
               }}
             >
               Cancel
