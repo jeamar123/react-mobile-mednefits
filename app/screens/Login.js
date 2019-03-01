@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TouchableOpacity, ActivityIndicator, Platform, View } from 'react-native';
+import { StatusBar, Text, TouchableOpacity, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
@@ -30,13 +30,13 @@ class Login extends Component {
   }
 
   LoginHandler() {
-    this.setState({isLoading: true, button: 'Logging in...'})
+    this.setState({ isLoading: true, button: 'Logging in...' })
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
       // console.log(err)
       // console.log(result);
       if (result) {
-        this.setState({isLoading: false, failed: false, button: 'Log in'})
+        this.setState({ isLoading: false, failed: false, button: 'Log in' })
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
@@ -51,10 +51,10 @@ class Login extends Component {
   }
 
   renderError = () => {
-    if(this.state.isLoading) {
-      if(Platform.OS == "ios") {
+    if (this.state.isLoading) {
+      if (Platform.OS == "ios") {
         return (
-          <View/>
+          <View />
         )
       } else {
         return (
@@ -63,20 +63,20 @@ class Login extends Component {
           />
         )
       }
-    } else if(this.state.failed) {
-        console.log('called')
-        return (
-          <Popup
-            kind="loginFailed"
-            //just for example the right parameter is like this isVisible={this.props.isVisible}
-            isVisible={this.state.failed}
-            closeSection={true}
-            closeSectionUpdate={this.isVisibleUpdate}
-            title={this.state.title}
-            message={this.state.message}
-          >
-          </Popup>
-        )
+    } else if (this.state.failed) {
+      console.log('called')
+      return (
+        <Popup
+          kind="loginFailed"
+          //just for example the right parameter is like this isVisible={this.props.isVisible}
+          isVisible={this.state.failed}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        >
+        </Popup>
+      )
     }
   }
 
@@ -84,24 +84,33 @@ class Login extends Component {
     return (
       <Container>
         {this.renderError()}
-        <Logo />
-        <InputWithButton
-          onChangeText={(text) => this.setState({ username: text })}
-          placeholder="Email or NRIC"
-          autoCapitalize='none'
-          returnKeyType={"next"}
-        />
-        <InputWithButton
-          onChangeText={(text) => this.setState({ password: text })}
-          placeholder="Password"
-          secureTextEntry={true}
-          autoCapitalize='none'
-        />
-        <View style={{ width: '75%' }}>
-        <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
-          {this.state.button}
-        </Buttons>
-        </View>
+        <KeyboardAvoidingView behavior="padding" enabled>
+
+          <Logo />
+          <InputWithButton
+            onChangeText={(text) => this.setState({ username: text })}
+            placeholder="Email or NRIC"
+            autoCapitalize='none'
+            returnKeyType={"next"}
+          />
+          <InputWithButton
+            onChangeText={(text) => this.setState({ password: text })}
+            placeholder="Password"
+            secureTextEntry={true}
+            autoCapitalize='none'
+          />
+          <View style={{ width: 295 }}>
+            <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
+              {this.state.button}
+            </Buttons>
+          </View>
+        </KeyboardAvoidingView>
+
+        {/* <View style={{ width: '75%' }}>
+          <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
+            {this.state.button}
+          </Buttons>
+        </View> */}
         <TouchableOpacity onPress={() => Actions.Forgot({ type: 'reset' })}>
           <Text style={{ color: '#0392cf', fontFamily: 'helvetica' }}>
             Forgot password?

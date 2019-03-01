@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  TextInput,
-  ScrollView
+  EclaimSubmit,
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native'
 import * as Common from '../common'
 import RNPickerSelect from 'react-native-picker-select'
@@ -116,9 +117,7 @@ export default class EclaimForm extends Component {
 
   render() {
     return (
-      <View
-        style={styles.container}
-      >
+      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <Core.Loader
           isVisible={this.state.isLoading}
         />
@@ -129,7 +128,7 @@ export default class EclaimForm extends Component {
           >
             <Common.Texti style={styles.title}>
               *Spending Account
-          </Common.Texti>
+            </Common.Texti>
             <View style={{ width: '50%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity
                 onPress={() => this.selectSpending("medical")}
@@ -190,13 +189,13 @@ export default class EclaimForm extends Component {
             }}>
               *Provider
           </Common.Texti>
-          <Common.InputText
-            value={this.state.provider}
-            onChangeText={text => this.setState({ provider: text })}
-            placeholder="Name of Provider"
-            iconColor="#2C3E50"
-            leftToRight
-          />
+            <Common.InputText
+              value={this.state.provider}
+              onChangeText={text => this.setState({ provider: text })}
+              placeholder="Name of Provider"
+              iconColor="#2C3E50"
+              leftToRight
+            />
           </View>
 
           <Common.Divider />
@@ -294,14 +293,14 @@ export default class EclaimForm extends Component {
               *Claim Amount
           </Common.Texti>
 
-          <Common.InputText
-            value={this.state.amount}
-            keyboardType="numeric"
-            onChangeText={text => this.setState({ amount: text })}
-            placeholder="Amount"
-            type={"currency"}
-            leftToRight
-          />
+            <Common.InputText
+              value={this.state.amount}
+              keyboardType="numeric"
+              onChangeText={text => this.setState({ amount: text })}
+              placeholder="Amount"
+              type={"currency"}
+              leftToRight
+            />
           </View>
 
           <Common.Divider />
@@ -329,8 +328,11 @@ export default class EclaimForm extends Component {
           </View>
 
 
+
+
+
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
