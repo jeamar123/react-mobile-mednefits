@@ -13,7 +13,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: height / 4.2,
+    height: height / 3.8,
     width: width,
     alignItems: 'center',
   },

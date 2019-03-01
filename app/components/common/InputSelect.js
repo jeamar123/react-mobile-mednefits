@@ -103,8 +103,9 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Texti
-            fontColor="#2c3e50"
-            style={this.props.style}
+            style={{
+              color: '#2c3e50'
+            }}
           >
             {this.setTitle()}
           </Common.Texti>

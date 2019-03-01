@@ -27,14 +27,14 @@ export default class EclaimForm extends Component {
         }
       ],
       claimTypeState: "Select",
-      claim: null,
-      member: null,
+      claim: false,
+      member: false,
       memberData: [],
       memberState: "Select",
       isDateTimePickerVisible: false,
-      amount: null,
-      provider: null,
-      file: null,
+      amount: false,
+      provider: false,
+      file: false,
       isLoading: false
     }
 
@@ -42,22 +42,23 @@ export default class EclaimForm extends Component {
     this.inputDate = {};
   }
 
-  componentWillMount = async () => {
-    await this.selectSpending("medical")
+  componentWillMount() {
+    this.getMember()
+    this.selectSpending("medical")
   }
 
-  getMember = async () => {
+  async getMember() {
     this.setState({ memberState: "Loading..." })
 
-    await Core.GetAllMember(async (err, result) => {
+    await Core.GetAllMember((err, result) => {
       if (result) {
         dataMember = []
 
-        await result.data.users.map( async (member) => {
-          await dataMember.push({ label: member.name, value: member.user_id })
+        result.data.users.map((member) => {
+          dataMember.push({ label: member.name, value: member.user_id })
         });
 
-        await this.setState({
+        this.setState({
           memberState: "Select",
           memberData: dataMember,
         })
@@ -69,11 +70,11 @@ export default class EclaimForm extends Component {
   async selectSpending(type) {
     this.setState({ type: type, claimTypeState: "Loading...", claim: false })
 
-    await Core.GetHealthTypeList(type, async (err, result) => {
+    await Core.GetHealthTypeList(type, (err, result) => {
       if (result) {
         dataClaim = []
 
-        await result.data.map((claim) => {
+        result.data.map((claim) => {
           dataClaim.push({ label: claim.name, value: claim.health_type_id })
         });
 
@@ -81,7 +82,6 @@ export default class EclaimForm extends Component {
       }
 
       this.setState({ claimTypeState: "Select" })
-      await this.getMember()
     })
   }
 
@@ -105,7 +105,7 @@ export default class EclaimForm extends Component {
       (!this.state.provider) ||
       (!this.state.amount) ||
       (!this.state.member) ||
-      (this.state.Idate == "Input Date") ||
+      (this.state.Idate == "nput Date") ||
       (this.state.time == "Input Time")
     ) {
       Core.getNotify("", "Please fill mandatory form")
@@ -170,7 +170,6 @@ export default class EclaimForm extends Component {
               data={this.state.claimType}
               titleValue={this.state.claim}
               onValueChange={(value) => this.setClaimValue(value)}
-              style={{ fontWeight: '500' }}
             />
 
           </View>
@@ -182,6 +181,7 @@ export default class EclaimForm extends Component {
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center',
+              paddingRight: 25
             }}
           >
             <Common.Texti style={{
@@ -190,14 +190,13 @@ export default class EclaimForm extends Component {
             }}>
               *Provider
           </Common.Texti>
-            <Common.InputText
-              value={this.state.provider}
-              onChangeText={text => this.setState({ provider: text })}
-              placeholder="Name of Provider"
-              placeholderTextColor="#2c3e50"
-              style={{ color: "#2c3e50", fontWeight: '500' }}
-              leftToRight
-            />
+          <Common.InputText
+            value={this.state.provider}
+            onChangeText={text => this.setState({ provider: text })}
+            placeholder="Name of Provider"
+            iconColor="#2C3E50"
+            leftToRight
+          />
           </View>
 
           <Common.Divider />
@@ -230,10 +229,10 @@ export default class EclaimForm extends Component {
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
-                  return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
+                  return <Common.Texti fontColor={"#2C3E50"}>{this.state.date}</Common.Texti>
                 }
                 const dateStr = `${day}-${month}-${year}`
-                return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
+                return <Common.Texti fontColor={"#2C3E50"} >{dateStr}</Common.Texti>
               }}
               onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
               rightIcon="arrow-right"
@@ -263,8 +262,6 @@ export default class EclaimForm extends Component {
               <Common.InputTime
                 placeholder={this.state.time}
                 onTimeChange={(time) => this.setState({ time: time })}
-                fontColor="#2c3e50"
-                style={{ fontWeight: '500' }}
               />
 
               <Icon
@@ -286,7 +283,8 @@ export default class EclaimForm extends Component {
             style={{
               justifyContent: 'space-between',
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              paddingRight: 25,
             }}
           >
             <Common.Texti style={{
@@ -296,16 +294,14 @@ export default class EclaimForm extends Component {
               *Claim Amount
           </Common.Texti>
 
-            <Common.InputText
-              value={this.state.amount}
-              keyboardType="numeric"
-              onChangeText={text => this.setState({ amount: text })}
-              placeholder="Amount"
-              placeholderTextColor="#2c3e50"
-              fontColor="#2c3e50"
-              type={"currency"}
-              style={{ fontWeight: '500' }}
-            />
+          <Common.InputText
+            value={this.state.amount}
+            keyboardType="numeric"
+            onChangeText={text => this.setState({ amount: text })}
+            placeholder="Amount"
+            type={"currency"}
+            leftToRight
+          />
           </View>
 
           <Common.Divider />
@@ -319,7 +315,7 @@ export default class EclaimForm extends Component {
           >
             <Common.Texti style={{
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
             }}>
               *Member
           </Common.Texti>
@@ -329,7 +325,6 @@ export default class EclaimForm extends Component {
               data={this.state.memberData}
               value={this.state.member}
               onValueChange={(value) => this.setState({ member: value })}
-              style={{fontWeight: '500'}}
             />
           </View>
 

@@ -7,7 +7,6 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 export default class InputText extends Component {
 
   render() {
-    console.log((this.props.placeholderStyle) ? this.props.placeholderStyle : '#cccccc');
     return (
       <View
         {...this.props}
@@ -19,7 +18,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={(this.props.fontColor) ? this.props.fontColor : "#cccccc"}
+            fontColor={"#2C3E50"}
           >
             S$
           </Common.Texti>
@@ -41,10 +40,8 @@ export default class InputText extends Component {
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
-          placeholderTextColor={(this.props.placeholderTextColor) ? this.props.placeholderTextColor : '#cccccc'}
-          style={[style.inputStyle, this.props.style]}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+            color: (this.props.iconColor) ? this.props.iconColor : '#2C3E50',
             fontFamily: Config.FONT_FAMILY_ROMAN,
           }, this.props.placeholderStyle]}
           style={[style.inputStyle, {textAlign: (this.props.leftToRight) ? 'right' : 'left'}]}
@@ -56,7 +53,7 @@ export default class InputText extends Component {
             <Icons
               name="remove"
               style={{
-                color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+                color: (this.props.iconColor) ? this.props.iconColor : '#2C3E50',
                 fontSize: 14,
                 paddingLeft: 10,
                 paddingRight: 10,
@@ -73,9 +70,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    marginTop: 5,
-    paddingBottom: '2%',
-    color: '#0392cf',
+    color: '#2C3E50',
     fontFamily: Config.FONT_FAMILY_ROMAN
   },
 };

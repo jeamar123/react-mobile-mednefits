@@ -196,7 +196,7 @@ class BenefitsDollar extends Component {
                 marginBottom: '10%'
               }}
             >
-              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                 Balance: {this.state.Balance}
               </Text>
             </View>

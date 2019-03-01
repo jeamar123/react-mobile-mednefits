@@ -320,7 +320,7 @@ class DetailEclaim extends Component {
                 style={{
                   color: '#000',
                   marginLeft: '2%',
-                  marginRight: '19%',
+                  marginRight: '16%',
                 }}
               >
                 Receipt
@@ -344,7 +344,7 @@ class DetailEclaim extends Component {
                       style={{flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around'}}>
                       <ImageBackground
                         resizeMode="cover"
-                        style={{ width: '100%', height: 80 }}
+                        style={{ width: '100%', height: 90 , width: 70 }}
                         source={{uri: value.preview}}
                       />
                     </View>

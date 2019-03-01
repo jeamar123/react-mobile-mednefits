@@ -71,6 +71,6 @@ const style = {
   inputStyle: {
     color: '#0392cf',
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    width: '100%'
+    width: '80%'
   },
 };

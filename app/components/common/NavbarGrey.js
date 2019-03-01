@@ -780,7 +780,7 @@ export default class Navbar extends React.Component {
             },
           ]}
         >
-          <StatusBar backgroundColor="#efeff4" barStyle="light-content" />
+          <StatusBar backgroundColor="#efeff4" barStyle="dark-content" />
           {this.renderLeft()}
           {this.renderMiddle()}
           {this.renderRight()}
