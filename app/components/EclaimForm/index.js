@@ -181,6 +181,7 @@ export default class EclaimForm extends Component {
               justifyContent: 'space-between',
               flexDirection: 'row',
               alignItems: 'center',
+              paddingRight: 25
             }}
           >
             <Common.Texti style={{
@@ -189,12 +190,13 @@ export default class EclaimForm extends Component {
             }}>
               *Provider
           </Common.Texti>
-            <Common.InputText
-              value={this.state.provider}
-              onChangeText={text => this.setState({ provider: text })}
-              placeholder="Name of Provider"
-              leftToRight
-            />
+          <Common.InputText
+            value={this.state.provider}
+            onChangeText={text => this.setState({ provider: text })}
+            placeholder="Name of Provider"
+            iconColor="#2C3E50"
+            leftToRight
+          />
           </View>
 
           <Common.Divider />
@@ -227,10 +229,10 @@ export default class EclaimForm extends Component {
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
-                  return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
+                  return <Common.Texti fontColor={"#2C3E50"}>{this.state.date}</Common.Texti>
                 }
                 const dateStr = `${day}-${month}-${year}`
-                return <Common.Texti fontColor={"#0392cf"} >{dateStr}</Common.Texti>
+                return <Common.Texti fontColor={"#2C3E50"} >{dateStr}</Common.Texti>
               }}
               onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
               rightIcon="arrow-right"
@@ -281,7 +283,8 @@ export default class EclaimForm extends Component {
             style={{
               justifyContent: 'space-between',
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
+              paddingRight: 25,
             }}
           >
             <Common.Texti style={{
@@ -291,13 +294,14 @@ export default class EclaimForm extends Component {
               *Claim Amount
           </Common.Texti>
 
-            <Common.InputText
-              value={this.state.amount}
-              keyboardType="numeric"
-              onChangeText={text => this.setState({ amount: text })}
-              placeholder="Amount"
-              type={"currency"}
-            />
+          <Common.InputText
+            value={this.state.amount}
+            keyboardType="numeric"
+            onChangeText={text => this.setState({ amount: text })}
+            placeholder="Amount"
+            type={"currency"}
+            leftToRight
+          />
           </View>
 
           <Common.Divider />

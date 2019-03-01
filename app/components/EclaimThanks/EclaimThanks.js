@@ -7,8 +7,13 @@ const EclaimThanks = () => (
   <View style={styles.container}>
     <ImageBackground resizeMode="contain" style={styles.containerImage}>
       <Image
-        resizeMode="contain"
-        style={styles.image}
+        style={{
+          height: 85,
+          resizeMode: 'contain',
+          width: 85,
+          marginTop: '20%',
+          marginBottom: '10%',
+        }}
         source={require('./images/smile.png')}
       />
     </ImageBackground>

@@ -10,7 +10,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   sectionTitle: {
-    backgroundColor: '#E8E7EE',
+    backgroundColor: '#f8f8fa',
     height: height / 10,
     width: width,
     alignItems: 'flex-start',
