@@ -91,7 +91,6 @@ class SearchResult extends Component {
                             source={{ uri: ke.image_url }}
                             resizeMode="contain"
                             style={{
-                              marginTop: '2%',
                               marginLeft: '2%',
                               marginRight: '2%',
                             }}
@@ -100,29 +99,31 @@ class SearchResult extends Component {
                           <View
                             style={{
                               flexDirection: 'column',
-                              marginTop: '2%',
-                              width: '60%',
+                              marginTop: 2,
+                              width: '65%',
+                              marginRight: '1%',
+                              marginLeft: '1%'
                             }}
                           >
                             <Text
-                              ellipsizeMode='tail'
+
                               numberOfLines={2}
                               style={{
-                                fontFamily: Config.FONT_FAMILY_ROMAN,
-                                fontSize: RF(1.7),
-                                marginTop: 5,
+                                fontFamily: Config.FONT_FAMILY_BOLD,
+                                fontSize: RF(1.6),
                                 width: '100%',
+                                fontWeight: '900'
                               }}
                             >
                               {ke.name}
                             </Text>
                             <Text
-                              ellipsizeMode='tail'
+
                               numberOfLines={2}
                               style={{
                                 color: '#8c8b7f',
                                 fontSize: RF(1.4),
-                                fontFamily: Config.FONT_FAMILY_LIGHT,
+                                fontFamily: Config.FONT_FAMILY_ROMAN,
                               }}
                             >
                               {ke.address}
@@ -135,9 +136,8 @@ class SearchResult extends Component {
                                 />
                                 {' '}
                                 <Text style={{
-                                  fontFamily: Config.FONT_FAMILY_LIGHT,
-                                  fontSize: 10,
-                                  marginTop: 2,
+                                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                                  fontSize: 8,
                                   marginLeft: 10,
                                   color: '#616161',
                                 }}>Now Open</Text>
@@ -151,8 +151,7 @@ class SearchResult extends Component {
                                   {' '}
                                   <Text style={{
                                     fontFamily: Config.FONT_FAMILY_LIGHT,
-                                    fontSize: 10,
-                                    marginTop: 2,
+                                    fontSize: 8,
                                     marginLeft: 10,
                                     color: '#616161',
                                   }}>Closed</Text>

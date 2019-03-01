@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
+import ResponsiveImage from 'react-native-responsive-image';
 import { Actions } from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
@@ -147,26 +148,26 @@ class NearbyClinic extends Component {
   renderFavourite(favourite) {
     if (favourite == 1) {
       return (
-        <Image
-          resizeMode="contain"
+        <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
+          resizeMode="contain"
           style={{
-            flex: 1,
-            height: 25,
-            width: 25
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     } else {
       return (
-        <Image
-          resizeMode="contain"
+        <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
+          resizeMode="contain"
           style={{
-            flex: 1,
-            height: 25,
-            width: 25
+            marginRight: '5%',
+            marginTop: '50%'
           }}
+          initWidth="25" initHeight="25"
         />
       )
     }
