@@ -8,7 +8,7 @@ class Member extends Component {
   render() {
     return (
       <Container>
-        <StatusBar backgroundColor="#0392cf" barStyle="light-content" />
+        <StatusBar backgroundColor="#0392cf" barStyle="dark-content" />
         <Navbar leftNav="back" title="Member" />
         <Content>
           <List>

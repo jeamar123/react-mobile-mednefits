@@ -102,7 +102,9 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Texti
-            fontColor="#bcbcbc"
+            style={{
+              color: '#2c3e50'
+            }}
           >
             {this.setTitle()}
           </Common.Texti>
