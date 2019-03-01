@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons } from '../components/common/Buttons';
+import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
 const { width, height } = Dimensions.get('window');
 
@@ -97,9 +97,9 @@ class SelectService extends Component {
             ))}
           </View>
 
-          <Buttons style={{ width: '100%' }} onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
+          <Buttons2 style={{ width: '100%' }} onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
             Proceed
-          </Buttons>
+          </Buttons2>
         </Content>
       </Container>
     );

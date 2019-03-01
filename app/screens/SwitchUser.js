@@ -58,7 +58,7 @@ class FamilyList extends Component {
                 flex: 1,
                 marginTop: 5,
                 marginBottom: 0,
-                height: 65,
+                height: 100,
                 backgroundColor: '#fff',
               }}
             >
