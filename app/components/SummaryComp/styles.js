@@ -13,10 +13,11 @@ export default EStyleSheet.create({
     backgroundColor: '#E8E7EE',
     height: height / 10,
     width: width,
-    alignItems: 'flex-start',
+    alignItems: 'center',
     flexDirection: 'row',
     alignContent: 'space-between',
     paddingVertical: 20,
+    marginLeft: '25%',
   },
   title: {
     fontFamily: 'helvetica',

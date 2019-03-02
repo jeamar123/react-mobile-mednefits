@@ -24,7 +24,7 @@ export default EStyleSheet.create({
   },
   containerPay: {
     backgroundColor: '$white',
-    width: '35%',
+    width: '45%',
     height: INPUT_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
