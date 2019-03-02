@@ -61,7 +61,13 @@ class RouterComponent extends Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
-        <Router>
+        <Router
+          getSceneStyle={() => ({
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          })}
+        >
           <Stack key="root">
             <Scene key="Splash" component={Splash} hideNavBar />
             <Scene key="Login" component={Logins} hideNavBar />
