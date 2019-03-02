@@ -53,11 +53,12 @@ class HomeContent extends Component {
   }
 
   processQuery = async () => {
+    console.log('searching')
     this.props.isLoadingSearch("true")
 
     try {
       result = await Core.MainSearch(this.state.query)
-
+      console.log(result);
       this.props.onUpdateSearch(result.data)
       this.props.isLoadingSearch("false")
 

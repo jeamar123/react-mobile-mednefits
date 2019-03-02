@@ -20,8 +20,8 @@ class HomeContent extends Component {
   }
 
   async componentWillMount() {
-    await this.getUserDetail();
-    await this.getUserBalance();
+    // await this.getUserDetail();
+    // await this.getUserBalance();
   }
 
   async getUserBalance() {
@@ -57,7 +57,7 @@ class HomeContent extends Component {
 
     try {
       result = await Core.MainSearch(this.state.query)
-
+      console.log(result);
       this.props.onUpdateSearch(result.data)
       this.props.isLoadingSearch("false")
 

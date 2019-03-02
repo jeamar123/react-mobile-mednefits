@@ -87,7 +87,7 @@ class SearchResult extends Component {
                           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                         >
                           <Image
-                            source={{ uri: ke.image_url }}
+                            source={{ uri: ke.clinic_image }}
                             resizeMode="contain"
                             style={{
                               marginLeft: '2%',
