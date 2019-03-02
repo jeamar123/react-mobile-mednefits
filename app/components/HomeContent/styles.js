@@ -17,6 +17,12 @@ export default EStyleSheet.create({
     width: width,
     alignItems: 'center',
   },
+  sectionSearch: {
+    backgroundColor: '#0392cf',
+    height: 70,
+    width: width,
+    alignItems: 'center',
+  },
   contain: {
     flex: 1,
     flexDirection: 'row',
