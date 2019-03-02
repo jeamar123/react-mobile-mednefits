@@ -107,15 +107,13 @@ class HomeContent extends Component {
             // alignItems="center"
             justifyContent="flex-start"
             style={{
-              width: '80%',
+              width: '90%',
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
-              marginLeft: 10,
-              marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: '45%'
+              height: '50%'
             }}
           />
         </View>
