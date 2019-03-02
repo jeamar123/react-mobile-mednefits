@@ -77,11 +77,10 @@ class SearchResult extends Component {
                       <View
                         style={{
                           flex: 1,
-                          marginTop: 5,
-                          marginBottom: 10,
+                          marginTop: 4,
                           height: 110,
                           backgroundColor: '#fff',
-                          opacity: 10000,
+                          width: '100%'
                         }}
                       >
                         <View
@@ -393,7 +392,7 @@ class Home extends Component {
                   clearProcess={this.clearSearch}
                 />
                 <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}
                 >
                   <Text
                     fontFamily={Config.FONT_FAMILY_ROMAN}
