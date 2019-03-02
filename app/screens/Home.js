@@ -13,7 +13,7 @@ import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide } from '../components/HomeContent';
+import { HomeContent, MenuSide, SearchHome } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -109,10 +109,10 @@ class SearchResult extends Component {
 
                               numberOfLines={2}
                               style={{
-                                fontFamily: Config.FONT_FAMILY_ROMAN,
+                                fontFamily: Config.FONT_FAMILY_BOLD,
                                 fontSize: RF(1.6),
                                 width: '100%',
-                                fontWeight: 'bold'
+                                fontWeight: '900'
                               }}
                             >
                               {ke.name}
@@ -375,17 +375,7 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <Navbar
-            drawerAction={this.drawerActionCallback}
-            leftNav={true}
-            rightNav={true}
-          />
-          <HomeContent
-            onUpdateSearch={this.onUpdateSearch}
-            isLoadingSearch={this.isLoadingSearch}
-            clearProcess={this.clearSearch}
-          />
-          <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
+          <View style={{ flex: 1 }}>
             {(!this.state.data || this.state.isLoadingSearch) ? (
               <View
                 style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
@@ -394,6 +384,14 @@ class Home extends Component {
               </View>
             ) : (this.state.searchdata) ? (
               <View>
+                <Navbar
+                  leftNav="back-home"
+                />
+                <SearchHome
+                  onUpdateSearch={this.onUpdateSearch}
+                  isLoadingSearch={this.isLoadingSearch}
+                  clearProcess={this.clearSearch}
+                />
                 <View
                   style={{ justifyContent: 'center', alignItems: 'flex-start' }}
                 >
@@ -409,7 +407,18 @@ class Home extends Component {
                 />
               </View>
             ) : (
+
                   <View style={{ flex: 1 }}>
+                    <Navbar
+                      drawerAction={this.drawerActionCallback}
+                      leftNav={true}
+                      rightNav={true}
+                    />
+                    <HomeContent
+                      onUpdateSearch={this.onUpdateSearch}
+                      isLoadingSearch={this.isLoadingSearch}
+                      clearProcess={this.clearSearch}
+                    />
                     <View
                       style={{ justifyContent: 'center', alignItems: 'flex-start' }}
                     >

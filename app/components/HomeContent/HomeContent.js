@@ -120,7 +120,7 @@ class HomeContent extends Component {
             }}
           />
           <View style={styles.contain}>
-          <TouchableOpacity
+            <TouchableOpacity
               onPress={() =>
                 Actions.Barcode()
               }
