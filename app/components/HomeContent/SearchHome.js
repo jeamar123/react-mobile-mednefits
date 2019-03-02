@@ -115,7 +115,7 @@ class HomeContent extends Component {
               marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: '60%'
+              height: '45%'
             }}
           />
         </View>

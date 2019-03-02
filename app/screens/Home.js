@@ -77,8 +77,7 @@ class SearchResult extends Component {
                       <View
                         style={{
                           flex: 1,
-                          marginTop: 5,
-                          marginBottom: 10,
+                          marginTop: 1,
                           height: 110,
                           backgroundColor: '#fff',
                           opacity: 10000,
