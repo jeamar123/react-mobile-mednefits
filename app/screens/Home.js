@@ -35,7 +35,7 @@ class SearchResult extends Component {
         showHorizontalScrollIndicator={false}
         showVerticalScrollIndicator={false}
       >
-        <View style={{ padding: 10 }}>
+        <View>
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key !== 'clinics') || (key !== 'doctors')) {
               if (Array.isArray(v.data) && (v.data.length > 0)) {
@@ -77,11 +77,10 @@ class SearchResult extends Component {
                       <View
                         style={{
                           flex: 1,
-                          marginTop: 5,
-                          marginBottom: 10,
+                          marginTop: 4,
                           height: 110,
                           backgroundColor: '#fff',
-                          opacity: 10000,
+                          width: '100%'
                         }}
                       >
                         <View
@@ -393,11 +392,11 @@ class Home extends Component {
                   clearProcess={this.clearSearch}
                 />
                 <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}
                 >
                   <Text
                     fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', marginLeft: '5%' }}
                   >
                     Search Result
                   </Text>
@@ -407,7 +406,6 @@ class Home extends Component {
                 />
               </View>
             ) : (
-
                   <View style={{ flex: 1 }}>
                     <Navbar
                       drawerAction={this.drawerActionCallback}
@@ -424,7 +422,7 @@ class Home extends Component {
                     >
                       <Text
                         fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', marginLeft: '0.5%' }}
+                        style={{ textAlign: 'center', marginLeft: '2.5%' }}
                       >
                         Benefits Category
                       </Text>
@@ -450,7 +448,8 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginLeft: '2%'
   },
   gridBox: {
     width: width / 3.23,

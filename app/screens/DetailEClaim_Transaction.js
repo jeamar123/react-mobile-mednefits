@@ -160,7 +160,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
+              style={{ marginLeft: '7.5%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
           </View>
@@ -183,7 +183,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '20%', fontSize: 13 }}
+              style={{ marginLeft: '20%', fontSize: 13 }}
               value={this.state.data.service}
             />
           </View>
@@ -205,7 +205,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Provider"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13 }}
+              style={{ marginLeft: '24%', fontSize: 13 }}
               value={this.state.data.merchant}
             />
           </View>
@@ -227,7 +227,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '25.4%', fontSize: 13 }}
+              style={{ marginLeft: '25.4%', fontSize: 13 }}
               value={this.state.data.transaction_id}
             />
           </View>
@@ -251,7 +251,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '14%', fontSize: 13 }}
+              style={{ marginLeft: '15.5%', fontSize: 13 }}
               value={this.state.data.date}
             />
           </View>
@@ -275,7 +275,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '13.5%', fontSize: 13 }}
+              style={{ marginLeft: '14.5%', fontSize: 13 }}
               value={this.state.data.claim_date}
             />
           </View>
@@ -304,7 +304,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Member"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '8%', fontSize: 13 }}
+              style={{ marginLeft: '8%', fontSize: 13 }}
               value={this.state.data.member ? this.state.data.member : 'N/A'}
             />
           </View>
