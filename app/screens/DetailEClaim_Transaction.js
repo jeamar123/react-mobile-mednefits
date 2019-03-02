@@ -53,7 +53,7 @@ class DetailEClaim_Transaction extends Component {
       console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
-      if(data.files) {
+      if (data.files) {
         this.setState({
           data: data,
           filesData: data.files
@@ -78,9 +78,23 @@ class DetailEClaim_Transaction extends Component {
       <View
         style={{
           borderBottomColor: '#cccccc',
-          borderBottomWidth: 0.8,
+          borderBottomWidth: 0.5,
           marginTop: '-2%',
           marginBottom: '1%',
+        }}
+      />
+    );
+  }
+
+  _renderDivider2() {
+    return (
+      <View
+        style={{
+          borderBottomColor: '#cccccc',
+          borderBottomWidth: 0.5,
+          marginTop: '-2%',
+          marginBottom: '1%',
+          marginLeft: '38%'
         }}
       />
     );
@@ -128,7 +142,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
               marginTop: 20,
             }}
           >
@@ -157,7 +171,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
 
             }}
           >
@@ -169,7 +183,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '19%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '20%', fontSize: 13 }}
               value={this.state.data.service}
             />
           </View>
@@ -180,7 +194,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
             }}
           >
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
@@ -191,7 +205,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Provider"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '23%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13 }}
               value={this.state.data.merchant}
             />
           </View>
@@ -202,7 +216,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
             }}
           >
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
@@ -213,7 +227,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '25.4%', fontSize: 13 }}
               value={this.state.data.transaction_id}
             />
           </View>
@@ -224,7 +238,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
             }}
           >
             <Text
@@ -241,14 +255,14 @@ class DetailEClaim_Transaction extends Component {
               value={this.state.data.date}
             />
           </View>
-          {this._renderDivider()}
+          {this._renderDivider2()}
 
           <View
             style={{
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
             }}
           >
             <Text
@@ -261,18 +275,18 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '12%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '13.5%', fontSize: 13 }}
               value={this.state.data.claim_date}
             />
           </View>
-          {this._renderDivider()}
+          {this._renderDivider2()}
 
           <View
             style={{
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
             }}
           >
             <Text
@@ -290,7 +304,7 @@ class DetailEClaim_Transaction extends Component {
               placeholder="Member"
               underlineColorAndroid="transparent"
               colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '8%', fontSize: 13 }}
               value={this.state.data.member ? this.state.data.member : 'N/A'}
             />
           </View>
@@ -306,7 +320,7 @@ class DetailEClaim_Transaction extends Component {
                 style={{
                   flexDirection: 'row',
                   alignContent: 'space-between',
-                  marginVertical: 10,
+                  marginVertical: 20,
                 }}
               >
                 <Text

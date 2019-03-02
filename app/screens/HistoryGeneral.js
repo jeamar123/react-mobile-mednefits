@@ -59,7 +59,7 @@ class History extends Component {
   }
 
   renderContainerHistory() {
-    if(!this.state.data) {
+    if (!this.state.data) {
       return (
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
@@ -70,291 +70,292 @@ class History extends Component {
     } else {
       return (
         <GiftedForm
-            style={{ backgroundColor: 'white' }}
-            formName="signupForm"
-            openModal={route => {
-              navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
+          style={{ backgroundColor: 'white' }}
+          formName="signupForm"
+          openModal={route => {
+            navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              alignItems: 'center',
+              marginVertical: 13,
+              borderBottomWidth: 1,
+              borderColor: '#efeff1'
             }}
           >
-            <View
+            <Image
               style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                alignItems: 'center',
-                marginVertical: 10,
-                borderBottomWidth: 1,
-                borderColor: '#efeff1'
+                width: 35,
+                height: 35,
+                marginHorizontal: 30,
+                marginRight: 30,
+                marginLeft: 50,
+              }}
+              source={{ uri: this.state.data.clinic_type_image }}
+            />
+            <Text
+              style={{
+                paddingHorizontal: 10,
+                marginLeft: '4.1%',
+                paddingVertical: 10,
+                fontSize: 13
               }}
             >
-              <Image
-                style={{
-                  width: 35,
-                  height: 35,
-                  marginHorizontal: 30,
-                  marginRight: 30,
-                  marginLeft: 50,
-                }}
-                source={{ uri: this.state.data.clinic_type_image }}
-              />
-              <Text
-                style={{
-                  paddingHorizontal: 10,
-                  marginLeft: '2%',
-                  paddingVertical: 10,
-                  fontSize: 13
-                }}
-              >
-                {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
-              </Text>
-            </View>
-            <View
+              {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+              borderBottomWidth: 1,
+              borderColor: '#efeff1'
+            }}
+          >
+            <Text
               style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 10,
-                borderBottomWidth: 1,
-                borderColor: '#efeff1'
+                color: '#c4c4c4',
+                marginLeft: 20,
+                padding: 5,
+                fontSize: 13,
+                marginBottom: 10,
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginLeft: 20,
-                  padding: 5,
-                  fontSize: 13
-                }}
-              >
-                Transaction #
+              Transaction #
               </Text>
-              <Text style={{ marginLeft: '7%', padding: 5, fontSize: 13 }}>
-                {this.props.transaction_id}
-              </Text>
-            </View>
+            <Text style={{ marginLeft: '6.4%', padding: 5, fontSize: 13, marginBottom: 10, }}>
+              {this.props.transaction_id}
+            </Text>
+          </View>
 
-            <View
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text
               style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 10,
+                color: '#c4c4c4',
+                marginLeft: 20,
+                marginRight: '6%',
+                padding: 5,
+                fontSize: 13
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginLeft: 20,
-                  marginRight: '6%',
-                  padding: 5,
-                  fontSize: 13
-                }}
-              >
-                Services/s
+              Services/s
               </Text>
-              <Text style={{ padding: 5, marginLeft: '5.7%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {this.state.data.services}
-              </Text>
-            </View>
+            <Text style={{ padding: 5, marginLeft: '5.7%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              {this.state.data.services}
+            </Text>
+          </View>
 
-            <View
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text
               style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 10,
+                color: '#c4c4c4',
+                marginLeft: 20,
+                marginRight: '3%',
+                padding: 5,
+                fontSize: 13
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginLeft: 20,
-                  marginRight: '3%',
-                  padding: 5,
-                  fontSize: 13
-                }}
-              >
-                Date & Time
+              Date & Time
               </Text>
-              <Text style={{ marginLeft: '6.1%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {this.state.data.date_of_transaction}
-              </Text>
-            </View>
+            <Text style={{ marginLeft: '5.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              {this.state.data.date_of_transaction}
+            </Text>
+          </View>
 
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 10,
-              }}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text
+              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '9%', padding: 5, fontSize: 13 }}
             >
-              <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '9%', padding: 5, fontSize: 13 }}
-              >
-                Member
+              Member
               </Text>
-              <Text style={{ marginLeft: '5.7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {(this.state.data.customer) ? this.state.data.customer : "N/A"}
-              </Text>
-            </View>
+            <Text style={{ marginLeft: '5.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              {(this.state.data.customer) ? this.state.data.customer : "N/A"}
+            </Text>
+          </View>
 
-            <View
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text
+              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+            >
+              Payment Type
+              </Text>
+            <Text style={{ marginLeft: '3.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
+            </Text>
+          </View>
+
+          {(this.state.data.lite_plan == false) ?
+            this.state.data.lite_plan : <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 10,
+                marginVertical: 13,
               }}
             >
               <Text
                 style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
               >
-                Payment Type
-              </Text>
-              <Text style={{ marginLeft: '3.5%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
+                Total Amount
+                  </Text>
+              <Text style={{ marginLeft: '4.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+                {(this.state.data.amount) ? this.state.data.amount : "0.00"}
               </Text>
             </View>
+          }
 
-            {(this.state.data.lite_plan == false) ?
-              this.state.data.lite_plan : <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignContent: 'space-between',
-                  marginVertical: 10,
-                }}
-              >
-                <Text
-                  style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
-                >
-                  Total Amount
-                  </Text>
-                <Text style={{ marginLeft: '4.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                  {(this.state.data.amount) ? this.state.data.amount : "0.00"}
-                </Text>
-              </View>
-            }
-
-            {(this.state.data.lite_plan == false) ?
-              this.state.data.lite_plan : <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignContent: 'space-between',
-                  marginVertical: 10,
-                }}
-              >
-                <Text
-                  style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13, width: '30%' }}
-                >
-                  Medicine & Treatment
-                  </Text>
-                <Text style={{ marginLeft: '-6.3%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
-                  {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
-                </Text>
-                {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
-                  style={{
-                    paddingTop: 5,
-                    paddingBottom: 5,
-                    width: '20%',
-                    backgroundColor: '#0392cf',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#fff',
-                    height: '65%'
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      textAlign: 'center',
-                      color: '#fff',
-                    }}
-                  >
-                    Credits
-                    </Text>
-                </View>}
-              </View>
-            }
-
-            {(this.state.data.lite_plan == false) ?
-              this.state.data.lite_plan : <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignContent: 'space-between',
-                  marginVertical: 10,
-                }}
-              >
-                <Text
-                  style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
-                >
-                  Consultation
-                  </Text>
-                <Text style={{ marginLeft: '4.7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
-                  {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
-                </Text>
-                {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
-                  style={{
-                    paddingTop: 5,
-                    paddingBottom: 5,
-                    width: '20%',
-                    backgroundColor: '#0392cf',
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: '#fff',
-                    height: '100%',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      textAlign: 'center',
-                      color: '#fff',
-                    }}
-                  >
-                    Credits
-                    </Text>
-                </View>}
-              </View>
-            }
-
-            <View
+          {(this.state.data.lite_plan == false) ?
+            this.state.data.lite_plan : <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 10,
+                marginVertical: 13,
               }}
             >
-              <Text style={{ width: '38%' }} />
-              <View
+              <Text
+                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13, width: '30%' }}
+              >
+                Medicine & Treatment
+                  </Text>
+              <Text style={{ marginLeft: '-6.3%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
+                {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
+              </Text>
+              {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
                 style={{
-                  height: 180,
-                  width: '50%',
-                  borderTopLeftRadius: 5,
-                  borderTopRightRadius: 5,
-                  borderBottomLeftRadius: 5,
-                  borderBottomRightRadius: 5,
-                  backgroundColor: '#fff',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  width: '20%',
+                  backgroundColor: '#0392cf',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#fff',
+                  height: '65%'
                 }}
               >
-                <Image
-                  resizeMode="cover"
-                  style={{ width: '80%', height: 180 }}
-                  source={{
-                    uri: !this.state.imageSource.uri
-                      ? '../../assets/photo.png'
-                      : this.state.imageSource.uri,
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: 'center',
+                    color: '#fff',
                   }}
-                />
-              </View>
+                >
+                  Credits
+                    </Text>
+              </View>}
             </View>
-          </GiftedForm>
+          }
+
+          {(this.state.data.lite_plan == false) ?
+            this.state.data.lite_plan : <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                marginVertical: 13,
+              }}
+            >
+              <Text
+                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+              >
+                Consultation
+                  </Text>
+              <Text style={{ marginLeft: '4.7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
+                {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
+              </Text>
+              {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
+                style={{
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  width: '20%',
+                  backgroundColor: '#0392cf',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#fff',
+                  height: '100%',
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: 'center',
+                    color: '#fff',
+                  }}
+                >
+                  Credits
+                    </Text>
+              </View>}
+            </View>
+          }
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text style={{ width: '38%' }} />
+            <View
+              style={{
+                height: 180,
+                width: '50%',
+                borderTopLeftRadius: 5,
+                borderTopRightRadius: 5,
+                borderBottomLeftRadius: 5,
+                borderBottomRightRadius: 5,
+                backgroundColor: '#fff',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Image
+                resizeMode="cover"
+                style={{ width: '80%', height: 180 }}
+                source={{
+                  uri: !this.state.imageSource.uri
+                    ? '../../assets/photo.png'
+                    : this.state.imageSource.uri,
+                }}
+              />
+            </View>
+          </View>
+        </GiftedForm>
       )
     }
   }
@@ -372,7 +373,7 @@ class History extends Component {
         />
 
         {this.renderContainerHistory()}
-        
+
       </Container>
     );
   }
