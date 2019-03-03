@@ -137,7 +137,7 @@ class NearbyClinic extends Component {
   }
 
   render() {
-    // console.warn("clinisc "+JSON.stringify(this.state.clinics));
+    let i = 0;
     return (
       <Drawer
         type="displace"
@@ -183,6 +183,7 @@ class NearbyClinic extends Component {
                   }}
                   description={dataMarker.description}
                   onPress={this.onMarkerPress}
+                  zIndex={i++}
                 >
                   <Callout
                     tooltip
@@ -217,7 +218,8 @@ class NearbyClinic extends Component {
                                 preserveAspectRatio="xMidYMid slice"
                                 href={{ uri: dataMarker.image_url }}
                                 style={{
-                                  borderRadius: 2
+                                  borderRadius: 2,
+                                  backgroundColor: '#ccc'
                                 }}
                                 resizeMode="contain"
                               />
