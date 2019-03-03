@@ -300,7 +300,7 @@ class HistoryTransaction extends Component {
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
+              <Text style={{ fontSize: 13, marginBottom: 2 }}>{Data.merchant}</Text>
               <Text />
             </Body>
           </CardItem>
@@ -330,7 +330,6 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-4%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
@@ -365,7 +364,6 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-6%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
@@ -379,7 +377,7 @@ class HistoryTransaction extends Component {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: '-3.5%'
+
             }}
           >
             <Text
@@ -455,7 +453,7 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  <View style={{ marginBottom: 60 }}>
+                  <View style={{ marginBottom: 20 }}>
                     {this.renderTransactionE_Claim()}
                   </View>
                 )}
