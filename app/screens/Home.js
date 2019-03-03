@@ -13,7 +13,7 @@ import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide, SearchHome } from '../components/HomeContent';
+import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -373,7 +373,7 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <View style={{ flex: 1 }}>
+          {/* <View style={{ flex: 1 }}>
             {(!this.state.data || this.state.isLoadingSearch) ? (
               <View
                 style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
@@ -438,6 +438,35 @@ class Home extends Component {
                     </View>
                   </View>
                 )}
+          </View> */}
+
+          <View style={{ flex: 1 }}>
+            <Navbar
+              drawerAction={this.drawerActionCallback}
+              leftNav={true}
+              rightNav={true}
+            />
+            <HomeContentStatic />
+            <View
+              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+            >
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', marginLeft: '2.5%' }}
+              >
+                Benefits Category
+                      </Text>
+            </View>
+            <View style={styles.contain}>
+              <FlatList
+                data={this.state.data}
+                extraData={this.state}
+                keyExtractor={this.data}
+                renderItem={this._renderItem}
+                horizontal={false}
+                numColumns={3}
+              />
+            </View>
           </View>
         </Container>
       </Drawer>
