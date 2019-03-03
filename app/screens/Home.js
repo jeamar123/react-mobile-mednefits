@@ -34,6 +34,7 @@ class SearchResult extends Component {
       <ScrollView
         showHorizontalScrollIndicator={false}
         showVerticalScrollIndicator={false}
+        style={{ marginBottom: 160 }}
       >
         <View>
           {Object.entries(this.props.searchdata).map(([key, v]) => {
@@ -69,7 +70,7 @@ class SearchResult extends Component {
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key == 'clinics') || (key == 'doctors')) {
               if (Array.isArray(v) && (v.length > 0)) {
-                return <View key={v}>
+                return <View key={v} >
                   {v.map((ke, va) => {
                     return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
@@ -86,15 +87,13 @@ class SearchResult extends Component {
                         <View
                           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                         >
-                          <Image
-                            source={{ uri: ke.image_url }}
-                            resizeMode="contain"
-                            style={{
-                              marginLeft: '2%',
-                              marginRight: '2%',
-                            }}
-
-                          />
+                          <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                            <ResponsiveImage
+                              style={{ marginTop: '8%' }}
+                              source={{ uri: ke.clinic_image }}
+                              initWidth="85" initHeight="85"
+                            />
+                          </View>
                           <View
                             style={{
                               flexDirection: 'column',
