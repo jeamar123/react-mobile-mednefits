@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  EclaimSubmit,
-  ScrollView,
-  KeyboardAvoidingView
+  TextInput,
+  ScrollView
 } from 'react-native'
 import * as Common from '../common'
 import RNPickerSelect from 'react-native-picker-select'
@@ -117,7 +116,9 @@ export default class EclaimForm extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View
+        style={styles.container}
+      >
         <Core.Loader
           isVisible={this.state.isLoading}
         />
@@ -128,7 +129,7 @@ export default class EclaimForm extends Component {
           >
             <Common.Texti style={styles.title}>
               *Spending Account
-            </Common.Texti>
+          </Common.Texti>
             <View style={{ width: '50%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity
                 onPress={() => this.selectSpending("medical")}
@@ -193,7 +194,7 @@ export default class EclaimForm extends Component {
               value={this.state.provider}
               onChangeText={text => this.setState({ provider: text })}
               placeholder="Name of Provider"
-              iconColor="#2C3E50"
+              iconColor="#bcbcbc"
               leftToRight
             />
           </View>
@@ -228,10 +229,10 @@ export default class EclaimForm extends Component {
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
-                  return <Common.Texti fontColor={"#2C3E50"}>{this.state.date}</Common.Texti>
+                  return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
                 }
                 const dateStr = `${day}-${month}-${year}`
-                return <Common.Texti fontColor={"#2C3E50"} >{dateStr}</Common.Texti>
+                return <Common.Texti fontColor={"#bcbcbc"} >{dateStr}</Common.Texti>
               }}
               onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
               rightIcon="arrow-right"
@@ -267,7 +268,7 @@ export default class EclaimForm extends Component {
                 type="SimpleLineIcons"
                 name="arrow-right"
                 style={{
-                  color: "#cccccc",
+                  color: "#bcbcbc",
                   marginLeft: 10,
                   fontSize: 18
                 }}
@@ -328,11 +329,8 @@ export default class EclaimForm extends Component {
           </View>
 
 
-
-
-
         </ScrollView>
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 }

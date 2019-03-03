@@ -18,7 +18,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={"#2C3E50"}
+            fontColor={"#cccccc"}
           >
             S$
           </Common.Texti>
@@ -41,10 +41,10 @@ export default class InputText extends Component {
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#2C3E50',
+            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
             fontFamily: Config.FONT_FAMILY_ROMAN,
           }, this.props.placeholderStyle]}
-          style={[style.inputStyle, {textAlign: (this.props.leftToRight) ? 'right' : 'left'}]}
+          style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
@@ -53,7 +53,7 @@ export default class InputText extends Component {
             <Icons
               name="remove"
               style={{
-                color: (this.props.iconColor) ? this.props.iconColor : '#2C3E50',
+                color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
                 fontSize: 14,
                 paddingLeft: 10,
                 paddingRight: 10,
@@ -70,7 +70,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    color: '#2C3E50',
+    color: '#cccccc',
     fontFamily: Config.FONT_FAMILY_ROMAN
   },
 };
