@@ -190,13 +190,13 @@ export default class EclaimForm extends Component {
             }}>
               *Provider
           </Common.Texti>
-          <Common.InputText
-            value={this.state.provider}
-            onChangeText={text => this.setState({ provider: text })}
-            placeholder="Name of Provider"
-            iconColor="#2C3E50"
-            leftToRight
-          />
+            <Common.InputText
+              value={this.state.provider}
+              onChangeText={text => this.setState({ provider: text })}
+              placeholder="Name of Provider"
+              iconColor="#bcbcbc"
+              leftToRight
+            />
           </View>
 
           <Common.Divider />
@@ -229,10 +229,10 @@ export default class EclaimForm extends Component {
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
-                  return <Common.Texti fontColor={"#2C3E50"}>{this.state.date}</Common.Texti>
+                  return <Common.Texti fontColor={"#bcbcbc"}>{this.state.date}</Common.Texti>
                 }
                 const dateStr = `${day}-${month}-${year}`
-                return <Common.Texti fontColor={"#2C3E50"} >{dateStr}</Common.Texti>
+                return <Common.Texti fontColor={"#bcbcbc"} >{dateStr}</Common.Texti>
               }}
               onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
               rightIcon="arrow-right"
@@ -268,7 +268,7 @@ export default class EclaimForm extends Component {
                 type="SimpleLineIcons"
                 name="arrow-right"
                 style={{
-                  color: "#cccccc",
+                  color: "#bcbcbc",
                   marginLeft: 10,
                   fontSize: 18
                 }}
@@ -294,14 +294,14 @@ export default class EclaimForm extends Component {
               *Claim Amount
           </Common.Texti>
 
-          <Common.InputText
-            value={this.state.amount}
-            keyboardType="numeric"
-            onChangeText={text => this.setState({ amount: text })}
-            placeholder="Amount"
-            type={"currency"}
-            leftToRight
-          />
+            <Common.InputText
+              value={this.state.amount}
+              keyboardType="numeric"
+              onChangeText={text => this.setState({ amount: text })}
+              placeholder="Amount"
+              type={"currency"}
+              leftToRight
+            />
           </View>
 
           <Common.Divider />

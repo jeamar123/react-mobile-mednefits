@@ -102,9 +102,7 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Texti
-            style={{
-              color: '#2c3e50'
-            }}
+            fontColor={"#bcbcbc"}
           >
             {this.setTitle()}
           </Common.Texti>
@@ -113,7 +111,7 @@ export default class InputSelect extends Component {
             type="SimpleLineIcons"
             name="arrow-right"
             style={{
-              color: "#cccccc",
+              color: "#bcbcbc",
               marginLeft: 10,
               fontSize: 18
             }}
