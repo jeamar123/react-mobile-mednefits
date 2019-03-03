@@ -63,8 +63,8 @@ class ECardUser extends Component {
   }
 
   renderCoverage() {
-    return this.state.resultPackage.map(Data => (
-      <View>
+    return this.state.resultPackage.map((Data, index) => (
+      <View key={index}>
         <View
           style={{
             flexDirection: 'row',
@@ -257,7 +257,7 @@ class ECardUser extends Component {
                     height: 55,
                     width: 55,
                     resizeMode: 'contain',
-                    alignItem: 'center',
+                    alignItems: 'center',
                     marginTop: '5%',
                     marginRight: '5%',
                   }}

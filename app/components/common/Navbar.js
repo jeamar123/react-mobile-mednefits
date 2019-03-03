@@ -73,6 +73,7 @@ export default class Navbar extends React.Component {
         </View>
       );
     } else if (this.props.leftNav == 'to-home') {
+      console.log('to-home');
       return (
         <View
           style={{
@@ -83,7 +84,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.Home()}
+            onPress={() => Actions.Home({ type: 'reset' })}
             style={{
               paddingStart: 11,
               flexDirection: 'row',

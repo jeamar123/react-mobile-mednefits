@@ -59,9 +59,8 @@ console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
-    console.log('props in routes.js', this.props)
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: this.props.bg_safe ? this.props.bg_safe : '#0392cf' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
         <Router
           getSceneStyle={() => ({
             elevation: 0,
