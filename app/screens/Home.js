@@ -381,7 +381,7 @@ class Home extends Component {
             ) : (this.state.searchdata) ? (
               <View>
                 <Navbar
-                  leftNav="back-home"
+                  leftNav="to-home"
                 />
                 <SearchHome
                   onUpdateSearch={this.onUpdateSearch}
