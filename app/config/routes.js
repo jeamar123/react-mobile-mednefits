@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 import { Button, Icon } from 'native-base';
 
@@ -54,21 +54,15 @@ import MedicalHistoryAdd from '../screens/MedicalHistoryAdd';
 import MedicalMedicationsAdd from '../screens/MedicalMedicationsAdd';
 import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
+import HomeSearch from '../screens/HomeSearch';
 
 console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
-    console.log('props in routes.js', this.props)
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: this.props.bg_safe ? this.props.bg_safe : '#0392cf' }}>
-        <Router
-          getSceneStyle={() => ({
-            elevation: 0,
-            shadowOpacity: 0,
-            borderBottomWidth: 0,
-          })}
-        >
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
+        <Router>
           <Stack key="root">
             <Scene key="Splash" component={Splash} hideNavBar />
             <Scene key="Login" component={Logins} hideNavBar />
@@ -147,7 +141,7 @@ class RouterComponent extends Component {
             <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
             <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
             <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
-
+            <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>
