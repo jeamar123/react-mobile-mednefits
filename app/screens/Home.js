@@ -86,15 +86,13 @@ class SearchResult extends Component {
                         <View
                           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                         >
-                          <Image
-                            source={{ uri: ke.clinic_image }}
-                            resizeMode="contain"
-                            style={{
-                              marginLeft: '2%',
-                              marginRight: '2%',
-                            }}
+                        <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                          <ResponsiveImage
 
+                            source={{ uri: ke.clinic_image }}
+                            initWidth="110" initHeight="110"
                           />
+                        </View>
                           <View
                             style={{
                               flexDirection: 'column',
