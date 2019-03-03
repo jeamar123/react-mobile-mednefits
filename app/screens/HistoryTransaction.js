@@ -146,7 +146,7 @@ class HistoryTransaction extends Component {
                 source={require('../../assets/apps/dotted.png')}
               />
 
-              <Text style={{ color: '#0392cf' }}>
+              <Text style={{ marginTop: '-2%', color: '#0392cf' }}>
                 S$ {Data.amount}
               </Text>
             </Body>
@@ -297,7 +297,7 @@ class HistoryTransaction extends Component {
             <Body
               style={{
                 flexDirection: 'row',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
               }}
             >
               <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
@@ -307,8 +307,8 @@ class HistoryTransaction extends Component {
           <CardItem>
             <Body
               style={{
-                marginTop: '-6%',
-                marginBottom: '-4%',
+                marginTop: '-8%',
+                marginBottom: '-8%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
@@ -330,27 +330,45 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                // marginTop: '-4%'
+                marginTop: '-4%'
               }}
             >
-              <Text style={{ marginTop: '-2%', fontSize: 12, color: '#B5B5B5' }}>
+              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{
-                color: '#0392cf',
-                marginTop: '-0.5%'
-              }}>S$ {Data.amount}</Text>
+              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>S$ {Data.amount}</Text>
             </Body>
           </CardItem>
-          <CardItem style={{ backgroundColor: 'transparent' }}>
+          {/* <CardItem>
             <Body
               style={{
-                backgroundColor: 'transparent',
+                marginTop: '-8%',
+                marginBottom: '-8%',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
             >
-              <Text style={{ marginTop: '-4%', fontSize: 12, color: '#B5B5B5' }}>
+              <Image
+                style={{
+                  margin: 8,
+                  aspectRatio: 0.4,
+                  resizeMode: 'contain',
+                }}
+                source={require('../../assets/apps/dotted.png')}
+              />
+
+              <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
+            </Body>
+          </CardItem> */}
+          <CardItem>
+            <Body
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: '-6%'
+              }}
+            >
+              <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.visit_date}
               </Text>
               {this.renderEclaimStatus(Data)}
@@ -361,11 +379,11 @@ class HistoryTransaction extends Component {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              marginTop: '-3.5%'
             }}
           >
             <Text
               style={{
-                marginTop: '-10%',
                 fontSize: 11,
                 fontWeight: '400',
                 color: '#0392cf',
@@ -393,11 +411,11 @@ class HistoryTransaction extends Component {
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: RF(1.9),
+              fontSize: RF(2.1),
             }}
           >
             <Content>
@@ -410,7 +428,9 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  this.renderTransactionIn_Network()
+                  <View style={{ marginBottom: 10 }}>
+                    {this.renderTransactionIn_Network()}
+                  </View>
                 )}
             </Content>
           </Tab>
@@ -418,11 +438,11 @@ class HistoryTransaction extends Component {
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
-              fontSize: RF(1.9),
+              fontSize: RF(2.1),
             }}
           >
             <Content>
@@ -435,7 +455,9 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  this.renderTransactionE_Claim()
+                  <View style={{ marginBottom: 60 }}>
+                    {this.renderTransactionE_Claim()}
+                  </View>
                 )}
             </Content>
           </Tab>

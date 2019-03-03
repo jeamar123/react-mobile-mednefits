@@ -34,6 +34,7 @@ class SearchResult extends Component {
       <ScrollView
         showHorizontalScrollIndicator={false}
         showVerticalScrollIndicator={false}
+        style={{ marginBottom: 160 }}
       >
         <View>
           {Object.entries(this.props.searchdata).map(([key, v]) => {
@@ -43,8 +44,8 @@ class SearchResult extends Component {
                   {v.data.map((ke, va) => {
                     return <View>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
-                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
+                        <Text numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
+                        <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
                       </View>
                       <View
                         style={{
@@ -69,7 +70,7 @@ class SearchResult extends Component {
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key == 'clinics') || (key == 'doctors')) {
               if (Array.isArray(v) && (v.length > 0)) {
-                return <View key={v}>
+                return <View key={v} >
                   {v.map((ke, va) => {
                     return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
@@ -86,13 +87,13 @@ class SearchResult extends Component {
                         <View
                           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                         >
-                        <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                          <ResponsiveImage
-
-                            source={{ uri: ke.clinic_image }}
-                            initWidth="110" initHeight="110"
-                          />
-                        </View>
+                          <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                            <ResponsiveImage
+                              style={{ marginTop: '8%' }}
+                              source={{ uri: ke.clinic_image }}
+                              initWidth="85" initHeight="85"
+                            />
+                          </View>
                           <View
                             style={{
                               flexDirection: 'column',
@@ -103,13 +104,11 @@ class SearchResult extends Component {
                             }}
                           >
                             <Text
-
-                              numberOfLines={2}
+                              fontFamily={Config.FONT_FAMILY_BOLD}
+                              fontSize={RF(1.6)}
                               style={{
-                                fontFamily: Config.FONT_FAMILY_BOLD,
-                                fontSize: RF(1.6),
-                                width: '100%',
-                                fontWeight: '900'
+                                color: 'black',
+                                fontWeight: "bold",
                               }}
                             >
                               {ke.name}
@@ -159,16 +158,16 @@ class SearchResult extends Component {
 
                         </View>
                         {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
-                          <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
+                          <Text numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
+                          <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
                         </View> */}
-                        {/* <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
+                        {/* <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
                         {(ke.open_status == 0) ? (
-                          <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
+                          <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
                             closed
                         </Text>
                         ) : (
-                            <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
+                            <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
                               open
                         </Text>
                           )} */}
