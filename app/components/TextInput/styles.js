@@ -24,7 +24,7 @@ export default EStyleSheet.create({
   },
   containerPay: {
     backgroundColor: '$white',
-    width: '35%',
+    width: '40%',
     height: INPUT_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
@@ -34,7 +34,6 @@ export default EStyleSheet.create({
     fontFamily: Config.FONT_FAMILY_ROMAN,
     flex: 1,
     height: INPUT_HEIGHT,
-    paddingHorizontal: 8,
     color: '$inputText',
     fontSize: 46,
     width: '80%'

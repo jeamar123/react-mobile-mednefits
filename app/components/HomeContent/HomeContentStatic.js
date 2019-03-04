@@ -3,6 +3,9 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
+import Icons from 'react-native-vector-icons/FontAwesome';
+import RF from "react-native-responsive-fontsize";
+import * as Common from '../common'
 
 class HomeContent extends Component {
   constructor(props) {
@@ -10,31 +13,73 @@ class HomeContent extends Component {
     this.state = {
       Balance: '0',
       Full_name: '',
+      currency: false,
+      isClearSearch: false,
+      isLoadingSearch: false
     };
   }
 
-  componentWillMount() {
-    this.getUserBalance();
-    this.getUserDetail();
+  async componentWillMount() {
+    await this.getUserDetail();
+    await this.getUserBalance();
   }
 
-  getUserBalance() {
-    Core.GetBalance((error, result) => {
+  async getUserBalance() {
+    // console.log('in progress fetching getUserBalance')
+    await Core.GetBalance(async (error, result) => {
+      // console.log('fetching done for getUserBalance');
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      this.setState({
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
         Balance: data.balance,
+        currency: result.data.currency_symbol
       });
     });
   }
 
-  getUserDetail() {
-    Core.UserDetail((error, result) => {
+  onQuery = async (query) => {
+    this.setState({
+      isClearSearch: true,
+      query: query
+    })
+  }
+
+  clearProcess = (state) => {
+    this.props.clearProcess("true")
+    this.setState({
+      query: "",
+      isClearSearch: false
+    })
+  }
+
+  processQuery = async () => {
+    this.props.isLoadingSearch("true")
+
+    try {
+      result = await Core.MainSearch(this.state.query)
+
+      this.props.onUpdateSearch(result.data)
+      this.props.isLoadingSearch("false")
+
+    } catch (e) {
+      Common.getNotify("", e.message)
+      this.props.isLoadingSearch("false")
+    } finally {
+      setTimeout(() => {
+        this.props.isLoadingSearch("false")
+      }, 2000)
+    }
+  }
+
+
+  async getUserDetail() {
+    console.log('in progress fetching getUserDetail')
+    await Core.UserDetail(async (error, result) => {
+      console.log('fetching done for getUserDetail');
       data =
-        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
-      this.setState({
+      await this.setState({
         Full_name: data.profile.full_name,
       });
     });
@@ -44,59 +89,123 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
+          <TouchableOpacity
+            onPress={() =>
+              Actions.HomeSearch()
+            }
+            style={{
+              width: '90%',
+              borderRadius: 5,
+              color: "#fff",
+              backgroundColor: '#0A6186',
+              marginLeft: 10,
+              marginRight: 10,
+              flexDirection: 'row',
+              alignItems: 'center',
+              height: '20%'
+            }}>
+            <Common.buttonSearch
+              type="search"
+              iconColor="#fff"
+              justifyContent="flex-start"
+
+            />
+          </TouchableOpacity>
+
+          {/* <Common.InputSearch
+            value={this.state.query}
+            returnKeyType="search"
+            onSubmitEditing={() => this.processQuery()}
+            onChangeText={query => this.onQuery(query)}
+            placeholder="Search"
+            placeholderTextColor="#fff"
+            placeholderStyle={{
+              color: "#fff",
+              width: '100%'
+            }}
+            type="search"
+            isClearSearch={this.state.isClearSearch}
+            isClearSearchChange={this.clearProcess}
+            iconColor="#fff"
+            // alignItems="center"
+            justifyContent="flex-start"
+            style={{
+              width: '90%',
+              borderRadius: 5,
+              color: "#fff",
+              backgroundColor: '#0A6186',
+              marginLeft: 10,
+              marginRight: 10,
+              flexDirection: 'row',
+              alignItems: 'center',
+              height: '20%'
+            }}
+          /> */}
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
-                Actions.SelectService({
-                  type: 'reset',
-                })
+                Actions.Barcode()
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{ marginBottom: 15, width: 30, height: 30 }}
-                  source={require('../../../assets/apps/Scan&Pay.png')}
-                />
-                <Text style={styles.title}>Scan & Pay</Text>
-                <Text style={styles.detail}>In-Network</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                    <Image
+                      style={{ marginBottom: 15, width: 30, height: 30 }}
+                      source={require('../../../assets/apps/Scan&Pay.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                    <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.ECardUserStatic({
-                  type: 'reset',
-                })
+                Actions.ECardUser()
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{ marginBottom: 12, width: 26, height: 35 }}
-                  source={require('../../../assets/apps/E-Card.png')}
-                />
-                <Text style={styles.title}>E-Card</Text>
-                <Text style={styles.detail}>Alice</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                    <Image
+                      style={{ marginBottom: 15, width: 26, height: 35, }}
+                      source={require('../../../assets/apps/E-Card.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                    <Text style={styles.title}>E-Card</Text>
+                    <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance({
-                  type: 'reset',
-                })
+                Actions.Balance()
               }
             >
               <View style={styles.gridBox}>
-                <Image
-                  style={{
-                    marginBottom: 15,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: 30,
-                    height: 30,
-                  }}
-                  source={require('../../../assets/apps/wallet.png')}
-                />
-                <Text style={styles.title}>B-Dollars</Text>
-                <Text style={styles.detail}>S$ {this.state.Balance}</Text>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                    <Image
+                      style={{
+                        marginBottom: 15,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: 30,
+                        height: 30,
+                      }}
+                      source={require('../../../assets/apps/wallet.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+                    <Text style={styles.title}>Wallet</Text>
+                    <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                  </View>
+                </View>
               </View>
             </TouchableOpacity>
           </View>

@@ -88,7 +88,7 @@ class HomeContent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.sectionTitle}>
+        <View style={styles.sectionSearch}>
           <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
@@ -111,81 +111,11 @@ class HomeContent extends Component {
               borderRadius: 5,
               color: "#fff",
               backgroundColor: '#0A6186',
-              marginLeft: 10,
-              marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: '20%'
+              height: '50%'
             }}
           />
-          <View style={styles.contain}>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.Barcode()
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                    <Image
-                      style={{ marginBottom: 15, width: 30, height: 30 }}
-                      source={require('../../../assets/apps/Scan&Pay.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.ECardUser()
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
-                    <Image
-                      style={{ marginBottom: 15, width: 26, height: 35, }}
-                      source={require('../../../assets/apps/E-Card.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>E-Card</Text>
-                    <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.Balance()
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                    <Image
-                      style={{
-                        marginBottom: 15,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 30,
-                        height: 30,
-                      }}
-                      source={require('../../../assets/apps/wallet.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
-                    <Text style={styles.title}>Wallet</Text>
-                    <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     );

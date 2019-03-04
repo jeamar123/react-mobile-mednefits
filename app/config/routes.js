@@ -54,8 +54,9 @@ import MedicalHistoryAdd from '../screens/MedicalHistoryAdd';
 import MedicalMedicationsAdd from '../screens/MedicalMedicationsAdd';
 import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
+import HomeSearch from '../screens/HomeSearch';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 class RouterComponent extends Component {
   render() {
@@ -140,7 +141,7 @@ class RouterComponent extends Component {
             <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
             <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
             <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
-
+            <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

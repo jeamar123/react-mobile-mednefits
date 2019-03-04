@@ -58,6 +58,20 @@ class History extends Component {
     })
   }
 
+  _renderDivider() {
+    return (
+      <View
+        style={{
+          borderBottomColor: '#efeff1',
+          borderBottomWidth: 0.8,
+          marginTop: '-2%',
+          marginBottom: '1%',
+          marginLeft: '34%'
+        }}
+      />
+    );
+  }
+
   render() {
     console.warn("datanya " + (this.state.data.clinic_name) ? this.state.data.clinic_name : "");
     return (
@@ -251,7 +265,7 @@ class History extends Component {
               >
                 Medicine & Treatment
                 </Text>
-              <Text style={{ marginLeft: '-7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
+              <Text style={{ marginLeft: '-7%', padding: 5, width: '48%', fontSize: 13 }}>
                 {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
               </Text>
               {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
@@ -278,6 +292,7 @@ class History extends Component {
               </View>}
             </View>
           }
+          {this._renderDivider()}
 
           {(this.state.data.lite_plan == false) ?
             this.state.data.lite_plan : <View
@@ -293,7 +308,7 @@ class History extends Component {
               >
                 Consultation
                 </Text>
-              <Text style={{ marginLeft: '3%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
+              <Text style={{ marginLeft: '3%', padding: 5, width: '43%', fontSize: 13 }}>
                 {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
               </Text>
               {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
@@ -320,6 +335,7 @@ class History extends Component {
               </View>}
             </View>
           }
+          {this._renderDivider()}
 
           <View
             style={{

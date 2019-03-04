@@ -158,14 +158,17 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
+                flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
-                width: '100%'
+                
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+              <View>
+                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
                 {this.state.currency ? this.state.currency : ' '}
-              </Text>
+                </Text>
+              </View>
               <InputPay
                 keyboardType="numeric"
                 placeholder="0.00"
@@ -183,7 +186,7 @@ class BenefitsDollar extends Component {
                 marginBottom: '10%'
               }}
             >
-              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                 Balance: {this.state.Balance}
               </Text>
             </View>

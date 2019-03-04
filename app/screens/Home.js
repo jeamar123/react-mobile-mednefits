@@ -13,7 +13,7 @@ import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide } from '../components/HomeContent';
+import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -34,8 +34,9 @@ class SearchResult extends Component {
       <ScrollView
         showHorizontalScrollIndicator={false}
         showVerticalScrollIndicator={false}
+        style={{ marginBottom: 160 }}
       >
-        <View style={{ padding: 10 }}>
+        <View>
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key !== 'clinics') || (key !== 'doctors')) {
               if (Array.isArray(v.data) && (v.data.length > 0)) {
@@ -69,7 +70,7 @@ class SearchResult extends Component {
           {Object.entries(this.props.searchdata).map(([key, v]) => {
             if ((key == 'clinics') || (key == 'doctors')) {
               if (Array.isArray(v) && (v.length > 0)) {
-                return <View key={v}>
+                return <View key={v} >
                   {v.map((ke, va) => {
                     return <TouchableOpacity key={va} onPress={() =>
                       Actions.DetailClinic({ clinic_id: ke.clinic_id, StatusOpen: ke.open_status })
@@ -77,25 +78,22 @@ class SearchResult extends Component {
                       <View
                         style={{
                           flex: 1,
-                          marginTop: 5,
-                          marginBottom: 10,
+                          marginTop: 4,
                           height: 110,
                           backgroundColor: '#fff',
-                          opacity: 10000,
+                          width: '100%'
                         }}
                       >
                         <View
                           style={{ flexDirection: 'row', justifyContent: 'space-between' }}
                         >
-                          <Image
-                            source={{ uri: ke.image_url }}
-                            resizeMode="contain"
-                            style={{
-                              marginLeft: '2%',
-                              marginRight: '2%',
-                            }}
-
-                          />
+                          <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                            <ResponsiveImage
+                              style={{ marginTop: '8%' }}
+                              source={{ uri: ke.clinic_image }}
+                              initWidth="85" initHeight="85"
+                            />
+                          </View>
                           <View
                             style={{
                               flexDirection: 'column',
@@ -109,10 +107,10 @@ class SearchResult extends Component {
 
                               numberOfLines={2}
                               style={{
-                                fontFamily: Config.FONT_FAMILY_ROMAN,
+                                fontFamily: Config.FONT_FAMILY_BOLD,
                                 fontSize: RF(1.6),
                                 width: '100%',
-                                fontWeight: 'bold'
+                                fontWeight: '900'
                               }}
                             >
                               {ke.name}
@@ -375,17 +373,7 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <Navbar
-            drawerAction={this.drawerActionCallback}
-            leftNav={true}
-            rightNav={true}
-          />
-          <HomeContent
-            onUpdateSearch={this.onUpdateSearch}
-            isLoadingSearch={this.isLoadingSearch}
-            clearProcess={this.clearSearch}
-          />
-          <View style={{ flex: 1, marginLeft: '2.5%', marginRight: '2.5%' }}>
+          {/* <View style={{ flex: 1 }}>
             {(!this.state.data || this.state.isLoadingSearch) ? (
               <View
                 style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
@@ -394,12 +382,20 @@ class Home extends Component {
               </View>
             ) : (this.state.searchdata) ? (
               <View>
+                <Navbar
+                  leftNav="back-home"
+                />
+                <SearchHome
+                  onUpdateSearch={this.onUpdateSearch}
+                  isLoadingSearch={this.isLoadingSearch}
+                  clearProcess={this.clearSearch}
+                />
                 <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+                  style={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}
                 >
                   <Text
                     fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', marginLeft: '5%' }}
                   >
                     Search Result
                   </Text>
@@ -410,12 +406,22 @@ class Home extends Component {
               </View>
             ) : (
                   <View style={{ flex: 1 }}>
+                    <Navbar
+                      drawerAction={this.drawerActionCallback}
+                      leftNav={true}
+                      rightNav={true}
+                    />
+                    <HomeContent
+                      onUpdateSearch={this.onUpdateSearch}
+                      isLoadingSearch={this.isLoadingSearch}
+                      clearProcess={this.clearSearch}
+                    />
                     <View
                       style={{ justifyContent: 'center', alignItems: 'flex-start' }}
                     >
                       <Text
                         fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', marginLeft: '0.5%' }}
+                        style={{ textAlign: 'center', marginLeft: '2.5%' }}
                       >
                         Benefits Category
                       </Text>
@@ -432,6 +438,35 @@ class Home extends Component {
                     </View>
                   </View>
                 )}
+          </View> */}
+
+          <View style={{ flex: 1 }}>
+            <Navbar
+              drawerAction={this.drawerActionCallback}
+              leftNav={true}
+              rightNav={true}
+            />
+            <HomeContentStatic />
+            <View
+              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+            >
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', marginLeft: '2.5%' }}
+              >
+                Benefits Category
+                      </Text>
+            </View>
+            <View style={styles.contain}>
+              <FlatList
+                data={this.state.data}
+                extraData={this.state}
+                keyExtractor={this.data}
+                renderItem={this._renderItem}
+                horizontal={false}
+                numColumns={3}
+              />
+            </View>
           </View>
         </Container>
       </Drawer>
@@ -441,7 +476,8 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginLeft: '2%'
   },
   gridBox: {
     width: width / 3.23,
