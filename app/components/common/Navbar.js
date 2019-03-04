@@ -6,7 +6,7 @@ import {
   Image,
   Platform,
   StyleSheet,
-  StatusBar,
+  StatusBar, SafeAreaView
 } from 'react-native';
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -72,7 +72,44 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.leftNav == 'back-eclaim') {
+    } else if (this.props.leftNav == 'to-home') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home({ type: 'reset' })}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: RF(1.8),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold'
+              }}
+            >
+              Home
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+    else if (this.props.leftNav == 'back-eclaim') {
       return (
         <View
           style={{
@@ -129,7 +166,7 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#fff',
-                fontSize: RF(1.7),
+                fontSize: RF(1.8),
                 fontFamily: Config.FONT_FAMILY_THIN,
                 fontWeight: 'bold'
               }}
@@ -393,7 +430,7 @@ export default class Navbar extends React.Component {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
             source={require('../../../assets/LogoMednefits.png')}
-            style={{ height: 135, resizeMode: 'contain', width: 135 }}
+            style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -8 }}
           />
         </View>
       );
@@ -418,7 +455,7 @@ export default class Navbar extends React.Component {
             <ResponsiveImage
               source={require('../../../assets/apps/switch.png')}
               style={{ resizeMode: 'contain', }}
-              initWidth="62" initHeight="38"
+              initWidth="78" initHeight="40"
             />
           </TouchableOpacity>
         </View>
@@ -774,26 +811,29 @@ export default class Navbar extends React.Component {
   render() {
     // console.warn(this.props.rightNav);
     return (
-      <View style={{ flexDirection: 'column' }}>
-        <View
-          style={[
-            styles.container,
-            {
-              justifyContent:
-                !this.props.leftNav && !this.props.rightNav
-                  ? 'center'
-                  : 'space-between',
-              backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#0392cf',
-            },
-          ]}
-        >
-          <StatusBar backgroundColor="#0392cf" barStyle="dark-content" />
-          {this.renderLeft()}
-          {this.renderMiddle()}
-          {this.renderRight()}
+      <SafeAreaView style={{ backgroundColor: '#0392cf' }}>
+        <View style={{ flexDirection: 'column' }}>
+          <View
+            style={[
+              styles.container,
+              {
+                justifyContent:
+                  !this.props.leftNav && !this.props.rightNav
+                    ? 'center'
+                    : 'space-between',
+                backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#0392cf',
+              },
+            ]}
+          >
+            <StatusBar backgroundColor="#0392cf" barStyle="dark-content" />
+            {this.renderLeft()}
+            {this.renderMiddle()}
+            {this.renderRight()}
+          </View>
+          <Core.Network />
         </View>
-        <Core.Network />
-      </View>
+      </SafeAreaView>
+
     );
   }
 }
