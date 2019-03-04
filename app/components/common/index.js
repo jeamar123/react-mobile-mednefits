@@ -20,5 +20,6 @@ import InputSearch from './InputSearch'
 import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
+import Text from './Text'
 
-export { buttonSearch, Body, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect, InputSearch, InputText, InputFile, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect, InputSearch, InputText, InputFile, Popup, Error }

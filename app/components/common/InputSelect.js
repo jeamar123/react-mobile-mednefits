@@ -101,17 +101,19 @@ export default class InputSelect extends Component {
             justifyContent: 'flex-end'
           }}
         >
-          <Common.Texti
-            fontColor={"#bcbcbc"}
+          <Common.Text
+            style={{
+              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
+            }}
           >
             {this.setTitle()}
-          </Common.Texti>
+          </Common.Text>
 
           <Icon
             type="SimpleLineIcons"
             name="arrow-right"
             style={{
-              color: "#bcbcbc",
+              color: "#9e9e9e",
               marginLeft: 10,
               fontSize: 18
             }}

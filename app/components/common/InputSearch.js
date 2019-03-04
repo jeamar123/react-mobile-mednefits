@@ -70,7 +70,7 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     paddingBottom: '2%',
-    color: '#0392cf',
+    color: '#fff',
     fontFamily: Config.FONT_FAMILY_ROMAN,
     width: '80%'
   },
