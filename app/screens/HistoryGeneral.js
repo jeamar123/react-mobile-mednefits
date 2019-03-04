@@ -93,7 +93,7 @@ class History extends Component {
                 height: 35,
                 marginHorizontal: 30,
                 marginRight: 30,
-                marginLeft: 80,
+                marginLeft: 100,
               }}
               source={{ uri: this.state.data.clinic_type_image }}
             />
@@ -130,7 +130,7 @@ class History extends Component {
             >
               Transaction #
               </Text>
-            <Text style={{ marginLeft: '6.4%', padding: 5, fontSize: 13, marginBottom: 10, }}>
+            <Text style={{ marginLeft: '12.4%', padding: 5, fontSize: 13, marginBottom: 10, }}>
               {this.props.transaction_id}
             </Text>
           </View>
@@ -154,7 +154,7 @@ class History extends Component {
             >
               Services/s
               </Text>
-            <Text style={{ padding: 5, marginLeft: '5.3%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+            <Text style={{ padding: 5, marginLeft: '11.3%', borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {this.state.data.services}
             </Text>
           </View>
@@ -178,7 +178,7 @@ class History extends Component {
             >
               Date & Time
               </Text>
-            <Text style={{ marginLeft: '5.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+            <Text style={{ marginLeft: '11.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {this.state.data.date_of_transaction}
             </Text>
           </View>
@@ -196,7 +196,7 @@ class History extends Component {
             >
               Member
               </Text>
-            <Text style={{ marginLeft: '5.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+            <Text style={{ marginLeft: '11.8%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {(this.state.data.customer) ? this.state.data.customer : "N/A"}
             </Text>
           </View>
@@ -214,7 +214,7 @@ class History extends Component {
             >
               Payment Type
               </Text>
-            <Text style={{ marginLeft: '3.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+            <Text style={{ marginLeft: '8.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
               {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
             </Text>
           </View>
@@ -233,7 +233,7 @@ class History extends Component {
               >
                 Total Amount
                   </Text>
-              <Text style={{ marginLeft: '4.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+              <Text style={{ marginLeft: '9.2%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
                 {(this.state.data.amount) ? this.state.data.amount : "0.00"}
               </Text>
             </View>
@@ -253,7 +253,7 @@ class History extends Component {
               >
                 Medicine & Treatment
                   </Text>
-              <Text style={{ marginLeft: '-6.3%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
+              <Text style={{ marginLeft: '0.1%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
                 {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
               </Text>
               {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
@@ -265,7 +265,8 @@ class History extends Component {
                   borderRadius: 10,
                   borderWidth: 1,
                   borderColor: '#fff',
-                  height: '65%'
+                  height: '65%',
+                  marginLeft: -40
                 }}
               >
                 <Text
@@ -295,7 +296,7 @@ class History extends Component {
               >
                 Consultation
                   </Text>
-              <Text style={{ marginLeft: '4.7%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
+              <Text style={{ marginLeft: '10.4%', padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
                 {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
               </Text>
               {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
@@ -308,6 +309,7 @@ class History extends Component {
                   borderWidth: 1,
                   borderColor: '#fff',
                   height: '100%',
+                  marginLeft: -40
                 }}
               >
                 <Text
