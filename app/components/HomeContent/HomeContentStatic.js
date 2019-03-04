@@ -164,9 +164,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.ECardUser({
-                  type: 'reset',
-                })
+                Actions.ECardUser()
               }
             >
               <View style={styles.gridBox}>
@@ -186,9 +184,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance({
-                  type: 'reset',
-                })
+                Actions.Balance()
               }
             >
               <View style={styles.gridBox}>
