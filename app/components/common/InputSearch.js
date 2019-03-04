@@ -69,7 +69,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    color: '#0392cf',
+    color: '#fff',
     fontFamily: Config.FONT_FAMILY_ROMAN,
     width: '80%'
   },
