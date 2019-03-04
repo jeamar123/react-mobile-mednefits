@@ -165,7 +165,7 @@ export default class EclaimForm extends Component {
               *Claim Type
           </Common.Texti>
 
-            <Common.InputSelect
+            <Common.InputSelect2
               placeholder={this.state.claimTypeState}
               data={this.state.claimType}
               titleValue={this.state.claim}
