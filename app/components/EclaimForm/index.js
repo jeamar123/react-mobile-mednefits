@@ -18,7 +18,8 @@ export default class EclaimForm extends Component {
 
     this.state = {
       date: "Input Date",
-      time: "Input Time",
+      timeholder: "Input Time",
+      time: false,
       type: "medical",
       claimType: [
         {
@@ -259,8 +260,9 @@ export default class EclaimForm extends Component {
               style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
             >
               <Common.InputTime
-                placeholder={this.state.time}
+                placeholder={this.state.timeholder}
                 onTimeChange={(time) => this.setState({ time: time })}
+                value={this.state.time}
               />
 
               <Icon
