@@ -7,6 +7,7 @@ import {
   Platform,
   StyleSheet,
   StatusBar,
+  SafeAreaView
 } from 'react-native';
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -767,26 +768,28 @@ export default class Navbar extends React.Component {
   render() {
     // console.warn(this.props.rightNav);
     return (
-      <View style={{ flexDirection: 'column' }}>
-        <View
-          style={[
-            styles.container,
-            {
-              justifyContent:
-                !this.props.leftNav && !this.props.rightNav
-                  ? 'center'
-                  : 'space-between',
-              backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#efeff4',
-            },
-          ]}
-        >
-          <StatusBar backgroundColor="#efeff4" barStyle="dark-content" />
-          {this.renderLeft()}
-          {this.renderMiddle()}
-          {this.renderRight()}
+      <SafeAreaView style={{ backgroundColor: '#efeff4' }}>
+        <View style={{ flexDirection: 'column' }}>
+          <View
+            style={[
+              styles.container,
+              {
+                justifyContent:
+                  !this.props.leftNav && !this.props.rightNav
+                    ? 'center'
+                    : 'space-between',
+                backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#efeff4',
+              },
+            ]}
+          >
+            <StatusBar backgroundColor="#efeff4" barStyle="dark-content" />
+            {this.renderLeft()}
+            {this.renderMiddle()}
+            {this.renderRight()}
+          </View>
+          <Core.Network />
         </View>
-        <Core.Network />
-      </View>
+      </SafeAreaView>
     );
   }
 }

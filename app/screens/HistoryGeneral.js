@@ -93,16 +93,17 @@ class History extends Component {
                 height: 35,
                 marginHorizontal: 30,
                 marginRight: 30,
-                marginLeft: 50,
+                marginLeft: 80,
               }}
               source={{ uri: this.state.data.clinic_type_image }}
             />
             <Text
               style={{
                 paddingHorizontal: 10,
-                marginLeft: '4.1%',
+                marginLeft: '-3.3%',
                 paddingVertical: 10,
-                fontSize: 13
+                fontSize: 13,
+                fontWeight: 'bold',
               }}
             >
               {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}

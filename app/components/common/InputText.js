@@ -18,7 +18,7 @@ export default class InputText extends Component {
       >
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontColor={"#cccccc"}
+            fontColor={"#2c3e50"}
           >
             S$
           </Common.Texti>
@@ -26,7 +26,7 @@ export default class InputText extends Component {
           <Icons
             name="search"
             style={{
-              color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+              color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
               fontSize: 14,
               paddingLeft: 10,
               paddingRight: 10
@@ -41,7 +41,7 @@ export default class InputText extends Component {
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+            color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
             fontFamily: Config.FONT_FAMILY_ROMAN,
           }, this.props.placeholderStyle]}
           style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
@@ -53,7 +53,7 @@ export default class InputText extends Component {
             <Icons
               name="remove"
               style={{
-                color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
+                color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
                 fontSize: 14,
                 paddingLeft: 10,
                 paddingRight: 10,
@@ -70,7 +70,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
-    color: '#cccccc',
+    color: '#2c3e50',
     fontFamily: Config.FONT_FAMILY_ROMAN
   },
 };

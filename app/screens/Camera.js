@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   camera: {
-    flex: 0.85,
+    flex: 1,
     flexDirection: 'column'
   },
   preview: {

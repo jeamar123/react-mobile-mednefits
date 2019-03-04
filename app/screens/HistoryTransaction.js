@@ -409,7 +409,7 @@ class HistoryTransaction extends Component {
             heading="In-Network Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',
@@ -436,7 +436,7 @@ class HistoryTransaction extends Component {
             heading="E-Claim Transactions"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
+            activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
             textStyle={{
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#fff',

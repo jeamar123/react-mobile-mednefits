@@ -15,7 +15,7 @@ export default class InputDate extends Component {
           type="SimpleLineIcons"
           name="arrow-right"
           style={{
-            color: "#cccccc",
+            color: "#9e9e9e",
             marginLeft: 10,
             fontSize: 18
           }}
@@ -36,10 +36,10 @@ export default class InputDate extends Component {
           onError={() => Common.getNotify("", "Error loading, please try again")}
           renderDate={({ year, month, day, date }) => {
             if (!date) {
-              return <Common.Texti fontColor={"#bcbcbc"}>{this.props.placeholder}</Common.Texti>
+              return <Common.Texti fontColor={"#9e9e9e"}>{this.props.placeholder}</Common.Texti>
             }
             const dateStr = `${day}-${month}-${year}`
-            return <Common.Texti fontColor={this.props.fontColor} >{dateStr}</Common.Texti>
+            return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
           }}
           onDateChanged={({ year, month, day, date }) => this.props.onChangeDate(`${day}-${month}-${year}`)}
         />
@@ -53,7 +53,7 @@ export default class InputDate extends Component {
 const style = {
   containerDatePicker: {
     backgroundColor: "white",
-    borderBottomColor: "#bcbcbc",
+    borderBottomColor: "#9e9e9e",
     borderBottomWidth: 0,
     justifyContent: 'center',
     borderRadius: 2,
