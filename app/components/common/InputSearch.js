@@ -36,12 +36,13 @@ export default class InputText extends Component {
               <View />
             )}
         <TextInput
+          autoFocus={true}
           {...this.props}
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc'
+            color: (this.props.iconColor) ? this.props.iconColor : '#cccccc',
           }, this.props.placeholderStyle]}
           style={[style.inputStyle]}
         />
