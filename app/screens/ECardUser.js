@@ -78,7 +78,7 @@ class ECardUser extends Component {
               marginTop: '3%',
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#808080',
-              fontSize: 11,
+              fontSize: 12,
               marginRight: '10%',
             }}
           >
@@ -89,7 +89,7 @@ class ECardUser extends Component {
               marginTop: '3%',
               fontFamily: Config.FONT_FAMILY_ROMAN,
               color: '#808080',
-              fontSize: 11,
+              fontSize: 12,
               width: '60%',
             }}
           >

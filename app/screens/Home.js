@@ -13,7 +13,7 @@ import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide, SearchHome } from '../components/HomeContent';
+import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -44,8 +44,8 @@ class SearchResult extends Component {
                   {v.data.map((ke, va) => {
                     return <View>
                       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
-                        <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
+                        <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
+                        <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
                       </View>
                       <View
                         style={{
@@ -104,11 +104,13 @@ class SearchResult extends Component {
                             }}
                           >
                             <Text
-                              fontFamily={Config.FONT_FAMILY_BOLD}
-                              fontSize={RF(1.6)}
+
+                              numberOfLines={2}
                               style={{
-                                color: 'black',
-                                fontWeight: "bold",
+                                fontFamily: Config.FONT_FAMILY_BOLD,
+                                fontSize: RF(1.6),
+                                width: '100%',
+                                fontWeight: '900'
                               }}
                             >
                               {ke.name}
@@ -158,16 +160,16 @@ class SearchResult extends Component {
 
                         </View>
                         {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Text numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
-                          <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
+                          <Text ellipsizeMode={"tail"} numberOfLines={2} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={14} style={{ color: 'black', letterSpacing: 2, fontWeight: "bold", width: "50%", lineHeight: 20 }}>{ke.name}</Text>
+                          <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{key.toUpperCase()}</Text>
                         </View> */}
-                        {/* <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
+                        {/* <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_THIN} fontSize={10} style={{ color: '#cccccc', letterSpacing: 3 }}>{ke.address}</Text>
                         {(ke.open_status == 0) ? (
-                          <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
+                          <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'red', letterSpacing: 1 }}>
                             closed
                         </Text>
                         ) : (
-                            <Text numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
+                            <Text ellipsizeMode={"tail"} numberOfLines={1} fontFamily={Config.FONT_FAMILY_BOLD} fontSize={8} style={{ color: 'green' }}>
                               open
                         </Text>
                           )} */}
@@ -371,7 +373,7 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <View style={{ flex: 1 }}>
+          {/* <View style={{ flex: 1 }}>
             {(!this.state.data || this.state.isLoadingSearch) ? (
               <View
                 style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
@@ -381,7 +383,7 @@ class Home extends Component {
             ) : (this.state.searchdata) ? (
               <View>
                 <Navbar
-                  leftNav="to-home"
+                  leftNav="back-home"
                 />
                 <SearchHome
                   onUpdateSearch={this.onUpdateSearch}
@@ -436,6 +438,35 @@ class Home extends Component {
                     </View>
                   </View>
                 )}
+          </View> */}
+
+          <View style={{ flex: 1 }}>
+            <Navbar
+              drawerAction={this.drawerActionCallback}
+              leftNav={true}
+              rightNav={true}
+            />
+            <HomeContentStatic />
+            <View
+              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+            >
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', marginLeft: '2.5%' }}
+              >
+                Benefits Category
+                      </Text>
+            </View>
+            <View style={styles.contain}>
+              <FlatList
+                data={this.state.data}
+                extraData={this.state}
+                keyExtractor={this.data}
+                renderItem={this._renderItem}
+                horizontal={false}
+                numColumns={3}
+              />
+            </View>
           </View>
         </Container>
       </Drawer>

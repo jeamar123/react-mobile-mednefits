@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  EclaimSubmit,
-  ScrollView,
-  KeyboardAvoidingView
+  TextInput,
+  ScrollView
 } from 'react-native'
 import * as Common from '../common'
 import RNPickerSelect from 'react-native-picker-select'
@@ -19,7 +18,8 @@ export default class EclaimForm extends Component {
 
     this.state = {
       date: "Input Date",
-      time: "Input Time",
+      timeholder: "Input Time",
+      time: false,
       type: "medical",
       claimType: [
         {
@@ -117,7 +117,9 @@ export default class EclaimForm extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View
+        style={styles.container}
+      >
         <Core.Loader
           isVisible={this.state.isLoading}
         />
@@ -128,7 +130,7 @@ export default class EclaimForm extends Component {
           >
             <Common.Texti style={styles.title}>
               *Spending Account
-            </Common.Texti>
+          </Common.Texti>
             <View style={{ width: '50%', flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity
                 onPress={() => this.selectSpending("medical")}
@@ -164,7 +166,7 @@ export default class EclaimForm extends Component {
               *Claim Type
           </Common.Texti>
 
-            <Common.InputSelect
+            <Common.InputSelect2
               placeholder={this.state.claimTypeState}
               data={this.state.claimType}
               titleValue={this.state.claim}
@@ -193,7 +195,7 @@ export default class EclaimForm extends Component {
               value={this.state.provider}
               onChangeText={text => this.setState({ provider: text })}
               placeholder="Name of Provider"
-              iconColor="#2C3E50"
+              iconColor="#9e9e9e"
               leftToRight
             />
           </View>
@@ -217,7 +219,7 @@ export default class EclaimForm extends Component {
             <Common.InputDateCustom
               style={{
                 backgroundColor: "white",
-                borderBottomColor: "#bcbcbc",
+                borderBottomColor: "#9e9e9e",
                 borderBottomWidth: 0,
                 justifyContent: 'center',
                 borderRadius: 2,
@@ -228,10 +230,10 @@ export default class EclaimForm extends Component {
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
-                  return <Common.Texti fontColor={"#2C3E50"}>{this.state.date}</Common.Texti>
+                  return <Common.Texti fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
                 }
                 const dateStr = `${day}-${month}-${year}`
-                return <Common.Texti fontColor={"#2C3E50"} >{dateStr}</Common.Texti>
+                return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
               }}
               onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
               rightIcon="arrow-right"
@@ -253,21 +255,20 @@ export default class EclaimForm extends Component {
               alignItems: 'center',
             }}>
               *Time of Visit
-          </Common.Texti>
-
+            </Common.Texti>
             <View
               style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
             >
               <Common.InputTime
-                placeholder={this.state.time}
+                placeholder={this.state.timeholder}
                 onTimeChange={(time) => this.setState({ time: time })}
+                value={this.state.time}
               />
-
               <Icon
                 type="SimpleLineIcons"
                 name="arrow-right"
                 style={{
-                  color: "#cccccc",
+                  color: "#9e9e9e",
                   marginLeft: 10,
                   fontSize: 18
                 }}
@@ -328,11 +329,8 @@ export default class EclaimForm extends Component {
           </View>
 
 
-
-
-
         </ScrollView>
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 }

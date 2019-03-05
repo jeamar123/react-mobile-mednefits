@@ -103,7 +103,7 @@ export default class InputSelect extends Component {
         >
           <Common.Text
             style={{
-              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
+              color: (this.props.titleValue) ? "#2c3e50" : "#9e9e9e"
             }}
           >
             {this.setTitle()}

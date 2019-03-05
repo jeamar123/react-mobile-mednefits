@@ -7,6 +7,7 @@ export * from './Notify';
 export * from './ButtonCall';
 export * from './Buttons2';
 
+import buttonSearch from './ButtonSearch'
 import Popup from './PopUp'
 import Texti from './Texti'
 import Body from './Body';
@@ -15,9 +16,11 @@ import InputDate from './InputDate'
 import InputDateCustom from './InputDateCustom'
 import InputTime from './InputTime'
 import InputSelect from './InputSelect'
+import InputSelect2 from './InputSelect2'
 import InputSearch from './InputSearch'
 import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
+import Text from './Text'
 
-export { Body, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect, InputSearch, InputText, InputFile, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputFile, Popup, Error }

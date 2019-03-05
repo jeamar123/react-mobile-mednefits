@@ -38,7 +38,8 @@ const MenuSide = () => (
               Actions.Home({
                 type: 'reset',
               })
-            }>
+            }
+            >
         <Left>
           <TouchableOpacity>
             <Image
