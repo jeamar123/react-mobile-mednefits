@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, TouchableOpacity, Keyboard } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
@@ -158,10 +159,10 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
+                marginLeft: responsiveWidth(4),
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
-                
               }}
             >
               <View>
