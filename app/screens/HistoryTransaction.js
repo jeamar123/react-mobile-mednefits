@@ -7,16 +7,14 @@ import {
   CardItem,
   Text,
   Body,
-  Button,
   Tab,
   Tabs,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
-import { FONT_FAMILY_THIN, FONT_FAMILY_LIGHT } from '../config';
-import RF from "react-native-responsive-fontsize";
 
 class HistoryTransaction extends Component {
   constructor(props) {
@@ -98,14 +96,13 @@ class HistoryTransaction extends Component {
       >
         <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>
           <CardItem
-
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               borderBottomWidth: 0.5,
               borderColor: 'grey',
               marginLeft: 10,
-              marginRight: 10
+              marginRight: 10,
             }}
           >
             <Text style={{ fontSize: 13, fontWeight: 'bold', marginLeft: -10 }}>
