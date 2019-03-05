@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
-import { Buttons, Popup } from '../components/common';
+import { Buttons2, Popup } from '../components/common';
 import * as Core from '../core'
 import Toast from 'react-native-simple-toast';
 
@@ -99,10 +99,10 @@ class Login extends Component {
             secureTextEntry={true}
             autoCapitalize='none'
           />
-          <View style={{ width: 295, alignItems: 'center' }}>
-            <Buttons disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
+          <View>
+            <Buttons2 disabled={this.state.failed} activeOpacity={this.state.failed ? 1 : 0.7} onPress={() => this.LoginHandler()}>
               {this.state.button}
-            </Buttons>
+            </Buttons2>
           </View>
         </KeyboardAvoidingView>
 

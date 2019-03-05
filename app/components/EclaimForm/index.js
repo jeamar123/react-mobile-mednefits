@@ -224,7 +224,7 @@ export default class EclaimForm extends Component {
                 height: 50
               }}
               startDate={new Date()}
-              minDate={new Date()}
+              maxDate={new Date()}
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {

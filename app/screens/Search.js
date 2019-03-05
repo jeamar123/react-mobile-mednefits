@@ -217,6 +217,7 @@ class Home extends Component {
               backgroundColor: '#fff',
               margin: 15,
               borderRadius: 5,
+              height: 35
             }}
           />
         </View>
