@@ -5,11 +5,16 @@ import styles from './styles';
 const SummaryComp = () => (
   <View style={styles.container}>
     <View style={styles.sectionTitle}>
-      <Image
-        style={{ marginLeft: 25, marginRight: 25, width: 25, height: 25 }}
-        source={require('../../../assets/apps/payment_successful.png')}
-      />
-      <Text style={styles.title}>Payment Successful</Text>
+      <View style={{ marginLeft: 45, marginRight: 45 }}>
+        <Image
+          style={{ width: 35, height: 35 }}
+          source={require('../../../assets/apps/payment_successful.png')}
+        />
+      </View>
+      <View>
+        <Text style={styles.title}>Payment Successful</Text>
+      </View>
+
     </View>
   </View>
 );
