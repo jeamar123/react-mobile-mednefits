@@ -166,7 +166,7 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#fff',
-                fontSize: RF(1.8),
+                fontSize: RF(1.7),
                 fontFamily: Config.FONT_FAMILY_THIN,
                 fontWeight: 'bold'
               }}
@@ -430,7 +430,7 @@ export default class Navbar extends React.Component {
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
             source={require('../../../assets/LogoMednefits.png')}
-            style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -15 }}
+            style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -8 }}
           />
         </View>
       );
@@ -498,7 +498,7 @@ export default class Navbar extends React.Component {
         >
           <TouchableOpacity
             onPress={() =>
-              Actions.Search()
+              Actions.HomeSearch()
             }
           >
             <ResponsiveImage
