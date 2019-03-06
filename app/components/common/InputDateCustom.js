@@ -27,6 +27,8 @@ class DatePicker extends Component {
       date: undefined
     }
 
+    Date = new Date()
+
     static defaultProps = {
       renderDate: ({ year, month, day, date }) => {
         if (date) {
@@ -40,7 +42,7 @@ class DatePicker extends Component {
       startDate: new Date(),
       onError: noop,
       onDateChanged: noop,
-      maxDate: undefined,
+      maxDate: Date.now(),
       minDate: undefined,
       modalButtonText: 'Done'
     }
@@ -104,12 +106,13 @@ class DatePicker extends Component {
 
     handlePressed = async () => {
       const { startDate, onError } = this.props
-      const { date } = this.state
+      const { date, maxDate } = this.state
 
       if (isAndroid) {
         try {
           const { action, year, month, day } = await DatePickerAndroid.open({
-            date: date || startDate
+            date: date || startDate,
+            maxDate: new Date()
           })
 
           if (action !== DatePickerAndroid.dismissedAction) {
@@ -182,6 +185,7 @@ class DatePicker extends Component {
         ...props
       } = this.props
 
+      console.warn(this.state.maxDate)
       return (
         <TouchableOpacity style={style} onPress={this.handlePressed}>
           <Modal

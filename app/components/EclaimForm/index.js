@@ -116,6 +116,7 @@ export default class EclaimForm extends Component {
   }
 
   render() {
+    let Tanggal = new Date()
     return (
       <View
         style={styles.container}
@@ -227,6 +228,7 @@ export default class EclaimForm extends Component {
               }}
               startDate={new Date()}
               minDate={new Date()}
+              maxDate={()=>Tanggal.now()}
               onError={() => Common.getNotify("", "Error loading, please try again")}
               renderDate={({ year, month, day, date }) => {
                 if (!date) {
