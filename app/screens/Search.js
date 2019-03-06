@@ -199,7 +199,7 @@ class Home extends Component {
           leftNav="close"
         />
         <View style={{ backgroundColor: "#0000" }}>
-          <Common.InputText
+          <Common.InputText2
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}

@@ -106,7 +106,7 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.HistoryTransaction()
+              Actions.HistoryTransaction({type: 'reset'})
             }>
         <Left>
           <TouchableOpacity>
