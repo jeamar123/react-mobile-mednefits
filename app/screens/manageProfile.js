@@ -155,8 +155,8 @@ class manageProfile extends Component {
 
         const file = {
           uri: response.uri,
-          name: response.fileName,
-          type: response.type,
+          name: 'profilePicture',
+          type: 'image/jpeg',
         };
 
         const options = {
