@@ -62,7 +62,7 @@ class RouterComponent extends Component {
   render() {
     return (
       <Router>
-        <Stack key="root">
+        <Stack key="root" gesturesEnabled={false}>
           <Scene key="Splash" component={Splash} hideNavBar />
           <Scene key="Login" component={Logins} hideNavBar />
           <Scene key="Forgot" component={Forgot} hideNavBar />

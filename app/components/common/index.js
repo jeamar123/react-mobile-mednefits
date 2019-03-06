@@ -19,8 +19,9 @@ import InputSelect from './InputSelect'
 import InputSelect2 from './InputSelect2'
 import InputSearch from './InputSearch'
 import InputText from './InputText'
+import InputText2 from './InputText2'
 import InputFile from './InputFile'
 import Error from './Error'
 import Text from './Text'
 
-export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputFile, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, Popup, Error }

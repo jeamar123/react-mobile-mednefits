@@ -27,7 +27,7 @@ const styles = {
     borderRadius: 5,
     margin: 10,
     alignSelf: 'center',
-    width: '100%'
+    width: '98%'
   },
   TextStyle: {
     fontFamily: Config.FONT_FAMILY_LIGHT,

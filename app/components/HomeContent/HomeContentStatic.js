@@ -91,7 +91,7 @@ class HomeContent extends Component {
         <View style={styles.sectionTitle}>
           <TouchableOpacity
             onPress={() =>
-              Actions.HomeSearch()
+              Actions.HomeSearch({type: 'reset'})
             }
             style={{
               width: '90%',

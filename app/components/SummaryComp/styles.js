@@ -10,14 +10,13 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   sectionTitle: {
-    backgroundColor: '#E8E7EE',
+    backgroundColor: '#f8f8fa',
     height: height / 10,
     width: width,
     alignItems: 'center',
     flexDirection: 'row',
     alignContent: 'space-between',
     paddingVertical: 20,
-    marginLeft: '25%',
   },
   title: {
     fontFamily: 'helvetica',

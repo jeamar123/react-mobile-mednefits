@@ -256,7 +256,7 @@ class Favourites extends Component {
               >
                 <ScrollView>
                   {this.renderTransactionIn_Network()}
-                  <TouchableOpacity onPress={() => Actions.Search()}>
+                  <TouchableOpacity onPress={() => Actions.Search({type: 'reset'})}>
                     <View
                       style={{
                         flex: 1,

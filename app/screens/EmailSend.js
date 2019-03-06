@@ -14,7 +14,7 @@ class EmailSend extends Component {
         <Email
           email={this.props.Email}
         />
-        <Buttons onPress={() => Actions.Login()}>Back to Login</Buttons>
+        <Buttons onPress={() => Actions.Login({type: 'reset'})}>Back to Login</Buttons>
       </Container>
     );
   }
