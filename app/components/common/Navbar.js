@@ -498,7 +498,7 @@ export default class Navbar extends React.Component {
         >
           <TouchableOpacity
             onPress={() =>
-              Actions.Search()
+              Actions.HomeSearch()
             }
           >
             <ResponsiveImage
