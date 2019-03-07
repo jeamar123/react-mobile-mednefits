@@ -6,7 +6,9 @@ import {
   Image,
   Platform,
   StyleSheet,
-  StatusBar, SafeAreaView
+  StatusBar,
+  SafeAreaView,
+  ActivityIndicator
 } from 'react-native';
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -547,21 +549,29 @@ export default class Navbar extends React.Component {
           <TouchableOpacity
             onPress={() => this.props.updateProfile(true)}
           >
-            <Text
-              style={{
-                fontFamily: 'HelveticaNeue-Roman',
-                fontSize: 14,
-                color: '#FFFFFF',
-                marginRight: '2%',
-                width: 65,
-              }}
-            >
-              UPDATE
-            </Text>
+            {(!this.props.onLoaderProcess) ? (
+              <Text
+                style={{
+                  fontFamily: 'HelveticaNeue-Roman',
+                  fontSize: 14,
+                  color: '#FFFFFF',
+                  marginRight: '2%',
+                  width: 65,
+                }}
+              >
+                UPDATE
+              </Text>
+            ) : (
+                <View style={{ marginRight: '5%' }}>
+                  <ActivityIndicator size="small" color="white" style={{ fontSize: 14 }} />
+                </View>
+              )
+            }
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'update-password') {
+    }
+    else if (this.props.rightNav == 'update-password') {
       return (
         <View
           style={{

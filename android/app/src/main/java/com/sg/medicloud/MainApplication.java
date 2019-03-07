@@ -1,4 +1,4 @@
-package com.mednefitsmobile;
+package com.sg.medicloud;
 
 import android.app.Application;
 
@@ -30,18 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage(),
-            new SystemSettingPackage(),
-            new MapsPackage(),
-            new ImagePickerPackage(),
-            new RNFSPackage(),
-            new ReactNativeDocumentPicker(),
-            new RNCameraPackage(),
-            new RNFusedLocationPackage(),
-            new SvgPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new VectorIconsPackage(), new SystemSettingPackage(),
+          new MapsPackage(), new ImagePickerPackage(), new RNFSPackage(), new ReactNativeDocumentPicker(),
+          new RNCameraPackage(), new RNFusedLocationPackage(), new SvgPackage());
     }
 
     @Override

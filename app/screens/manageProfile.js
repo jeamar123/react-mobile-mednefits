@@ -13,7 +13,7 @@ import { RNS3 } from 'react-native-aws3';
 import ImagePicker from 'react-native-image-picker';
 import DatePicker from 'react-native-datepicker-latest';
 const options = {
-  title: 'Upload Foto Profil Anda',
+  title: 'Upload Profile Image',
   takePhotoButtonTitle: 'Take a Photo',
   chooseFromLibraryButtonTitle: 'Choose from Gallery',
   quality: 1,
@@ -42,6 +42,7 @@ class manageProfile extends Component {
       allergies: [],
       medCondition: [],
       medication: [],
+      loaderProcess: false,
     };
     this.updateProfile = this.updateProfile.bind(this);
   }
@@ -85,6 +86,7 @@ class manageProfile extends Component {
     bmi = this.state.bmi;
     blood_type = this.state.blodeType;
     // photo_url = this.state.photo_url;
+    this.setState({ loaderProcess: true });
     try {
       Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
         if (result) {
@@ -108,6 +110,7 @@ class manageProfile extends Component {
           })
             .then(response => response.json())
             .then(res => {
+              this.setState({ loaderProcess: false })
               console.warn(res);
               if (res.status == true) {
                 Core.getNotify('', res.message);
@@ -116,13 +119,16 @@ class manageProfile extends Component {
               }
             })
             .catch(error => {
+              this.setState({ loaderProcess: false })
               console.warn('error fetching', error.message);
             });
         } else {
           Actions.login({ type: 'reset' });
+          this.setState({ loaderProcess: false })
         }
       });
     } catch (e) {
+      this.setState({ loaderProcess: false });
       console.warn('error get history transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
@@ -151,7 +157,7 @@ class manageProfile extends Component {
         console.warn('User tapped custom button: ', response.customButton);
       } else {
         let source = { uri: response.uri };
-        this.setState({ imageSource: source, photo_url: response.uri });
+        this.setState({ imageSource: source, photo_url: response.uri, loaderProcess: true });
 
         const file = {
           uri: response.uri,
@@ -193,6 +199,7 @@ class manageProfile extends Component {
           })
             .then(response => response.json())
             .then(res => {
+              this.setState({ loaderProcess: false })
               console.warn(res);
               // if (res.status == true) {
               //   Core.getNotify('', 'Success update data');
@@ -295,6 +302,7 @@ class manageProfile extends Component {
           leftNav="back"
           rightNav="update-profile"
           updateProfile={this.updateProfile}
+          onLoaderProcess={this.state.loaderProcess}
         />
         <View
           style={{
