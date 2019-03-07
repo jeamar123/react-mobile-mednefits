@@ -125,25 +125,36 @@ class BenefitsDollar extends Component {
                 marginLeft: '10%'
               }}
             >
-              {!this.state.clinic_image ? (
-                <ResponsiveImage
-                  source={require('../../assets/apps/mednefits.png')}
-                  style={{ resizeMode: 'center' }}
-                  initWidth="70" initHeight="70"
-                />
-              ) : (
-                  <ResponsiveImage
-                    source={{ uri: this.state.clinic_image }}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="70" initHeight="70"
-                  />
-                )}
               {!this.state.clinic_name ? (
                 <Spinner size="small" />
               ) : (
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginLeft: 20 }}>
-                    {this.state.clinic_name}
-                  </Text>
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 60
+                  }}
+                  >
+                    <ResponsiveImage
+                      source={{ uri: this.state.clinic_image }}
+                      style={{ resizeMode: 'center' }}
+                      initWidth="70" initHeight="70"
+                    />
+                    <Text
+                      style={{
+                        marginLeft: '5%',
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                        color: '#9e9e9e',
+                        fontSize: 18,
+                        width: '50%'
+                      }}
+                      numberOfLines={2}
+                    >
+                      {this.state.clinic_name}
+                    </Text>
+                  </View>
+
                 )}
 
             </View>
