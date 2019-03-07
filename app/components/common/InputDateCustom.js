@@ -26,6 +26,7 @@ class DatePicker extends Component {
       showIOSModal: false,
       date: undefined
     }
+    Date = new Date()
 
     static defaultProps = {
       renderDate: ({ year, month, day, date }) => {
@@ -40,7 +41,7 @@ class DatePicker extends Component {
       startDate: new Date(),
       onError: noop,
       onDateChanged: noop,
-      maxDate: undefined,
+      maxDate: Date.now(),
       minDate: undefined,
       modalButtonText: 'Done'
     }
@@ -182,6 +183,7 @@ class DatePicker extends Component {
         ...props
       } = this.props
 
+      console.warn(this.state.maxDate)
       return (
         <TouchableOpacity style={style} onPress={this.handlePressed}>
           <Modal
