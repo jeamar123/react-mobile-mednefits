@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
-import { Button, Icon } from 'native-base';
 
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
@@ -58,11 +57,62 @@ import HomeSearch from '../screens/HomeSearch';
 
 console.disableYellowBox = true;
 
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 300,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {
+      const { position, layout, scene, index, scenes } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const height = layout.initHeight
+      const width = layout.initWidth
+
+      // We can access our navigation params on the scene's 'route' property
+      var thisSceneParams = scene.route.params || {}
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [width, 0, 0]
+      })
+
+      const translateY = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [height, 0, 0]
+      })
+
+      const opacity = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex - 0.5, thisSceneIndex],
+        outputRange: [0, 1, 1],
+      })
+
+      const scale = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [4, 1, 1]
+      })
+
+      const slideFromRight = { transform: [{ translateX }] }
+      const scaleWithOpacity = { opacity, transform: [{ scaleX: scale }, { scaleY: scale }] }
+      const slideInFromBottom = { transform: [{ translateY }] }
+
+      return scaleWithOpacity
+    },
+  }
+}
+
+
 class RouterComponent extends Component {
   render() {
     return (
       <Router>
-        <Stack key="root" gesturesEnabled={false}>
+        <Stack key="root"
+          gesturesEnabled={false}
+          transitionConfig={transitionConfig}
+        >
           <Scene key="Splash" component={Splash} hideNavBar />
           <Scene key="Login" component={Logins} hideNavBar />
           <Scene key="Forgot" component={Forgot} hideNavBar />
