@@ -212,7 +212,7 @@ class Camera extends Component {
               resizeMode="center"
             />
           </TouchableOpacity>
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
               onPress={() => this.changeViewCamera('single')}
               style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -226,7 +226,7 @@ class Camera extends Component {
                 <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
               ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
             </TouchableOpacity>
-            {/* <TouchableOpacity
+            <TouchableOpacity
               onPress={()=>this.changeViewCamera('batch')}
               style={{flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
               <Common.Texti
@@ -238,8 +238,8 @@ class Camera extends Component {
               {(this.state.shootType == 'batch') ? (
                 <View style={{width: 4, height:4, borderRadius: 4/2, backgroundColor: '#0392cf', marginTop: 2}}/>
               ) : (<View style={{width: 4, height:4, borderRadius: 4/2, marginTop: 2}} />)}
-            </TouchableOpacity> */}
-          </View>
+            </TouchableOpacity>
+          </View> */}
           <TouchableOpacity
             onPress={this.openGallery}
             style={{
