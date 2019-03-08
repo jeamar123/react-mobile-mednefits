@@ -8,10 +8,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Text, Drawer, Icon } from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
 import ResponsiveImage from 'react-native-responsive-image';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
-import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -109,7 +108,6 @@ class NearbyClinic extends Component {
             var new_data = this.state.DataClinic.concat(data.clinics);
             this.setState({ DataClinic: new_data, current_page: current_page, processing: false });
           } else {
-            Core.getNotifyLong('', 'No more clinics to show');
             this.setState({ processing: false });
           }
         } else {
@@ -150,8 +148,8 @@ class NearbyClinic extends Component {
       return (
         <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
-          resizeMode="contain"
           style={{
+            resizeMode: 'center',
             marginRight: '5%',
             marginTop: '50%'
           }}
@@ -162,8 +160,8 @@ class NearbyClinic extends Component {
       return (
         <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
-          resizeMode="contain"
           style={{
+            resizeMode: 'center',
             marginRight: '5%',
             marginTop: '50%'
           }}
@@ -203,15 +201,14 @@ class NearbyClinic extends Component {
                 alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
-                // marginRight: '2%',
+                marginRight: '2%',
               }}
             />
             <View
               style={{
                 flexDirection: 'column',
                 marginTop: '2%',
-                width: '55%',
-                marginLeft: '-4%'
+                width: '50%',
               }}
             >
               <Text
@@ -219,7 +216,7 @@ class NearbyClinic extends Component {
                 numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: RF(1.9),
+                  fontSize: 12,
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -228,10 +225,10 @@ class NearbyClinic extends Component {
               </Text>
               <Text
                 ellipsizeMode='tail'
-                numberOfLines={2}
+                numberOfLines={3}
                 style={{
                   color: '#8c8b7f',
-                  fontSize: RF(1.7),
+                  fontSize: 10,
                   fontFamily: Config.FONT_FAMILY_LIGHT,
                 }}
               >
@@ -246,7 +243,7 @@ class NearbyClinic extends Component {
                   {' '}
                   <Text style={{
                     fontFamily: Config.FONT_FAMILY_LIGHT,
-                    fontSize: 12,
+                    fontSize: 10,
                     marginTop: 2,
                     marginLeft: 10,
                     color: '#616161',
@@ -256,7 +253,7 @@ class NearbyClinic extends Component {
                   <Text style={{ marginTop: 1 }}>
                     <Icons
                       name="circle"
-                      style={{ color: '#e83637', fontSize: 12, marginRight: 15 }}
+                      style={{ color: '#e83637', fontSize: 10, marginRight: 15 }}
                     />
                     {' '}
                     <Text style={{
@@ -269,7 +266,7 @@ class NearbyClinic extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginRight: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
@@ -359,22 +356,14 @@ class NearbyClinic extends Component {
                   <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => Actions.NearbyClinicMaps({
                   clinicType: this.props.ClinicTypeID,
                   NameCategory: this.props.NameCategory
                 })}
               >
-                {
-                  (this.state.processing) ?
-                    (
-                      <View>
-                        <ActivityIndicator size="small" color="white" style={{ marginTop: 5 }} />
-                      </View>
-                    )
-                    : (<Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>)
-                }
-              </TouchableOpacity>
+                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
+              </TouchableOpacity> */}
 
             </View>
           </View>
