@@ -11,6 +11,7 @@ import { Text, Drawer, Icon } from 'native-base';
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -184,7 +185,7 @@ class NearbyClinic extends Component {
             flex: 1,
             marginTop: 5,
             marginBottom: 10,
-            height: 110,
+            height: responsiveHeight(15),
             backgroundColor: '#fff',
             opacity: 10000,
           }}
