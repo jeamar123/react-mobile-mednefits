@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types'
 import { Icon } from 'native-base'
+import * as Common from '../common'
 
 const isAndroid = Platform.OS === 'android'
 
@@ -32,8 +33,7 @@ class DatePicker extends Component {
     renderDate: ({ year, month, day, date }) => {
       if (date) {
         const str = `${year}-${month}-${day}`
-        return <Text>{str}</Text>
-
+        return <Common.Text fontColor={"#2c3e50"} >{str}</Common.Text>
       }
 
       return null
@@ -130,9 +130,9 @@ class DatePicker extends Component {
 
     return {
       date,
-      year: date ? date.getFullYear() : '',
-      day: date ? `${date.getDate()}`.padStart(2, '0') : '',
-      month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : ''
+      year: date ? date.getFullYear() : new Date().getFullYear(),
+      day: date ? `${date.getDate()}`.padStart(2, '0') : `${new Date().getDate()}`.padStart(2, '0'),
+      month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : `${new Date().getMonth() + 1}`.padStart(2, '0')
     }
   }
 
@@ -146,7 +146,7 @@ class DatePicker extends Component {
     )
   }
 
-  handleDateChange = date => this.setState({ date })
+  handleDateChange = date => this.setState({ date: date })
 
   renderRightIcon() {
     if (this.props.rightIcon == 'arrow-right') {
