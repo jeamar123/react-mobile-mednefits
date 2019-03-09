@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import Navbar from '../components/common/Navbar';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -86,7 +86,7 @@ class ResultList extends Component {
             style={{
               flex: 1,
               marginTop: 4,
-              height: 110,
+              height: responsiveHeight(14),
               backgroundColor: '#fff',
               width: '100%'
             }}
@@ -276,7 +276,7 @@ class Home extends Component {
               marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: 35
+              height: responsiveHeight(5.5)
             }}
           />
         </View>

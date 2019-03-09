@@ -6,7 +6,7 @@ import {
   Image,
   Platform,
   StyleSheet,
-  StatusBar, 
+  StatusBar,
   SafeAreaView,
   ActivityIndicator
 } from 'react-native';
@@ -169,7 +169,7 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#fff',
-                fontSize: RF(1.7),
+                fontSize: RF(1.6),
                 fontFamily: Config.FONT_FAMILY_THIN,
                 fontWeight: 'bold'
               }}
@@ -550,7 +550,7 @@ export default class Navbar extends React.Component {
           <TouchableOpacity
             onPress={() => this.props.updateProfile(true)}
           >
-          {(!this.props.onLoaderProcess) ? (
+            {(!this.props.onLoaderProcess) ? (
               <Text
                 style={{
                   fontFamily: 'HelveticaNeue-Roman',
@@ -563,11 +563,11 @@ export default class Navbar extends React.Component {
                 UPDATE
               </Text>
             ) : (
-            <View style={{ marginRight: '5%' }}>
-              <ActivityIndicator size="small" color="white" style={{ fontSize: 14 }} />
-            </View>
-            ) 
-          }
+                <View style={{ marginRight: '5%' }}>
+                  <ActivityIndicator size="small" color="white" style={{ fontSize: 14 }} />
+                </View>
+              )
+            }
           </TouchableOpacity>
         </View>
       );

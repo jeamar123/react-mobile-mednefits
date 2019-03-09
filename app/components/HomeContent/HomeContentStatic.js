@@ -3,8 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
-import Icons from 'react-native-vector-icons/FontAwesome';
-import RF from "react-native-responsive-fontsize";
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import * as Common from '../common'
 
 class HomeContent extends Component {
@@ -91,7 +90,7 @@ class HomeContent extends Component {
         <View style={styles.sectionTitle}>
           <TouchableOpacity
             onPress={() =>
-              Actions.HomeSearch({type: 'reset'})
+              Actions.HomeSearch({ type: 'reset' })
             }
             style={{
               width: '90%',
@@ -102,7 +101,7 @@ class HomeContent extends Component {
               marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: '20%'
+              height: responsiveHeight(5.5)
             }}>
             <Common.buttonSearch
               type="search"

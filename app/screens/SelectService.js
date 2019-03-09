@@ -97,7 +97,7 @@ class SelectService extends Component {
             ))}
           </View>
 
-          <Buttons2 style={{ width: '100%' }} onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid, clinic_data: this.props.clinic_data })}>
+          <Buttons2 style={{ width: '100%' }} onPress={() => Actions.PayScan({ services: this.state.services, clinicid: this.props.clinicid, clinic_data: this.props.clinic_data })}>
             Proceed
           </Buttons2>
         </Content>

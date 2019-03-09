@@ -11,6 +11,7 @@ import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
@@ -130,7 +131,7 @@ class Favourites extends Component {
             flex: 1,
             marginTop: 5,
             marginBottom: 10,
-            height: 90,
+            height: responsiveHeight(14),
             backgroundColor: '#fff',
             opacity: 10000,
           }}
@@ -256,7 +257,7 @@ class Favourites extends Component {
               >
                 <ScrollView>
                   {this.renderTransactionIn_Network()}
-                  <TouchableOpacity onPress={() => Actions.Search({type: 'reset'})}>
+                  <TouchableOpacity onPress={() => Actions.Search({ type: 'reset' })}>
                     <View
                       style={{
                         flex: 1,
