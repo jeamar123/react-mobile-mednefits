@@ -8,8 +8,6 @@ import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
 import * as Core from '../core';
-import * as Config from '../config';
-import * as mime from 'react-native-mime-types';
 
 const options = {
   title: 'Select Photo',
@@ -209,7 +207,7 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
           {/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -254,7 +252,7 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
@@ -281,7 +279,7 @@ class Camera extends Component {
             (this.state.images.length > 0) ?
               (
                 <TouchableOpacity
-                  onPress={() => Actions.DetailEclaim({ claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
+                  onPress={() => Actions.DetailEclaim({ type: 'reset', claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
