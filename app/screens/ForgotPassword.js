@@ -5,7 +5,7 @@ import { Container } from '../components/Container';
 import { ForgotPassword } from '../components/ForgotPassword';
 import { InputWithButton } from '../components/TextInput';
 import { Buttons } from '../components/common';
-import * as Core from '../core'
+import * as Core from '../core';
 
 class ForgotPass extends Component {
 
@@ -14,13 +14,20 @@ class ForgotPass extends Component {
 
     this.state = {
       email: "",
-      message: ""
+      message: "",
+      isLoading: false,
     }
   }
 
+  isVisibleUpdate() {
+    this.setState({ failed: false })
+  }
+
   resetPassword = () => {
+    this.setState({ isLoading: true })
     try {
       Core.ResetPassword(this.state.email, (err, result) => {
+        this.setState({ isLoading: false })
         if (result) {
           console.warn(result)
           Actions.EmailSend({ Email: this.state.email, Message: result.message, Type: result.type })
@@ -36,6 +43,9 @@ class ForgotPass extends Component {
   render() {
     return (
       <Container>
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <ForgotPassword />
         <InputWithButton placeholder="Email address or NRIC/FIN" onChangeText={(text) => this.setState({ email: text })} />

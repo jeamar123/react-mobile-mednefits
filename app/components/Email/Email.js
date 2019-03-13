@@ -17,7 +17,7 @@ class Email extends Component {
         {
           (this.props.Type == 'email') ? (
             <Text style={styles.textTitle}>Email Sent!</Text>
-          ) : (this.props.Type == 'email') ? (
+          ) : (this.props.Type == 'sms') ? (
             <Text style={styles.textTitle}>SMS Sent!</Text>
           ) : (
                 <Text style={{

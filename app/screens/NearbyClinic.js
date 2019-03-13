@@ -185,7 +185,7 @@ class NearbyClinic extends Component {
             marginTop: 5,
             marginBottom: 10,
             height: 90,
-            backgroundColor: '#fff',
+            backgroundColor: '#ffffff',
             opacity: 10000,
           }}
         >

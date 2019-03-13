@@ -319,7 +319,7 @@ class manageProfile extends Component {
         {/* <ProfileManage photo_url={this.state.photo_url} /> */}
         <GiftedForm
           style={{
-            backgroundColor: '#fff',
+            backgroundColor: '#ffffff',
             paddingLeft: '5%',
             paddingRight: '5%',
           }}
