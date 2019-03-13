@@ -13,7 +13,8 @@ class ForgotPass extends Component {
     super(props);
 
     this.state = {
-      email: ""
+      email: "",
+      message: ""
     }
   }
 
@@ -21,7 +22,8 @@ class ForgotPass extends Component {
     try {
       Core.ResetPassword(this.state.email, (err, result) => {
         if (result) {
-          Actions.EmailSend({ Email: this.state.email })
+          console.warn(result)
+          Actions.EmailSend({ Email: this.state.email, Message: result.message, Type: result.type })
         } else {
           throw result.message;
         }
@@ -32,12 +34,11 @@ class ForgotPass extends Component {
   }
 
   render() {
-    console.warn(this.state.email);
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <ForgotPassword />
-        <InputWithButton placeholder="Email address" onChangeText={(text) => this.setState({ email: text })} />
+        <InputWithButton placeholder="Email address or NRIC/FIN" onChangeText={(text) => this.setState({ email: text })} />
         <Buttons
           onPress={this.resetPassword}
         >Reset password</Buttons>

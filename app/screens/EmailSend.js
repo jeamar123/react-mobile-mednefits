@@ -13,6 +13,8 @@ class EmailSend extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Email
           email={this.props.Email}
+          Message={this.props.Message}
+          Type={this.props.Type}
         />
         <Buttons onPress={() => Actions.Login()}>Back to Login</Buttons>
       </Container>
