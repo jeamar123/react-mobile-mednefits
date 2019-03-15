@@ -66,7 +66,27 @@ export default EStyleSheet.create({
     borderRadius: 14,
   },
   sectionTextPanel: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     height: '50%'
-  }
+  },
+  spendingActive: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
+    borderRadius: 3,
+    borderWidth: 2,
+    borderColor: "#0392cf",
+  },
+  spendingNotactive: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
+  },
+  sectionComponent: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 });
