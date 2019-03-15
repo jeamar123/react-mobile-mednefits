@@ -13,6 +13,7 @@ import { Container, Content, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
@@ -481,7 +482,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.23,
-    height: height / 5.9,
+    height: responsiveHeight(18),
     backgroundColor: '#fff',
     margin: 2,
     justifyContent: 'space-around',
