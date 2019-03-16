@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
-import { Button, Icon } from 'native-base';
 
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
@@ -55,15 +54,69 @@ import MedicalMedicationsAdd from '../screens/MedicalMedicationsAdd';
 import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
 import HomeSearch from '../screens/HomeSearch';
+import Wallet from '../screens/Wallet';
+import WalletWellness from '../screens/WalletWellness';
 
 console.disableYellowBox = true;
+
+
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 300,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {
+      const { position, layout, scene, index, scenes } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const height = layout.initHeight
+      const width = layout.initWidth
+
+      // We can access our navigation params on the scene's 'route' property
+      var thisSceneParams = scene.route.params || {}
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [width, 0, 0]
+      })
+
+      const translateY = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [height, 0, 0]
+      })
+
+      const opacity = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex - 0.5, thisSceneIndex],
+        outputRange: [0, 1, 1],
+      })
+
+      const scale = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
+        outputRange: [4, 1, 1]
+      })
+
+      const slideFromRight = { transform: [{ translateX }] }
+      const scaleWithOpacity = { opacity, transform: [{ scaleX: scale }, { scaleY: scale }] }
+      const slideInFromBottom = { transform: [{ translateY }] }
+
+      return slideFromRight
+    },
+  }
+}
 
 class RouterComponent extends Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
         <Router>
-          <Stack key="root">
+          <Stack
+            key="root"
+            gesturesEnabled={false}
+            transitionConfig={transitionConfig}
+          >
             <Scene key="Splash" component={Splash} hideNavBar />
             <Scene key="Login" component={Logins} hideNavBar />
             <Scene key="Forgot" component={Forgot} hideNavBar />
@@ -142,6 +195,8 @@ class RouterComponent extends Component {
             <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
             <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
             <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
+            <Scene key="Wallet" component={Wallet} hideNavBar />
+            <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

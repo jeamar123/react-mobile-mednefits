@@ -70,17 +70,17 @@ export default EStyleSheet.create({
     height: '50%'
   },
   spendingActive: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingRight: 15,
     paddingLeft: 15,
-    borderRadius: 3,
+    borderRadius: 5,
     borderWidth: 2,
     borderColor: "#0392cf",
   },
   spendingNotactive: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
     paddingRight: 15,
     paddingLeft: 15,
   },

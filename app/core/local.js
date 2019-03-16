@@ -88,10 +88,10 @@ export function CheckUserData(callback) {
         dataUser = JSON.parse(result);
         callback('', dataUser);
       } else {
-        Actions.Balance();
+        Actions.Wallet();
       }
     });
   } catch (error) {
-    Actions.Balance();
+    Actions.Wallet();
   }
 }

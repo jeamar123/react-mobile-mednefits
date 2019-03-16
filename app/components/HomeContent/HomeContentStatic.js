@@ -184,7 +184,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance()
+                Actions.Wallet()
               }
             >
               <View style={styles.gridBox}>

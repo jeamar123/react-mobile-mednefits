@@ -170,6 +170,54 @@ export async function GetBalance(callback) {
   }, 100);
 }
 
+export async function GetBalanceMedical(callback) {
+  await setTimeout(async function () {
+    try {
+      await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+        params = {
+          url: Config.USER_CREDITS + "?spending_type=medical",
+          method: 'GET',
+          header: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: result,
+          },
+        };
+        await fetching(params, async result => {
+          await callback('', result);
+        });
+      });
+    } catch (e) {
+      console.warn('error get balance' + e.message);
+      getNotify('', 'Failed get data, try again');
+    }
+  }, 100);
+}
+
+export async function GetBalanceWellness(callback) {
+  await setTimeout(async function () {
+    try {
+      await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+        params = {
+          url: Config.USER_CREDITS + "?spending_type=wellness",
+          method: 'GET',
+          header: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: result,
+          },
+        };
+        await fetching(params, async result => {
+          await callback('', result);
+        });
+      });
+    } catch (e) {
+      console.warn('error get balance' + e.message);
+      getNotify('', 'Failed get data, try again');
+    }
+  }, 100);
+}
+
 export async function GetHistoryTransaction(callback) {
   await setTimeout(async function () {
     try {
@@ -467,12 +515,12 @@ export function SendEClaim(params, callback) {
       formdata.append("user_id", params.user_id)
       formdata.append("service", params.service)
       formdata.append("merchant", params.merchant)
-      params.images.map((value, index)=>{
-          formdata.append("files[]", {
-            uri: value.preview,
-            type: value.filetype,
-            name: value.filename
-          }
+      params.images.map((value, index) => {
+        formdata.append("files[]", {
+          uri: value.preview,
+          type: value.filetype,
+          name: value.filename
+        }
         )
       })
       formdata.append("amount", params.amount)
@@ -671,10 +719,10 @@ export async function GetLocationPermission(callback) {
   console.warn('get location');
   let result = await requestLocationPermission();
   console.log('result permission', result);
-  if(result) {
-  	callback('', result);
+  if (result) {
+    callback('', result);
   } else {
-  	callback(result);
+    callback(result);
   }
   // permissionLocation = await requestLocationPermission()
   // console.warn('permissionLocation', permissionLocation);
@@ -754,11 +802,11 @@ export async function checkLocationFirst(clinic_type_id, callback) {
 
 export async function GetClinicMapList(clinic_type_id, callback) {
   // final code flow
-  await enableLocationDevice( async function(error, result) {
+  await enableLocationDevice(async function (error, result) {
     console.log(error);
     console.log(result);
-    if(result) {
-    	console.log('get location clinics')
+    if (result) {
+      console.log('get location clinics')
       Geolocation.getCurrentPosition(
         async (position) => {
           console.log('position', position);
@@ -788,7 +836,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
           // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
           // query location
           await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
-          	console.log('querying location clinics')
+            console.log('querying location clinics')
             params = {
               url: Config.CLINIC_PAGE_NEARBY + "?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&type=" + clinic_type_id + "&page=1",
               method: 'GET',
@@ -806,13 +854,13 @@ export async function GetClinicMapList(clinic_type_id, callback) {
           return;
         },
         function (error) {
-        	console.log(error);
+          console.log(error);
           callback(error, '');
         },
         { enableHighAccuracy: true, timeout: 3000 },
       );
     } else {
-    	return callback(false);
+      return callback(false);
     }
   });
 }
@@ -841,7 +889,7 @@ export function MainSearch(query) {
 }
 
 export async function paginateClinicResults(clinic_type_id, page, callback) {
-	latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
 
   await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
@@ -872,9 +920,9 @@ export async function GetClinicMap(clinic_type_id, callback) {
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
-  	await enableLocationDevice( async function(error, result) {
-      if(result) {
-  	    // console.warn('latitude', latitude)
+    await enableLocationDevice(async function (error, result) {
+      if (result) {
+        // console.warn('latitude', latitude)
         // console.warn('longitude', longitude)
         Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
           params = {
@@ -893,7 +941,7 @@ export async function GetClinicMap(clinic_type_id, callback) {
           });
         });
       }
-  	})
+    })
   }
 }
 
@@ -914,7 +962,7 @@ export function GetFamilyCoverage(callback) {
   });
 }
 
-export function SwitchAccount(param, callback){
+export function SwitchAccount(param, callback) {
   Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
     params = {
       url: Config.ONE_TAP_LOGIN,

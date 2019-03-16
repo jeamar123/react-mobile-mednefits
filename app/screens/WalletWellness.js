@@ -26,7 +26,7 @@ const styless = {
   },
 }
 
-class Wallet extends Component {
+class WalletWellness extends Component {
   constructor(props) {
     super(props);
 
@@ -83,7 +83,7 @@ class Wallet extends Component {
   }
 
   getUserBalance() {
-    Core.GetBalanceMedical((error, result) => {
+    Core.GetBalanceWellness((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
@@ -123,17 +123,20 @@ class Wallet extends Component {
                 marginTop: responsiveHeight(17)
               }}
             >
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  color: '#fff',
-                  lineHeight: 19
-                }}
-              >
-                Medical
+              <TouchableOpacity onPress={() => Actions.Wallet()}>
+                <Text
+                  style={{
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    marginTop: 30,
+                    opacity: 0.6,
+                    color: '#fff',
+                    lineHeight: 19
+                  }}
+                >
+                  Medical
               </Text>
+              </TouchableOpacity>
               <View style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -149,21 +152,19 @@ class Wallet extends Component {
                 marginRight: responsiveWidth(4),
               }}
               />
-              <TouchableOpacity onPress={() => Actions.WalletWellness()}>
-                <Text
-                  style={{
-                    fontSize: RF(2.2),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    marginTop: 30,
-                    color: '#fff',
-                    opacity: 0.6,
-                    lineHeight: 19
-                  }}
-                >
-                  Wellness
+              <Text
+                style={{
+                  fontSize: RF(2.2),
+                  fontFamily: Config.FONT_FAMILY_MEDIUM,
+                  marginTop: 30,
+                  color: '#fff',
+                  lineHeight: 19
+                }}
+              >
+                Wellness
               </Text>
-              </TouchableOpacity>
             </View>
+
 
             <Text
               style={{
@@ -206,6 +207,7 @@ class Wallet extends Component {
                 {this.state.Balance}
               </Text>
             </View>
+
 
             <View
               style={{
@@ -272,6 +274,7 @@ class Wallet extends Component {
 
               }}
               >
+
                 <View
                   style={{
                     justifyContent: 'center',
@@ -301,7 +304,13 @@ class Wallet extends Component {
                   </Text>
                 </View>
               </View>
+
             </View>
+
+
+
+
+
 
             <View style={{
               marginTop: responsiveHeight(4),
@@ -405,6 +414,7 @@ class Wallet extends Component {
                     15 January 2019, 08:45am
                   </Text>
                 </View>
+
                 <Text
                   style={{
                     fontSize: RF(2.2),
@@ -414,69 +424,7 @@ class Wallet extends Component {
                     marginLeft: 10
                   }}
                 />
-                <View style={styles.sectionTextPanel}>
-                  <Text
-                    style={{
-                      fontSize: RF(1.6),
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
-                  >
-                    {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                  </Text>
-                </View>
-              </View>
 
-              <View
-                style={{
-                  marginLeft: '5%',
-                  marginRight: '5%',
-                }}>
-                <Common.Divider />
-              </View>
-
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginLeft: responsiveWidth(4),
-                  marginRight: responsiveWidth(4),
-                }}
-              >
-                <View style={styles.sectionTextPanel}>
-                  <Text
-                    style={{
-                      fontSize: RF(1.4),
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
-                  >
-                    Drs Chua & Partners Pte Ltd
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: RF(1.2),
-                      fontFamily: Config.FONT_FAMILY_THIN,
-                      color: '#A8A8A8',
-                      lineHeight: 20
-                    }}
-                  >
-                    15 January 2019, 08:45am
-                  </Text>
-                </View>
-                <Text
-                  style={{
-                    fontSize: RF(2.2),
-                    fontFamily: Config.FONT_FAMILY_MEDIUM,
-                    marginTop: 30,
-                    marginRight: 10,
-                    marginLeft: 10
-                  }}
-                />
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
@@ -530,6 +478,7 @@ class Wallet extends Component {
                     15 January 2019, 08:45am
                   </Text>
                 </View>
+
                 <Text
                   style={{
                     fontSize: RF(2.2),
@@ -539,6 +488,71 @@ class Wallet extends Component {
                     marginLeft: 10
                   }}
                 />
+
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: RF(1.6),
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      letterSpacing: 1.5,
+                      lineHeight: 20
+                    }}
+                  >
+                    {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%',
+                }}>
+                <Common.Divider />
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: responsiveWidth(4),
+                  marginRight: responsiveWidth(4),
+                }}
+              >
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: RF(1.4),
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      letterSpacing: 1.5,
+                      lineHeight: 20
+                    }}
+                  >
+                    Drs Chua & Partners Pte Ltd
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: RF(1.2),
+                      fontFamily: Config.FONT_FAMILY_THIN,
+                      color: '#A8A8A8',
+                      lineHeight: 20
+                    }}
+                  >
+                    15 January 2019, 08:45am
+                  </Text>
+                </View>
+
+                <Text
+                  style={{
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: 30,
+                    marginRight: 10,
+                    marginLeft: 10
+                  }}
+                />
+
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
@@ -587,6 +601,7 @@ class Wallet extends Component {
                       See More
                     </Text>
                   </TouchableOpacity>
+
                 </View>
               </View>
 
@@ -598,4 +613,4 @@ class Wallet extends Component {
   }
 }
 
-export default Wallet;
+export default WalletWellness;
