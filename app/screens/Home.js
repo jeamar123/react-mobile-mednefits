@@ -5,16 +5,13 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator,
   ScrollView,
-  ImageBackground
 } from 'react-native';
-import { Container, Content, Drawer } from 'native-base';
+import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import Svg, { Image } from 'react-native-svg';
 import Navbar from '../components/common/Navbar';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
@@ -23,7 +20,7 @@ import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
 
-const { width, height, fontScale } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 class SearchResult extends Component {
 

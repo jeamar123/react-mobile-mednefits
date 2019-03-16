@@ -10,21 +10,7 @@ import * as Config from '../config';
 import RF from "react-native-responsive-fontsize";
 import * as Common from '../components/common';
 
-const { height, width } = Dimensions.get('window')
-
-const styless = {
-
-  modal: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  modal2: {
-    marginTop: 54,
-    height: 230,
-    backgroundColor: "white"
-  },
-}
+const { width } = Dimensions.get('window')
 
 class Wallet extends Component {
   constructor(props) {

@@ -31,7 +31,6 @@ import GeneralPractitioner from '../screens/GeneralPractitioner';
 import ECardUser from '../screens/ECardUser';
 import SwitchUser from '../screens/SwitchUser';
 import HomeStatic from '../screens/HomeStatic';
-import ECardUserStatic from '../screens/ECardUserStatic';
 import ManageProfile from '../screens/manageProfile';
 import Profile from '../screens/Profile';
 import Favourites from '../screens/Favourites';
@@ -44,7 +43,6 @@ import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic';
 import NearbyClinicMaps from '../screens/NearbyClinicMaps';
 import ConfirmPay from '../screens/ConfirmPay';
-// import MapView from '../components/MapView/MapView';
 import MedicalCondition from '../screens/MedicalCondition';
 import MedicalAllergies from '../screens/MedicalAllergies';
 import MedicalHistory from '../screens/MedicalHistory';
@@ -171,7 +169,6 @@ class RouterComponent extends Component {
             <Scene key="ECardUser" component={ECardUser} hideNavBar />
             <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
             <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
-            <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
             <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
             <Scene key="Profile" component={Profile} hideNavBar />
             <Scene key="Favourites" component={Favourites} hideNavBar />
@@ -185,7 +182,6 @@ class RouterComponent extends Component {
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
             <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
             <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
-            {/* <Scene key="MapView" component={MapView} hideNavBar /> */}
             <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
             <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
             <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />

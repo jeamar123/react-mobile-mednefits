@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import {
   StatusBar,
   View,
-  ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
   Dimensions,
   Platform,
-  ImageBackground
 } from 'react-native';
-import { Text, Drawer, Icon } from 'native-base';
+import { Text, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import IconR from 'react-native-vector-icons/Feather';
 import Svg, { Image } from 'react-native-svg'
@@ -28,7 +24,6 @@ const LATITUDE = 1.3437419;
 const LONGITUDE = 103.6839585;
 const LATITUDE_DELTA = 0.5;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-import MEDICAL_PIN from '../../assets/annotation_red_cross.png';
 
 class NearbyClinic extends Component {
   constructor(props) {

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { StatusBar, Image, View, Dimensions } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Buttons, Spinner, Popup } from '../components/common';
-import { InputWithButton } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
-import styles from '../components/DollarBenefits';
-const { width, height } = Dimensions.get('window');
 import * as Core from '../core';
 
 class ConfirmPay extends Component {

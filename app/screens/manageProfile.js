@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { RNS3 } from 'react-native-aws3';
 import ImagePicker from 'react-native-image-picker';
 import DatePicker from 'react-native-datepicker-latest';
 const options = {
@@ -18,10 +17,9 @@ const options = {
   chooseFromLibraryButtonTitle: 'Choose from Gallery',
   quality: 1,
 };
-import { getNotify, getAlert } from '../components/common/Notify';
+import { getNotify } from '../components/common/Notify';
 import * as Core from '../core';
 import * as Config from '../config';
-import * as Common from '../components/common';
 import Navbar from '../components/common/Navbar';
 import { ButtonProfile } from '../components/common/ButtonProfile';
 

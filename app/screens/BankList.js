@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 import {
   Container,
-  Header,
   Content,
   List,
   ListItem,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
   Text,
 } from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../components/common/Navbar';
 
 class BankList extends Component {

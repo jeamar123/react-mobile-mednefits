@@ -3,13 +3,11 @@ import {
   StatusBar,
   View,
   Image,
-  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   FlatList
 } from 'react-native';
 import { Text } from 'native-base';
-import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { UserSwitch } from '../components/UserSwitch';
 import * as Core from '../core';

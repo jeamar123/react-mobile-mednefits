@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Image, ScrollView } from 'react-native';
 import {
-  Container,
-  Content,
-  Card,
-  CardItem,
   Text,
-  Body,
-  Button,
-  Tab,
-  Tabs,
   Drawer,
 } from 'native-base';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide } from '../components/HomeContent';
+import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
 
 class GeneralPractitioner extends Component {

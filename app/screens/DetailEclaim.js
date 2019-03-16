@@ -5,7 +5,6 @@ import {
   View,
   Text,
   TextInput,
-  Image,
   ScrollView,
   ActivityIndicator,
   ImageBackground
@@ -17,12 +16,11 @@ import { ClaimDetail } from '../components/ClaimDetail';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
-import * as Core from '../core'
-import * as Common from '../components/common';
+import * as Core from '../core';
 
 class DetailEclaim extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -57,14 +55,14 @@ class DetailEclaim extends Component {
         'time': this.props.claimdata.time
       }
 
-      await Core.SendEClaim(eclaimFile, async (err, result)=>{
+      await Core.SendEClaim(eclaimFile, async (err, result) => {
         // Core.getNotify("",result.message)
         if (result.status) {
           this.setState({
             isLoading: true,
             button: 'DONE'
           })
-          Actions.ThanksEclaim({type: 'reset'})
+          Actions.ThanksEclaim({ type: 'reset' })
         } else {
           console.log('failed to submit')
           await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit' })
@@ -88,7 +86,7 @@ class DetailEclaim extends Component {
     }
   }
 
-  componentDidMount( ) {
+  componentDidMount() {
     this.renderMember();
   }
 
@@ -96,16 +94,16 @@ class DetailEclaim extends Component {
     this.setState({ failed: false, showPopUp: false })
   }
 
-  async renderMember( ) {
+  async renderMember() {
     const user = await this.props.claimdata.memberData.find(item => item.value === this.props.claimdata.member)
-    if(user) {
-    	this.setState({ member: user.label })
+    if (user) {
+      this.setState({ member: user.label })
     }
   }
 
   statusModal = () => {
     console.log('modal hide completely')
-    if(this.state.failed) {
+    if (this.state.failed) {
       this.setState({ showPopUp: true });
       console.log('this.state.showPopUp', this.state.showPopUp);
     }
@@ -140,13 +138,13 @@ class DetailEclaim extends Component {
           <ActivityIndicator color="#fff" size="large" />
           <Texti
             fontColor="#FFFFFF"
-            >Just a sec...</Texti>
+          >Just a sec...</Texti>
         </Modal>
       </View>
     );
   }
 
-  render() {    
+  render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -275,7 +273,7 @@ class DetailEclaim extends Component {
               </Text>
               <TextInput
                 placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.amount) ? "S$"+this.props.claimdata.amount : ""}
+                placeholder={(this.props.claimdata.amount) ? "S$" + this.props.claimdata.amount : ""}
                 underlineColorAndroid="transparent"
                 colo="#000"
                 style={{ marginTop: '-3%', marginLeft: '15%' }}
@@ -338,20 +336,20 @@ class DetailEclaim extends Component {
                 }}
               >
                 {(typeof this.props.claimdata.images !== 'undefined') ? (
-                  this.props.claimdata.images.map((value, index)=>(
+                  this.props.claimdata.images.map((value, index) => (
                     <View
                       key={index}
-                      style={{flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around'}}>
+                      style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
                       <ImageBackground
                         resizeMode="cover"
-                        style={{ width: '100%', height: 90 , width: 70 }}
-                        source={{uri: value.preview}}
+                        style={{ width: '100%', height: 90, width: 70 }}
+                        source={{ uri: value.preview }}
                       />
                     </View>
                   ))
                 ) : (
-                  <View />
-                )}
+                    <View />
+                  )}
               </View>
             </View>
             <View

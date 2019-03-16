@@ -3,7 +3,7 @@ import { GiftedForm } from 'react-native-gifted-form';
 import { StatusBar, View, Image, ActivityIndicator } from 'react-native';
 import { Container, Text } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { HistoryUser } from '../components/HistoryUser';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';

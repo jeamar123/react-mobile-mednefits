@@ -6,13 +6,9 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { Container, Content, Drawer } from 'native-base';
+import { Container, Drawer } from 'native-base';
 import Navbar from '../components/common/Navbar';
-import {
-  HomeContent,
-  MenuSide,
-  HomeContentStatic,
-} from '../components/HomeContent';
+import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import { Text } from '../common';
 import * as Config from '../config';

@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import {
   StatusBar,
   View,
-  Image,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Text, Drawer, Icon } from 'native-base';
+import { Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
-import { ButtonCall } from '../components/common/ButtonCall';
 import * as Config from '../config';
 import * as Core from '../core';
 

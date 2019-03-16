@@ -4,17 +4,13 @@ import {
   StatusBar,
   View,
   TextInput,
-  TouchableOpacity,
-  Image,
 } from 'react-native';
 import { Container, Text, Right } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { getNotify, getAlert } from '../components/common/Notify';
+import { getNotify } from '../components/common/Notify';
 import * as Core from '../core';
 import * as Config from '../config';
-import * as Common from '../components/common';
 import Navbar from '../components/common/Navbar';
-import { ButtonProfile } from '../components/common/ButtonProfile';
 
 class Updatepassword extends Component {
   constructor(props) {

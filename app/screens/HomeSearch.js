@@ -6,9 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import { Container, Content, Drawer } from 'native-base';
+import { Container, } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
 import Navbar from '../components/common/Navbar';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import { Container, Content, Drawer } from 'native-base';
+import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import { Actions } from 'react-native-router-flux';
 import * as Common from '../components/common';

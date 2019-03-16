@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
@@ -8,8 +8,6 @@ import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
 import * as Core from '../core';
-import * as Config from '../config';
-import * as mime from 'react-native-mime-types';
 
 const options = {
   title: 'Select Photo',

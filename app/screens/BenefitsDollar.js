@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, TouchableOpacity, Keyboard } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import { StatusBar, Image, View } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
