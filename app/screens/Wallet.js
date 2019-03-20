@@ -3,6 +3,7 @@ import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Text } from 'native-base';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from '../components/BalanceComp/styles';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
@@ -21,8 +22,16 @@ class Wallet extends Component {
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
       currency: '',
+      inNetwork: [],
+      outNetwork: [],
       collapsed: true,
-      visible: true
+      visible: true,
+      medicalData: [
+        {
+          label: "Please choose claim first",
+          value: null
+        }
+      ],
     };
     this.selectSpending = this.selectSpending.bind(this)
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -44,27 +53,33 @@ class Wallet extends Component {
 
   componentWillMount() {
     this.getUserBalance();
-    this.selectSpending("medical")
+    this.selectSpending("in_network_transactions")
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
   }
 
   async selectSpending(type) {
-    this.setState({ type: type, claimTypeState: "Loading...", claim: false })
+    this.setState({ type: type, claim: false })
 
-    await Core.GetHealthTypeList(type, (err, result) => {
+    await Core.GetBalanceMedical((error, result) => {
       if (result) {
-        dataClaim = []
+        dataMedical = []
 
         result.data.map((claim) => {
-          dataClaim.push({ label: claim.name, value: claim.health_type_id })
+          dataMedical.push({ doctor: claim.clinic_name, date: claim.date_of_transaction, amount: claim.amount })
         });
 
-        this.setState({ claimType: dataClaim })
+        this.setState({ medicalData: dataMedical })
       }
+    })
+  }
 
-      this.setState({ claimTypeState: "Select" })
+  setClaimValue(val) {
+    this.state.medicalData.map((value, index) => {
+      if (val == value.value) {
+        this.setState({ Doctor: value.doctor, Date: value.date, Amount: value.amount })
+      }
     })
   }
 
@@ -77,15 +92,99 @@ class Wallet extends Component {
         Balance: data.balance,
         InNetwork_Credit_spent: data.in_network_credits_spent,
         Eclaim_Credit_spent: data.e_claim_credits_spent,
-        currency: result.data.currency_symbol
+        currency: result.data.currency_symbol,
+        inNetwork: data.in_network_transactions,
+        outNetwork: data.e_claim_transactions
       });
     });
   }
 
-  componentDidMount() {
+  renderIn_Network() {
+    return this.state.inNetwork.map((Data, index) => (
+      <View>
+        <TouchableOpacity
+          key={index}
+          onPress={() =>
+            Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+          }
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginLeft: responsiveWidth(4),
+              marginRight: responsiveWidth(4),
+            }}
+          >
+            <View style={styles.sectionTextPanel}>
+              <Text
+                style={{
+                  fontSize: RF(1.4),
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#2C3E50',
+                  letterSpacing: 1.5,
+                  lineHeight: 20
+                }}
+              >
+                {Data.clinic_name}
+              </Text>
+              <Text
+                style={{
+                  fontSize: RF(1.2),
+                  fontFamily: Config.FONT_FAMILY_THIN,
+                  color: '#A8A8A8',
+                  lineHeight: 20
+                }}
+              >
+                {Data.date_of_transaction}
+              </Text>
+            </View>
+            <Text
+              style={{
+                fontSize: RF(2.2),
+                fontFamily: Config.FONT_FAMILY_MEDIUM,
+                marginTop: 30,
+                marginRight: 10,
+                marginLeft: 10
+              }}
+            />
+            <View style={styles.sectionTextPanel}>
+              <Text
+                style={{
+                  fontSize: RF(1.6),
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#2C3E50',
+                  letterSpacing: 1.5,
+                  lineHeight: 20,
+                  marginTop: responsiveHeight(1),
+                  marginLeft: responsiveWidth(20)
+                }}
+              >
+                {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
+              </Text>
+            </View>
+            <Icons
+              name="angle-right"
+              style={{
+                color: '#2C3E50',
+                fontSize: 20,
+                paddingRight: 5,
+                marginTop: responsiveHeight(0.85),
+              }}
+            />
+          </View>
 
+          <View
+            style={{
+              marginLeft: '5%',
+              marginRight: '5%',
+            }}>
+            <Common.Divider />
+          </View>
+        </TouchableOpacity>
+      </View>
+    ));
   }
-
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
@@ -334,9 +433,9 @@ class Wallet extends Component {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => this.selectSpending("medical")}
-                  refs="medical"
-                  style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive]}
+                  onPress={() => this.selectSpending("in_network_transactions")}
+                  refs="in_network_transactions"
+                  style={[(this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
                     style={{
@@ -362,9 +461,9 @@ class Wallet extends Component {
                   }}
                 />
                 <TouchableOpacity
-                  onPress={() => this.selectSpending("wellness")}
-                  refs="wellness"
-                  style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive]}
+                  onPress={() => this.selectSpending("e_claim_transactions")}
+                  refs="e_claim_transactions"
+                  style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
                     style={{
@@ -382,191 +481,8 @@ class Wallet extends Component {
               </View>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
+            <View>
+              {this.renderIn_Network()}
             </View>
 
             <View style={{

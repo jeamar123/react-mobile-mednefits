@@ -21,6 +21,8 @@ class Wallet extends Component {
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
       currency: '',
+      inNetwork: [],
+      outNetwork: [],
       collapsed: true,
       visible: true
     };
@@ -77,13 +79,81 @@ class Wallet extends Component {
         Balance: data.balance,
         InNetwork_Credit_spent: data.in_network_credits_spent,
         Eclaim_Credit_spent: data.e_claim_credits_spent,
-        currency: result.data.currency_symbol
+        currency: result.data.currency_symbol,
+        inNetwork: data.in_network_transactions,
+        outNetwork: data.e_claim_transactions
       });
     });
   }
 
-  componentDidMount() {
+  renderOut_Network() {
+    return this.state.inNetwork.map((Data, index) => (
+      <View>
 
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginLeft: responsiveWidth(4),
+            marginRight: responsiveWidth(4),
+          }}
+        >
+          <View style={styles.sectionTextPanel}>
+            <Text
+              style={{
+                fontSize: RF(1.4),
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#2C3E50',
+                letterSpacing: 1.5,
+                lineHeight: 20
+              }}
+            >
+              {Data.clinic_name}
+            </Text>
+            <Text
+              style={{
+                fontSize: RF(1.2),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                color: '#A8A8A8',
+                lineHeight: 20
+              }}
+            >
+              {Data.date_of_transaction}
+            </Text>
+          </View>
+          <Text
+            style={{
+              fontSize: RF(2.2),
+              fontFamily: Config.FONT_FAMILY_MEDIUM,
+              marginTop: 30,
+              marginRight: 10,
+              marginLeft: 10
+            }}
+          />
+          <View style={styles.sectionTextPanel}>
+            <Text
+              style={{
+                fontSize: RF(1.6),
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#2C3E50',
+                letterSpacing: 1.5,
+                lineHeight: 20,
+                marginTop: responsiveHeight(1)
+              }}
+            >
+              {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            marginLeft: '5%',
+            marginRight: '5%',
+          }}>
+          <Common.Divider />
+        </View>
+      </View>
+    ));
   }
 
   render() {
@@ -351,7 +421,7 @@ class Wallet extends Component {
                     }}
                   >
                     In-Network
-                    </Text>
+                  </Text>
                 </TouchableOpacity>
                 <View
                   style={{
@@ -384,191 +454,8 @@ class Wallet extends Component {
               </View>
             </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
-            >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  Drs Chua & Partners Pte Ltd
-                  </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  15 January 2019, 08:45am
-                  </Text>
-              </View>
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
-                }}
-              />
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
+            <View>
+              {this.renderOut_Network()}
             </View>
 
             <View style={{
