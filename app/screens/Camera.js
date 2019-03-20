@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
@@ -207,10 +207,10 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
               onPress={() => this.changeViewCamera('single')}
               style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -224,7 +224,7 @@ class Camera extends Component {
                 <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
               ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
             </TouchableOpacity>
-            {/* <TouchableOpacity
+            <TouchableOpacity
               onPress={()=>this.changeViewCamera('batch')}
               style={{flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
               <Common.Texti
@@ -236,8 +236,8 @@ class Camera extends Component {
               {(this.state.shootType == 'batch') ? (
                 <View style={{width: 4, height:4, borderRadius: 4/2, backgroundColor: '#0392cf', marginTop: 2}}/>
               ) : (<View style={{width: 4, height:4, borderRadius: 4/2, marginTop: 2}} />)}
-            </TouchableOpacity> */}
-          </View>
+            </TouchableOpacity>
+          </View> */}
           <TouchableOpacity
             onPress={this.openGallery}
             style={{
@@ -252,7 +252,7 @@ class Camera extends Component {
                 width: 30,
                 height: 30
               }}
-              resizeMode="center"
+              resizeMode="contain"
             />
           </TouchableOpacity>
         </View>
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   camera: {
-    flex: 0.85,
+    flex: 1,
     flexDirection: 'column'
   },
   preview: {
