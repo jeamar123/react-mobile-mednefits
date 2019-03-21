@@ -37,6 +37,10 @@ export async function GetDataLocalReturnNew(key) {
   return await AsyncStorage.getItem(key);
 }
 
+export async function GetAllClinic(key) {
+  return await AsyncStorage.multiGet(key);
+}
+
 export function SetDataLocal(params, callback) {
   try {
     AsyncStorage.setItem(params.key, params.value);
