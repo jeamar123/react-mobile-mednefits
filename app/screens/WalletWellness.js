@@ -53,21 +53,7 @@ class Wallet extends Component {
   }
 
   async selectSpending(type) {
-    this.setState({ type: type, claimTypeState: "Loading...", claim: false })
-
-    await Core.GetHealthTypeList(type, (err, result) => {
-      if (result) {
-        dataClaim = []
-
-        result.data.map((claim) => {
-          dataClaim.push({ label: claim.name, value: claim.health_type_id })
-        });
-
-        this.setState({ claimType: dataClaim })
-      }
-
-      this.setState({ claimTypeState: "Select" })
-    })
+    this.setState({ type: type })
   }
 
   getUserBalance() {
@@ -86,74 +72,179 @@ class Wallet extends Component {
     });
   }
 
-  renderOut_Network() {
-    return this.state.inNetwork.map((Data, index) => (
-      <View>
+  renderRecentActivity() {
+    console.warn(this.state.type)
+    if (this.state.type == 'in_network_transactions') {
+      return this.state.inNetwork.map((Data, index) => (
+        <View>
+          <TouchableOpacity
+            key={index}
+            onPress={() =>
+              Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+            }
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginLeft: responsiveWidth(4),
+                marginRight: responsiveWidth(4),
+              }}
+            >
+              <View style={styles.sectionTextPanel}>
+                <Text
+                  style={{
+                    fontSize: RF(1.4),
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    color: '#2C3E50',
+                    letterSpacing: 1.5,
+                    lineHeight: 20
+                  }}
+                >
+                  {Data.clinic_name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: RF(1.2),
+                    fontFamily: Config.FONT_FAMILY_THIN,
+                    color: '#A8A8A8',
+                    lineHeight: 20
+                  }}
+                >
+                  {Data.date_of_transaction}
+                </Text>
+              </View>
+              <Text
+                style={{
+                  fontSize: RF(2.2),
+                  fontFamily: Config.FONT_FAMILY_MEDIUM,
+                  marginTop: 30,
+                  marginRight: 10,
+                  marginLeft: 10
+                }}
+              />
+              <View style={styles.sectionTextPanel}>
+                <Text
+                  style={{
+                    fontSize: RF(1.6),
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    color: '#2C3E50',
+                    letterSpacing: 1.5,
+                    lineHeight: 20,
+                    marginTop: responsiveHeight(1),
+                    marginLeft: responsiveWidth(8)
+                  }}
+                >
+                  {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
+                </Text>
+              </View>
+              <Icons
+                name="angle-right"
+                style={{
+                  color: '#2C3E50',
+                  fontSize: 20,
+                  paddingRight: 5,
+                  marginTop: responsiveHeight(0.85),
+                }}
+              />
+            </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginLeft: responsiveWidth(4),
-            marginRight: responsiveWidth(4),
-          }}
-        >
-          <View style={styles.sectionTextPanel}>
-            <Text
+            <View
               style={{
-                fontSize: RF(1.4),
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                color: '#2C3E50',
-                letterSpacing: 1.5,
-                lineHeight: 20
-              }}
-            >
-              {Data.clinic_name}
-            </Text>
-            <Text
-              style={{
-                fontSize: RF(1.2),
-                fontFamily: Config.FONT_FAMILY_THIN,
-                color: '#A8A8A8',
-                lineHeight: 20
-              }}
-            >
-              {Data.date_of_transaction}
-            </Text>
-          </View>
-          <Text
-            style={{
-              fontSize: RF(2.2),
-              fontFamily: Config.FONT_FAMILY_MEDIUM,
-              marginTop: 30,
-              marginRight: 10,
-              marginLeft: 10
-            }}
-          />
-          <View style={styles.sectionTextPanel}>
-            <Text
-              style={{
-                fontSize: RF(1.6),
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                color: '#2C3E50',
-                letterSpacing: 1.5,
-                lineHeight: 20,
-                marginTop: responsiveHeight(1)
-              }}
-            >
-              {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
-            </Text>
-          </View>
+                marginLeft: '5%',
+                marginRight: '5%',
+              }}>
+              <Common.Divider />
+            </View>
+          </TouchableOpacity>
         </View>
-        <View
-          style={{
-            marginLeft: '5%',
-            marginRight: '5%',
-          }}>
-          <Common.Divider />
+      ));
+    } else if (this.state.type == 'e_claim_transactions') {
+      return this.state.outNetwork.map((Data, index) => (
+        <View>
+          <TouchableOpacity
+            key={index}
+            onPress={() =>
+              Actions.DetailEclaimTransaction({ transaction_id: Data.transaction_id })
+            }
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginLeft: responsiveWidth(4),
+                marginRight: responsiveWidth(4),
+              }}
+            >
+              <View style={styles.sectionTextPanel}>
+                <Text
+                  style={{
+                    fontSize: RF(1.4),
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    color: '#2C3E50',
+                    letterSpacing: 1.5,
+                    lineHeight: 20
+                  }}
+                >
+                  {Data.service}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: RF(1.2),
+                    fontFamily: Config.FONT_FAMILY_THIN,
+                    color: '#A8A8A8',
+                    lineHeight: 20
+                  }}
+                >
+                  {Data.claim_date}
+                </Text>
+              </View>
+              <Text
+                style={{
+                  fontSize: RF(2.2),
+                  fontFamily: Config.FONT_FAMILY_MEDIUM,
+                  marginTop: 30,
+                  marginRight: 10,
+                  marginLeft: 10
+                }}
+              />
+              <View style={styles.sectionTextPanel}>
+                <Text
+                  style={{
+                    fontSize: RF(1.6),
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    color: '#2C3E50',
+                    letterSpacing: 1.5,
+                    lineHeight: 20,
+                    marginTop: responsiveHeight(1),
+                    marginLeft: responsiveWidth(12)
+                  }}
+                >
+                  {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
+                </Text>
+              </View>
+              <Icons
+                name="angle-right"
+                style={{
+                  color: '#2C3E50',
+                  fontSize: 20,
+                  paddingRight: 5,
+                  marginTop: responsiveHeight(0.85),
+                }}
+              />
+            </View>
+
+            <View
+              style={{
+                marginLeft: '5%',
+                marginRight: '5%',
+              }}>
+              <Common.Divider />
+            </View>
+          </TouchableOpacity>
         </View>
-      </View>
-    ));
+      ));
+    }
   }
 
   render() {
@@ -455,7 +546,7 @@ class Wallet extends Component {
             </View>
 
             <View>
-              {this.renderOut_Network()}
+              {this.renderRecentActivity()}
             </View>
 
             <View style={{

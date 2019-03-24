@@ -79,7 +79,7 @@ class Wallet extends Component {
     });
   }
 
-  renderIn_Network() {
+  renderRecentActivity() {
     console.warn(this.state.type)
     if (this.state.type == 'in_network_transactions') {
       return this.state.inNetwork.map((Data, index) => (
@@ -253,6 +253,7 @@ class Wallet extends Component {
       ));
     }
   }
+
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
@@ -550,7 +551,7 @@ class Wallet extends Component {
             </View>
 
             <View>
-              {this.renderIn_Network()}
+              {this.renderRecentActivity()}
             </View>
 
             <View style={{
