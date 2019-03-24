@@ -81,8 +81,10 @@ class NearbyClinic extends Component {
   getCurrentPosition = async () => {
     latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
     longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+    dataClinicNearby = await Code.GetAllClinic(dataClinicNearby)
 
-    // console.warn(latitude);
+    console.warn(latitude);
+    // console.warn(dataClinicNearby);
     // console.warn(longitude);
     this.setState({
       region: {

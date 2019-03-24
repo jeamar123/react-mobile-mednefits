@@ -57,11 +57,10 @@ import WalletWellness from '../screens/WalletWellness';
 
 console.disableYellowBox = true;
 
-
 const transitionConfig = () => {
   return {
     transitionSpec: {
-      duration: 300,
+      duration: 600,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
       useNativeDriver: true,

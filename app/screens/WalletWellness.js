@@ -180,7 +180,7 @@ class Wallet extends Component {
                 // marginTop: responsiveHeight(4)
               }}
             >
-              <TouchableOpacity onPress={() => Actions.Wallet()}>
+              <TouchableOpacity onPress={() => Actions.pop()}>
                 <Text
                   style={{
                     fontSize: RF(2.2),

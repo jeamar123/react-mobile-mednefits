@@ -879,6 +879,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
 export async function GetClinicMap(clinic_type_id, callback) {
   latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+  // dataClinicNearbyMap = await Core.GetAllClinic(dataClinicNearbyMap)
 
   if (!latitude || !longitude) {
     console.warn('Waiting to get device location');
@@ -902,7 +903,6 @@ export async function GetClinicMap(clinic_type_id, callback) {
 
           await fetching(params, async result => {
             if (result) {
-              console.warn(result.data.clinics);
               await callback('', result.data.clinics);
 
               dataClinicNearbyMap = result.data.clinics;
