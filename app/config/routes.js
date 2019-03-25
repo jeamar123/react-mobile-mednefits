@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Animated, Easing } from 'react-native';
+import { SafeAreaView, Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
-
+// import PushNotification from 'react-native-push-notification';
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
 import EmailSend from '../screens/EmailSend';
@@ -31,7 +31,6 @@ import GeneralPractitioner from '../screens/GeneralPractitioner';
 import ECardUser from '../screens/ECardUser';
 import SwitchUser from '../screens/SwitchUser';
 import HomeStatic from '../screens/HomeStatic';
-import ECardUserStatic from '../screens/ECardUserStatic';
 import ManageProfile from '../screens/manageProfile';
 import Profile from '../screens/Profile';
 import Favourites from '../screens/Favourites';
@@ -44,7 +43,6 @@ import Paycash from '../screens/PayCash';
 import NearbyClinic from '../screens/NearbyClinic';
 import NearbyClinicMaps from '../screens/NearbyClinicMaps';
 import ConfirmPay from '../screens/ConfirmPay';
-// import MapView from '../components/MapView/MapView';
 import MedicalCondition from '../screens/MedicalCondition';
 import MedicalAllergies from '../screens/MedicalAllergies';
 import MedicalHistory from '../screens/MedicalHistory';
@@ -54,8 +52,12 @@ import MedicalMedicationsAdd from '../screens/MedicalMedicationsAdd';
 import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
 import HomeSearch from '../screens/HomeSearch';
+import Wallet from '../screens/Wallet';
+import WalletWellness from '../screens/WalletWellness';
+import * as Core from '../core';
 
 console.disableYellowBox = true;
+
 
 const transitionConfig = () => {
   return {
@@ -104,93 +106,139 @@ const transitionConfig = () => {
   }
 }
 
-
 class RouterComponent extends Component {
+  // componentDidMount() {
+  //   PushNotification.configure({
+
+  //     // (optional) Called when Token is generated (iOS and Android)
+  //     onRegister: function (token) {
+  //       console.log('TOKEN:', token);
+  //       Core.SaveDeviceToken(null, token.token, token.os);
+  //     },
+
+  //     // (required) Called when a remote or local notification is opened or received
+  //     onNotification: function (notification) {
+  //       console.log('NOTIFICATION:', notification);
+
+  //       // process the notification
+
+  //       // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
+  //       // notification.finish(PushNotificationIOS.FetchResult.NoData);
+  //     },
+
+  //     // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
+  //     senderID: "864568376301",
+
+  //     // IOS ONLY (optional): default: all - Permissions to register.
+  //     permissions: {
+  //       alert: true,
+  //       badge: true,
+  //       sound: true
+  //     },
+
+  //     // Should the initial notification be popped automatically
+  //     // default: true
+  //     popInitialNotification: true,
+
+  //     /**
+  //       * (optional) default: true
+  //       * - Specified if permissions (ios) and token (android and ios) will requested or not,
+  //       * - if not, you must call PushNotificationsHandler.requestPermissions() later
+  //       */
+  //     requestPermissions: true,
+  //   });
+  // }
+
   render() {
     return (
-      <Router>
-        <Stack key="root"
-          gesturesEnabled={false}
-          transitionConfig={transitionConfig}
-        >
-          <Scene key="Splash" component={Splash} hideNavBar />
-          <Scene key="Login" component={Logins} hideNavBar />
-          <Scene key="Forgot" component={Forgot} hideNavBar />
-          <Scene key="Home" component={Homes} hideNavBar />
-          <Scene key="SelectService" component={SelectService} hideNavBar />
-          <Scene key="Balance" component={Balance} hideNavBar />
-          <Scene key="Summary" component={Summary} hideNavBar />
-          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
-          <Scene key="PayScan" component={ScanPay} hideNavBar />
-          <Scene
-            key="HistoryTransaction"
-            component={HistoryTransaction}
-            hideNavBar
-          />
-          <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
-          <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
-          <Scene
-            key="HistoryChieneseMedicine"
-            component={HistoryChieneseMedicine}
-            hideNavBar
-          />
-          <Scene
-            key="HistoryDentalCare"
-            component={HistoryDentalCare}
-            hideNavBar
-          />
-          <Scene key="BankList" component={BankList} hideNavBar />
-          <Scene key="Member" component={Member} hideNavBar />
-          <Scene key="SettingWallet" component={SettingWallet} hideNavBar />
-          <Scene key="EclaimSubmit" component={EclaimSubmit} hideNavBar />
-          <Scene key="DetailEclaim" component={DetailEclaim} hideNavBar />
-          <Scene
-            key="ReceiptVerification"
-            component={ReceiptVerification}
-            hideNavBar
-          />
-          <Scene
-            key="InNetworkBenefits"
-            component={InNetworkBenefits}
-            hideNavBar
-          />
-          <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
-          <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
-          <Scene key="EmailSend" component={EmailSend} hideNavBar />
-          <Scene key="Barcode" component={Barcode} hideNavBar />
-          <Scene
-            key="GeneralPractitioner"
-            component={GeneralPractitioner}
-            hideNavBar
-          />
-          <Scene key="ECardUser" component={ECardUser} hideNavBar />
-          <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
-          <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
-          <Scene key="ECardUserStatic" component={ECardUserStatic} hideNavBar />
-          <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
-          <Scene key="Profile" component={Profile} hideNavBar />
-          <Scene key="Favourites" component={Favourites} hideNavBar />
-          <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
-          <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
-          <Scene key="Search" component={Search} hideNavBar />
-          <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
-          <Scene key="Camera" component={Camera} hideNavBar />
-          <Scene key="Paycash" component={Paycash} hideNavBar />
-          <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
-          <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
-          <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
-          {/* <Scene key="MapView" component={MapView} hideNavBar /> */}
-          <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
-          <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
-          <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />
-          <Scene key="MedicalMedications" component={MedicalMedications} hideNavBar />
-          <Scene key="MedicalHistoryAdd" component={MedicalHistoryAdd} hideNavBar />
-          <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
-          <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
-          <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
-          <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
-        </Stack>
-      </Router>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
+        <Router>
+          <Stack
+            key="root"
+            gesturesEnabled={false}
+            transitionConfig={transitionConfig}
+          >
+            <Scene key="Splash" component={Splash} hideNavBar />
+            <Scene key="Login" component={Logins} hideNavBar />
+            <Scene key="Forgot" component={Forgot} hideNavBar />
+            <Scene key="Home" component={Homes} hideNavBar />
+            <Scene key="SelectService" component={SelectService} hideNavBar />
+            <Scene key="Balance" component={Balance} hideNavBar />
+            <Scene key="Summary" component={Summary} hideNavBar />
+            <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
+            <Scene key="PayScan" component={ScanPay} hideNavBar />
+            <Scene
+              key="HistoryTransaction"
+              component={HistoryTransaction}
+              hideNavBar
+            />
+            <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
+            <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
+            <Scene
+              key="HistoryChieneseMedicine"
+              component={HistoryChieneseMedicine}
+              hideNavBar
+            />
+            <Scene
+              key="HistoryDentalCare"
+              component={HistoryDentalCare}
+              hideNavBar
+            />
+            <Scene key="BankList" component={BankList} hideNavBar />
+            <Scene key="Member" component={Member} hideNavBar />
+            <Scene key="SettingWallet" component={SettingWallet} hideNavBar />
+            <Scene key="EclaimSubmit" component={EclaimSubmit} hideNavBar />
+            <Scene key="DetailEclaim" component={DetailEclaim} hideNavBar />
+            <Scene
+              key="ReceiptVerification"
+              component={ReceiptVerification}
+              hideNavBar
+
+            />
+            <Scene
+              key="InNetworkBenefits"
+              component={InNetworkBenefits}
+              hideNavBar
+            />
+            <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
+            <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
+            <Scene key="EmailSend" component={EmailSend} hideNavBar />
+            <Scene key="Barcode" component={Barcode} hideNavBar />
+            <Scene
+              key="GeneralPractitioner"
+              component={GeneralPractitioner}
+              hideNavBar
+            />
+            <Scene key="ECardUser" component={ECardUser} hideNavBar />
+            <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
+            <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
+            <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
+            <Scene key="Profile" component={Profile} hideNavBar />
+            <Scene key="Favourites" component={Favourites} hideNavBar />
+            <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
+            <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
+            <Scene key="Camera" component={Camera} hideNavBar />
+            <Scene key="Search" component={Search} hideNavBar />
+            <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
+            <Scene key="Camera" component={Camera} hideNavBar />
+            <Scene key="Paycash" component={Paycash} hideNavBar />
+            <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
+            <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
+            <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
+            <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
+            <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
+            <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />
+            <Scene key="MedicalMedications" component={MedicalMedications} hideNavBar />
+            <Scene key="MedicalHistoryAdd" component={MedicalHistoryAdd} hideNavBar />
+            <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
+            <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
+            <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
+            <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
+            <Scene key="Wallet" component={Wallet} hideNavBar />
+            <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
+          </Stack>
+        </Router>
+      </SafeAreaView>
     );
   }
 }

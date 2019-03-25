@@ -89,30 +89,7 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-          <TouchableOpacity
-            onPress={() =>
-              Actions.HomeSearch({type: 'reset'})
-            }
-            style={{
-              width: '90%',
-              borderRadius: 5,
-              color: "#fff",
-              backgroundColor: '#0A6186',
-              marginLeft: 10,
-              marginRight: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              height: '20%'
-            }}>
-            <Common.buttonSearch
-              type="search"
-              iconColor="#fff"
-              justifyContent="flex-start"
-
-            />
-          </TouchableOpacity>
-
-          {/* <Common.InputSearch
+          <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
             onSubmitEditing={() => this.processQuery()}
@@ -140,11 +117,11 @@ class HomeContent extends Component {
               alignItems: 'center',
               height: '20%'
             }}
-          /> */}
+          />
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
-                Actions.Barcode({type: 'reset'})
+                Actions.Barcode()
               }
             >
               <View style={styles.gridBox}>
@@ -164,9 +141,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.ECardUser({
-                  type: 'reset',
-                })
+                Actions.ECardUser()
               }
             >
               <View style={styles.gridBox}>
@@ -186,9 +161,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance({
-                  type: 'reset',
-                })
+                Actions.Wallet()
               }
             >
               <View style={styles.gridBox}>

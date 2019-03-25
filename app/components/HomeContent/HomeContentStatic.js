@@ -3,7 +3,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import Icons from 'react-native-vector-icons/FontAwesome';
+import RF from "react-native-responsive-fontsize";
 import * as Common from '../common'
 
 class HomeContent extends Component {
@@ -90,7 +91,7 @@ class HomeContent extends Component {
         <View style={styles.sectionTitle}>
           <TouchableOpacity
             onPress={() =>
-              Actions.HomeSearch({ type: 'reset' })
+              Actions.HomeSearch()
             }
             style={{
               width: '90%',
@@ -101,7 +102,7 @@ class HomeContent extends Component {
               marginRight: 10,
               flexDirection: 'row',
               alignItems: 'center',
-              height: responsiveHeight(5.5)
+              height: '20%'
             }}>
             <Common.buttonSearch
               type="search"
@@ -163,9 +164,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.ECardUser({
-                  type: 'reset',
-                })
+                Actions.ECardUser()
               }
             >
               <View style={styles.gridBox}>
@@ -185,9 +184,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Balance({
-                  type: 'reset',
-                })
+                Actions.Wallet()
               }
             >
               <View style={styles.gridBox}>

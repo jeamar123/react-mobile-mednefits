@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image,ImageBackground, TouchableOpacity } from 'react-native';
+import { View, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import {
   Content,
   ListItem,
@@ -18,7 +18,7 @@ const MenuSide = () => (
   <ImageBackground
     source={require('../../../assets/andriod_splash.png')}
     style={styles.DrawerContain}
-    >
+  >
     <Content padder>
       <View style={{ marginTop: 50 }} />
       <Body>
@@ -35,11 +35,10 @@ const MenuSide = () => (
       </Body>
       <View style={{ marginTop: 10 }} />
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.Home({
-                type: 'reset',
-              })
-            }
-            >
+        Actions.Home({
+          type: 'reset',
+        })
+      }>
         <Left>
           <TouchableOpacity>
             <Image
@@ -59,13 +58,13 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.Balance({
-                type: 'reset',
-              })
-            }>
+        Actions.Wallet({
+          type: 'reset',
+        })
+      }>
         <Left>
           <TouchableOpacity
-            
+
           >
             <Image
               style={{
@@ -84,10 +83,10 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.EclaimSubmit({
-                type: 'reset',
-              })
-            }>
+        Actions.EclaimSubmit({
+          type: 'reset',
+        })
+      }>
         <Left>
           <TouchableOpacity>
             <Image
@@ -107,8 +106,8 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.HistoryTransaction({type: 'reset'})
-            }>
+        Actions.HistoryTransaction()
+      }>
         <Left>
           <TouchableOpacity>
             <Image
@@ -128,8 +127,8 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.Favourites()
-            }>
+        Actions.Favourites()
+      }>
         <Left>
           <TouchableOpacity>
             <Image
@@ -149,8 +148,8 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-              Actions.Profile()
-            }>
+        Actions.Profile()
+      }>
         <Left>
           <TouchableOpacity>
             <Image

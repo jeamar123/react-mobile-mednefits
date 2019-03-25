@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Text } from 'native-base';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
 import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
+import * as Commmon from '../components/common';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
@@ -74,6 +76,14 @@ class SelectService extends Component {
     this.setState({ services: service })
   }
 
+  validationField() {
+    if (this.state.services == "") {
+      Commmon.getAlert("Mednefits", "Please at least chooseone service to proceed")
+    } else {
+      Actions.PayScan({ services: this.state.services, clinicid: this.props.clinicid })
+    }
+  }
+
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
@@ -97,7 +107,7 @@ class SelectService extends Component {
             ))}
           </View>
 
-          <Buttons2 style={{ width: '100%' }} onPress={() => Actions.PayScan({ services: this.state.services, clinicid: this.props.clinicid, clinic_data: this.props.clinic_data })}>
+          <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
             Proceed
           </Buttons2>
         </Content>
@@ -113,7 +123,7 @@ const styles = {
   },
   gridBox: {
     width: width / 3.8,
-    height: height / 6.7,
+    height: responsiveHeight(18),
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
@@ -122,7 +132,7 @@ const styles = {
   },
   gridBoxActive: {
     width: width / 3.8,
-    height: height / 6.7,
+    height: responsiveHeight(18),
     backgroundColor: '#fff',
     margin: 10,
     justifyContent: 'center',
