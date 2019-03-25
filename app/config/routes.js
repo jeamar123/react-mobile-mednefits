@@ -151,7 +151,6 @@ class RouterComponent extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
         <Router>
           <Stack
             key="root"
@@ -238,7 +237,6 @@ class RouterComponent extends Component {
             <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
           </Stack>
         </Router>
-      </SafeAreaView>
     );
   }
 }
