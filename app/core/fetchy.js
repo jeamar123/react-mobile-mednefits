@@ -879,7 +879,7 @@ export async function GetClinicMap(clinic_type_id, callback) {
         // console.warn('longitude', longitude)
         Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
           params = {
-            url: Config.CLINIC_ALL_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
+            url: Config.CLINIC_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=1",
             method: 'GET',
             header: {
               Accept: 'application/json',

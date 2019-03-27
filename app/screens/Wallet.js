@@ -371,7 +371,7 @@ class Wallet extends Component {
             <View style={{
               marginTop: responsiveHeight(-3),
               width: responsiveWidth(40),
-              height: responsiveHeight(12),
+              height: responsiveHeight(11),
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#fff',
@@ -415,7 +415,7 @@ class Wallet extends Component {
             <View style={{
               marginTop: responsiveHeight(-3),
               width: responsiveWidth(40),
-              height: responsiveHeight(12),
+              height: responsiveHeight(11),
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#fff',
@@ -482,7 +482,7 @@ class Wallet extends Component {
           <View style={{
             marginTop: responsiveHeight(1),
             width: responsiveWidth(80),
-            height: responsiveHeight(45),
+            height: responsiveHeight(41),
             // alignItems: 'center',
             backgroundColor: '#fff',
             elevation: 5,
@@ -563,7 +563,7 @@ class Wallet extends Component {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginTop: responsiveHeight(2),
+                  marginTop: responsiveHeight(1.5),
                 }}
               >
                 <TouchableOpacity onPress={() => Actions.HistoryTransaction()}>
