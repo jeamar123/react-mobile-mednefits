@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, TouchableOpacity, Keyboard } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import { StatusBar, Image, View } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
@@ -113,23 +114,34 @@ class BenefitsDollar extends Component {
                 marginBottom: '10%'
               }}
             >
-              {!this.state.clinic_image ? (
-                <Image
-                  source={require('../../assets/apps/mednefits.png')}
-                  style={{ height: 55, resizeMode: 'center', width: 155 }}
-                />
-              ) : (
-                  <Image
-                    source={{ uri: this.state.clinic_image }}
-                    style={{ height: 55, resizeMode: 'center', width: 155 }}
-                  />
-                )}
               {!this.state.clinic_name ? (
                 <Spinner size="small" />
               ) : (
-                  <Text style={{ marginLeft: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18 }}>
-                    {this.state.clinic_name}
-                  </Text>
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    height: 60
+                  }}
+                  >
+                    <Image
+                      source={{ uri: this.state.clinic_image }}
+                      style={{ height: 55, resizeMode: 'center', width: 155 }}
+                    />
+                    <Text
+                      style={{
+                        marginLeft: '-5%',
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                        color: '#9e9e9e',
+                        fontSize: 18,
+                        width: '50%'
+                      }}
+                      numberOfLines={2}
+                    >
+                      {this.state.clinic_name}
+                    </Text>
+                  </View>
                 )}
 
             </View>
@@ -158,15 +170,15 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
+                marginLeft: responsiveWidth(4),
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
-                
               }}
             >
               <View>
                 <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
-                {this.state.currency ? this.state.currency : ' '}
+                  {this.state.currency ? this.state.currency : ' '}
                 </Text>
               </View>
               <InputPay

@@ -5,12 +5,12 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
 } from 'react-native';
-import { Text, Drawer, Icon } from 'native-base';
+import { Text, Drawer } from 'native-base';
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -171,7 +171,7 @@ class NearbyClinic extends Component {
     }
   }
 
-  renderTransactionIn_Network() {
+  clinicNearbyByCategory() {
     return this.state.DataClinic.map((Data, index) => (
       <TouchableOpacity
         key={index}
@@ -184,8 +184,8 @@ class NearbyClinic extends Component {
             flex: 1,
             marginTop: 5,
             marginBottom: 10,
-            height: 90,
-            backgroundColor: '#fff',
+            height: responsiveHeight(15),
+            backgroundColor: '#ffffff',
             opacity: 10000,
           }}
         >
@@ -327,7 +327,7 @@ class NearbyClinic extends Component {
                   }
                 }}>
                   {
-                    this.renderTransactionIn_Network()
+                    this.clinicNearbyByCategory()
                   }
                 </ScrollView>
 
@@ -335,7 +335,7 @@ class NearbyClinic extends Component {
 
             )}
           <View style={{
-            height: 50,
+            height: responsiveHeight(7),
             backgroundColor: '#0392cf'
           }}>
             <View style={{

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { StatusBar } from 'react-native';
 import { Container } from 'native-base';
 import { EclaimSubmit } from '../components/EclaimSubmit';
 import EclaimForm from '../components/EclaimForm';
-import { Buttons, Texti } from '../components/common';
 import Navbar from '../components/common/Navbar';
 
 class EclaimFormSubmit extends Component {

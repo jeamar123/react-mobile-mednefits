@@ -5,7 +5,7 @@ import styles from './styles';
 const SummaryComp = () => (
   <View style={styles.container}>
     <View style={styles.sectionTitle}>
-      <View style={{ marginLeft: 20, marginRight: 20 }}>
+      <View style={{ marginLeft: 45, marginRight: 45 }}>
         <Image
           style={{ width: 35, height: 35 }}
           source={require('../../../assets/apps/payment_successful.png')}

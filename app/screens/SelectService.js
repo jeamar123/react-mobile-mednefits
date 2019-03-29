@@ -4,6 +4,7 @@ import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
+import * as Commmon from '../components/common';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
@@ -74,6 +75,14 @@ class SelectService extends Component {
     this.setState({ services: service })
   }
 
+  validationField() {
+    if (this.state.services == "") {
+      Commmon.getAlert("Mednefits", "Please at least choose one service to proceed")
+    } else {
+      Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })
+    }
+  }
+
   render() {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
@@ -97,7 +106,7 @@ class SelectService extends Component {
             ))}
           </View>
 
-          <Buttons2 style={{ width: '100%' }} onPress={() => Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })}>
+          <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
             Proceed
           </Buttons2>
         </Content>

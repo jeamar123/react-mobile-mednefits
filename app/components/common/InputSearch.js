@@ -36,6 +36,7 @@ export default class InputText extends Component {
               <View />
             )}
         <TextInput
+          autoFocus={true}
           {...this.props}
           value={this.props.value}
           onChangeText={this.props.onChangeText}

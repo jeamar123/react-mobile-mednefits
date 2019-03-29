@@ -10,11 +10,12 @@ export default EStyleSheet.create({
     fontFamily: 'helvetica',
     fontSize: 32,
     fontWeight: '300',
-    marginBottom: 120,
+    marginBottom: 100,
   },
   text: {
     fontFamily: 'helvetica',
     width: width / 1.3,
     textAlign: 'center',
+    marginBottom: 20,
   },
 });

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { StatusBar, View, StyleSheet, Dimensions, TouchableOpacity, Button, Animated, ScrollView } from 'react-native';
-import { Container, Content, Text, Drawer, Icon } from 'native-base';
+import { StatusBar, View, Dimensions, TouchableOpacity, Button, Animated, ScrollView } from 'react-native';
+import { Container, Text, Drawer, Icon } from 'native-base';
 import styles from '../components/BalanceComp/styles';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Core from '../core';
 import Modal from 'react-native-modalbox';
 import * as Common from '../components/common'
-
-const { height } = Dimensions.get('window')
 
 const styless = {
 

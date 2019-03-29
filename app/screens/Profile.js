@@ -6,8 +6,7 @@ import * as Config from '../config';
 import Navbar from '../components/common/Navbar';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ActionSheet from 'react-native-actionsheet'
-import * as Core from '../core'
-import * as Common from '../components/common'
+import * as Core from '../core';
 
 class RenderList extends Component {
   render() {

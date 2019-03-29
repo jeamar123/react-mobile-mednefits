@@ -3,11 +3,10 @@ import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-nati
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
-import { RNCamera, FaceDetector } from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
-import { Spinner, Text } from '../components/common/Spinner'
+import { Spinner } from '../components/common/Spinner'
 import { Popup } from '../components/common';
-import * as Config from '../config'
 
 const PendingView = () => (
   <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position: 'absolute' }}>
@@ -48,17 +47,17 @@ class Barcode extends Component {
   }
 
   scanBarcode = (data) => {
-  	this.setState({ isLoading: true })
+    this.setState({ isLoading: true })
     barcodeData = data
     console.log(barcodeData);
 
     try {
-      Core.GetBarcodeData(barcodeData.data, (result)=>{
-        console.warn("res "+result);
+      Core.GetBarcodeData(barcodeData.data, (result) => {
+        console.warn("res " + result);
         console.log(result)
         if (result.status) {
           Actions.SelectService({
-            type:'reset',
+            type: 'reset',
             services: result.data.clinic_procedures,
             clinicid: result.data.clinic_id
           })
@@ -75,14 +74,14 @@ class Barcode extends Component {
           })
         }
 
-        
+
       })
     } catch (e) {
       this.setState({
         isLoading: false
       })
     } finally {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.setState({
           isLoading: false
         })

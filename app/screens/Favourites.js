@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Text, Drawer, Icon } from 'native-base';
+import { Text, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
@@ -258,7 +258,7 @@ class Favourites extends Component {
               >
                 <ScrollView>
                   {this.renderTransactionIn_Network()}
-                  <TouchableOpacity onPress={() => Actions.Search()}>
+                  <TouchableOpacity onPress={() => Actions.HomeSearch()}>
                     <View
                       style={{
                         flex: 1,

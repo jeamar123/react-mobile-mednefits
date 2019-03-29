@@ -6,6 +6,7 @@ import {
   Image,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import * as Config from '../../config'
 import * as Common from '../common'
 export default class Popup extends Component {
@@ -29,13 +30,12 @@ export default class Popup extends Component {
   renderBody() {
     if (this.props.kind == 'loginFailed') {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <ImageBackground
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
+          {/* <ImageBackground
             style={{ width: 250, height: 100 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
-          />
-
+          /> */}
           <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
             <Common.Texti
               fontFamily={Config.FONT_FAMILY_ROMAN}
@@ -64,12 +64,12 @@ export default class Popup extends Component {
       );
     } else if (this.props.kind == 'insufficientCredit') {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <ImageBackground
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
+          {/* <ImageBackground
             style={{ width: 250, height: 100 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
-          />
+          /> */}
 
           <View style={{ margin: 10 }}>
             <Common.Texti
@@ -99,12 +99,12 @@ export default class Popup extends Component {
       );
     } else if (this.props.kind == 'eClaimError') {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <ImageBackground
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
+          {/* <ImageBackground
             style={{ width: 250, height: 100 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
-          />
+          /> */}
 
           <View style={{ margin: 10 }}>
             <Common.Texti
