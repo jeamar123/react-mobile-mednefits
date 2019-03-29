@@ -94,10 +94,9 @@ class Wallet extends Component {
               <View style={styles.sectionTextPanel}>
                 <Text
                   style={{
-                    fontSize: RF(1.4),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_ROMAN,
                     color: '#2C3E50',
-                    letterSpacing: 1.5,
                     lineHeight: 20
                   }}
                 >
@@ -105,9 +104,9 @@ class Wallet extends Component {
                 </Text>
                 <Text
                   style={{
-                    fontSize: RF(1.2),
+                    fontSize: 11,
                     fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
+                    color: '#4f4f4f',
                     lineHeight: 20
                   }}
                 >
@@ -127,12 +126,12 @@ class Wallet extends Component {
                 <Text
                   style={{
                     fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
                     color: '#2C3E50',
-                    letterSpacing: 1.5,
                     lineHeight: 20,
                     marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(8)
+                    marginLeft: responsiveWidth(8),
+                    fontWeight: '500'
                   }}
                 >
                   {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
@@ -179,10 +178,9 @@ class Wallet extends Component {
               <View style={styles.sectionTextPanel}>
                 <Text
                   style={{
-                    fontSize: RF(1.4),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_ROMAN,
                     color: '#2C3E50',
-                    letterSpacing: 1.5,
                     lineHeight: 20
                   }}
                 >
@@ -190,9 +188,9 @@ class Wallet extends Component {
                 </Text>
                 <Text
                   style={{
-                    fontSize: RF(1.2),
+                    fontSize: 11,
                     fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
+                    color: '#4f4f4f',
                     lineHeight: 20
                   }}
                 >
@@ -212,12 +210,12 @@ class Wallet extends Component {
                 <Text
                   style={{
                     fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
                     color: '#2C3E50',
-                    letterSpacing: 1.5,
                     lineHeight: 20,
                     marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(12)
+                    marginLeft: responsiveWidth(12),
+                    fontWeight: '500'
                   }}
                 >
                   {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
@@ -252,7 +250,7 @@ class Wallet extends Component {
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back"
+          leftNav="homeback"
           title="Wallet"
         />
         <View style={styles.wrapperTop}>
@@ -301,17 +299,27 @@ class Wallet extends Component {
               }}
               />
 
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: responsiveHeight(2),
-                  color: '#fff',
-                  lineHeight: 19
-                }}
-              >
-                Wellness
+              <View>
+                <Text
+                  style={{
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: responsiveHeight(2),
+                    color: '#fff',
+                    lineHeight: 19
+                  }}
+                >
+                  Wellness
               </Text>
+                <View
+                  style={{
+                    borderBottomColor: '#FFFFFF',
+                    borderBottomWidth: 1.2,
+                    marginTop: 5,
+                    marginBottom: 10,
+                  }}
+                />
+              </View>
 
             </View>
 
@@ -365,8 +373,8 @@ class Wallet extends Component {
           >
             <View style={{
               marginTop: responsiveHeight(-3),
-              width: responsiveWidth(40),
-              height: responsiveHeight(11),
+              width: responsiveWidth(45),
+              height: responsiveHeight(12),
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#fff',
@@ -409,8 +417,8 @@ class Wallet extends Component {
 
             <View style={{
               marginTop: responsiveHeight(-3),
-              width: responsiveWidth(40),
-              height: responsiveHeight(11),
+              width: responsiveWidth(45),
+              height: responsiveHeight(12),
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#fff',
@@ -459,7 +467,7 @@ class Wallet extends Component {
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
               marginTop: responsiveHeight(1),
-              marginLeft: responsiveWidth(-45)
+              marginLeft: responsiveWidth(-57)
             }}
           >
             <Text
@@ -476,8 +484,8 @@ class Wallet extends Component {
 
           <View style={{
             marginTop: responsiveHeight(1),
-            width: responsiveWidth(80),
-            height: responsiveHeight(41),
+            width: responsiveWidth(90),
+            height: responsiveHeight(45),
             // alignItems: 'center',
             backgroundColor: '#fff',
             elevation: 5,
@@ -558,7 +566,7 @@ class Wallet extends Component {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginTop: responsiveHeight(1.5),
+                  marginTop: responsiveHeight(2),
                 }}
               >
                 <TouchableOpacity onPress={() => Actions.HistoryTransaction()}>

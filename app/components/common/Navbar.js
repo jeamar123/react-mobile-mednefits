@@ -75,7 +75,6 @@ export default class Navbar extends React.Component {
         </View>
       );
     } else if (this.props.leftNav == 'to-home') {
-      console.log('to-home');
       return (
         <View
           style={{
@@ -111,8 +110,38 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    }
-    else if (this.props.leftNav == 'back-eclaim') {
+    } else if (this.props.leftNav == 'back-eclaim') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home()}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: Config.FONT_FAMILY_ROMAN, }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'homeback') {
       return (
         <View
           style={{
@@ -169,7 +198,7 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#fff',
-                fontSize: RF(1.6),
+                fontSize: RF(1.7),
                 fontFamily: Config.FONT_FAMILY_THIN,
                 fontWeight: 'bold'
               }}
@@ -571,7 +600,8 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'update-password') {
+    }
+    else if (this.props.rightNav == 'update-password') {
       return (
         <View
           style={{
