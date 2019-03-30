@@ -8,11 +8,10 @@ import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
 import * as Core from '../core';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 const options = {
   title: 'Select Photo',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from gallery' }],
   storageOptions: {
     skipBackup: true,
     path: 'images',
@@ -51,7 +50,10 @@ class Camera extends Component {
   takePicture = async () => {
     try {
       if (this.camera) {
-        const options = { quality: 0.5, base64: false };
+        const options = {
+          quality: 0.5, base64: false, orientation: "portrait",
+          fixOrientation: true
+        };
         const data = await this.camera.takePictureAsync(options);
         const maxHeight = Dimensions.get('window').height;
         const maxWidth = Dimensions.get('window').width;
@@ -89,9 +91,9 @@ class Camera extends Component {
     }
   }
 
-  setPreview(ind){
-    this.state.images.map((value, index)=>{
-      if (index == ind-1) {
+  setPreview(ind) {
+    this.state.images.map((value, index) => {
+      if (index == ind - 1) {
         this.setState({
           previewState: ind,
           previewImage: value.preview
@@ -123,24 +125,24 @@ class Camera extends Component {
 
   onSwipeLeft(gestureState) {
     console.warn(gestureState);
-    this.setState({shootType: 'batch'});
+    this.setState({ shootType: 'batch' });
   }
 
   onSwipeRight(gestureState) {
     console.warn(gestureState);
-    this.setState({shootType: 'single'});
+    this.setState({ shootType: 'single' });
   }
 
   onSwipe(gestureName, gestureState) {
     console.warn(gestureState);
-    const {SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    this.setState({shootType: (this.state.shootType == 'single') ? 'batch' : 'single'});
+    const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
+    this.setState({ shootType: (this.state.shootType == 'single') ? 'batch' : 'single' });
     switch (gestureName) {
       case SWIPE_LEFT:
-        this.setState({shootType: 'batch'});
+        this.setState({ shootType: 'batch' });
         break;
       case SWIPE_RIGHT:
-        this.setState({shootType: 'single'});
+        this.setState({ shootType: 'single' });
         break;
     }
   }
@@ -230,10 +232,10 @@ class Camera extends Component {
     this.retakeAction()
   }
 
-  previewCaption(){
+  previewCaption() {
     if (this.state.images.length > 0) {
-      return(
-        <View style={{flex: 1}}>
+      return (
+        <View style={{ flex: 1 }}>
           {this.state.images.map((value, index) => (
             (this.state.shootType == 'single') ? (
               <View
@@ -250,7 +252,7 @@ class Camera extends Component {
         </View>
       )
     } else {
-      return(
+      return (
         <View>
           <Common.Texti>
             bye
@@ -276,14 +278,14 @@ class Camera extends Component {
           />
         </TouchableOpacity> */}
         <View style={{ width: "100%", backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex', paddingBottom: 5 }}>
-          <View style={{width: "33%", alignItems: 'flex-start'}}>
+          <View style={{ width: "33%", alignItems: 'flex-start' }}>
             {(this.state.images.length == 2) ? (
               <TouchableOpacity
-                onPress={()=>this.removeImage(this.state.previewState - 1)}
+                onPress={() => this.removeImage(this.state.previewState - 1)}
                 style={{
                   width: 30,
                   height: 30,
-                  borderRadius: 30/2,
+                  borderRadius: 30 / 2,
                   backgroundColor: "white",
                   padding: 3,
                   justifyContent: 'center',
@@ -293,30 +295,30 @@ class Camera extends Component {
                   marginTop: 5,
                   marginLeft: 15
                 }}
-                >
-                <Icon type="Feather" name="camera" style={{ color: 'black', fontSize: 14, justifyContent: 'center'}} />
+              >
+                <Icon type="Feather" name="camera" style={{ color: 'black', fontSize: 14, justifyContent: 'center' }} />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                onPress={this.changeFlash}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: 5,
-                  marginLeft: 15
-                }}>
-                <ImageBackground
-                  source={(this.state.flashMode) ? require("../../assets/apps/flash-active.png") : require("../../assets/apps/flash.png")}
+                <TouchableOpacity
+                  onPress={this.changeFlash}
                   style={{
-                    width: 30,
-                    height: 30
-                  }}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            )}
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 5,
+                    marginLeft: 15
+                  }}>
+                  <ImageBackground
+                    source={(this.state.flashMode) ? require("../../assets/apps/flash-active.png") : require("../../assets/apps/flash.png")}
+                    style={{
+                      width: 30,
+                      height: 30
+                    }}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              )}
           </View>
-          <View style={{width: "33%"}}>
+          <View style={{ width: "33%" }}>
             {(this.state.images.length !== 2) ? (
               <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity
@@ -333,8 +335,8 @@ class Camera extends Component {
                   ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={()=>this.changeViewCamera('batch')}
-                  style={{flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
+                  onPress={() => this.changeViewCamera('batch')}
+                  style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                   <Common.Texti
                     fontColor={"#0392cf"}
                     fontSize={11}
@@ -342,54 +344,54 @@ class Camera extends Component {
                     Batch
                   </Common.Texti>
                   {(this.state.shootType == 'batch') ? (
-                    <View style={{width: 4, height:4, borderRadius: 4/2, backgroundColor: '#0392cf', marginTop: 2}}/>
-                  ) : (<View style={{width: 4, height:4, borderRadius: 4/2, marginTop: 2}} />)}
+                    <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
+                  ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity
-                  onPress={()=>this.removeImage(this.state.previewState-1)}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 30/2,
-                    backgroundColor: "#C61E00",
-                    padding: 3,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
+                <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                  <TouchableOpacity
+                    onPress={() => this.removeImage(this.state.previewState - 1)}
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 30 / 2,
+                      backgroundColor: "#C61E00",
+                      padding: 3,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
                   >
-                  <Icon type="Feather" name="trash-2" style={{ color: 'white', fontSize: 14, justifyContent: 'center' }} />
-                </TouchableOpacity>
-              </View>
-            )}
+                    <Icon type="Feather" name="trash-2" style={{ color: 'white', fontSize: 14, justifyContent: 'center' }} />
+                  </TouchableOpacity>
+                </View>
+              )}
           </View>
-          <View style={{width: "33%", alignItems: 'flex-end'}}>
+          <View style={{ width: "33%", alignItems: 'flex-end' }}>
             {(this.state.images.length == 2) ? (
               <View />
             ) : (
-              <TouchableOpacity
-                onPress={this.openGallery}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: 5,
-                  marginRight: 15
-                }}>
-                <ImageBackground
-                  source={require('../../assets/apps/gallery-round.png')}
+                <TouchableOpacity
+                  onPress={this.openGallery}
                   style={{
-                    width: 30,
-                    height: 30
-                  }}
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            )}
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 5,
+                    marginRight: 15
+                  }}>
+                  <ImageBackground
+                    source={require('../../assets/apps/gallery-round.png')}
+                    style={{
+                      width: 30,
+                      height: 30
+                    }}
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              )}
           </View>
         </View>
-        <View style={{ width: "100%", justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex', alignItems: 'center', height: '75%'}}>
+        <View style={{ width: "100%", justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex', alignItems: 'center', height: '75%' }}>
           <View style={{ width: '33%', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
             {((this.state.images.length > 0) && (this.state.preview !== false)) ? (
               this.state.images.map((value, index) => (
@@ -397,18 +399,18 @@ class Camera extends Component {
                   key={index}
                   style={{ flex: 1, paddingLeft: 15, justifyContent: 'center', alignItems: 'center' }}
                 >
-                <TouchableOpacity
-                  onPress={()=>this.setPreview(index+1)}
-                  style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    margin: 5,
-                  }}
-                >
-                  <View style={{
+                  <TouchableOpacity
+                    onPress={() => this.setPreview(index + 1)}
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      margin: 5,
+                    }}
+                  >
+                    <View style={{
                       width: 15,
                       height: 15,
-                      borderRadius: 15/2,
+                      borderRadius: 15 / 2,
                       backgroundColor: "#0392cf",
                       justifyContent: 'center',
                       alignItems: 'center',
@@ -416,16 +418,16 @@ class Camera extends Component {
                       marginBottom: -10,
                       zIndex: 99,
                     }}>
-                    <Common.Texti fontColor="#FFFFFF" fontSize={5}>{index + 1}</Common.Texti>
-                  </View>
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <ImageBackground
-                      source={{ uri: value.preview }}
-                      style={[styles.preview,{borderWidth: (this.state.previewState == (index+1)) ? 2 : 0,borderColor: (this.state.previewState == (index+1)) ? "#0392cf" : "#FFFFFF"}]}
-                    />
-                  </View>
+                      <Common.Texti fontColor="#FFFFFF" fontSize={5}>{index + 1}</Common.Texti>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <ImageBackground
+                        source={{ uri: value.preview }}
+                        style={[styles.preview, { borderWidth: (this.state.previewState == (index + 1)) ? 2 : 0, borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF" }]}
+                      />
+                    </View>
 
-                </TouchableOpacity>
+                  </TouchableOpacity>
                 </View>
               ))
             ) : (<View />)}
@@ -506,14 +508,14 @@ class Camera extends Component {
     }
   }
 
-  renderContainer(){
+  renderContainer() {
     if (this.state.previewState == 0) {
       return this.renderCamera()
     } else {
-      return(
+      return (
         <ImageBackground
           source={{ uri: this.state.previewImage }}
-          style={{flex: 1}}
+          style={{ flex: 1 }}
         />
       )
     }

@@ -3,8 +3,8 @@
 * @year 2018
 */
 
-export const MAIN                           = 'https://medicloud.sg/v2';
-// export const MAIN                           = 'http://staging.medicloud.sg/v2';
+// export const MAIN                           = 'https://medicloud.sg/v2';
+export const MAIN                           = 'http://staging.medicloud.sg/v2';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
 

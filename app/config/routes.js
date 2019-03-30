@@ -173,7 +173,6 @@ class RouterComponent extends Component {
             <Scene key="Favourites" component={Favourites} hideNavBar />
             <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
             <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
-            <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Search" component={Search} hideNavBar />
             <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
             <Scene key="Camera" component={Camera} hideNavBar />
