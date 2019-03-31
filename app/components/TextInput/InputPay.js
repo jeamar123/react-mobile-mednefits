@@ -13,7 +13,7 @@ const InputWithButton = props => {
       <TextInputMask
         autoFocus={true}
         type={'money'}
-        options={{ unit: '', precision: '2', separator: '.', delimiter: '.', }}
+        options={{ unit: '', precision: '2', separator: '.', delimiter: '', }}
         style={styles.inputPay}
         {...props}
         underlineColorAndroid="transparent"
