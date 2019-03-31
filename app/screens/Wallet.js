@@ -150,7 +150,7 @@ class Wallet extends Component {
                 </View>
                 <Text
                   style={{
-                    fontSize: RF(2.2),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_MEDIUM,
                     marginTop: 30,
                     marginRight: 10,
@@ -160,12 +160,11 @@ class Wallet extends Component {
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
-                      fontSize: RF(1.6),
+                      fontSize: 12,
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
                       marginTop: responsiveHeight(1),
-                      marginLeft: responsiveWidth(20),
                       fontWeight: '500'
                     }}
                   >
@@ -173,18 +172,18 @@ class Wallet extends Component {
                       (this.state.walletType == 'Medical') ?
                         (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
                         (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"}
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
                   </Text>
+
                 </View>
-                <Icons
-                  name="angle-right"
-                  style={{
-                    color: '#2C3E50',
-                    fontSize: 20,
-                    paddingRight: 5,
-                    marginTop: responsiveHeight(0.85),
-                  }}
-                />
               </View>
 
               <View
@@ -238,7 +237,7 @@ class Wallet extends Component {
                 </View>
                 <Text
                   style={{
-                    fontSize: RF(2.2),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_MEDIUM,
                     marginTop: 30,
                     marginRight: 10,
@@ -248,12 +247,11 @@ class Wallet extends Component {
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
-                      fontSize: RF(1.6),
+                      fontSize: 12,
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
                       marginTop: responsiveHeight(1),
-                      marginLeft: responsiveWidth(30),
                       fontWeight: '500'
                     }}
                   >
@@ -261,18 +259,18 @@ class Wallet extends Component {
                       (this.state.walletType == 'Medical') ?
                         (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
                         (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"}
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
                   </Text>
+
                 </View>
-                <Icons
-                  name="angle-right"
-                  style={{
-                    color: '#2C3E50',
-                    fontSize: 20,
-                    paddingRight: 5,
-                    marginTop: responsiveHeight(0.85),
-                  }}
-                />
               </View>
 
               <View
@@ -328,7 +326,7 @@ class Wallet extends Component {
                 </View>
                 <Text
                   style={{
-                    fontSize: RF(2.2),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_MEDIUM,
                     marginTop: 30,
                     marginRight: 10,
@@ -338,12 +336,11 @@ class Wallet extends Component {
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
-                      fontSize: RF(1.6),
+                      fontSize: 12,
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
                       marginTop: responsiveHeight(1),
-                      marginLeft: responsiveWidth(20),
                       fontWeight: '500'
                     }}
                   >
@@ -351,18 +348,17 @@ class Wallet extends Component {
                       (this.state.walletType == 'Medical') ?
                         (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
                         (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"}
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
                   </Text>
                 </View>
-                <Icons
-                  name="angle-right"
-                  style={{
-                    color: '#2C3E50',
-                    fontSize: 20,
-                    paddingRight: 5,
-                    marginTop: responsiveHeight(0.85),
-                  }}
-                />
               </View>
 
               <View
@@ -416,7 +412,7 @@ class Wallet extends Component {
                 </View>
                 <Text
                   style={{
-                    fontSize: RF(2.2),
+                    fontSize: 12,
                     fontFamily: Config.FONT_FAMILY_MEDIUM,
                     marginTop: 30,
                     marginRight: 10,
@@ -426,12 +422,11 @@ class Wallet extends Component {
                 <View style={styles.sectionTextPanel}>
                   <Text
                     style={{
-                      fontSize: RF(1.6),
+                      fontSize: 12,
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
                       marginTop: responsiveHeight(1),
-                      marginLeft: responsiveWidth(30),
                       fontWeight: '500'
                     }}
                   >
@@ -439,18 +434,17 @@ class Wallet extends Component {
                       (this.state.walletType == 'Medical') ?
                         (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
                         (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"}
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
                   </Text>
                 </View>
-                <Icons
-                  name="angle-right"
-                  style={{
-                    color: '#2C3E50',
-                    fontSize: 20,
-                    paddingRight: 5,
-                    marginTop: responsiveHeight(0.85),
-                  }}
-                />
               </View>
 
               <View
