@@ -46,6 +46,7 @@
     "react-native-router-flux": "^4.0.1",
     "react-native-simple-toast": "0.0.8",
     "react-native-svg": "^9.2.4",
+    "react-native-swipe-gestures": "^1.0.3",
     "react-native-system-setting": "^1.7.1",
     "react-native-vector-icons": "^4.6.0",
     "save": "^2.3.2"

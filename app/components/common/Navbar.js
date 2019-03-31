@@ -110,7 +110,8 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.leftNav == 'back-eclaim') {
+    }
+    else if (this.props.leftNav == 'back-eclaim') {
       return (
         <View
           style={{

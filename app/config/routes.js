@@ -151,92 +151,91 @@ class RouterComponent extends Component {
 
   render() {
     return (
-        <Router>
-          <Stack
-            key="root"
-            gesturesEnabled={false}
-            transitionConfig={transitionConfig}
-          >
-            <Scene key="Splash" component={Splash} hideNavBar />
-            <Scene key="Login" component={Logins} hideNavBar />
-            <Scene key="Forgot" component={Forgot} hideNavBar />
-            <Scene key="Home" component={Homes} hideNavBar />
-            <Scene key="SelectService" component={SelectService} hideNavBar />
-            <Scene key="Balance" component={Balance} hideNavBar />
-            <Scene key="Summary" component={Summary} hideNavBar />
-            <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
-            <Scene key="PayScan" component={ScanPay} hideNavBar />
-            <Scene
-              key="HistoryTransaction"
-              component={HistoryTransaction}
-              hideNavBar
-            />
-            <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
-            <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
-            <Scene
-              key="HistoryChieneseMedicine"
-              component={HistoryChieneseMedicine}
-              hideNavBar
-            />
-            <Scene
-              key="HistoryDentalCare"
-              component={HistoryDentalCare}
-              hideNavBar
-            />
-            <Scene key="BankList" component={BankList} hideNavBar />
-            <Scene key="Member" component={Member} hideNavBar />
-            <Scene key="SettingWallet" component={SettingWallet} hideNavBar />
-            <Scene key="EclaimSubmit" component={EclaimSubmit} hideNavBar />
-            <Scene key="DetailEclaim" component={DetailEclaim} hideNavBar />
-            <Scene
-              key="ReceiptVerification"
-              component={ReceiptVerification}
-              hideNavBar
+      <Router>
+        <Stack
+          key="root"
+          gesturesEnabled={false}
+          transitionConfig={transitionConfig}
+        >
+          <Scene key="Splash" component={Splash} hideNavBar />
+          <Scene key="Login" component={Logins} hideNavBar />
+          <Scene key="Forgot" component={Forgot} hideNavBar />
+          <Scene key="Home" component={Homes} hideNavBar />
+          <Scene key="SelectService" component={SelectService} hideNavBar />
+          <Scene key="Balance" component={Balance} hideNavBar />
+          <Scene key="Summary" component={Summary} hideNavBar />
+          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
+          <Scene key="PayScan" component={ScanPay} hideNavBar />
+          <Scene
+            key="HistoryTransaction"
+            component={HistoryTransaction}
+            hideNavBar
+          />
+          <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
+          <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
+          <Scene
+            key="HistoryChieneseMedicine"
+            component={HistoryChieneseMedicine}
+            hideNavBar
+          />
+          <Scene
+            key="HistoryDentalCare"
+            component={HistoryDentalCare}
+            hideNavBar
+          />
+          <Scene key="BankList" component={BankList} hideNavBar />
+          <Scene key="Member" component={Member} hideNavBar />
+          <Scene key="SettingWallet" component={SettingWallet} hideNavBar />
+          <Scene key="EclaimSubmit" component={EclaimSubmit} hideNavBar />
+          <Scene key="DetailEclaim" component={DetailEclaim} hideNavBar />
+          <Scene
+            key="ReceiptVerification"
+            component={ReceiptVerification}
+            hideNavBar
 
-            />
-            <Scene
-              key="InNetworkBenefits"
-              component={InNetworkBenefits}
-              hideNavBar
-            />
-            <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
-            <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
-            <Scene key="EmailSend" component={EmailSend} hideNavBar />
-            <Scene key="Barcode" component={Barcode} hideNavBar />
-            <Scene
-              key="GeneralPractitioner"
-              component={GeneralPractitioner}
-              hideNavBar
-            />
-            <Scene key="ECardUser" component={ECardUser} hideNavBar />
-            <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
-            <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
-            <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
-            <Scene key="Profile" component={Profile} hideNavBar />
-            <Scene key="Favourites" component={Favourites} hideNavBar />
-            <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
-            <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
-            <Scene key="Camera" component={Camera} hideNavBar />
-            <Scene key="Search" component={Search} hideNavBar />
-            <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
-            <Scene key="Camera" component={Camera} hideNavBar />
-            <Scene key="Paycash" component={Paycash} hideNavBar />
-            <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
-            <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
-            <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
-            <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
-            <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
-            <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />
-            <Scene key="MedicalMedications" component={MedicalMedications} hideNavBar />
-            <Scene key="MedicalHistoryAdd" component={MedicalHistoryAdd} hideNavBar />
-            <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
-            <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
-            <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
-            <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
-            <Scene key="Wallet" component={Wallet} hideNavBar />
-            <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
-          </Stack>
-        </Router>
+          />
+          <Scene
+            key="InNetworkBenefits"
+            component={InNetworkBenefits}
+            hideNavBar
+          />
+          <Scene key="HealthProvider" component={HealthProvider} hideNavBar />
+          <Scene key="ThanksEclaim" component={ThanksEclaim} hideNavBar />
+          <Scene key="EmailSend" component={EmailSend} hideNavBar />
+          <Scene key="Barcode" component={Barcode} hideNavBar />
+          <Scene
+            key="GeneralPractitioner"
+            component={GeneralPractitioner}
+            hideNavBar
+          />
+          <Scene key="ECardUser" component={ECardUser} hideNavBar />
+          <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
+          <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
+          <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
+          <Scene key="Profile" component={Profile} hideNavBar />
+          <Scene key="Favourites" component={Favourites} hideNavBar />
+          <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
+          <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
+          <Scene key="Search" component={Search} hideNavBar />
+          <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
+          <Scene key="Camera" component={Camera} hideNavBar />
+          <Scene key="Paycash" component={Paycash} hideNavBar />
+          <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
+          <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
+          <Scene key="ConfirmPay" component={ConfirmPay} hideNavBar />
+          <Scene key="MedicalCondition" component={MedicalCondition} hideNavBar />
+          <Scene key="MedicalAllergies" component={MedicalAllergies} hideNavBar />
+          <Scene key="MedicalHistory" component={MedicalHistory} hideNavBar />
+          <Scene key="MedicalMedications" component={MedicalMedications} hideNavBar />
+          <Scene key="MedicalHistoryAdd" component={MedicalHistoryAdd} hideNavBar />
+          <Scene key="MedicalMedicationsAdd" component={MedicalMedicationsAdd} hideNavBar />
+          <Scene key="MedicalConditionAdd" component={MedicalConditionAdd} hideNavBar />
+          <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
+          <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
+          <Scene key="Wallet" component={Wallet} hideNavBar />
+          <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
+        </Stack>
+      </Router>
     );
   }
 }

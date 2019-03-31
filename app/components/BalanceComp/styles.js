@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Left } from 'native-base';
+import RF from "react-native-responsive-fontsize";
+import * as Config from '../../config';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 
@@ -89,5 +91,32 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  textActive: {
+    fontSize: RF(2.2),
+    fontFamily: Config.FONT_FAMILY_MEDIUM,
+    marginTop: responsiveHeight(2),
+    color: '#fff',
+    lineHeight: 19
+  },
+  textNoactive: {
+    fontSize: RF(2.2),
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    marginTop: responsiveHeight(2),
+    color: '#fff',
+    opacity: 0.6,
+    lineHeight: 19
+  },
+  walletActive: {
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 1.2,
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  walletNotactive: {
+    borderBottomColor: '#0392cf',
+    borderBottomWidth: 1.2,
+    marginTop: 5,
+    marginBottom: 10,
   },
 });

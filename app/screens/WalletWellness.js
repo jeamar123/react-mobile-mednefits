@@ -3,6 +3,7 @@ import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Text } from 'native-base';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from '../components/BalanceComp/styles';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
@@ -46,7 +47,7 @@ class Wallet extends Component {
 
   componentWillMount() {
     this.getUserBalance();
-    this.selectSpending("medical")
+    this.selectSpending("in_network_transactions")
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
@@ -68,6 +69,38 @@ class Wallet extends Component {
         currency: result.data.currency_symbol,
         inNetwork: data.in_network_transactions,
         outNetwork: data.e_claim_transactions
+      });
+    });
+  }
+
+  getMedicalWallet() {
+    Core.GetBalanceMedical((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      this.setState({
+        medicalBalance: data.balance,
+        medicalInNetwork_Credit_spent: data.in_network_credits_spent,
+        medicalEclaim_Credit_spent: data.e_claim_credits_spent,
+        medicalcurrency: result.data.currency_symbol,
+        medicalinNetwork: data.in_network_transactions,
+        medicaloutNetwork: data.e_claim_transactions
+      });
+    });
+  }
+
+  getWelnnessWallet() {
+    Core.GetBalanceMedical((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      this.setState({
+        wallnessBalance: data.balance,
+        wallnessInNetwork_Credit_spent: data.in_network_credits_spent,
+        wallnessEclaim_Credit_spent: data.e_claim_credits_spent,
+        wallnessurrency: result.data.currency_symbol,
+        wallnessinNetwork: data.in_network_transactions,
+        wallnessoutNetwork: data.e_claim_transactions
       });
     });
   }
@@ -130,7 +163,7 @@ class Wallet extends Component {
                     color: '#2C3E50',
                     lineHeight: 20,
                     marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(8),
+                    marginLeft: responsiveWidth(20),
                     fontWeight: '500'
                   }}
                 >
@@ -214,7 +247,7 @@ class Wallet extends Component {
                     color: '#2C3E50',
                     lineHeight: 20,
                     marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(12),
+                    marginLeft: responsiveWidth(30),
                     fontWeight: '500'
                   }}
                 >
@@ -505,9 +538,9 @@ class Wallet extends Component {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => this.selectSpending("medical")}
-                  refs="medical"
-                  style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive]}
+                  onPress={() => this.selectSpending("in_network_transactions")}
+                  refs="in_network_transactions"
+                  style={[(this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
                     style={{
@@ -533,9 +566,9 @@ class Wallet extends Component {
                   }}
                 />
                 <TouchableOpacity
-                  onPress={() => this.selectSpending("wellness")}
-                  refs="wellness"
-                  style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive]}
+                  onPress={() => this.selectSpending("e_claim_transactions")}
+                  refs="e_claim_transactions"
+                  style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
                     style={{
