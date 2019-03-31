@@ -12,6 +12,7 @@ import Popup from './PopUp'
 import Texti from './Texti'
 import Body from './Body';
 import Divider from './Divider'
+import DividerWallet from './DividerWallet'
 import InputDate from './InputDate'
 import InputDateCustom from './InputDateCustom'
 import InputTime from './InputTime'
@@ -24,4 +25,4 @@ import InputFile from './InputFile'
 import Error from './Error'
 import Text from './Text'
 
-export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, DividerWallet, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, Popup, Error }

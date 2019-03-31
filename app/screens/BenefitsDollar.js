@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, TouchableOpacity, Keyboard } from 'react-native';
-import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
+import { StatusBar, Image, View } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import ResponsiveImage from 'react-native-responsive-image';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
-import { ButtonPay, Spinner, Popup, Buttons } from '../components/common/';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
@@ -21,7 +20,7 @@ class BenefitsDollar extends Component {
       amount: 0,
       currency: false,
       isLoading: false,
-      Balance: 0,
+      Balance: '0',
       placeholder: null,
       failed: false,
       title: null,
@@ -35,25 +34,16 @@ class BenefitsDollar extends Component {
     this.setState({ failed: false })
   }
 
-  componentDidMount = async () => {
-    console.log('-----')
-    console.log(this.props.clinic_data);
-    await this.setState({
-      clinic_name: this.props.clinic_data.name,
-      clinic_image: this.props.clinic_data.image_url,
-      currency: this.props.clinic_data.currency_symbol,
-      Balance: this.props.clinic_data.current_balance,
+  componentDidMount() {
+    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
+      console.log(result)
+      this.setState({
+        clinic_name: result.data.name,
+        clinic_image: result.data.image_url,
+        currency: result.data.currency_symbol,
+        Balance: result.data.current_balance,
+      });
     });
-    console.log('-----')
-    // await Core.GetClinicDetails(this.props.clinicid, async (err, result) => {
-    //   console.log(result)
-    //   await this.setState({
-    //     clinic_name: result.data.name,
-    //     clinic_image: result.data.image_url,
-    //     currency: result.data.currency_symbol,
-    //     Balance: result.data.current_balance,
-    //   });
-    // });
 
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
@@ -121,8 +111,7 @@ class BenefitsDollar extends Component {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '10%',
-                marginLeft: '10%'
+                marginBottom: '10%'
               }}
             >
               {!this.state.clinic_name ? (
@@ -131,19 +120,18 @@ class BenefitsDollar extends Component {
                   <View style={{
                     flex: 1,
                     flexDirection: 'row',
-                    justifyContent: 'center',
+                    justifyContent: 'flex-start',
                     alignItems: 'center',
                     height: 60
                   }}
                   >
-                    <ResponsiveImage
+                    <Image
                       source={{ uri: this.state.clinic_image }}
-                      style={{ resizeMode: 'center' }}
-                      initWidth="70" initHeight="70"
+                      style={{ height: 55, resizeMode: 'center', width: 155 }}
                     />
                     <Text
                       style={{
-                        marginLeft: '5%',
+                        marginLeft: '-5%',
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                         color: '#9e9e9e',
                         fontSize: 18,
@@ -154,7 +142,6 @@ class BenefitsDollar extends Component {
                       {this.state.clinic_name}
                     </Text>
                   </View>
-
                 )}
 
             </View>
@@ -183,15 +170,17 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
+                marginLeft: responsiveWidth(4),
                 flex: 1,
-                marginLeft: responsiveWidth(6),
                 flexDirection: 'row',
                 justifyContent: 'center', alignItems: 'center',
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#bdbdbd', }}>
-                {this.state.currency ? this.state.currency : ' '}
-              </Text>
+              <View>
+                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+                  {this.state.currency ? this.state.currency : ' '}
+                </Text>
+              </View>
               <InputPay
                 keyboardType="numeric"
                 placeholder="0.00"
@@ -216,9 +205,9 @@ class BenefitsDollar extends Component {
           </View>
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount.replace(/^,/, ''), clinic_data: this.props.clinic_data })}>
+          <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount })}>
             Next
-          </ButtonPay>
+            </ButtonPay>
         </Content>
       </Container>
     );

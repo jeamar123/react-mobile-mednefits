@@ -36,29 +36,30 @@ class ConfirmPay extends Component {
   }
 
   componentDidMount() {
-    // Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-    // console.log(result)
-    this.setState({
-      clinic_name: this.props.clinic_data.name,
-      clinic_image: this.props.clinic_data.image_url,
-      currency: this.props.clinic_data.currency_symbol,
-      Balance: this.props.clinic_data.current_balance,
-      placeholder: this.props.clinic_data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
+    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
+      console.log(result)
+      this.setState({
+        clinic_name: result.data.name,
+        clinic_image: result.data.image_url,
+        currency: result.data.currency_symbol,
+        Balance: result.data.current_balance,
+        placeholder: result.data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
+      });
     });
-    // });
 
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
 
-    // this.props.services.map(value =>
-    //   Core.GetProcedureDetails(value, (err, result) => {
-    //     this.setState({
-    //       amount: Number(result.data.price) + Number(this.state.amount),
-    //     });
-    //   })
-    // );
+    this.props.services.map(value =>
+      Core.GetProcedureDetails(value, (err, result) => {
+        this.setState({
+          amount: Number(result.data.price) + Number(this.state.amount),
+        });
+      })
+    );
   }
+
 
   SendPayment() {
     this.setState({ isLoading: true });
