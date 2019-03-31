@@ -66,7 +66,7 @@ class Wallet extends Component {
     this.setState({ walletType: walletType })
     setInterval(() => {
       this.setState({ isLoading: false })
-    }, 5000);
+    }, 2000);
   }
 
   getMedicalWallet() {
@@ -569,7 +569,7 @@ class Wallet extends Component {
                 {
                   (this.state.walletType == 'Medical') ?
                     (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                    (this.state.wllnessurrency) ? this.state.wllnessurrency : ''
+                    (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
                 }
               </Text>
               <Text
