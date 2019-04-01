@@ -104,8 +104,24 @@ export default EStyleSheet.create({
     fontFamily: Config.FONT_FAMILY_ROMAN,
     marginTop: responsiveHeight(2),
     color: '#fff',
-    opacity: 0.6,
+    opacity: 0.4,
     lineHeight: 19
+  },
+  textRecentActive: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#2C3E50',
+    letterSpacing: 1.5,
+    lineHeight: 20
+  },
+  textRecentNoactive: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#A8A8A8',
+    letterSpacing: 1.5,
+    lineHeight: 20
   },
   walletActive: {
     borderBottomColor: '#FFFFFF',
