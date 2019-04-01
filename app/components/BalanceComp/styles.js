@@ -104,7 +104,7 @@ export default EStyleSheet.create({
     fontFamily: Config.FONT_FAMILY_ROMAN,
     marginTop: responsiveHeight(2),
     color: '#fff',
-    opacity: 0.4,
+    opacity: 0.8,
     lineHeight: 19
   },
   textRecentActive: {
