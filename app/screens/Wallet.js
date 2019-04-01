@@ -603,10 +603,10 @@ class Wallet extends Component {
                 width: 0,
                 height: 2,
               },
-              shadowOpacity: 0.25,
+              shadowOpacity: 0.09,
               elevation: 5,
-              borderWidth: 0.3,
-              borderColor: '#DBDBDB',
+              borderWidth: 0.1,
+              borderColor: 'rgba(255,255,255,0.5)',
               borderBottomLeftRadius: 2,
               borderTopLeftRadius: 2,
             }}
@@ -662,10 +662,10 @@ class Wallet extends Component {
                 width: 0,
                 height: 2,
               },
-              shadowOpacity: 0.25,
+              shadowOpacity: 0.09,
               elevation: 5,
-              borderWidth: 0.3,
-              borderColor: '#DBDBDB',
+              borderWidth: 0.1,
+              borderColor: 'rgba(255,255,255,0.5)',
               borderTopRightRadius: 2,
               borderBottomRightRadius: 2,
 
@@ -743,7 +743,7 @@ class Wallet extends Component {
               width: 0,
               height: 2,
             },
-            shadowOpacity: 0.25,
+            shadowOpacity: 0.09,
             elevation: 5,
           }}
           >
