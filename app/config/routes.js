@@ -54,6 +54,7 @@ import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
 import HomeSearch from '../screens/HomeSearch';
 import Wallet from '../screens/Wallet';
 import WalletWellness from '../screens/WalletWellness';
+import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 
 console.disableYellowBox = true;
 
@@ -126,6 +127,11 @@ class RouterComponent extends Component {
             <Scene
               key="HistoryTransaction"
               component={HistoryTransaction}
+              hideNavBar
+            />
+            <Scene
+              key="HistoryTransactionWallet"
+              component={HistoryTransactionWallet}
               hideNavBar
             />
             <Scene key="HistoryReject" component={HistoryReject} hideNavBar />

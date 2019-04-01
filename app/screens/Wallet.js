@@ -164,7 +164,7 @@ class Wallet extends Component {
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
-                      marginTop: responsiveHeight(1),
+                      marginTop: responsiveHeight(0.8),
                       fontWeight: '500'
                     }}
                   >
@@ -251,7 +251,7 @@ class Wallet extends Component {
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
-                      marginTop: responsiveHeight(1),
+                      marginTop: responsiveHeight(0.8),
                       fontWeight: '500'
                     }}
                   >
@@ -340,7 +340,7 @@ class Wallet extends Component {
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
-                      marginTop: responsiveHeight(1),
+                      marginTop: responsiveHeight(0.8),
                       fontWeight: '500'
                     }}
                   >
@@ -426,7 +426,7 @@ class Wallet extends Component {
                       fontFamily: Config.FONT_FAMILY_MEDIUM,
                       color: '#2C3E50',
                       lineHeight: 20,
-                      marginTop: responsiveHeight(1),
+                      marginTop: responsiveHeight(0.8),
                       fontWeight: '500'
                     }}
                   >
@@ -705,7 +705,7 @@ class Wallet extends Component {
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
               marginTop: responsiveHeight(1),
-              marginLeft: responsiveWidth(-57)
+              marginLeft: responsiveWidth(-59)
             }}
           >
             <Text
@@ -748,14 +748,7 @@ class Wallet extends Component {
                   style={[(this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
-                    style={{
-                      fontSize: RF(1.6),
-                      fontWeight: '500',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
+                    style={(this.state.type == 'in_network_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
                     In-Network
                     </Text>
@@ -776,14 +769,7 @@ class Wallet extends Component {
                   style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
-                    style={{
-                      fontSize: RF(1.6),
-                      fontWeight: '500',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
+                    style={(this.state.type == 'e_claim_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
                     Out-of-Network
                     </Text>
@@ -807,7 +793,7 @@ class Wallet extends Component {
                   marginTop: responsiveHeight(2),
                 }}
               >
-                <TouchableOpacity onPress={() => Actions.HistoryTransaction()}>
+                <TouchableOpacity onPress={() => Actions.HistoryTransactionWallet()}>
                   <Text
                     style={{
                       fontSize: RF(1.6),
