@@ -51,8 +51,11 @@ class Camera extends Component {
     try {
       if (this.camera) {
         const options = {
-          quality: 0.5, base64: false, orientation: "portrait",
-          fixOrientation: true
+          quality: 0, 
+          base64: false, 
+          orientation: "portrait",
+          fixOrientation: true,
+          skipProcessing: false,
         };
         const data = await this.camera.takePictureAsync(options);
         const maxHeight = Dimensions.get('window').height;
