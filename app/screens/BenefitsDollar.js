@@ -177,7 +177,7 @@ class BenefitsDollar extends Component {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f' }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
               <InputPay
