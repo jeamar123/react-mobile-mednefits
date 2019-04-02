@@ -33,10 +33,8 @@ export default EStyleSheet.create({
   },
   inputPay: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    flex: 1,
     height: INPUT_HEIGHT,
     color: '$inputText',
     fontSize: 46,
-    width: responsiveWidth(60)
   },
 });
