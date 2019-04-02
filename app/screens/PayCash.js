@@ -22,26 +22,26 @@ class PayCash extends Component {
   }
 
   componentDidMount() {
-    // Core.GetClinicDetails(this.props.clinicid, (err, result) => {
+    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
       this.setState({
-        clinic_name: this.props.clinic_data.name,
-        clinic_image: this.props.clinic_data.image_url,
-        currency: this.props.clinic_data.currency_symbol,
-        Balance: this.props.clinic_data.current_balance,
+        clinic_name: result.data.name,
+        clinic_image: result.data.image_url,
+        currency: result.data.currency_symbol,
+        Balance: result.data.current_balance,
       });
-    // });
+    });
 
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
 
-    // this.props.services.map(value =>
-    //   Core.GetProcedureDetails(value, (err, result) => {
-    //     this.setState({
-    //       amount: Number(result.data.price) + Number(this.state.amount),
-    //     });
-    //   })
-    // );
+    this.props.services.map(value =>
+      Core.GetProcedureDetails(value, (err, result) => {
+        this.setState({
+          amount: Number(result.data.price) + Number(this.state.amount),
+        });
+      })
+    );
   }
 
   SendPayment() {

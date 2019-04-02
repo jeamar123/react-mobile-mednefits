@@ -9,7 +9,7 @@ const InputWithButton = props => {
   const containerStyles = [styles.containerPay];
 
   return (
-    <View style={containerStyles}>
+    <View >
       <TextInputMask
         autoFocus={true}
         type={'money'}

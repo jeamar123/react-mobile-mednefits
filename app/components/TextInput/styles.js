@@ -25,7 +25,7 @@ export default EStyleSheet.create({
   },
   containerPay: {
     backgroundColor: '$white',
-    width: responsiveWidth(55),
+    // width: responsiveWidth(55),
     height: INPUT_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
@@ -33,10 +33,8 @@ export default EStyleSheet.create({
   },
   inputPay: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    flex: 1,
     height: INPUT_HEIGHT,
     color: '$inputText',
     fontSize: 46,
-    width: responsiveWidth(60)
   },
 });

@@ -735,7 +735,7 @@ class Wallet extends Component {
           <View style={{
             marginTop: responsiveHeight(1.5),
             width: responsiveWidth(90),
-            height: responsiveHeight(39),
+            height: responsiveHeight(42),
             // alignItems: 'center',
             backgroundColor: '#fff',
             shadowColor: "#000",
