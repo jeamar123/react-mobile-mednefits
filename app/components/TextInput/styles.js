@@ -36,5 +36,7 @@ export default EStyleSheet.create({
     height: INPUT_HEIGHT,
     color: '$inputText',
     fontSize: 46,
+    marginLeft: responsiveWidth(5),
+    width: '100%'
   },
 });

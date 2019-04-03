@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/Navbar';
@@ -120,18 +120,23 @@ class BenefitsDollar extends Component {
                   <View style={{
                     flex: 1,
                     flexDirection: 'row',
-                    justifyContent: 'flex-start',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    height: 60
+                    height: responsiveHeight(8)
                   }}
                   >
                     <Image
                       source={{ uri: this.state.clinic_image }}
-                      style={{ height: 55, resizeMode: 'center', width: 155 }}
+                      style={{ 
+                        height: responsiveHeight(20), 
+                        resizeMode: 'center', 
+                        width: responsiveWidth(20),
+                        marginRight: responsiveWidth(4) 
+                      }}
                     />
                     <Text
                       style={{
-                        marginLeft: '-5%',
+                        // marginLeft: '-5%',
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                         color: '#9e9e9e',
                         fontSize: 18,
@@ -177,7 +182,7 @@ class BenefitsDollar extends Component {
                 alignItems: 'center',
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', marginRight: 8 }}>
+              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f',  }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
               <InputPay
