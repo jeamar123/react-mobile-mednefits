@@ -281,6 +281,42 @@ class DetailEClaim_Transaction extends Component {
               value={this.state.user ? this.state.user : 'N/A'}
             />
           </View>
+
+
+          {(this.state.data.status_text === 'Rejected') ?
+            <View>
+              {this._renderDivider()}
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginLeft: '2%',
+                    marginRight: '16%',
+                    fontSize: 13
+                  }}
+                >
+                  Reason
+                </Text>
+                <TextInput
+                  placeholder="Member"
+                  underlineColorAndroid="transparent"
+                  colo="#000"
+                  style={{ marginTop: '-3%', marginLeft: '7%', fontSize: 13 }}
+                  value={this.state.data.rejected_reason ? this.state.data.rejected_reason : 'N/A'}
+                />
+              </View>
+            </View> : <View />
+          }
+
+
           <View
             style={{
               flex: 1,
