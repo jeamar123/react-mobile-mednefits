@@ -159,7 +159,7 @@ class DetailEClaim_Transaction extends Component {
             <TextInput
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '7.5%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
             />
@@ -182,7 +182,7 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '20%', fontSize: 13 }}
               value={this.state.data.service}
             />
@@ -204,7 +204,7 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Provider"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '24%', fontSize: 13 }}
               value={this.state.data.merchant}
             />
@@ -226,7 +226,7 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '25.4%', fontSize: 13 }}
               value={this.state.data.transaction_id}
             />
@@ -250,7 +250,7 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '15.5%', fontSize: 13 }}
               value={this.state.data.date}
             />
@@ -274,7 +274,7 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '14.5%', fontSize: 13 }}
               value={this.state.data.claim_date}
             />
@@ -303,11 +303,47 @@ class DetailEClaim_Transaction extends Component {
               editable={false} selectTextOnFocus={false}
               placeholder="Member"
               underlineColorAndroid="transparent"
-              colo="#000"
+              color="#000"
               style={{ marginLeft: '8%', fontSize: 13 }}
               value={this.state.data.member ? this.state.data.member : 'N/A'}
             />
           </View>
+
+          {(this.state.data.status_text === 'Rejected') ?
+            <View>
+              {this._renderDivider2()}
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 20,
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginLeft: '2%',
+                    marginRight: '16%',
+                    fontSize: 13
+                  }}
+                >
+                  Reason
+                </Text>
+                <TextInput
+                  editable={false} selectTextOnFocus={false}
+                  placeholder="Member"
+                  underlineColorAndroid="transparent"
+                  color="#000"
+                  style={{ marginLeft: '9%', fontSize: 13 }}
+                  value={this.state.data.rejected_reason ? this.state.data.rejected_reason : 'N/A'}
+                />
+              </View>
+            </View> : <View />
+          }
+
+
           <View
             style={{
               flex: 1,
