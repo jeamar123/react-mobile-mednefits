@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Animated, Easing } from 'react-native';
-import { Scene, Router, Stack } from 'react-native-router-flux';
+import { BackHandler, SafeAreaView, Animated, Easing } from 'react-native';
+import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
+import * as Core from '../core';
 
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
@@ -106,10 +107,39 @@ const transitionConfig = () => {
 }
 
 class RouterComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      doubleBackToExitPressedOnce: false
+    }
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillMount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  onButtonPress = () => {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton = () => {
+    if (Actions.currentScene !== 'Home') {
+      Actions.pop();
+      return true;
+    } else {
+      BackHandler.exitApp();
+      return true;
+    }
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#0392cf' }}>
-        <Router>
+        <Router backAndroidHandler={this.handleBackButton} >
           <Stack
             key="root"
             gesturesEnabled={false}
