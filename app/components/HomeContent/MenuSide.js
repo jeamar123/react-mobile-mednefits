@@ -81,9 +81,7 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-        Actions.EclaimSubmit({
-          type: 'reset',
-        })
+        Actions.EclaimSubmit()
       }>
         <Left>
           <TouchableOpacity>
