@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { RNS3 } from 'react-native-aws3';
 import ImagePicker from 'react-native-image-picker';
 import DatePicker from 'react-native-datepicker-latest';
 const options = {
