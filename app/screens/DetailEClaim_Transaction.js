@@ -309,7 +309,7 @@ class DetailEClaim_Transaction extends Component {
             />
           </View>
 
-          {(this.state.data.status_text === 'Rejected') ?
+          {(this.state.data.rejected_status == true) ?
             <View>
               {this._renderDivider2()}
 
@@ -337,7 +337,7 @@ class DetailEClaim_Transaction extends Component {
                   underlineColorAndroid="transparent"
                   color="#000"
                   style={{ marginLeft: '9%', fontSize: 13 }}
-                  value={this.state.data.rejected_reason ? this.state.data.rejected_reason : 'N/A'}
+                  value={this.state.data.rejected_message ? this.state.data.rejected_message : 'N/A'}
                 />
               </View>
             </View> : <View />
