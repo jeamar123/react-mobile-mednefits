@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { StatusBar, View, Image, TextInput, Easing } from 'react-native';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import ZoomImage from 'react-native-zoom-image';
 import { HistoryClaim } from '../components/HistoryClaim';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
+
 const options = {
   title: 'Upload Your Receipt',
   takePhotoButtonTitle: 'Take a Photo',
@@ -82,18 +84,34 @@ class DetailEClaim_Transaction extends Component {
   _renderReceipt() {
     return this.state.filesData.map(Data => (
 
-      <Image
-        style={{
+      <ZoomImage
+        imgStyle={{
           width: 70,
           height: 80,
           margin: 2
         }}
+        enableScaling={true}
+        easingFunc={Easing.ease}
+        duration={200}
         source={{
           uri: !Data.file
             ? '../../assets/photo.png'
             : Data.file,
         }}
       />
+
+      // <Image
+      //   style={{
+      //     width: 70,
+      //     height: 80,
+      //     margin: 2
+      //   }}
+      //   source={{
+      //     uri: !Data.file
+      //       ? '../../assets/photo.png'
+      //       : Data.file,
+      //   }}
+      // />
     ));
   }
 
@@ -306,14 +324,15 @@ class DetailEClaim_Transaction extends Component {
                   Reason
                 </Text>
                 <Text
-                  style={{ marginTop: '-3%', 
-                  marginLeft: '8%', 
-                  fontSize: 13, 
-                  color: '#000',
-                  width: '60%',
-                  marginTop: '0.5%'
-                }}
-                numberOfLines={8}
+                  style={{
+                    marginTop: '-3%',
+                    marginLeft: '8%',
+                    fontSize: 13,
+                    color: '#000',
+                    width: '60%',
+                    marginTop: '0.5%'
+                  }}
+                  numberOfLines={8}
                 >
                   {this.state.data.rejected_message ? this.state.data.rejected_message : 'N/A'}
                 </Text>
