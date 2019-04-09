@@ -10,6 +10,7 @@ import * as Config from '../config';
 import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
 import Geolocation from 'react-native-geolocation-service';
+import Permissions from 'react-native-permissions';
 
 const headerLogin = {
   'Accept': 'application/json',
