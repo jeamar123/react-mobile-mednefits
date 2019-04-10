@@ -44,21 +44,6 @@ class NearbyClinic extends Component {
       },
       clinics: []
     };
-    this.drawerActionCallback = this.drawerActionCallback.bind(this);
-  }
-
-  closeDrawer() {
-    this._drawer._root.close();
-  }
-
-  openDrawer() {
-    this._drawer._root.open();
-  }
-
-  drawerActionCallback(callback) {
-    if (callback == true) {
-      this.openDrawer();
-    }
   }
 
   componentWillMount() {
@@ -136,20 +121,9 @@ class NearbyClinic extends Component {
   render() {
     // console.warn("clinisc "+JSON.stringify(this.state.clinics));
     return (
-      <Drawer
-        type="displace"
-        openDrawerOffset={0.4}
-        panCloseMask={0.4}
-        ref={ref => {
-          this._drawer = ref;
-        }}
-        content={<MenuSide navigator={this._navigator} />}
-        onClose={() => this.closeDrawer()}
-      >
         <View style={{ flex: 1 }}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
-            drawerAction={this.drawerActionCallback}
             leftNav="back"
             rightNav="search"
           />
@@ -310,7 +284,6 @@ class NearbyClinic extends Component {
             </View>
           </View>
         </View>
-      </Drawer>
     );
   }
 }

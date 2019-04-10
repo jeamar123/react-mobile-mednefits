@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { Text, Drawer } from 'native-base';
+import { Text } from 'native-base';
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
@@ -37,22 +37,7 @@ class NearbyClinic extends Component {
       last_page: null,
       processing: false,
     };
-    this.drawerActionCallback = this.drawerActionCallback.bind(this);
     this.paginateClinicResults = this.paginateClinicResults.bind(this);
-  }
-
-  closeDrawer() {
-    this._drawer._root.close();
-  }
-
-  openDrawer() {
-    this._drawer._root.open();
-  }
-
-  drawerActionCallback(callback) {
-    if (callback == true) {
-      this.openDrawer();
-    }
   }
 
   async componentWillMount() {
@@ -278,20 +263,9 @@ class NearbyClinic extends Component {
 
   render() {
     return (
-      <Drawer
-        type="displace"
-        openDrawerOffset={0.4}
-        panCloseMask={0.4}
-        ref={ref => {
-          this._drawer = ref;
-        }}
-        content={<MenuSide navigator={this._navigator} />}
-        onClose={() => this.closeDrawer()}
-      >
         <View style={{ flex: 1 }}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
-            drawerAction={this.drawerActionCallback}
             leftNav="back-home"
             rightNav="search"
           />
@@ -368,7 +342,6 @@ class NearbyClinic extends Component {
             </View>
           </View>
         </View>
-      </Drawer>
     );
   }
 }
