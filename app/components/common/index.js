@@ -22,5 +22,6 @@ import InputText from './InputText'
 import InputFile from './InputFile'
 import Error from './Error'
 import Text from './Text'
+import SimpleCurrencyInput from './SimpleCurrencyInput'
 
-export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputFile, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputFile, Popup, Error, SimpleCurrencyInput }

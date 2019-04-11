@@ -36,6 +36,8 @@ export default EStyleSheet.create({
     height: INPUT_HEIGHT,
     color: '$inputText',
     fontSize: 46,
-    marginLeft: 8
+    marginLeft: responsiveWidth(2),
+    width: '100%',
+    textAlign: 'right'
   },
 });

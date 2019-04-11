@@ -149,6 +149,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-text-input-mask')
 	compile project(':react-native-geolocation-service')
     compile project(':react-native-vector-icons')
     compile project(':react-native-system-setting')
