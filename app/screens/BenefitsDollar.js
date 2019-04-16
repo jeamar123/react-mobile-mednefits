@@ -182,7 +182,7 @@ class BenefitsDollar extends Component {
               </Text>
               <InputPay
                 keyboardType="numeric"
-                placeholder="0.00"
+                // placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
               />

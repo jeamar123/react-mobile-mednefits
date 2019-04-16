@@ -156,12 +156,30 @@ class HomeContent extends Component {
                     />
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text>
+                    <Text style={styles.title}>Register</Text>
                   </View>
                 </View>
               </View>
             </TouchableOpacity>
+            {/* <TouchableOpacity
+              onPress={() =>
+                Actions.Barcode()
+              }
+            >
+              <View style={styles.gridBox}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                    <Image
+                      style={{ marginBottom: 8, width: 23, height: 35 }}
+                      source={require('../../../assets/apps/payIcon.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8%' }}>
+                    <Text style={styles.title}>Checkout</Text>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity> */}
             <TouchableOpacity
               onPress={() =>
                 Actions.ECardUser()

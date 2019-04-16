@@ -1,11 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+// import { TextInputMask } from 'react-native-masked-text';
 // import TextInputMask from 'react-native-text-input-mask';
 // import CurrencyInput from 'react-currency-input';
+// import { TextInputMask } from 'react-masked-text';
 import * as Common from '../common';
-
-
 import styles from './styles';
 
 const InputWithButton = props => {
@@ -13,6 +12,16 @@ const InputWithButton = props => {
 
   return (
     <View >
+
+      {/* <TextInputMask
+        autoFocus={true}
+        kind={'money'}
+        options={{ unit: '', precision: '2', separator: '.', delimiter: ',', }}
+        style={styles.inputPay}
+        {...props}
+        underlineColorAndroid="transparent"
+      /> */}
+
       {/* <Common.SimpleCurrencyInput
         precision={2}
         separator=','
@@ -22,10 +31,17 @@ const InputWithButton = props => {
         keyboardType='numeric'
       /> */}
 
-      <TextInputMask
+      <Common.TextInputMask
         autoFocus={true}
         type={'money'}
-        options={{ unit: '', precision: '2', separator: '.', delimiter: ',', }}
+        options={{
+          unit: '',
+          precision: '2',
+          separator: '.',
+          delimiter: ',',
+          suffixUnit: ''
+        }}
+        ref={(ref) => this.moneyField = ref}
         style={styles.inputPay}
         {...props}
         underlineColorAndroid="transparent"
@@ -50,6 +66,10 @@ const InputWithButton = props => {
       /> */}
 
       {/* <CurrencyInput
+        autoFocus={'true'}
+        decimalSeparator="."
+        thousandSeparator=","
+        {...props}
       /> */}
     </View>
   );
