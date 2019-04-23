@@ -134,10 +134,10 @@ export async function UserDetail(callback) {
             },
           };
           await fetching(params, async result => {
-            console.warn('done fetching in UserDetail');
+            // console.warn('done fetching in UserDetail');
             await callback('', result)
           });
-          console.warn('fetching executed');
+          // console.warn('fetching executed');
         }
       });
     } catch (e) {

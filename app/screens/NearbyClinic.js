@@ -263,85 +263,85 @@ class NearbyClinic extends Component {
 
   render() {
     return (
-        <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <Navbar
-            leftNav="back-home"
-            rightNav="search"
-          />
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Navbar
+          leftNav="back-home"
+          rightNav="search"
+        />
 
-          {(!this.state.data) ? (
+        {(!this.state.data) ? (
+          <View
+            style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+          >
+            <Image
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: 15,
+                width: 80,
+                height: 80,
+              }}
+              source={require('../../assets/apps/search_empty.png')}
+            />
+            <Text>We are looking  for health partners near you.</Text>
+          </View>
+        ) : (
             <View
-              style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+              style={{
+                flex: 1,
+                marginLeft: '2%',
+                marginRight: '2%',
+                marginTop: '2%',
+              }}
             >
-              <Image
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginBottom: 15,
-                  width: 80,
-                  height: 80,
-                }}
-                source={require('../../assets/apps/search_empty.png')}
-              />
-              <Text>We are looking  for health partners near you.</Text>
+              <ScrollView onScroll={({ nativeEvent }) => {
+                if (isCloseToBottom(nativeEvent)) {
+                  this.paginateClinicResults();
+                }
+              }}>
+                {
+                  this.clinicNearbyByCategory()
+                }
+              </ScrollView>
+
             </View>
-          ) : (
-              <View
-                style={{
-                  flex: 1,
-                  marginLeft: '2%',
-                  marginRight: '2%',
-                  marginTop: '2%',
-                }}
-              >
-                <ScrollView onScroll={({ nativeEvent }) => {
-                  if (isCloseToBottom(nativeEvent)) {
-                    this.paginateClinicResults();
-                  }
-                }}>
-                  {
-                    this.clinicNearbyByCategory()
-                  }
-                </ScrollView>
 
-              </View>
-
-            )}
+          )}
+        <View style={{
+          height: responsiveHeight(7),
+          backgroundColor: '#0392cf'
+        }}>
           <View style={{
-            height: responsiveHeight(7),
-            backgroundColor: '#0392cf'
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginRight: '3%',
+            marginLeft: '3%',
+            marginBottom: 5,
+            marginTop: 5,
+            alignItem: 'center'
           }}>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginRight: '3%',
-              marginLeft: '3%',
-              marginBottom: 5,
-              marginTop: 5,
-              alignItem: 'center'
-            }}>
-              <TouchableOpacity onPress={() => Actions.Home()}>
-                <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}>
-                  <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
-                  <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
-                </View>
-              </TouchableOpacity>
-              {/* <TouchableOpacity
-                onPress={() => Actions.NearbyClinicMaps({
-                  clinicType: this.props.ClinicTypeID,
-                  NameCategory: this.props.NameCategory
-                })}
-              >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
-              </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => Actions.Home()}>
+              <View style={{
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
+                <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Actions.NearbyClinicMaps({
+                clinicType: this.props.ClinicTypeID,
+                NameCategory: this.props.NameCategory
+              })}
+            >
+              <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
+            </TouchableOpacity>
 
-            </View>
           </View>
         </View>
+      </View>
     );
   }
 }

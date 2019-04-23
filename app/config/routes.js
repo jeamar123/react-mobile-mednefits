@@ -56,7 +56,7 @@ import Wallet from '../screens/Wallet';
 import WalletWellness from '../screens/WalletWellness';
 import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

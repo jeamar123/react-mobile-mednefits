@@ -71,7 +71,6 @@ class HomeContent extends Component {
     }
   }
 
-
   async getUserDetail() {
     console.log('in progress fetching getUserDetail')
     await Core.UserDetail(async (error, result) => {
@@ -156,7 +155,9 @@ class HomeContent extends Component {
                     />
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Register</Text>
+                    {/* <Text style={styles.title}>Register</Text> */}
+                    <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text>
                   </View>
                 </View>
               </View>
