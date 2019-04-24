@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
+  BackHandler
 } from 'react-native';
 import { Text, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
@@ -20,9 +21,9 @@ import * as Common from '../components/common'
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE = 1.3437419;
-const LONGITUDE = 103.6839585;
-const LATITUDE_DELTA = 0.5;
+const LATITUDE = 1.352083;
+const LONGITUDE = 103.819839;
+const LATITUDE_DELTA = 0.6;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class NearbyClinic extends Component {
@@ -37,10 +38,15 @@ class NearbyClinic extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      clinics: []
+      DataClinics: [],
+      data: false,
+      current_page: null,
+      last_page: null,
+      processing: false,
     };
   }
 
+  // Loading Data Clinic in Maps with Pagination
   async componentWillMount() {
     await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
       console.warn(error);
@@ -50,7 +56,7 @@ class NearbyClinic extends Component {
           data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
           // console.warn(data.current_page);
           // console.warn(data.last_page);
-          await this.setState({ clinics: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
+          await this.setState({ DataClinics: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
         } else {
           setTimeout(function () {
             Actions.pop();
@@ -72,8 +78,46 @@ class NearbyClinic extends Component {
       }
       // console.warn(data);
     });
+
+    setInterval(() => {
+      console.warn('I Love Karnela');
+      this.paginateClinicResults();
+    }, 2000);
   }
 
+  async paginateClinicResults() {
+    console.warn('paginate');
+    // console.warn(this.state);
+    // console.warn(event)
+    if (!this.state.processing) {
+      console.warn(this.state.current_page);
+      console.warn(this.state.last_page);
+      var current_page = await this.state.current_page + 1;
+      console.warn(current_page);
+      // if(current_page != this.state.last_page) {
+      console.warn('query more')
+      this.setState({ processing: true });
+      await Core.paginateClinicResults(this.props.clinicType, current_page, async (error, result) => {
+        if (result) {
+          console.warn(result);
+          if (result.status) {
+            data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+            var new_data = this.state.DataClinics.concat(data.clinics);
+            this.setState({ DataClinics: new_data, current_page: current_page, processing: false });
+          } else {
+            this.setState({ processing: false });
+          }
+        } else {
+          this.setState({ processing: false });
+        }
+      })
+      // } else {
+      // 	console.warn('stop');
+      // }
+    }
+  }
+
+  // Loading Data Clinic in Maps with All Data in one loading
   // componentWillMount() {
   //   this.getClinics()
   // }
@@ -147,7 +191,7 @@ class NearbyClinic extends Component {
   }
 
   render() {
-    console.warn("clinisc " + JSON.stringify(this.state.clinics));
+    console.warn("DataClinic " + JSON.stringify(this.state.DataClinics));
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -170,8 +214,8 @@ class NearbyClinic extends Component {
           onPress={this.onMapPress}
         >
 
-          {(this.state.clinics) ? (
-            this.state.clinics.map(dataMarker => (
+          {(this.state.DataClinics) ? (
+            this.state.DataClinics.map(dataMarker => (
               <MapView.Marker
                 title={dataMarker.custom_title}
                 image={dataMarker.annotation_url}

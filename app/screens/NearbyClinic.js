@@ -37,18 +37,18 @@ class NearbyClinic extends Component {
       last_page: null,
       processing: false,
     };
-    this.paginateClinicResults = this.paginateClinicResults.bind(this);
+    // this.paginateClinicResults = this.paginateClinicResults.bind(this);
   }
 
   async componentWillMount() {
     await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
-      console.log(error);
-      console.log(result);
+      console.warn(error);
+      console.warn(result);
       if (result) {
         if (result.status) {
           data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-          // console.log(data.current_page);
-          // console.log(data.last_page);
+          // console.warn(data.current_page);
+          // console.warn(data.last_page);
           await this.setState({ DataClinic: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
         } else {
           setTimeout(function () {
@@ -69,25 +69,25 @@ class NearbyClinic extends Component {
           }, 2000);
         }
       }
-      // console.log(data);
+      // console.warn(data);
     });
   }
 
   async paginateClinicResults(event) {
-    console.log('paginate');
-    // console.log(this.state);
-    // console.log(event)
+    console.warn('paginate');
+    // console.warn(this.state);
+    // console.warn(event)
     if (!this.state.processing) {
-      console.log(this.state.current_page);
-      console.log(this.state.last_page);
+      console.warn(this.state.current_page);
+      console.warn(this.state.last_page);
       var current_page = await this.state.current_page + 1;
-      console.log(current_page);
+      console.warn(current_page);
       // if(current_page != this.state.last_page) {
-      console.log('query more')
+      console.warn('query more')
       this.setState({ processing: true });
       await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async (error, result) => {
         if (result) {
-          console.log(result);
+          console.warn(result);
           if (result.status) {
             data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
             var new_data = this.state.DataClinic.concat(data.clinics);
@@ -100,7 +100,7 @@ class NearbyClinic extends Component {
         }
       })
       // } else {
-      // 	console.log('stop');
+      // 	console.warn('stop');
       // }
     }
   }
