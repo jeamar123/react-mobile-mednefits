@@ -2,42 +2,32 @@ import React, { Component } from 'react';
 import {
   StatusBar,
   View,
-  ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
   Dimensions,
   Platform,
-  ImageBackground
 } from 'react-native';
-import { Text, Drawer, Icon } from 'native-base';
+import { Text } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import IconR from 'react-native-vector-icons/Feather';
 import Svg, { Image } from 'react-native-svg'
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
-import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
 import * as Core from '../core';
 import MapView, { Callout, PROVIDER_GOOGLE } from 'react-native-maps';
-const { width, height } = Dimensions.get('window');
 import * as Common from '../components/common'
-const ASPECT_RATIO = width / height;
 
-const LATITUDE = 1.3437419;
-const LONGITUDE = 103.6839585;
-const LATITUDE_DELTA = 0.5;
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE = 1.352083;
+const LONGITUDE = 103.819839;
+const LATITUDE_DELTA = 0.6;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-import MEDICAL_PIN from '../../assets/annotation_red_cross.png';
 
 class NearbyClinic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idTransaction: '0',
-      date: '',
-      customerName: '',
-      price: '',
       status: '',
       DataClinic: [],
       data: false,
@@ -47,41 +37,102 @@ class NearbyClinic extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      clinics: []
+      DataClinics: [],
+      data: false,
+      current_page: null,
+      last_page: null,
+      processing: false,
     };
-    this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
-  closeDrawer() {
-    this._drawer._root.close();
+  // Loading Data Clinic in Maps with Pagination
+  async componentWillMount() {
+    await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
+      console.warn(error);
+      console.warn(result);
+      if (result) {
+        if (result.status) {
+          data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+          // console.warn(data.current_page);
+          // console.warn(data.last_page);
+          await this.setState({ DataClinics: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
+        } else {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+          }, 2000);
+        }
+      } else {
+        if (error.code === 3) {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong("", 'Unable to get location. Please try again.');
+          }, 1000);
+        } else {
+          setTimeout(function () {
+            Actions.pop();
+            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+          }, 2000);
+        }
+      }
+      // console.warn(data);
+    });
+
+    setInterval(() => {
+      console.warn('I Love Karnela');
+      this.paginateClinicResults();
+    }, 2000);
   }
 
-  openDrawer() {
-    this._drawer._root.open();
-  }
-
-  drawerActionCallback(callback) {
-    if (callback == true) {
-      this.openDrawer();
+  async paginateClinicResults() {
+    console.warn('paginate');
+    // console.warn(this.state);
+    // console.warn(event)
+    if (!this.state.processing) {
+      console.warn(this.state.current_page);
+      console.warn(this.state.last_page);
+      var current_page = await this.state.current_page + 1;
+      console.warn(current_page);
+      // if(current_page != this.state.last_page) {
+      console.warn('query more')
+      this.setState({ processing: true });
+      await Core.paginateClinicResults(this.props.clinicType, current_page, async (error, result) => {
+        if (result) {
+          console.warn(result);
+          if (result.status) {
+            data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+            var new_data = this.state.DataClinics.concat(data.clinics);
+            this.setState({ DataClinics: new_data, current_page: current_page, processing: false });
+          } else {
+            this.setState({ processing: false });
+          }
+        } else {
+          this.setState({ processing: false });
+        }
+      })
+      // } else {
+      // 	console.warn('stop');
+      // }
     }
   }
 
-  componentWillMount() {
-    this.getClinics()
-  }
+  // Loading Data Clinic in Maps with All Data in one loading
+  // componentWillMount() {
+  //   this.getClinics()
+  // }
 
-  getClinics = async () => {
-    console.warn(this.props);
-    await Core.GetClinicMap(this.props.clinicType, (err, result) => {
-      console.warn('result', result)
-      if (result) {
-        this.setState({
-          clinics: result
-        })
-        this.getCurrentPosition()
-      }
-    })
-  }
+  // getClinics = async () => {
+  //   console.warn(this.props);
+  //   await Core.GetClinicMap(this.props.clinicType, (err, result) => {
+  //     console.warn('result', result)
+  //     if (result) {
+  //       this.setState({
+  //         clinics: result
+  //       })
+  //       this.getCurrentPosition()
+  //     }
+  //   })
+  // }
 
   getCurrentPosition = async () => {
     latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
@@ -139,20 +190,9 @@ class NearbyClinic extends Component {
   render() {
     let i = 0;
     return (
-      <Drawer
-        type="displace"
-        openDrawerOffset={0.4}
-        panCloseMask={0.4}
-        ref={ref => {
-          this._drawer = ref;
-        }}
-        content={<MenuSide navigator={this._navigator} />}
-        onClose={() => this.closeDrawer()}
-      >
         <View style={{ flex: 1 }}>
           <StatusBar backgroundColor="white" barStyle="dark-content" />
           <Navbar
-            drawerAction={this.drawerActionCallback}
             leftNav="back"
             rightNav="search"
           />
@@ -171,8 +211,8 @@ class NearbyClinic extends Component {
             onPress={this.onMapPress}
           >
 
-            {(this.state.clinics) ? (
-              this.state.clinics.map(dataMarker => (
+            {(this.state.DataClinics) ? (
+              this.state.DataClinics.map(dataMarker => (
                 <MapView.Marker
                   title={dataMarker.custom_title}
                   image={dataMarker.annotation_url}
@@ -318,7 +358,6 @@ class NearbyClinic extends Component {
             </View>
           </View>
         </View>
-      </Drawer>
     );
   }
 }
