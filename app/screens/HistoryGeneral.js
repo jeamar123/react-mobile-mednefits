@@ -6,6 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { HistoryUser } from '../components/HistoryUser';
 import * as Core from '../core';
+import * as Config from '../config';
 import Navbar from '../components/common/Navbar';
 const options = {
   title: 'Upload Your Receipt',
@@ -90,13 +91,26 @@ class History extends Component {
               style={{
                 width: 35,
                 height: 35,
-                marginHorizontal: 30,
-                marginRight: 30,
-                marginLeft: 100,
+                marginTop: '3%',
+                marginLeft: '17.5%',
               }}
               source={{ uri: this.state.data.clinic_type_image }}
             />
-            <Text
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '13.5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
+              </Text>
+            </View>
+            {/* <Text
               style={{
                 paddingHorizontal: 10,
                 marginLeft: '-3.3%',
@@ -105,8 +119,7 @@ class History extends Component {
                 fontWeight: 'bold',
               }}
             >
-              {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
-            </Text>
+            </Text> */}
           </View>
           <View
             style={{
@@ -121,17 +134,28 @@ class History extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                marginLeft: 20,
-                padding: 5,
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
                 fontSize: 13,
-                marginBottom: 10,
+                marginLeft: '7%',
               }}
             >
               Transaction #
-              </Text>
-            <Text style={{ marginLeft: responsiveWidth(12), padding: 5, fontSize: 13, marginBottom: 10, }}>
-              {this.props.transaction_id}
             </Text>
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '13.5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.props.transaction_id}
+              </Text>
+            </View>
           </View>
 
           <View
@@ -145,17 +169,31 @@ class History extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                marginLeft: 20,
-                marginRight: '6%',
-                padding: 5,
-                fontSize: 13
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 13,
+                marginLeft: '7%',
               }}
             >
               Services/s
-              </Text>
-            <Text style={{ padding: 5, marginLeft: responsiveWidth(10.7), borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-              {this.state.data.services}
             </Text>
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '18%',
+                borderBottomWidth: 1,
+                borderColor: '#efeff1',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  borderColor: '#efeff1',
+                  fontSize: 13
+                }}>
+                {this.state.data.services}
+              </Text>
+            </View>
           </View>
 
           <View
@@ -169,17 +207,31 @@ class History extends Component {
             <Text
               style={{
                 color: '#c4c4c4',
-                marginLeft: 20,
-                marginRight: '3%',
-                padding: 5,
-                fontSize: 13
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 13,
+                marginLeft: '7%',
               }}
             >
               Date & Time
-              </Text>
-            <Text style={{ marginLeft: responsiveWidth(10.9), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-              {this.state.data.date_of_transaction}
             </Text>
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '15.3%',
+                borderBottomWidth: 1,
+                borderColor: '#efeff1',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  borderColor: '#efeff1',
+                  fontSize: 13
+                }}>
+                {this.state.data.date_of_transaction}
+              </Text>
+            </View>
           </View>
 
           <View
@@ -191,13 +243,33 @@ class History extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '9%', padding: 5, fontSize: 13 }}
+              style={{
+                color: '#c4c4c4',
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 13,
+                marginLeft: '7%',
+              }}
             >
               Member
-              </Text>
-            <Text style={{ marginLeft: responsiveWidth(11.2), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-              {(this.state.data.customer) ? this.state.data.customer : "N/A"}
             </Text>
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '21.4%',
+                borderBottomWidth: 1,
+                borderColor: '#efeff1',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  borderColor: '#efeff1',
+                  fontSize: 13
+                }}>
+                {(this.state.data.customer) ? this.state.data.customer : "N/A"}
+              </Text>
+            </View>
           </View>
 
           <View
@@ -209,13 +281,33 @@ class History extends Component {
             }}
           >
             <Text
-              style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+              style={{
+                color: '#c4c4c4',
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 13,
+                marginLeft: '7%',
+              }}
             >
               Payment Type
-              </Text>
-            <Text style={{ marginLeft: responsiveWidth(8.5), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-              {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
             </Text>
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '12.5%',
+                borderBottomWidth: 1,
+                borderColor: '#efeff1',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  borderColor: '#efeff1',
+                  fontSize: 13
+                }}>
+                {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
+              </Text>
+            </View>
           </View>
 
           {(this.state.data.lite_plan == false) ?
