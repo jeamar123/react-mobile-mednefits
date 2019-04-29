@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.RNTextInputMask.RNTextInputMaskPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
@@ -31,10 +32,19 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new RNTextInputMaskPackage(), new VectorIconsPackage(), new SystemSettingPackage(),
-          new MapsPackage(), new ImagePickerPackage(), new RNFSPackage(), new ReactNativeDocumentPicker(),
-          new RNCameraPackage(), new RNFusedLocationPackage(), new SvgPackage());
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(),
+        new ReactNativePushNotificationPackage(),
+        new RNTextInputMaskPackage(), 
+        new VectorIconsPackage(), 
+        new SystemSettingPackage(),
+        new MapsPackage(), 
+        new ImagePickerPackage(), 
+        new RNFSPackage(), 
+        new ReactNativeDocumentPicker(),
+        new RNCameraPackage(), 
+        new RNFusedLocationPackage(), 
+        new SvgPackage());
     }
 
     @Override

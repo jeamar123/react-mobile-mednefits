@@ -149,15 +149,16 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-text-input-mask')
-	compile project(':react-native-geolocation-service')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-system-setting')
-    compile project(':react-native-maps')
-    compile project(':react-native-image-picker')
-    compile project(':react-native-fs')
-    compile project(':react-native-document-picker')
-    compile project(':react-native-camera')
+    implementation project(':react-native-text-input-mask')
+	implementation project(':react-native-geolocation-service')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-system-setting')
+    implementation project(':react-native-maps')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-document-picker')
+    implementation project(':react-native-push-notification')
+    implementation project(':react-native-camera')
     implementation project(':react-native-svg')
     implementation project(':react-native-fs')
     implementation (project(':react-native-camera')) {
@@ -179,7 +180,7 @@ dependencies {
       exclude group: 'com.google.android.gms', module: 'play-services-maps'
     }
   
-    compile(project(':react-native-geolocation-service')) {
+    implementation(project(':react-native-geolocation-service')) {
       exclude group: 'com.google.android.gms', module: 'play-services-location'
     }
 
