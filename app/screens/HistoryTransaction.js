@@ -362,7 +362,8 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-6%'
+                marginTop: '-6%',
+                marginBottom: '1%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
