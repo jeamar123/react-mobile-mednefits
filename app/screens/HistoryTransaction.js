@@ -233,7 +233,7 @@ class HistoryTransaction extends Component {
               color: '#fff',
             }}
           >
-            Approve
+            Approved
           </Text>
         </View>
       );
