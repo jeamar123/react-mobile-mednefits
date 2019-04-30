@@ -27,5 +27,6 @@ export default EStyleSheet.create({
     fontFamily: 'helvetica',
     width: width / 1.3,
     textAlign: 'center',
+    color: "#3C4D5E"
   },
 });
