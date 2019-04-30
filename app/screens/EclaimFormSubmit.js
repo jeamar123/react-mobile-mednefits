@@ -3,7 +3,8 @@ import { StatusBar } from 'react-native';
 import { Container } from 'native-base';
 import { EclaimSubmit } from '../components/EclaimSubmit';
 import EclaimForm from '../components/EclaimForm';
-import Navbar from '../components/common/Navbar';
+import EclaimStep from '../components/EclaimStep';
+import Navbar from '../components/common/NavbarGrey';
 
 class EclaimFormSubmit extends Component {
 
@@ -20,17 +21,17 @@ class EclaimFormSubmit extends Component {
   render() {
     return (
       <Container>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back-eclaim"
-          title="E-Claim"
-          subtitle="File e-claim"
-          rightNav="next"
-          rightNavCallback={this.rightNavCallback}
+          leftNav="back"
+          title="Submit Claim"
+          subtitle="E-Claim"
+          fontColor="#000000"
         />
-        <EclaimSubmit />
+        <EclaimStep />
         <EclaimForm
           submitForm={this.state.submitForm}
+          claim={this.props.claim}
+          claimTypeState={this.props.claimTypeState}
         />
       </Container>
     );
