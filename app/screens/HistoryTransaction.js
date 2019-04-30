@@ -426,7 +426,7 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  <View style={{ marginBottom: 10 }}>
+                  <View style={{ marginBottom: 20 }}>
                     {this.renderTransactionIn_Network()}
                   </View>
                 )}
@@ -453,7 +453,7 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  <View style={{ marginBottom: 60 }}>
+                  <View style={{ marginBottom: 200 }}>
                     {this.renderTransactionE_Claim()}
                   </View>
                 )}
