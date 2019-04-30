@@ -116,7 +116,7 @@ export default class EclaimForm extends Component {
           time: this.state.time
         }
 
-        Actions.ReceiptVerification({ claimdata: Object.assign({}, claimData, {memberData: this.state.memberData}) })
+        Actions.ReceiptVerification({ claimdata: Object.assign({}, claimData, { memberData: this.state.memberData }) })
 
       }
     } catch (e) {
@@ -133,7 +133,7 @@ export default class EclaimForm extends Component {
         <Core.Loader
           isVisible={this.state.isLoading}
         />
-      <ScrollView showsVerticalScrollIndicator={false} >
+        <ScrollView showsVerticalScrollIndicator={false} >
           <View
             style={styles.sectionComponent}
           >
@@ -168,7 +168,7 @@ export default class EclaimForm extends Component {
             </Common.Texti>
           </View>
 
-          <View style={{flex: 1, marginLeft: "5%", marginRight: "5%"}}>
+          <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
             <View
               style={styles.fieldStyle}
             >
@@ -177,8 +177,8 @@ export default class EclaimForm extends Component {
               </Common.Texti>
 
               <TouchableOpacity
-                onPress={()=>Actions.SelectList({title: "Claim Type", data: this.state.claimType})}
-                style={{flexDirection: 'row'}}>
+                onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
                   {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
                 </Common.Texti>
@@ -205,13 +205,13 @@ export default class EclaimForm extends Component {
               }}>
                 Provider
             </Common.Texti>
-            <Common.InputText
-              value={this.state.provider}
-              onChangeText={text => this.setState({ provider: text })}
-              placeholder="Name of Provider"
-              iconColor="#9e9e9e"
-              leftToRight
-            />
+              <Common.InputText
+                value={this.state.provider}
+                onChangeText={text => this.setState({ provider: text })}
+                placeholder="Name of Provider"
+                iconColor="#9e9e9e"
+                leftToRight
+              />
             </View>
 
             <Common.Divider />
@@ -314,7 +314,7 @@ export default class EclaimForm extends Component {
             <Common.Divider />
 
             <View
-              style={[styles.fieldStyle, {marginBottom: "10%"}]}
+              style={[styles.fieldStyle, { marginBottom: "10%" }]}
             >
               <Common.Texti style={{
                 justifyContent: 'center',
@@ -323,32 +323,32 @@ export default class EclaimForm extends Component {
                 Member
             </Common.Texti>
 
-            <Common.InputSelect
-              placeholder={this.state.memberState}
-              data={this.state.memberData}
-              value={this.state.member}
-              onValueChange={(value) => this.setState({ member: value })}
-            />
+              <Common.InputSelect
+                placeholder={this.state.memberState}
+                data={this.state.memberData}
+                value={this.state.member}
+                onValueChange={(value) => this.setState({ member: value })}
+              />
             </View>
 
           </View>
 
           <TouchableOpacity
-            onPress={()=>this.nextSnapPhoto()}
+            onPress={() => this.nextSnapPhoto()}
             style={{
-              backgroundColor:"#0392CF",
+              backgroundColor: "#0392CF",
               width: "100%",
               marginBottom: "5%",
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            >
+          >
             <Common.Texti
               fontSize={16}
               fontColor={"#ffffff"}
               style={{
-              padding: 10
-            }}>
+                padding: 10
+              }}>
               Next
           </Common.Texti>
           </TouchableOpacity>

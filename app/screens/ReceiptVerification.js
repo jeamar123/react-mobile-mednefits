@@ -24,9 +24,9 @@ class ReceiptVerification extends Component {
         />
         <VericicationReceipt />
         <TouchableOpacity
-          onPress={()=>Actions.Camera({ claimdata: this.props.claimdata })}
-          style={{ backgroundColor: "#EFEFF4"}}>
-          <View style={{justifyContent: 'center', alignItems: 'center',paddingTop: 60,paddingBottom: 60}}>
+          onPress={() => Actions.Camera({ claimdata: this.props.claimdata })}
+          style={{ backgroundColor: "#EFEFF4" }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 60, paddingBottom: 60 }}>
             <Icon name="camera" style={{ color: '#B4B4B4', fontSize: 36 }} />
             <Common.Texti fontColor={"#B4B4B4"}>
               Snap and upload your receipt
