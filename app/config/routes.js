@@ -57,8 +57,9 @@ import Wallet from '../screens/Wallet';
 import WalletWellness from '../screens/WalletWellness';
 import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
+import SelectList from '../screens/SelectList';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -225,7 +226,6 @@ class RouterComponent extends Component {
               key="ReceiptVerification"
               component={ReceiptVerification}
               hideNavBar
-
             />
             <Scene
               key="InNetworkBenefits"
@@ -251,7 +251,6 @@ class RouterComponent extends Component {
             <Scene key="Updatepassword" component={Updatepassword} hideNavBar />
             <Scene key="Search" component={Search} hideNavBar />
             <Scene key="DetailClinic" component={DetailClinic} hideNavBar />
-            <Scene key="Camera" component={Camera} hideNavBar />
             <Scene key="Paycash" component={Paycash} hideNavBar />
             <Scene key="NearbyClinic" component={NearbyClinic} hideNavBar />
             <Scene key="NearbyClinicMaps" component={NearbyClinicMaps} hideNavBar />
@@ -268,6 +267,7 @@ class RouterComponent extends Component {
             <Scene key="Wallet" component={Wallet} hideNavBar />
             <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
             <Scene key="checkinUser" component={checkinUser} hideNavBar />
+            <Scene key="SelectList" component={SelectList} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

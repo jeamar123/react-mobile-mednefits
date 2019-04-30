@@ -207,7 +207,7 @@ export default class CameraComponent extends Component{
               onPress={()=>this.changeViewCamera('single')}
               style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
               <Common.Texti
-                fontColor={"#0392cf"}
+                fontColor={(this.state.shootType == 'batch') ? "black" : "#0392cf"}
                 fontSize={11}
               >
                 Single{" "}
@@ -220,7 +220,7 @@ export default class CameraComponent extends Component{
               onPress={()=>this.changeViewCamera('batch')}
               style={{flexDirection: 'column',  justifyContent: 'center', alignItems: 'center'}}>
               <Common.Texti
-                fontColor={"#0392cf"}
+                fontColor={(this.state.shootType == 'single') ? "black" : "#0392cf"}
                 fontSize={11}
               >
                 Batch
