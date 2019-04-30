@@ -110,16 +110,6 @@ class History extends Component {
                 {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
               </Text>
             </View>
-            {/* <Text
-              style={{
-                paddingHorizontal: 10,
-                marginLeft: '-3.3%',
-                paddingVertical: 10,
-                fontSize: 13,
-                fontWeight: 'bold',
-              }}
-            >
-            </Text> */}
           </View>
           <View
             style={{
@@ -320,13 +310,33 @@ class History extends Component {
               }}
             >
               <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+                style={{
+                  color: '#c4c4c4',
+                  marginTop: '3%',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  fontSize: 13,
+                  marginLeft: '7%',
+                }}
               >
                 Total Amount
-                  </Text>
-              <Text style={{ marginLeft: responsiveWidth(9.3), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {(this.state.data.amount) ? this.state.data.amount : "0.00"}
               </Text>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: '14%',
+                  borderBottomWidth: 1,
+                  borderColor: '#efeff1',
+                  width: '100%',
+                  fontSize: 13
+                }}>
+                <Text
+                  style={{
+                    borderColor: '#efeff1',
+                    fontSize: 13
+                  }}>
+                  {(this.state.data.amount) ? this.state.data.amount : "0.00"}
+                </Text>
+              </View>
             </View>
           }
 
@@ -340,13 +350,35 @@ class History extends Component {
               }}
             >
               <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13, width: '30%' }}
+                style={{
+                  color: '#c4c4c4',
+                  marginTop: '3%',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  fontSize: 13,
+                  marginLeft: '7%',
+                  width: '20%'
+                }}
               >
                 Medicine & Treatment
-                  </Text>
-              <Text style={{ marginLeft: responsiveWidth(-0.7), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
-                {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
               </Text>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: '9%',
+                  borderBottomWidth: 1,
+                  borderColor: '#efeff1',
+                  width: '100%',
+                  marginTop: '3%',
+                  fontSize: 13
+                }}>
+                <Text
+                  style={{
+                    borderColor: '#efeff1',
+                    fontSize: 13
+                  }}>
+                  {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
+                </Text>
+              </View>
               {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
                 style={{
                   paddingTop: 5,
@@ -383,13 +415,33 @@ class History extends Component {
               }}
             >
               <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+                style={{
+                  color: '#c4c4c4',
+                  marginTop: '3%',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  fontSize: 13,
+                  marginLeft: '7.5%',
+                }}
               >
                 Consultation
-                  </Text>
-              <Text style={{ marginLeft: responsiveWidth(10), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '43%', fontSize: 13 }}>
-                {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
               </Text>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: '14%',
+                  borderBottomWidth: 1,
+                  borderColor: '#efeff1',
+                  width: '42%',
+                  fontSize: 13
+                }}>
+                <Text
+                  style={{
+                    borderColor: '#efeff1',
+                    fontSize: 13
+                  }}>
+                  {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
+                </Text>
+              </View>
               {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
                 style={{
                   paddingTop: 5,
@@ -411,7 +463,7 @@ class History extends Component {
                   }}
                 >
                   Credits
-                    </Text>
+                </Text>
               </View>}
             </View>
           }

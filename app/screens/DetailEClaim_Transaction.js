@@ -159,13 +159,27 @@ class DetailEClaim_Transaction extends Component {
             >
               Spending Account
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
               color="#000"
               style={{ marginLeft: '7.5%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -181,14 +195,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Claim Type
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '18.5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.service ? this.state.data.service : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               editable={false} selectTextOnFocus={false}
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
               color="#000"
               style={{ marginLeft: '20%', fontSize: 13 }}
               value={this.state.data.service}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -203,14 +231,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Provider
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '23%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.merchant ? this.state.data.merchant : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               editable={false} selectTextOnFocus={false}
               placeholder="Provider"
               underlineColorAndroid="transparent"
               color="#000"
               style={{ marginLeft: '24%', fontSize: 13 }}
               value={this.state.data.merchant}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -225,14 +267,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Claim #
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '24.5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.transaction_id ? this.state.data.transaction_id : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               editable={false} selectTextOnFocus={false}
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
               color="#000"
               style={{ marginLeft: '25.4%', fontSize: 13 }}
               value={this.state.data.transaction_id}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -249,14 +305,28 @@ class DetailEClaim_Transaction extends Component {
             >
               Date & Time
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginLeft: '13.5%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.date ? this.state.data.date : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               editable={false} selectTextOnFocus={false}
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
               color="#000"
               style={{ marginLeft: '15.5%', fontSize: 13 }}
               value={this.state.data.date}
-            />
+            /> */}
           </View>
           {this._renderDivider2()}
 
