@@ -88,9 +88,8 @@ class SelectService extends Component {
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back-home"
+          leftNav="back"
           title="Select Service/s"
-          subtitle="Scan & Pay"
         />
         <Content padder>
           <View style={styles.contain}>

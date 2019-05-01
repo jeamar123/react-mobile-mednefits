@@ -47,7 +47,7 @@ export function SetDataLocal(params, callback) {
     callback('', true);
   } catch (error) {
     // console.warn(error.message);
-    Core.getNotify('', 'Gagal set data lokal');
+    Core.getNotify('', 'Failed set data to localstorage phone');
   }
 }
 

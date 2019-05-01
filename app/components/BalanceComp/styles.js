@@ -1,6 +1,8 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Left } from 'native-base';
+import RF from "react-native-responsive-fontsize";
+import * as Config from '../../config';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 
@@ -89,5 +91,48 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  textActive: {
+    fontSize: RF(2.2),
+    fontFamily: Config.FONT_FAMILY_MEDIUM,
+    marginTop: responsiveHeight(2),
+    color: '#fff',
+    lineHeight: 19
+  },
+  textNoactive: {
+    fontSize: RF(2.2),
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    marginTop: responsiveHeight(2),
+    color: '#fff',
+    opacity: 0.8,
+    lineHeight: 19
+  },
+  textRecentActive: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#2C3E50',
+    letterSpacing: 1.5,
+    lineHeight: 20
+  },
+  textRecentNoactive: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#A8A8A8',
+    letterSpacing: 1.5,
+    lineHeight: 20
+  },
+  walletActive: {
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 1.2,
+    marginTop: 5,
+    marginBottom: 10,
+  },
+  walletNotactive: {
+    borderBottomColor: '#0392cf',
+    borderBottomWidth: 1.2,
+    marginTop: 5,
+    marginBottom: 10,
   },
 });

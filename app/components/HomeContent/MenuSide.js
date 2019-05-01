@@ -58,9 +58,7 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-        Actions.Wallet({
-          type: 'reset',
-        })
+        Actions.Wallet()
       }>
         <Left>
           <TouchableOpacity
@@ -83,9 +81,7 @@ const MenuSide = () => (
       </ListItem>
 
       <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-        Actions.EclaimSubmit({
-          type: 'reset',
-        })
+        Actions.EclaimSubmit()
       }>
         <Left>
           <TouchableOpacity>

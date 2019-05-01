@@ -233,7 +233,7 @@ class HistoryTransaction extends Component {
               color: '#fff',
             }}
           >
-            Approve
+            Approved
           </Text>
         </View>
       );
@@ -362,7 +362,8 @@ class HistoryTransaction extends Component {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-6%'
+                marginTop: '-6%',
+                marginBottom: '1%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
@@ -425,7 +426,7 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  <View style={{ marginBottom: 10 }}>
+                  <View style={{ marginBottom: 20 }}>
                     {this.renderTransactionIn_Network()}
                   </View>
                 )}
@@ -452,7 +453,7 @@ class HistoryTransaction extends Component {
                   </View>
                 </View>
               ) : (
-                  <View style={{ marginBottom: 60 }}>
+                  <View style={{ marginBottom: 200 }}>
                     {this.renderTransactionE_Claim()}
                   </View>
                 )}

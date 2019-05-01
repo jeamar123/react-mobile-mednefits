@@ -68,7 +68,7 @@ class ConfirmPay extends Component {
     Core.SendPayment(params, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Summary({ result: result });
+        Actions.Summary({ result: result, type: 'reset' });
         this.setState({ isLoading: false });
       } else if (!result.status) {
         // Core.getNotify('', result.message);
