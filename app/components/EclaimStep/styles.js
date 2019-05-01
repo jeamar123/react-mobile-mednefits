@@ -6,8 +6,8 @@ const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   container: {
-    paddingTop: 14,
-    paddingBottom: 14,
+    paddingTop: '4.3%',
+    paddingBottom: '4.3%',
     backgroundColor: "#EFEFF4",
   },
   stepContainer: {

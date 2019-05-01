@@ -13,7 +13,7 @@ export default EStyleSheet.create({
     marginBottom: 20,
     marginLeft: "5%",
     marginRight: "5%",
-    marginTop: '2.5%',
+    marginTop: '2%',
   },
   sectionSpending: {
     flexDirection: 'row',
@@ -25,7 +25,7 @@ export default EStyleSheet.create({
     marginRight: "5%",
   },
   dividerDetail: {
-    padding: '2%',
+    padding: 8,
     backgroundColor: "#EFEFF4"
   },
   sectionTitleComponent: {
