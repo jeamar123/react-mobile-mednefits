@@ -5,20 +5,20 @@ import {
   View,
   Text,
   TextInput,
-  Image,
   ScrollView,
   ActivityIndicator,
   ImageBackground
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Container } from 'native-base';
+import { Container, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { ClaimDetail } from '../components/ClaimDetail';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
-import * as Core from '../core'
 import * as Common from '../components/common';
+import EclaimStep from '../components/EclaimStep';
+import * as Core from '../core';
 
 class DetailEclaim extends Component {
 
@@ -98,6 +98,7 @@ class DetailEclaim extends Component {
 
   async renderMember() {
     const user = await this.props.claimdata.memberData.find(item => item.value === this.props.claimdata.member)
+
     if (user) {
       this.setState({ member: user.label })
     }
@@ -151,18 +152,23 @@ class DetailEclaim extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
-        <ClaimDetail />
-        {/*<Popup
-          kind="eClaimError"
-          isVisible={this.state.failed}
-          closeSection={true}
-          closeSectionUpdate={this.isVisibleUpdate}
-          title={this.state.title}
-          message={this.state.message}
-        />*/}
+        <EclaimStep
+          currentPosition={2}
+        />
+        <View style={{ backgroundColor: "#EFEFF4", marginTop: -15, marginBottom: -15 }}>
+          <Common.Divider />
+          <Common.Texti fontColor={"#B4B4B4"} style={{
+            paddingLeft: 15,
+            paddingTop: -15,
+          }}>
+            DETAILS
+          </Common.Texti>
+          <Common.Divider />
+        </View>
         {this.customLoader()}
         {this.renderPopUp()}
-        <ScrollView>
+
+        <ScrollView showsVerticalScrollIndicator={false}>
           <GiftedForm
             style={{
               backgroundColor: '#fff',
@@ -179,115 +185,158 @@ class DetailEclaim extends Component {
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
-                *Item/Service
+                Claim Type
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.claim) ? this.props.claimdata.claim : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '20%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.claim}
+                </Common.Texti>
+                <Icon
+                  type="SimpleLineIcons"
+                  name="arrow-right"
+                  style={{
+                    color: "#9e9e9e",
+                    marginLeft: 10,
+                    fontSize: 18
+                  }}
+                />
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '6%' }}
               >
-                *Merchant
+                Provider
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.provider) ? this.props.claimdata.provider : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '20%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.provider}
+                </Common.Texti>
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                *Date of Visit
+                Visit Date
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.date) ? this.props.claimdata.date : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '19%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.date}
+                </Common.Texti>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="calendar-multiple"
+                  style={{
+                    color: "#9e9e9e",
+                    marginLeft: 10,
+                    fontSize: 18
+                  }}
+                />
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                *Time of Visit
+                Visit Time
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.time) ? this.props.claimdata.time : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '18%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.time}
+                </Common.Texti>
+                <Icon
+                  type="EvilIcons"
+                  name="clock"
+                  style={{
+                    color: "#9e9e9e",
+                    marginLeft: 10,
+                    fontSize: 18
+                  }}
+                />
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                *Claim Amount
+                Claim Amount
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.props.claimdata.amount) ? "S$" + this.props.claimdata.amount : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '15%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.amount}{" "}
+                </Common.Texti>
+                <Common.Texti fontColor={"#9e9e9e"} fontSize={16}>
+                  S$
+                </Common.Texti>
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
@@ -299,21 +348,32 @@ class DetailEclaim extends Component {
               >
                 Member
               </Text>
-              <TextInput
-                placeholderTextColor="#0392cf"
-                placeholder={(this.state.member) ? this.state.member : ""}
-                underlineColorAndroid="transparent"
-                colo="#000"
-                style={{ marginTop: '-3%', marginLeft: '19%' }}
-              />
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.state.member}
+                </Common.Texti>
+                <Icon
+                  type="SimpleLineIcons"
+                  name="arrow-right"
+                  style={{
+                    color: "#9e9e9e",
+                    marginLeft: 10,
+                    fontSize: 18
+                  }}
+                />
+              </View>
             </View>
-
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
               }}
             >
               <Text
@@ -333,7 +393,7 @@ class DetailEclaim extends Component {
                   borderBottomLeftRadius: 5,
                   borderBottomRightRadius: 5,
                   backgroundColor: '#fff',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-end',
                   alignItems: 'center',
                 }}
               >
@@ -341,7 +401,7 @@ class DetailEclaim extends Component {
                   this.props.claimdata.images.map((value, index) => (
                     <View
                       key={index}
-                      style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-around' }}>
+                      style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
                       <ImageBackground
                         resizeMode="cover"
                         style={{ width: '100%', height: 90, width: 70 }}
@@ -359,7 +419,7 @@ class DetailEclaim extends Component {
                 flex: 1,
                 flexDirection: 'row',
                 alignContent: 'space-between',
-                marginVertical: 17.5,
+                marginVertical: 10,
               }}
             >
               <Text style={{ width: '38%' }} />

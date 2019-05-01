@@ -8,8 +8,8 @@ import Icon from 'react-native-vector-icons/Feather';
 
 const labels = ["Details", "Verification", "Submit"];
 const customStyles = {
-  stepIndicatorSize: 25,
-  currentStepIndicatorSize: 30,
+  stepIndicatorSize: 20,
+  currentStepIndicatorSize: 25,
   separatorStrokeWidth: 2,
   currentStepStrokeWidth: 3,
   stepStrokeCurrentColor: '#0392CF',

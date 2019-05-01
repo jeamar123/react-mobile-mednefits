@@ -6,9 +6,9 @@ const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   container: {
-    paddingTop: 30,
-    paddingBottom: 30,
-    backgroundColor: "#efeff4",
+    paddingTop: 14,
+    paddingBottom: 14,
+    backgroundColor: "#EFEFF4",
   },
   stepContainer: {
     flexDirection: 'column',
@@ -18,7 +18,7 @@ export default EStyleSheet.create({
     backgroundColor: '#fff',
     width: 15,
     height: 15,
-    borderRadius: 15/2,
+    borderRadius: 15 / 2,
     borderWidth: 2,
     borderColor: "#0392cf",
     borderRightColor: 'black',
@@ -28,9 +28,9 @@ export default EStyleSheet.create({
     backgroundColor: '#CECED0',
     width: 15,
     height: 15,
-    borderRadius: 15/2,
+    borderRadius: 15 / 2,
   },
-  line:{
+  line: {
     backgroundColor: 'red',
     borderBottomColor: '#000',
     borderBottomWidth: 1

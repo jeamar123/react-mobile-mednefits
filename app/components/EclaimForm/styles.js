@@ -10,21 +10,22 @@ export default EStyleSheet.create({
   },
   sectionComponent: {
     flexDirection: 'column',
-    marginBottom: 10,
+    marginBottom: 20,
     marginLeft: "5%",
     marginRight: "5%",
-    marginTop: "5%",
+    marginTop: '2.5%',
   },
   sectionSpending: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 15,
+    marginBottom: 10,
+    marginTop: '-3%',
     marginLeft: "5%",
     marginRight: "5%",
   },
   dividerDetail: {
-    padding: 15,
+    padding: '2%',
     backgroundColor: "#EFEFF4"
   },
   sectionTitleComponent: {
@@ -34,23 +35,28 @@ export default EStyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  detailsTitle: {
+    marginLeft: '3%'
+  },
   spendingActive: {
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 10,
     borderRadius: 3,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#0392cf",
+    alignItems: 'center'
   },
   spendingNotactive: {
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 10,
     borderRadius: 3,
-    borderWidth: 1,
-    borderColor: "#cccccc",
+    borderWidth: 2,
+    borderColor: "#B4B4B4",
+    alignItems: 'center'
   },
   inputClaimType: {
     fontSize: 16,

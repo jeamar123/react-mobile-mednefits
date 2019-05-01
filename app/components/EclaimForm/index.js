@@ -128,233 +128,234 @@ export default class EclaimForm extends Component {
   render() {
     let Tanggal = new Date()
     return (
-      <View
+      <KeyboardAvoidingView
         style={styles.container}
-      >
+        behavior="padding" >
         <Core.Loader
           isVisible={this.state.isLoading}
         />
         <ScrollView showsVerticalScrollIndicator={false} >
-          <View
-            style={styles.sectionComponent}
-          >
-            <Common.Texti fontColor="#848484" style={styles.title}>
-              SPENDING ACCOUNT
-            </Common.Texti>
-          </View>
-          <View style={styles.sectionSpending}>
-            <TouchableOpacity
-              onPress={() => this.selectSpending("medical")}
-              refs="medical"
-              style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
-            >
-              <Common.Texti>
-                Medical
-              </Common.Texti>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.selectSpending("wellness")}
-              refs="wellness"
-              style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
-            >
-              <Common.Texti>
-                Wellness
-              </Common.Texti>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dividerDetail}>
-            <Common.Texti fontColor="#848484" style={styles.title}>
-              DETAILS
-            </Common.Texti>
-          </View>
-
-          <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
+          <View>
             <View
-              style={styles.fieldStyle}
+              style={styles.sectionComponent}
             >
-              <Common.Texti>
-                Claim Type
+              <Common.Texti fontColor="#B4B4B4" style={styles.title}>
+                SPENDING ACCOUNT
               </Common.Texti>
+            </View>
+
+            <View style={styles.sectionSpending}>
+              <TouchableOpacity
+                onPress={() => this.selectSpending("medical")}
+                refs="medical"
+                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
+              >
+                <Common.Texti style={{ color: '#2C3E50' }}>
+                  Medical
+                </Common.Texti>
+              </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
-                style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
-                  {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
+                onPress={() => this.selectSpending("wellness")}
+                refs="wellness"
+                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
+              >
+                <Common.Texti style={{ color: '#2C3E50' }}>
+                  Wellness
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
-                  style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
-                  }}
-                />
               </TouchableOpacity>
             </View>
 
-            <Common.Divider />
-
-            <View
-              style={styles.fieldStyleNoPadding}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Provider
-            </Common.Texti>
-              <Common.InputText
-                value={this.state.provider}
-                onChangeText={text => this.setState({ provider: text })}
-                placeholder="Name of Provider"
-                iconColor="#9e9e9e"
-                leftToRight
-              />
-            </View>
-
-            <Common.Divider />
-
-            <View
-              style={{
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Date of Visit
-            </Common.Texti>
-
-              <Common.InputDateCustom
-                style={{
-                  backgroundColor: "white",
-                  borderBottomColor: "#9e9e9e",
-                  borderBottomWidth: 0,
-                  justifyContent: 'center',
-                  borderRadius: 2,
-                  height: 50
-                }}
-                startDate={new Date()}
-                minDate={new Date()}
-                maxDate={() => Tanggal.now()}
-                onError={() => Common.getNotify("", "Error loading, please try again")}
-                renderDate={({ year, month, day, date }) => {
-                  if (!date) {
-                    return <Common.Texti fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
-                  }
-                  const dateStr = `${day}-${month}-${year}`
-                  return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
-                }}
-                onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
-                rightIcon="arrow-right"
-              />
-
-            </View>
-
-            <Common.Divider />
-
-            <View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Time of Visit
+            <View style={styles.dividerDetail}>
+              <Common.Texti fontColor="#B4B4B4" style={styles.detailsTitle}>
+                DETAILS
               </Common.Texti>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
-              >
-                <Common.InputTime
-                  placeholder={this.state.timeholder}
-                  onTimeChange={(time) => this.setState({ time: time })}
-                  value={this.state.time}
-                />
+            </View>
 
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+            <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti>
+                  Claim Type
+                </Common.Texti>
+                <TouchableOpacity
+                  onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
+                  style={{ flexDirection: 'row' }}>
+                  <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
+                    {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
+                  </Common.Texti>
+                  <Icon
+                    type="SimpleLineIcons"
+                    name="arrow-right"
+                    style={{
+                      color: "#9e9e9e",
+                      marginLeft: 10,
+                      fontSize: 18
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <Common.Divider />
+
+              <View
+                style={styles.fieldStyleNoPadding}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  Provider
+                </Common.Texti>
+                <Common.InputText
+                  value={this.state.provider}
+                  onChangeText={text => this.setState({ provider: text })}
+                  placeholder="Name of Provider"
+                  iconColor="#9e9e9e"
+                  leftToRight
+                />
+              </View>
+
+              <Common.Divider />
+
+              <View
+                style={{
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  alignItems: 'center'
+                }}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  Date of Visit
+            </Common.Texti>
+
+                <Common.InputDateCustom
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    backgroundColor: "white",
+                    borderBottomColor: "#9e9e9e",
+                    borderBottomWidth: 0,
+                    justifyContent: 'center',
+                    borderRadius: 2,
+                    height: 50
                   }}
+                  maxDate={new Date()}
+                  onError={() => Common.getNotify("", "Error loading, please try again")}
+                  renderDate={({ year, month, day, date }) => {
+                    if (!date) {
+                      return <Common.Texti fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
+                    }
+                    const dateStr = `${day}-${month}-${year}`
+                    return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
+                  }}
+                  onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
+                  rightIcon="arrow-right"
                 />
 
               </View>
+
+              <Common.Divider />
+
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  Time of Visit
+              </Common.Texti>
+                <View
+                  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+                >
+                  <Common.InputTime
+                    placeholder={this.state.timeholder}
+                    onTimeChange={(time) => this.setState({ time: time })}
+                    value={this.state.time}
+                  />
+
+                  <Icon
+                    type="SimpleLineIcons"
+                    name="arrow-right"
+                    style={{
+                      color: "#9e9e9e",
+                      marginLeft: 10,
+                      fontSize: 18
+                    }}
+                  />
+
+                </View>
+              </View>
+
+              <Common.Divider />
+
+              <View
+                style={styles.fieldStyleNoPadding}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  Claim Amount
+                </Common.Texti>
+
+                <Common.InputText
+                  value={this.state.amount}
+                  keyboardType="numeric"
+                  onChangeText={text => this.setState({ amount: text })}
+                  placeholder="Amount"
+                  type={"currency"}
+                  leftToRight
+                />
+              </View>
+
+              <Common.Divider />
+
+              <View
+                style={[styles.fieldStyle, { marginBottom: "10%" }]}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  Member
+                </Common.Texti>
+
+                <Common.InputSelect
+                  placeholder={this.state.memberState}
+                  data={this.state.memberData}
+                  value={this.state.member}
+                  onValueChange={(value) => this.setState({ member: value })}
+                />
+              </View>
+
             </View>
 
-            <Common.Divider />
-
-            <View
-              style={styles.fieldStyleNoPadding}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Claim Amount
-            </Common.Texti>
-
-              <Common.InputText
-                value={this.state.amount}
-                keyboardType="numeric"
-                onChangeText={text => this.setState({ amount: text })}
-                placeholder="Amount"
-                type={"currency"}
-                leftToRight
-              />
-            </View>
-
-            <Common.Divider />
-
-            <View
-              style={[styles.fieldStyle, { marginBottom: "10%" }]}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Member
-            </Common.Texti>
-
-              <Common.InputSelect
-                placeholder={this.state.memberState}
-                data={this.state.memberData}
-                value={this.state.member}
-                onValueChange={(value) => this.setState({ member: value })}
-              />
-            </View>
-
-          </View>
-
-          <TouchableOpacity
-            onPress={() => this.nextSnapPhoto()}
-            style={{
-              backgroundColor: "#0392CF",
-              width: "100%",
-              marginBottom: "5%",
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Common.Texti
-              fontSize={16}
-              fontColor={"#ffffff"}
+            <TouchableOpacity
+              onPress={() => this.nextSnapPhoto()}
               style={{
-                padding: 10
-              }}>
-              Next
-          </Common.Texti>
-          </TouchableOpacity>
+                backgroundColor: "#0392CF",
+                width: "100%",
+                marginBottom: "5%",
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#ffffff"}
+                style={{
+                  padding: 10
+                }}>
+                Next
+              </Common.Texti>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
 
 
 
