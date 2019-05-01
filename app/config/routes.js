@@ -58,7 +58,6 @@ import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 
 console.disableYellowBox = true;
 
-
 const transitionConfig = () => {
   return {
     transitionSpec: {
