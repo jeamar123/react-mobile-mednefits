@@ -55,6 +55,8 @@ import HomeSearch from '../screens/HomeSearch';
 import Wallet from '../screens/Wallet';
 import WalletWellness from '../screens/WalletWellness';
 import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
+import checkinUser from '../screens/checkinUser';
+import SelectList from '../screens/SelectList';
 
 console.disableYellowBox = true;
 
@@ -238,6 +240,8 @@ class RouterComponent extends Component {
           <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
           <Scene key="Wallet" component={Wallet} hideNavBar />
           <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
+          <Scene key="checkinUser" component={checkinUser} hideNavBar />
+          <Scene key="SelectList" component={SelectList} hideNavBar />
         </Stack>
       </Router>
     );

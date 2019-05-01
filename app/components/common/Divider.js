@@ -10,8 +10,8 @@ export default class Divider extends Component {
         style={{
           borderBottomColor: '#DBDBDB',
           borderBottomWidth: 0.8,
-          marginTop: 15,
-          marginBottom: 15,
+          marginTop: (this.props.noMargin) ? 0 : 10,
+          marginBottom: (this.props.noMargin) ? 0 : 10,
         }}
       />
     );

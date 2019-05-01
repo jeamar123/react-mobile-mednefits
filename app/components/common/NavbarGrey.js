@@ -482,7 +482,7 @@ export default class Navbar extends React.Component {
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
                 fontSize: 16,
-                color: '#FFFFFF',
+                color: (this.props.fontColor) ? this.props.fontColor : '#FFF',
                 marginRight: 10,
               }}
             >

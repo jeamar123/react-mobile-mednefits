@@ -7,12 +7,28 @@ const imageWidth = Dimensions.get('window').width / 2;
 export default EStyleSheet.create({
   container: {
     flex: 1,
-    margin: '5%'
   },
   sectionComponent: {
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    marginBottom: 10,
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginTop: "5%",
+  },
+  sectionSpending: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+    marginLeft: "5%",
+    marginRight: "5%",
+  },
+  dividerDetail: {
+    padding: 15,
+    backgroundColor: "#EFEFF4"
+  },
+  sectionTitleComponent: {
+    backgroundColor: "#CECED0"
   },
   title: {
     justifyContent: 'center',
@@ -40,5 +56,17 @@ export default EStyleSheet.create({
     fontSize: 16,
     color: 'black',
     width: "100%"
+  },
+  fieldStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  fieldStyleNoPadding: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   }
 });
