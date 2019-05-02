@@ -46,6 +46,7 @@ class Camera extends Component {
 
     this.renderCamera = this.renderCamera.bind(this)
     this.changeViewCamera = this.changeViewCamera.bind(this)
+    this.leftNavCameraCallback = this.leftNavCameraCallback.bind(this)
   }
 
   takePicture = async () => {
@@ -283,7 +284,7 @@ class Camera extends Component {
           />
         </TouchableOpacity> */}
         <View style={{ width: "100%", backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex', paddingBottom: 5 }}>
-          <View style={{ width: "33%", alignItems: 'flex-start' }}>
+          <View style={{ width: "33%", alignItems: 'flex-start', paddingTop: 5 }}>
             {(this.state.previewState !== 0) ? (
               <TouchableOpacity
                 onPress={() => this.setState({ previewState: 0 })}
@@ -323,9 +324,9 @@ class Camera extends Component {
                 </TouchableOpacity>
               )}
           </View>
-          <View style={{ width: "33%" }}>
+          <View style={{ width: "33%", paddingTop: 5  }}>
             {((this.state.preview !== true) || (this.state.previewState == 0)) ? (
-              <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', display: (this.state.preview && (this.state.shootType == 'single')) ? 'none' : 'flex' }}>
                 <TouchableOpacity
                   onPress={() => this.changeViewCamera('single')}
                   style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -376,7 +377,7 @@ class Camera extends Component {
                 </View>
               )}
           </View>
-          <View style={{ width: "33%", alignItems: 'flex-end' }}>
+          <View style={{ width: "33%", alignItems: 'flex-end', paddingTop: 5  }}>
             {(this.state.images.length == 5) ? (
               <View />
             ) : (
@@ -554,14 +555,28 @@ class Camera extends Component {
     }
   }
 
+  leftNavCameraCallback=(callback)=>{
+    if (this.state.preview) {
+      this.setState({
+        preview: false,
+        images: [],
+        previewState: 0,
+        previewImage: false
+      })
+    } else {
+      Actions.pop()
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
         <View style={{ zIndex: 99 }}>
           <Navbar
-            leftNav="back"
+            leftNav="back-camera"
             title="Receipt Verification"
             subtitle="E-Claim"
+            leftNavCameraCallback={this.leftNavCameraCallback}
           />
         </View>
         <View style={{ flex: 0.8, backgroundColor: '#efeff4' }}>
