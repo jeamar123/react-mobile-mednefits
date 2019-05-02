@@ -155,12 +155,12 @@ class DetailEclaim extends Component {
         <EclaimStep
           currentPosition={2}
         />
-      <View style={{backgroundColor: "#EFEFF4", marginTop: -15, marginBottom: -15}}>
+        <View style={{ backgroundColor: "#EFEFF4", marginTop: -15, marginBottom: -15 }}>
           <Common.Divider />
           <Common.Texti fontColor={"#B4B4B4"} style={{
-              paddingLeft: 15,
-              paddingTop: -15,
-            }}>
+            paddingLeft: 15,
+            paddingTop: -15,
+          }}>
             DETAILS
           </Common.Texti>
           <Common.Divider />
@@ -195,7 +195,7 @@ class DetailEclaim extends Component {
                 Claim Type
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.claim}
                 </Common.Texti>
@@ -210,7 +210,7 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -228,13 +228,13 @@ class DetailEclaim extends Component {
                 Provider
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.provider}
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -252,7 +252,7 @@ class DetailEclaim extends Component {
                 Visit Date
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
@@ -267,7 +267,7 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -285,7 +285,7 @@ class DetailEclaim extends Component {
                 Visit Time
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
@@ -300,7 +300,7 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -318,7 +318,7 @@ class DetailEclaim extends Component {
                 Claim Amount
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
@@ -327,7 +327,7 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -349,7 +349,7 @@ class DetailEclaim extends Component {
                 Member
               </Text>
               <View
-                style={{flexDirection: 'row'}}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.state.member}
                 </Common.Texti>
@@ -364,7 +364,7 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin/>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,
@@ -397,21 +397,21 @@ class DetailEclaim extends Component {
                   alignItems: 'center',
                 }}
               >
-              {(typeof this.props.claimdata.images !== 'undefined') ? (
-                this.props.claimdata.images.map((value, index) => (
-                  <View
-                    key={index}
-                    style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
-                    <ImageBackground
-                      resizeMode="cover"
-                      style={{ width: '100%', height: 90, width: 70 }}
-                      source={{ uri: value.preview }}
-                    />
-                  </View>
-                ))
-              ) : (
-                  <View />
-                )}
+                {(typeof this.props.claimdata.images !== 'undefined') ? (
+                  this.props.claimdata.images.map((value, index) => (
+                    <View
+                      key={index}
+                      style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
+                      <ImageBackground
+                        resizeMode="cover"
+                        style={{ width: '100%', height: 90, width: 70 }}
+                        source={{ uri: value.preview }}
+                      />
+                    </View>
+                  ))
+                ) : (
+                    <View />
+                  )}
               </View>
             </View>
             <View

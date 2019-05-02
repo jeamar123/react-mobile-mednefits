@@ -19,10 +19,11 @@ import InputSelect from './InputSelect'
 import InputSelect2 from './inputSelect2'
 import InputSearch from './InputSearch'
 import InputText from './InputText'
+import InputAmount from './InputAmount'
 import InputFile from './InputFile'
 import Error from './Error'
 import Text from './Text'
 import SimpleCurrencyInput from './SimpleCurrencyInput'
 import TextInputMask from './text-input-mask'
 
-export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputFile, Popup, Error, SimpleCurrencyInput, TextInputMask }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputAmount, InputFile, Popup, Error, SimpleCurrencyInput, TextInputMask }
