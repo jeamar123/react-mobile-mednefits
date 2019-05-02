@@ -827,6 +827,7 @@ const styles = StyleSheet.create({
     height: Platform.OS === 'ios' ? 64 : 54,
     flexDirection: 'row',
     paddingTop: 2,
+    paddingBottom: 15,
   },
   navBarItem: {
     justifyContent: 'center',

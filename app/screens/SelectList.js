@@ -8,18 +8,18 @@ class ItemRender extends Component {
 
   itemCallback = () => {
 
-    Actions.EclaimSubmit({claimTypeState: this.props.label, claim: this.props.label})
+    Actions.EclaimSubmit({ claimTypeState: this.props.label, claim: this.props.label })
 
   }
 
-  render(){
-    return(
-      <View style={{flex: 1, marginLeft: 15}}>
+  render() {
+    return (
+      <View style={{ flex: 1, marginLeft: 15 }}>
         <TouchableOpacity
           onPress={this.itemCallback}
           style={{
-            paddingTop: 15,
-            paddingBottom: 15
+            marginTop: 15,
+            marginBottom: 15,
           }}
         >
           <Common.Texti>
@@ -45,7 +45,7 @@ class SelectList extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Navbar leftNav="back" title={this.props.title} />
         <FlatList
           data={this.props.data}

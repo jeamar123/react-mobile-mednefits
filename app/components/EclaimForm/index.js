@@ -170,7 +170,7 @@ export default class EclaimForm extends Component {
 
           <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
             <View
-              style={styles.fieldStyle}
+              style={[styles.fieldStyle, { marginTop: "3%" }]}
             >
               <Common.Texti>
                 Claim Type
