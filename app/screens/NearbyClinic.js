@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { Text, Drawer } from 'native-base';
+import { Text } from 'native-base';
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
@@ -37,33 +37,18 @@ class NearbyClinic extends Component {
       last_page: null,
       processing: false,
     };
-    this.drawerActionCallback = this.drawerActionCallback.bind(this);
-    this.paginateClinicResults = this.paginateClinicResults.bind(this);
-  }
-
-  closeDrawer() {
-    this._drawer._root.close();
-  }
-
-  openDrawer() {
-    this._drawer._root.open();
-  }
-
-  drawerActionCallback(callback) {
-    if (callback == true) {
-      this.openDrawer();
-    }
+    // this.paginateClinicResults = this.paginateClinicResults.bind(this);
   }
 
   async componentWillMount() {
     await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
-      console.log(error);
-      console.log(result);
+      console.warn(error);
+      console.warn(result);
       if (result) {
         if (result.status) {
           data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-          // console.log(data.current_page);
-          // console.log(data.last_page);
+          // console.warn(data.current_page);
+          // console.warn(data.last_page);
           await this.setState({ DataClinic: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
         } else {
           setTimeout(function () {
@@ -84,25 +69,25 @@ class NearbyClinic extends Component {
           }, 2000);
         }
       }
-      // console.log(data);
+      // console.warn(data);
     });
   }
 
   async paginateClinicResults(event) {
-    console.log('paginate');
-    // console.log(this.state);
-    // console.log(event)
+    console.warn('paginate');
+    // console.warn(this.state);
+    // console.warn(event)
     if (!this.state.processing) {
-      console.log(this.state.current_page);
-      console.log(this.state.last_page);
+      console.warn(this.state.current_page);
+      console.warn(this.state.last_page);
       var current_page = await this.state.current_page + 1;
-      console.log(current_page);
+      console.warn(current_page);
       // if(current_page != this.state.last_page) {
-      console.log('query more')
+      console.warn('query more')
       this.setState({ processing: true });
       await Core.paginateClinicResults(this.props.ClinicTypeID, current_page, async (error, result) => {
         if (result) {
-          console.log(result);
+          console.warn(result);
           if (result.status) {
             data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
             var new_data = this.state.DataClinic.concat(data.clinics);
@@ -115,7 +100,7 @@ class NearbyClinic extends Component {
         }
       })
       // } else {
-      // 	console.log('stop');
+      // 	console.warn('stop');
       // }
     }
   }
@@ -278,97 +263,85 @@ class NearbyClinic extends Component {
 
   render() {
     return (
-      <Drawer
-        type="displace"
-        openDrawerOffset={0.4}
-        panCloseMask={0.4}
-        ref={ref => {
-          this._drawer = ref;
-        }}
-        content={<MenuSide navigator={this._navigator} />}
-        onClose={() => this.closeDrawer()}
-      >
-        <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <Navbar
-            drawerAction={this.drawerActionCallback}
-            leftNav="back-home"
-            rightNav="search"
-          />
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Navbar
+          leftNav="back-home"
+          rightNav="search"
+        />
 
-          {(!this.state.data) ? (
+        {(!this.state.data) ? (
+          <View
+            style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+          >
+            <Image
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginBottom: 15,
+                width: 80,
+                height: 80,
+              }}
+              source={require('../../assets/apps/search_empty.png')}
+            />
+            <Text>We are looking  for health partners near you.</Text>
+          </View>
+        ) : (
             <View
-              style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
+              style={{
+                flex: 1,
+                marginLeft: '2%',
+                marginRight: '2%',
+                marginTop: '2%',
+              }}
             >
-              <Image
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginBottom: 15,
-                  width: 80,
-                  height: 80,
-                }}
-                source={require('../../assets/apps/search_empty.png')}
-              />
-              <Text>We are looking  for health partners near you.</Text>
+              <ScrollView onScroll={({ nativeEvent }) => {
+                if (isCloseToBottom(nativeEvent)) {
+                  this.paginateClinicResults();
+                }
+              }}>
+                {
+                  this.clinicNearbyByCategory()
+                }
+              </ScrollView>
+
             </View>
-          ) : (
-              <View
-                style={{
-                  flex: 1,
-                  marginLeft: '2%',
-                  marginRight: '2%',
-                  marginTop: '2%',
-                }}
-              >
-                <ScrollView onScroll={({ nativeEvent }) => {
-                  if (isCloseToBottom(nativeEvent)) {
-                    this.paginateClinicResults();
-                  }
-                }}>
-                  {
-                    this.clinicNearbyByCategory()
-                  }
-                </ScrollView>
 
-              </View>
-
-            )}
+          )}
+        <View style={{
+          height: responsiveHeight(7),
+          backgroundColor: '#0392cf'
+        }}>
           <View style={{
-            height: responsiveHeight(7),
-            backgroundColor: '#0392cf'
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginRight: '3%',
+            marginLeft: '3%',
+            marginBottom: 5,
+            marginTop: 5,
+            alignItem: 'center'
           }}>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginRight: '3%',
-              marginLeft: '3%',
-              marginBottom: 5,
-              marginTop: 5,
-              alignItem: 'center'
-            }}>
-              <TouchableOpacity onPress={() => Actions.Home()}>
-                <View style={{
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                }}>
-                  <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
-                  <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => Actions.NearbyClinicMaps({
-                  clinicType: this.props.ClinicTypeID,
-                  NameCategory: this.props.NameCategory
-                })}
-              >
-                <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
-              </TouchableOpacity>
+            <TouchableOpacity onPress={() => Actions.Home()}>
+              <View style={{
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}>
+                <Text style={{ color: '#fff', fontSize: 10, marginTop: 2, fontWeight: 'bold' }}>I am looking for</Text>
+                <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Actions.NearbyClinicMaps({
+                clinicType: this.props.ClinicTypeID,
+                NameCategory: this.props.NameCategory
+              })}
+            >
+              <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
+            </TouchableOpacity>
 
-            </View>
           </View>
         </View>
-      </Drawer>
+      </View>
     );
   }
 }

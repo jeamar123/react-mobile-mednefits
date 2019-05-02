@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { StatusBar, View, Image, TextInput, Easing } from 'react-native';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image, TextInput } from 'react-native';
 import { Container, Text } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import ZoomImage from 'react-native-zoom-image';
 import { HistoryClaim } from '../components/HistoryClaim';
 import * as Core from '../core';
 import Navbar from '../components/common/Navbar';
+
 const options = {
   title: 'Upload Your Receipt',
   takePhotoButtonTitle: 'Take a Photo',
@@ -82,18 +84,34 @@ class DetailEClaim_Transaction extends Component {
   _renderReceipt() {
     return this.state.filesData.map(Data => (
 
-      <Image
-        style={{
+      <ZoomImage
+        imgStyle={{
           width: 70,
           height: 80,
           margin: 2
         }}
+        enableScaling={true}
+        easingFunc={Easing.ease}
+        duration={200}
         source={{
           uri: !Data.file
             ? '../../assets/photo.png'
             : Data.file,
         }}
       />
+
+      // <Image
+      //   style={{
+      //     width: 70,
+      //     height: 80,
+      //     margin: 2
+      //   }}
+      //   source={{
+      //     uri: !Data.file
+      //       ? '../../assets/photo.png'
+      //       : Data.file,
+      //   }}
+      // />
     ));
   }
 
@@ -121,7 +139,7 @@ class DetailEClaim_Transaction extends Component {
               flex: 1,
               flexDirection: 'row',
               alignContent: 'space-between',
-              marginVertical: 10,
+              marginVertical: 20,
               marginTop: 20,
             }}
           >
@@ -135,14 +153,30 @@ class DetailEClaim_Transaction extends Component {
             >
               Spending Account
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '5.6%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
               placeholder="Spending Account"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
+              color="#000"
+              style={{ marginLeft: '7.5%', fontSize: 13 }}
               value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
-            />
+            /> */}
           </View>
+
           {this._renderDivider()}
 
           <View
@@ -157,13 +191,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Claim Type
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '18.1%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.service ? this.state.data.service : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim Type"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '19%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '19%', fontSize: 13, color: '#000' }}
               value={this.state.data.service}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -178,13 +227,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Provider
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '22.2%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.merchant ? this.state.data.merchant : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Provider"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '23%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '23%', fontSize: 13, color: '#000' }}
               value={this.state.data.merchant}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -199,13 +263,28 @@ class DetailEClaim_Transaction extends Component {
             <Text style={{ color: '#c4c4c4', marginLeft: '2%', fontSize: 13 }}>
               Claim #
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '23.4%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.transaction_id ? this.state.data.transaction_id : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim ID"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '24%', fontSize: 13, color: '#000' }}
               value={this.state.data.transaction_id}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -222,13 +301,28 @@ class DetailEClaim_Transaction extends Component {
             >
               Date & Time
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '13.6%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.date ? this.state.data.date : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Date & Time"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '14%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '14%', fontSize: 13, color: '#000' }}
               value={this.state.data.date}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -245,13 +339,28 @@ class DetailEClaim_Transaction extends Component {
             >
               Claim Date
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '12.3%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.claim_date ? this.state.data.claim_date : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Claim Date"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '12%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '12%', fontSize: 13, color: '#000' }}
               value={this.state.data.claim_date}
-            />
+            /> */}
           </View>
           {this._renderDivider()}
 
@@ -273,14 +382,94 @@ class DetailEClaim_Transaction extends Component {
             >
               Member
             </Text>
-            <TextInput
+            <View
+              style={{
+                padding: 5,
+                marginTop: '-1%',
+                marginLeft: '6.1%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.user ? this.state.data.user : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              editable={false} selectTextOnFocus={false}
               placeholder="Member"
               underlineColorAndroid="transparent"
-              colo="#000"
-              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13 }}
+              style={{ marginTop: '-3%', marginLeft: '6%', fontSize: 13, color: '#000' }}
               value={this.state.user ? this.state.user : 'N/A'}
-            />
+            /> */}
           </View>
+
+
+          {(this.state.data.rejected_status == true) ?
+            <View>
+              {this._renderDivider()}
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 10,
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginLeft: '2%',
+                    marginRight: '16.5%',
+                    fontSize: 13
+                  }}
+                >
+                  Reason
+                </Text>
+                <View
+                  style={{
+                    padding: 5,
+                    marginTop: '-1%',
+                    marginLeft: '6.3%',
+                    width: '60%',
+                    fontSize: 13
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 13
+                    }}>
+                    {this.state.data.rejected_message ? this.state.data.rejected_message : 'N/A'}
+                  </Text>
+                </View>
+                {/* <Text
+                  style={{
+                    marginTop: '-3%',
+                    marginLeft: '8%',
+                    fontSize: 13,
+                    color: '#000',
+                    width: '60%',
+                    marginTop: '0.5%'
+                  }}
+                  numberOfLines={8}
+                >
+                  {this.state.data.rejected_message ? this.state.data.rejected_message : 'N/A'}
+                </Text> */}
+                {/* <TextInput
+                  editable={false} selectTextOnFocus={false}
+                  placeholder="Member"
+                  underlineColorAndroid="transparent"
+                  
+                  
+                  value=
+                /> */}
+              </View>
+            </View> : <View />
+          }
+
+
           <View
             style={{
               flex: 1,

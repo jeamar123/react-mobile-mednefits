@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import * as Config from '../../config';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const INPUT_HEIGHT = 70;
 
@@ -24,7 +25,7 @@ export default EStyleSheet.create({
   },
   containerPay: {
     backgroundColor: '$white',
-    width: '40%',
+    // width: responsiveWidth(55),
     height: INPUT_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
@@ -32,10 +33,11 @@ export default EStyleSheet.create({
   },
   inputPay: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    flex: 1,
     height: INPUT_HEIGHT,
     color: '$inputText',
     fontSize: 46,
-    width: '80%'
+    marginLeft: responsiveWidth(2),
+    width: '100%',
+    textAlign: 'right'
   },
 });

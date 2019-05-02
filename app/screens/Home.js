@@ -20,7 +20,12 @@ import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+const ASPECT_RATIO = width / height;
+const LATITUDE = 1.3437419;
+const LONGITUDE = 103.6839585;
+const LATITUDE_DELTA = 0.5;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class SearchResult extends Component {
 
@@ -235,8 +240,8 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-      console.log(error)
-      console.log(result)
+      console.warn(error)
+      console.warn(result)
       // if(result) {
       Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
       // }
@@ -280,7 +285,15 @@ class Home extends Component {
     this.state = {
       data: false,
       searchdata: false,
-      isLoadingSearch: false
+      isLoadingSearch: false,
+      clinicType: 2,
+      AllClinic: [],
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -310,6 +323,71 @@ class Home extends Component {
         await this.setState({
           data: result.data.clinic_types,
         })
+      }
+    })
+  }
+
+
+  // Getting Data Clinic
+
+  // async componentWillMount() {
+  //   await Core.GetClinicMapList(2, async (error, result) => {
+  //     console.warn(error);
+  //     console.warn(result);
+  //     if (result) {
+  //       if (result.status) {
+  //         data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+  //         // console.warn(data.current_page);
+  //         // console.warn(data.last_page);
+  //         await this.setState({ AllClinic: data.clinics });
+  //       } else {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+  //         }, 2000);
+  //       }
+  //     } else {
+  //       if (error.code === 3) {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong("", 'Unable to get location. Please try again.');
+  //         }, 1000);
+  //       } else {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+  //         }, 2000);
+  //       }
+  //     }
+  //     // console.warn(data);
+  //   });
+  // }
+
+  // componentWillMount() {
+  //   this.getClinics()
+  // }
+
+  // getClinics = async () => {
+  //   console.warn('anjing' + this.state.clinicType);
+  //   await Core.GetClinicMap(this.state.clinicType, (err, result) => {
+  //     console.warn(result);
+  //   })
+  // }
+
+  getCurrentPosition = async () => {
+    latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+    longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+    dataClinicNearby = await Code.GetAllClinic(dataClinicNearby)
+
+    console.warn(latitude);
+    // console.warn(dataClinicNearby);
+    // console.warn(longitude);
+    this.setState({
+      region: {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
       }
     })
   }
@@ -358,6 +436,7 @@ class Home extends Component {
 
 
   render() {
+    // console.warn("clinisc " + JSON.stringify(this.state.AllClinic));
     return (
       <Drawer
         type="displace"
@@ -453,7 +532,7 @@ class Home extends Component {
                 style={{ textAlign: 'center', marginLeft: '2.5%' }}
               >
                 Benefits Category
-                      </Text>
+              </Text>
             </View>
             <View style={styles.contain}>
               <FlatList

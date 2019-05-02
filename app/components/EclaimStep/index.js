@@ -19,7 +19,7 @@ const customStyles = {
   separatorFinishedColor: '#0392CF',
   separatorUnFinishedColor: '#aaaaaa',
   stepIndicatorFinishedColor: '#0392CF',
-  stepIndicatorUnFinishedColor: '#ffffff',
+  stepIndicatorUnFinishedColor: '#aaaaaa',
   stepIndicatorCurrentColor: '#ffffff',
   stepIndicatorLabelFontSize: 13,
   currentStepIndicatorLabelFontSize: 13,

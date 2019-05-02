@@ -22,18 +22,15 @@ class Wallet extends Component {
       InNetwork_Credit_spent: '0',
       Eclaim_Credit_spent: '0',
       currency: '',
-      inNetwork: [],
-      outNetwork: [],
-      collapsed: true,
+      medicalinNetwork: [],
+      medicaloutNetwork: [],
+      wellnessinNetwork: [],
+      wellnessoutNetwork: [],
       visible: true,
-      medicalData: [
-        {
-          label: "Please choose claim first",
-          value: null
-        }
-      ],
+      isLoading: this.props.isLoading
     };
-    this.selectSpending = this.selectSpending.bind(this)
+    this.selectSpending = this.selectSpending.bind(this);
+    this.selectWallet = this.selectWallet.bind(this);
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
@@ -52,8 +49,10 @@ class Wallet extends Component {
   }
 
   componentWillMount() {
-    this.getUserBalance();
-    this.selectSpending("in_network_transactions")
+    this.selectWallet("Medical")
+    this.selectSpending("in_network_transactions");
+    this.getMedicalWallet();
+    this.getWelnnessWallet();
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
@@ -63,195 +62,405 @@ class Wallet extends Component {
     this.setState({ type: type })
   }
 
-  getUserBalance() {
+  async selectWallet(walletType) {
+    this.setState({ walletType: walletType })
+    setInterval(() => {
+      this.setState({ isLoading: false })
+    }, 2000);
+  }
+
+  getMedicalWallet() {
+    this.setState({ isLoading: true })
     Core.GetBalanceMedical((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
+      this.setState({ isLoading: false })
       this.setState({
-        Balance: data.balance,
-        InNetwork_Credit_spent: data.in_network_credits_spent,
-        Eclaim_Credit_spent: data.e_claim_credits_spent,
-        currency: result.data.currency_symbol,
-        inNetwork: data.in_network_transactions,
-        outNetwork: data.e_claim_transactions
+        medicalData: data,
+        medicalBalance: data.balance,
+        medicalInNetwork_Credit_spent: data.in_network_credits_spent,
+        medicalEclaim_Credit_spent: data.e_claim_credits_spent,
+        medicalcurrency: result.data.currency_symbol,
+        medicalinNetwork: data.in_network_transactions,
+        medicaloutNetwork: data.e_claim_transactions
+      });
+    });
+  }
+
+  getWelnnessWallet() {
+    this.setState({ isLoading: true })
+    Core.GetBalanceWellness((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(data);
+      this.setState({ isLoading: false })
+      this.setState({
+        wellnessData: data,
+        wellnessBalance: data.balance,
+        wellnessInNetwork_Credit_spent: data.in_network_credits_spent,
+        wellnessEclaim_Credit_spent: data.e_claim_credits_spent,
+        wellnessurrency: result.data.currency_symbol,
+        wellnessinNetwork: data.in_network_transactions,
+        wellnessoutNetwork: data.e_claim_transactions
       });
     });
   }
 
   renderRecentActivity() {
-    console.warn(this.state.type)
-    if (this.state.type == 'in_network_transactions') {
-      return this.state.inNetwork.map((Data, index) => (
-        <View>
-          <TouchableOpacity
-            key={index}
-            onPress={() =>
-              Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
-            }
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
+    if (this.state.walletType == 'Medical') {
+      if (this.state.type == 'in_network_transactions') {
+        return this.state.medicalinNetwork.map((Data, index) => (
+          <View>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+              }
             >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {Data.clinic_name}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  {Data.date_of_transaction}
-                </Text>
-              </View>
-              <Text
+              <View
                 style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: responsiveWidth(4),
+                  marginRight: responsiveWidth(4),
                 }}
-              />
-              <View style={styles.sectionTextPanel}>
+              >
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.clinic_name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontFamily: Config.FONT_FAMILY_THIN,
+                      color: '#4f4f4f',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.date_of_transaction}
+                  </Text>
+                </View>
                 <Text
                   style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20,
-                    marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(8)
+                    fontSize: 12,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: 30,
+                    marginRight: 10,
+                    marginLeft: 10
                   }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
-                </Text>
-              </View>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#2C3E50',
-                  fontSize: 20,
-                  paddingRight: 5,
-                  marginTop: responsiveHeight(0.85),
-                }}
-              />
-            </View>
+                />
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_MEDIUM,
+                      color: '#2C3E50',
+                      lineHeight: 20,
+                      marginTop: responsiveHeight(0.8),
+                      fontWeight: '500'
+                    }}
+                  >
+                    {
+                      (this.state.walletType == 'Medical') ?
+                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
+                  </Text>
 
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-          </TouchableOpacity>
-        </View>
-      ));
-    } else if (this.state.type == 'e_claim_transactions') {
-      return this.state.outNetwork.map((Data, index) => (
-        <View>
-          <TouchableOpacity
-            key={index}
-            onPress={() =>
-              Actions.DetailEclaimTransaction({ transaction_id: Data.transaction_id })
-            }
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: responsiveWidth(4),
-                marginRight: responsiveWidth(4),
-              }}
+                </View>
+              </View>
+
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%',
+                }}>
+                <Common.Divider />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ));
+      } else if (this.state.type == 'e_claim_transactions') {
+        return this.state.medicaloutNetwork.map((Data, index) => (
+          <View>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                Actions.DetailEclaimTransaction({ transaction_id: Data.transaction_id })
+              }
             >
-              <View style={styles.sectionTextPanel}>
-                <Text
-                  style={{
-                    fontSize: RF(1.4),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20
-                  }}
-                >
-                  {Data.service}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: RF(1.2),
-                    fontFamily: Config.FONT_FAMILY_THIN,
-                    color: '#A8A8A8',
-                    lineHeight: 20
-                  }}
-                >
-                  {Data.claim_date}
-                </Text>
-              </View>
-              <Text
+              <View
                 style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: 30,
-                  marginRight: 10,
-                  marginLeft: 10
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: responsiveWidth(4),
+                  marginRight: responsiveWidth(4),
                 }}
-              />
-              <View style={styles.sectionTextPanel}>
+              >
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.service}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontFamily: Config.FONT_FAMILY_THIN,
+                      color: '#4f4f4f',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.claim_date}
+                  </Text>
+                </View>
                 <Text
                   style={{
-                    fontSize: RF(1.6),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    color: '#2C3E50',
-                    letterSpacing: 1.5,
-                    lineHeight: 20,
-                    marginTop: responsiveHeight(1),
-                    marginLeft: responsiveWidth(12)
+                    fontSize: 12,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: 30,
+                    marginRight: 10,
+                    marginLeft: 10
                   }}
-                >
-                  {(this.state.currency) ? this.state.currency : " "} {(Data.amount) ? Data.amount : "0"}
-                </Text>
-              </View>
-              <Icons
-                name="angle-right"
-                style={{
-                  color: '#2C3E50',
-                  fontSize: 20,
-                  paddingRight: 5,
-                  marginTop: responsiveHeight(0.85),
-                }}
-              />
-            </View>
+                />
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_MEDIUM,
+                      color: '#2C3E50',
+                      lineHeight: 20,
+                      marginTop: responsiveHeight(0.8),
+                      fontWeight: '500'
+                    }}
+                  >
+                    {
+                      (this.state.walletType == 'Medical') ?
+                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
+                  </Text>
 
-            <View
-              style={{
-                marginLeft: '5%',
-                marginRight: '5%',
-              }}>
-              <Common.Divider />
-            </View>
-          </TouchableOpacity>
-        </View>
-      ));
+                </View>
+              </View>
+
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%',
+                }}>
+                <Common.Divider />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ));
+      }
+    } else if (this.state.walletType == 'Wellness') {
+      if (this.state.type == 'in_network_transactions') {
+        return this.state.wellnessinNetwork.map((Data, index) => (
+          <View>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+              }
+            >
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: responsiveWidth(4),
+                  marginRight: responsiveWidth(4),
+                }}
+              >
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.clinic_name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontFamily: Config.FONT_FAMILY_THIN,
+                      color: '#4f4f4f',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.date_of_transaction}
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: 30,
+                    marginRight: 10,
+                    marginLeft: 10
+                  }}
+                />
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_MEDIUM,
+                      color: '#2C3E50',
+                      lineHeight: 20,
+                      marginTop: responsiveHeight(0.8),
+                      fontWeight: '500'
+                    }}
+                  >
+                    {
+                      (this.state.walletType == 'Medical') ?
+                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
+                  </Text>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%',
+                }}>
+                <Common.Divider />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ));
+      } else if (this.state.type == 'e_claim_transactions') {
+        return this.state.wellnessoutNetwork.map((Data, index) => (
+          <View>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                Actions.DetailEclaimTransaction({ transaction_id: Data.transaction_id })
+              }
+            >
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginLeft: responsiveWidth(4),
+                  marginRight: responsiveWidth(4),
+                }}
+              >
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                      color: '#2C3E50',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.service}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      fontFamily: Config.FONT_FAMILY_THIN,
+                      color: '#4f4f4f',
+                      lineHeight: 20
+                    }}
+                  >
+                    {Data.claim_date}
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    marginTop: 30,
+                    marginRight: 10,
+                    marginLeft: 10
+                  }}
+                />
+                <View style={styles.sectionTextPanel}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      fontFamily: Config.FONT_FAMILY_MEDIUM,
+                      color: '#2C3E50',
+                      lineHeight: 20,
+                      marginTop: responsiveHeight(0.8),
+                      fontWeight: '500'
+                    }}
+                  >
+                    {
+                      (this.state.walletType == 'Medical') ?
+                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                    <Icons
+                      name="angle-right"
+                      style={{
+                        color: '#2C3E50',
+                        fontSize: 15,
+                        fontWeight: '600'
+                      }}
+                    />
+                  </Text>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%',
+                }}>
+                <Common.Divider />
+              </View>
+            </TouchableOpacity>
+          </View>
+        ));
+      }
     }
+
+
   }
 
   render() {
@@ -259,10 +468,13 @@ class Wallet extends Component {
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back"
+          leftNav="homeback"
           title="Wallet"
         />
         <View style={styles.wrapperTop}>
+          <Core.Loader
+            isVisible={this.state.isLoading}
+          />
           <View style={{
             backgroundColor: '#0392cf',
             height: responsiveHeight(28),
@@ -278,17 +490,20 @@ class Wallet extends Component {
                 // marginTop: responsiveHeight(4)
               }}
             >
-              <Text
-                style={{
-                  fontSize: RF(2.2),
-                  fontFamily: Config.FONT_FAMILY_MEDIUM,
-                  marginTop: responsiveHeight(2),
-                  color: '#fff',
-                  lineHeight: 19
-                }}
-              >
-                Medical
-              </Text>
+              <View>
+                <TouchableOpacity onPress={() => this.selectWallet("Medical") ? this.setState({ isLoading: true }) : null}
+                  refs="Medical"
+                >
+                  <Text
+                    style={(this.state.walletType == 'Medical') ? styles.textActive : styles.textNoactive}
+                  >
+                    Medical
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={(this.state.walletType == 'Medical') ? styles.walletActive : styles.walletNotactive}
+                />
+              </View>
               <View style={{
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -304,20 +519,20 @@ class Wallet extends Component {
                 marginRight: responsiveWidth(4),
               }}
               />
-              <TouchableOpacity onPress={() => Actions.WalletWellness()}>
-                <Text
-                  style={{
-                    fontSize: RF(2.2),
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    marginTop: responsiveHeight(2),
-                    color: '#fff',
-                    opacity: 0.6,
-                    lineHeight: 19
-                  }}
+              <View>
+                <TouchableOpacity onPress={() => this.selectWallet("Wellness") ? this.setState({ isLoading: true }) : null}
+                  refs="Wellness"
                 >
-                  Wellness
-              </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={(this.state.walletType == 'Wellness') ? styles.textActive : styles.textNoactive}
+                  >
+                    Wellness
+                  </Text>
+                </TouchableOpacity>
+                <View
+                  style={(this.state.walletType == 'Wellness') ? styles.walletActive : styles.walletNotactive}
+                />
+              </View>
             </View>
 
             <Text
@@ -345,7 +560,11 @@ class Wallet extends Component {
                   letterSpacing: 1.7
                 }}
               >
-                {(this.state.currency) ? this.state.currency : " "}
+                {
+                  (this.state.walletType == 'Medical') ?
+                    (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                    (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                }
               </Text>
               <Text
                 style={{
@@ -357,7 +576,11 @@ class Wallet extends Component {
                   letterSpacing: 2.5
                 }}
               >
-                {this.state.Balance}
+                {
+                  (this.state.walletType == 'Medical') ?
+                    (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
+                    (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
+                }
               </Text>
             </View>
           </View>
@@ -370,7 +593,7 @@ class Wallet extends Component {
           >
             <View style={{
               marginTop: responsiveHeight(-3),
-              width: responsiveWidth(40),
+              width: responsiveWidth(45),
               height: responsiveHeight(12),
               justifyContent: 'center',
               alignItems: 'center',
@@ -397,7 +620,16 @@ class Wallet extends Component {
                     lineHeight: 20
                   }}
                 >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.InNetwork_Credit_spent) ? this.state.InNetwork_Credit_spent : "0"}
+                  {
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                  }
+                  {
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalInNetwork_Credit_spent) ? this.state.medicalInNetwork_Credit_spent : '0' :
+                      (this.state.wellnessInNetwork_Credit_spent) ? this.state.wellnessInNetwork_Credit_spent : '0'
+                  }
                 </Text>
                 <Text
                   style={{
@@ -414,7 +646,7 @@ class Wallet extends Component {
 
             <View style={{
               marginTop: responsiveHeight(-3),
-              width: responsiveWidth(40),
+              width: responsiveWidth(45),
               height: responsiveHeight(12),
               justifyContent: 'center',
               alignItems: 'center',
@@ -442,7 +674,16 @@ class Wallet extends Component {
                     lineHeight: 20
                   }}
                 >
-                  {(this.state.currency) ? this.state.currency : " "} {(this.state.Eclaim_Credit_spent) ? this.state.Eclaim_Credit_spent : "0"}
+                  {
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                  }
+                  {
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalEclaim_Credit_spent) ? this.state.medicalEclaim_Credit_spent : '0' :
+                      (this.state.wellnessEclaim_Credit_spent) ? this.state.wellnessEclaim_Credit_spent : '0'
+                  }
                 </Text>
                 <Text
                   style={{
@@ -464,7 +705,7 @@ class Wallet extends Component {
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
               marginTop: responsiveHeight(1),
-              marginLeft: responsiveWidth(-45)
+              marginLeft: responsiveWidth(-59)
             }}
           >
             <Text
@@ -481,7 +722,7 @@ class Wallet extends Component {
 
           <View style={{
             marginTop: responsiveHeight(1),
-            width: responsiveWidth(80),
+            width: responsiveWidth(90),
             height: responsiveHeight(45),
             // alignItems: 'center',
             backgroundColor: '#fff',
@@ -507,14 +748,7 @@ class Wallet extends Component {
                   style={[(this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
-                    style={{
-                      fontSize: RF(1.6),
-                      fontWeight: '500',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
+                    style={(this.state.type == 'in_network_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
                     In-Network
                     </Text>
@@ -535,14 +769,7 @@ class Wallet extends Component {
                   style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive : styles.spendingNotactive]}
                 >
                   <Text
-                    style={{
-                      fontSize: RF(1.6),
-                      fontWeight: '500',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      color: '#2C3E50',
-                      letterSpacing: 1.5,
-                      lineHeight: 20
-                    }}
+                    style={(this.state.type == 'e_claim_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
                     Out-of-Network
                     </Text>
@@ -566,7 +793,7 @@ class Wallet extends Component {
                   marginTop: responsiveHeight(2),
                 }}
               >
-                <TouchableOpacity onPress={() => Actions.HistoryTransaction()}>
+                <TouchableOpacity onPress={() => Actions.HistoryTransactionWallet()}>
                   <Text
                     style={{
                       fontSize: RF(1.6),

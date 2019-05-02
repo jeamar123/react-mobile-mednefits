@@ -22,7 +22,6 @@ class ECardUser extends Component {
       EndDate: '',
       resultPackage: [],
     };
-    this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
 
   closeDrawer() {
@@ -31,12 +30,6 @@ class ECardUser extends Component {
 
   openDrawer() {
     this._drawer._root.open();
-  }
-
-  drawerActionCallback(callback) {
-    if (callback == true) {
-      this.openDrawer();
-    }
   }
 
   componentWillMount() {
@@ -124,221 +117,209 @@ class ECardUser extends Component {
 
   render() {
     return (
-      <Drawer
-        type="displace"
-        openDrawerOffset={0.4}
-        panCloseMask={0.4}
-        ref={ref => {
-          this._drawer = ref;
-        }}
-        content={<MenuSide navigator={this._navigator} />}
-        onClose={() => this.closeDrawer()}
-      >
-        <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
-          <Navbar
-            drawerAction={this.drawerActionCallback}
-            leftNav="back-home"
-          />
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Navbar
+          leftNav="back-home"
+        />
+        <View
+          style={{
+            flex: 1,
+            marginLeft: '2%',
+            marginRight: '2%',
+            marginTop: '2%',
+          }}
+        >
           <View
             style={{
               flex: 1,
-              marginLeft: '2%',
-              marginRight: '2%',
-              marginTop: '2%',
+              marginTop: 5,
+              marginBottom: 10,
+              height: 120,
+              backgroundColor: '#fff',
+              borderRadius: 14,
+              opacity: 10000,
             }}
           >
             <View
               style={{
-                flex: 1,
-                marginTop: 5,
-                marginBottom: 10,
-                height: 120,
-                backgroundColor: '#fff',
-                borderRadius: 14,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: 'column',
+                  marginTop: '30%',
+                  marginLeft: '5%',
+                }}
+              >
+                <Text
+                  style={{
+                    color: '#0392cf',
+                    fontSize: 24,
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                  }}
+                >
+                  {this.state.FullName}
+                </Text>
+                <Text
+                  style={{
+                    color: '#0392cf',
+                    fontSize: 24,
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                  }}
+                >
+                  {this.state.Nric}
+                </Text>
+
+                <Text
+                  style={{
+                    marginTop: '15%',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  Member ID {this.state.MemberID}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  {this.state.PlanType}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  Plan Add-on: {this.state.PlanAddon}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  {this.state.Company}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  Start Date: {this.state.StartDate}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  End Date: {this.state.EndDate}
+                </Text>
+
+                <Text
+                  style={{
+                    marginTop: '15%',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 14,
+                  }}
+                >
+                  Your Basic Coverage
+                  </Text>
+              </View>
+              <Image
+                source={require('../../assets/apps/mednefits.png')}
+                style={{
+                  height: 55,
+                  width: 55,
+                  resizeMode: 'center',
+                  alignItem: 'center',
+                  marginTop: '5%',
+                  marginRight: '5%',
+                }}
+              />
+            </View>
+
+            <ScrollView>{this.renderCoverage()}</ScrollView>
+
+            <View
+              style={{
+                height: '13%',
+                backgroundColor: '#f2f2f2',
+                borderBottomLeftRadius: 14,
+                borderBottomRightRadius: 14,
                 opacity: 10000,
               }}
             >
               <View
                 style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  flexDirection: 'column',
+                  marginTop: '4%',
+                  marginLeft: '5%',
                 }}
               >
-                <View
+                <Text
                   style={{
-                    flexDirection: 'column',
-                    marginTop: '30%',
-                    marginLeft: '5%',
+                    color: '#000',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: RF(2.4)
                   }}
                 >
-                  <Text
-                    style={{
-                      color: '#0392cf',
-                      fontSize: 24,
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                    }}
-                  >
-                    {this.state.FullName}
+                  Need Help?
                   </Text>
-                  <Text
-                    style={{
-                      color: '#0392cf',
-                      fontSize: 24,
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                    }}
-                  >
-                    {this.state.Nric}
-                  </Text>
-
-                  <Text
-                    style={{
-                      marginTop: '15%',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    Member ID {this.state.MemberID}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    {this.state.PlanType}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    Plan Add-on: {this.state.PlanAddon}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    {this.state.Company}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    Start Date: {this.state.StartDate}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    End Date: {this.state.EndDate}
-                  </Text>
-
-                  <Text
-                    style={{
-                      marginTop: '15%',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: 14,
-                    }}
-                  >
-                    Your Basic Coverage
-                  </Text>
-                </View>
-                <Image
-                  source={require('../../assets/apps/mednefits.png')}
+                <Text
                   style={{
-                    height: 55,
-                    width: 55,
-                    resizeMode: 'center',
-                    alignItem: 'center',
-                    marginTop: '5%',
-                    marginRight: '5%',
-                  }}
-                />
-              </View>
-
-              <ScrollView>{this.renderCoverage()}</ScrollView>
-
-              <View
-                style={{
-                  height: '13%',
-                  backgroundColor: '#f2f2f2',
-                  borderBottomLeftRadius: 14,
-                  borderBottomRightRadius: 14,
-                  opacity: 10000,
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    marginTop: '4%',
-                    marginLeft: '5%',
+                    color: '#0392cf',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: RF(2.0)
                   }}
                 >
-                  <Text
-                    style={{
-                      color: '#000',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: RF(2.4)
-                    }}
-                  >
-                    Need Help?
+                  <Text style={{
+                    color: '#0392cf',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: RF(2.0),
+                    textDecorationLine: 'underline'
+                  }}
+                    onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
+                    happiness@mednefits.com
                   </Text>
+                  {' '}
                   <Text
                     style={{
-                      color: '#0392cf',
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                       fontSize: RF(2.0)
                     }}
                   >
-                    <Text style={{
-                      color: '#0392cf',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: RF(2.0),
-                      textDecorationLine: 'underline'
-                    }}
-                      onPress={() => Linking.openURL('mailto:happiness@mednefits.com')}>
-                      happiness@mednefits.com
-                  </Text>
-                    {' '}
-                    <Text
-                      style={{
-                        fontFamily: Config.FONT_FAMILY_ROMAN,
-                        fontSize: RF(2.0)
-                      }}
-                    >
-                      or
+                    or
                     </Text>
-                    {' '}
-                    <Text style={{
-                      color: '#0392cf',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: RF(2.0),
-                      textDecorationLine: 'underline'
-                    }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
+                  {' '}
+                  <Text style={{
+                    color: '#0392cf',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: RF(2.0),
+                    textDecorationLine: 'underline'
+                  }} onPress={() => Linking.openURL("tel:+65 6254 7889")}>+65 6254 7889</Text>
+                </Text>
+                <Text
+                  style={{
+                    color: '#0392cf',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: RF(2.0)
+                  }}
+                >
+                  mednefits.com
                   </Text>
-                  <Text
-                    style={{
-                      color: '#0392cf',
-                      fontFamily: Config.FONT_FAMILY_ROMAN,
-                      fontSize: RF(2.0)
-                    }}
-                  >
-                    mednefits.com
-                  </Text>
-                </View>
               </View>
             </View>
           </View>
         </View>
-      </Drawer>
+      </View>
     );
   }
 }
