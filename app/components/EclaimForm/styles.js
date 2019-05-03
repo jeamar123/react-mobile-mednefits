@@ -24,7 +24,7 @@ export default EStyleSheet.create({
     marginRight: "5%",
   },
   dividerDetail:{
-    padding: 15,
+    padding: 8,
     backgroundColor: "#EFEFF4"
   },
   sectionTitleComponent:{
@@ -33,6 +33,14 @@ export default EStyleSheet.create({
   title: {
     justifyContent: 'center',
     alignItems: 'center',
+    color : '#919191'
+  },
+  detailsTitle: {
+  fontSize: 8,
+  fontStyle: "normal",
+  letterSpacing: 0,
+  color: "#919191",
+  marginLeft: '3%'
   },
   spendingActive: {
     paddingTop: 10,
@@ -51,7 +59,7 @@ export default EStyleSheet.create({
     paddingLeft: 10,
     borderRadius: 3,
     borderWidth: 2,
-    borderColor: "#cccccc",
+    borderColor: "#dbdbdb",
     alignItems: 'center'
   },
   inputClaimType: {

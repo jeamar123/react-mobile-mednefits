@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   View,
-  ImageBackground,
+  Image,
   TouchableOpacity,
   Dimensions,
   ScrollView
@@ -109,7 +109,18 @@ export default class InputSelect extends Component {
             {this.setTitle()}
           </Common.Text>
 
-          <Icon
+          <View
+            style={{
+              alignItems: 'flex-end',
+              marginLeft: 10
+            }}
+          >
+            <Image
+              source={require('../../../assets/apps/arrow.png')}
+              style={{ height: 20, resizeMode: 'center', width: 20 }}
+            />
+          </View>
+          {/* <Icon
             type="SimpleLineIcons"
             name="arrow-right"
             style={{
@@ -117,7 +128,7 @@ export default class InputSelect extends Component {
               marginLeft: 10,
               fontSize: 18
             }}
-          />
+          /> */}
         </TouchableOpacity>
 
       </View>

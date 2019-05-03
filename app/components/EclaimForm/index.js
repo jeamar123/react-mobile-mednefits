@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  TextInput,
+  Image,
   ScrollView
 } from 'react-native'
 import * as Common from '../common'
@@ -163,14 +163,14 @@ export default class EclaimForm extends Component {
           </View>
 
           <View style={styles.dividerDetail}>
-            <Common.Texti fontColor="#848484" style={styles.title}>
+            <Common.Texti fontColor="#848484" style={styles.detailsTitle}>
               DETAILS
             </Common.Texti>
           </View>
 
           <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
             <View
-              style={styles.fieldStyle}
+              style={[styles.fieldStyle, { marginTop: "3%" }]}
             >
               <Common.Texti>
                 Claim Type
@@ -182,15 +182,17 @@ export default class EclaimForm extends Component {
                 <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
                   {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../../assets/apps/arrow.png')}
+                    style={{ height: 20, resizeMode: 'center', width: 20 }}
+                  />
+                </View>
               </TouchableOpacity>
             </View>
 
@@ -251,7 +253,7 @@ export default class EclaimForm extends Component {
                   return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                 }}
                 onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
-                rightIcon="arrow-right"
+
               />
 
             </View>
@@ -276,20 +278,24 @@ export default class EclaimForm extends Component {
                   value={this.state.time}
                 />
 
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../../assets/apps/clocks.png')}
+                    style={{ height: 20, resizeMode: 'center', width: 20 }}
+                  />
+                </View>
 
               </View>
             </View>
 
             <Common.Divider />
+
+            {/*   */}
 
             <View
               style={styles.fieldStyleNoPadding}
@@ -301,11 +307,11 @@ export default class EclaimForm extends Component {
                 Claim Amount
             </Common.Texti>
 
-              <Common.InputText
+              <Common.InputAmount
                 value={this.state.amount}
                 keyboardType="numeric"
                 onChangeText={text => this.setState({ amount: text })}
-                placeholder="Amount"
+                placeholder="Enter amount"
                 type={"currency"}
                 leftToRight
               />
@@ -321,7 +327,7 @@ export default class EclaimForm extends Component {
                 alignItems: 'center',
               }}>
                 Member
-            </Common.Texti>
+              </Common.Texti>
 
               <Common.InputSelect
                 placeholder={this.state.memberState}
@@ -347,7 +353,8 @@ export default class EclaimForm extends Component {
               fontSize={16}
               fontColor={"#ffffff"}
               style={{
-                padding: 10
+                paddingTop: 15,
+                paddingBottom: 10,
               }}>
               Next
           </Common.Texti>
