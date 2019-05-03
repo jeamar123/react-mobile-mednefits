@@ -137,10 +137,10 @@ class manageProfile extends Component {
     return (
       <View
         style={{
-          borderBottomColor: '#cccccc',
+          borderBottomColor: '#DBDBDB',
           borderBottomWidth: 0.8,
-          // marginTop: '-2%',
-          marginBottom: '5%',
+          marginTop: (this.props.noMargin) ? 0 : 10,
+          marginBottom: (this.props.noMargin) ? 0 : 10,
         }}
       />
     );
@@ -413,6 +413,7 @@ class manageProfile extends Component {
             <DatePicker
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
+                marginBottom: '-20%',
               }}
               date={
                 this.state.Dob == '0000-00-00'
@@ -420,7 +421,6 @@ class manageProfile extends Component {
                   : this.state.Dob
               }
               mode="date"
-              placeholder="00-00-0000"
               format="DD-MM-YYYY"
               minDate="30-01-1945"
               maxDate="30-12-2002"
@@ -432,21 +432,22 @@ class manageProfile extends Component {
                   color: '#38424B',
                   justifyContent: 'center',
                   alignItems: 'flex-start',
-                  marginLeft: '4%',
                   borderWidth: 0,
-                  marginBottom: 10,
+                  marginTop: -10,
                 },
                 placeholderText: {
                   color: '#38424B',
                   fontFamily: Config.FONT_FAMILY_ROMAN,
                   fontSize: 14,
                   lineHeight: 30,
+                  marginTop: -10,
                 },
                 dateText: {
                   color: '#38424B',
                   fontFamily: Config.FONT_FAMILY_ROMAN,
                   fontSize: 14,
                   lineHeight: 30,
+                  marginTop: '-13%',
                 },
               }}
               onDateChange={date => this.setState({ Dob: date })}
