@@ -330,7 +330,7 @@ class DetailEclaim extends Component {
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
                 <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
-                  SGD
+                  S$
                 </Common.Texti>
               </View>
             </View>
