@@ -4,15 +4,16 @@ import {
   StatusBar,
   View,
   Text,
-  TextInput,
   ScrollView,
   ActivityIndicator,
-  ImageBackground
+  ImageBackground,
+  Image,
+  Easing
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Container, Icon } from 'native-base';
+import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { ClaimDetail } from '../components/ClaimDetail';
+import ZoomImage from 'react-native-zoom-image';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
@@ -199,15 +200,17 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.claim}
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -256,15 +259,17 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="calendar-multiple"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../assets/apps/calendar.png')}
+                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -289,15 +294,17 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
-                <Icon
-                  type="EvilIcons"
-                  name="clock"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../assets/apps/clocks.png')}
+                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -353,15 +360,17 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.state.member}
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <Image
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -402,11 +411,22 @@ class DetailEclaim extends Component {
                     <View
                       key={index}
                       style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
-                      <ImageBackground
+                      <ZoomImage
+                        imgStyle={{
+                          width: 70,
+                          height: 80,
+                          margin: 2
+                        }}
+                        enableScaling={true}
+                        easingFunc={Easing.ease}
+                        duration={200}
+                        source={{ uri: value.preview }}
+                      />
+                      {/* <ImageBackground
                         resizeMode="cover"
                         style={{ width: '100%', height: 90, width: 70 }}
                         source={{ uri: value.preview }}
-                      />
+                      /> */}
                     </View>
                   ))
                 ) : (

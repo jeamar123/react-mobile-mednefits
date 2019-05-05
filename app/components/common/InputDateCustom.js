@@ -3,7 +3,7 @@ import {
   DatePickerAndroid,
   DatePickerIOS,
   Platform,
-  Text,
+  Image,
   TouchableOpacity,
   Modal,
   View,
@@ -162,7 +162,19 @@ class DatePicker extends Component {
         />
       )
     } else {
-      return <View />
+      return (
+        <View
+          style={{
+            alignItems: 'flex-end',
+            marginLeft: 10
+          }}
+        >
+          <Image
+            source={require('../../../assets/apps/calendar.png')}
+            style={{ height: 20, resizeMode: 'center', width: 20 }}
+          />
+        </View>
+      )
     }
   }
 
@@ -235,7 +247,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: 15,
-    marginTop: 15
   }
 })
 

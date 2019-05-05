@@ -99,7 +99,7 @@ class History extends Component {
             <View
               style={{
                 padding: 5,
-                marginLeft: '13.5%',
+                marginLeft: '14.5%',
                 width: '100%',
                 fontSize: 13
               }}>

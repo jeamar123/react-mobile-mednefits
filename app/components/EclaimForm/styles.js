@@ -34,8 +34,13 @@ export default EStyleSheet.create({
   title: {
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#919191'
   },
   detailsTitle: {
+    fontSize: 8,
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#919191",
     marginLeft: '3%'
   },
   spendingActive: {
@@ -55,7 +60,7 @@ export default EStyleSheet.create({
     paddingLeft: 10,
     borderRadius: 3,
     borderWidth: 2,
-    borderColor: "#B4B4B4",
+    borderColor: "#dbdbdb",
     alignItems: 'center'
   },
   inputClaimType: {
@@ -67,8 +72,8 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 15,
-    paddingBottom: 15
+    paddingTop: '2.5%',
+    paddingBottom: '2.5%'
   },
   fieldStyleNoPadding: {
     flexDirection: 'row',
