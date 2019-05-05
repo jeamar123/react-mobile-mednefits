@@ -208,7 +208,7 @@ class DetailEclaim extends Component {
                 >
                   <Image
                     source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                    style={{ height: 15, resizeMode: 'center', width: 15 }}
                   />
                 </View>
               </View>
@@ -267,7 +267,7 @@ class DetailEclaim extends Component {
                 >
                   <Image
                     source={require('../../assets/apps/calendar.png')}
-                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                    style={{ height: 16, resizeMode: 'center', width: 15 }}
                   />
                 </View>
               </View>
@@ -302,7 +302,7 @@ class DetailEclaim extends Component {
                 >
                   <Image
                     source={require('../../assets/apps/clocks.png')}
-                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                    style={{ height: 15, resizeMode: 'center', width: 15 }}
                   />
                 </View>
               </View>
@@ -329,8 +329,8 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
-                <Common.Texti fontColor={"#9e9e9e"} fontSize={16}>
-                  S$
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                  SGD
                 </Common.Texti>
               </View>
             </View>
@@ -368,7 +368,7 @@ class DetailEclaim extends Component {
                 >
                   <Image
                     source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 18, resizeMode: 'center', width: 18 }}
+                    style={{ height: 15, resizeMode: 'center', width: 15 }}
                   />
                 </View>
               </View>

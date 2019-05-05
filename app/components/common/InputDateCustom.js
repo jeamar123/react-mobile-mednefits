@@ -171,7 +171,7 @@ class DatePicker extends Component {
         >
           <Image
             source={require('../../../assets/apps/calendar.png')}
-            style={{ height: 20, resizeMode: 'center', width: 20 }}
+            style={{ height: 16, resizeMode: 'center', width: 15 }}
           />
         </View>
       )

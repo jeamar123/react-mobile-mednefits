@@ -192,7 +192,7 @@ export default class EclaimForm extends Component {
                   >
                     <Image
                       source={require('../../../assets/apps/arrow.png')}
-                      style={{ height: 18, resizeMode: 'center', width: 18 }}
+                      style={{ height: 15, resizeMode: 'center', width: 15 }}
                     />
                   </View>
                 </TouchableOpacity>
@@ -285,7 +285,7 @@ export default class EclaimForm extends Component {
                   >
                     <Image
                       source={require('../../../assets/apps/clocks.png')}
-                      style={{ height: 18, resizeMode: 'center', width: 18 }}
+                      style={{ height: 15, resizeMode: 'center', width: 15 }}
                     />
                   </View>
 

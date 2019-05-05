@@ -117,7 +117,7 @@ export default class InputSelect extends Component {
           >
             <Image
               source={require('../../../assets/apps/arrow.png')}
-              style={{ height: 20, resizeMode: 'center', width: 20 }}
+              style={{ height: 15, resizeMode: 'center', width: 15 }}
             />
           </View>
 
