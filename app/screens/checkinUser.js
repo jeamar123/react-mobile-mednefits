@@ -16,6 +16,9 @@ class checkinUser extends Component {
         <Navbar
           title="Register"
           rightNav="Close"
+          Services={this.props.services}
+          clinic_Id={this.props.clinicid}
+          check_Id={this.props.checkId}
         />
         <View style={{
           alignItems: 'center',
@@ -99,6 +102,11 @@ class checkinUser extends Component {
 
             </View>
           </View>
+
+          <Image
+            source={require('../../assets/apps/LogoMednefits.png')}
+            style={{ height: 25, resizeMode: 'contain', width: 25, marginTop: '60%' }}
+          />
 
         </View>
       </Container>

@@ -155,16 +155,20 @@ class HomeContent extends Component {
                     />
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    {/* <Text style={styles.title}>Register</Text> */}
-                    <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text>
+                    <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                    {/* <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text> */}
                   </View>
                 </View>
               </View>
             </TouchableOpacity>
-            {/* <TouchableOpacity
+            <TouchableOpacity
               onPress={() =>
-                Actions.Barcode()
+                Actions.SelectService({
+                  type: 'reset',
+                  services: this.props.Services,
+                  clinicid: this.props.clinic_Id
+                })
               }
             >
               <View style={styles.gridBox}>
@@ -180,7 +184,7 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </View>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
                 Actions.ECardUser()

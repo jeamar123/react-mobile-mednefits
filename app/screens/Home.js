@@ -437,6 +437,7 @@ class Home extends Component {
 
   render() {
     // console.warn("clinisc " + JSON.stringify(this.state.AllClinic));
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Drawer
         type="displace"
@@ -523,7 +524,11 @@ class Home extends Component {
               leftNav={true}
               rightNav={true}
             />
-            <HomeContentStatic />
+            <HomeContentStatic
+              Services={this.props.services}
+              clinic_Id={this.props.clinicid}
+              check_Id={this.props.checkId}
+            />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
             >

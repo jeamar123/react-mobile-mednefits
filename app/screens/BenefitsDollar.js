@@ -147,12 +147,11 @@ class BenefitsDollar extends Component {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#fff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#fff' }}>
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'center', alignItems: 'center',
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -171,18 +170,20 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
-                // flex: 1,
+                marginLeft: responsiveWidth(4),
+                flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+                justifyContent: 'center', alignItems: 'center',
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f' }}>
-                {this.state.currency ? this.state.currency : ' '}
-              </Text>
+              <View>
+                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+                  {this.state.currency ? this.state.currency : ' '}
+                </Text>
+              </View>
               <InputPay
                 keyboardType="numeric"
-                // placeholder="0.00"
+                placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
               />

@@ -771,7 +771,11 @@ export default class Navbar extends React.Component {
         >
           <TouchableOpacity
             // style={{ paddingStart: '23%' }}
-            onPress={() => Actions.Home()}
+            onPress={() => Actions.Home({
+              services: this.props.Services,
+              clinicid: this.props.clinic_Id,
+              checkId: this.props.check_Id
+            })}
           >
             <Image
               source={require('../../../assets/apps/Close.png')}
