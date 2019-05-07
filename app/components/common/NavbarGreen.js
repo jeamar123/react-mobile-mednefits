@@ -774,11 +774,13 @@ export default class Navbar extends React.Component {
             onPress={() => Actions.Home({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,
-              checkId: this.props.check_Id
+              checkId: this.props.check_Id,
+              capCurrency: this.props.capCurrency,
+              capAmount: this.props.capAmount
             })}
           >
             <Image
-              source={require('../../../assets/apps/Close.png')}
+              source={require('../../../assets/apps/cancel.png')}
               style={{ height: 85, resizeMode: 'center', width: 55 }}
             />
           </TouchableOpacity>

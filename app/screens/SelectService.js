@@ -79,11 +79,18 @@ class SelectService extends Component {
     if (this.state.services == "") {
       Commmon.getAlert("Mednefits", "Please at least choose one service to proceed")
     } else {
-      Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })
+      Actions.PayScan({
+        type: 'reset',
+        services: this.state.services,
+        clinicid: this.props.clinicid,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+      })
     }
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />

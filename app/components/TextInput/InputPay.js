@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-// import { TextInputMask } from 'react-native-masked-text';
-import TextInputMask from 'react-native-text-input-mask';
+import { TextInputMask } from 'react-native-masked-text';
+// import TextInputMask from 'react-native-text-input-mask';
 // import CurrencyInput from 'react-currency-input';
 // import { TextInputMask } from 'react-masked-text';
 import * as Common from '../common';
@@ -15,8 +15,8 @@ const InputWithButton = props => {
 
       <TextInputMask
         autoFocus={true}
-        kind={'money'}
-        options={{ unit: '', precision: '2', separator: '.', delimiter: ',', }}
+        type={'money'}
+        options={{ unit: '', precision: '2', separator: '.', delimiter: '.', }}
         style={styles.inputPay}
         {...props}
         underlineColorAndroid="transparent"

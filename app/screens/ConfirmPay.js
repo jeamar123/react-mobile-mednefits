@@ -3,7 +3,7 @@ import { StatusBar, Image, View, Dimensions } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { Buttons, Spinner, Popup } from '../components/common';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/common/NavbarGrey';
 import * as Config from '../config';
 import * as Core from '../core';
 
@@ -93,7 +93,7 @@ class ConfirmPay extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel-cash" title="Mednefits Credits" />
+        <Navbar leftNav="cancel-cash" title="Summary" />
         {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <View
             style={{
@@ -131,12 +131,13 @@ class ConfirmPay extends Component {
         </View> */}
         <Content padder>
 
-          <View style={{ backgroundColor: '#f8f8fa' }}>
+          <View style={{ backgroundColor: '#fff' }}>
             <View
               style={{
-                justifyContent: 'center', alignItems: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '10%'
+                marginBottom: '5%'
               }}
             >
               {!this.state.clinic_image ? (
@@ -166,15 +167,10 @@ class ConfirmPay extends Component {
                 flex: 1,
                 height: 100,
                 justifyContent: 'center',
-                alignItems: 'flex-start',
-                marginLeft: 50,
+                alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '5%'
               }}
             >
-              <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
-                Payment Amount
-                </Text>
               <View
                 style={{
                   flexDirection: 'row',
@@ -190,14 +186,14 @@ class ConfirmPay extends Component {
               </View>
 
             </View>
-          </View>
-          <View style={{ flex: 1, marginBottom: '20%', marginTop: '10%' }}>
-            <Buttons
-              onPress={() => this.SendPayment()}
-              isLoading={this.state.isLoading}
-            >
-              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-            </Buttons>
+            <View style={{ flex: 1, marginBottom: '20%', marginTop: '10%' }}>
+              <Buttons
+                onPress={() => this.SendPayment()}
+                isLoading={this.state.isLoading}
+              >
+                Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+              </Buttons>
+            </View>
           </View>
           {/* <Card>
             <CardItem cardBody>

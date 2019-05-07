@@ -10,12 +10,18 @@ class ScanPay extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar({ services: this.props.services, clinicid: this.props.clinicid })}>
+          <TouchableOpacity onPress={() => Actions.BenefitsDollar({
+            services: this.props.services,
+            clinicid: this.props.clinicid,
+            capCurrency: this.props.capCurrency,
+            capAmount: this.props.capAmount,
+          })}>
             <Card>
               <CardItem>
                 <Body

@@ -165,9 +165,10 @@ class HomeContent extends Component {
             <TouchableOpacity
               onPress={() =>
                 Actions.SelectService({
-                  type: 'reset',
                   services: this.props.Services,
-                  clinicid: this.props.clinic_Id
+                  clinicid: this.props.clinic_Id,
+                  capCurrency: this.props.capCurrency,
+                  capAmount: this.props.capAmount,
                 })
               }
             >

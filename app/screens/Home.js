@@ -528,6 +528,8 @@ class Home extends Component {
               Services={this.props.services}
               clinic_Id={this.props.clinicid}
               check_Id={this.props.checkId}
+              capCurrency={this.props.capCurrency}
+              capAmount={this.props.capAmount}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
