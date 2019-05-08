@@ -22,9 +22,10 @@ class checkinUser extends Component {
           capCurrency={this.props.capCurrency}
           capAmount={this.props.capAmount}
         />
-        <View style={{
-          alignItems: 'center',
-        }}
+        <View
+          style={{
+            alignItems: 'center',
+          }}
         >
           <Image
             source={require('../../assets/apps/CheckIn.png')}

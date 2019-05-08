@@ -382,6 +382,7 @@ export default class Navbar extends React.Component {
               fontFamily: 'HelveticaNeue-Bold',
               color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 18,
+              marginTop: '9%'
             }}
           >
             {this.props.title}
@@ -411,6 +412,7 @@ export default class Navbar extends React.Component {
               fontFamily: 'HelveticaNeue-Bold',
               color: (this.props.fontColor) ? this.props.fontColor : '#000',
               fontSize: 18,
+              marginTop: '9%'
             }}
           >
             {this.props.title}
@@ -466,7 +468,7 @@ export default class Navbar extends React.Component {
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
                 fontSize: 16,
-                color: '#FFFFFF',
+                color: '#000',
                 marginRight: 10,
               }}
             >

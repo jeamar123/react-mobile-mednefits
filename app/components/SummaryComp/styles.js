@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
+import * as Config from '../../config';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 
@@ -24,17 +25,17 @@ export default EStyleSheet.create({
     color: '#08BB08',
   },
   detail: {
-    fontFamily: 'helvetica',
-    fontSize: 30,
-    lineHeight: 30,
-    color: '#000',
+    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontSize: 35,
+    lineHeight: 35,
+    color: '#fff',
     fontWeight: '600',
   },
   detailUp: {
-    fontFamily: 'helvetica',
-    fontSize: 17,
-    lineHeight: 18,
-    color: '#000',
+    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontSize: 20,
+    lineHeight: 20,
+    color: '#fff',
     fontWeight: '600',
   },
 });

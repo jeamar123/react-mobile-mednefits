@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, Dimensions } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons, Spinner, Popup } from '../components/common';
+import { ButtonsConfirm, Spinner, Popup } from '../components/common';
 import Navbar from '../components/common/NavbarGrey';
 import * as Config from '../config';
 import * as Core from '../core';
@@ -93,42 +93,7 @@ class ConfirmPay extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel-cash" title="Summary" />
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View
-            style={{
-              backgroundColor: '#518cb0',
-              height: height / 9,
-              width: width,
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'helvetica',
-                fontSize: 16,
-                paddingTop: 10,
-                paddingBottom: 15,
-                color: '#fff',
-              }}
-            >
-              Current Balance
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Text
-                style={{
-                  fontFamily: 'helvetica',
-                  fontSize: 20,
-                  lineHeight: 20,
-                  color: '#fff',
-                  fontWeight: '600',
-                }}
-              >
-                {this.state.Balance}
-              </Text>
-            </View>
-          </View>
-        </View> */}
+        <Navbar leftNav="cancel" title="Summary" />
         <Content padder>
 
           <View style={{ backgroundColor: '#fff' }}>
@@ -137,7 +102,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '5%'
+                marginBottom: '3%'
               }}
             >
               {!this.state.clinic_image ? (
@@ -154,7 +119,7 @@ class ConfirmPay extends Component {
               {!this.state.clinic_name ? (
                 <Spinner size="small" />
               ) : (
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginTop: '3%' }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, marginTop: '3%' }}>
                     {this.state.clinic_name}
                   </Text>
                 )}
@@ -168,7 +133,6 @@ class ConfirmPay extends Component {
                 height: 100,
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: '2%',
               }}
             >
               <View
@@ -177,55 +141,72 @@ class ConfirmPay extends Component {
                   justifyContent: 'space-between',
                 }}
               >
-                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
+                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
                   {this.state.currency ? this.state.currency : ' '} {' '}
                 </Text>
-                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44 }}>
+                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50' }}>
                   {this.props.amount}
                 </Text>
               </View>
 
             </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <View style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingRight: 10,
+                paddingLeft: 10,
+                borderRadius: 3,
+                borderWidth: 2,
+                borderColor: "#bdbdbd",
+                alignItems: 'flex-start',
+                width: '48%'
+              }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  By Credits:
+                </Text>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
+                  {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+                </Text>
+              </View>
+              <View style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingRight: 10,
+                paddingLeft: 10,
+                borderRadius: 3,
+                borderWidth: 2,
+                borderColor: "#bdbdbd",
+                alignItems: 'flex-start',
+                width: '48%'
+              }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  Cap:
+                </Text>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
+                  {this.props.capCurrency} {this.props.capAmount}
+                </Text>
+              </View>
+            </View>
+
             <View style={{ flex: 1, marginBottom: '20%', marginTop: '10%' }}>
-              <Buttons
+              <ButtonsConfirm
                 onPress={() => this.SendPayment()}
                 isLoading={this.state.isLoading}
               >
                 Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-              </Buttons>
+              </ButtonsConfirm>
             </View>
           </View>
-          {/* <Card>
-            <CardItem cardBody>
-              <Body
-                style={{
-                  height: 120,
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  marginLeft: 50,
-                }}
-              >
-                <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
-                  Payment Amount
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 22 }}>
-                    {this.state.currency ? this.state.currency : ' '} {' '}
-                  </Text>
-                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 30 }}>
-                    {this.props.amount}
-                  </Text>
-                </View>
-              </Body>
-            </CardItem>
-
-          </Card> */}
 
         </Content>
       </Container>
