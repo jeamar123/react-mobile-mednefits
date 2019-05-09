@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, Image } from 'react-native';
 import {
   Container,
   Content,
@@ -7,134 +7,342 @@ import {
 } from 'native-base';
 import { SummaryComp } from '../components/SummaryComp';
 import styles from '../components/SummaryComp/styles';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/common/NavbarGrey';
 import * as Common from '../components/common';
+import * as Config from '../config';
 
 class Summary extends Component {
   render() {
     return (
-      <Container style={{ backgroundColor: '#f8f8fa' }}>
+      <View style={{ flex: 1, backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="null"
           title="Summary"
+          subtitle="In-Network"
           rightNav="done"
         />
-        <SummaryComp />
-        <Content>
+
+        {(this.props.result.data.half_credits_payment == false) ? (
           <View
             style={{
-              height: 250,
-              backgroundColor: '#fff',
-            }}>
+              alignItems: 'center',
+            }}
+          >
             <View
               style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  marginTop: 10,
-                  marginBottom: 14,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
-              </Text>
+                backgroundColor: '#3F9D59',
+                width: '90%',
+                marginTop: 10,
+                height: '45%'
+              }}
+            >
               <View
-                style={{ flexDirection: 'row', alignItems: 'flex-start' }}
-              >
-                <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                <Text style={styles.detail}>{(this.props.result.data.amount) ? this.props.result.data.amount : ""}</Text>
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+
+                <Image
+                  source={require('../../assets/apps/CheckIn.png')}
+                  style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                />
+
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      marginBottom: 5,
+                      color: '#fff',
+                      fontSize: 20,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                    }}
+                  >
+                    Paid by Credits: Successful
+                </Text>
+                  <Text
+                    style={{
+                      marginTop: 5,
+                      marginBottom: 5,
+                      color: '#fff',
+                      fontSize: 15,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
+                    }}
+                  >
+                    {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
+                  </Text>
+                </View>
+                <View
+                  style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
+                >
+                  <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
+                  <Text style={styles.detail}>{(this.props.result.data.credits) ? this.props.result.data.credits : ""}</Text>
+                </View>
               </View>
             </View>
 
-            <Common.Divider />
+            <View style={{ backgroundColor: '#fff', width: '90%', marginTop: 10 }}>
+              <View
+                style={{
+                  marginLeft: '5%',
+                  marginRight: '5%'
+                }}>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    Total Payment
+                  </Text>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                  </Text>
+                </View>
 
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: '3%',
-                marginRight: '3%'
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                Service
-              </Text>
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                {(this.props.result.data.services) ? this.props.result.data.services : ""}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: '3%',
-                marginRight: '3%'
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                Transaction Time
-              </Text>
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginLeft: '3%',
-                marginRight: '3%'
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                Trans-ID
-              </Text>
-              <Text
-                style={{
-                  fontSize: 13,
-                  marginTop: 20,
-                  fontFamily: 'helvetica',
-                }}
-              >
-                {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
-              </Text>
+                <View
+                  style={{
+                    marginTop: '5%',
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    Service
+                </Text>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    {(this.props.result.data.services) ? this.props.result.data.services : ""}
+                  </Text>
+                </View>
+
+                <View
+                  style={{
+                    marginTop: '5%',
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', width: '30%' }}>
+                    Transaction Time
+                </Text>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                  </Text>
+                </View>
+
+                <View
+                  style={{
+                    marginTop: '5%',
+                    flexDirection: 'row',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                    marginBottom: '5%'
+                  }}
+                >
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    Trans-ID
+                </Text>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
+                  </Text>
+                </View>
+
+              </View>
             </View>
           </View>
-        </Content>
-      </Container>
+        ) : (
+            <View
+              style={{
+                alignItems: 'center',
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: '#FF5757',
+                  width: '90%',
+                  marginTop: 10,
+                  height: '27%'
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+
+                  <Image
+                    source={require('../../assets/apps/notifications.png')}
+                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                  />
+
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        marginBottom: 5,
+                        color: '#fff',
+                        fontSize: 20,
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                      }}
+                    >
+                      Make Payment in Cash
+                    </Text>
+                  </View>
+                  <View
+                    style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
+                  >
+                    <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
+                    <Text style={styles.detail}>{(this.props.result.data.cash) ? this.props.result.data.cash : ""}</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  backgroundColor: '#fff',
+                  width: '90%',
+                  marginTop: 10,
+                  height: '35%'
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+
+                  <Image
+                    source={require('../../assets/apps/CheckIn2.png')}
+                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                  />
+
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        marginBottom: 5,
+                        color: '#000',
+                        fontSize: 20,
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                      }}
+                    >
+                      Paid by Credits: Successful
+                </Text>
+                    <Text
+                      style={{
+                        marginTop: 5,
+                        marginBottom: 5,
+                        color: '#000',
+                        fontSize: 15,
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                      }}
+                    >
+                      {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
+                    </Text>
+                  </View>
+                  <View
+                    style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
+                  >
+                    <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
+                    <Text style={styles.detail2}>{(this.props.result.data.credits) ? this.props.result.data.credits : ""}</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View style={{ backgroundColor: '#fff', width: '90%', marginTop: 10 }}>
+                <View
+                  style={{
+                    marginLeft: '5%',
+                    marginRight: '5%'
+                  }}>
+                  <View
+                    style={{
+                      marginTop: '5%',
+                      flexDirection: 'row',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      Total Payment
+                    </Text>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={{
+                      marginTop: '5%',
+                      flexDirection: 'row',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      Service
+                </Text>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      {(this.props.result.data.services) ? this.props.result.data.services : ""}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={{
+                      marginTop: '5%',
+                      flexDirection: 'row',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', width: '30%' }}>
+                      Transaction Time
+                </Text>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={{
+                      marginTop: '5%',
+                      flexDirection: 'row',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                      marginBottom: '5%'
+                    }}
+                  >
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      Trans-ID
+                </Text>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                      {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
+                    </Text>
+                  </View>
+
+                </View>
+              </View>
+            </View>
+          )}
+
+      </View>
     );
   }
 }

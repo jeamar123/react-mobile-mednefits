@@ -3,11 +3,10 @@ import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-nati
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core'
-import { RNCamera, FaceDetector } from 'react-native-camera';
+import { RNCamera } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
 import { Spinner, Text } from '../components/common/Spinner'
 import { Popup } from '../components/common';
-import * as Config from '../config'
 
 const PendingView = () => (
   <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position: 'absolute' }}>
@@ -48,20 +47,33 @@ class Barcode extends Component {
   }
 
   scanBarcode = (data) => {
-  	this.setState({ isLoading: true })
+    this.setState({ isLoading: true })
     barcodeData = data
     console.log(barcodeData);
 
     try {
-      Core.GetBarcodeData(barcodeData.data, (result)=>{
-        console.warn("res "+result);
+      Core.GetBarcodeData(barcodeData.data, (result) => {
+        console.warn("res " + JSON.stringify(result));
         console.log(result)
         if (result.status) {
-          Actions.SelectService({
-            type:'reset',
+          // Actions.SelectService({
+          //   type: 'reset',
+          //   services: result.data.clinic_procedures,
+          //   clinicid: result.data.clinic_id,
+          //   clinic_data: result.data
+          // })
+          Actions.checkinUser({
+            type: 'reset',
             services: result.data.clinic_procedures,
             clinicid: result.data.clinic_id,
-            clinic_data: result.data
+            member: result.data.member,
+            nric: result.data.nric,
+            checkId: result.data.check_in_id,
+            checkTime: result.data.check_in_time,
+            capCurrency: result.data.cap_currency_symbol,
+            capAmount: result.data.cap_per_visit_amount,
+            clinic_image: result.data.image_url,
+            clinic_name: result.data.name,
           })
           this.setState({
             isLoading: false,
@@ -76,14 +88,14 @@ class Barcode extends Component {
           })
         }
 
-        
+
       })
     } catch (e) {
       this.setState({
         isLoading: false
       })
     } finally {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.setState({
           isLoading: false
         })
@@ -124,12 +136,7 @@ class Barcode extends Component {
         ) : (
             <RNCamera
               style={styles.preview}
-              barCodeTypes={[
-                RNCamera.Constants.BarCodeType.qr,
-                RNCamera.Constants.BarCodeType.ean13,
-                RNCamera.Constants.BarCodeType.upce,
-                RNCamera.Constants.BarCodeType.code128
-              ]}
+              barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               flashMode={RNCamera.Constants.FlashMode.on}
               permissionDialogTitle={'Permission to use camera'}
               permissionDialogMessage={

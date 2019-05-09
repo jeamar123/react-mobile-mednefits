@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/common/NavbarGrey';
 import * as Core from '../core';
 import * as Config from '../config';
 import * as Common from '../components/common';
@@ -44,18 +44,6 @@ class BenefitsDollar extends Component {
         Balance: result.data.current_balance,
       });
     });
-
-    // Core.GetBalance((err, result)=>{
-    //   this.setState({currency: result.data.currency_symbol})
-    // })
-
-    // this.props.services.map(value =>
-    //   Core.GetProcedureDetails(value, (err, result) => {
-    //     this.setState({
-    //       amount: Number(result.data.price) + Number(this.state.amount),
-    //     });
-    //   })
-    // );
   }
 
   SendPayment() {
@@ -88,6 +76,7 @@ class BenefitsDollar extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
@@ -100,9 +89,8 @@ class BenefitsDollar extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Mednefits Credits" />
+        <Navbar leftNav="cancel" title="Payment Amount" />
         <Content padder>
-
 
           <View style={{ backgroundColor: '#f8f8fa', flex: 1 }}>
             <View
@@ -127,11 +115,11 @@ class BenefitsDollar extends Component {
                   >
                     <Image
                       source={{ uri: this.state.clinic_image }}
-                      style={{ 
-                        height: responsiveHeight(20), 
-                        resizeMode: 'center', 
+                      style={{
+                        height: responsiveHeight(20),
+                        resizeMode: 'center',
                         width: responsiveWidth(20),
-                        marginRight: responsiveWidth(4) 
+                        marginRight: responsiveWidth(4)
                       }}
                     />
                     <Text
@@ -156,33 +144,34 @@ class BenefitsDollar extends Component {
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
             >
               <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
-                Payment Amount
+                Total Bill Amount
               </Text>
             </View>
             <View
               style={{
-                marginLeft: '20%',
-                marginRight: '20%',
+                marginLeft: '5%',
+                marginRight: '5%',
               }}>
               <Common.Divider />
             </View>
 
             <View
               style={{
-                // flex: 1,
+                marginLeft: responsiveWidth(4),
+                flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f',  }}>
+              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
               <InputPay
@@ -192,26 +181,35 @@ class BenefitsDollar extends Component {
                 onChangeText={number => this.setState({ amount: number })}
               />
             </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center', alignItems: 'center',
-                marginLeft: '5%',
-                marginRight: '5%',
-                marginBottom: '10%'
-              }}
-            >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
-                Balance: {this.state.Balance}
-              </Text>
-            </View>
           </View>
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() => Actions.ConfirmPay({ services: this.props.services, clinicid: this.props.clinicid, amount: this.state.amount })}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+              Balance: {this.state.Balance}
+            </Text>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+              Cap: {this.props.capCurrency}{this.props.capAmount}
+            </Text>
+          </View>
+
+          <View style={{ marginBottom: '5%' }} />
+          <ButtonPay onPress={() => Actions.PayScan({
+            services: this.props.services,
+            clinicid: this.props.clinicid,
+            amount: this.state.amount,
+            capCurrency: this.props.capCurrency,
+            capAmount: this.props.capAmount,
+            check_Id: this.props.check_Id
+          })}>
             Next
-            </ButtonPay>
+          </ButtonPay>
         </Content>
       </Container>
     );

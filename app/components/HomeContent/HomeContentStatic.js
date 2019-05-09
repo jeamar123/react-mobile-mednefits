@@ -156,12 +156,57 @@ class HomeContent extends Component {
                     />
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text>
+                    <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                    {/* <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text> */}
                   </View>
                 </View>
               </View>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                Actions.SelectService({
+                  services: this.props.Services,
+                  clinicid: this.props.clinic_Id,
+                  services: this.props.Services,
+                  clinicid: this.props.clinic_Id,
+                  capCurrency: this.props.capCurrency,
+                  capAmount: this.props.capAmount,
+                })
+              }
+            >
+              <View style={styles.gridBox}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                    {(this.props.check_Id) ? (
+                      <View style={{
+                        marginTop: '-7%',
+                        marginLeft: '55%',
+                        marginBottom: '-8%',
+                        width: 15,
+                        height: 15,
+                        borderRadius: 15 / 2,
+                        backgroundColor: '#f44336',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                      </View>
+                    ) : (
+                        <View />
+                      )}
+
+                    <Image
+                      style={{ marginBottom: 8, width: 23, height: 35 }}
+                      source={require('../../../assets/apps/payIcon.png')}
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8%' }}>
+                    <Text style={styles.title}>Checkout</Text>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+
             <TouchableOpacity
               onPress={() =>
                 Actions.ECardUser()

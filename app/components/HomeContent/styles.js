@@ -30,7 +30,8 @@ export default EStyleSheet.create({
     marginTop: 10
   },
   gridBox: {
-    width: width / 3.23,
+    // width: width / 3.23,
+    width: width / 4.23,
     height: height / 6,
     margin: 1,
     justifyContent: 'center',
@@ -39,7 +40,8 @@ export default EStyleSheet.create({
   title: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: RF(2.3),
+    // fontSize: RF(2.3),
+    fontSize: RF(2.1),
     fontWeight: '600',
     paddingTop: 5,
     color: '#fff',

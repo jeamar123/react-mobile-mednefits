@@ -10,12 +10,18 @@ class checkinUser extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           title="Register"
           rightNav="Close"
+          Services={this.props.services}
+          clinic_Id={this.props.clinicid}
+          check_Id={this.props.checkId}
+          capCurrency={this.props.capCurrency}
+          capAmount={this.props.capAmount}
         />
         <View style={{
           alignItems: 'center',
@@ -99,7 +105,20 @@ class checkinUser extends Component {
 
             </View>
           </View>
+        </View>
 
+        <View style={{
+          width: '100%',
+          height: 50,
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          bottom: 0,
+        }}>
+          <Image
+            source={require('../../assets/apps/LogoMednefits.png')}
+            style={{ height: 25, resizeMode: 'contain', width: 25 }}
+          />
         </View>
       </Container>
     );

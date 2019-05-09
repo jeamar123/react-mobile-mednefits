@@ -4,7 +4,7 @@ import * as Config from '../../config'
 
 const { width } = Dimensions.get('window');
 
-const Buttons2 = ({ onPress, children }) => {
+const ButtonsConfirm = ({ onPress, children }) => {
   const { MainContainer, ButtonStyle, TextStyle } = styles;
 
   return (
@@ -27,14 +27,14 @@ const styles = {
     borderRadius: 5,
     margin: 10,
     alignSelf: 'center',
-    width: '96%'
+    width: '90%'
   },
   TextStyle: {
-    fontFamily: Config.FONT_FAMILY_LIGHT,
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     color: '#fff',
     alignSelf: 'center',
     fontSize: 20,
   },
 };
 
-export { Buttons2 };
+export { ButtonsConfirm };
