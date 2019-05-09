@@ -169,12 +169,32 @@ class HomeContent extends Component {
                   clinicid: this.props.clinic_Id,
                   capCurrency: this.props.capCurrency,
                   capAmount: this.props.capAmount,
+                  check_Id: this.props.check_Id
                 })
               }
             >
               <View style={styles.gridBox}>
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+
+                    {(this.props.check_Id) ? (
+                      <View style={{
+                        marginTop: '-7%',
+                        marginLeft: '55%',
+                        marginBottom: '-8%',
+                        width: 15,
+                        height: 15,
+                        borderRadius: 15 / 2,
+                        backgroundColor: '#f44336',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                      </View>
+                    ) : (
+                        <View />
+                      )}
+
+
                     <Image
                       style={{ marginBottom: 8, width: 23, height: 35 }}
                       source={require('../../../assets/apps/payIcon.png')}

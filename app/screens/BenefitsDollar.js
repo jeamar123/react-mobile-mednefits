@@ -215,6 +215,7 @@ class BenefitsDollar extends Component {
             amount: this.state.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
+            check_Id: this.props.check_Id
           })}>
             Next
           </ButtonPay>

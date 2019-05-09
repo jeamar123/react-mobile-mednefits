@@ -38,4 +38,18 @@ export default EStyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+  detail2: {
+    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontSize: 35,
+    lineHeight: 35,
+    color: '#000',
+    fontWeight: '600',
+  },
+  detailUp2: {
+    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontSize: 20,
+    lineHeight: 20,
+    color: '#000',
+    fontWeight: '600',
+  },
 });

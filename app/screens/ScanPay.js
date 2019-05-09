@@ -21,6 +21,7 @@ class ScanPay extends Component {
             clinicid: this.props.clinicid,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
+            check_Id: this.props.check_Id
           })}>
             <Card>
               <CardItem>

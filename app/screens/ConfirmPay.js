@@ -14,7 +14,8 @@ class ConfirmPay extends Component {
     this.state = {
       clinic_name: false,
       clinic_image: false,
-      amount: 0,
+      amount: '',
+      credits: '',
       currency: false,
       isLoading: false,
       Balance: '0',
@@ -61,11 +62,14 @@ class ConfirmPay extends Component {
 
     params = {
       amount: this.props.amount,
+      credits: this.props.capAmount,
+      cash: this.props.capAmount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
+      check_Id: this.props.check_Id
     };
 
-    Core.SendPayment(params, (err, result) => {
+    Core.CreatePayment(params, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
         Actions.Summary({ result: result, type: 'reset' });
