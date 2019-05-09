@@ -16,9 +16,10 @@ class ScanPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back-home" title="Scan & Pay" />
         <Content padder>
-          <TouchableOpacity onPress={() => Actions.BenefitsDollar({
+          <TouchableOpacity onPress={() => Actions.ConfirmPay({
             services: this.props.services,
             clinicid: this.props.clinicid,
+            amount: this.props.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
             check_Id: this.props.check_Id

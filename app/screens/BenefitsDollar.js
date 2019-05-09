@@ -209,7 +209,7 @@ class BenefitsDollar extends Component {
           </View>
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() => Actions.ConfirmPay({
+          <ButtonPay onPress={() => Actions.PayScan({
             services: this.props.services,
             clinicid: this.props.clinicid,
             amount: this.state.amount,
