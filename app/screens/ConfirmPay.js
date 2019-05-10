@@ -141,7 +141,7 @@ class ConfirmPay extends Component {
         {this.customLoader()}
         {this.renderPopUp()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Summary" />
+        <Navbar leftNav="back" title="Summary" />
         <Content padder>
 
           <View style={{ backgroundColor: '#fff' }}>
@@ -150,7 +150,6 @@ class ConfirmPay extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '10%'
               }}
             >
               {!this.state.clinic_image ? (
@@ -181,7 +180,7 @@ class ConfirmPay extends Component {
             <View
               style={{
                 flex: 1,
-                height: 100,
+                height: 80,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
@@ -195,7 +194,7 @@ class ConfirmPay extends Component {
                 <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
                   {this.state.currency ? this.state.currency : ' '} {' '}
                 </Text>
-                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50' }}>
+                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50', fontWeight: 'bold' }}>
                   {this.props.amount}
                 </Text>
               </View>

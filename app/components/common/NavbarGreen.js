@@ -12,6 +12,7 @@ import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
+import ResponsiveImage from 'react-native-responsive-image';
 import * as Core from '../../core';
 import * as Config from '../../config';
 
@@ -384,6 +385,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: '5%'
           }}
         >
           <Text
@@ -767,6 +769,8 @@ export default class Navbar extends React.Component {
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
+            paddingRight: '4%',
+            marginTop: '2%'
           }}
         >
           <TouchableOpacity
@@ -779,10 +783,15 @@ export default class Navbar extends React.Component {
               capAmount: this.props.capAmount
             })}
           >
-            <Image
+            <ResponsiveImage
+              source={require('../../../assets/apps/Close.png')}
+              style={{ resizeMode: 'center', }}
+              initWidth="18" initHeight="18"
+            />
+            {/* <Image
               source={require('../../../assets/apps/Close.png')}
               style={{ height: 85, resizeMode: 'center', width: 55 }}
-            />
+            /> */}
           </TouchableOpacity>
         </View>
       );

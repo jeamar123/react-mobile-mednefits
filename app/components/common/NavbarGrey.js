@@ -375,6 +375,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: '-1.8%'
           }}
         >
           <Text

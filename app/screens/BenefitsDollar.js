@@ -89,7 +89,10 @@ class BenefitsDollar extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Payment Amount" />
+        <Navbar
+          leftNav="cancel"
+          title="Payment Amount"
+        />
         <Content padder>
 
           <View style={{ backgroundColor: '#f8f8fa', flex: 1 }}>
@@ -191,10 +194,10 @@ class BenefitsDollar extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#B0B0B0', }}>
               Balance: {this.state.Balance}
             </Text>
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#B0B0B0', }}>
               Cap: {this.props.capCurrency}{this.props.capAmount}
             </Text>
           </View>
