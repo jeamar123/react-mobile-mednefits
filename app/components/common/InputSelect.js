@@ -6,10 +6,9 @@ import {
   Dimensions,
   ScrollView
 } from 'react-native'
-import { Icon } from 'native-base'
-import Modal from 'react-native-modal'
-import * as Common from './index'
-import * as Config from '../../config'
+import Modal from 'react-native-modal';
+import ResponsiveImage from 'react-native-responsive-image';
+import * as Common from './index';
 const { height, width } = Dimensions.get('window');
 
 export default class InputSelect extends Component {
@@ -115,9 +114,10 @@ export default class InputSelect extends Component {
               marginLeft: 10
             }}
           >
-            <Image
+            <ResponsiveImage
               source={require('../../../assets/apps/arrow.png')}
-              style={{ height: 15, resizeMode: 'center', width: 15 }}
+              style={{ resizeMode: 'center' }}
+              initWidth="15" initHeight="15"
             />
           </View>
 

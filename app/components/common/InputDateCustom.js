@@ -10,10 +10,11 @@ import {
   StyleSheet,
   ViewPropTypes,
   Button
-} from 'react-native'
-import PropTypes from 'prop-types'
-import { Icon } from 'native-base'
-import * as Common from '../common'
+} from 'react-native';
+import PropTypes from 'prop-types';
+import ResponsiveImage from 'react-native-responsive-image';
+import { Icon } from 'native-base';
+import * as Common from '../common';
 
 const isAndroid = Platform.OS === 'android'
 
@@ -169,9 +170,10 @@ class DatePicker extends Component {
             marginLeft: 10
           }}
         >
-          <Image
+          <ResponsiveImage
             source={require('../../../assets/apps/calendar.png')}
-            style={{ height: 16, resizeMode: 'center', width: 15 }}
+            style={{ resizeMode: 'center' }}
+            initWidth="15" initHeight="15"
           />
         </View>
       )

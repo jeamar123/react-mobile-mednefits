@@ -5,11 +5,12 @@ import {
   Image,
   KeyboardAvoidingView,
   ScrollView
-} from 'react-native'
-import * as Common from '../common'
-import styles from './styles'
-import * as Core from '../../core'
-import { Actions } from 'react-native-router-flux'
+} from 'react-native';
+import ResponsiveImage from 'react-native-responsive-image';
+import * as Common from '../common';
+import styles from './styles';
+import * as Core from '../../core';
+import { Actions } from 'react-native-router-flux';
 
 export default class EclaimForm extends Component {
   constructor(props) {
@@ -190,9 +191,10 @@ export default class EclaimForm extends Component {
                       marginLeft: 10
                     }}
                   >
-                    <Image
+                    <ResponsiveImage
                       source={require('../../../assets/apps/arrow.png')}
-                      style={{ height: 15, resizeMode: 'center', width: 15 }}
+                      style={{ resizeMode: 'center' }}
+                      initWidth="15" initHeight="15"
                     />
                   </View>
                 </TouchableOpacity>
@@ -283,9 +285,10 @@ export default class EclaimForm extends Component {
                       marginLeft: 10
                     }}
                   >
-                    <Image
+                    <ResponsiveImage
                       source={require('../../../assets/apps/clocks.png')}
-                      style={{ height: 15, resizeMode: 'center', width: 15 }}
+                      style={{ resizeMode: 'center' }}
+                      initWidth="15" initHeight="15"
                     />
                   </View>
 
@@ -336,27 +339,28 @@ export default class EclaimForm extends Component {
 
             </View>
           </View>
-        </ScrollView>
-        <View>
-          <TouchableOpacity
-            onPress={() => this.nextSnapPhoto()}
-            style={{
-              backgroundColor: "#0392CF",
-              width: "100%",
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Common.Texti
-              fontSize={16}
-              fontColor={"#ffffff"}
+          <View style={{ marginTop: '4.8%' }}>
+            <TouchableOpacity
+              onPress={() => this.nextSnapPhoto()}
               style={{
-                padding: 10
-              }}>
-              Next
+                backgroundColor: "#0392CF",
+                width: "100%",
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#ffffff"}
+                style={{
+                  padding: 10
+                }}>
+                Next
               </Common.Texti>
-          </TouchableOpacity>
-        </View>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
       </KeyboardAvoidingView>
     )
   }

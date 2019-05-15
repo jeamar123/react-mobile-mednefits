@@ -29,10 +29,11 @@ class checkinUser extends Component {
         >
           <Image
             source={require('../../assets/apps/CheckIn.png')}
-            style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+            style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 30 }}
           />
           <Text style={{
             fontFamily: 'HelveticaNeue-Roman',
+            fontWeight: 'bold',
             textAlign: 'center',
             fontSize: 25,
             color: '#fff',
@@ -99,7 +100,7 @@ class checkinUser extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Cap per visit
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 18 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 18 }}>
                 {this.props.capCurrency}{this.props.capAmount}
               </Text>
 
