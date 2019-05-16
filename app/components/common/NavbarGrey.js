@@ -467,9 +467,9 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
-                fontSize: 16,
+                fontSize: 12,
                 color: '#000',
-                marginRight: 10,
+                marginRight: 19,
               }}
             >
               Done

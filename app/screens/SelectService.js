@@ -82,7 +82,6 @@ class SelectService extends Component {
     } else {
       // Actions.PayScan({
       Actions.BenefitsDollar({
-        type: 'reset',
         services: this.state.services,
         clinicid: this.props.clinicid,
         capCurrency: this.props.capCurrency,

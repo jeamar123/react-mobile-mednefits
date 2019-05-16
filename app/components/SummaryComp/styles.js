@@ -37,6 +37,7 @@ export default EStyleSheet.create({
     lineHeight: 20,
     color: '#fff',
     fontWeight: '600',
+    marginRight: '2%',
   },
   detail2: {
     fontFamily: Config.FONT_FAMILY_BOLD,
@@ -51,5 +52,6 @@ export default EStyleSheet.create({
     lineHeight: 20,
     color: '#000',
     fontWeight: '600',
+    marginRight: '2%',
   },
 });

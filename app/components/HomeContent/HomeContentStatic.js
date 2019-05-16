@@ -200,7 +200,7 @@ class HomeContent extends Component {
                       source={require('../../../assets/apps/payIcon.png')}
                     />
                   </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8%' }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                     <Text style={styles.title}>Checkout</Text>
                   </View>
                 </View>

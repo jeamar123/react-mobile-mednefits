@@ -34,7 +34,7 @@ class Summary extends Component {
                 backgroundColor: '#3F9D59',
                 width: '90%',
                 marginTop: 10,
-                height: '45%'
+                height: '40%'
               }}
             >
               <View
@@ -45,7 +45,7 @@ class Summary extends Component {
 
                 <Image
                   source={require('../../assets/apps/CheckIn.png')}
-                  style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                  style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                 />
 
                 <View
@@ -102,7 +102,7 @@ class Summary extends Component {
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                     Total Payment
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
                   </Text>
                 </View>
@@ -118,7 +118,7 @@ class Summary extends Component {
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                     Service
                 </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
                     {(this.props.result.data.services) ? this.props.result.data.services : ""}
                   </Text>
                 </View>
@@ -134,7 +134,7 @@ class Summary extends Component {
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', width: '30%' }}>
                     Transaction Time
                 </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
                     {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
                   </Text>
                 </View>
@@ -151,7 +151,7 @@ class Summary extends Component {
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                     Trans-ID
                 </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
                     {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
                   </Text>
                 </View>
@@ -170,7 +170,7 @@ class Summary extends Component {
                   backgroundColor: '#FF5757',
                   width: '90%',
                   marginTop: 10,
-                  height: '27%'
+                  height: '25%'
                 }}
               >
                 <View
@@ -181,7 +181,7 @@ class Summary extends Component {
 
                   <Image
                     source={require('../../assets/apps/notifications.png')}
-                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                    style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                   />
 
                   <View
@@ -226,7 +226,7 @@ class Summary extends Component {
 
                   <Image
                     source={require('../../assets/apps/CheckIn2.png')}
-                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                    style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                   />
 
                   <View
@@ -283,7 +283,7 @@ class Summary extends Component {
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                       Total Payment
                     </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
                     </Text>
                   </View>
@@ -299,7 +299,7 @@ class Summary extends Component {
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                       Service
                 </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
                       {(this.props.result.data.services) ? this.props.result.data.services : ""}
                     </Text>
                   </View>
@@ -315,7 +315,7 @@ class Summary extends Component {
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', width: '30%' }}>
                       Transaction Time
                 </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
                       {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
                     </Text>
                   </View>

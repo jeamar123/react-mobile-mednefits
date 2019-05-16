@@ -122,6 +122,7 @@ class BenefitsDollar extends Component {
                     flexDirection: 'row',
                     justifyContent: 'flex-start',
                     alignItems: 'center',
+                    marginLeft: '-8%',
                     height: 60
                   }}
                   >
@@ -176,6 +177,7 @@ class BenefitsDollar extends Component {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
+                marginLeft: '5%',
               }}
             >
               <View>
@@ -200,10 +202,10 @@ class BenefitsDollar extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
               Balance: {this.state.Balance}
             </Text>
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
               Cap: {this.props.capCurrency}{this.props.capAmount}
             </Text>
           </View>

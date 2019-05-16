@@ -106,7 +106,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '3%'
+                marginBottom: '2%'
               }}
             >
               {!this.state.clinic_image ? (
@@ -194,7 +194,7 @@ class ConfirmPay extends Component {
                 width: '48%'
               }}>
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                  Cap:
+                  By Cash:
                 </Text>
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
                   {this.props.capCurrency} {this.props.capAmount}
@@ -202,7 +202,7 @@ class ConfirmPay extends Component {
               </View>
             </View>
 
-            <View style={{ flex: 1, marginBottom: '20%', marginTop: '10%' }}>
+            <View style={{ flex: 1, marginBottom: '18%', marginTop: '8%' }}>
               <ButtonsConfirm
                 onPress={() => this.SendPayment()}
                 isLoading={this.state.isLoading}
