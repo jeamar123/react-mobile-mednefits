@@ -22,7 +22,8 @@ class ConfirmPay extends Component {
       placeholder: null,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      calculate: null
     };
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -60,16 +61,14 @@ class ConfirmPay extends Component {
   SendPayment() {
     this.setState({ isLoading: true });
 
-    params = {
+    parameterData = {
       amount: this.props.amount,
-      credits: this.props.capAmount,
-      cash: 90,
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_Id: this.props.check_Id
     };
 
-    Core.CreatePayment(params, (err, result) => {
+    Core.CreatePayment(parameterData, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
         Actions.Summary({ result: result, type: 'reset' });
@@ -85,6 +84,7 @@ class ConfirmPay extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />

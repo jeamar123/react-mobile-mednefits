@@ -37,6 +37,7 @@ class ScanPay extends Component {
     params = {
       services: this.props.services,
       clinic_id: this.props.clinicid,
+      check_Id: this.props.check_Id,
     };
 
     Core.PayDirect(params, (err, result) => {
