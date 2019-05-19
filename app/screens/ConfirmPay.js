@@ -246,7 +246,7 @@ class ConfirmPay extends Component {
                 </View>
               </View>
 
-              <View style={{ flex: 1, marginBottom: '5%', marginTop: '10%' }}>
+              <View style={{ flex: 1, marginBottom: '8%', marginTop: '10%' }}>
                 <ButtonsConfirm
                   onPress={() => this.SendPayment()}
                   isLoading={this.state.isLoading}

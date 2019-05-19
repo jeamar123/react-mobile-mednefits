@@ -45,7 +45,7 @@ class Summary extends Component {
 
                 <Image
                   source={require('../../assets/apps/CheckIn.png')}
-                  style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                  style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                 />
 
                 <View
@@ -181,7 +181,7 @@ class Summary extends Component {
 
                   <Image
                     source={require('../../assets/apps/notifications.png')}
-                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                    style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                   />
 
                   <View
@@ -226,7 +226,7 @@ class Summary extends Component {
 
                   <Image
                     source={require('../../assets/apps/CheckIn2.png')}
-                    style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+                    style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: 20 }}
                   />
 
                   <View

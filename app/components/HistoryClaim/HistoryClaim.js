@@ -50,7 +50,7 @@ class HistoryClaim extends Component {
             adjustsFontSizeToFit={true}
             style={styles.amount}
           >
-            Claim Amount: S$ {this.props.Amount}
+            Claim Amount: {this.props.Currency} {this.props.Amount}
           </Text>
           <Text
             numberOfLines={2}

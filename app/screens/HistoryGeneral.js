@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image, ActivityIndicator } from 'react-native';
+import { StatusBar, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Container, Text } from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
@@ -485,69 +485,6 @@ class History extends Component {
               }}
             >
               <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
-              >
-                Total Amount
-              </Text>
-              <Text style={{ marginLeft: responsiveWidth(9.1), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
-                {(this.state.data.amount) ? this.state.data.amount : "0.00"}
-              </Text>
-            </View>
-          }
-
-          {(this.state.data.lite_plan == false) ?
-            this.state.data.lite_plan : <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
-              }}
-            >
-              <Text
-                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13, width: '30%' }}
-              >
-                Medicine & Treatment
-              </Text>
-              <Text style={{ marginLeft: responsiveWidth(-0.6), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
-                {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
-              </Text>
-              {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#0392cf',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                  height: '65%',
-                  marginLeft: -40
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Credits
-                </Text>
-              </View>}
-            </View>
-          }
-
-          {(this.state.data.lite_plan == false) ?
-            this.state.data.lite_plan : <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
-              }}
-            >
-              <Text
                 style={{
                   color: '#c4c4c4',
                   marginTop: '3%',
@@ -572,7 +509,7 @@ class History extends Component {
                     borderColor: '#efeff1',
                     fontSize: 13
                   }}>
-                  {(this.state.data.amount) ? this.state.data.amount : "0.00"}
+                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_amount) ? this.state.data.converted_amount : "0.00"}
                 </Text>
               </View>
             </View>
@@ -614,7 +551,7 @@ class History extends Component {
                     borderColor: '#efeff1',
                     fontSize: 13
                   }}>
-                  {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
+                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_procedure_cost) ? this.state.data.converted_procedure_cost : "0.00"}
                 </Text>
               </View>
               {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
@@ -677,7 +614,7 @@ class History extends Component {
                     borderColor: '#efeff1',
                     fontSize: 13
                   }}>
-                  {(this.state.data.consultation) ? this.state.data.consultation : "0.00"}
+                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_consultation) ? this.state.data.converted_consultation : "0.00"}
                 </Text>
               </View>
               {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
@@ -706,7 +643,7 @@ class History extends Component {
             </View>
           }
 
-          <View
+          {/* <View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -714,7 +651,9 @@ class History extends Component {
               marginVertical: 13,
             }}
           >
-            <Text style={{ width: '38%' }} />
+            <Text style={{ width: '38%' }} >
+              Receipt
+            </Text>
             <View
               style={{
                 height: 180,
@@ -738,7 +677,55 @@ class History extends Component {
                 }}
               />
             </View>
+          </View> */}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 13,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginTop: '3%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 13,
+                marginLeft: '8%',
+              }}
+            >
+              Receipt
+            </Text>
+            <TouchableOpacity
+              style={{
+                marginLeft: '20.5%',
+                paddingTop: 5,
+                paddingBottom: 5,
+                width: '20%',
+                backgroundColor: '#fff',
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: '#c4c4c4',
+                height: '100%',
+              }}>
+              <Image
+                resizeMode="cover"
+                style={{
+                  width: 70,
+                  height: 80,
+                }}
+                source={{
+                  uri: !this.state.imageSource.uri
+                    ? '../../assets/photo.png'
+                    : this.state.imageSource.uri,
+                }}
+              />
+            </TouchableOpacity>
           </View>
+
+
         </GiftedForm>
       )
     }
@@ -751,7 +738,7 @@ class History extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
         <HistoryUser
-          Amount={this.state.data.amount}
+          Amount={this.state.data.converted_amount}
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
         />

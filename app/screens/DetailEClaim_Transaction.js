@@ -131,6 +131,7 @@ class DetailEClaim_Transaction extends Component {
           Status={this.state.data.status_text}
           Date={this.state.data.claim_date}
           Amount={this.state.data.amount}
+          Currency={this.state.data.currency_symbol}
         />
         <GiftedForm
           style={{ backgroundColor: '#fff' }}
