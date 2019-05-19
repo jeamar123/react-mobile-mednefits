@@ -66,8 +66,6 @@ class ConfirmPay extends Component {
 
     params = {
       amount: this.props.amount,
-      credits: this.props.capAmount,
-      cash: 90,
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_Id: this.props.check_Id
