@@ -218,6 +218,121 @@ class History extends Component {
             </Text>
           </View>
 
+          <View
+            style={{
+              borderBottomColor: '#efeff1',
+              borderBottomWidth: 0.8,
+            }}
+          />
+
+          {(this.state.data.cap_transaction == false) ?
+            this.state.data.cap_transaction : <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                marginVertical: 13,
+              }}
+            >
+              <Text
+                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+              >
+                Cap  per visit
+              </Text>
+              <Text style={{ marginLeft: responsiveWidth(10.4), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.cap_per_visit) ? this.state.data.cap_per_visit : "N/A"}
+              </Text>
+            </View>
+          }
+
+          {(this.state.data.cap_transaction == false) ?
+            this.state.data.cap_transaction : <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                marginVertical: 13,
+              }}
+            >
+              <Text
+                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+              >
+                Paid by Credits
+              </Text>
+              <Text style={{ marginLeft: responsiveWidth(7.2), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '58%', fontSize: 13 }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "N/A"}
+              </Text>
+
+              <View
+                style={{
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  width: '20%',
+                  backgroundColor: '#0392cf',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#fff',
+                  height: '100%',
+                  marginLeft: '-20%'
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: 'center',
+                    color: '#fff',
+                  }}
+                >
+                  Credits
+              </Text>
+              </View>
+            </View>
+          }
+
+          {(this.state.data.cap_transaction == false) ?
+            this.state.data.cap_transaction : <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                marginVertical: 13,
+              }}
+            >
+              <Text
+                style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
+              >
+                Paid by Cash
+              </Text>
+              <Text style={{ marginLeft: responsiveWidth(10.2), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '53%', fontSize: 13 }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "N/A"}
+              </Text>
+
+              <View
+                style={{
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                  width: '20%',
+                  backgroundColor: '#3F9D59',
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  borderColor: '#fff',
+                  height: '100%',
+                  marginLeft: -60
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    textAlign: 'center',
+                    color: '#fff',
+                  }}
+                >
+                  Cash
+                </Text>
+              </View>
+            </View>
+          }
+
           {(this.state.data.lite_plan == false) ?
             this.state.data.lite_plan : <View
               style={{
@@ -231,7 +346,7 @@ class History extends Component {
                 style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13 }}
               >
                 Total Amount
-                  </Text>
+              </Text>
               <Text style={{ marginLeft: responsiveWidth(9.1), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '100%', fontSize: 13 }}>
                 {(this.state.data.amount) ? this.state.data.amount : "0.00"}
               </Text>
@@ -251,7 +366,7 @@ class History extends Component {
                 style={{ color: '#c4c4c4', marginLeft: 20, marginRight: '3%', padding: 5, fontSize: 13, width: '30%' }}
               >
                 Medicine & Treatment
-                  </Text>
+              </Text>
               <Text style={{ marginLeft: responsiveWidth(-0.6), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '48%', fontSize: 13 }}>
                 {(this.state.data.procedure_cost) ? this.state.data.procedure_cost : "0.00"}
               </Text>
@@ -276,7 +391,7 @@ class History extends Component {
                   }}
                 >
                   Credits
-                    </Text>
+                </Text>
               </View>}
             </View>
           }
@@ -319,7 +434,7 @@ class History extends Component {
                   }}
                 >
                   Credits
-                    </Text>
+                </Text>
               </View>}
             </View>
           }
