@@ -304,7 +304,7 @@ class History extends Component {
                 Paid by Cash
               </Text>
               <Text style={{ marginLeft: responsiveWidth(10.2), padding: 5, borderBottomWidth: 1, borderColor: '#efeff1', width: '53%', fontSize: 13 }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "N/A"}
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_cash) ? this.state.data.paid_by_cash : "N/A"}
               </Text>
 
               <View
