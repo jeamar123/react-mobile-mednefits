@@ -170,9 +170,8 @@ class Wallet extends Component {
                   >
                     {
                       (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -257,9 +256,8 @@ class Wallet extends Component {
                   >
                     {
                       (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -345,10 +343,9 @@ class Wallet extends Component {
                     }}
                   >
                     {
-                      (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                      (this.state.walletType == 'Wellness') ?
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -431,10 +428,9 @@ class Wallet extends Component {
                     }}
                   >
                     {
-                      (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                      (this.state.walletType == 'Wellness') ?
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{

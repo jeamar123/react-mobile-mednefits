@@ -170,7 +170,7 @@ class Summary extends Component {
                   backgroundColor: '#FF5757',
                   width: '90%',
                   marginTop: 10,
-                  height: '25%'
+                  height: '26%'
                 }}
               >
                 <View
@@ -215,7 +215,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: 10,
-                  height: '35%'
+                  height: '31%'
                 }}
               >
                 <View
@@ -244,7 +244,7 @@ class Summary extends Component {
                       }}
                     >
                       Paid by Credits: Successful
-                </Text>
+                    </Text>
                     <Text
                       style={{
                         marginTop: 5,

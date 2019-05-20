@@ -23,7 +23,9 @@ class ConfirmPay extends Component {
       failed: false,
       title: null,
       message: null,
-      calculate: null
+      inputAmount: this.props.amount,
+      amountCap: this.props.capAmount,
+      byCash: ''
     };
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -56,6 +58,10 @@ class ConfirmPay extends Component {
         });
       })
     );
+
+    const amount = this.state.inputAmount;
+    const cap = this.state.amountCap;
+    this.setState({ byCash: amount - cap });
   }
 
   SendPayment() {
@@ -179,7 +185,7 @@ class ConfirmPay extends Component {
                   By Credits:
                 </Text>
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                  {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+                  {this.state.currency ? this.state.currency : ' '} {this.state.inputAmount}
                 </Text>
               </View>
               <View style={{
@@ -197,7 +203,8 @@ class ConfirmPay extends Component {
                   By Cash:
                 </Text>
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                  {this.props.capCurrency} {this.props.capAmount}
+                  {this.props.capCurrency}
+                  {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
                 </Text>
               </View>
             </View>
