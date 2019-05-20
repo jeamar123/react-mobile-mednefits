@@ -144,7 +144,7 @@ class HistoryTransaction extends Component {
               />
 
               <Text style={{ marginTop: '-2%', color: '#0392cf' }}>
-                S$ {Data.amount}
+                {Data.currency_symbol} {Data.amount}
               </Text>
             </Body>
           </CardItem>
@@ -333,7 +333,7 @@ class HistoryTransaction extends Component {
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>S$ {Data.amount}</Text>
+              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.amount}</Text>
             </Body>
           </CardItem>
           {/* <CardItem>
