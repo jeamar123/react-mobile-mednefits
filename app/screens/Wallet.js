@@ -74,14 +74,14 @@ class Wallet extends Component {
     Core.GetBalanceMedical((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      console.warn(JSON.stringify(data, null, 4))
       this.setState({ isLoading: false })
       this.setState({
         medicalData: data,
         medicalBalance: data.balance,
         medicalInNetwork_Credit_spent: data.in_network_credits_spent,
         medicalEclaim_Credit_spent: data.e_claim_credits_spent,
-        medicalcurrency: result.data.currency_symbol,
+        medicalcurrency: data.currency_symbol,
         medicalinNetwork: data.in_network_transactions,
         medicaloutNetwork: data.e_claim_transactions
       });
@@ -93,7 +93,7 @@ class Wallet extends Component {
     Core.GetBalanceWellness((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      // console.warn(data);
       this.setState({ isLoading: false })
       this.setState({
         wellnessData: data,
@@ -170,9 +170,9 @@ class Wallet extends Component {
                   >
                     {
                       (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    }
+                    {(Data.amount) ? Data.amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -257,9 +257,9 @@ class Wallet extends Component {
                   >
                     {
                       (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    }
+                    {(Data.amount) ? Data.amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -345,10 +345,10 @@ class Wallet extends Component {
                     }}
                   >
                     {
-                      (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                      (this.state.walletType == 'Wellness') ?
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    }
+                    {(Data.amount) ? Data.amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -431,10 +431,10 @@ class Wallet extends Component {
                     }}
                   >
                     {
-                      (this.state.walletType == 'Medical') ?
-                        (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                        (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                    } {(Data.amount) ? Data.amount : "0"} {" "}
+                      (this.state.walletType == 'Wellness') ?
+                        (Data.currency_symbol) ? Data.currency_symbol : '' : ''
+                    }
+                    {(Data.amount) ? Data.amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{

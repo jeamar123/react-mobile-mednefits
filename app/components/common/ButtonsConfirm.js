@@ -21,11 +21,11 @@ const styles = {
     alignSelf: 'center',
   },
   ButtonStyle: {
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
     backgroundColor: '#0392cf',
     borderRadius: 5,
-    margin: 10,
+    margin: 12,
     alignSelf: 'center',
     width: '90%'
   },

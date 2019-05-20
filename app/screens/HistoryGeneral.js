@@ -741,6 +741,7 @@ class History extends Component {
           Amount={this.state.data.converted_amount}
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
+          Currency={this.state.data.currency_symbol}
         />
 
         {this.renderContainerHistory()}

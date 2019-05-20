@@ -34,7 +34,7 @@ class Summary extends Component {
                 backgroundColor: '#3F9D59',
                 width: '90%',
                 marginTop: 10,
-                height: '45%'
+                height: '40%'
               }}
             >
               <View

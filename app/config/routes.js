@@ -58,7 +58,7 @@ import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

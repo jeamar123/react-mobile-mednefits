@@ -33,7 +33,7 @@ class HistoryUser extends Component {
         <View style={styles.sectionHeader}>
           <View style={styles.contentHeader}>
             <View />
-            <View style={{flexDirection:'column', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'column', alignItems: 'center' }}>
               <Image
                 source={{ uri: this.props.clinicimage }}
                 style={styles.imageHeader} />
@@ -51,7 +51,7 @@ class HistoryUser extends Component {
             adjustsFontSizeToFit={true}
             style={styles.amount}
           >
-            Total Amount: S$ {this.props.Amount ? this.props.Amount : '0.00'}
+            Total Amount: {this.props.Currency ? this.props.Currency : 'N/A'} {this.props.Amount ? this.props.Amount : '0.00'}
           </Text>
           <Text
             numberOfLines={2}

@@ -190,7 +190,6 @@ class BenefitsDollar extends Component {
           <View style={{ marginBottom: '5%' }} />
           <View
             style={{
-              marginLeft: '4%',
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
