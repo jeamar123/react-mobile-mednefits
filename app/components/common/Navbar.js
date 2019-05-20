@@ -445,6 +445,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: '-1.7%'
           }}
         >
           <Text
@@ -460,7 +461,7 @@ export default class Navbar extends React.Component {
       );
     } else {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '-0.9%' }}>
           <Image
             source={require('../../../assets/LogoMednefits.png')}
             style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -8 }}

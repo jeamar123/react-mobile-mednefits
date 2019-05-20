@@ -43,7 +43,7 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log(data);
+      console.warn(JSON.stringify(data, null, 4))
       await this.setState({ resultData: data, in_network: true });
     });
   }
@@ -52,6 +52,7 @@ class HistoryTransaction extends Component {
     await Core.GetEClaimTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+
       this.setState({ DataE_Claim: data, out_network: true });
     });
   }
@@ -335,7 +336,7 @@ class HistoryTransaction extends Component {
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.amount}</Text>
+              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.converted_amount}</Text>
             </Body>
           </CardItem>
           {/* <CardItem>

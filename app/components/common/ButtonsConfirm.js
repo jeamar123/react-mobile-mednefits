@@ -22,7 +22,7 @@ const styles = {
   },
   ButtonStyle: {
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 12,
     backgroundColor: '#0392cf',
     borderRadius: 5,
     margin: 12,

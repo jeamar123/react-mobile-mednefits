@@ -172,11 +172,10 @@ class ConfirmPay extends Component {
                 {!this.state.clinic_name ? (
                   <Spinner size="small" />
                 ) : (
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginTop: '2%', marginBottom: '1%' }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginTop: '2%', marginBottom: '3%' }}>
                       {this.state.clinic_name}
                     </Text>
                   )}
-
               </View>
 
             </View>
@@ -195,10 +194,10 @@ class ConfirmPay extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
                     {this.state.currency ? this.state.currency : ' '} {' '}
                   </Text>
-                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50', fontWeight: 'bold' }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50', fontWeight: 'bold' }}>
                     {this.props.amount}
                   </Text>
                 </View>
