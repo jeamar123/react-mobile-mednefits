@@ -47,6 +47,7 @@
     "react-native-step-indicator": "0.0.11",
     "react-native-svg": "^9.2.4",
     "react-native-swipe-gestures": "^1.0.3",
+    "react-native-swipeable": "^0.6.0",
     "react-native-system-setting": "^1.7.1",
     "react-native-vector-icons": "^4.6.0",
     "react-native-zoom-image": "^0.1.2",

@@ -5,7 +5,6 @@ import android.app.Application;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-import com.RNTextInputMask.RNTextInputMaskPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -35,7 +34,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
         new ReactNativePushNotificationPackage(),
-        new RNTextInputMaskPackage(), 
         new VectorIconsPackage(), 
         new SystemSettingPackage(),
         new MapsPackage(), 
