@@ -434,7 +434,10 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity onPress={() => Actions.Home()}>
+          <TouchableOpacity 
+          onPress={() => Actions.receiptUpload({
+            transactionID: this.props.transaction_id,
+          })}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
@@ -444,6 +447,31 @@ export default class Navbar extends React.Component {
               }}
             >
               Done
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'skip') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity 
+          onPress={() => Actions.Home()}>
+            <Text
+              style={{
+                fontFamily: 'HelveticaNeue-Roman',
+                fontSize: 14,
+                color: '#000',
+                marginRight: 18,
+              }}
+            >
+              Skip
             </Text>
           </TouchableOpacity>
         </View>

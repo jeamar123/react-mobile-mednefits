@@ -246,13 +246,12 @@ class ConfirmPay extends Component {
                     By Cash:
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                    {this.props.capCurrency}
-                    {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
+                    {this.props.capCurrency} {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
                   </Text>
                 </View>
               </View>
 
-              <View style={{ flex: 1, marginBottom: '8%', marginTop: '10%' }}>
+              <View style={{ marginBottom: '2%', marginTop: '4%' }}>
                 <ButtonsConfirm
                   onPress={() => this.SendPayment()}
                   isLoading={this.state.isLoading}

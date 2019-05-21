@@ -14,11 +14,11 @@ class ItemRender extends Component {
 
   render(){
     return(
-      <View style={{flex: 1, marginLeft: 15}}>
+      <View style={{ flex: 1, marginLeft: 15, marginTop: 15 }}>
         <TouchableOpacity
           onPress={this.itemCallback}
           style={{
-            paddingTop: 15,
+            paddingTop: (this.props.index == 0) ? 5 : 0,
             paddingBottom: 15
           }}
         >
@@ -36,8 +36,9 @@ class SelectList extends Component {
 
   _keyExtractor = (item, index) => index;
 
-  _renderItem = ({ item }) => (
+  _renderItem = ({ item, index }) => (
     <ItemRender
+      index={index}
       label={item.label}
       value={item.value}
     />
