@@ -434,10 +434,10 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity 
-          onPress={() => Actions.receiptUpload({
-            transactionID: this.props.transaction_id,
-          })}>
+          <TouchableOpacity
+            onPress={() => Actions.receiptUpload({
+              transactionID: this.props.transaction_id,
+            })}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
@@ -461,8 +461,8 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity 
-          onPress={() => Actions.Home()}>
+          <TouchableOpacity
+            onPress={() => Actions.Home()}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',

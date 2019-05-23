@@ -60,7 +60,7 @@ import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
 import receiptUpload from '../screens/receiptUpload';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

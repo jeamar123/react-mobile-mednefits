@@ -12,6 +12,10 @@ import * as Common from '../components/common';
 import * as Config from '../config';
 
 class Summary extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#efeff4' }}>
@@ -21,6 +25,7 @@ class Summary extends Component {
           title="Summary"
           subtitle="In-Network"
           rightNav="done"
+          transaction_id={this.props.result.data.transation_id}
         />
 
         {(this.props.result.data.half_credits_payment == false) ? (
