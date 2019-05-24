@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 import { GiftedForm } from 'react-native-gifted-form';
-import { StatusBar, View, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import {
+  StatusBar,
+  View,
+  Image,
+  ActivityIndicator,
+  Easing,
+  ScrollView,
+  RefreshControl
+}
+  from 'react-native';
 import { Container, Text } from 'native-base';
-import ImagePicker from 'react-native-image-picker';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { Actions } from 'react-native-router-flux';
+import ImagePicker from 'react-native-image-picker';
+import ZoomImage from 'react-native-zoom-image';
+import Icon from 'react-native-vector-icons/Feather';
+import Modal from 'react-native-modal';
+import { Buttons } from '../components/common';
 import { HistoryUser } from '../components/HistoryUser';
-import * as Core from '../core';
+import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
+import * as Core from '../core';
 import * as Config from '../config';
+
 const options = {
   title: 'Upload Your Receipt',
   takePhotoButtonTitle: 'Take a Photo',
@@ -22,28 +38,82 @@ class History extends Component {
       imageSource: {
         uri: '',
       },
-      data: false
+      data: false,
+      isLoading: false,
+      refreshing: false,
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
 
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    Core.GetUserNetwork(this.props.transaction_id, (result) => {
+      data = (typeof result == "string") ? JSON.parse(result.data) : result.data
+      console.warn(data)
+      this.setState({
+        data: data, refreshing: false
+      })
+    })
+  }
+
+
   selectPhoto() {
     ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response);
-
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        console.warn('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.warn('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.warn('User tapped custom button: ', response.customButton);
       } else {
         let source = { uri: response.uri };
+        this.setState({ imageSource: source, photo_url: response.uri, isLoading: true });
 
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        const file = {
+          uri: response.uri,
+          name: 'receipt',
+          type: 'image/jpeg',
+        };
 
-        this.setState({ imageSource: source });
+        Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+          let myHeaders = new Headers();
+          let formdata = new FormData();
+
+          myHeaders.append('Authorization', result);
+          myHeaders.append('Content-Type', 'multipart/form-data');
+          formdata.append("file", file)
+          formdata.append("transaction_id", this.props.transaction_id)
+
+          params = {
+            url: Config.USER_UPLOAD_IN_NETWORK_RECEIPT,
+            method: 'POST',
+            header: myHeaders,
+            body: formdata,
+          };
+
+          fetch(Config.USER_UPLOAD_IN_NETWORK_RECEIPT, {
+            method: 'POST',
+            headers: myHeaders,
+            body: formdata,
+          })
+            .then(response => response.json())
+            .then(response => {
+              console.warn(JSON.stringify(response, null, 4))
+              Core.getNotify('', response.message);
+              Actions.HistoryGeneral(this.props.transaction_id)
+              this.setState({ isLoading: false, refreshing: true });
+              Core.GetUserNetwork(this.props.transaction_id, (result) => {
+                data = (typeof result == "string") ? JSON.parse(result.data) : result.data
+                console.warn(data)
+                this.setState({
+                  data: data, refreshing: false
+                })
+              })
+            })
+            .catch(error => {
+              console.warn('error fetching', error.message);
+            });
+        });
       }
     });
   }
@@ -56,6 +126,84 @@ class History extends Component {
         data: data
       })
     })
+  }
+
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+          >Uploading</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
+  renderReceiptUpload() {
+    if (this.state.data.files.length > 0) {
+      return this.state.data.files.map((Data, index) => (
+        <ZoomImage
+          imgStyle={{
+            width: 80,
+            height: 100,
+            marginLeft: '18.5%',
+            paddingTop: 5,
+            paddingBottom: 5,
+            backgroundColor: '#fff',
+            borderRadius: 10,
+            borderWidth: 1,
+            borderColor: '#c4c4c4',
+          }}
+          enableScaling={true}
+          easingFunc={Easing.ease}
+          duration={200}
+          source={{
+            uri: !Data.file
+              ? '../../assets/photo.png'
+              : Data.file,
+          }}
+        />
+      ));
+
+    } else if (this.state.data.files) {
+      return (
+        <View
+          style={{
+            marginLeft: '10.5%',
+            width: '60%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={{
+            marginTop: '-7%',
+            marginLeft: '75%',
+            marginBottom: '-8%',
+            width: 15,
+            height: 15,
+            borderRadius: 15 / 2,
+            backgroundColor: '#f44336',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }} />
+          <View style={{ flex: 1, width: '100%', height: '100%' }}>
+            <Buttons onPress={() => this.selectPhoto()}>
+              <Icon name="camera" style={{ color: '#fff', fontSize: 36 }} />
+            </Buttons>
+          </View>
+        </View>
+      )
+    }
   }
 
   renderContainerHistory() {
@@ -443,47 +591,39 @@ class History extends Component {
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text
+            }}>
+            <View
               style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '8%',
-              }}
-            >
-              Receipt
-            </Text>
-            <TouchableOpacity
-              style={{
-                marginLeft: '20.5%',
-                paddingTop: 5,
-                paddingBottom: 5,
-                width: '20%',
-                backgroundColor: '#fff',
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: '#c4c4c4',
-                height: '100%',
+                backgroundColor: '#efeff4'
               }}>
-              <Image
-                resizeMode="cover"
+              <View
                 style={{
-                  width: 70,
-                  height: 80,
+                  flexDirection: 'row',
+                  alignContent: 'space-between',
+                  marginVertical: 20,
                 }}
-                source={{
-                  uri: !this.state.imageSource.uri
-                    ? '../../assets/photo.png'
-                    : this.state.imageSource.uri,
-                }}
-              />
-            </TouchableOpacity>
+              >
+                <Text
+                  style={{
+                    color: '#c4c4c4',
+                    marginTop: '3%',
+                    fontFamily: Config.FONT_FAMILY_ROMAN,
+                    fontSize: 13,
+                    marginLeft: '7%',
+                  }}
+                >
+                  Receipt
+                </Text>
+                <View style={{
+                  padding: 5,
+                  marginLeft: '3%',
+                  width: '100%',
+                  fontSize: 13
+                }}>
+                  {this.renderReceiptUpload()}
+                </View>
+              </View>
+            </View>
           </View>
 
         </GiftedForm>
@@ -495,6 +635,7 @@ class History extends Component {
     console.warn("datanya " + (this.state.data.clinic_name) ? this.state.data.clinic_name : "");
     return (
       <Container>
+        {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
         <HistoryUser
@@ -504,7 +645,18 @@ class History extends Component {
           Currency={this.state.data.currency_symbol}
         />
 
-        {this.renderContainerHistory()}
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
+        >
+          {this.renderContainerHistory()}
+
+        </ScrollView>
+
 
       </Container>
     );

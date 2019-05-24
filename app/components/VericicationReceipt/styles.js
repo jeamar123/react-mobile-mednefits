@@ -19,4 +19,23 @@ export default EStyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  containerImage: {
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 200,
+    height: 200,
+  },
+  imageUpload: {
+    width: '30%',
+  },
+  textUpload: {
+    fontFamily: 'helvetica',
+    marginBottom: 30,
+    width: width / 1.3,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
 });
