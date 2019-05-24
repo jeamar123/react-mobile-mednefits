@@ -324,7 +324,7 @@ class Camera extends Component {
                 </TouchableOpacity>
               )}
           </View>
-          <View style={{ width: "33%", paddingTop: 5  }}>
+          <View style={{ width: "33%", paddingTop: 5 }}>
             {((this.state.preview !== true) || (this.state.previewState == 0)) ? (
               <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', display: (this.state.preview && (this.state.shootType == 'single')) ? 'none' : 'flex' }}>
                 <TouchableOpacity
@@ -377,7 +377,7 @@ class Camera extends Component {
                 </View>
               )}
           </View>
-          <View style={{ width: "33%", alignItems: 'flex-end', paddingTop: 5  }}>
+          <View style={{ width: "33%", alignItems: 'flex-end', paddingTop: 5 }}>
             {(this.state.images.length == 5) ? (
               <View />
             ) : (
@@ -463,7 +463,7 @@ class Camera extends Component {
               (this.state.images.length > 0) ?
                 (
                   <TouchableOpacity
-                    onPress={() => Actions.CameraPreview({ shootType: this.state.shootType,claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
+                    onPress={() => Actions.CameraPreview({ shootType: this.state.shootType, claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
                     style={{
                       justifyContent: 'center',
                       alignItems: 'center',
@@ -555,7 +555,7 @@ class Camera extends Component {
     }
   }
 
-  leftNavCameraCallback=(callback)=>{
+  leftNavCameraCallback = (callback) => {
     if (this.state.preview) {
       this.setState({
         preview: false,
@@ -569,6 +569,7 @@ class Camera extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
         <View style={{ zIndex: 99 }}>
