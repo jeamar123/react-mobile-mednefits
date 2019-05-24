@@ -95,11 +95,11 @@ class BenefitsDollar extends Component {
         />
         <Content padder>
 
-          <View style={{ backgroundColor: '#f8f8fa', flex: 1 }}>
+          <View style={{ backgroundColor: '#f8f8fa', justifyContent: 'center' }}>
             <View
               style={{
-                flexDirection: 'row',
                 justifyContent: 'flex-start',
+                flexDirection: 'row',
                 alignItems: 'center',
                 marginTop: '2%',
                 marginBottom: '10%'
@@ -113,16 +113,16 @@ class BenefitsDollar extends Component {
                     flexDirection: 'row',
                     justifyContent: 'flex-start',
                     alignItems: 'center',
-                    marginLeft: '5%',
+                    marginLeft: responsiveWidth(5),
                     height: responsiveHeight(8)
                   }}
                   >
                     <Image
                       source={{ uri: this.state.clinic_image }}
                       style={{
-                        height: responsiveHeight(20),
+                        height: 65,
                         resizeMode: 'center',
-                        width: responsiveWidth(20),
+                        width: 65,
                         marginRight: responsiveWidth(4)
                       }}
                     />
@@ -168,11 +168,11 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
-                marginLeft: responsiveWidth(4),
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
+                marginLeft: responsiveWidth(5),
               }}
             >
               <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>

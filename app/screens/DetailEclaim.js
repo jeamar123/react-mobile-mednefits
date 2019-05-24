@@ -14,6 +14,7 @@ import Modal from 'react-native-modal';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import ZoomImage from 'react-native-zoom-image';
+import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
@@ -207,9 +208,10 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <Image
+                  <ResponsiveImage
                     source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 15, resizeMode: 'center', width: 15 }}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
                   />
                 </View>
               </View>
@@ -266,9 +268,10 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <Image
+                  <ResponsiveImage
                     source={require('../../assets/apps/calendar.png')}
-                    style={{ height: 16, resizeMode: 'center', width: 15 }}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
                   />
                 </View>
               </View>
@@ -301,9 +304,10 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <Image
+                  <ResponsiveImage
                     source={require('../../assets/apps/clocks.png')}
-                    style={{ height: 15, resizeMode: 'center', width: 15 }}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
                   />
                 </View>
               </View>
@@ -367,9 +371,10 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <Image
+                  <ResponsiveImage
                     source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 15, resizeMode: 'center', width: 15 }}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
                   />
                 </View>
               </View>
@@ -403,8 +408,7 @@ class DetailEclaim extends Component {
                   borderBottomLeftRadius: 5,
                   borderBottomRightRadius: 5,
                   backgroundColor: '#fff',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
+                  alignItems: 'flex-end',
                 }}
               >
                 {(typeof this.props.claimdata.images !== 'undefined') ? (
