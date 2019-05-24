@@ -107,6 +107,7 @@ export default class EclaimForm extends Component {
         Core.getNotify("", "Please fill mandatory form")
       } else {
         claimData = {
+          type_spending: this.state.type,
           claim: this.props.claim,
           provider: this.state.provider,
           amount: this.state.amount,
@@ -126,6 +127,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
+    console.warn(this.state.type);
     return (
       <KeyboardAvoidingView
         style={styles.container}

@@ -11,6 +11,7 @@ import * as Common from '../components/common';
 
 class ReceiptVerification extends Component {
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: 'white' }}>
         <StatusBar barStyle="dark-content" />

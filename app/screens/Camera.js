@@ -456,7 +456,7 @@ class Camera extends Component {
               (this.state.images.length > 0) ?
                 (
                   <TouchableOpacity
-                  onPress={() => Actions.CameraPreview({ shootType: this.state.shootType,claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
+                    onPress={() => Actions.CameraPreview({ shootType: this.state.shootType, claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
                     style={{
                       justifyContent: 'center',
                       alignItems: 'center',
@@ -549,6 +549,7 @@ class Camera extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
         <View style={{ zIndex: 99 }}>

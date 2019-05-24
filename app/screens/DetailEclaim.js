@@ -54,7 +54,7 @@ class DetailEclaim extends Component {
         'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
-        'spending_type': this.props.claimdata.type,
+        'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time
       }
 
@@ -149,6 +149,7 @@ class DetailEclaim extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />

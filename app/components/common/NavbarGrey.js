@@ -316,6 +316,19 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'null') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <Button transparent style={{ paddingLeft: 15 }} />
+        </View>
+      )
     } else {
       return (
         <View
@@ -390,6 +403,19 @@ export default class Navbar extends React.Component {
           </Text>
         </View>
       );
+    } else if (this.props.title == false) {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Button transparent style={{ paddingLeft: 15 }} />
+        </View>
+      )
     } else {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
