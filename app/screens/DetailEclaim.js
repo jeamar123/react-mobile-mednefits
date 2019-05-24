@@ -32,7 +32,8 @@ class DetailEclaim extends Component {
       message: null,
       member: null,
       showPopUp: false,
-      button: 'Submit'
+      button: 'Submit',
+      currency_exchange: false
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -54,7 +55,9 @@ class DetailEclaim extends Component {
         'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type,
-        'time': this.props.claimdata.time
+        'time': this.props.claimdata.time,
+        'currency_type': this.props.claimdata.currency,
+        'currency_exchange': this.state.currency_exchange
       }
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {
@@ -90,6 +93,23 @@ class DetailEclaim extends Component {
 
   componentDidMount() {
     this.renderMember();
+    this.GetCurrency()
+  }
+
+  async GetCurrency() {
+    await Core.CurrencyList((err, result) => {
+      if (result) {
+        if ((result.currency_name == "SGD - Singapore Dollar") && (this.props.claimdata.currency == "$S")) {
+          this.setState({
+            currency_exchange: result.currency_exchange_rate
+          })
+        } else {
+          this.setState({
+            currency_exchange: result.currency_exchange_rate
+          })
+        }
+      }
+    })
   }
 
   isVisibleUpdate() {
@@ -228,7 +248,7 @@ class DetailEclaim extends Component {
                 Provider
               </Text>
               <View
-                style={{ flexDirection: 'row' }}>
+                style={{ flexDirection: 'row', marginRight: 25 }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.provider}
                 </Common.Texti>
@@ -323,7 +343,7 @@ class DetailEclaim extends Component {
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
                 <Common.Texti fontColor={"#9e9e9e"} fontSize={16}>
-                  S$
+                  {this.props.claimdata.currency}
                 </Common.Texti>
               </View>
             </View>
