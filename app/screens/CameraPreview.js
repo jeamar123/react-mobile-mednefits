@@ -23,31 +23,31 @@ class CameraBatchImage extends Component {
 
   }
 
-  removeImagePreview=()=>{
+  removeImagePreview = () => {
     this.props.removeCallback(this.props.index)
   }
 
-  render(){
+  render() {
     const rightButtons = [
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 15}}>
-      <TouchableOpacity
-        onPress={this.removeImagePreview}
-      >
-        <ImageBackground
-          source={require('../../assets/delete-button.png')}
-          style={{
-            width: 60,
-            height: 60
-          }}
-        />
-      </TouchableOpacity></View>,
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-start', marginLeft: 15 }}>
+        <TouchableOpacity
+          onPress={this.removeImagePreview}
+        >
+          <ImageBackground
+            source={require('../../assets/delete-button.png')}
+            style={{
+              width: 60,
+              height: 60
+            }}
+          />
+        </TouchableOpacity></View>,
     ];
 
     if (this.props.shootType == 'single') {
-      return(
-        <View style={{padding: 15, alignItems: 'center', height:"100%"}}>
+      return (
+        <View style={{ padding: 15, alignItems: 'center', height: "100%" }}>
           <ImageBackground
-            source={{uri: this.props.preview}}
+            source={{ uri: this.props.preview }}
             style={{
               width: '100%',
               height: 500,
@@ -56,18 +56,18 @@ class CameraBatchImage extends Component {
         </View>
       )
     } else {
-      return(
+      return (
         <View>
-          {(this.props.index == 1) ? (<Common.Texti style={{paddingLeft: 15, paddingTop: 15}}>
+          {(this.props.index == 1) ? (<Common.Texti style={{ paddingLeft: 15, paddingTop: 15 }}>
             {this.props.index}
           </Common.Texti>) : (<View><Common.Divider />
-            <Common.Texti style={{paddingLeft: 15}}>
+            <Common.Texti style={{ paddingLeft: 15 }}>
               {this.props.index}
             </Common.Texti></View>)}
-          <View style={{padding: 15}}>
+          <View style={{ padding: 15 }}>
             <Swipeable rightButtons={rightButtons}>
               <ImageBackground
-                source={{uri: this.props.preview}}
+                source={{ uri: this.props.preview }}
                 style={{
                   width: '100%',
                   height: 230,
@@ -99,17 +99,17 @@ export default class CameraPreview extends Component {
 
   _renderItem = ({ item, index }) => (
     <CameraBatchImage
-      index={index+1}
+      index={index + 1}
       shootType={this.props.shootType}
       preview={item.preview}
       images={this.props.claimdata.images}
-      removeCallback={(index)=>this.removeImage(index)}
+      removeCallback={(index) => this.removeImage(index)}
     />
   );
 
-  removeImage=(index)=>{
+  removeImage = (index) => {
     arr = this.props.claimdata.images
-    remove = arr.splice(parseInt(index-1), 1);
+    remove = arr.splice(parseInt(index - 1), 1);
 
     this.setState({
       changeData: true,
@@ -120,8 +120,8 @@ export default class CameraPreview extends Component {
 
   }
 
-  renderPreview(){
-    return(
+  renderPreview() {
+    return (
       <FlatList
         data={(this.state.changeData) ? this.state.dataimage : this.props.claimdata.images}
         extraData={this.state}
@@ -135,15 +135,15 @@ export default class CameraPreview extends Component {
 
   }
 
-  renderButton(){
-    return(
+  renderButton() {
+    return (
       <TouchableOpacity
-        onPress={()=>Actions.DetailEclaim({claimdata: this.props.claimdata})}
+        onPress={() => Actions.DetailEclaim({ claimdata: this.props.claimdata })}
         style={{
           backgroundColor: "#0392CF",
           padding: 15,
-          justifyContent:"center",
-          alignItems:"center"
+          justifyContent: "center",
+          alignItems: "center"
         }}
       >
         <Common.Texti fontColor="#FFFFFF" fontSize={12}>Next</Common.Texti>
@@ -151,29 +151,29 @@ export default class CameraPreview extends Component {
     )
   }
 
-  toggleModal=()=>{
+  toggleModal = () => {
     this.setState({
       isModalVisible: false
     })
   }
 
-  componentDidMount(){
-    setTimeout(()=>{
+  componentDidMount() {
+    setTimeout(() => {
       this.setState({
         isModalVisible: true
       })
     }, 300)
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
         isModalVisible: false
       })
     }, 2000)
   }
 
-  render(){
-    return(
-      <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+  render() {
+    return (
+      <View style={{ flex: 1, backgroundColor: '#EFEFF4' }}>
         <Navbar
           leftNav="back"
           title="Receipt Verification"
@@ -189,7 +189,7 @@ export default class CameraPreview extends Component {
           animationOutTiming={1000}
           onBackdropPress={() => this.setState({ isModalVisible: false })}
           isVisible={this.state.isModalVisible}>
-          <View style={{ backgroundColor: "#3C4D5E", flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 15, borderRadius: 5}}>
+          <View style={{ backgroundColor: "#3C4D5E", flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 15, borderRadius: 5 }}>
             <Icon name="check-circle" style={{ color: '#0392CF', fontSize: 24 }} />
             <TouchableOpacity onPress={this.toggleModal} >
               <Common.Texti
@@ -200,7 +200,7 @@ export default class CameraPreview extends Component {
             </TouchableOpacity>
           </View>
         </Modal>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           {this.renderPreview()}
           {this.renderButton()}
         </View>
