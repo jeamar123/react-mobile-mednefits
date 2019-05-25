@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   View,
   TouchableOpacity,
-  Image,
   KeyboardAvoidingView,
   ScrollView
 } from 'react-native';
@@ -36,7 +35,10 @@ export default class EclaimForm extends Component {
       amount: false,
       provider: false,
       file: false,
-      isLoading: false
+      isLoading: false,
+      currency: false,
+      currencyData: [],
+      currencyState: "S$"
     }
 
     this.selectSpending = this.selectSpending.bind(this)
@@ -44,8 +46,9 @@ export default class EclaimForm extends Component {
   }
 
   componentWillMount() {
-    this.getMember()
-    this.selectSpending("medical")
+    this.getMember();
+    this.selectSpending("medical");
+    this.getCurrency();
   }
 
   async getMember() {
@@ -58,12 +61,29 @@ export default class EclaimForm extends Component {
         result.data.users.map((member) => {
           dataMember.push({ label: member.name, value: member.user_id })
         });
-
         this.setState({
           memberState: "Select",
           memberData: dataMember,
         })
+      }
+    })
+  }
 
+  async getCurrency() {
+    this.setState({ currencyState: "Loading..." })
+
+    await Core.CurrencyList((err, result) => {
+      if (result) {
+        dataCurrency = []
+
+        result.data.map((currency) => {
+          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM" })
+        });
+        this.setState({
+          currencyState: "Select",
+          currencyData: dataCurrency,
+          currency: "S$",
+        })
       }
     })
   }
@@ -78,10 +98,8 @@ export default class EclaimForm extends Component {
         result.data.map((claim) => {
           dataClaim.push({ label: claim.name, value: claim.health_type_id })
         });
-
         this.setState({ claimType: dataClaim })
       }
-
       this.setState({ claimTypeState: "Select" })
     })
   }
@@ -113,11 +131,10 @@ export default class EclaimForm extends Component {
           amount: this.state.amount,
           member: this.state.member,
           date: this.state.date,
-          time: this.state.time
+          time: this.state.time,
+          currency: this.state.currency
         }
-
         Actions.ReceiptVerification({ claimdata: Object.assign({}, claimData, { memberData: this.state.memberData }) })
-
       }
     } catch (e) {
       Core.getNotify("", "Failed to process data")
@@ -212,14 +229,19 @@ export default class EclaimForm extends Component {
                   alignItems: 'center',
                 }}>
                   Provider
-                </Common.Texti>
-                <Common.InputText
-                  value={this.state.provider}
-                  onChangeText={text => this.setState({ provider: text })}
-                  placeholder="Name of Provider"
-                  iconColor="#9e9e9e"
-                  leftToRight
-                />
+              </Common.Texti>
+                <View style={{ marginRight: 25 }}>
+                  <Common.InputText
+                    value={this.state.provider}
+                    onChangeText={text => this.setState({ provider: text })}
+                    placeholder="Name of Provider"
+                    inputStyle={{
+                      fontSize: 16
+                    }}
+                    iconColor="#9e9e9e"
+                    leftToRight
+                  />
+                </View>
               </View>
 
               <Common.Divider />
@@ -306,6 +328,26 @@ export default class EclaimForm extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
+                  Currency
+                </Common.Texti>
+
+                <Common.InputSelect
+                  placeholder={this.state.currency}
+                  data={this.state.currencyData}
+                  value={this.state.currency}
+                  onValueChange={(value) => this.setState({ currency: value })}
+                />
+              </View>
+
+              <Common.Divider />
+
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                   Claim Amount
                 </Common.Texti>
 
@@ -315,6 +357,7 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ amount: text })}
                   placeholder="Enter amount"
                   type={"currency"}
+                  currency={this.state.currency}
                   leftToRight
                 />
               </View>
@@ -322,7 +365,7 @@ export default class EclaimForm extends Component {
               <Common.Divider />
 
               <View
-                style={[styles.fieldStyle, { marginBottom: "10%" }]}
+                style={styles.fieldStyle}
               >
                 <Common.Texti style={{
                   justifyContent: 'center',
@@ -341,8 +384,6 @@ export default class EclaimForm extends Component {
 
             </View>
           </View>
-
-
         </ScrollView>
         <View style={{
           flex: 1,
@@ -364,7 +405,7 @@ export default class EclaimForm extends Component {
                 padding: 10
               }}>
               Next
-              </Common.Texti>
+            </Common.Texti>
           </TouchableOpacity>
         </View>
 

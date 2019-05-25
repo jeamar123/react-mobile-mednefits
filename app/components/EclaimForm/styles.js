@@ -72,8 +72,8 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: '2.5%',
-    paddingBottom: '2.5%'
+    paddingTop: '1.5%',
+    paddingBottom: '1.5%'
   },
   fieldStyleNoPadding: {
     flexDirection: 'row',

@@ -1027,3 +1027,20 @@ export function CreatePayment(param, callback) {
     })
   });
 }
+
+export function CurrencyList(callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CURRENCY_LIST,
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      }
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
+}
