@@ -341,27 +341,32 @@ export default class EclaimForm extends Component {
 
             </View>
           </View>
-          <View style={{ marginTop: '4.8%' }}>
-            <TouchableOpacity
-              onPress={() => this.nextSnapPhoto()}
-              style={{
-                backgroundColor: "#0392CF",
-                width: "100%",
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Common.Texti
-                fontSize={16}
-                fontColor={"#ffffff"}
-                style={{
-                  padding: 10
-                }}>
-                Next
-              </Common.Texti>
-            </TouchableOpacity>
-          </View>
+
+
         </ScrollView>
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+        }}>
+          <TouchableOpacity
+            onPress={() => this.nextSnapPhoto()}
+            style={{
+              backgroundColor: "#0392CF",
+              width: "100%",
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Common.Texti
+              fontSize={16}
+              fontColor={"#ffffff"}
+              style={{
+                padding: 10
+              }}>
+              Next
+              </Common.Texti>
+          </TouchableOpacity>
+        </View>
 
       </KeyboardAvoidingView>
     )

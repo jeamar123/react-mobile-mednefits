@@ -6,7 +6,7 @@ import {
   Text,
   ScrollView,
   ActivityIndicator,
-  ImageBackground,
+  TouchableOpacity,
   Image,
   Easing
 } from 'react-native';
@@ -154,7 +154,7 @@ class DetailEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
+        <View style={{ backgroundColor: '#efeff4', paddingTop: '5%' }} />
         <EclaimStep
           currentPosition={2}
         />
@@ -450,10 +450,34 @@ class DetailEclaim extends Component {
               <Text style={{ width: '38%' }} />
             </View>
           </GiftedForm>
-          <ButtonFooter onPress={this.EclaimProcess} disabled={this.state.isLoading} activeOpacity={this.state.isLoading ? 0.2 : 1}>
-            {this.state.button}
-          </ButtonFooter>
+
         </ScrollView>
+
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+        }}>
+          <TouchableOpacity
+            onPress={this.EclaimProcess}
+            disabled={this.state.isLoading}
+            activeOpacity={this.state.isLoading ? 0.2 : 1}
+            style={{
+              backgroundColor: "#0392CF",
+              width: "100%",
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Common.Texti
+              fontSize={16}
+              fontColor={"#ffffff"}
+              style={{
+                padding: 10
+              }}>
+              {this.state.button}
+            </Common.Texti>
+          </TouchableOpacity>
+        </View>
       </Container>
     );
   }

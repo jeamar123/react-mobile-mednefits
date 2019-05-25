@@ -22,8 +22,6 @@ const styles = {
     alignSelf: 'center',
   },
   ButtonStyle: {
-    paddingTop: 10,
-    paddingBottom: 10,
     width: width,
     backgroundColor: '#0392cf',
   },

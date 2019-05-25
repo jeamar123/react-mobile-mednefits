@@ -174,7 +174,7 @@ export default class CameraPreview extends Component {
   render() {
     console.warn("props: " + JSON.stringify(this.props))
     return (
-      <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+      <View style={{ flex: 1, backgroundColor: '#EFEFF4' }}>
         <Navbar
           leftNav="back"
           title="Receipt Verification"
