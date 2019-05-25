@@ -7,7 +7,8 @@ import {
   ActivityIndicator,
   Easing,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  TouchableOpacity
 }
   from 'react-native';
 import { Container, Text } from 'native-base';
@@ -17,7 +18,6 @@ import ImagePicker from 'react-native-image-picker';
 import ZoomImage from 'react-native-zoom-image';
 import Icon from 'react-native-vector-icons/Feather';
 import Modal from 'react-native-modal';
-import { Buttons } from '../components/common';
 import { HistoryUser } from '../components/HistoryUser';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
@@ -180,26 +180,43 @@ class History extends Component {
       return (
         <View
           style={{
-            marginLeft: '10.5%',
-            width: '60%',
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            marginLeft: '13.3%'
           }}>
           <View style={{
-            marginTop: '-7%',
-            marginLeft: '75%',
+            marginLeft: '62.5%',
             marginBottom: '-8%',
             width: 15,
             height: 15,
             borderRadius: 15 / 2,
             backgroundColor: '#f44336',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            zIndex: 1
           }} />
-          <View style={{ flex: 1, width: '100%', height: '100%' }}>
-            <Buttons onPress={() => this.selectPhoto()}>
-              <Icon name="camera" style={{ color: '#fff', fontSize: 36 }} />
-            </Buttons>
+          <View style={{ flex: 1, width: '50%', }}>
+            <TouchableOpacity
+              onPress={() => this.selectPhoto()}
+              style={{
+                paddingTop: 2,
+                paddingBottom: 2,
+                backgroundColor: '#0392cf',
+                borderRadius: 5,
+                margin: 20,
+                width: '120%',
+                height: '50%'
+              }}>
+              <View style={{
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }} >
+                <Icon name="camera" style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} />
+                <Text style={{ color: '#fff', fontSize: 15, margin: 5 }}> Upload Receipt</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       )

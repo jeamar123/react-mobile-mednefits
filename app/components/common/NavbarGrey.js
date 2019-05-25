@@ -465,7 +465,7 @@ export default class Navbar extends React.Component {
         >
           <TouchableOpacity
             onPress={() => Actions.receiptUpload({
-              transactionID: this.props.transaction_id,
+              transactionID: this.props.transaction_id, type: 'reset',
             })}>
             <Text
               style={{
@@ -491,7 +491,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.Home()}>
+            onPress={() => Actions.Home({ type: 'reset' })}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',

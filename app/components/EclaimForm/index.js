@@ -6,8 +6,6 @@ import {
   ScrollView
 } from 'react-native'
 import * as Common from '../common'
-import RNPickerSelect from 'react-native-picker-select'
-import { Icon } from 'native-base'
 import styles from './styles'
 import * as Core from '../../core'
 import { Actions } from 'react-native-router-flux'
@@ -36,9 +34,11 @@ export default class EclaimForm extends Component {
       amount: false,
       provider: false,
       file: false,
-      isLoading: false
+      isLoading: false,
+      currency: false,
+      currencyData: [],
+      currencyState: "S$"
     }
-
     this.selectSpending = this.selectSpending.bind(this)
     this.inputDate = {};
   }
@@ -46,6 +46,7 @@ export default class EclaimForm extends Component {
   componentWillMount() {
     this.getMember()
     this.selectSpending("medical")
+    this.getCurrency()
   }
 
   async getMember() {
@@ -58,15 +59,33 @@ export default class EclaimForm extends Component {
         result.data.users.map((member) => {
           dataMember.push({ label: member.name, value: member.user_id })
         });
-
         this.setState({
           memberState: "Select",
           memberData: dataMember,
         })
-
       }
     })
   }
+
+  async getCurrency() {
+    this.setState({ currencyState: "Loading..." })
+
+    await Core.CurrencyList((err, result) => {
+      if (result) {
+        dataCurrency = []
+
+        result.data.map((currency) => {
+          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM" })
+        });
+        this.setState({
+          currencyState: "Select",
+          currencyData: dataCurrency,
+          currency: "S$",
+        })
+      }
+    })
+  }
+
 
   async selectSpending(type) {
     this.setState({ type: type, claimTypeState: "Loading...", claim: false })
@@ -78,11 +97,8 @@ export default class EclaimForm extends Component {
         result.data.map((claim) => {
           dataClaim.push({ label: claim.name, value: claim.health_type_id })
         });
-
         this.setState({ claimType: dataClaim })
-
       }
-
       this.setState({ claimTypeState: "Select" })
     })
   }
@@ -114,7 +130,8 @@ export default class EclaimForm extends Component {
           amount: this.state.amount,
           member: this.state.member,
           date: this.state.date,
-          time: this.state.time
+          time: this.state.time,
+          currency: this.state.currency
         }
 
         Actions.ReceiptVerification({ claimdata: Object.assign({}, claimData, { memberData: this.state.memberData }) })
@@ -177,7 +194,6 @@ export default class EclaimForm extends Component {
               <Common.Texti>
                 Claim Type
               </Common.Texti>
-
               <TouchableOpacity
                 onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
                 style={{ flexDirection: 'row' }}>
@@ -208,14 +224,19 @@ export default class EclaimForm extends Component {
                 alignItems: 'center',
               }}>
                 Provider
-            </Common.Texti>
-              <Common.InputText
-                value={this.state.provider}
-                onChangeText={text => this.setState({ provider: text })}
-                placeholder="Name of Provider"
-                iconColor="#9e9e9e"
-                leftToRight
-              />
+              </Common.Texti>
+              <View style={{ marginRight: 25 }}>
+                <Common.InputText
+                  value={this.state.provider}
+                  onChangeText={text => this.setState({ provider: text })}
+                  placeholder="Name of Provider"
+                  inputStyle={{
+                    fontSize: 16
+                  }}
+                  iconColor="#9e9e9e"
+                  leftToRight
+                />
+              </View>
             </View>
 
             <Common.Divider />
@@ -300,6 +321,26 @@ export default class EclaimForm extends Component {
             {/*   */}
 
             <View
+              style={styles.fieldStyle}
+            >
+              <Common.Texti style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                Currency
+              </Common.Texti>
+
+              <Common.InputSelect
+                placeholder={this.state.currency}
+                data={this.state.currencyData}
+                value={this.state.currency}
+                onValueChange={(value) => this.setState({ currency: value })}
+              />
+            </View>
+
+            <Common.Divider />
+
+            <View
               style={styles.fieldStyleNoPadding}
             >
               <Common.Texti style={{
@@ -307,7 +348,7 @@ export default class EclaimForm extends Component {
                 alignItems: 'center',
               }}>
                 Claim Amount
-            </Common.Texti>
+              </Common.Texti>
 
               <Common.InputAmount
                 value={this.state.amount}
@@ -315,6 +356,7 @@ export default class EclaimForm extends Component {
                 onChangeText={text => this.setState({ amount: text })}
                 placeholder="Enter amount"
                 type={"currency"}
+                currency={this.state.currency}
                 leftToRight
               />
             </View>
