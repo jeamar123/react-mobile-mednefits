@@ -4,15 +4,17 @@ import {
   StatusBar,
   View,
   Text,
-  TextInput,
   ScrollView,
   ActivityIndicator,
-  ImageBackground
+  TouchableOpacity,
+  Image,
+  Easing
 } from 'react-native';
 import Modal from 'react-native-modal';
-import { Container, Icon } from 'native-base';
+import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { ClaimDetail } from '../components/ClaimDetail';
+import ZoomImage from 'react-native-zoom-image';
+import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
@@ -54,7 +56,7 @@ class DetailEclaim extends Component {
         'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
-        'spending_type': this.props.claimdata.type,
+        'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
         'currency_type': this.props.claimdata.currency,
         'currency_exchange': this.state.currency_exchange
@@ -82,18 +84,12 @@ class DetailEclaim extends Component {
       })
     } finally {
       console.log('finally called')
-      // setTimeout(()=>{
-      //   this.setState({
-      //     isLoading: false,
-      //     button: 'Log in'
-      //   })
-      // }, 2000)
     }
   }
 
   componentDidMount() {
     this.renderMember();
-    this.GetCurrency()
+    this.GetCurrency();
   }
 
   async GetCurrency() {
@@ -168,10 +164,11 @@ class DetailEclaim extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back" title="E-Claim" subtitle="File e-claim" />
+        <View style={{ backgroundColor: '#efeff4', paddingTop: '5%' }} />
         <EclaimStep
           currentPosition={2}
         />
@@ -188,7 +185,7 @@ class DetailEclaim extends Component {
         {this.customLoader()}
         {this.renderPopUp()}
 
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <GiftedForm
             style={{
               backgroundColor: '#fff',
@@ -219,15 +216,18 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.claim}
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <ResponsiveImage
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -276,15 +276,18 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name="calendar-multiple"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <ResponsiveImage
+                    source={require('../../assets/apps/calendar.png')}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -309,15 +312,18 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
-                <Icon
-                  type="EvilIcons"
-                  name="clock"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <ResponsiveImage
+                    source={require('../../assets/apps/clocks.png')}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -342,7 +348,7 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
-                <Common.Texti fontColor={"#9e9e9e"} fontSize={16}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
                   {this.props.claimdata.currency}
                 </Common.Texti>
               </View>
@@ -373,15 +379,18 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.state.member}
                 </Common.Texti>
-                <Icon
-                  type="SimpleLineIcons"
-                  name="arrow-right"
+                <View
                   style={{
-                    color: "#9e9e9e",
-                    marginLeft: 10,
-                    fontSize: 18
+                    alignItems: 'flex-end',
+                    marginLeft: 10
                   }}
-                />
+                >
+                  <ResponsiveImage
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
+                  />
+                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -413,8 +422,7 @@ class DetailEclaim extends Component {
                   borderBottomLeftRadius: 5,
                   borderBottomRightRadius: 5,
                   backgroundColor: '#fff',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
+                  alignItems: 'flex-end',
                 }}
               >
                 {(typeof this.props.claimdata.images !== 'undefined') ? (
@@ -422,11 +430,22 @@ class DetailEclaim extends Component {
                     <View
                       key={index}
                       style={{ flex: 1, flexDirection: 'column', marginBottom: 3, justifyContent: 'space-around' }}>
-                      <ImageBackground
+                      <ZoomImage
+                        imgStyle={{
+                          width: 70,
+                          height: 80,
+                          margin: 2
+                        }}
+                        enableScaling={true}
+                        easingFunc={Easing.ease}
+                        duration={200}
+                        source={{ uri: value.preview }}
+                      />
+                      {/* <ImageBackground
                         resizeMode="cover"
                         style={{ width: '100%', height: 90, width: 70 }}
                         source={{ uri: value.preview }}
-                      />
+                      /> */}
                     </View>
                   ))
                 ) : (
@@ -445,10 +464,34 @@ class DetailEclaim extends Component {
               <Text style={{ width: '38%' }} />
             </View>
           </GiftedForm>
-          <ButtonFooter onPress={this.EclaimProcess} disabled={this.state.isLoading} activeOpacity={this.state.isLoading ? 0.2 : 1}>
-            {this.state.button}
-          </ButtonFooter>
+
         </ScrollView>
+
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+        }}>
+          <TouchableOpacity
+            onPress={this.EclaimProcess}
+            disabled={this.state.isLoading}
+            activeOpacity={this.state.isLoading ? 0.2 : 1}
+            style={{
+              backgroundColor: "#0392CF",
+              width: "100%",
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Common.Texti
+              fontSize={16}
+              fontColor={"#ffffff"}
+              style={{
+                padding: 10
+              }}>
+              {this.state.button}
+            </Common.Texti>
+          </TouchableOpacity>
+        </View>
       </Container>
     );
   }

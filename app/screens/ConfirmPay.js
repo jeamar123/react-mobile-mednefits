@@ -203,8 +203,7 @@ class ConfirmPay extends Component {
                   By Cash:
                 </Text>
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                  {this.props.capCurrency}
-                  {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
+                  {this.props.capCurrency} {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
                 </Text>
               </View>
             </View>

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { StatusBar, TouchableOpacity } from 'react-native';
+import { StatusBar, TouchableOpacity, View } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { EclaimThanks } from '../components/EclaimThanks';
-import { Buttons, Texti } from '../components/common';
+import { Texti } from '../components/common';
 import EclaimStep from '../components/EclaimStep';
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/common/NavbarGrey';
 
 class ThanksEclaim extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <View style={{ backgroundColor: '#efeff4', paddingTop: '5%' }} />
         <EclaimStep
           currentPosition={3}
         />
@@ -29,15 +30,16 @@ class ThanksEclaim extends Component {
             left: 0,
             backgroundColor: "#0392CF",
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingBottom: '3%'
           }}
-          >
+        >
           <Texti
             style={{
               padding: 15
             }}
             fontColor={"#FFFFFF"}
-            >
+          >
             Back to Home
           </Texti>
         </TouchableOpacity>

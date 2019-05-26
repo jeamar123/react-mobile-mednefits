@@ -1041,7 +1041,7 @@ export function CreatePayment(param, callback) {
   });
 }
 
-export function CurrencyList(callback){
+export function CurrencyList(callback) {
   Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
     params = {
       url: Config.CURRENCY_LIST,
