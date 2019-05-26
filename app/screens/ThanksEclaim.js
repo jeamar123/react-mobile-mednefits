@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StatusBar, TouchableOpacity, View, SafeAreaView } from 'react-native';
+import { StatusBar, TouchableOpacity, View } from 'react-native';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { EclaimThanks } from '../components/EclaimThanks';
 import { Texti } from '../components/common';
 import EclaimStep from '../components/EclaimStep';
+import Navbar from '../components/common/NavbarGrey';
 
 class ThanksEclaim extends Component {
   render() {
