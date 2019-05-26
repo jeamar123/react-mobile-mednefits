@@ -17,6 +17,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,16 +33,17 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+        new RNVersionCheckPackage(),
         new MainReactPackage(),
         new ReactNativePushNotificationPackage(),
-        new VectorIconsPackage(), 
+        new VectorIconsPackage(),
         new SystemSettingPackage(),
-        new MapsPackage(), 
-        new ImagePickerPackage(), 
-        new RNFSPackage(), 
+        new MapsPackage(),
+        new ImagePickerPackage(),
+        new RNFSPackage(),
         new ReactNativeDocumentPicker(),
-        new RNCameraPackage(), 
-        new RNFusedLocationPackage(), 
+        new RNCameraPackage(),
+        new RNFusedLocationPackage(),
         new SvgPackage());
     }
 
