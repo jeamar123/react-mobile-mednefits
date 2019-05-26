@@ -4,11 +4,16 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Linking
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import * as Config from '../../config'
+import * as Core from '../../core'
 import * as Common from '../common'
+
+import VersionCheck from 'react-native-version-check';
+
 export default class Popup extends Component {
   constructor(props) {
     super(props);
@@ -132,6 +137,59 @@ export default class Popup extends Component {
 
         </View>
       );
+    }  else if (this.props.kind == 'update-application') {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
+          {/* <ImageBackground
+            style={{ width: 250, height: 100 }}
+            source={require('../../../assets/modalAsset/loginFailed.png')}
+            resizeMode="center"
+          /> */}
+
+          <View style={{ margin: 10 }}>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_MEDIUM}
+              fontSize={20}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.title}
+            </Common.Texti>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_ROMAN}
+              fontSize={14}
+              numberOfLines={10}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.message}
+            </Common.Texti>
+            <Common.ButtonPay
+              style={{
+                padding: 5
+              }}
+              onPress={() => this.CheckVersion()}>
+              Update Now
+            </Common.ButtonPay>
+          </View>
+        </View>
+      );
+    }
+  }
+
+  async CheckVersion(){
+    try {
+      version = await Core.CheckVersion()
+
+      Linking.openURL(version);
+
+    } catch (e) {
+      console.warn(e+"sa");
+      // Common.getNotify("","Failed to request url")
     }
   }
 
@@ -148,18 +206,19 @@ export default class Popup extends Component {
     return (
       <View style={{ backgroundColor: '#000' }}>
         <Modal isVisible={this.props.isVisible}>
-          <TouchableOpacity
-            onPress={() => this.props.closeSectionUpdate(true)}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'flex-end',
-              marginBottom: -50,
-              zIndex: 99,
-            }}
-          >
-            {this._closeSection()}
-          </TouchableOpacity>
-
+          {(!this.props.closeSection) ? (<View />) : (
+            <TouchableOpacity
+              onPress={() => this.props.closeSectionUpdate(true)}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                marginBottom: -50,
+                zIndex: 99,
+              }}
+            >
+              {this._closeSection()}
+            </TouchableOpacity>
+          )}
           <View
             style={{ backgroundColor: '#fff', borderRadius: 10, margin: 20 }}
           >

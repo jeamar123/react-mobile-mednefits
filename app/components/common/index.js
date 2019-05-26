@@ -7,6 +7,7 @@ export * from './Notify';
 export * from './ButtonCall';
 export * from './Buttons2';
 export * from './ButtonsConfirm';
+export * from './Notify';
 
 import buttonSearch from './ButtonSearch'
 import Popup from './PopUp'
