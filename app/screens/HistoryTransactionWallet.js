@@ -335,30 +335,9 @@ class HistoryTransaction extends Component {
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
-              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.converted_amount}</Text>
+              <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.amount}</Text>
             </Body>
           </CardItem>
-          {/* <CardItem>
-            <Body
-              style={{
-                marginTop: '-8%',
-                marginBottom: '-8%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Image
-                style={{
-                  margin: 8,
-                  aspectRatio: 0.4,
-                  resizeMode: 'contain',
-                }}
-                source={require('../../assets/apps/dotted.png')}
-              />
-
-              <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
-            </Body>
-          </CardItem> */}
           <CardItem>
             <Body
               style={{
