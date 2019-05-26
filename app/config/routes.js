@@ -59,6 +59,7 @@ import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
+import receiptUpload from '../screens/receiptUpload';
 
 console.disableYellowBox = true;
 
@@ -271,6 +272,7 @@ class RouterComponent extends Component {
             <Scene key="checkinUser" component={checkinUser} hideNavBar />
             <Scene key="SelectList" component={SelectList} hideNavBar />
             <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
+            <Scene key="receiptUpload" component={receiptUpload} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>
