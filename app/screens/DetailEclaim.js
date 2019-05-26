@@ -57,7 +57,7 @@ class DetailEclaim extends Component {
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
         'currency_type': this.props.claimdata.currency,
-        'currency_exchange': this.state.currency_exchange
+        'currency_exchange_rate': this.state.currency_exchange
       }
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {

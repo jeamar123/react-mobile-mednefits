@@ -258,14 +258,14 @@ class History extends Component {
                 width: 35,
                 height: 35,
                 marginTop: '3%',
-                marginLeft: '17.5%',
+                marginLeft: '16.5%',
               }}
               source={{ uri: this.state.data.clinic_type_image }}
             />
             <View
               style={{
                 padding: 5,
-                marginLeft: '14.5%',
+                marginLeft: '13.5%',
                 width: '100%',
                 fontSize: 13
               }}>

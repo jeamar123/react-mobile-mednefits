@@ -35,6 +35,7 @@ class BenefitsDollar extends Component {
   }
 
   componentDidMount() {
+    // Core.GetClinicDetails(98, (err, result) => {
     Core.GetClinicDetails(this.props.clinicid, (err, result) => {
       console.log(result)
       this.setState({
@@ -172,15 +173,21 @@ class BenefitsDollar extends Component {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                marginLeft: responsiveWidth(5),
+                marginLeft: responsiveWidth(5)
               }}
             >
-              <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+              <Text style={{
+                paddingBottom: '7%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 20,
+                color: '#9f9f9f',
+                alignItems: 'center'
+              }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
               <InputPay
                 keyboardType="numeric"
-                placeholder="0.00"
+                // placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
               />
