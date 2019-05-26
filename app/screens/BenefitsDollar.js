@@ -180,8 +180,8 @@ class BenefitsDollar extends Component {
                 marginLeft: '5%',
               }}
             >
-              <View>
-                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', }}>
+              <View style={{}}>
+                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', justifyContent: 'center', alignItems: 'center' }}>
                   {this.state.currency ? this.state.currency : ' '}
                 </Text>
               </View>
