@@ -395,7 +395,7 @@ class DetailEClaim_Transaction extends Component {
                 style={{
                   fontSize: 13
                 }}>
-                {this.state.data.user ? this.state.data.user : 'N/A'}
+                {this.state.data.member ? this.state.data.member : 'N/A'}
               </Text>
             </View>
             {/* <TextInput

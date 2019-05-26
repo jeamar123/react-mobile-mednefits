@@ -5,6 +5,9 @@ import * as Common from './index'
 import Icons from 'react-native-vector-icons/FontAwesome';
 
 export default class InputText extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     return (
@@ -32,7 +35,7 @@ export default class InputText extends Component {
           <Common.Texti
             fontColor={"#2c3e50"}
           >
-            S$
+            {this.props.currency}
           </Common.Texti>
         ) : (this.props.type == 'search') ? (
           <Icons
@@ -45,8 +48,8 @@ export default class InputText extends Component {
             }}
           />
         ) : (
-          <View />
-        )}
+              <View />
+            )}
       </View>
     )
   }

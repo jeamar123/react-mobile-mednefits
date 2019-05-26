@@ -6,8 +6,6 @@ import {
   ScrollView
 } from 'react-native'
 import * as Common from '../common'
-import RNPickerSelect from 'react-native-picker-select'
-import { Icon } from 'native-base'
 import styles from './styles'
 import * as Core from '../../core'
 import { Actions } from 'react-native-router-flux'
@@ -41,7 +39,6 @@ export default class EclaimForm extends Component {
       currencyData: [],
       currencyState: "S$"
     }
-
     this.selectSpending = this.selectSpending.bind(this)
     this.inputDate = {};
   }
@@ -62,12 +59,10 @@ export default class EclaimForm extends Component {
         result.data.users.map((member) => {
           dataMember.push({ label: member.name, value: member.user_id })
         });
-
         this.setState({
           memberState: "Select",
           memberData: dataMember,
         })
-
       }
     })
   }
@@ -80,18 +75,17 @@ export default class EclaimForm extends Component {
         dataCurrency = []
 
         result.data.map((currency) => {
-          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM"})
+          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM" })
         });
-
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
           currency: "S$",
         })
-
       }
     })
   }
+
 
   async selectSpending(type) {
     this.setState({ type: type, claimTypeState: "Loading...", claim: false })
@@ -103,11 +97,8 @@ export default class EclaimForm extends Component {
         result.data.map((claim) => {
           dataClaim.push({ label: claim.name, value: claim.health_type_id })
         });
-
         this.setState({ claimType: dataClaim })
-
       }
-
       this.setState({ claimTypeState: "Select" })
     })
   }
@@ -133,6 +124,7 @@ export default class EclaimForm extends Component {
         Core.getNotify("", "Please fill mandatory form")
       } else {
         claimData = {
+          type_spending: this.state.type,
           claim: this.props.claim,
           provider: this.state.provider,
           amount: this.state.amount,
@@ -152,6 +144,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
+    console.warn(this.state.type);
     return (
       <View
         style={styles.container}
@@ -201,7 +194,6 @@ export default class EclaimForm extends Component {
               <Common.Texti>
                 Claim Type
               </Common.Texti>
-
               <TouchableOpacity
                 onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
                 style={{ flexDirection: 'row' }}>
@@ -232,8 +224,8 @@ export default class EclaimForm extends Component {
                 alignItems: 'center',
               }}>
                 Provider
-            </Common.Texti>
-              <View style={{marginRight: 25}}>
+              </Common.Texti>
+              <View style={{ marginRight: 25 }}>
                 <Common.InputText
                   value={this.state.provider}
                   onChangeText={text => this.setState({ provider: text })}
@@ -356,7 +348,7 @@ export default class EclaimForm extends Component {
                 alignItems: 'center',
               }}>
                 Claim Amount
-            </Common.Texti>
+              </Common.Texti>
 
               <Common.InputAmount
                 value={this.state.amount}
@@ -396,7 +388,6 @@ export default class EclaimForm extends Component {
             style={{
               backgroundColor: "#0392CF",
               width: "100%",
-              marginBottom: "5%",
               justifyContent: 'center',
               alignItems: 'center',
             }}
@@ -405,7 +396,7 @@ export default class EclaimForm extends Component {
               fontSize={16}
               fontColor={"#ffffff"}
               style={{
-                paddingTop: 15,
+                paddingTop: 10,
                 paddingBottom: 10,
               }}>
               Next
