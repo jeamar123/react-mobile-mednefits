@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
 import * as Commmon from '../components/common';
+import * as Config from '../config';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
@@ -79,36 +80,67 @@ class SelectService extends Component {
     if (this.state.services == "") {
       Commmon.getAlert("Mednefits", "Please at least choose one service to proceed")
     } else {
-      Actions.PayScan({ type: 'reset', services: this.state.services, clinicid: this.props.clinicid })
+      // Actions.PayScan({
+      Actions.BenefitsDollar({
+        services: this.state.services,
+        clinicid: this.props.clinicid,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        check_Id: this.props.check_Id
+      })
     }
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar
-          leftNav="back"
-          title="Select Service/s"
-        />
-        <Content padder>
-          <View style={styles.contain}>
-            {this.props.services.map((data, key) => (
-              <TouchableOpacity
-                key={key}
-                ref={"services-" + data.procedureid}
-                style={styles.gridBox} onPress={() => this.selectedService(data)}>
-                <Text style={{ fontFamily: 'HelveticaNeue-Roman', textAlign: 'center', fontSize: 14 }}>
-                  {data.name}
-                </Text>
-              </TouchableOpacity>
-            ))}
+
+        {(this.props.services == undefined) ? (
+          <View style={{ flex: 1 }}>
+            <Navbar
+              leftNav="back"
+              title="Payment Type"
+            />
+            <View style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              <Text style={{ textAlign: 'center', fontFamily: Config.FONT_FAMILY_ROMAN }}>Please register before</Text>
+              <Text style={{ textAlign: 'center', fontFamily: Config.FONT_FAMILY_ROMAN }}>making payment</Text>
+            </View>
           </View>
 
-          <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
-            Proceed
-          </Buttons2>
-        </Content>
+        ) : (
+            <View style={{ flex: 1 }}>
+              <Navbar
+                leftNav="back"
+                title="Select Service/s"
+              />
+              <Content padder>
+                <View style={styles.contain}>
+                  {this.props.services.map((data, key) => (
+                    <TouchableOpacity
+                      key={key}
+                      ref={"services-" + data.procedureid}
+                      style={styles.gridBox} onPress={() => this.selectedService(data)}>
+                      <Text style={{ fontFamily: 'HelveticaNeue-Roman', textAlign: 'center', fontSize: 14 }}>
+                        {data.name}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
+                  Proceed
+                </Buttons2>
+              </Content>
+            </View>
+          )}
+
+
       </Container>
     );
   }

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View, Dimensions } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons, Spinner, Popup } from '../components/common';
-import Navbar from '../components/common/Navbar';
+import { ButtonsConfirm, Spinner, Popup } from '../components/common';
+import Navbar from '../components/common/NavbarGrey';
 import * as Config from '../config';
 import * as Core from '../core';
 
@@ -14,14 +14,18 @@ class ConfirmPay extends Component {
     this.state = {
       clinic_name: false,
       clinic_image: false,
-      amount: 0,
+      amount: '',
+      credits: '',
       currency: false,
       isLoading: false,
       Balance: '0',
       placeholder: null,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      inputAmount: this.props.amount,
+      amountCap: this.props.capAmount,
+      byCash: ''
     };
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -54,18 +58,23 @@ class ConfirmPay extends Component {
         });
       })
     );
+
+    const amount = this.state.inputAmount;
+    const cap = this.state.amountCap;
+    this.setState({ byCash: amount - cap });
   }
 
   SendPayment() {
     this.setState({ isLoading: true });
 
-    params = {
+    parameterData = {
       amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
+      check_Id: this.props.check_Id
     };
 
-    Core.SendPayment(params, (err, result) => {
+    Core.CreatePayment(parameterData, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
         Actions.Summary({ result: result, type: 'reset' });
@@ -81,6 +90,7 @@ class ConfirmPay extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
@@ -93,50 +103,16 @@ class ConfirmPay extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel-cash" title="Mednefits Credits" />
-        {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <View
-            style={{
-              backgroundColor: '#518cb0',
-              height: height / 9,
-              width: width,
-              alignItems: 'center',
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: 'helvetica',
-                fontSize: 16,
-                paddingTop: 10,
-                paddingBottom: 15,
-                color: '#fff',
-              }}
-            >
-              Current Balance
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Text
-                style={{
-                  fontFamily: 'helvetica',
-                  fontSize: 20,
-                  lineHeight: 20,
-                  color: '#fff',
-                  fontWeight: '600',
-                }}
-              >
-                {this.state.Balance}
-              </Text>
-            </View>
-          </View>
-        </View> */}
+        <Navbar leftNav="cancel" title="Summary" />
         <Content padder>
 
-          <View style={{ backgroundColor: '#f8f8fa' }}>
+          <View style={{ backgroundColor: '#fff' }}>
             <View
               style={{
-                justifyContent: 'center', alignItems: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
                 marginTop: '2%',
-                marginBottom: '10%'
+                marginBottom: '2%'
               }}
             >
               {!this.state.clinic_image ? (
@@ -153,7 +129,7 @@ class ConfirmPay extends Component {
               {!this.state.clinic_name ? (
                 <Spinner size="small" />
               ) : (
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#9e9e9e', fontSize: 18, marginTop: '3%' }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, marginTop: '3%' }}>
                     {this.state.clinic_name}
                   </Text>
                 )}
@@ -166,70 +142,82 @@ class ConfirmPay extends Component {
                 flex: 1,
                 height: 100,
                 justifyContent: 'center',
-                alignItems: 'flex-start',
-                marginLeft: 50,
-                marginTop: '2%',
-                marginBottom: '5%'
+                alignItems: 'center',
               }}
             >
-              <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
-                Payment Amount
-                </Text>
               <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                 }}
               >
-                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
+                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
                   {this.state.currency ? this.state.currency : ' '} {' '}
                 </Text>
-                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44 }}>
+                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50' }}>
                   {this.props.amount}
                 </Text>
               </View>
 
             </View>
-          </View>
-          <View style={{ flex: 1, marginBottom: '20%', marginTop: '10%' }}>
-            <Buttons
-              onPress={() => this.SendPayment()}
-              isLoading={this.state.isLoading}
-            >
-              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-            </Buttons>
-          </View>
-          {/* <Card>
-            <CardItem cardBody>
-              <Body
-                style={{
-                  height: 120,
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  marginLeft: 50,
-                }}
-              >
-                <Text style={{ marginTop: '-5%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18 }}>
-                  Payment Amount
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 22 }}>
-                    {this.state.currency ? this.state.currency : ' '} {' '}
-                  </Text>
-                  <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 30 }}>
-                    {this.props.amount}
-                  </Text>
-                </View>
-              </Body>
-            </CardItem>
 
-          </Card> */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <View style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingRight: 10,
+                paddingLeft: 10,
+                borderRadius: 3,
+                borderWidth: 2,
+                borderColor: "#bdbdbd",
+                alignItems: 'flex-start',
+                width: '48%'
+              }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  By Credits:
+                </Text>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
+                  {this.state.currency ? this.state.currency : ' '} {this.state.inputAmount}
+                </Text>
+              </View>
+              <View style={{
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingRight: 10,
+                paddingLeft: 10,
+                borderRadius: 3,
+                borderWidth: 2,
+                borderColor: "#bdbdbd",
+                alignItems: 'flex-start',
+                width: '48%'
+              }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  By Cash:
+                </Text>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
+                  {this.props.capCurrency}
+                  {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
+                </Text>
+              </View>
+            </View>
+
+            <View style={{ flex: 1, marginBottom: '18%', marginTop: '8%' }}>
+              <ButtonsConfirm
+                onPress={() => this.SendPayment()}
+                isLoading={this.state.isLoading}
+              >
+                Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+              </ButtonsConfirm>
+            </View>
+          </View>
 
         </Content>
       </Container>

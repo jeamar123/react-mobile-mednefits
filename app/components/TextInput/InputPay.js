@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-// import { TextInputMask } from 'react-native-masked-text';
-// import TextInputMask from 'react-native-text-input-mask';
+import { TextInputMask } from 'react-native-masked-text';
 // import CurrencyInput from 'react-currency-input';
 // import { TextInputMask } from 'react-masked-text';
 import * as Common from '../common';
@@ -13,14 +12,14 @@ const InputWithButton = props => {
   return (
     <View >
 
-      {/* <TextInputMask
+      <TextInputMask
         autoFocus={true}
-        kind={'money'}
+        type={'money'}
         options={{ unit: '', precision: '2', separator: '.', delimiter: ',', }}
         style={styles.inputPay}
         {...props}
         underlineColorAndroid="transparent"
-      /> */}
+      />
 
       {/* <Common.SimpleCurrencyInput
         precision={2}
@@ -31,7 +30,7 @@ const InputWithButton = props => {
         keyboardType='numeric'
       /> */}
 
-      <Common.TextInputMask
+      {/* <Common.TextInputMask
         autoFocus={true}
         type={'money'}
         options={{
@@ -45,7 +44,7 @@ const InputWithButton = props => {
         style={styles.inputPay}
         {...props}
         underlineColorAndroid="transparent"
-      />
+      /> */}
 
       {/* <TextInputMask
         autoFocus={true}

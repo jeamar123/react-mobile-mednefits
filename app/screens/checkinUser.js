@@ -16,17 +16,24 @@ class checkinUser extends Component {
         <Navbar
           title="Register"
           rightNav="Close"
+          Services={this.props.services}
+          clinic_Id={this.props.clinicid}
+          check_Id={this.props.checkId}
+          capCurrency={this.props.capCurrency}
+          capAmount={this.props.capAmount}
         />
-        <View style={{
-          alignItems: 'center',
-        }}
+        <View
+          style={{
+            alignItems: 'center',
+          }}
         >
           <Image
             source={require('../../assets/apps/CheckIn.png')}
-            style={{ height: 50, resizeMode: 'contain', width: 50, marginBottom: 10, marginTop: 20 }}
+            style={{ height: 40, resizeMode: 'contain', width: 40, marginBottom: 10, marginTop: '14%' }}
           />
           <Text style={{
             fontFamily: 'HelveticaNeue-Roman',
+            fontWeight: 'bold',
             textAlign: 'center',
             fontSize: 25,
             color: '#fff',
@@ -93,13 +100,26 @@ class checkinUser extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Cap per visit
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 18 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 18 }}>
                 {this.props.capCurrency}{this.props.capAmount}
               </Text>
 
             </View>
           </View>
+        </View>
 
+        <View style={{
+          width: '100%',
+          height: 50,
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          bottom: 0,
+        }}>
+          <Image
+            source={require('../../assets/apps/LogoMednefits.png')}
+            style={{ height: 25, resizeMode: 'contain', width: 25 }}
+          />
         </View>
       </Container>
     );
