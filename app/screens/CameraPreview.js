@@ -137,17 +137,30 @@ export default class CameraPreview extends Component {
 
   renderButton() {
     return (
-      <TouchableOpacity
-        onPress={() => Actions.DetailEclaim({ claimdata: this.props.claimdata })}
-        style={{
-          backgroundColor: "#0392CF",
-          padding: 15,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Common.Texti fontColor="#FFFFFF" fontSize={12}>Next</Common.Texti>
-      </TouchableOpacity>
+      <View style={{
+        flex: 1,
+        justifyContent: 'flex-end',
+      }}>
+        <TouchableOpacity
+          onPress={() => Actions.DetailEclaim({ claimdata: this.props.claimdata })}
+          style={{
+            backgroundColor: "#0392CF",
+            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '3%'
+          }}
+        >
+          <Common.Texti
+            fontSize={16}
+            fontColor={"#ffffff"}
+            style={{
+              padding: 10
+            }}>
+            Next
+            </Common.Texti>
+        </TouchableOpacity>
+      </View>
     )
   }
 

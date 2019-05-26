@@ -166,7 +166,7 @@ class DetailEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <View style={{ backgroundColor: '#efeff4', paddingTop: '5%' }} />
+        <View style={{ backgroundColor: '#efeff4', paddingTop: '10%' }} />
         <EclaimStep
           currentPosition={2}
         />
@@ -478,6 +478,7 @@ class DetailEclaim extends Component {
               width: "100%",
               justifyContent: 'center',
               alignItems: 'center',
+              paddingBottom: '3%'
             }}
           >
             <Common.Texti
