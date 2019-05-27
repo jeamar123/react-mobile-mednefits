@@ -171,8 +171,7 @@ class Wallet extends Component {
                     {
                       (this.state.walletType == 'Medical') ?
                         (Data.currency_symbol) ? Data.currency_symbol : '' : ''
-                    }
-                    {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -258,8 +257,7 @@ class Wallet extends Component {
                     {
                       (this.state.walletType == 'Medical') ?
                         (Data.currency_symbol) ? Data.currency_symbol : '' : ''
-                    }
-                    {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -347,8 +345,7 @@ class Wallet extends Component {
                     {
                       (this.state.walletType == 'Wellness') ?
                         (Data.currency_symbol) ? Data.currency_symbol : '' : ''
-                    }
-                    {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
@@ -433,8 +430,7 @@ class Wallet extends Component {
                     {
                       (this.state.walletType == 'Wellness') ?
                         (Data.currency_symbol) ? Data.currency_symbol : '' : ''
-                    }
-                    {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
+                    } {(Data.converted_amount) ? Data.converted_amount : "0"} {" "}
                     <Icons
                       name="angle-right"
                       style={{
