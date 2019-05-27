@@ -35,8 +35,8 @@ class BenefitsDollar extends Component {
   }
 
   componentDidMount() {
-    Core.GetClinicDetails(98, (err, result) => {
-      // Core.GetClinicDetails(this.props.clinicid, (err, result) => {
+    // Core.GetClinicDetails(98, (err, result) => {
+    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
       console.log(result)
       this.setState({
         clinic_name: result.data.name,

@@ -266,10 +266,16 @@ class DetailEclaim extends Component {
                 paddingBottom: 15
               }}
             >
+              <Common.Texti style={{
+                color: '#000', marginLeft: '2%', marginRight: '3%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                Visit Date
+              </Common.Texti>
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                Visit Date
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
@@ -285,7 +291,7 @@ class DetailEclaim extends Component {
                   <ResponsiveImage
                     source={require('../../assets/apps/calendar.png')}
                     style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="15"
+                    initWidth="15" initHeight="16"
                   />
                 </View>
               </View>
