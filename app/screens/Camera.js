@@ -291,7 +291,7 @@ class Camera extends Component {
                   alignItems: 'center',
                   borderWidth: 1,
                   borderColor: 'black',
-                  marginTop: 5,
+                  marginTop: 10,
                   marginLeft: 15
                 }}
               >
@@ -303,7 +303,7 @@ class Camera extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: 5,
+                    marginTop: 10,
                     marginLeft: 15
                   }}>
                   <ImageBackground
@@ -319,7 +319,7 @@ class Camera extends Component {
           </View>
           <View style={{ width: "33%" }}>
             {((this.state.preview !== true) || (this.state.previewState == 0)) ? (
-              <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ paddingTop: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <TouchableOpacity
                   onPress={() => this.changeViewCamera('single')}
                   style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -327,7 +327,7 @@ class Camera extends Component {
                     fontColor={(this.state.shootType !== 'single') ? "grey" : "#0392cf"}
                     fontSize={11}
                   >
-                    Single{" "}
+                    Single{" "}{" "}
                   </Common.Texti>
                   {(this.state.shootType == 'single') ? (
                     <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
@@ -348,7 +348,7 @@ class Camera extends Component {
                 </TouchableOpacity>
               </View>
             ) : (
-                <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ paddingTop: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                   <TouchableOpacity
                     onPress={() => this.removeImage(this.state.previewState - 1)}
                     style={{
@@ -379,7 +379,7 @@ class Camera extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: 5,
+                    marginTop: 10,
                     marginRight: 15
                   }}>
                   <ImageBackground
