@@ -17,7 +17,7 @@ import ZoomImage from 'react-native-zoom-image';
 import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
-import Navbar from '../components/common/Navbar';
+import Navbar from '../components/common/NavbarGrey';
 import * as Common from '../components/common';
 import EclaimStep from '../components/EclaimStep';
 import * as Core from '../core';
@@ -166,7 +166,7 @@ class DetailEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <View style={{ backgroundColor: '#efeff4', paddingTop: '10%' }} />
+        <Navbar leftNav="back" title="Review and Submit" subtitle="E-claim" />
         <EclaimStep
           currentPosition={2}
         />
@@ -246,7 +246,7 @@ class DetailEclaim extends Component {
                 Provider
               </Text>
               <View
-                style={{ flexDirection: 'row', marginRight: 25 }}>
+                style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.provider}
                 </Common.Texti>
@@ -343,7 +343,7 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={"#2C3E50"}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
                 <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
@@ -466,7 +466,6 @@ class DetailEclaim extends Component {
         </ScrollView>
 
         <View style={{
-          flex: 1,
           justifyContent: 'flex-end',
         }}>
           <TouchableOpacity

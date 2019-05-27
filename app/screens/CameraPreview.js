@@ -36,8 +36,8 @@ class CameraBatchImage extends Component {
           <ImageBackground
             source={require('../../assets/delete-button.png')}
             style={{
-              width: 60,
-              height: 60
+              width: 30,
+              height: 30
             }}
           />
         </TouchableOpacity></View>,
@@ -138,7 +138,6 @@ export default class CameraPreview extends Component {
   renderButton() {
     return (
       <View style={{
-        flex: 1,
         justifyContent: 'flex-end',
       }}>
         <TouchableOpacity

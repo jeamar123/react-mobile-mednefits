@@ -101,7 +101,7 @@ class checkinUser extends Component {
                 Cap per visit
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 18 }}>
-                {this.props.capCurrency}{this.props.capAmount}
+                {this.props.capCurrency} {this.props.capAmount}
               </Text>
 
             </View>

@@ -5,13 +5,14 @@ import { Actions } from 'react-native-router-flux';
 import { EclaimThanks } from '../components/EclaimThanks';
 import { Texti } from '../components/common';
 import EclaimStep from '../components/EclaimStep';
+import Navbar from '../components/common/NavbarGrey';
 
 class ThanksEclaim extends Component {
   render() {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <View style={{ backgroundColor: '#efeff4', paddingTop: '10%' }} />
+        <Navbar leftNav="back-home" title="Review and Submit" subtitle="E-claim" />
         <EclaimStep
           currentPosition={3}
         />

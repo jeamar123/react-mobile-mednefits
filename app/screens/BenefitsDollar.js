@@ -187,9 +187,18 @@ class BenefitsDollar extends Component {
               </Text>
               <InputPay
                 keyboardType="numeric"
-                // placeholder="0.00"
+                placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  height: 70,
+                  fontSize: 46,
+                  marginLeft: responsiveWidth(6),
+                  width: '100%',
+                  color:
+                    (!this.state.amount) ? "#B0B0B0" : "#2c3e50",
+                }}
               />
             </View>
           </View>
@@ -206,7 +215,7 @@ class BenefitsDollar extends Component {
               Balance: {this.state.Balance}
             </Text>
             <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#B0B0B0', }}>
-              Cap: {this.props.capCurrency}{this.props.capAmount}
+              Cap: {this.props.capCurrency} {this.props.capAmount}
             </Text>
           </View>
 
