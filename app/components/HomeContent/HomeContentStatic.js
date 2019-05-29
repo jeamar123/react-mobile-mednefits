@@ -142,32 +142,66 @@ class HomeContent extends Component {
             }}
           /> */}
           <View style={styles.contain}>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.Barcode()
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                    <Image
-                      style={{ marginBottom: 15, width: 30, height: 30 }}
-                      source={require('../../../assets/apps/Scan&Pay.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Register {this.props.clinic_id} </Text>
-                    {/* <Text style={styles.title}>Scan & Pay</Text>
+            {(this.props.check_Id) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.cancelVisit({
+                    services: this.props.Services,
+                    clinicid: this.props.clinic_Id,
+                    member: this.props.member,
+                    nric: this.props.nric,
+                    checkId: this.props.check_Id,
+                    checkTime: this.props.checkTime,
+                    capCurrency: this.props.capCurrency,
+                    capAmount: this.props.capAmount,
+                    clinic_image: this.props.clinic_image,
+                    clinic_name: this.props.clinic_name,
+                  })
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <Image
+                        style={{ marginBottom: 15, width: 30, height: 30 }}
+                        source={require('../../../assets/apps/Scan&Pay.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                      <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                      {/* <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text> */}
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                  onPress={() =>
+                    Actions.Barcode()
+                  }
+                >
+                  <View style={styles.gridBox}>
+                    <View style={{ flex: 1 }}>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                        <Image
+                          style={{ marginBottom: 15, width: 30, height: 30 }}
+                          source={require('../../../assets/apps/Scan&Pay.png')}
+                        />
+                      </View>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                        <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                        {/* <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text> */}
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+
             <TouchableOpacity
               onPress={() =>
                 Actions.SelectService({
-                  services: this.props.Services,
-                  clinicid: this.props.clinic_Id,
                   services: this.props.Services,
                   clinicid: this.props.clinic_Id,
                   capCurrency: this.props.capCurrency,
@@ -200,7 +234,7 @@ class HomeContent extends Component {
                       source={require('../../../assets/apps/payIcon.png')}
                     />
                   </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8%' }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                     <Text style={styles.title}>Checkout</Text>
                   </View>
                 </View>
@@ -246,7 +280,7 @@ class HomeContent extends Component {
                       source={require('../../../assets/apps/wallet.png')}
                     />
                   </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
                     <Text style={styles.title}>Wallet</Text>
                     <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
                   </View>

@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View } from 'react-native';
+import { StatusBar, Image, View, TouchableOpacity } from 'react-native';
 import { Container, Text } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/NavbarGreen';
 import * as Config from '../config';
+import * as Common from '../components/common';
+import * as Core from '../core';
 
 class checkinUser extends Component {
   constructor(props) {
     super(props);
+  }
+
+  prosesCancel = async () => {
+    await Core.CancelVisit({check_in_id: this.props.checkId}, async (err, result) => {
+      console.warn(result);
+      if (result.status == true) {
+        Core.getNotify('', result.message);
+        Actions.Home({type: 'reset'});
+      } else {
+        Core.getNotify('', 'Failed Cancel Check In, please try again');
+      }
+    });
   }
 
   render() {
@@ -17,16 +32,6 @@ class checkinUser extends Component {
         <Navbar
           title="Register"
           rightNav="Close"
-          Services={this.props.services}
-          clinic_Id={this.props.clinicid}
-          member={this.props.member}
-          nric={this.props.nric}
-          check_Id={this.props.checkId}
-          checkTime={this.props.checkTime}
-          capCurrency={this.props.capCurrency}
-          capAmount={this.props.capAmount}
-          clinic_image={this.props.clinic_image}
-          clinic_name={this.props.clinic_name}
         />
         <View style={{
           alignItems: 'center',
@@ -111,6 +116,35 @@ class checkinUser extends Component {
 
             </View>
           </View>
+        </View>
+
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          marginBottom: '10%',
+          alignItems: 'center',
+        }}>
+          <TouchableOpacity
+            onPress={() => this.prosesCancel()}
+            style={{
+              backgroundColor: "#2C3E50",
+              width: "90%",
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 50,
+              borderRadius: 5,
+            }}
+          >
+            <Common.Texti
+              fontSize={16}
+              fontColor={"#ffffff"}
+              style={{
+                padding: 10,
+                fontWeight: 'bold'
+              }}>
+              Cancel Visit
+            </Common.Texti>
+          </TouchableOpacity>
         </View>
 
         <View style={{

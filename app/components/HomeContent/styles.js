@@ -13,7 +13,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: height / 3.8,
+    height: height / 4.3,
     width: width,
     alignItems: 'center',
   },
@@ -55,7 +55,7 @@ export default EStyleSheet.create({
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: RF(1.9),
+    fontSize: 13,
     color: '#fff',
   },
   DrawerContain: {

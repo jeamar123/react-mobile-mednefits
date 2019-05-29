@@ -228,7 +228,7 @@ class ConfirmPay extends Component {
                     By Credits:
                 </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                    {this.state.currency ? this.state.currency : ' '} {this.state.inputAmount}
+                    {this.state.currency ? this.state.currency : ' '} {this.state.amountCap}
                   </Text>
                 </View>
                 <View style={{

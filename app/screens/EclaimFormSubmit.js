@@ -30,6 +30,8 @@ class EclaimFormSubmit extends Component {
           submitForm={this.state.submitForm}
           claim={this.props.claim}
           claimTypeState={this.props.claimTypeState}
+          currencyState={this.props.currencyState}
+          currency={this.props.currency}
         />
       </Container>
     );

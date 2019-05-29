@@ -491,7 +491,7 @@ class History extends Component {
                   marginLeft: '7%',
                 }}
               >
-                Cap  per visit
+                Cap per visit
               </Text>
               <View
                 style={{

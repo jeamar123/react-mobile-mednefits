@@ -37,8 +37,13 @@ export default class EclaimForm extends Component {
       file: false,
       isLoading: false,
       currency: false,
-      currencyData: [],
-      currencyState: "S$",
+      currencyData: [
+        {
+          label: "Please choose currency first",
+          value: null
+        }
+      ],
+      currencyState: "SGD",
       claimData: null,
     }
 
@@ -71,20 +76,25 @@ export default class EclaimForm extends Component {
   }
 
   async getCurrency() {
-    this.setState({ currencyState: "Loading..." })
+    this.setState({ currencyState: "Loading...", currency: false })
 
     await Core.CurrencyList((err, result) => {
       if (result) {
         dataCurrency = []
 
         result.data.map((currency) => {
-          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM" })
+          dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
-        this.setState({
-          currencyState: "Select",
-          currencyData: dataCurrency,
-          currency: "S$",
-        })
+        this.setState({ currencyData: dataCurrency })
+      }
+      this.setState({ currencyState: "SGD" })
+    })
+  }
+
+  setCurrencyValue(val) {
+    this.state.currencyData.map((value, index) => {
+      if (val == value.value) {
+        this.setState({ currency: value.label })
       }
     })
   }
@@ -145,7 +155,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
-    console.warn(this.state.type);
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -327,38 +337,46 @@ export default class EclaimForm extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                  Currency
+                  Receipt Amount
                 </Common.Texti>
 
-                <Common.InputSelect
-                  placeholder={this.state.currency}
-                  data={this.state.currencyData}
-                  value={this.state.currency}
-                  onValueChange={(value) => this.setState({ currency: value })}
-                />
-              </View>
+                <View
+                  style={{ flexDirection: 'row' }}>
+                  <Common.InputAmount
+                    value={this.state.amount}
+                    keyboardType="numeric"
+                    onChangeText={text => this.setState({ amount: text })}
+                    placeholder="Enter amount"
+                    leftToRight
+                  />
+                  {/* <Common.InputSelect
+                    placeholder={this.state.currency}
+                    data={this.state.currencyData}
+                    value={this.state.currency}
+                    onValueChange={(value) => this.setState({ currency: value })}
+                  /> */}
 
-              <Common.Divider />
+                  <TouchableOpacity
+                    onPress={() => Actions.CurrencySelect({ title: "Currency", currencyData: this.state.currencyData })}
+                    style={{ flexDirection: 'row' }}>
+                    <Common.Texti fontColor={((this.props.currencyState == "") || (this.props.currencyState == undefined) || (this.props.currencyState == null)) ? "#848484" : "black"}>
+                      {((this.props.currencyState == "") || (this.props.currencyState == undefined) || (this.props.currencyState == null)) ? this.state.currencyState : this.props.currencyState}
+                    </Common.Texti>
+                    <View
+                      style={{
+                        alignItems: 'flex-end',
+                        marginLeft: 10
+                      }}
+                    >
+                      <ResponsiveImage
+                        source={require('../../../assets/apps/arrow.png')}
+                        style={{ resizeMode: 'center' }}
+                        initWidth="15" initHeight="15"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
 
-              <View
-                style={styles.fieldStyle}
-              >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                  Claim Amount
-                </Common.Texti>
-
-                <Common.InputAmount
-                  value={this.state.amount}
-                  keyboardType="numeric"
-                  onChangeText={text => this.setState({ amount: text })}
-                  placeholder="Enter amount"
-                  type={"currency"}
-                  currency={this.state.currency}
-                  leftToRight
-                />
               </View>
 
               <Common.Divider />
@@ -400,6 +418,7 @@ export default class EclaimForm extends Component {
               width: "100%",
               justifyContent: 'center',
               alignItems: 'center',
+              paddingBottom: '3%'
             }}
           >
             <Common.Texti

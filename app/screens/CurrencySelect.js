@@ -5,18 +5,22 @@ import * as Common from '../components/common'
 import { Actions } from 'react-native-router-flux'
 
 class ItemRender extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  itemCallback = () => {
+  callbackItem = () => {
 
-    Actions.EclaimSubmit({ claimTypeState: this.props.label, claim: this.props.label })
+    Actions.EclaimSubmit({ currencyState: this.props.value, currency: this.props.label })
 
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props))
     return (
       <View style={{ flex: 1, marginLeft: 15, marginTop: 15 }}>
         <TouchableOpacity
-          onPress={this.itemCallback}
+          onPress={this.callbackItem}
           style={{
             paddingTop: (this.props.index == 0) ? 5 : 0,
             paddingBottom: 15
@@ -32,7 +36,7 @@ class ItemRender extends Component {
   }
 }
 
-class SelectList extends Component {
+class CurrencySelect extends Component {
 
   _keyExtractor = (item, index) => index;
 
@@ -49,7 +53,7 @@ class SelectList extends Component {
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Navbar leftNav="back" title={this.props.title} />
         <FlatList
-          data={this.props.data}
+          data={this.props.currencyData}
           extraData={this.state}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
@@ -61,4 +65,4 @@ class SelectList extends Component {
   }
 }
 
-export default SelectList;
+export default CurrencySelect;

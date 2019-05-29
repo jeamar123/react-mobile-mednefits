@@ -454,6 +454,11 @@ class Home extends Component {
               check_Id={this.props.checkId}
               capCurrency={this.props.capCurrency}
               capAmount={this.props.capAmount}
+              member={this.props.member}
+              nric={this.props.nric}
+              checkTime={this.props.checkTime}
+              clinic_image={this.props.clinic_image}
+              clinic_name={this.props.clinic_name}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start' }}
@@ -463,7 +468,7 @@ class Home extends Component {
                 style={{ textAlign: 'center', marginLeft: '2.5%' }}
               >
                 Benefits Category
-                      </Text>
+              </Text>
             </View>
             <View style={styles.contain}>
               <FlatList

@@ -59,6 +59,8 @@ import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
 import receiptUpload from '../screens/receiptUpload';
+import CurrencySelect from '../screens/CurrencySelect';
+import cancelVisit from '../screens/cancelVisit';
 
 console.disableYellowBox = true;
 
@@ -161,7 +163,7 @@ class RouterComponent extends Component {
           <Scene key="SelectService" component={SelectService} hideNavBar />
           <Scene key="Balance" component={Balance} hideNavBar />
           <Scene key="Summary" component={Summary} hideNavBar />
-          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
+          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar/>
           <Scene key="PayScan" component={ScanPay} hideNavBar />
           <Scene
             key="HistoryTransaction"
@@ -240,6 +242,8 @@ class RouterComponent extends Component {
           <Scene key="SelectList" component={SelectList} hideNavBar />
           <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
           <Scene key="receiptUpload" component={receiptUpload} hideNavBar />
+          <Scene key="CurrencySelect" component={CurrencySelect} hideNavBar />
+          <Scene key="cancelVisit" component={cancelVisit} hideNavBar />
         </Stack>
       </Router>
     );

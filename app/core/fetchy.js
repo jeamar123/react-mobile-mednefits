@@ -1044,3 +1044,21 @@ export function CurrencyList(callback) {
     })
   });
 }
+
+export function CancelVisit(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CANCEL_VISIT,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param,
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
+}

@@ -385,7 +385,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            marginTop: '5%'
+            marginTop: '7%'
           }}
         >
           <Text
@@ -769,8 +769,8 @@ export default class Navbar extends React.Component {
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
-            paddingRight: '4%',
-            marginTop: '2%'
+            paddingRight: '5%',
+            marginTop: '5%'
           }}
         >
           <TouchableOpacity
@@ -778,15 +778,20 @@ export default class Navbar extends React.Component {
             onPress={() => Actions.Home({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
               checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
               capCurrency: this.props.capCurrency,
-              capAmount: this.props.capAmount
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
             })}
           >
             <ResponsiveImage
-              source={require('../../../assets/apps/Close.png')}
+              source={require('../../../assets/apps/downclose.png')}
               style={{ resizeMode: 'center', }}
-              initWidth="18" initHeight="18"
+              initWidth="25" initHeight="20"
             />
             {/* <Image
               source={require('../../../assets/apps/Close.png')}

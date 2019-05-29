@@ -155,7 +155,7 @@ class BenefitsDollar extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
+              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', fontSize: 16 }}>
                 Total Bill Amount
               </Text>
             </View>
@@ -211,10 +211,10 @@ class BenefitsDollar extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#B0B0B0', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#666', fontSize: 17 }}>
               Balance: {this.state.Balance}
             </Text>
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#B0B0B0', }}>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#666', fontSize: 17 }}>
               Cap: {this.props.capCurrency} {this.props.capAmount}
             </Text>
           </View>

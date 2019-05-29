@@ -34,7 +34,7 @@ class DetailEclaim extends Component {
       member: null,
       showPopUp: false,
       button: 'Submit',
-      currency_exchange: false
+      currency_exchange: ''
     }
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -207,14 +207,14 @@ class DetailEclaim extends Component {
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
-                Claim Type
+                Spending Account
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
-                  {this.props.claimdata.claim}
+                  {this.props.claimdata.type_spending}
                 </Common.Texti>
-                <View
+                {/* <View
                   style={{
                     alignItems: 'flex-end',
                     marginLeft: 10
@@ -225,7 +225,41 @@ class DetailEclaim extends Component {
                     style={{ resizeMode: 'center' }}
                     initWidth="15" initHeight="15"
                   />
-                </View>
+                </View> */}
+              </View>
+            </View>
+            <Common.Divider noMargin />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
+              }}
+            >
+              <Text style={{ color: '#000', marginLeft: '2%' }}>
+                Claim Type
+              </Text>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.props.claimdata.claim}
+                </Common.Texti>
+                {/* <View
+                  style={{
+                    alignItems: 'flex-end',
+                    marginLeft: 10
+                  }}
+                >
+                  <ResponsiveImage
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ resizeMode: 'center' }}
+                    initWidth="15" initHeight="15"
+                  />
+                </View> */}
               </View>
             </View>
             <Common.Divider noMargin />
@@ -339,7 +373,58 @@ class DetailEclaim extends Component {
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                Claim Amount
+                Receipt Amount
+              </Text>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                  {this.props.claimdata.amount}{" "}
+                </Common.Texti>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                  {this.props.claimdata.currency}
+                </Common.Texti>
+              </View>
+            </View>
+            <Common.Divider noMargin />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
+              }}
+            >
+              <Text
+                style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+              >
+                Exchange Rate
+              </Text>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                  {this.state.currency_exchange}
+                </Common.Texti>
+              </View>
+            </View>
+            <Common.Divider noMargin />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
+              }}
+            >
+              <Text
+                style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+              >
+                Total
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
@@ -377,7 +462,7 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.state.member}
                 </Common.Texti>
-                <View
+                {/* <View
                   style={{
                     alignItems: 'flex-end',
                     marginLeft: 10
@@ -388,7 +473,7 @@ class DetailEclaim extends Component {
                     style={{ resizeMode: 'center' }}
                     initWidth="15" initHeight="15"
                   />
-                </View>
+                </View> */}
               </View>
             </View>
             <Common.Divider noMargin />
