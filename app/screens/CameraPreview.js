@@ -36,8 +36,8 @@ class CameraBatchImage extends Component {
           <ImageBackground
             source={require('../../assets/delete-button.png')}
             style={{
-              width: 60,
-              height: 60
+              width: 35,
+              height: 35
             }}
           />
         </TouchableOpacity></View>,

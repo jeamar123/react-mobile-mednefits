@@ -12,7 +12,7 @@ class ThanksEclaim extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <View style={{ backgroundColor: '#efeff4', paddingTop: '5%' }} />
+        <Navbar leftNav="back-home" title="Review and Submit" subtitle="E-claim" />
         <EclaimStep
           currentPosition={3}
         />
