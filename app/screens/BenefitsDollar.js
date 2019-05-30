@@ -96,14 +96,14 @@ class BenefitsDollar extends Component {
         />
         <Content padder>
 
-          <View style={{ backgroundColor: '#f8f8fa', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
                 justifyContent: 'flex-start',
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: '2%',
-                marginBottom: '10%'
+                marginTop: '4%',
+                height: responsiveHeight(11)
               }}
             >
               {!this.state.clinic_name ? (
@@ -131,9 +131,9 @@ class BenefitsDollar extends Component {
                       style={{
                         // marginLeft: '-5%',
                         fontFamily: Config.FONT_FAMILY_ROMAN,
-                        color: '#9e9e9e',
+                        color: '#666666',
                         fontSize: 18,
-                        width: '50%'
+                        width: '100%'
                       }}
                       numberOfLines={2}
                     >
@@ -141,11 +141,10 @@ class BenefitsDollar extends Component {
                     </Text>
                   </View>
                 )}
-
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#fff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -155,7 +154,7 @@ class BenefitsDollar extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', fontSize: 16 }}>
+              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
                 Total Bill Amount
               </Text>
             </View>
@@ -171,17 +170,18 @@ class BenefitsDollar extends Component {
               style={{
                 flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'flex-start',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                marginLeft: responsiveWidth(5)
+                marginLeft: responsiveWidth(5),
+                marginRight: responsiveWidth(5)
               }}
             >
               <Text style={{
                 paddingBottom: '7%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 20,
+                fontSize: 24,
                 color: '#9f9f9f',
-                alignItems: 'center'
+                alignItems: 'center',
               }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
@@ -211,12 +211,29 @@ class BenefitsDollar extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#666', fontSize: 17 }}>
-              Balance: {this.state.Balance}
-            </Text>
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#666', fontSize: 17 }}>
-              Cap: {this.props.capCurrency} {this.props.capAmount}
-            </Text>
+            <View style={{
+              backgroundColor: '#fff',
+              width: '45%',
+              paddingLeft: responsiveWidth(5),
+              paddingTop: responsiveWidth(3),
+              paddingBottom: responsiveWidth(3)
+            }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 17 }}>
+                Balance: {'\n'}{this.state.Balance}
+              </Text>
+            </View>
+
+            <View style={{
+              backgroundColor: '#fff',
+              width: '45%',
+              paddingLeft: responsiveWidth(5),
+              paddingTop: responsiveWidth(3),
+              paddingBottom: responsiveWidth(3)
+            }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 17 }}>
+                Cap: {'\n'}{this.props.capCurrency} {this.props.capAmount}
+              </Text>
+            </View>
           </View>
 
           <View style={{ marginBottom: '5%' }} />

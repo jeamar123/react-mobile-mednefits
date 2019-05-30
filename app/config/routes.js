@@ -62,7 +62,7 @@ import receiptUpload from '../screens/receiptUpload';
 import CurrencySelect from '../screens/CurrencySelect';
 import cancelVisit from '../screens/cancelVisit';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -163,7 +163,7 @@ class RouterComponent extends Component {
           <Scene key="SelectService" component={SelectService} hideNavBar />
           <Scene key="Balance" component={Balance} hideNavBar />
           <Scene key="Summary" component={Summary} hideNavBar />
-          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar/>
+          <Scene key="BenefitsDollar" component={BenefitsDollar} hideNavBar />
           <Scene key="PayScan" component={ScanPay} hideNavBar />
           <Scene
             key="HistoryTransaction"

@@ -13,11 +13,11 @@ class checkinUser extends Component {
   }
 
   prosesCancel = async () => {
-    await Core.CancelVisit({check_in_id: this.props.checkId}, async (err, result) => {
+    await Core.CancelVisit({ check_in_id: this.props.checkId }, async (err, result) => {
       console.warn(result);
       if (result.status == true) {
         Core.getNotify('', result.message);
-        Actions.Home({type: 'reset'});
+        Actions.Home({ type: 'reset' });
       } else {
         Core.getNotify('', 'Failed Cancel Check In, please try again');
       }
