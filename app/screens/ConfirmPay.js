@@ -84,7 +84,7 @@ class ConfirmPay extends Component {
       console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Summary({ result: result });
+        Actions.Summary({ result: result, clinic_image: this.state.clinic_image });
         this.setState({ isLoading: false });
       } else if (!result.status) {
         // Core.getNotify('', result.message);
@@ -325,7 +325,9 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 18 }}>
-                {this.state.currency ? this.state.currency : ' '} {this.state.amountCap}
+                {this.state.currency ? this.state.currency : ' '} {
+                  (this.props.amount > this.state.amountCap) ? this.state.amountCap : this.props.amount
+                }
               </Text>
             </View>
             <View>
@@ -380,32 +382,6 @@ class ConfirmPay extends Component {
             </TouchableOpacity>
           </View>
 
-          {/* <TouchableOpacity style={{ backgroundColor: '#3f9d59',  }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingTop: responsiveHeight(1),
-                paddingBottom: responsiveHeight(1),
-                marginLeft: '5%',
-                marginRight: '5%'
-              }}
-            >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#FFF', fontSize: 16 }}>
-
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <View style={{ marginBottom: '2%', marginTop: '4%' }}>
-            <ButtonsConfirm
-              onPress={() => this.SendPayment()}
-              isLoading={this.state.isLoading}
-            >
-              Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-            </ButtonsConfirm>
-          </View> */}
         </Content>
       </Container>
     );
