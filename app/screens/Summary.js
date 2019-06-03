@@ -55,7 +55,7 @@ class Summary extends Component {
                   style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
                 >
                   <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                  <Text style={styles.detail}>{(this.props.result.data.credits) ? this.props.result.data.credits : ""}</Text>
+                  <Text style={styles.detail}>{(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}</Text>
                 </View>
 
                 <View
@@ -177,7 +177,7 @@ class Summary extends Component {
                     Bill Amount
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.bill_amount) ? this.props.result.data.bill_amount : ""}
                   </Text>
                 </View>
 
@@ -193,7 +193,7 @@ class Summary extends Component {
                     Consultation Fee
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.consultation_fees) ? this.props.result.data.consultation_fees : ""}
                   </Text>
                 </View>
 
@@ -209,7 +209,7 @@ class Summary extends Component {
                     Total Amount
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_amount) ? this.props.result.data.total_amount : ""}
                   </Text>
                 </View>
 
@@ -229,7 +229,7 @@ class Summary extends Component {
                     Paid by Credits
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.credits) ? this.props.result.data.credits : ""}
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}
                   </Text>
                 </View>
                 <View>
@@ -248,7 +248,7 @@ class Summary extends Component {
                     Paid by Cash
                   </Text>
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.cash) ? this.props.result.data.cash : ""}
+                    {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}
                   </Text>
                 </View>
 
@@ -285,7 +285,7 @@ class Summary extends Component {
                     style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
                   >
                     <Text style={styles.detailUp}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                    <Text style={styles.detail}>{(this.props.result.data.credits) ? this.props.result.data.credits : ""}</Text>
+                    <Text style={styles.detail}>{(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}</Text>
                   </View>
 
                   <View
@@ -383,12 +383,12 @@ class Summary extends Component {
                           }}
                         >
                           Make Payment in Cash
-                      </Text>
+                        </Text>
                         <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '3%' }}
+                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5%' }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                          <Text style={styles.detail2}>{(this.props.result.data.cash) ? this.props.result.data.cash : ""}</Text>
+                          <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>
                         </View>
                       </View>
                     </View>
@@ -446,7 +446,7 @@ class Summary extends Component {
                       Bill Amount
                   </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.bill_amount) ? this.props.result.data.bill_amount : ""}
                     </Text>
                   </View>
 
@@ -462,7 +462,7 @@ class Summary extends Component {
                       Consultation Fee
                   </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.consultation_fees) ? this.props.result.data.consultation_fees : ""}
                     </Text>
                   </View>
 
@@ -478,7 +478,7 @@ class Summary extends Component {
                       Total Amount
                   </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_payment) ? this.props.result.data.total_payment : ""}
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_amount) ? this.props.result.data.total_amount : ""}
                     </Text>
                   </View>
 
@@ -498,7 +498,7 @@ class Summary extends Component {
                       Paid by Credits
                   </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.credits) ? this.props.result.data.credits : ""}
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}
                     </Text>
                   </View>
                   <View>
@@ -517,7 +517,7 @@ class Summary extends Component {
                       Paid by Cash
                   </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.cash) ? this.props.result.data.cash : ""}
+                      {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}
                     </Text>
                   </View>
 

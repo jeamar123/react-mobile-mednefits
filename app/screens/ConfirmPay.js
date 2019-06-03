@@ -30,7 +30,9 @@ class ConfirmPay extends Component {
       showPopUp: false,
       inputAmount: this.props.amount,
       amountCap: this.props.capAmount,
-      byCash: ''
+      feeConsultation: this.props.consultation_fees,
+      byCash: '',
+      amountTotal: ''
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -63,9 +65,16 @@ class ConfirmPay extends Component {
       })
     );
 
-    const amount = this.state.inputAmount;
+    const amounts = this.state.inputAmount;
     const cap = this.state.amountCap;
-    this.setState({ byCash: amount - cap });
+    const consultationAmount = this.state.feeConsultation;
+
+    this.setState({ byCash: amounts - cap });
+    if (this.props.consultation_status == false) {
+      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount) });
+    } else {
+      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount) });
+    }
   }
 
 
@@ -73,7 +82,7 @@ class ConfirmPay extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      amount: this.props.amount,
+      input_amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_Id: this.props.check_Id
@@ -264,7 +273,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {(this.props.consultation_status == false) ? this.props.consultation_fees : 0}
               </Text>
             </View>
             <View
@@ -281,7 +290,7 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {this.props.amount}
+                {this.state.currency ? this.state.currency : ' '} {this.state.amountTotal}
               </Text>
             </View>
           </View>

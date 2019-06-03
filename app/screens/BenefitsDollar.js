@@ -243,7 +243,10 @@ class BenefitsDollar extends Component {
             amount: this.state.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
-            check_Id: this.props.check_Id
+            check_Id: this.props.check_Id,
+            consultation_fee_symbol: this.props.consultation_fee_symbol,
+            consultation_status: this.props.consultation_status,
+            consultation_fees: this.props.consultation_fees
           })}>
             Next
           </ButtonPay>

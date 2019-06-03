@@ -27,6 +27,9 @@ class checkinUser extends Component {
           capAmount={this.props.capAmount}
           clinic_image={this.props.clinic_image}
           clinic_name={this.props.clinic_name}
+          consultation_fee_symbol={this.props.consultation_fee_symbol}
+          consultation_status={this.props.consultation_status}
+          consultation_fees={this.props.consultation_fees}
         />
         <View style={{
           alignItems: 'center',
