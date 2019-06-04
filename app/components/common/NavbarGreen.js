@@ -795,8 +795,8 @@ export default class Navbar extends React.Component {
           >
             <ResponsiveImage
               source={require('../../../assets/apps/downclose.png')}
-              style={{ resizeMode: 'center', }}
-              initWidth="25" initHeight="20"
+              style={{ resizeMode: 'contain', }}
+              initWidth="32" initHeight="16"
             />
             {/* <Image
               source={require('../../../assets/apps/Close.png')}
