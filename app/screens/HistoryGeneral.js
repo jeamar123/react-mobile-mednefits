@@ -928,10 +928,14 @@ class History extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="History" />
         <HistoryUser
-          Amount={this.state.data.converted_amount}
+          Currency={this.state.data.currency_symbol}
+          Amount={this.state.data.total_amount}
+          transaction_id={this.state.data.transaction_id}
+          date_of_transaction={this.state.data.date_of_transaction}
+          customer={this.state.data.customer}
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
-          Currency={this.state.data.currency_symbol}
+          services={this.state.data.services}
         />
         <ScrollView
           refreshControl={
