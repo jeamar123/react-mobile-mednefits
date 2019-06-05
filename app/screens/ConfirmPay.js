@@ -270,7 +270,7 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {(this.props.capCurrency == 'RM') ? this.state.amountTotal + '.00' : Number(this.state.amountTotal).toFixed(2)}
+                {this.state.currency ? this.state.currency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.amountTotal).toFixed(2).length === 2) ? Number(this.state.amountTotal).toFixed(2) + '.00' : Number(this.state.amountTotal).toFixed(2) : Number(this.state.amountTotal).toFixed(2)}
               </Text>
             </View>
           </View>
@@ -337,7 +337,11 @@ class ConfirmPay extends Component {
                 Payable by Cash
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency} {(this.props.capCurrency == 'RM') ? this.state.byCash + '.00' : Number(this.state.byCash).toFixed(2)}
+                {this.props.capCurrency} {
+                  (this.props.capCurrency == 'RM') ? (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' :
+                    (Number(this.state.byCash).toFixed(2).length === 2) ?
+                      Number(this.state.byCash).toFixed(2) + '.00' : Number(this.state.byCash).toFixed(2) :
+                    (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' : Number(this.state.byCash).toFixed(2)}
               </Text>
             </View>
           </View>
