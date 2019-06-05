@@ -161,8 +161,7 @@ export default class Navbar extends React.Component {
               style={{
                 color: '#000',
                 fontSize: RF(1.8),
-                fontFamily: Config.FONT_FAMILY_THIN,
-                fontWeight: 'bold',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
                 width: 50,
                 paddingStart: 2,
                 paddingEnd: 2
