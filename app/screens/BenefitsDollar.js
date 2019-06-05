@@ -35,7 +35,7 @@ class BenefitsDollar extends Component {
   }
 
   componentDidMount() {
-    // Core.GetClinicDetails(98, (err, result) => {
+    // Core.GetClinicDetails(99, (err, result) => {
     Core.GetClinicDetails(this.props.clinicid, (err, result) => {
       console.log(result)
       this.setState({
@@ -155,7 +155,7 @@ class BenefitsDollar extends Component {
               }}
             >
               <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
-                Total Bill Amount
+                Enter Bill Amount
               </Text>
             </View>
             <View
@@ -218,7 +218,7 @@ class BenefitsDollar extends Component {
               paddingTop: responsiveWidth(3),
               paddingBottom: responsiveWidth(3)
             }}>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 17 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
                 Balance: {'\n'}{this.state.Balance}
               </Text>
             </View>
@@ -230,8 +230,8 @@ class BenefitsDollar extends Component {
               paddingTop: responsiveWidth(3),
               paddingBottom: responsiveWidth(3)
             }}>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 17 }}>
-                Cap: {'\n'}{this.props.capCurrency} {this.props.capAmount}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
+                Cap: {'\n'}{(this.props.capAmount === 0) ? "" : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount}
               </Text>
             </View>
           </View>

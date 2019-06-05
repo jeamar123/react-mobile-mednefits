@@ -4,6 +4,7 @@ import { Left } from 'native-base';
 import RF from "react-native-responsive-fontsize";
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import * as Config from '../../config';
 
 export default EStyleSheet.create({
@@ -13,7 +14,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: height / 4.3,
+    height: responsiveHeight(23),
     width: width,
     alignItems: 'center',
   },
@@ -31,7 +32,7 @@ export default EStyleSheet.create({
   },
   gridBox: {
     // width: width / 3.23,
-    width: width / 4.23,
+    width: width / 4.13,
     height: height / 6,
     margin: 1,
     justifyContent: 'center',
@@ -55,7 +56,13 @@ export default EStyleSheet.create({
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: RF(1.8),
+    color: '#fff',
+  },
+  amount: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    textAlign: 'center',
+    fontSize: RF(1.8),
     color: '#fff',
   },
   DrawerContain: {

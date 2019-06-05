@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { GiftedForm } from 'react-native-gifted-form';
 import {
   StatusBar,
   View,
-  Image,
   ActivityIndicator,
   Easing,
   ScrollView,
@@ -11,19 +9,20 @@ import {
   TouchableOpacity
 }
   from 'react-native';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { Container, Text } from 'native-base';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import ZoomImage from 'react-native-zoom-image';
 import Icon from 'react-native-vector-icons/Feather';
 import Modal from 'react-native-modal';
-import { Buttons } from '../components/common';
+import RF from "react-native-responsive-fontsize";
 import { HistoryUser } from '../components/HistoryUser';
 import Texti from "../components/common/Texti"
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
+import * as Common from '../components/common';
 
 const options = {
   title: 'Upload Your Receipt',
@@ -235,646 +234,180 @@ class History extends Component {
       )
     } else {
       return (
-        <GiftedForm
-          style={{ backgroundColor: 'white' }}
-          formName="signupForm"
-          openModal={route => {
-            navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
-          }}
-        >
+        // <GiftedForm
+        //   style={{ backgroundColor: 'white' }}
+        //   formName="signupForm"
+        //   openModal={route => {
+        //     navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
+        //   }}
+        // >
+
+        //   <View
+        //     style={{
+        //       flex: 1,
+        //     }}>
+        //     <View
+        //       style={{
+        //         backgroundColor: '#efeff4'
+        //       }}>
+        //       <View
+        //         style={{
+        //           flexDirection: 'row',
+        //           alignContent: 'space-between',
+        //           marginVertical: 20,
+        //         }}
+        //       >
+        //         <Text
+        //           style={{
+        //             color: '#c4c4c4',
+        //             marginTop: '3%',
+        //             fontFamily: Config.FONT_FAMILY_ROMAN,
+        //             fontSize: 13,
+        //             marginLeft: '7%',
+        //           }}
+        //         >
+        //           Receipt
+        //         </Text>
+        //         <View style={{
+        //           padding: 5,
+        //           marginLeft: '3%',
+        //           width: '100%',
+        //           fontSize: 13
+        //         }}>
+        //           {this.renderReceiptUpload()}
+        //         </View>
+        //       </View>
+        //     </View>
+        //   </View>
+
+
+        // </GiftedForm>
+
+        <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <View
             style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              alignItems: 'center',
-              marginVertical: 13,
-              borderBottomWidth: 1,
-              borderColor: '#efeff1'
+              backgroundColor: '#efeff4',
+              width: '100%',
             }}
           >
-            <Image
-              style={{
-                width: 35,
-                height: 35,
-                marginTop: '3%',
-                marginLeft: '16.5%',
-              }}
-              source={{ uri: this.state.data.clinic_type_image }}
-            />
             <View
               style={{
-                padding: 5,
-                marginLeft: '13.5%',
-                width: '100%',
-                fontSize: 13
+                justifyContent: 'center',
+                alignItems: 'flex-start',
               }}>
-              <Text
+              <View
                 style={{
-                  fontSize: 13
-                }}>
-                {(this.state.data.clinic_type) ? this.state.data.clinic_type : "N/A"}
-              </Text>
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingTop: '1%',
+                  paddingBottom: '5%',
+                  marginLeft: '5%',
+                  marginRight: '5%'
+                }}
+              >
+                <View>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#b1b1b1', fontSize: RF(1.9), marginTop: '2%', paddingBottom: '1%' }}>
+                    Bill Details
+                  </Text>
+                </View>
+
+              </View>
             </View>
           </View>
           <View
             style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-              borderBottomWidth: 1,
-              borderColor: '#efeff1'
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Transaction #
-            </Text>
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}>
             <View
               style={{
-                padding: 5,
-                marginLeft: '13.5%',
-                width: '100%',
-                fontSize: 13
-              }}>
-              <Text
-                style={{
-                  fontSize: 13
-                }}>
-                {this.props.transaction_id}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Services/s
-            </Text>
-            <View
-              style={{
-                padding: 5,
-                marginLeft: '18%',
-                borderBottomWidth: 1,
-                borderColor: '#efeff1',
-                width: '100%',
-                fontSize: 13
-              }}>
-              <Text
-                style={{
-                  borderColor: '#efeff1',
-                  fontSize: 13
-                }}>
-                {this.state.data.services}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Date & Time
-            </Text>
-            <View
-              style={{
-                padding: 5,
-                marginLeft: '15.3%',
-                borderBottomWidth: 1,
-                borderColor: '#efeff1',
-                width: '100%',
-                fontSize: 13
-              }}>
-              <Text
-                style={{
-                  borderColor: '#efeff1',
-                  fontSize: 13
-                }}>
-                {this.state.data.date_of_transaction}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Member
-            </Text>
-            <View
-              style={{
-                padding: 5,
-                marginLeft: '21.4%',
-                borderBottomWidth: 1,
-                borderColor: '#efeff1',
-                width: '100%',
-                fontSize: 13
-              }}>
-              <Text
-                style={{
-                  borderColor: '#efeff1',
-                  fontSize: 13
-                }}>
-                {(this.state.data.customer) ? this.state.data.customer : "N/A"}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Payment Type
-            </Text>
-            <View
-              style={{
-                padding: 5,
-                marginLeft: '12.5%',
-                borderBottomWidth: 1,
-                borderColor: '#efeff1',
-                width: '100%',
-                fontSize: 13
-              }}>
-              <Text
-                style={{
-                  borderColor: '#efeff1',
-                  fontSize: 13
-                }}>
-                {(this.state.data.payment_type) ? this.state.data.payment_type : "N/A"}
-              </Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              borderBottomColor: '#efeff1',
-              borderBottomWidth: 0.8,
-            }}
-          />
-
-          {(this.state.data.cap_transaction == false) ?
-            this.state.data.cap_transaction : <View
-              style={{
-                flex: 1,
+                marginTop: responsiveHeight(1.5),
                 flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7%',
-                }}
-              >
-                Cap per visit
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
+                Bill Amount
               </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '13.9%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '100%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.cap_per_visit) ? this.state.data.cap_per_visit : "N/A"}
-                </Text>
-              </View>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.bill_amount) ? this.state.data.bill_amount : "0.00"}
+              </Text>
             </View>
-          }
 
-          {(this.state.data.cap_transaction == false) ?
-            this.state.data.cap_transaction : <View
+            <View
               style={{
-                flex: 1,
+                marginTop: responsiveHeight(1.5),
                 flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7%',
-                }}
-              >
-                Paid by Credits
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
+                Consultation Fee
               </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '10.8%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '56%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "N/A"}
-                </Text>
-              </View>
-
-              <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#0392cf',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                  height: '100%',
-                  marginLeft: '-20%'
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Credits
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.consultation_fee) ? this.state.data.consultation_fee : "0.00"}
               </Text>
-              </View>
             </View>
-          }
 
-          {(this.state.data.cap_transaction == false) ?
-            this.state.data.cap_transaction : <View
+            <View
               style={{
-                flex: 1,
+                marginTop: responsiveHeight(1.5),
+                marginBottom: responsiveHeight(1),
                 flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
               }}
             >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7%',
-                }}
-              >
-                Paid by Cash
-              </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '13.7%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '52%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_cash) ? this.state.data.paid_by_cash : "N/A"}
-                </Text>
-              </View>
-
-              <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#3F9D59',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                  height: '100%',
-                  marginLeft: -60
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Cash
-                </Text>
-              </View>
-            </View>
-          }
-
-          {(this.state.data.lite_plan == false) ?
-            this.state.data.lite_plan : <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
-              }}
-            >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7%',
-                }}
-              >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
                 Total Amount
               </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '14%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '100%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_amount) ? this.state.data.converted_amount : "0.00"}
-                </Text>
-              </View>
-            </View>
-          }
-
-          {(this.state.data.lite_plan == false) ?
-            this.state.data.lite_plan : <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
-              }}
-            >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7%',
-                  width: '20%'
-                }}
-              >
-                Medicine & Treatment
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.total_amount) ? this.state.data.total_amount : "0.00"}
               </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '9%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '100%',
-                  marginTop: '3%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_procedure_cost) ? this.state.data.converted_procedure_cost : "0.00"}
-                </Text>
-              </View>
-              {(this.state.data.service_credits == false) ? this.state.data.service_credits : <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#0392cf',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                  height: '65%',
-                  marginLeft: responsiveWidth(-11)
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Credits
-                    </Text>
-              </View>}
             </View>
-          }
 
-          {(this.state.data.lite_plan == false) ?
-            this.state.data.lite_plan : <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                marginVertical: 13,
-              }}
-            >
-              <Text
-                style={{
-                  color: '#c4c4c4',
-                  marginTop: '3%',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 13,
-                  marginLeft: '7.5%',
-                }}
-              >
-                Consultation
-              </Text>
-              <View
-                style={{
-                  padding: 5,
-                  marginLeft: '14%',
-                  borderBottomWidth: 1,
-                  borderColor: '#efeff1',
-                  width: '42%',
-                  fontSize: 13
-                }}>
-                <Text
-                  style={{
-                    borderColor: '#efeff1',
-                    fontSize: 13
-                  }}>
-                  {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.converted_consultation) ? this.state.data.converted_consultation : "0.00"}
-                </Text>
-              </View>
-              {(this.state.data.consultation_credits == false) ? this.state.data.consultation_credits : <View
-                style={{
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                  width: '20%',
-                  backgroundColor: '#0392cf',
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  borderColor: '#fff',
-                  height: '100%',
-                  marginLeft: responsiveWidth(-6.5)
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    textAlign: 'center',
-                    color: '#fff',
-                  }}
-                >
-                  Credits
-                </Text>
-              </View>}
+            <View>
+              <Common.Divider />
             </View>
-          }
-
-          {/* <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-            }}
-          >
-            <Text style={{ width: '38%' }} >
-              Receipt
-            </Text>
             <View
               style={{
-                height: 180,
-                width: '50%',
-                borderTopLeftRadius: 5,
-                borderTopRightRadius: 5,
-                borderBottomLeftRadius: 5,
-                borderBottomRightRadius: 5,
-                backgroundColor: '#fff',
-                justifyContent: 'center',
-                alignItems: 'center',
+                marginTop: responsiveHeight(1),
+                marginBottom: responsiveHeight(1),
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
               }}
             >
-              <Image
-                resizeMode="cover"
-                style={{ width: '80%', height: 180 }}
-                source={{
-                  uri: !this.state.imageSource.uri
-                    ? '../../assets/photo.png'
-                    : this.state.imageSource.uri,
-                }}
-              />
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
+                Paid by Credits
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "0.00"}
+              </Text>
             </View>
-          </View> */}
-
-          {/* <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignContent: 'space-between',
-              marginVertical: 13,
-              borderColor: '#efeff1'
-            }}
-          >
-            <Text
-              style={{
-                color: '#c4c4c4',
-                marginTop: '3%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 13,
-                marginLeft: '7%',
-              }}
-            >
-              Receipt
-            </Text>
+            <View>
+              <Common.Divider />
+            </View>
             <View
               style={{
-                padding: 5,
-                marginLeft: '13.5%',
-                width: '100%',
-                fontSize: 13
-              }}>
-              {this.renderReceiptUpload()}
+                marginTop: responsiveHeight(1),
+                marginBottom: responsiveHeight(2.5),
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
+                Paid by Cash
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_cash) ? this.state.data.paid_by_cash : "0.00"}
+              </Text>
             </View>
-          </View> */}
+          </View>
 
           <View
             style={{
@@ -901,7 +434,7 @@ class History extends Component {
                   }}
                 >
                   Receipt
-                </Text>
+                  </Text>
                 <View style={{
                   padding: 5,
                   marginLeft: '3%',
@@ -913,9 +446,7 @@ class History extends Component {
               </View>
             </View>
           </View>
-
-
-        </GiftedForm>
+        </View>
       )
     }
   }
@@ -936,6 +467,7 @@ class History extends Component {
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
           services={this.state.data.services}
+          cap_per_visit={this.state.data.cap_per_visit}
         />
         <ScrollView
           refreshControl={

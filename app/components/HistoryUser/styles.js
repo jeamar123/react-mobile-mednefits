@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { Left } from 'native-base';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 import * as Config from '../../config';
@@ -10,7 +10,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#0392cf',
-    height: height / 2.7,
+    height: responsiveHeight(37),
     width: width,
   },
   contentHeader: {

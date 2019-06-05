@@ -5,7 +5,8 @@ import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modal';
 import ResponsiveImage from 'react-native-responsive-image';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
-import { ButtonsConfirm, Spinner, Popup } from '../components/common';
+import RF from "react-native-responsive-fontsize";
+import { Spinner, Popup } from '../components/common';
 import Texti from "../components/common/Texti";
 import Navbar from '../components/common/NavbarGrey';
 import * as Config from '../config';
@@ -53,10 +54,6 @@ class ConfirmPay extends Component {
       });
     });
 
-    // Core.GetBalance((err, result)=>{
-    //   this.setState({currency: result.data.currency_symbol})
-    // })
-
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
         this.setState({
@@ -96,11 +93,9 @@ class ConfirmPay extends Component {
         Actions.Summary({ result: result, clinic_image: this.state.clinic_image });
         this.setState({ isLoading: false });
       } else if (!result.status) {
-        // Core.getNotify('', result.message);
         this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false })
       } else {
         this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true, isLoading: false })
-        // Core.getNotify('', 'Failed to send payment, please try again');
       }
     });
   }
@@ -180,15 +175,6 @@ class ConfirmPay extends Component {
                     height: responsiveHeight(8)
                   }}
                   >
-                    {/* <Image
-                      source={{ uri: this.state.clinic_image }}
-                      style={{
-                        height: 65,
-                        width: 65,
-                        resizeMode: 'center',
-                        
-                      }}
-                    /> */}
                     <ResponsiveImage
                       source={{ uri: this.state.clinic_image }}
                       style={{ resizeMode: 'center', marginRight: responsiveWidth(4) }}
@@ -224,30 +210,25 @@ class ConfirmPay extends Component {
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
-                Total Bill Amount
+                Bill Amount
               </Text>
             </View>
+
             <View
               style={{
-                flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginLeft: responsiveWidth(5),
-                marginRight: responsiveWidth(5),
-                marginTop: responsiveHeight(1)
+                marginTop: responsiveHeight(2),
+                marginBottom: responsiveHeight(1),
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
-              <Text style={{
-                paddingBottom: '7%',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 24,
-                color: '#9f9f9f',
-                alignItems: 'center',
-              }}>
+              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
                 {this.state.currency ? this.state.currency : ' '}
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 48, color: '#2C3E50', fontWeight: 'bold' }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
                 {this.props.amount}
               </Text>
             </View>
@@ -273,7 +254,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {(this.props.consultation_status == false) ? this.props.consultation_fees : 0}
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {(this.props.consultation_status == false) ? this.props.consultation_fees : '0.00'}
               </Text>
             </View>
             <View
@@ -290,7 +271,7 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {this.state.amountTotal}
+                {this.state.currency ? this.state.currency : ' '} {(this.state.amountTotal == undefined) ? this.state.amountTotal : '0.00'}
               </Text>
             </View>
           </View>
@@ -311,8 +292,8 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Cap
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 18 }}>
-                {this.state.currency ? this.state.currency : ' '} {this.state.amountCap}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
+                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount}
               </Text>
 
             </View>
@@ -333,9 +314,9 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Credits
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 18 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
                 {this.state.currency ? this.state.currency : ' '} {
-                  (this.props.amount > this.state.amountCap) ? this.state.amountCap : this.props.amount
+                  (this.props.amount > this.state.amountCap) ? (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount : (this.props.capCurrency == 'RM') ? this.props.amount + '.00' : this.props.amount
                 }
               </Text>
             </View>
@@ -356,8 +337,8 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Cash
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 18 }}>
-                {this.props.capCurrency} {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+                {this.props.capCurrency} {this.state.inputAmount < this.state.amountCap ? 0 : (this.state.byCash == undefined) ? (this.props.capCurrency == 'RM') ? this.state.byCash + '.00' : this.state.byCash : '0.00'}
               </Text>
             </View>
           </View>

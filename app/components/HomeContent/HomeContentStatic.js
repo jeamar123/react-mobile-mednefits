@@ -288,7 +288,7 @@ class HomeContent extends Component {
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
                     <Text style={styles.title}>Wallet</Text>
-                    <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                    <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
                   </View>
                 </View>
               </View>

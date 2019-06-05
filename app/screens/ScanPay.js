@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StatusBar, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import ResponsiveImage from 'react-native-responsive-image';
 import Navbar from '../components/common/NavbarGrey';
 import * as Commmon from '../components/common';
 import * as Core from '../core';
@@ -61,7 +63,7 @@ class ScanPay extends Component {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" title="Scan & Pay" />
+        <Navbar leftNav="back" title="Payment Type" />
         <Content padder>
           <TouchableOpacity onPress={() => Actions.ConfirmPay({
             services: this.props.services,
@@ -78,16 +80,19 @@ class ScanPay extends Component {
               <CardItem>
                 <Body
                   style={{
-                    height: 290,
+                    height: responsiveHeight(38),
                     width: '95%',
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
                 >
-                  <Image style={{ width: 50, height: 50 }} source={require('../../assets/apps/byCredit.png')} />
+                  <ResponsiveImage
+                    source={require('../../assets/apps/byCredit.png')}
+                    initWidth="55" initHeight="55"
+                  />
                   <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
-                    Pay by Mednefits Credits
+                    Mednefits Credits
                   </Text>
                 </Body>
               </CardItem>
@@ -98,16 +103,19 @@ class ScanPay extends Component {
               <CardItem>
                 <Body
                   style={{
-                    height: 290,
+                    height: responsiveHeight(38),
                     width: '95%',
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
                 >
-                  <Image style={{ width: 50, height: 50 }} source={require('../../assets/apps/byCash.png')} />
+                  <ResponsiveImage
+                    source={require('../../assets/apps/byCash.png')}
+                    initWidth="55" initHeight="55"
+                  />
                   <Text style={{ marginTop: 20, fontFamily: 'helvetica' }}>
-                    Pay by Cash
+                    Cash/Nets/Credit Card
                   </Text>
                 </Body>
               </CardItem>
