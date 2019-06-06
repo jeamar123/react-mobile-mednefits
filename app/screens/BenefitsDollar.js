@@ -26,7 +26,6 @@ class BenefitsDollar extends Component {
       title: null,
       message: null
     };
-
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
@@ -34,15 +33,17 @@ class BenefitsDollar extends Component {
     this.setState({ failed: false })
   }
 
-  componentDidMount() {
-    // Core.GetClinicDetails(99, (err, result) => {
-    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      console.log(result)
-      this.setState({
-        clinic_name: result.data.name,
-        clinic_image: result.data.image_url,
-        currency: result.data.currency_symbol,
-        Balance: result.data.current_balance,
+  async componentDidMount() {
+    await this.getUserBalance();
+  }
+
+  async getUserBalance() {
+    await Core.GetBalance(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
       });
     });
   }
@@ -106,7 +107,7 @@ class BenefitsDollar extends Component {
                 height: responsiveHeight(11)
               }}
             >
-              {!this.state.clinic_name ? (
+              {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
                   <View style={{
@@ -119,7 +120,7 @@ class BenefitsDollar extends Component {
                   }}
                   >
                     <Image
-                      source={{ uri: this.state.clinic_image }}
+                      source={{ uri: this.props.clinic_image }}
                       style={{
                         height: 65,
                         resizeMode: 'center',
@@ -137,7 +138,7 @@ class BenefitsDollar extends Component {
                       }}
                       numberOfLines={2}
                     >
-                      {this.state.clinic_name}
+                      {this.props.clinic_name}
                     </Text>
                   </View>
                 )}
@@ -183,7 +184,7 @@ class BenefitsDollar extends Component {
                 color: '#9f9f9f',
                 alignItems: 'center',
               }}>
-                {this.state.currency ? this.state.currency : ' '}
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <InputPay
                 keyboardType="numeric"
@@ -219,7 +220,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.state.Balance}
+                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.Balance) * 3).toFixed(2) : this.state.Balance}
               </Text>
             </View>
 
@@ -246,7 +247,9 @@ class BenefitsDollar extends Component {
             check_Id: this.props.check_Id,
             consultation_fee_symbol: this.props.consultation_fee_symbol,
             consultation_status: this.props.consultation_status,
-            consultation_fees: this.props.consultation_fees
+            consultation_fees: this.props.consultation_fees,
+            clinic_image: this.props.clinic_image,
+            clinic_name: this.props.clinic_name,
           })}>
             Next
           </ButtonPay>

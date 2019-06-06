@@ -42,17 +42,19 @@ class ConfirmPay extends Component {
     this.setState({ showPopUp: false })
   }
 
-  componentDidMount() {
-    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      console.warn(result)
-      this.setState({
-        clinic_name: result.data.name,
-        clinic_image: result.data.image_url,
-        currency: result.data.currency_symbol,
-        Balance: result.data.current_balance,
-        placeholder: result.data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
+  async getUserBalance() {
+    await Core.GetBalance(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
       });
     });
+  }
+
+  componentDidMount() {
+    this.getUserBalance();
 
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
@@ -89,7 +91,7 @@ class ConfirmPay extends Component {
       console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Summary({ result: result, clinic_image: this.state.clinic_image });
+        Actions.Summary({ result: result, clinic_image: this.props.clinic_image });
         this.setState({ isLoading: false });
       } else if (!result.status) {
         this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false })
@@ -162,7 +164,7 @@ class ConfirmPay extends Component {
                 height: responsiveHeight(11)
               }}
             >
-              {!this.state.clinic_name ? (
+              {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
                   <View style={{
@@ -175,7 +177,7 @@ class ConfirmPay extends Component {
                   }}
                   >
                     <ResponsiveImage
-                      source={{ uri: this.state.clinic_image }}
+                      source={{ uri: this.props.clinic_image }}
                       style={{ resizeMode: 'center', marginRight: responsiveWidth(4) }}
                       initWidth="70" initHeight="70"
                     />
@@ -190,7 +192,7 @@ class ConfirmPay extends Component {
                       }}
                       numberOfLines={2}
                     >
-                      {this.state.clinic_name}
+                      {this.props.clinic_name}
                     </Text>
                   </View>
                 )}
@@ -225,7 +227,7 @@ class ConfirmPay extends Component {
               }}
             >
               <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '}
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
                 {this.props.amount}
@@ -270,7 +272,7 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.amountTotal).toFixed(2).length === 2) ? Number(this.state.amountTotal).toFixed(2) + '.00' : Number(this.state.amountTotal).toFixed(2) : Number(this.state.amountTotal).toFixed(2)}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.amountTotal).toFixed(2).length === 2) ? Number(this.state.amountTotal).toFixed(2) + '.00' : Number(this.state.amountTotal).toFixed(2) : Number(this.state.amountTotal).toFixed(2)}
               </Text>
             </View>
           </View>
@@ -314,7 +316,7 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.state.currency ? this.state.currency : ' '} {
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {
                   (this.props.amount > this.state.amountCap) ? (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount : this.props.amount
                 }
               </Text>
