@@ -386,7 +386,6 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            marginTop: '5%'
           }}
         >
           <Text
@@ -442,7 +441,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: responsiveWidth(2.5),
-            marginTop: responsiveHeight(5.3)
+            marginTop: responsiveHeight(0.5)
           }}
         >
           <TouchableOpacity onPress={() => Actions.Home({ type: 'reset' })}>
@@ -771,7 +770,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: '5%',
-            marginTop: responsiveHeight(5.3)
+            marginTop: responsiveHeight(1)
           }}
         >
           <TouchableOpacity

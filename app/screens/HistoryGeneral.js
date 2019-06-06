@@ -286,7 +286,7 @@ class History extends Component {
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <View
             style={{
-              backgroundColor: '#efeff4',
+              backgroundColor: '#f8f8fa',
               width: '100%',
             }}
           >
@@ -307,7 +307,7 @@ class History extends Component {
                 }}
               >
                 <View>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#b1b1b1', fontSize: RF(1.9), marginTop: '2%', paddingBottom: '1%' }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 16, marginTop: responsiveHeight(-1) }}>
                     Bill Details
                   </Text>
                 </View>
@@ -315,17 +315,15 @@ class History extends Component {
               </View>
             </View>
           </View>
-          <View
-            style={{
-              marginLeft: '5%',
-              marginRight: '5%'
-            }}>
+          <View>
             <View
               style={{
                 marginTop: responsiveHeight(1.5),
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -342,6 +340,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -359,6 +359,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -379,6 +381,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -398,6 +402,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>

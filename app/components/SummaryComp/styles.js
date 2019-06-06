@@ -32,11 +32,10 @@ export default EStyleSheet.create({
     fontWeight: '600',
   },
   detailUp: {
-    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     fontSize: 20,
     lineHeight: 20,
     color: '#2c3e50',
-    fontWeight: '600',
     marginRight: '2%',
   },
   detail2: {
@@ -47,11 +46,10 @@ export default EStyleSheet.create({
     fontWeight: '600',
   },
   detailUp2: {
-    fontFamily: Config.FONT_FAMILY_BOLD,
+    fontFamily: Config.FONT_FAMILY_ROMAN,
     fontSize: 20,
     lineHeight: 20,
     color: '#fff',
-    fontWeight: '600',
     marginRight: '2%',
   },
 

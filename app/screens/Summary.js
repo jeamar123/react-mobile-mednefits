@@ -37,8 +37,8 @@ class Summary extends Component {
               style={{
                 backgroundColor: '#fff',
                 width: '90%',
-                marginTop: responsiveHeight(5),
-                height: responsiveHeight(34),
+                marginTop: responsiveHeight(3),
+                height: responsiveHeight(32),
                 borderRadius: 5
               }}
             >
@@ -93,7 +93,7 @@ class Summary extends Component {
                     backgroundColor: '#f3f3f7',
                     width: '90%',
                     marginTop: responsiveHeight(1),
-                    height: '32%'
+                    height: responsiveHeight(9)
                   }}
                 >
                   <View
@@ -163,17 +163,15 @@ class Summary extends Component {
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  marginLeft: '5%',
-                  marginRight: '5%'
-                }}>
+              <View>
                 <View
                   style={{
                     marginTop: responsiveHeight(1.5),
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -190,6 +188,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -206,6 +206,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -226,6 +228,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -245,6 +249,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -268,7 +274,7 @@ class Summary extends Component {
                 style={{
                   backgroundColor: '#fff',
                   width: '90%',
-                  marginTop: responsiveHeight(5),
+                  marginTop: responsiveHeight(3),
                   height: responsiveHeight(46),
                   borderRadius: 5
                 }}
@@ -324,7 +330,7 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: '22%'
+                      height: responsiveHeight(9)
                     }}
                   >
                     <View
@@ -364,7 +370,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: '26%'
+                      height: responsiveHeight(11.5)
                     }}
                   >
                     <View
@@ -433,17 +439,15 @@ class Summary extends Component {
                     </View>
                   </View>
                 </View>
-                <View
-                  style={{
-                    marginLeft: '5%',
-                    marginRight: '5%'
-                  }}>
+                <View>
                   <View
                     style={{
                       marginTop: responsiveHeight(2),
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -460,6 +464,8 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -476,6 +482,8 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -496,6 +504,8 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -515,6 +525,8 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
