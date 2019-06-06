@@ -74,6 +74,9 @@ class Barcode extends Component {
             capAmount: result.data.cap_per_visit_amount,
             clinic_image: result.data.image_url,
             clinic_name: result.data.name,
+            consultation_fee_symbol: result.data.consultation_fee_symbol,
+            consultation_status: result.data.consultation_status,
+            consultation_fees: result.data.consultation_fees
           })
           this.setState({
             isLoading: false,

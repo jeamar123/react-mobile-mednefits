@@ -12,6 +12,8 @@ import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import ResponsiveImage from 'react-native-responsive-image';
 import * as Core from '../../core';
 import * as Config from '../../config';
 
@@ -436,13 +438,14 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
-            height: 50,
+            width: responsiveWidth(20),
             justifyContent: 'center',
             alignItems: 'flex-end',
+            paddingRight: responsiveWidth(2.5),
+            marginTop: responsiveHeight(5.3)
           }}
         >
-          <TouchableOpacity onPress={() => Actions.Home()}>
+          <TouchableOpacity onPress={() => Actions.Home({ type: 'reset' })}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
@@ -764,10 +767,11 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
-            height: 50,
+            width: responsiveWidth(12),
             justifyContent: 'center',
             alignItems: 'flex-end',
+            paddingRight: '5%',
+            marginTop: responsiveHeight(5.3)
           }}
         >
           <TouchableOpacity
@@ -775,14 +779,23 @@ export default class Navbar extends React.Component {
             onPress={() => Actions.Home({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
               checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
               capCurrency: this.props.capCurrency,
-              capAmount: this.props.capAmount
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
+              consultation_fee_symbol: this.props.consultation_fee_symbol,
+              consultation_status: this.props.consultation_status,
+              consultation_fees: this.props.consultation_fees
             })}
           >
-            <Image
-              source={require('../../../assets/apps/cancel.png')}
-              style={{ height: 85, resizeMode: 'center', width: 55 }}
+            <ResponsiveImage
+              source={require('../../../assets/apps/downclose.png')}
+              style={{ resizeMode: 'contain', }}
+              initWidth="24" initHeight="12"
             />
           </TouchableOpacity>
         </View>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Container, Content, Text } from 'native-base';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
 import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
@@ -80,13 +81,17 @@ class SelectService extends Component {
     if (this.state.services == "") {
       Commmon.getAlert("Mednefits", "Please at least choose one service to proceed")
     } else {
-      // Actions.PayScan({
       Actions.BenefitsDollar({
         services: this.state.services,
         clinicid: this.props.clinicid,
         capCurrency: this.props.capCurrency,
         capAmount: this.props.capAmount,
-        check_Id: this.props.check_Id
+        check_Id: this.props.check_Id,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
       })
     }
   }

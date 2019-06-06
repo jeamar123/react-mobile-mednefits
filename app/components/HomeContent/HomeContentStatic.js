@@ -141,27 +141,66 @@ class HomeContent extends Component {
             }}
           /> */}
           <View style={styles.contain}>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.Barcode()
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                    <Image
-                      style={{ marginBottom: 15, width: 30, height: 30 }}
-                      source={require('../../../assets/apps/Scan&Pay.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>Register {this.props.clinic_id} </Text>
-                    {/* <Text style={styles.title}>Scan & Pay</Text>
+            {(this.props.check_Id) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.cancelVisit({
+                    services: this.props.Services,
+                    clinicid: this.props.clinic_Id,
+                    member: this.props.member,
+                    nric: this.props.nric,
+                    checkId: this.props.check_Id,
+                    checkTime: this.props.checkTime,
+                    capCurrency: this.props.capCurrency,
+                    capAmount: this.props.capAmount,
+                    clinic_image: this.props.clinic_image,
+                    clinic_name: this.props.clinic_name,
+                    consultation_fee_symbol: this.props.consultation_fee_symbol,
+                    consultation_status: this.props.consultation_status,
+                    consultation_fees: this.props.consultation_fees
+                  })
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <Image
+                        style={{ marginBottom: 15, width: 30, height: 30 }}
+                        source={require('../../../assets/apps/Scan&Pay.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                      <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                      {/* <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text> */}
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                  onPress={() =>
+                    Actions.Barcode()
+                  }
+                >
+                  <View style={styles.gridBox}>
+                    <View style={{ flex: 1 }}>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                        <Image
+                          style={{ marginBottom: 15, width: 30, height: 30 }}
+                          source={require('../../../assets/apps/Scan&Pay.png')}
+                        />
+                      </View>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                        <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                        {/* <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text> */}
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+
             <TouchableOpacity
               onPress={() =>
                 Actions.SelectService({
@@ -169,7 +208,11 @@ class HomeContent extends Component {
                   clinicid: this.props.clinic_Id,
                   capCurrency: this.props.capCurrency,
                   capAmount: this.props.capAmount,
-                  check_Id: this.props.check_Id
+                  consultation_fee_symbol: this.props.consultation_fee_symbol,
+                  consultation_status: this.props.consultation_status,
+                  consultation_fees: this.props.consultation_fees,
+                  clinic_image: this.props.clinic_image,
+                  clinic_name: this.props.clinic_name,
                 })
               }
             >

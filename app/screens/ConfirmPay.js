@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, Dimensions } from 'react-native';
+import { StatusBar, Image, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { ButtonsConfirm, Spinner, Popup } from '../components/common';
+import Modal from 'react-native-modal';
+import ResponsiveImage from 'react-native-responsive-image';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
+import { Spinner, Popup } from '../components/common';
+import Texti from "../components/common/Texti";
 import Navbar from '../components/common/NavbarGrey';
 import * as Config from '../config';
+import * as Common from '../components/common';
 import * as Core from '../core';
 
 class ConfirmPay extends Component {
@@ -14,8 +20,7 @@ class ConfirmPay extends Component {
     this.state = {
       clinic_name: false,
       clinic_image: false,
-      amount: '',
-      credits: '',
+      amount: 0,
       currency: false,
       isLoading: false,
       Balance: '0',
@@ -23,33 +28,33 @@ class ConfirmPay extends Component {
       failed: false,
       title: null,
       message: null,
+      showPopUp: false,
       inputAmount: this.props.amount,
       amountCap: this.props.capAmount,
-      byCash: ''
+      feeConsultation: this.props.consultation_fees,
+      byCash: '',
+      amountTotal: ''
     };
-
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
   isVisibleUpdate() {
-    this.setState({ failed: false })
+    this.setState({ showPopUp: false })
+  }
+
+  async getUserBalance() {
+    await Core.GetBalance(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
+      });
+    });
   }
 
   componentDidMount() {
-    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      console.log(result)
-      this.setState({
-        clinic_name: result.data.name,
-        clinic_image: result.data.image_url,
-        currency: result.data.currency_symbol,
-        Balance: result.data.current_balance,
-        placeholder: result.data.currency_symbol == 'RM' ? 'Please input amount Malaysian Ringgit' : 'Please input amount in Singaporean Dollar'
-      });
-    });
-
-    // Core.GetBalance((err, result)=>{
-    //   this.setState({currency: result.data.currency_symbol})
-    // })
+    this.getUserBalance();
 
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
@@ -59,163 +64,317 @@ class ConfirmPay extends Component {
       })
     );
 
-    const amount = this.state.inputAmount;
+    const amounts = this.state.inputAmount;
     const cap = this.state.amountCap;
-    this.setState({ byCash: amount - cap });
+    const consultationAmount = this.state.feeConsultation;
+
+    if (this.props.consultation_status == false) {
+      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount), byCash: (Number(amounts) + Number(consultationAmount)) - cap });
+    } else {
+      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount), byCash: (Number(amounts) + Number(consultationAmount)) - cap });
+    }
   }
+
 
   SendPayment() {
     this.setState({ isLoading: true });
 
-    parameterData = {
-      amount: this.props.amount,
+    params = {
+      input_amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
-      check_Id: this.props.check_Id
+      check_in_id: this.props.check_Id
     };
 
-    Core.CreatePayment(parameterData, (err, result) => {
+
+    Core.CreatePayment(params, (err, result) => {
+      console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Summary({ result: result, type: 'reset' });
+        Actions.Summary({ result: result, clinic_image: this.props.clinic_image });
         this.setState({ isLoading: false });
       } else if (!result.status) {
-        // Core.getNotify('', result.message);
         this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false })
       } else {
         this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true, isLoading: false })
-        // Core.getNotify('', 'Failed to send payment, please try again');
       }
     });
+  }
+
+  statusModal = () => {
+    console.warn('modal hide completely')
+    if (this.state.failed) {
+      this.setState({ showPopUp: true });
+    } else {
+      this.setState({ showPopUp: false });
+    }
+  }
+
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+          >Just a sec...</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
+  renderPopUp() {
+    return (
+      <Popup
+        kind="insufficientCredit"
+        isVisible={this.state.showPopUp}
+        closeSection={true}
+        closeSectionUpdate={this.isVisibleUpdate}
+        title={this.state.title}
+        message={this.state.message}
+      />
+    )
   }
 
   render() {
     console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
-        <Core.Loader isVisible={this.state.isLoading} />
-        <Popup
-          kind="insufficientCredit"
-          isVisible={this.state.failed}
-          closeSection={true}
-          closeSectionUpdate={this.isVisibleUpdate}
-          title={this.state.title}
-          message={this.state.message}
-        />
+        {this.customLoader()}
+        {this.renderPopUp()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Summary" />
+        <Navbar leftNav="back" title="Summary" />
         <Content padder>
-
-          <View style={{ backgroundColor: '#fff' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
-                justifyContent: 'center',
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: '2%',
-                marginBottom: '2%'
+                marginTop: '4%',
+                height: responsiveHeight(11)
               }}
             >
-              {!this.state.clinic_image ? (
-                <Image
-                  source={require('../../assets/apps/mednefits.png')}
-                  style={{ height: 55, resizeMode: 'center', width: 155 }}
-                />
-              ) : (
-                  <Image
-                    source={{ uri: this.state.clinic_image }}
-                    style={{ height: 55, resizeMode: 'center', width: 155 }}
-                  />
-                )}
-              {!this.state.clinic_name ? (
+              {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, marginTop: '3%' }}>
-                    {this.state.clinic_name}
-                  </Text>
-                )}
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    marginLeft: responsiveWidth(5),
+                    height: responsiveHeight(8)
+                  }}
+                  >
+                    <ResponsiveImage
+                      source={{ uri: this.props.clinic_image }}
+                      style={{ resizeMode: 'center', marginRight: responsiveWidth(4) }}
+                      initWidth="70" initHeight="70"
+                    />
 
+                    <Text
+                      style={{
+                        // marginLeft: '-5%',
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
+                        color: '#666666',
+                        fontSize: 18,
+                        width: '100%'
+                      }}
+                      numberOfLines={2}
+                    >
+                      {this.props.clinic_name}
+                    </Text>
+                  </View>
+                )}
             </View>
           </View>
-          <View style={{ backgroundColor: '#fff' }}>
+
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
-                flex: 1,
-                height: 100,
-                justifyContent: 'center',
+                flexDirection: 'row',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
+                marginTop: '5%',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <Text style={{ marginTop: '2%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 18, color: '#2C3E50' }}>
-                  {this.state.currency ? this.state.currency : ' '} {' '}
-                </Text>
-                <Text style={{ marginTop: '1%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 44, color: '#2C3E50' }}>
-                  {this.props.amount}
-                </Text>
-              </View>
-
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+                Bill Amount
+              </Text>
             </View>
 
             <View
               style={{
                 flexDirection: 'row',
-                alignItems: 'center',
                 justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: responsiveHeight(2),
+                marginBottom: responsiveHeight(1),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
             >
-              <View style={{
-                paddingTop: 10,
-                paddingBottom: 10,
-                paddingRight: 10,
-                paddingLeft: 10,
-                borderRadius: 3,
-                borderWidth: 2,
-                borderColor: "#bdbdbd",
-                alignItems: 'flex-start',
-                width: '48%'
-              }}>
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                  By Credits:
-                </Text>
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                  {this.state.currency ? this.state.currency : ' '} {this.state.inputAmount}
-                </Text>
-              </View>
-              <View style={{
-                paddingTop: 10,
-                paddingBottom: 10,
-                paddingRight: 10,
-                paddingLeft: 10,
-                borderRadius: 3,
-                borderWidth: 2,
-                borderColor: "#bdbdbd",
-                alignItems: 'flex-start',
-                width: '48%'
-              }}>
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
-                  By Cash:
-                </Text>
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontWeight: 'bold' }}>
-                  {this.props.capCurrency} {this.state.inputAmount < this.state.amountCap ? 0 : this.state.byCash}
-                </Text>
-              </View>
+              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
+                {Number(this.props.amount).toFixed(2)}
+              </Text>
             </View>
+            <View
+              style={{
+                marginLeft: '5%',
+                marginRight: '5%',
+              }}>
+              <Common.Divider />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: responsiveHeight(2),
+                marginBottom: responsiveHeight(1),
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+                Consultation Fee
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {Number(this.props.consultation_fees).toFixed(2)}
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '7%',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+                Total Amount
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.amountTotal).toFixed(2).length === 2) ? Number(this.state.amountTotal).toFixed(2) + '.00' : Number(this.state.amountTotal).toFixed(2) : Number(this.state.amountTotal).toFixed(2)}
+              </Text>
+            </View>
+          </View>
 
-            <View style={{ flex: 1, marginBottom: '18%', marginTop: '8%' }}>
-              <ButtonsConfirm
-                onPress={() => this.SendPayment()}
-                isLoading={this.state.isLoading}
-              >
-                Pay {this.state.currency ? this.state.currency : ' '} {this.props.amount}
-              </ButtonsConfirm>
+          <View style={{ backgroundColor: '#dde0e4', marginTop: responsiveHeight(3) }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: responsiveHeight(1),
+                paddingBottom: responsiveHeight(1),
+                marginBottom: '5%',
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
+                Cap
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
+                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2)}
+              </Text>
+
             </View>
+          </View>
+
+          <View style={{ backgroundColor: '#fff', marginTop: responsiveHeight(3) }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: responsiveHeight(3),
+                paddingBottom: responsiveHeight(1),
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
+                Payable by Credits
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {
+                  (this.props.amount > this.state.amountCap) ? Number(this.props.capAmount).toFixed(2) : Number(this.props.amount).toFixed(2)
+                }
+              </Text>
+            </View>
+            <View>
+              <Common.Divider />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingTop: responsiveHeight(1),
+                paddingBottom: responsiveHeight(3),
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
+                Payable by Cash
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+                {this.props.capCurrency} {
+                  (this.props.capCurrency == 'RM') ? (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' :
+                    (Number(this.state.byCash).toFixed(2).length === 2) ?
+                      Number(this.state.byCash).toFixed(2) + '.00' : Number(this.state.byCash).toFixed(2) :
+                    (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' : Number(this.state.byCash).toFixed(2)}
+              </Text>
+            </View>
+          </View>
+
+
+          <View style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            marginTop: responsiveHeight(6)
+          }}>
+            <TouchableOpacity
+              onPress={() => this.SendPayment()}
+              isLoading={this.state.isLoading}
+              style={{
+                backgroundColor: "#3f9d59",
+                width: "100%",
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: '3%'
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#ffffff"}
+                style={{
+                  padding: 10,
+                  fontWeight: 'bold'
+                }}>
+                PAY NOW
+            </Common.Texti>
+            </TouchableOpacity>
           </View>
 
         </Content>

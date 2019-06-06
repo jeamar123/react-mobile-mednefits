@@ -43,7 +43,7 @@ class ScanPay extends Component {
     Core.PayDirect(params, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Home({ result: result });
+        Actions.Home({ result: result, type: 'reset' });
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {
@@ -61,7 +61,7 @@ class ScanPay extends Component {
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" title="Scan & Pay" />
+        <Navbar leftNav="back" title="Payment Type" />
         <Content padder>
           <TouchableOpacity onPress={() => Actions.ConfirmPay({
             services: this.props.services,
@@ -69,7 +69,12 @@ class ScanPay extends Component {
             amount: this.props.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
-            check_Id: this.props.check_Id
+            check_Id: this.props.check_Id,
+            consultation_fee_symbol: this.props.consultation_fee_symbol,
+            consultation_status: this.props.consultation_status,
+            consultation_fees: this.props.consultation_fees,
+            clinic_image: this.props.clinic_image,
+            clinic_name: this.props.clinic_name,
           })}>
             <Card>
               <CardItem>

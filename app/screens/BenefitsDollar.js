@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { responsiveWidth } from 'react-native-responsive-dimensions';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/NavbarGrey';
@@ -26,7 +26,6 @@ class BenefitsDollar extends Component {
       title: null,
       message: null
     };
-
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
 
@@ -34,29 +33,19 @@ class BenefitsDollar extends Component {
     this.setState({ failed: false })
   }
 
-  componentDidMount() {
-    // Core.GetClinicDetails(98, (err, result) => {
-    Core.GetClinicDetails(this.props.clinicid, (err, result) => {
-      console.log(result)
-      this.setState({
-        clinic_name: result.data.name,
-        clinic_image: result.data.image_url,
-        currency: result.data.currency_symbol,
-        Balance: result.data.current_balance,
+  async componentDidMount() {
+    await this.getUserBalance();
+  }
+
+  async getUserBalance() {
+    await Core.GetBalance(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
       });
     });
-
-    // Core.GetBalance((err, result)=>{
-    //   this.setState({currency: result.data.currency_symbol})
-    // })
-
-    // this.props.services.map(value =>
-    //   Core.GetProcedureDetails(value, (err, result) => {
-    //     this.setState({
-    //       amount: Number(result.data.price) + Number(this.state.amount),
-    //     });
-    //   })
-    // );
   }
 
   SendPayment() {
@@ -102,20 +91,23 @@ class BenefitsDollar extends Component {
           message={this.state.message}
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="cancel" title="Payment Amount" />
+        <Navbar
+          leftNav="cancel"
+          title="Payment Amount"
+        />
         <Content padder>
 
-          <View style={{ backgroundColor: '#f8f8fa', flex: 1 }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
-                flexDirection: 'row',
                 justifyContent: 'flex-start',
+                flexDirection: 'row',
                 alignItems: 'center',
-                marginTop: '2%',
-                marginBottom: '10%'
+                marginTop: '4%',
+                height: responsiveHeight(11)
               }}
             >
-              {!this.state.clinic_name ? (
+              {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
                   <View style={{
@@ -123,35 +115,37 @@ class BenefitsDollar extends Component {
                     flexDirection: 'row',
                     justifyContent: 'flex-start',
                     alignItems: 'center',
-                    marginLeft: '-8%',
-                    height: 60
+                    marginLeft: responsiveWidth(5),
+                    height: responsiveHeight(8)
                   }}
                   >
                     <Image
-                      source={{ uri: this.state.clinic_image }}
-                      style={{ height: 55, resizeMode: 'center', width: 155 }}
+                      source={{ uri: this.props.clinic_image }}
+                      style={{
+                        height: 65,
+                        resizeMode: 'center',
+                        width: 65,
+                        marginRight: responsiveWidth(4)
+                      }}
                     />
                     <Text
                       style={{
                         // marginLeft: '-5%',
                         fontFamily: Config.FONT_FAMILY_ROMAN,
-                        color: '#9e9e9e',
+                        color: '#666666',
                         fontSize: 18,
-                        width: '50%',
-                        alignItems: 'center',
-                        justifyContent: 'center'
+                        width: '100%'
                       }}
                       numberOfLines={2}
                     >
-                      {this.state.clinic_name}
+                      {this.props.clinic_name}
                     </Text>
                   </View>
                 )}
-
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#fff' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -161,8 +155,8 @@ class BenefitsDollar extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
-                Total Bill Amount
+              <Text style={{ marginTop: 20, fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+                Enter Bill Amount
               </Text>
             </View>
             <View
@@ -175,19 +169,23 @@ class BenefitsDollar extends Component {
 
             <View
               style={{
-                marginLeft: responsiveWidth(4),
                 flex: 1,
                 flexDirection: 'row',
-                justifyContent: 'flex-start',
+                justifyContent: 'space-between',
                 alignItems: 'center',
-                marginLeft: '5%',
+                marginLeft: responsiveWidth(5),
+                marginRight: responsiveWidth(5)
               }}
             >
-              <View style={{}}>
-                <Text style={{ paddingBottom: '7%', fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: 20, color: '#9f9f9f', justifyContent: 'center', alignItems: 'center' }}>
-                  {this.state.currency ? this.state.currency : ' '}
-                </Text>
-              </View>
+              <Text style={{
+                paddingBottom: '7%',
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                fontSize: 24,
+                color: '#9f9f9f',
+                alignItems: 'center',
+              }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
+              </Text>
               <InputPay
                 keyboardType="numeric"
                 placeholder="0.00"
@@ -214,12 +212,29 @@ class BenefitsDollar extends Component {
               justifyContent: 'space-between',
             }}
           >
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
-              Balance: {this.state.Balance}
-            </Text>
-            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
-              Cap: {this.props.capCurrency} {this.props.capAmount}
-            </Text>
+            <View style={{
+              backgroundColor: '#fff',
+              width: '45%',
+              paddingLeft: responsiveWidth(5),
+              paddingTop: responsiveWidth(3),
+              paddingBottom: responsiveWidth(3)
+            }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
+                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.Balance) * 3).toFixed(2) : this.state.Balance}
+              </Text>
+            </View>
+
+            <View style={{
+              backgroundColor: '#fff',
+              width: '45%',
+              paddingLeft: responsiveWidth(5),
+              paddingTop: responsiveWidth(3),
+              paddingBottom: responsiveWidth(3)
+            }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
+                Cap: {'\n'}{(this.props.capAmount === 0) ? "" : this.props.capCurrency}{(this.props.capAmount === 0) ? 'Not applicable' : '' + Number(this.props.capAmount).toFixed(2)}
+              </Text>
+            </View>
           </View>
 
           <View style={{ marginBottom: '5%' }} />
@@ -229,7 +244,12 @@ class BenefitsDollar extends Component {
             amount: this.state.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
-            check_Id: this.props.check_Id
+            check_Id: this.props.check_Id,
+            consultation_fee_symbol: this.props.consultation_fee_symbol,
+            consultation_status: this.props.consultation_status,
+            consultation_fees: this.props.consultation_fees,
+            clinic_image: this.props.clinic_image,
+            clinic_name: this.props.clinic_name,
           })}>
             Next
           </ButtonPay>

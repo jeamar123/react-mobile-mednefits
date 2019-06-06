@@ -60,6 +60,8 @@ import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
 import receiptUpload from '../screens/receiptUpload';
+// import CurrencySelect from '../screens/CurrencySelect';
+import cancelVisit from '../screens/cancelVisit';
 
 console.disableYellowBox = true;
 
@@ -273,6 +275,8 @@ class RouterComponent extends Component {
             <Scene key="SelectList" component={SelectList} hideNavBar />
             <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
             <Scene key="receiptUpload" component={receiptUpload} hideNavBar />
+            {/* <Scene key="CurrencySelect" component={CurrencySelect} hideNavBar /> */}
+            <Scene key="cancelVisit" component={cancelVisit} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

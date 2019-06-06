@@ -45,7 +45,7 @@ export const CLINIC_PAYMENT_DIRECT          = CLINIC + '/payment_direct';
 export const CLINIC_PAGE_NEARBY             = CLINIC + '/paginate_nearby';
 export const CLINIC_ALL_NEARBY              = CLINIC + '/all_nearby';
 export const CLINIC_CREATE_PAYMENT          = CLINIC + '/create_payment';
-
+export const CANCEL_VISIT                   = CLINIC + '/cancel_visit';
 
 /* USER VARIABLE */
 export const USER                           = MAIN+"/user"
