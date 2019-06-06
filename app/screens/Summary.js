@@ -3,6 +3,7 @@ import { StatusBar, View, Image } from 'react-native';
 import {
   Text,
 } from 'native-base';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import styles from '../components/SummaryComp/styles';
 import Navbar from '../components/common/NavbarGreen';
 import * as Common from '../components/common';
@@ -35,8 +36,8 @@ class Summary extends Component {
               style={{
                 backgroundColor: '#fff',
                 width: '90%',
-                marginTop: '5%',
-                height: '41%',
+                marginTop: responsiveHeight(5),
+                height: responsiveHeight(34),
                 borderRadius: 5
               }}
             >
@@ -66,6 +67,7 @@ class Summary extends Component {
                   <Text
                     style={{
                       marginTop: 5,
+                      marginBottom: responsiveHeight(0.5),
                       color: '#848484',
                       fontSize: 15,
                       fontFamily: Config.FONT_FAMILY_THIN,
@@ -75,7 +77,7 @@ class Summary extends Component {
                   </Text>
                   <Text
                     style={{
-                      marginBottom: 5,
+                      marginBottom: responsiveHeight(1),
                       color: '#848484',
                       fontSize: 15,
                       fontFamily: Config.FONT_FAMILY_THIN,
@@ -89,7 +91,7 @@ class Summary extends Component {
                   style={{
                     backgroundColor: '#f3f3f7',
                     width: '90%',
-                    marginTop: 10,
+                    marginTop: responsiveHeight(1),
                     height: '32%'
                   }}
                 >
@@ -152,7 +154,7 @@ class Summary extends Component {
                     }}
                   >
                     <View>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 18, marginTop: '2%', paddingBottom: '1%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 16, marginTop: responsiveHeight(-1) }}>
                         Bill Details
                       </Text>
                     </View>
@@ -167,16 +169,16 @@ class Summary extends Component {
                 }}>
                 <View
                   style={{
-                    marginTop: '5%',
+                    marginTop: responsiveHeight(1.5),
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                     Bill Amount
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.bill_amount) ? this.props.result.data.bill_amount : ""}
                   </Text>
                 </View>
@@ -189,10 +191,10 @@ class Summary extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                     Consultation Fee
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.consultation_fees) ? this.props.result.data.consultation_fees : ""}
                   </Text>
                 </View>
@@ -205,10 +207,10 @@ class Summary extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                     Total Amount
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_amount) ? this.props.result.data.total_amount : ""}
                   </Text>
                 </View>
@@ -225,10 +227,10 @@ class Summary extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                     Paid by Credits
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}
                   </Text>
                 </View>
@@ -244,10 +246,10 @@ class Summary extends Component {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                     Paid by Cash
                   </Text>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                     {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}
                   </Text>
                 </View>
@@ -265,8 +267,8 @@ class Summary extends Component {
                 style={{
                   backgroundColor: '#fff',
                   width: '90%',
-                  marginTop: '5%',
-                  height: '51%',
+                  marginTop: responsiveHeight(5),
+                  height: responsiveHeight(46),
                   borderRadius: 5
                 }}
               >
@@ -296,6 +298,7 @@ class Summary extends Component {
                     <Text
                       style={{
                         marginTop: 5,
+                        marginBottom: responsiveHeight(0.5),
                         color: '#848484',
                         fontSize: 15,
                         fontFamily: Config.FONT_FAMILY_THIN,
@@ -305,7 +308,7 @@ class Summary extends Component {
                     </Text>
                     <Text
                       style={{
-                        marginBottom: 5,
+                        marginBottom: responsiveHeight(1),
                         color: '#848484',
                         fontSize: 15,
                         fontFamily: Config.FONT_FAMILY_THIN,
@@ -319,7 +322,7 @@ class Summary extends Component {
                     style={{
                       backgroundColor: '#f3f3f7',
                       width: '90%',
-                      marginTop: 10,
+                      marginTop: responsiveHeight(1),
                       height: '22%'
                     }}
                   >
@@ -421,7 +424,7 @@ class Summary extends Component {
                       }}
                     >
                       <View>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 18, marginTop: '2%', paddingBottom: '1%' }}>
+                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 16, marginTop: responsiveHeight(-1) }}>
                           Bill Details
                       </Text>
                       </View>
@@ -436,16 +439,16 @@ class Summary extends Component {
                   }}>
                   <View
                     style={{
-                      marginTop: '5%',
+                      marginTop: responsiveHeight(2),
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
                     }}
                   >
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Bill Amount
                   </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.bill_amount) ? this.props.result.data.bill_amount : ""}
                     </Text>
                   </View>
@@ -458,10 +461,10 @@ class Summary extends Component {
                       justifyContent: 'space-between',
                     }}
                   >
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Consultation Fee
                   </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.consultation_fees) ? this.props.result.data.consultation_fees : ""}
                     </Text>
                   </View>
@@ -474,10 +477,10 @@ class Summary extends Component {
                       justifyContent: 'space-between',
                     }}
                   >
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Total Amount
                   </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_amount) ? this.props.result.data.total_amount : ""}
                     </Text>
                   </View>
@@ -494,10 +497,10 @@ class Summary extends Component {
                       justifyContent: 'space-between',
                     }}
                   >
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Paid by Credits
                   </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}
                     </Text>
                   </View>
@@ -513,10 +516,10 @@ class Summary extends Component {
                       justifyContent: 'space-between',
                     }}
                   >
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Paid by Cash
                   </Text>
-                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', }}>
+                    <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}
                     </Text>
                   </View>

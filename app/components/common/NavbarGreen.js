@@ -438,12 +438,11 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
-            height: 50,
+            width: responsiveWidth(20),
             justifyContent: 'center',
             alignItems: 'flex-end',
-            paddingRight: '3%',
-            marginTop: '5%'
+            paddingRight: responsiveWidth(2.5),
+            marginTop: responsiveHeight(5.3)
           }}
         >
           <TouchableOpacity onPress={() => Actions.Home({ type: 'reset' })}>
@@ -768,12 +767,11 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
-            height: 50,
+            width: responsiveWidth(5),
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: '5%',
-            marginTop: responsiveHeight(3.6)
+            marginTop: responsiveHeight(6.5)
           }}
         >
           <TouchableOpacity
