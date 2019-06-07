@@ -70,7 +70,7 @@ class Summary extends Component {
                       marginBottom: responsiveHeight(0.5),
                       color: '#848484',
                       fontSize: 15,
-                      fontFamily: Config.FONT_FAMILY_THIN,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                     }}
                   >
                     Trans-ID: {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
@@ -80,7 +80,7 @@ class Summary extends Component {
                       marginBottom: responsiveHeight(1),
                       color: '#848484',
                       fontSize: 15,
-                      fontFamily: Config.FONT_FAMILY_THIN,
+                      fontFamily: Config.FONT_FAMILY_ROMAN,
                     }}
                   >
                     Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
@@ -92,7 +92,7 @@ class Summary extends Component {
                     backgroundColor: '#f3f3f7',
                     width: '90%',
                     marginTop: responsiveHeight(1),
-                    height: '32%'
+                    height: responsiveHeight(10)
                   }}
                 >
                   <View
@@ -162,17 +162,15 @@ class Summary extends Component {
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  marginLeft: '5%',
-                  marginRight: '5%'
-                }}>
+              <View>
                 <View
                   style={{
                     marginTop: responsiveHeight(1.5),
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -189,6 +187,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -205,6 +205,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -225,6 +227,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -244,6 +248,8 @@ class Summary extends Component {
                     flexDirection: 'row',
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
+                    marginLeft: '5%',
+                    marginRight: '5%'
                   }}
                 >
                   <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
@@ -301,7 +307,7 @@ class Summary extends Component {
                         marginBottom: responsiveHeight(0.5),
                         color: '#848484',
                         fontSize: 15,
-                        fontFamily: Config.FONT_FAMILY_THIN,
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
                       }}
                     >
                       Trans-ID: {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
@@ -311,7 +317,7 @@ class Summary extends Component {
                         marginBottom: responsiveHeight(1),
                         color: '#848484',
                         fontSize: 15,
-                        fontFamily: Config.FONT_FAMILY_THIN,
+                        fontFamily: Config.FONT_FAMILY_ROMAN,
                       }}
                     >
                       Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
@@ -323,7 +329,7 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: '22%'
+                      height: responsiveHeight(10)
                     }}
                   >
                     <View
@@ -363,7 +369,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: '26%'
+                      height: responsiveHeight(11.5)
                     }}
                   >
                     <View
@@ -432,22 +438,20 @@ class Summary extends Component {
                     </View>
                   </View>
                 </View>
-                <View
-                  style={{
-                    marginLeft: '5%',
-                    marginRight: '5%'
-                  }}>
+                <View>
                   <View
                     style={{
                       marginTop: responsiveHeight(2),
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Bill Amount
-                  </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.bill_amount) ? this.props.result.data.bill_amount : ""}
                     </Text>
@@ -459,11 +463,13 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Consultation Fee
-                  </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.consultation_fees) ? this.props.result.data.consultation_fees : ""}
                     </Text>
@@ -475,11 +481,13 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Total Amount
-                  </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.total_amount) ? this.props.result.data.total_amount : ""}
                     </Text>
@@ -495,11 +503,13 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Paid by Credits
-                  </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_credits) ? this.props.result.data.paid_by_credits : ""}
                     </Text>
@@ -514,11 +524,13 @@ class Summary extends Component {
                       flexDirection: 'row',
                       alignItems: 'flex-start',
                       justifyContent: 'space-between',
+                      marginLeft: '5%',
+                      marginRight: '5%'
                     }}
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16, }}>
                       Paid by Cash
-                  </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16, }}>
                       {(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""} {(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}
                     </Text>

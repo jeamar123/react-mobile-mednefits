@@ -14,7 +14,7 @@ export default EStyleSheet.create({
   },
   sectionTitle: {
     backgroundColor: '#0392cf',
-    height: responsiveHeight(23),
+    height: responsiveHeight(26),
     width: width,
     alignItems: 'center',
   },

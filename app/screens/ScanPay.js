@@ -45,7 +45,7 @@ class ScanPay extends Component {
     Core.PayDirect(params, (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Home({ result: result });
+        Actions.Home({ result: result, type: 'reset' });
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {

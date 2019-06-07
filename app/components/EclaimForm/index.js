@@ -344,17 +344,12 @@ export default class EclaimForm extends Component {
                   style={{ flexDirection: 'row' }}>
                   <Common.InputAmount
                     value={this.state.amount}
+                    returnKeyType='done'
                     keyboardType="numeric"
                     onChangeText={text => this.setState({ amount: text })}
                     placeholder="Enter amount"
                     leftToRight
                   />
-                  {/* <Common.InputSelect
-                    placeholder={this.state.currency}
-                    data={this.state.currencyData}
-                    value={this.state.currency}
-                    onValueChange={(value) => this.setState({ currency: value })}
-                  /> */}
 
                   <TouchableOpacity
                     onPress={() => Actions.CurrencySelect({ title: "Currency", currencyData: this.state.currencyData })}

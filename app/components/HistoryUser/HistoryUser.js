@@ -38,7 +38,7 @@ class HistoryUser extends Component {
             style={{
               backgroundColor: '#fff',
               width: '90%',
-              height: responsiveHeight(35),
+              height: responsiveHeight(36),
               borderRadius: 5
             }}
           >
@@ -152,7 +152,7 @@ class HistoryUser extends Component {
                 Cap
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.props.cap_per_visit === 0) ? this.props.cap_per_visit : 'Not applicable'}
+                {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_per_visit == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
               </Text>
             </View>
 

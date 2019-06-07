@@ -767,11 +767,11 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: responsiveWidth(5),
+            width: responsiveWidth(13),
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: '5%',
-            marginTop: responsiveHeight(6.5)
+            marginTop: responsiveHeight(5.1)
           }}
         >
           <TouchableOpacity

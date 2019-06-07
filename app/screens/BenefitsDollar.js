@@ -190,6 +190,7 @@ class BenefitsDollar extends Component {
                 keyboardType="numeric"
                 placeholder="0.00"
                 value={this.state.amount}
+                returnKeyType='done'
                 onChangeText={number => this.setState({ amount: number })}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,

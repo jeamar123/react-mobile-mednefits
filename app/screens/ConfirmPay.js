@@ -83,9 +83,8 @@ class ConfirmPay extends Component {
       input_amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
-      check_Id: this.props.check_Id
+      check_in_id: this.props.check_Id
     };
-
 
     Core.CreatePayment(params, (err, result) => {
       console.warn(result);
@@ -199,7 +198,7 @@ class ConfirmPay extends Component {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center', height: responsiveHeight(27) }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -230,7 +229,7 @@ class ConfirmPay extends Component {
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
-                {this.props.amount}
+                {Number(this.props.amount).toFixed(2)}
               </Text>
             </View>
             <View
@@ -255,7 +254,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {(this.props.capCurrency == 'RM') ? this.props.consultation_fees + '.00' : this.props.consultation_fees}
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {Number(this.props.consultation_fees).toFixed(2)}
               </Text>
             </View>
             <View
@@ -277,7 +276,7 @@ class ConfirmPay extends Component {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#dde0e4', marginTop: responsiveHeight(3) }}>
+          <View style={{ backgroundColor: '#dde0e4', marginTop: responsiveHeight(3), height: responsiveHeight(6) }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -294,13 +293,12 @@ class ConfirmPay extends Component {
                 Cap
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount}
+                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2)}
               </Text>
-
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#fff', marginTop: responsiveHeight(3) }}>
+          <View style={{ backgroundColor: '#fff', marginTop: responsiveHeight(3), height: responsiveHeight(15) }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -317,7 +315,7 @@ class ConfirmPay extends Component {
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '} {
-                  (this.props.amount > this.state.amountCap) ? (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount : this.props.amount
+                  (this.props.amount > this.state.amountCap) ? Number(this.props.capAmount).toFixed(2) : Number(this.props.amount).toFixed(2)
                 }
               </Text>
             </View>
@@ -348,11 +346,10 @@ class ConfirmPay extends Component {
             </View>
           </View>
 
-
           <View style={{
             flex: 1,
             justifyContent: 'flex-end',
-            marginTop: responsiveHeight(6)
+            marginTop: responsiveHeight(5)
           }}>
             <TouchableOpacity
               onPress={() => this.SendPayment()}
@@ -373,7 +370,7 @@ class ConfirmPay extends Component {
                   fontWeight: 'bold'
                 }}>
                 PAY NOW
-            </Common.Texti>
+              </Common.Texti>
             </TouchableOpacity>
           </View>
 

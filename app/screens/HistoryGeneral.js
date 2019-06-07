@@ -468,6 +468,7 @@ class History extends Component {
           clinicimage={this.state.data.clinic_image}
           services={this.state.data.services}
           cap_per_visit={this.state.data.cap_per_visit}
+          cap_transaction={this.state.data.cap_transaction}
         />
         <ScrollView
           refreshControl={
