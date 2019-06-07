@@ -56,12 +56,6 @@ class Barcode extends Component {
         console.warn("res " + JSON.stringify(result));
         console.warn(result)
         if (result.status) {
-          // Actions.SelectService({
-          //   type: 'reset',
-          //   services: result.data.clinic_procedures,
-          //   clinicid: result.data.clinic_id
-          // })
-
           Actions.checkinUser({
             type: 'reset',
             services: result.data.clinic_procedures,
