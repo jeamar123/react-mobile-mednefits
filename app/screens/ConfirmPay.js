@@ -33,7 +33,8 @@ class ConfirmPay extends Component {
       amountCap: this.props.capAmount,
       feeConsultation: this.props.consultation_fees,
       byCash: '',
-      amountTotal: ''
+      amountTotal: '',
+      timeNow: ''
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -73,6 +74,20 @@ class ConfirmPay extends Component {
     } else {
       this.setState({ amountTotal: Number(amounts) + Number(consultationAmount), byCash: (Number(amounts) + Number(consultationAmount)) - cap });
     }
+
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+
+    that.setState({
+      //Setting the value of the date time
+      timeNow:
+        year + '-' + month + '-' + date + ' ' + hours + ':' + min + ':' + sec,
+    });
   }
 
 
@@ -83,7 +98,8 @@ class ConfirmPay extends Component {
       input_amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
-      check_in_id: this.props.check_Id
+      check_in_id: this.props.checkId,
+      check_out_time: this.state.timeNow
     };
 
 
@@ -91,7 +107,7 @@ class ConfirmPay extends Component {
       console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
-        Actions.Summary({ result: result, clinic_image: this.props.clinic_image });
+        Actions.Summary({ result: result, clinic_image: this.props.clinic_image, type: 'reset' });
         this.setState({ isLoading: false });
       } else if (!result.status) {
         this.setState({ title: result.message, message: result.sub_mesage, failed: true, isLoading: false })
@@ -130,6 +146,64 @@ class ConfirmPay extends Component {
         </Modal>
       </View>
     );
+  }
+
+  PaybyCredit() {
+    if (this.props.capAmount === 0) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.byCash).toFixed(2)}
+          </Text>
+        </View >
+      )
+    } else if (this.state.amountTotal > this.state.amountCap) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.props.capAmount).toFixed(2)}
+          </Text>
+        </View >
+      )
+    } else if (this.state.amountTotal < this.state.amountCap) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.amountTotal).toFixed(2)}
+          </Text>
+        </View>
+      )
+    } else if (this.state.amountTotal > this.state.Balance) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.Balance).toFixed(2)}
+          </Text>
+        </View>
+      )
+    }
+  }
+
+  PaybyCash() {
+    if (this.props.capAmount === 0) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} 0.00
+          </Text>
+        </View >
+      )
+    } else {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {
+              Number(this.state.byCash).toFixed(2)
+            }
+          </Text>
+        </View >
+      )
+    }
   }
 
   renderPopUp() {
@@ -178,8 +252,8 @@ class ConfirmPay extends Component {
                   >
                     <ResponsiveImage
                       source={{ uri: this.props.clinic_image }}
-                      style={{ resizeMode: 'center', marginRight: responsiveWidth(4) }}
-                      initWidth="70" initHeight="70"
+                      style={{ resizeMode: 'contain', marginRight: responsiveWidth(4) }}
+                      initWidth="75" initHeight="75"
                     />
 
                     <Text
@@ -315,11 +389,12 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Credits
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+              {this.PaybyCredit()}
+              {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '} {
-                  (this.props.amount > this.state.amountCap) ? Number(this.props.capAmount).toFixed(2) : Number(this.props.amount).toFixed(2)
+                  (this.state.amountTotal > this.state.amountCap) ? Number(this.state.amountCap).toFixed(2) : Number(this.state.amountTotal).toFixed(2)
                 }
-              </Text>
+              </Text> */}
             </View>
             <View>
               <Common.Divider />
@@ -338,13 +413,7 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Cash
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency} {
-                  (this.props.capCurrency == 'RM') ? (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' :
-                    (Number(this.state.byCash).toFixed(2).length === 2) ?
-                      Number(this.state.byCash).toFixed(2) + '.00' : Number(this.state.byCash).toFixed(2) :
-                    (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' : Number(this.state.byCash).toFixed(2)}
-              </Text>
+              {this.PaybyCash()}
             </View>
           </View>
 

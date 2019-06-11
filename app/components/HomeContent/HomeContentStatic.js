@@ -169,8 +169,8 @@ class HomeContent extends Component {
                         source={require('../../../assets/apps/Scan&Pay.png')}
                       />
                     </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                      <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', }}>
+                      <Text style={(styles.titleRegister)}>Register {this.props.clinic_id} </Text>
                       {/* <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text> */}
                     </View>
@@ -192,7 +192,7 @@ class HomeContent extends Component {
                         />
                       </View>
                       <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                        <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                        <Text style={styles.titleRegister}>Register {this.props.clinic_id} </Text>
                         {/* <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text> */}
                       </View>
@@ -206,6 +206,10 @@ class HomeContent extends Component {
                 Actions.SelectService({
                   services: this.props.Services,
                   clinicid: this.props.clinic_Id,
+                  member: this.props.member,
+                  nric: this.props.nric,
+                  checkId: this.props.check_Id,
+                  checkTime: this.props.checkTime,
                   capCurrency: this.props.capCurrency,
                   capAmount: this.props.capAmount,
                   consultation_fee_symbol: this.props.consultation_fee_symbol,

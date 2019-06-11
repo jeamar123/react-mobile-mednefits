@@ -46,6 +46,16 @@ export default EStyleSheet.create({
     paddingTop: 5,
     color: '#fff',
   },
+  titleRegister: {
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    textAlign: 'center',
+    // fontSize: RF(2.3),
+    fontSize: RF(2.1),
+    fontWeight: '600',
+    paddingTop: 5,
+    color: '#fff',
+    marginLeft: 5,
+  },
   searchtext: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     color: '#fff',
@@ -55,7 +65,7 @@ export default EStyleSheet.create({
   detail: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    fontSize: RF(1.9),
+    fontSize: RF(1.7),
     color: '#fff',
   },
   DrawerContain: {

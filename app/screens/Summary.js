@@ -38,7 +38,7 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(3),
-                height: responsiveHeight(32),
+                height: responsiveHeight(33),
                 borderRadius: 5
               }}
             >

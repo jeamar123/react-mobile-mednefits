@@ -3,6 +3,7 @@ import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
 import Navbar from '../components/common/NavbarGrey';
@@ -119,14 +120,10 @@ class BenefitsDollar extends Component {
                     height: responsiveHeight(8)
                   }}
                   >
-                    <Image
+                    <ResponsiveImage
                       source={{ uri: this.props.clinic_image }}
-                      style={{
-                        height: 65,
-                        resizeMode: 'center',
-                        width: 65,
-                        marginRight: responsiveWidth(4)
-                      }}
+                      style={{ resizeMode: 'contain', marginRight: responsiveWidth(4) }}
+                      initWidth="75" initHeight="75"
                     />
                     <Text
                       style={{
@@ -188,6 +185,7 @@ class BenefitsDollar extends Component {
               </Text>
               <InputPay
                 keyboardType="numeric"
+                returnKeyType='done'
                 placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
@@ -244,7 +242,7 @@ class BenefitsDollar extends Component {
             amount: this.state.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
-            check_Id: this.props.check_Id,
+            checkId: this.props.checkId,
             consultation_fee_symbol: this.props.consultation_fee_symbol,
             consultation_status: this.props.consultation_status,
             consultation_fees: this.props.consultation_fees,

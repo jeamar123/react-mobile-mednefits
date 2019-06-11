@@ -25,7 +25,8 @@ class Barcode extends Component {
       isLoading: false,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      timeNow: ''
     };
 
     this.scanBarcode = this.scanBarcode.bind(this)
@@ -46,15 +47,29 @@ class Barcode extends Component {
     this.setState({ failed: false })
   }
 
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+
+    that.setState({
+      //Setting the value of the date time
+      timeNow:
+        year + '-' + month + '-' + date + ' ' + hours + ':' + min,
+    });
+  }
+
   scanBarcode = (data) => {
     this.setState({ isLoading: true })
     barcodeData = data
     console.warn(barcodeData);
 
     try {
-      Core.GetBarcodeData(barcodeData.data, (result) => {
+      Core.GetBarcodeData(barcodeData.data + "?check_in_time=" + this.state.timeNow, (result) => {
         console.warn("res " + JSON.stringify(result));
-        console.warn(result)
         if (result.status) {
           Actions.checkinUser({
             type: 'reset',
