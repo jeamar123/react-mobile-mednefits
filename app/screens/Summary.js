@@ -388,7 +388,7 @@ class Summary extends Component {
                             marginTop: 10,
                             marginBottom: 5,
                             color: '#fff',
-                            fontSize: 20,
+                            fontSize: 16,
                             fontFamily: Config.FONT_FAMILY_ROMAN,
                           }}
                         >
