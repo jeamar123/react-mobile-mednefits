@@ -233,7 +233,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Cap: {'\n'}{(this.props.capAmount === 0) ? "" : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : this.props.capAmount}
+                Cap: {'\n'}{(this.props.capAmount === 0) ? "" : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : (this.props.capCurrency == 'RM') ? this.props.capAmount + '.00' : Number(this.props.capAmount).toFixed(2)}
               </Text>
             </View>
           </View>
