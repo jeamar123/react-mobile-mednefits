@@ -3,6 +3,7 @@ import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import Numeral from "numeral";
 import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonPay, Spinner, Popup } from '../components/common/';
 import { InputPay } from '../components/TextInput';
@@ -80,6 +81,7 @@ class BenefitsDollar extends Component {
 
   render() {
     console.warn("props: " + JSON.stringify(this.props))
+    console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
@@ -219,7 +221,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Number(this.state.Balance) * 3).toFixed(2) : this.state.Balance}
+                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Numeral(this.state.Balance).value() * 3).toFixed(2) : this.state.Balance}
               </Text>
             </View>
 

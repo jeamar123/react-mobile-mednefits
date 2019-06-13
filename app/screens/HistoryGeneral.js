@@ -268,27 +268,6 @@ class History extends Component {
                 </Common.Texti>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity
-              onPress={() => this.selectPhoto()}
-              style={{
-                paddingTop: 2,
-                paddingBottom: 2,
-                backgroundColor: '#0392cf',
-                borderRadius: 5,
-                margin: 15,
-                width: '120%',
-                height: '50%'
-              }}>
-              <View style={{
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }} >
-                <Icon name="camera" style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} />
-                <Text style={{ color: '#fff', fontSize: 15, margin: 5 }}> Upload Receipt</Text>
-              </View>
-            </TouchableOpacity> */}
           </View>
         </View >
       )
@@ -306,54 +285,6 @@ class History extends Component {
       )
     } else {
       return (
-        // <GiftedForm
-        //   style={{ backgroundColor: 'white' }}
-        //   formName="signupForm"
-        //   openModal={route => {
-        //     navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
-        //   }}
-        // >
-
-        //   <View
-        //     style={{
-        //       flex: 1,
-        //     }}>
-        //     <View
-        //       style={{
-        //         backgroundColor: '#efeff4'
-        //       }}>
-        //       <View
-        //         style={{
-        //           flexDirection: 'row',
-        //           alignContent: 'space-between',
-        //           marginVertical: 20,
-        //         }}
-        //       >
-        //         <Text
-        //           style={{
-        //             color: '#c4c4c4',
-        //             marginTop: '3%',
-        //             fontFamily: Config.FONT_FAMILY_ROMAN,
-        //             fontSize: 13,
-        //             marginLeft: '7%',
-        //           }}
-        //         >
-        //           Receipt
-        //         </Text>
-        //         <View style={{
-        //           padding: 5,
-        //           marginLeft: '3%',
-        //           width: '100%',
-        //           fontSize: 13
-        //         }}>
-        //           {this.renderReceiptUpload()}
-        //         </View>
-        //       </View>
-        //     </View>
-        //   </View>
-
-
-        // </GiftedForm>
 
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <View

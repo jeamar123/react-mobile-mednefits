@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image } from 'react-native';
-import {
-  Text,
-} from 'native-base';
+import { StatusBar, View, Image, TouchableOpacity } from 'react-native';
+import { Text } from 'native-base';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import styles from '../components/SummaryComp/styles';
 import Navbar from '../components/common/NavbarGreen';
@@ -12,6 +10,35 @@ import * as Config from '../config';
 class Summary extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isActive: true
+    };
+  }
+
+  detailPaymentOpened(data) {
+    let toggleID = 'toggleID';
+    let id = 'detailPayment';
+
+    if (this.state.isActive == true) {
+      // close menu
+      this.state.isActive = false;
+      this.refs[id].setNativeProps({
+        display: 'none',
+      });
+      this.refs[toggleID].setNativeProps({
+        transform: [{ rotate: '0deg' }],
+      });
+    } else {
+      //show menu
+      this.state.isActive = true;
+      this.refs[id].setNativeProps({
+        display: 'flex',
+      });
+
+      this.refs[toggleID].setNativeProps({
+        transform: [{ rotate: '180deg' }],
+      });
+    }
   }
 
   render() {
@@ -130,7 +157,38 @@ class Summary extends Component {
               </View>
             </View>
 
-            <View style={{ backgroundColor: '#ffffff', width: '90%', marginTop: 15 }}>
+            <View style={{ marginTop: responsiveHeight(2) }}>
+              <TouchableOpacity
+                onPress={() => this.detailPaymentOpened(data.number)}
+                style={{
+                  backgroundColor: "#3F9D59",
+                  width: "90%",
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 5,
+                  borderColor: '#fff',
+                  borderWidth: 1,
+                  paddingRight: '32.5%',
+                  paddingLeft: '32.5%'
+                }}
+              >
+                <Common.Texti
+                  fontSize={16}
+                  fontColor={"#ffffff"}
+                  style={{
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                  }}>
+                  View Details
+                </Common.Texti>
+                <View ref={'toggleID'}>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              ref={'detailPayment'}
+              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-5.5) }}>
               <View
                 style={{
                   backgroundColor: '#f8f8fa',
@@ -406,7 +464,38 @@ class Summary extends Component {
                 </View>
               </View>
 
-              <View style={{ backgroundColor: '#ffffff', width: '90%', marginTop: 15 }}>
+              <View style={{ marginTop: responsiveHeight(2) }}>
+                <TouchableOpacity
+                  onPress={() => this.detailPaymentOpened(data.number)}
+                  style={{
+                    backgroundColor: "#3F9D59",
+                    width: "90%",
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 5,
+                    borderColor: '#fff',
+                    borderWidth: 1,
+                    paddingRight: '32.5%',
+                    paddingLeft: '32.5%'
+                  }}
+                >
+                  <Common.Texti
+                    fontSize={16}
+                    fontColor={"#ffffff"}
+                    style={{
+                      paddingTop: 10,
+                      paddingBottom: 10,
+                    }}>
+                    View Details
+                </Common.Texti>
+                  <View ref={'toggleID'}>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                ref={'detailPayment'}
+                style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-5.5) }}>
                 <View
                   style={{
                     backgroundColor: '#f8f8fa',
