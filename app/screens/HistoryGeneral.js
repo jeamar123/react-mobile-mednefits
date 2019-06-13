@@ -56,7 +56,6 @@ class History extends Component {
     })
   }
 
-
   selectPhoto() {
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
@@ -152,51 +151,123 @@ class History extends Component {
 
   renderReceiptUpload() {
     if (this.state.data.files.length > 0) {
-      return this.state.data.files.map((Data, index) => (
-        <ZoomImage
-          imgStyle={{
-            width: 80,
-            height: 100,
-            marginLeft: '18.5%',
-            paddingTop: 5,
-            paddingBottom: 5,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            borderWidth: 1,
-            borderColor: '#c4c4c4',
-          }}
-          enableScaling={true}
-          easingFunc={Easing.ease}
-          duration={200}
-          source={{
-            uri: !Data.file
-              ? '../../assets/photo.png'
-              : Data.file,
-          }}
-        />
-      ));
+      return (
+        <View style={{
+          flex: 1, justifyContent: 'center', alignItems: 'center', marginLeft: '5%',
+          marginRight: '5%'
+        }}>
+          <View style={{ marginTop: responsiveHeight(2) }}>
+            <TouchableOpacity
+              onPress={() => this.detailPaymentOpened(data.number)}
+              style={{
+                backgroundColor: "#efeff4",
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 5,
+                borderColor: '#0392cf',
+                borderWidth: 1,
+                paddingRight: '35%',
+                paddingLeft: '35%'
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#0392cf"}
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}>
+                View Receipt
+              </Common.Texti>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ marginTop: responsiveHeight(2) }}>
+            <TouchableOpacity
+              onPress={() => this.selectPhoto()}
+              style={{
+                backgroundColor: "#efeff4",
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 5,
+                borderColor: '#848484',
+                borderWidth: 1,
+                paddingRight: '32.5%',
+                paddingLeft: '32.5%'
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#848484"}
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}>
+                Upload Receipt
+            </Common.Texti>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+
+      // return this.state.data.files.map((Data, index) => (
+      //   <ZoomImage
+      //     imgStyle={{
+      //       width: 80,
+      //       height: 100,
+      //       marginLeft: '18.5%',
+      //       paddingTop: 5,
+      //       paddingBottom: 5,
+      //       backgroundColor: '#fff',
+      //       borderRadius: 10,
+      //       borderWidth: 1,
+      //       borderColor: '#c4c4c4',
+      //     }}
+      //     enableScaling={true}
+      //     easingFunc={Easing.ease}
+      //     duration={200}
+      //     source={{
+      //       uri: !Data.file
+      //         ? '../../assets/photo.png'
+      //         : Data.file,
+      //     }}
+      //   />
+      // ));
 
     } else if (this.state.data.files) {
       return (
         <View
           style={{
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            marginLeft: '15.3%'
+            flex: 1, justifyContent: 'center', alignItems: 'center', marginLeft: '5%',
+            marginRight: '5%'
+
           }}>
-          <View style={{
-            marginLeft: '61.5%',
-            marginBottom: '-7.5%',
-            width: 15,
-            height: 15,
-            borderRadius: 15 / 2,
-            backgroundColor: '#f44336',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1
-          }} />
-          <View style={{ flex: 1, width: '50%', }}>
+          <View style={{ flex: 1, width: '100%', marginTop: responsiveHeight(2), marginBottom: responsiveHeight(10) }}>
             <TouchableOpacity
+              onPress={() => this.selectPhoto()}
+              style={{
+                backgroundColor: "#efeff4",
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 5,
+                borderColor: '#0392cf',
+                borderWidth: 1,
+                paddingRight: '32.5%',
+                paddingLeft: '32.5%'
+              }}
+            >
+              <Common.Texti
+                fontSize={16}
+                fontColor={"#0392cf"}
+                style={{
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}>
+                Upload Receipt
+                </Common.Texti>
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity
               onPress={() => this.selectPhoto()}
               style={{
                 paddingTop: 2,
@@ -216,9 +287,9 @@ class History extends Component {
                 <Icon name="camera" style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} />
                 <Text style={{ color: '#fff', fontSize: 15, margin: 5 }}> Upload Receipt</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
-        </View>
+        </View >
       )
     }
   }
@@ -286,7 +357,7 @@ class History extends Component {
         <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
           <View
             style={{
-              backgroundColor: '#f8f8fa',
+              backgroundColor: '#EFEFF4',
               width: '100%',
             }}
           >
@@ -307,7 +378,7 @@ class History extends Component {
                 }}
               >
                 <View>
-                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#cacaca', fontSize: 16, marginTop: responsiveHeight(-1) }}>
+                  <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#B1B1B1', fontSize: 16, marginTop: responsiveHeight(-1) }}>
                     Bill Details
                   </Text>
                 </View>
@@ -421,31 +492,12 @@ class History extends Component {
             }}>
             <View
               style={{
-                backgroundColor: '#efeff4'
+                backgroundColor: '#efeff4',
+                marginBottom: responsiveHeight(10)
               }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignContent: 'space-between',
-                  marginVertical: 20,
-                }}
-              >
-                <Text
-                  style={{
-                    color: '#c4c4c4',
-                    marginTop: '3%',
-                    fontFamily: Config.FONT_FAMILY_ROMAN,
-                    fontSize: 13,
-                    marginLeft: '7%',
-                  }}
-                >
-                  Receipt
-                  </Text>
+              <View>
                 <View style={{
-                  padding: 5,
-                  marginLeft: '3%',
                   width: '100%',
-                  fontSize: 13
                 }}>
                   {this.renderReceiptUpload()}
                 </View>
