@@ -8,6 +8,7 @@ import {
 import * as Common from '../common'
 import styles from './styles'
 import * as Core from '../../core'
+import * as Config from '../../config'
 import { Actions } from 'react-native-router-flux'
 
 export default class EclaimForm extends Component {
@@ -25,7 +26,7 @@ export default class EclaimForm extends Component {
           value: null
         }
       ],
-      claimTypeState: "Select",
+      claimTypeState: "Name of Provider",
       claim: false,
       member: false,
       memberData: [],
@@ -197,9 +198,14 @@ export default class EclaimForm extends Component {
               <TouchableOpacity
                 onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
                 style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
-                  {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
-                </Common.Texti>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Common.Texti
+                    fontSize={12}
+                    fontFamily={Config.FONT_FAMILY_LIGHT}
+                    fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#9e9e9e" : "black"}>
+                    {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
+                  </Common.Texti>
+                </View>
                 <View
                   style={{
                     alignItems: 'flex-end',
@@ -252,7 +258,7 @@ export default class EclaimForm extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-                Date of Visit
+                Visit Date
             </Common.Texti>
 
               <Common.InputDateCustom
@@ -270,7 +276,7 @@ export default class EclaimForm extends Component {
                 onError={() => Common.getNotify("", "Error loading, please try again")}
                 renderDate={({ year, month, day, date }) => {
                   if (!date) {
-                    return <Common.Texti fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
+                    return <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_LIGHT} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
                   }
                   const dateStr = `${day}-${month}-${year}`
                   return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
@@ -290,7 +296,7 @@ export default class EclaimForm extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-                Time of Visit
+                Visit Time
               </Common.Texti>
               <View
                 style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
@@ -347,7 +353,7 @@ export default class EclaimForm extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-                Claim Amount
+                Receipt Amount
               </Common.Texti>
 
               <Common.InputAmount
@@ -364,7 +370,7 @@ export default class EclaimForm extends Component {
             <Common.Divider />
 
             <View
-              style={[styles.fieldStyle, { marginBottom: "10%" }]}
+              style={styles.fieldStyle}
             >
               <Common.Texti style={{
                 justifyContent: 'center',
@@ -381,7 +387,11 @@ export default class EclaimForm extends Component {
               />
             </View>
 
+            <Common.Divider style={{marginLeft:"-5%", marginRight:"-5%"}}/>
+
           </View>
+
+          <View style={{marginBottom: "15%"}} />
 
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
