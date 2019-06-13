@@ -69,15 +69,8 @@ class Barcode extends Component {
 
     try {
       Core.GetBarcodeData(barcodeData.data + "?check_in_time=" + this.state.timeNow, (result) => {
-        console.warn("res " + JSON.stringify(result));
-        console.log(result)
         if (result.status) {
-          // Actions.SelectService({
-          //   type: 'reset',
-          //   services: result.data.clinic_procedures,
-          //   clinicid: result.data.clinic_id,
-          //   clinic_data: result.data
-          // })
+          console.warn("res " + JSON.stringify(result));
           Actions.checkinUser({
             type: 'reset',
             services: result.data.clinic_procedures,
@@ -99,15 +92,12 @@ class Barcode extends Component {
             failed: false,
           })
         } else {
+          Actions.ExpireMember({ type: 'reset' })
           this.setState({
             isLoading: false,
-            failed: true,
-            title: 'Clinic Scan Error',
-            message: result.message
+            failed: false,
           })
         }
-
-
       })
     } catch (e) {
       this.setState({
