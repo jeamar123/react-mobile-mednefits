@@ -38,7 +38,7 @@ class HistoryUser extends Component {
             style={{
               backgroundColor: '#fff',
               width: '90%',
-              height: responsiveHeight(36),
+              height: responsiveHeight(34.5),
               borderRadius: 5
             }}
           >
@@ -70,7 +70,7 @@ class HistoryUser extends Component {
                 </Text>
                 <Text style={{
                   fontFamily: Config.FONT_FAMILY_BOLD,
-                  fontSize: RF(3.8),
+                  fontSize: RF(4.2),
                   lineHeight: 38,
                   color: '#2c3e50',
                   fontWeight: 'bold',
@@ -191,7 +191,7 @@ class HistoryUser extends Component {
                       <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.1), fontWeight: 'bold', marginTop: '2%' }}>
                         {(this.props.clinicname) ? this.props.clinicname : ""}
                       </Text>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9), marginTop: '2%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }}>
                         Service : {(this.props.services) ? this.props.services : ""}
                       </Text>
                     </View>
