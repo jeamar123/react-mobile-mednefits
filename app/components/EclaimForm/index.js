@@ -231,18 +231,16 @@ export default class EclaimForm extends Component {
               }}>
                 Provider
               </Common.Texti>
-              <View style={{ marginRight: 25 }}>
-                <Common.InputText
-                  value={this.state.provider}
-                  onChangeText={text => this.setState({ provider: text })}
-                  placeholder="Name of Provider"
-                  inputStyle={{
-                    fontSize: 16
-                  }}
-                  iconColor="#9e9e9e"
-                  leftToRight
-                />
-              </View>
+              <Common.InputText
+                value={this.state.provider}
+                onChangeText={text => this.setState({ provider: text })}
+                placeholder="Name of Provider"
+                inputStyle={{
+                  fontSize: 16
+                }}
+                iconColor="#9e9e9e"
+                leftToRight
+              />
             </View>
 
             <Common.Divider />
@@ -396,7 +394,12 @@ export default class EclaimForm extends Component {
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
             style={{
-              backgroundColor: "#0392CF",
+              backgroundColor: (!this.props.claim) ||
+                (!this.state.provider) ||
+                (!this.state.amount) ||
+                (!this.state.member) ||
+                (this.state.date == "Input Date") ||
+                (this.state.time == "Input Time") ? "#aacef7" : "#0392CF",
               width: "100%",
               justifyContent: 'center',
               alignItems: 'center',

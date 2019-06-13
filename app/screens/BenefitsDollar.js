@@ -35,6 +35,7 @@ class BenefitsDollar extends Component {
   }
 
   componentDidMount() {
+    // Core.GetClinicDetails(98, (err, result) => {
     Core.GetClinicDetails(this.props.clinicid, (err, result) => {
       console.log(result)
       this.setState({
@@ -132,11 +133,13 @@ class BenefitsDollar extends Component {
                     />
                     <Text
                       style={{
-                        marginLeft: '-5%',
+                        // marginLeft: '-5%',
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                         color: '#9e9e9e',
                         fontSize: 18,
-                        width: '50%'
+                        width: '50%',
+                        alignItems: 'center',
+                        justifyContent: 'center'
                       }}
                       numberOfLines={2}
                     >
@@ -190,6 +193,15 @@ class BenefitsDollar extends Component {
                 placeholder="0.00"
                 value={this.state.amount}
                 onChangeText={number => this.setState({ amount: number })}
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  height: 70,
+                  fontSize: 46,
+                  marginLeft: responsiveWidth(6),
+                  width: '100%',
+                  color:
+                    (!this.state.amount) ? "#B0B0B0" : "#2c3e50",
+                }}
               />
             </View>
           </View>
@@ -206,7 +218,7 @@ class BenefitsDollar extends Component {
               Balance: {this.state.Balance}
             </Text>
             <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#bdbdbd', }}>
-              Cap: {this.props.capCurrency}{this.props.capAmount}
+              Cap: {this.props.capCurrency} {this.props.capAmount}
             </Text>
           </View>
 

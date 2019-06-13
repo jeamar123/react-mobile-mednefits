@@ -175,6 +175,7 @@ class Summary extends Component {
                   backgroundColor: '#FF5757',
                   width: '90%',
                   marginTop: 10,
+                  marginBottom: 5,
                   height: '26%'
                 }}
               >
@@ -220,6 +221,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: 10,
+                  marginBottom: 5,
                   height: '31%'
                 }}
               >
@@ -336,7 +338,7 @@ class Summary extends Component {
                   >
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                       Trans-ID
-                </Text>
+                    </Text>
                     <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bdbdbd', }}>
                       {(this.props.result.data.transation_id) ? this.props.result.data.transation_id : ""}
                     </Text>
