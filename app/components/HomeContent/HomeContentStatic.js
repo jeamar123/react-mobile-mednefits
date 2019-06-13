@@ -207,6 +207,10 @@ class HomeContent extends Component {
                 Actions.SelectService({
                   services: this.props.Services,
                   clinicid: this.props.clinic_Id,
+                  member: this.props.member,
+                  nric: this.props.nric,
+                  checkId: this.props.check_Id,
+                  checkTime: this.props.checkTime,
                   capCurrency: this.props.capCurrency,
                   capAmount: this.props.capAmount,
                   consultation_fee_symbol: this.props.consultation_fee_symbol,
