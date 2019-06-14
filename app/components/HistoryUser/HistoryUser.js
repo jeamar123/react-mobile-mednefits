@@ -38,7 +38,7 @@ class HistoryUser extends Component {
             style={{
               backgroundColor: '#fff',
               width: '90%',
-              height: responsiveHeight(34.5),
+              height: responsiveHeight(36),
               borderRadius: 5
             }}
           >
@@ -52,7 +52,7 @@ class HistoryUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Total Amount
               </Text>
               <View
@@ -60,7 +60,7 @@ class HistoryUser extends Component {
               >
                 <Text style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: RF(1.9),
+                  fontSize: RF(1.8),
                   lineHeight: 20,
                   color: '#2c3e50',
                   marginRight: responsiveWidth(1),
@@ -70,7 +70,7 @@ class HistoryUser extends Component {
                 </Text>
                 <Text style={{
                   fontFamily: Config.FONT_FAMILY_BOLD,
-                  fontSize: RF(4.2),
+                  fontSize: RF(4.1),
                   lineHeight: 38,
                   color: '#2c3e50',
                   fontWeight: 'bold',
@@ -91,10 +91,10 @@ class HistoryUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Transaction ID
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.props.transaction_id ? this.props.transaction_id : ' '}
               </Text>
             </View>
@@ -110,10 +110,10 @@ class HistoryUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Transaction Time
                 </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.props.date_of_transaction ? this.props.date_of_transaction.toUpperCase() : ' '}
               </Text>
             </View>
@@ -129,10 +129,10 @@ class HistoryUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Member
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.props.customer ? this.props.customer : ' '}
               </Text>
             </View>
@@ -148,10 +148,10 @@ class HistoryUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Cap
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_per_visit == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
               </Text>
             </View>
@@ -188,10 +188,10 @@ class HistoryUser extends Component {
                       style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                     />
                     <View>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.1), fontWeight: 'bold', marginTop: '2%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9), fontWeight: 'bold', marginTop: '2%' }}>
                         {(this.props.clinicname) ? this.props.clinicname : ""}
                       </Text>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
                         Service : {(this.props.services) ? this.props.services : ""}
                       </Text>
                     </View>

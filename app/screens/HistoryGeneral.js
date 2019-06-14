@@ -318,17 +318,15 @@ class History extends Component {
               </View>
             </View>
           </View>
-          <View
-            style={{
-              marginLeft: '5%',
-              marginRight: '5%'
-            }}>
+          <View>
             <View
               style={{
                 marginTop: responsiveHeight(1.5),
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -345,6 +343,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -362,6 +362,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -382,6 +384,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>
@@ -401,6 +405,8 @@ class History extends Component {
                 flexDirection: 'row',
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
+                marginLeft: '5%',
+                marginRight: '5%'
               }}
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.9) }}>

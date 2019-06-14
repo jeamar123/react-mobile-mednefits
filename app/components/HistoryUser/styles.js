@@ -10,7 +10,7 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#0392cf',
-    height: responsiveHeight(37),
+    height: responsiveHeight(38.5),
     width: width,
   },
   contentHeader: {
