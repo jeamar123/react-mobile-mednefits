@@ -181,6 +181,14 @@ class ConfirmPay extends Component {
           </Text>
         </View>
       )
+    } else {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} 0.00
+          </Text>
+        </View>
+      )
     }
   }
 
@@ -236,7 +244,7 @@ class ConfirmPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="Summary" />
         <Content padder>
-          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center', paddingBottom: responsiveHeight(1.5) }}>
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -429,7 +437,7 @@ class ConfirmPay extends Component {
           <View style={{
             flex: 1,
             justifyContent: 'flex-end',
-            marginTop: responsiveHeight(6)
+            marginTop: responsiveHeight(5)
           }}>
             <TouchableOpacity
               onPress={() => this.SendPayment()}

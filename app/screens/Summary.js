@@ -3,7 +3,7 @@ import { StatusBar, View, Image, TouchableOpacity } from 'react-native';
 import {
   Text,
 } from 'native-base';
-import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import styles from '../components/SummaryComp/styles';
 import Navbar from '../components/common/NavbarGreen';
@@ -67,7 +67,7 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(3),
-                height: responsiveHeight(33),
+                height: responsiveHeight(34.5),
                 borderRadius: 5
               }}
             >
@@ -113,7 +113,7 @@ class Summary extends Component {
                       fontFamily: Config.FONT_FAMILY_THIN,
                     }}
                   >
-                    Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                    Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
                   </Text>
                 </View>
 
@@ -122,7 +122,8 @@ class Summary extends Component {
                     backgroundColor: '#f3f3f7',
                     width: '90%',
                     marginTop: responsiveHeight(1),
-                    height: responsiveHeight(9)
+                    height: responsiveHeight(9),
+                    marginBottom: responsiveHeight(1),
                   }}
                 >
                   <View
@@ -335,7 +336,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(3),
-                  height: responsiveHeight(46),
+                  height: responsiveHeight(47),
                   borderRadius: 5
                 }}
               >
@@ -381,7 +382,7 @@ class Summary extends Component {
                         fontFamily: Config.FONT_FAMILY_THIN,
                       }}
                     >
-                      Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                      Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
                     </Text>
                   </View>
 
@@ -390,7 +391,8 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: responsiveHeight(9)
+                      height: responsiveHeight(9),
+                      marginBottom: responsiveHeight(1),
                     }}
                   >
                     <View
@@ -467,7 +469,7 @@ class Summary extends Component {
                 </View>
               </View>
 
-              <View style={{ backgroundColor: '#ffffff', width: '90%', marginTop: 15 }}>
+              <View style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(2) }}>
                 <View
                   style={{
                     backgroundColor: '#f8f8fa',

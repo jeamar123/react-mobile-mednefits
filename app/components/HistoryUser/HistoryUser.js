@@ -39,7 +39,7 @@ class HistoryUser extends Component {
               marginTop: responsiveHeight(3),
               backgroundColor: '#fff',
               width: '90%',
-              height: responsiveHeight(37),
+              height: responsiveHeight(37.5),
               borderRadius: 5
             }}
           >
@@ -166,7 +166,7 @@ class HistoryUser extends Component {
                 style={{
                   backgroundColor: '#f3f3f7',
                   width: '90%',
-                  height: responsiveHeight(9.5),
+                  height: responsiveHeight(10),
                 }}
               >
                 <View
@@ -181,7 +181,9 @@ class HistoryUser extends Component {
                       alignItems: 'center',
                       marginTop: responsiveHeight(1),
                       marginLeft: '5%',
-                      marginRight: '5%'
+                      marginRight: '5%',
+                      marginBottom: responsiveHeight(1),
+                      marginTop: responsiveHeight(1.5)
                     }}
                   >
                     <Image
