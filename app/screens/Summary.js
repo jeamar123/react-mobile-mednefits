@@ -6,6 +6,7 @@ import styles from '../components/SummaryComp/styles';
 import Navbar from '../components/common/NavbarGreen';
 import * as Common from '../components/common';
 import * as Config from '../config';
+import RF from 'react-native-responsive-fontsize';
 
 class Summary extends Component {
   constructor(props) {
@@ -110,7 +111,7 @@ class Summary extends Component {
                       fontFamily: Config.FONT_FAMILY_ROMAN,
                     }}
                   >
-                    Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                    Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
                   </Text>
                 </View>
 
@@ -142,10 +143,10 @@ class Summary extends Component {
                         style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                       />
                       <View>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 18, fontWeight: 'bold', marginTop: '2%' }}>
+                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                           {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                         </Text>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 15, marginTop: '2%' }}>
+                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
                           Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                         </Text>
                       </View>
@@ -378,7 +379,7 @@ class Summary extends Component {
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                       }}
                     >
-                      Paid on: {(this.props.result.data.transaction_time) ? this.props.result.data.transaction_time : ""}
+                      Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
                     </Text>
                   </View>
 
@@ -410,10 +411,10 @@ class Summary extends Component {
                           style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                         />
                         <View>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 18, fontWeight: 'bold', marginTop: '2%' }}>
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 15, marginTop: '2%' }}>
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
                             Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                           </Text>
                         </View>
@@ -427,7 +428,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: responsiveHeight(11.5)
+                      height: responsiveHeight(10)
                     }}
                   >
                     <View
@@ -445,7 +446,7 @@ class Summary extends Component {
                             marginTop: 10,
                             marginBottom: 5,
                             color: '#fff',
-                            fontSize: 16,
+                            fontSize: RF(1.6),
                             fontFamily: Config.FONT_FAMILY_ROMAN,
                           }}
                         >

@@ -4,6 +4,7 @@ import { Left } from 'native-base';
 import * as Config from '../../config';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
+import RF from 'react-native-responsive-fontsize'
 
 export default EStyleSheet.create({
   container: {
@@ -41,14 +42,14 @@ export default EStyleSheet.create({
   },
   detail2: {
     fontFamily: Config.FONT_FAMILY_BOLD,
-    fontSize: 38,
+    fontSize: RF(5.2),
     lineHeight: 38,
     color: '#fff',
     fontWeight: '600',
   },
   detailUp2: {
     fontFamily: Config.FONT_FAMILY_BOLD,
-    fontSize: 20,
+    fontSize: RF(2.0),
     lineHeight: 20,
     color: '#fff',
     fontWeight: '600',

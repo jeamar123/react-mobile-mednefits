@@ -243,7 +243,7 @@ class ConfirmPay extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar leftNav="back" title="Summary" />
         <Content padder>
-          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center', paddingBottom: responsiveHeight(1.5) }}>
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -372,7 +372,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingTop: responsiveHeight(1),
+                paddingTop: responsiveHeight(0.5),
                 paddingBottom: responsiveHeight(1),
                 marginBottom: '5%',
                 marginLeft: '5%',
@@ -418,7 +418,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingTop: responsiveHeight(1),
+                paddingTop: responsiveHeight(0.5),
                 paddingBottom: responsiveHeight(3),
                 marginLeft: '5%',
                 marginRight: '5%'

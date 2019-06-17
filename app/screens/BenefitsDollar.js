@@ -100,7 +100,7 @@ class BenefitsDollar extends Component {
         />
         <Content padder>
 
-          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center' }}>
+          <View style={{ backgroundColor: '#ffffff', justifyContent: 'center', paddingBottom: responsiveHeight(1.5) }}>
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -255,7 +255,7 @@ class BenefitsDollar extends Component {
             Next
           </ButtonPay>
         </Content>
-      </Container>
+      </Container >
     );
   }
 }
