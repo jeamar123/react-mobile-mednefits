@@ -149,7 +149,7 @@ class Summary extends Component {
                         <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                           {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                         </Text>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }}>
+                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }} numberOfLines={3}>
                           Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                         </Text>
                       </View>
@@ -418,7 +418,7 @@ class Summary extends Component {
                           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }}>
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }} numberOfLines={3}>
                             Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                           </Text>
                         </View>

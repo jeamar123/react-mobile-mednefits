@@ -10,7 +10,8 @@ class ScanPay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      touch: ''
+      touch: '',
+      timeNow: ''
     }
   }
 
@@ -31,13 +32,31 @@ class ScanPay extends Component {
     }
   }
 
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+
+    that.setState({
+      //Setting the value of the date time
+      timeNow:
+        year + '-' + month + '-' + date + ' ' + hours + ':' + min + ':' + sec,
+    });
+  }
+
   SendPayment() {
     this.setState({ isLoading: true });
 
     params = {
+      input_amount: this.props.amount,
       services: this.props.services,
       clinic_id: this.props.clinicid,
-      check_Id: this.props.check_Id,
+      check_in_id: this.props.checkId,
+      check_out_time: this.state.timeNow
     };
 
     Core.PayDirect(params, (err, result) => {
