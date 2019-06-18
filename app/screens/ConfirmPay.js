@@ -316,7 +316,7 @@ class ConfirmPay extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(3.0) }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
@@ -353,7 +353,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '7%',
+                paddingBottom: responsiveHeight(3.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -421,7 +421,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingTop: responsiveHeight(1),
-                paddingBottom: responsiveHeight(3),
+                paddingBottom: responsiveHeight(3.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}

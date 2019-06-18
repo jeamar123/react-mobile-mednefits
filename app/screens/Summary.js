@@ -67,7 +67,7 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(3),
-                height: responsiveHeight(34.5),
+                height: responsiveHeight(35.5),
                 borderRadius: 5
               }}
             >
@@ -432,7 +432,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: responsiveHeight(11.5)
+                      height: responsiveHeight(10)
                     }}
                   >
                     <View
@@ -450,14 +450,14 @@ class Summary extends Component {
                             marginTop: 10,
                             marginBottom: 5,
                             color: '#fff',
-                            fontSize: 16,
+                            fontSize: RF(1.8),
                             fontFamily: Config.FONT_FAMILY_ROMAN,
                           }}
                         >
                           Make Payment in Cash
                         </Text>
                         <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5%' }}
+                          style={{ flexDirection: 'row', alignItems: 'flex-start' }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
                           <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>

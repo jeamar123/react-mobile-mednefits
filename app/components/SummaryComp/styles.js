@@ -2,6 +2,8 @@ import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
 import * as Config from '../../config';
+import RF from 'react-native-responsive-fontsize';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 
@@ -40,17 +42,18 @@ export default EStyleSheet.create({
   },
   detail2: {
     fontFamily: Config.FONT_FAMILY_BOLD,
-    fontSize: 38,
+    fontSize: RF(3.8),
     lineHeight: 38,
     color: '#fff',
     fontWeight: '600',
   },
   detailUp2: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
-    fontSize: 20,
+    fontSize: RF(1.8),
     lineHeight: 20,
     color: '#fff',
     marginRight: '2%',
+    marginTop: responsiveHeight(0.8)
   },
 
 });
