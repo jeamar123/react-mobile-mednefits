@@ -4,6 +4,7 @@ import {
   TimePickerAndroid
 } from 'react-native'
 import * as Common from './index'
+import * as Config from '../../config'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 
 export default class InputTime extends Component {
@@ -29,7 +30,7 @@ export default class InputTime extends Component {
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    this.props.onTimeChange(date.toLocaleTimeString())
+    this.props.onTimeChange(this.msToTime(date))
     this._hideDateTimePicker();
   };
 
@@ -39,6 +40,8 @@ export default class InputTime extends Component {
         onPress={() => this._showDateTimePicker()}
       >
         <Common.Texti
+          fontSize={12}
+          fontFamily={Config.FONT_FAMILY_LIGHT}
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}

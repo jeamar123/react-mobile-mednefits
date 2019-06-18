@@ -13,34 +13,34 @@ export default EStyleSheet.create({
     marginBottom: 10,
     marginLeft: "5%",
     marginRight: "5%",
-    marginTop: "5%",
+    marginTop: 25,
   },
-  sectionSpending:{
+  sectionSpending: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 15,
+    marginBottom: 25,
     marginLeft: "5%",
     marginRight: "5%",
   },
-  dividerDetail:{
+  dividerDetail: {
     padding: 8,
     backgroundColor: "#EFEFF4"
   },
-  sectionTitleComponent:{
+  sectionTitleComponent: {
     backgroundColor: "#CECED0"
   },
   title: {
     justifyContent: 'center',
     alignItems: 'center',
-    color : '#919191'
+    color: '#919191'
   },
   detailsTitle: {
-  fontSize: 8,
-  fontStyle: "normal",
-  letterSpacing: 0,
-  color: "#919191",
-  marginLeft: '3%'
+    fontSize: 8,
+    fontStyle: "normal",
+    letterSpacing: 0,
+    color: "#919191",
+    marginLeft: '3%'
   },
   spendingActive: {
     paddingTop: 10,
@@ -67,14 +67,14 @@ export default EStyleSheet.create({
     color: 'black',
     width: "100%"
   },
-  fieldStyle:{
+  fieldStyle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 15,
     paddingBottom: 15
   },
-  fieldStyleNoPadding:{
+  fieldStyleNoPadding: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

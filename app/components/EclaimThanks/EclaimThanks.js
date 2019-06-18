@@ -20,7 +20,7 @@ const EclaimThanks = () => (
     </ImageBackground>
     <Text style={styles.textThanks}>Thank you!</Text>
     <Text style={styles.text}>
-      Your claim has been successfully submitted. For claim status update, please go to History/Activity
+      Your claim has been successfully submitted. For claim status update, please go to History / Activity
     </Text>
   </View>
 );
