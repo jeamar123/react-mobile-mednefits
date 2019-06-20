@@ -65,7 +65,7 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(5),
-                height: responsiveHeight(34),
+                height: responsiveHeight(35.5),
                 borderRadius: 5
               }}
             >
@@ -146,7 +146,7 @@ class Summary extends Component {
                         <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                           {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                         </Text>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
+                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }} numberOfLines={3}>
                           Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                         </Text>
                       </View>
@@ -163,7 +163,6 @@ class Summary extends Component {
                 onPress={() => this.detailPaymentOpened(data.number)}
                 style={{
                   backgroundColor: "#3F9D59",
-                  width: "90%",
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 5,
@@ -333,7 +332,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(5),
-                  height: responsiveHeight(46),
+                  height: responsiveHeight(47.5),
                   borderRadius: 5
                 }}
               >
@@ -414,7 +413,7 @@ class Summary extends Component {
                           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }} numberOfLines={3}>
                             Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                           </Text>
                         </View>
@@ -444,16 +443,15 @@ class Summary extends Component {
                         <Text
                           style={{
                             marginTop: 10,
-                            marginBottom: 5,
                             color: '#fff',
-                            fontSize: RF(1.6),
+                            fontSize: RF(2.2),
                             fontFamily: Config.FONT_FAMILY_ROMAN,
                           }}
                         >
                           Make Payment in Cash
                         </Text>
                         <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: '1.5%' }}
+                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(0.5) }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
                           <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>
@@ -470,7 +468,6 @@ class Summary extends Component {
                   onPress={() => this.detailPaymentOpened(data.number)}
                   style={{
                     backgroundColor: "#3F9D59",
-                    width: "90%",
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 5,

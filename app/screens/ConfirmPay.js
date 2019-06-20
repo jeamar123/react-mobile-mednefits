@@ -315,7 +315,7 @@ class ConfirmPay extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: 16 }}>
+              <Text style={{ marginBottom: responsiveHeight(2.2), fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(3.2) }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
@@ -352,7 +352,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '7%',
+                paddingBottom: responsiveHeight(3.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -404,11 +404,6 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               {this.PaybyCredit()}
-              {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {
-                  (this.props.amount > this.state.amountCap) ? Number(this.props.capAmount).toFixed(2) : Number(this.props.amount).toFixed(2)
-                }
-              </Text> */}
             </View>
             <View>
               <Common.Divider />
@@ -419,7 +414,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingTop: responsiveHeight(0.5),
-                paddingBottom: responsiveHeight(3),
+                paddingBottom: responsiveHeight(3.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -428,13 +423,6 @@ class ConfirmPay extends Component {
                 Payable by Cash
               </Text>
               {this.PaybyCash()}
-              {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency} {
-                  (this.props.capCurrency == 'RM') ? (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' :
-                    (Number(this.state.byCash).toFixed(2).length === 2) ?
-                      Number(this.state.byCash).toFixed(2) + '.00' : Number(this.state.byCash).toFixed(2) :
-                    (Number(this.state.byCash).toFixed(2) < 0) ? '0.00' : Number(this.state.byCash).toFixed(2)}
-              </Text> */}
             </View>
           </View>
 
