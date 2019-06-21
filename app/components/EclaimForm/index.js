@@ -202,7 +202,7 @@ export default class EclaimForm extends Component {
                   <Common.Texti
                     fontSize={12}
                     fontFamily={Config.FONT_FAMILY_LIGHT}
-                    fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#9e9e9e" : "black"}>
+                    fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#9e9e9e" : "#2C3E50"}>
                     {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
                   </Common.Texti>
                 </View>
@@ -237,7 +237,8 @@ export default class EclaimForm extends Component {
                 onChangeText={text => this.setState({ provider: text })}
                 placeholder="Name of Provider"
                 inputStyle={{
-                  fontSize: 16
+                  fontSize: 16,
+                  color: "#2C3E50"
                 }}
                 iconColor="#9e9e9e"
                 leftToRight
@@ -325,7 +326,7 @@ export default class EclaimForm extends Component {
 
             {/*   */}
 
-            <View
+            {/*<View
               style={styles.fieldStyle}
             >
               <Common.Texti style={{
@@ -343,7 +344,7 @@ export default class EclaimForm extends Component {
               />
             </View>
 
-            <Common.Divider />
+            <Common.Divider />*/}
 
             <View
               style={styles.fieldStyleNoPadding}
@@ -355,15 +356,32 @@ export default class EclaimForm extends Component {
                 Receipt Amount
               </Common.Texti>
 
-              <Common.InputAmount
-                value={this.state.amount}
-                keyboardType="numeric"
-                onChangeText={text => this.setState({ amount: text })}
-                placeholder="Enter amount"
-                type={"currency"}
-                currency={this.state.currency}
-                leftToRight
-              />
+              <View style={{flexDirection: 'row'}}>
+                <Common.InputAmount
+                  value={this.state.amount}
+                  keyboardType="numeric"
+                  onChangeText={text => this.setState({ amount: text })}
+                  placeholder="Enter amount"
+                  currency={this.state.currency}
+                  leftToRight
+                />
+                <View
+                  style={{
+                    borderRightColor: '#DBDBDB',
+                    borderRightWidth: 0.8,
+                    marginTop: -10,
+                    marginBottom: -10
+                  }}
+                />
+              <View style={{marginLeft: 10, justifyContent: 'center', alignItems: 'center'}}>
+                  <Common.InputSelect
+                    placeholder={this.state.currency}
+                    data={this.state.currencyData}
+                    value={this.state.currency}
+                    onValueChange={(value) => this.setState({ currency: value })}
+                  />
+                </View>
+              </View>
             </View>
 
             <Common.Divider />

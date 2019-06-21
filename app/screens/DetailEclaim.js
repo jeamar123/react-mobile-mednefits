@@ -163,8 +163,13 @@ class DetailEclaim extends Component {
     );
   }
 
+  Capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("props: " + JSON.stringify(this.props))
+    console.warn(this.props.claimdata)
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -209,6 +214,39 @@ class DetailEclaim extends Component {
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
+                Spending Account
+              </Text>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"}>
+                  {this.Capitalize(this.props.claimdata.type_spending)}
+                </Common.Texti>
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                    marginLeft: 10
+                  }}
+                >
+                  <Image
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ height: 20, resizeMode: 'center', width: 20 }}
+                  />
+                </View>
+              </View>
+            </View>
+            <Common.Divider noMargin />
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15
+              }}
+            >
+              <Text style={{ color: '#000', marginLeft: '2%' }}>
                 Claim Type
               </Text>
               <View
@@ -222,11 +260,10 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <ResponsiveImage
-                    source={require('../../assets/apps/arrow.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="15"
-                  />
+                <Image
+                  source={require('../../assets/apps/arrow.png')}
+                  style={{ height: 20, resizeMode: 'center', width: 20 }}
+                />
                 </View>
               </View>
             </View>
@@ -288,10 +325,9 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <ResponsiveImage
-                    source={require('../../assets/apps/calendar.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="16"
+                  <Image
+                    source={require('../../assets/apps/arrow.png')}
+                    style={{ height: 20, resizeMode: 'center', width: 20 }}
                   />
                 </View>
               </View>

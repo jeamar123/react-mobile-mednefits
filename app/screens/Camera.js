@@ -340,6 +340,19 @@ class Camera extends Component {
                     <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
                   ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.changeViewCamera('batch')}
+                  style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  <Common.Texti
+                    fontColor={(this.state.shootType !== 'batch') ? "grey" : "#0392cf"}
+                    fontSize={11}
+                  >
+                    Batch{" "}
+                  </Common.Texti>
+                  {(this.state.shootType == 'batch') ? (
+                    <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
+                  ) : (<View style={{ width: 4, height: 4, borderRadius: 4 / 2, marginTop: 2 }} />)}
+                </TouchableOpacity>
               </View>
             ) : (
                 <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -396,13 +409,18 @@ class Camera extends Component {
             <View style={{
               flex: 1,
               flexGrow: 2,
-              flexDirection: 'column',
             }}>
               {((this.state.images.length > 0) && (this.state.shootType == 'batch') && (this.state.preview !== false)) ? (
                 this.state.images.map((value, index) => (
                   <View
                     key={index}
-                    style={{ flex: 1, alignItems: 'flex-start', paddingTop: 3 }}
+                    style={{
+                      flex: 1,
+                      alignItems: 'flex-start',
+                      paddingTop: 3,
+                      position: (index == 0) ? 'relative' : 'absolute',
+                      zIndex: 5
+                    }}
                   >
                     <TouchableOpacity
                       onPress={() => this.setPreview(index + 1)}

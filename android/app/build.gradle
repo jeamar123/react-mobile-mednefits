@@ -207,35 +207,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply plugin: 'com.google.gms.google-services'
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
-
-def manifest = new XmlSlurper().parse(file("./src/main/AndroidManifest.xml"))
-def packageName = manifest.@package.text()
-task copyAAR(type: Copy) {
-  from "$projectDir/build/outputs/aar/"
-  include 'android.aar'
-  into "$projectDir/AAR/"
-  rename 'android.aar', "${packageName}.aar"
-  doLast {
-new File("$projectDir/AAR/build.gradle").text = """
-      configurations.maybeCreate("default")
-      artifacts.add("default", file('${packageName}.aar'))
-      """
-  }
-}
-task deJetify(type: Exec) {
-  workingDir "$projectDir/AAR/"
-if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-    commandLine 'cmd', '/c', 'npx', 'jetifier-standalone', '-r', '-i', "${packageName}.aar", '-o', "${packageName}-support.aar"
-  } else {
-    commandLine 'npx', 'jetifier-standalone', '-r', '-i', "${packageName}.aar", '-o', "${packageName}-support.aar"
-  }
-  ignoreExitValue true
-  doLast {
-if(execResult.exitValue != 0) {
-      logger.error("It seems that you don't have jetifier installed. Try installing it by `npm install jetifier` and try again")
-    }
-  }
-}
-task prepareAAR(type: GradleBuild) {
-  tasks = ['assemble', 'copyAAR', 'deJetify']
-}
