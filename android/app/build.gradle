@@ -131,6 +131,7 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
+            matchingFallbacks = ['release', 'debug']
         }
     }
     // applicationVariants are e.g. debug, release
@@ -149,6 +150,16 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-system-setting')
+    compile project(':react-native-svg')
+    compile project(':react-native-maps')
+    compile project(':react-native-image-picker')
+    compile project(':react-native-geolocation-service')
+    compile project(':react-native-fs')
+    compile project(':react-native-document-picker')
+    compile project(':react-native-push-notification')
     implementation project(':react-native-version-check')
 	implementation project(':react-native-geolocation-service')
     implementation project(':react-native-vector-icons')
@@ -158,7 +169,6 @@ dependencies {
     implementation project(':react-native-fs')
     implementation project(':react-native-document-picker')
     implementation project(':react-native-push-notification')
-    implementation project(':react-native-camera')
     implementation project(':react-native-svg')
     implementation project(':react-native-fs')
     implementation (project(':react-native-camera')) {
@@ -197,3 +207,35 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply plugin: 'com.google.gms.google-services'
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
+
+def manifest = new XmlSlurper().parse(file("./src/main/AndroidManifest.xml"))
+def packageName = manifest.@package.text()
+task copyAAR(type: Copy) {
+  from "$projectDir/build/outputs/aar/"
+  include 'android.aar'
+  into "$projectDir/AAR/"
+  rename 'android.aar', "${packageName}.aar"
+  doLast {
+new File("$projectDir/AAR/build.gradle").text = """
+      configurations.maybeCreate("default")
+      artifacts.add("default", file('${packageName}.aar'))
+      """
+  }
+}
+task deJetify(type: Exec) {
+  workingDir "$projectDir/AAR/"
+if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+    commandLine 'cmd', '/c', 'npx', 'jetifier-standalone', '-r', '-i', "${packageName}.aar", '-o', "${packageName}-support.aar"
+  } else {
+    commandLine 'npx', 'jetifier-standalone', '-r', '-i', "${packageName}.aar", '-o', "${packageName}-support.aar"
+  }
+  ignoreExitValue true
+  doLast {
+if(execResult.exitValue != 0) {
+      logger.error("It seems that you don't have jetifier installed. Try installing it by `npm install jetifier` and try again")
+    }
+  }
+}
+task prepareAAR(type: GradleBuild) {
+  tasks = ['assemble', 'copyAAR', 'deJetify']
+}

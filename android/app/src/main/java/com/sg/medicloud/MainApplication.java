@@ -4,6 +4,17 @@ import android.app.Application;
 
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.ninty.system.setting.SystemSettingPackage;
+import com.horcrux.svg.SvgPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
+import com.rnfs.RNFSPackage;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import org.reactnative.camera.RNCameraPackage;
+import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
