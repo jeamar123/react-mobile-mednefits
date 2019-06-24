@@ -60,7 +60,8 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     color: '#2c3e50',
-    fontFamily: Config.FONT_FAMILY_ROMAN,
-    marginRight: 10
+    fontFamily: Config.FONT_FAMILY_LIGHT,
+    fontSize: 12,
+    paddingRight: 10
   },
 };

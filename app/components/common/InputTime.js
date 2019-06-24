@@ -20,16 +20,18 @@ export default class InputTime extends Component {
       hours = parseInt((duration / (1000 * 60 * 60)) % 24);
 
     hours = (hours < 10) ? "0" + hours : hours;
+    ampm = hours >= 12 ? 'PM' : 'AM';
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    return hours + ":" + minutes;
+    return (hours-4) + ":" + minutes + " "+ampm;
   }
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
+    console.warn(date);
     this.props.onTimeChange(this.msToTime(date))
     this._hideDateTimePicker();
   };

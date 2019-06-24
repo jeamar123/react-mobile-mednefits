@@ -43,6 +43,7 @@ export default class InputText extends Component {
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
             fontFamily: Config.FONT_FAMILY_ROMAN,
+            fontSize: 12
           }, this.props.placeholderStyle]}
           style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
         />
@@ -71,6 +72,7 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     color: '#2c3e50',
-    fontFamily: Config.FONT_FAMILY_ROMAN
+    fontFamily: Config.FONT_FAMILY_LIGHT,
+    fontSize: 12
   },
 };

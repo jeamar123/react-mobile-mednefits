@@ -221,17 +221,6 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.Capitalize(this.props.claimdata.type_spending)}
                 </Common.Texti>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <Image
-                    source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 20, resizeMode: 'center', width: 20 }}
-                  />
-                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -252,19 +241,8 @@ class DetailEclaim extends Component {
               <View
                 style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
-                  {this.props.claimdata.claim}
+                  {(this.props.claimdata.claim == '1') ? "General Practice" : (this.props.claimdata.claim == "2") ? "Health Screening" : (this.props.claimdata.claim == "3") ? "Traditional Chinese Medicine" : (this.props.claimdata.claim == "4") ? "Medical Specialist" : "-"}
                 </Common.Texti>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                <Image
-                  source={require('../../assets/apps/arrow.png')}
-                  style={{ height: 20, resizeMode: 'center', width: 20 }}
-                />
-                </View>
               </View>
             </View>
             <Common.Divider noMargin />
@@ -319,17 +297,10 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <Image
-                    source={require('../../assets/apps/arrow.png')}
-                    style={{ height: 20, resizeMode: 'center', width: 20 }}
-                  />
-                </View>
+                <Image
+                  source={require('../../assets/apps/calendar.png')}
+                  style={{ height: 20, resizeMode: 'center', width: 20 }}
+                />
               </View>
             </View>
             <Common.Divider noMargin />
@@ -383,7 +354,7 @@ class DetailEclaim extends Component {
               <Text
                 style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
               >
-                Claim Amount
+                Receipt Amount
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
@@ -421,18 +392,6 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.state.member}
                 </Common.Texti>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <ResponsiveImage
-                    source={require('../../assets/apps/arrow.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="15"
-                  />
-                </View>
               </View>
             </View>
             <Common.Divider noMargin />

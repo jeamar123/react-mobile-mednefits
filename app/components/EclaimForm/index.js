@@ -37,8 +37,9 @@ export default class EclaimForm extends Component {
       file: false,
       isLoading: false,
       currency: false,
+      updateDataSelect: false,
       currencyData: [],
-      currencyState: "S$"
+      currencyState: "Select"
     }
     this.selectSpending = this.selectSpending.bind(this)
     this.inputDate = {};
@@ -48,6 +49,26 @@ export default class EclaimForm extends Component {
     this.getMember()
     this.selectSpending("medical")
     this.getCurrency()
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.currencyState !== this.props.currencyState) {
+      this.setState({
+        currency: this.props.currency
+      })
+    }
+  }
+
+  updateDataSelect(){
+    this.setState({
+      type_spending: this.props.type_spending,
+      provider: this.props.provider,
+      amount: this.props.amount,
+      member: this.props.member,
+      date: this.props.date,
+      time: this.props.time,
+      updateDataSelect: true
+    })
   }
 
   async getMember() {
@@ -76,12 +97,12 @@ export default class EclaimForm extends Component {
         dataCurrency = []
 
         result.data.map((currency) => {
-          dataCurrency.push({ label: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM", value: (currency.currency_name == "SGD - Singapore Dollar") ? "S$" : "RM" })
+          dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
-          currency: "S$",
+          currency: "Select",
         })
       }
     })
@@ -115,7 +136,7 @@ export default class EclaimForm extends Component {
   nextSnapPhoto() {
     try {
       if (
-        (!this.props.claim) ||
+        (!this.state.claim) ||
         (!this.state.provider) ||
         (!this.state.amount) ||
         (!this.state.member) ||
@@ -126,7 +147,7 @@ export default class EclaimForm extends Component {
       } else {
         claimData = {
           type_spending: this.state.type,
-          claim: this.props.claim,
+          claim: this.state.claim,
           provider: this.state.provider,
           amount: this.state.amount,
           member: this.state.member,
@@ -145,7 +166,6 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
-    console.warn(this.state.type);
     return (
       <View
         style={styles.container}
@@ -195,30 +215,13 @@ export default class EclaimForm extends Component {
               <Common.Texti>
                 Claim Type
               </Common.Texti>
-              <TouchableOpacity
-                onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
-                style={{ flexDirection: 'row' }}>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  <Common.Texti
-                    fontSize={12}
-                    fontFamily={Config.FONT_FAMILY_LIGHT}
-                    fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#9e9e9e" : "#2C3E50"}>
-                    {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
-                  </Common.Texti>
-                </View>
-
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <Image
-                    source={require('../../../assets/apps/arrow.png')}
-                    style={{ height: 20, resizeMode: 'center', width: 20 }}
-                  />
-                </View>
-              </TouchableOpacity>
+              <Common.InputSelectListClaim
+                title="Claim Type"
+                placeholder={this.state.claimTypeState}
+                dataclaim={this.state.claimType}
+                value={this.state.claim}
+                onValueChange={(value) => this.setState({ claim: value })}
+              />
             </View>
 
             <Common.Divider />
@@ -237,7 +240,7 @@ export default class EclaimForm extends Component {
                 onChangeText={text => this.setState({ provider: text })}
                 placeholder="Name of Provider"
                 inputStyle={{
-                  fontSize: 16,
+                  fontSize: 12,
                   color: "#2C3E50"
                 }}
                 iconColor="#9e9e9e"
@@ -373,13 +376,21 @@ export default class EclaimForm extends Component {
                     marginBottom: -10
                   }}
                 />
-              <View style={{marginLeft: 10, justifyContent: 'center', alignItems: 'center'}}>
-                  <Common.InputSelect
-                    placeholder={this.state.currency}
+                <View style={{marginLeft: 10, justifyContent: 'center', alignItems: 'center'}}>
+                  <Common.InputSelectListCurrency
+                    title="Currency"
+                    placeholder={this.state.currencyState}
+                    titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
                     data={this.state.currencyData}
                     value={this.state.currency}
                     onValueChange={(value) => this.setState({ currency: value })}
                   />
+                  {/*<Common.InputSelect
+                    placeholder={this.state.currency}
+                    data={this.state.currencyData}
+                    value={this.state.currency}
+                    onValueChange={(value) => this.setState({ currency: value })}
+                  />*/}
                 </View>
               </View>
             </View>
@@ -411,7 +422,7 @@ export default class EclaimForm extends Component {
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
             style={{
-              backgroundColor: (!this.props.claim) ||
+              backgroundColor: (!this.state.claim) ||
                 (!this.state.provider) ||
                 (!this.state.amount) ||
                 (!this.state.member) ||
