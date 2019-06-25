@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   View,
-  Image,
   TouchableOpacity,
   Dimensions,
   ScrollView
@@ -9,6 +8,7 @@ import {
 import Modal from 'react-native-modal';
 import ResponsiveImage from 'react-native-responsive-image';
 import * as Common from './index';
+import * as Config from '../../config';
 const { height, width } = Dimensions.get('window');
 
 export default class InputSelect extends Component {
@@ -104,6 +104,8 @@ export default class InputSelect extends Component {
             style={{
               color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
             }}
+            fontSize={13}
+            fontFamily={Config.FONT_FAMILY_LIGHT}
           >
             {this.setTitle()}
           </Common.Text>
@@ -117,7 +119,7 @@ export default class InputSelect extends Component {
             <ResponsiveImage
               source={require('../../../assets/apps/arrow.png')}
               style={{ resizeMode: 'center' }}
-              initWidth="15" initHeight="15"
+              initWidth="8" initHeight="15"
             />
           </View>
 

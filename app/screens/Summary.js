@@ -12,7 +12,7 @@ class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: true
+      isActive: false
     };
   }
 
@@ -188,7 +188,7 @@ class Summary extends Component {
 
             <View
               ref={'detailPayment'}
-              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-5.5) }}>
+              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-6.3), display: "none" }}>
               <View
                 style={{
                   backgroundColor: '#f8f8fa',
@@ -332,7 +332,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(5),
-                  height: responsiveHeight(47.5),
+                  height: responsiveHeight(47),
                   borderRadius: 5
                 }}
               >
@@ -427,7 +427,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: responsiveHeight(10)
+                      height: responsiveHeight(10.5)
                     }}
                   >
                     <View
@@ -493,7 +493,7 @@ class Summary extends Component {
 
               <View
                 ref={'detailPayment'}
-                style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-5.5) }}>
+                style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-6.3), display: "none" }}>
                 <View
                   style={{
                     backgroundColor: '#f8f8fa',

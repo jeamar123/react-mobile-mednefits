@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Left } from 'native-base';
 const { width, height } = Dimensions.get('window');
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
@@ -19,7 +20,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: responsiveHeight(3),
     marginTop: '-3%',
     marginLeft: "5%",
     marginRight: "5%",

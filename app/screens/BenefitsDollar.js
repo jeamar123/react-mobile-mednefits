@@ -187,7 +187,6 @@ class BenefitsDollar extends Component {
               </Text>
               <InputPay
                 keyboardType="numeric"
-                returnKeyType='done'
                 placeholder="0.00"
                 value={this.state.amount}
                 returnKeyType='done'

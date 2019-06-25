@@ -366,7 +366,7 @@ class ConfirmPay extends Component {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#dde0e4', marginTop: responsiveHeight(3), height: responsiveHeight(6) }}>
+          <View style={{ backgroundColor: '#dde0e4', marginTop: responsiveHeight(2), paddingTop: responsiveHeight(0.5), height: responsiveHeight(7), paddingBottom: responsiveHeight(2) }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -388,7 +388,7 @@ class ConfirmPay extends Component {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#fff', marginTop: responsiveHeight(3), height: responsiveHeight(15) }}>
+          <View style={{ backgroundColor: '#fff', marginTop: responsiveHeight(2), height: responsiveHeight(15.5) }}>
             <View
               style={{
                 flexDirection: 'row',

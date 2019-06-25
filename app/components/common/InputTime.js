@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import {
-  TouchableOpacity,
-  TimePickerAndroid
-} from 'react-native'
-import * as Common from './index'
-import DateTimePicker from 'react-native-modal-datetime-picker'
+import { TouchableOpacity } from 'react-native';
+import * as Common from './index';
+import * as Config from '../../config';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class InputTime extends Component {
   state = {
@@ -15,8 +13,8 @@ export default class InputTime extends Component {
     console.warn(duration);
     var milliseconds = parseInt((duration % 1000) / 100),
       seconds = parseInt((duration / 1000) % 60),
-      minutes = parseInt((duration / (1000 * 60)) % 60),
-      hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+      minutes = duration.getMinutes(),
+      hours = duration.getHours()
 
     var mid = 'AM';
     if (hours == 0) { //At 00 hours we need to show 12 am
@@ -49,6 +47,8 @@ export default class InputTime extends Component {
       >
         <Common.Texti
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
+          fontSize={13}
+          fontFamily={Config.FONT_FAMILY_LIGHT}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}
         </Common.Texti>

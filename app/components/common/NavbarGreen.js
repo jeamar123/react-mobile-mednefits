@@ -438,7 +438,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: responsiveWidth(14),
+            width: responsiveWidth(15.5),
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: responsiveWidth(3),

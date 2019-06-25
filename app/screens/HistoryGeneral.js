@@ -185,7 +185,7 @@ class History extends Component {
 
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => this.selectPhoto()}
+              onPress={() => Actions.Camera()}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -205,7 +205,7 @@ class History extends Component {
                   paddingBottom: 10,
                 }}>
                 Upload Receipt
-            </Common.Texti>
+              </Common.Texti>
             </TouchableOpacity>
           </View>
         </View>
@@ -245,7 +245,7 @@ class History extends Component {
           }}>
           <View style={{ flex: 1, width: '100%', marginTop: responsiveHeight(2), marginBottom: responsiveHeight(10) }}>
             <TouchableOpacity
-              onPress={() => this.selectPhoto()}
+              onPress={() => Actions.Camera()}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',

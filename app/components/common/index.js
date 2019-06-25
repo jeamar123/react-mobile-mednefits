@@ -18,6 +18,8 @@ import InputDate from './InputDate'
 import InputDateCustom from './InputDateCustom'
 import InputTime from './InputTime'
 import InputSelect from './InputSelect'
+import InputSelectListClaim from './InputSelectListClaim'
+import InputSelectListCurrency from './InputSelectListCurrency'
 import InputSelect2 from './InputSelect2'
 import InputSearch from './InputSearch'
 import InputText from './InputText'
@@ -26,5 +28,7 @@ import InputAmount from './InputAmount'
 import InputFile from './InputFile'
 import Error from './Error'
 import Text from './Text'
+import SimpleCurrencyInput from './SimpleCurrencyInput'
+import TextInputMask from './text-input-mask'
 
-export { buttonSearch, Body, Text, Texti, Divider, DividerWallet, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, InputAmount, Popup, Error }
+export { buttonSearch, Body, Text, Texti, Divider, DividerWallet, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, InputAmount, Popup, Error, SimpleCurrencyInput, TextInputMask, InputSelectListClaim, InputSelectListCurrency }

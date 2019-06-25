@@ -319,7 +319,7 @@ class Camera extends Component {
           </View>
           <View style={{ width: "33%" }}>
             {((this.state.preview !== true) || (this.state.previewState == 0)) ? (
-              <View style={{ paddingTop: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', display: (this.state.preview && (this.state.shootType == 'single')) ? 'none' : 'flex' }}>
                 <TouchableOpacity
                   onPress={() => this.changeViewCamera('single')}
                   style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -327,7 +327,7 @@ class Camera extends Component {
                     fontColor={(this.state.shootType !== 'single') ? "grey" : "#0392cf"}
                     fontSize={11}
                   >
-                    Single{" "}{" "}
+                    Single{" "}
                   </Common.Texti>
                   {(this.state.shootType == 'single') ? (
                     <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
@@ -337,10 +337,10 @@ class Camera extends Component {
                   onPress={() => this.changeViewCamera('batch')}
                   style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                   <Common.Texti
-                    fontColor={(this.state.shootType == 'single') ? "grey" : "#0392cf"}
+                    fontColor={(this.state.shootType !== 'batch') ? "grey" : "#0392cf"}
                     fontSize={11}
                   >
-                    Batch
+                    Batch{" "}
                   </Common.Texti>
                   {(this.state.shootType == 'batch') ? (
                     <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
@@ -348,7 +348,7 @@ class Camera extends Component {
                 </TouchableOpacity>
               </View>
             ) : (
-                <View style={{ paddingTop: 10, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                   <TouchableOpacity
                     onPress={() => this.removeImage(this.state.previewState - 1)}
                     style={{
@@ -401,14 +401,19 @@ class Camera extends Component {
             style={{ width: '40%' }}>
             <View style={{
               flex: 1,
-              flexGrow: 2,
-              flexDirection: 'column',
+              flexGrow: 2
             }}>
               {((this.state.images.length > 0) && (this.state.shootType == 'batch') && (this.state.preview !== false)) ? (
                 this.state.images.map((value, index) => (
                   <View
                     key={index}
-                    style={{ flex: 1, alignItems: 'flex-start', paddingTop: 3 }}
+                    style={{
+                      flex: 1,
+                      alignItems: 'flex-start',
+                      paddingTop: 3,
+                      position: (index == 0) ? 'relative' : 'absolute',
+                      zIndex: 5
+                    }}
                   >
                     <TouchableOpacity
                       onPress={() => this.setPreview(index + 1)}

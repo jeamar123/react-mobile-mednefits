@@ -5,11 +5,13 @@ import {
   KeyboardAvoidingView,
   ScrollView
 } from 'react-native';
-import ResponsiveImage from 'react-native-responsive-image';
-import * as Common from '../common';
-import styles from './styles';
-import * as Core from '../../core';
 import { Actions } from 'react-native-router-flux';
+import ResponsiveImage from 'react-native-responsive-image';
+import styles from './styles';
+import * as Common from '../common';
+import * as Core from '../../core';
+import * as Config from '../../config';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default class EclaimForm extends Component {
   constructor(props) {
@@ -57,6 +59,26 @@ export default class EclaimForm extends Component {
     this.getCurrency();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.currencyState !== this.props.currencyState) {
+      this.setState({
+        currency: this.props.currency
+      })
+    }
+  }
+
+  updateDataSelect() {
+    this.setState({
+      type_spending: this.props.type_spending,
+      provider: this.props.provider,
+      amount: this.props.amount,
+      member: this.props.member,
+      date: this.props.date,
+      time: this.props.time,
+      updateDataSelect: true
+    })
+  }
+
   async getMember() {
     this.setState({ memberState: "Loading..." })
 
@@ -76,7 +98,7 @@ export default class EclaimForm extends Component {
   }
 
   async getCurrency() {
-    this.setState({ currencyState: "Loading...", currency: false })
+    this.setState({ currencyState: "Loading..." })
 
     await Core.CurrencyList((err, result) => {
       if (result) {
@@ -85,9 +107,12 @@ export default class EclaimForm extends Component {
         result.data.map((currency) => {
           dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
-        this.setState({ currencyData: dataCurrency })
+        this.setState({
+          currencyState: "Select",
+          currencyData: dataCurrency,
+          currency: "SGD",
+        })
       }
-      this.setState({ currencyState: "SGD" })
     })
   }
 
@@ -126,7 +151,7 @@ export default class EclaimForm extends Component {
   nextSnapPhoto() {
     try {
       if (
-        (!this.props.claim) ||
+        (!this.state.claim) ||
         (!this.state.provider) ||
         (!this.state.amount) ||
         (!this.state.member) ||
@@ -137,7 +162,7 @@ export default class EclaimForm extends Component {
       } else {
         claimData = {
           type_spending: this.state.type,
-          claim: this.props.claim,
+          claim: this.state.claim,
           provider: this.state.provider,
           amount: this.state.amount,
           member: this.state.member,
@@ -209,25 +234,13 @@ export default class EclaimForm extends Component {
                   Claim Type
                 </Common.Texti>
 
-                <TouchableOpacity
-                  onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
-                  style={{ flexDirection: 'row' }}>
-                  <Common.Texti fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#848484" : "black"}>
-                    {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
-                  </Common.Texti>
-                  <View
-                    style={{
-                      alignItems: 'flex-end',
-                      marginLeft: 10
-                    }}
-                  >
-                    <ResponsiveImage
-                      source={require('../../../assets/apps/arrow.png')}
-                      style={{ resizeMode: 'center' }}
-                      initWidth="15" initHeight="15"
-                    />
-                  </View>
-                </TouchableOpacity>
+                <Common.InputSelectListClaim
+                  title="Claim Type"
+                  placeholder={this.state.claimTypeState}
+                  dataclaim={this.state.claimType}
+                  value={this.state.claim}
+                  onValueChange={(value) => this.setState({ claim: value })}
+                />
               </View>
 
               <Common.Divider />
@@ -246,11 +259,15 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
-                    fontSize: 16
+                    fontSize: 12,
+                    color: "#2C3E50",
+                    fontFamily: Config.FONT_FAMILY_LIGHT
                   }}
                   iconColor="#9e9e9e"
+                  fontFamily={Config.FONT_FAMILY_LIGHT}
                   leftToRight
                 />
+
               </View>
 
               <Common.Divider />
@@ -266,7 +283,7 @@ export default class EclaimForm extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                  Date of Visit
+                  Visit Date
                 </Common.Texti>
 
                 <Common.InputDateCustom
@@ -282,10 +299,18 @@ export default class EclaimForm extends Component {
                   onError={() => Common.getNotify("", "Error loading, please try again")}
                   renderDate={({ year, month, day, date }) => {
                     if (!date) {
-                      return <Common.Texti fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
+                      return <Common.Texti
+                        fontColor={"#9e9e9e"}
+                        fontSize={13}
+                        fontFamily={Config.FONT_FAMILY_LIGHT}
+                      >{this.state.date}</Common.Texti>
                     }
                     const dateStr = `${day}-${month}-${year}`
-                    return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
+                    return <Common.Texti
+                      fontColor={"#2c3e50"}
+                      fontSize={13}
+                      fontFamily={Config.FONT_FAMILY_LIGHT}
+                    >{dateStr}</Common.Texti>
                   }}
                   onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
                 />
@@ -301,8 +326,8 @@ export default class EclaimForm extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                  Time of Visit
-              </Common.Texti>
+                  Visit Time
+                </Common.Texti>
                 <View
                   style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
                 >
@@ -351,27 +376,26 @@ export default class EclaimForm extends Component {
                     leftToRight
                   />
 
-                  <TouchableOpacity
-                    onPress={() => Actions.CurrencySelect({ title: "Currency", currencyData: this.state.currencyData })}
-                    style={{ flexDirection: 'row' }}>
-                    <Common.Texti fontColor={((this.props.currencyState == "") || (this.props.currencyState == undefined) || (this.props.currencyState == null)) ? "#848484" : "black"}>
-                      {((this.props.currencyState == "") || (this.props.currencyState == undefined) || (this.props.currencyState == null)) ? this.state.currencyState : this.props.currencyState}
-                    </Common.Texti>
-                    <View
-                      style={{
-                        alignItems: 'flex-end',
-                        marginLeft: 10
-                      }}
-                    >
-                      <ResponsiveImage
-                        source={require('../../../assets/apps/arrow.png')}
-                        style={{ resizeMode: 'center' }}
-                        initWidth="15" initHeight="15"
-                      />
-                    </View>
-                  </TouchableOpacity>
-                </View>
+                  <View
+                    style={{
+                      borderRightColor: '#DBDBDB',
+                      borderRightWidth: 0.8,
+                      marginTop: -10,
+                      marginBottom: -10
+                    }}
+                  />
 
+                  <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.InputSelectListCurrency
+                      title="Currency"
+                      placeholder={this.state.currencyState}
+                      titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
+                      data={this.state.currencyData}
+                      value={this.state.currency}
+                      onValueChange={(value) => this.setState({ currency: value })}
+                    />
+                  </View>
+                </View>
               </View>
 
               <Common.Divider />
@@ -404,7 +428,7 @@ export default class EclaimForm extends Component {
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
             style={{
-              backgroundColor: (!this.props.claim) ||
+              backgroundColor: (!this.state.claim) ||
                 (!this.state.provider) ||
                 (!this.state.amount) ||
                 (!this.state.member) ||
@@ -413,7 +437,7 @@ export default class EclaimForm extends Component {
               width: "100%",
               justifyContent: 'center',
               alignItems: 'center',
-              paddingBottom: '3%'
+              paddingBottom: responsiveHeight(0.1)
             }}
           >
             <Common.Texti

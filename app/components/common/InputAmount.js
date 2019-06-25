@@ -24,6 +24,7 @@ export default class InputText extends Component {
           {...this.props}
           value={this.props.value}
           onChangeText={this.props.onChangeText}
+          returnKeyType='done'
           placeholder={this.props.placeholder}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
@@ -58,7 +59,8 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     color: '#2c3e50',
-    fontFamily: Config.FONT_FAMILY_ROMAN,
-    marginRight: 10
+    fontFamily: Config.FONT_FAMILY_LIGHT,
+    fontSize: 12,
+    paddingRight: 10
   },
 };

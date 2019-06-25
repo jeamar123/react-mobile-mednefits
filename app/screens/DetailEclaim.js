@@ -377,10 +377,10 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
                   {this.props.claimdata.currency}
                 </Common.Texti>
               </View>
@@ -428,10 +428,10 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
                   {this.props.claimdata.amount}{" "}
                 </Common.Texti>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
                   {this.props.claimdata.currency}
                 </Common.Texti>
               </View>
