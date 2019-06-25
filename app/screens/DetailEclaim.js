@@ -167,6 +167,49 @@ class DetailEclaim extends Component {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  claimTypeProcess(){
+    if (this.props.claimdata.type_spending == 'medical') {
+      switch (this.props.claimdata.claim) {
+        case '1':
+          claim = "General Practice"
+          break;
+        case '2':
+          claim = "Health Screening"
+          break;
+        case '3':
+          claim = "Traditional Chinese Medicine"
+          break;
+        default:
+          claim = "Traditional Chinese Medicine"
+      }
+    } else {
+      switch (this.props.claimdata.claim) {
+        case '1':
+          claim = "Dental"
+          break;
+        case '2':
+          claim = "Traditional Chinese Medicine"
+          break;
+        case '3':
+          claim = "Vision"
+          break;
+        case '4':
+          claim = "Fitness"
+          break;
+        case '5':
+          claim = "Specialist"
+          break;
+        case '6':
+          claim = "Other"
+          break;
+        default:
+          claim = "Dental"
+      }
+    }
+
+    return claim
+  }
+
   render() {
     // console.warn("props: " + JSON.stringify(this.props))
     console.warn(this.props.claimdata)
@@ -241,7 +284,7 @@ class DetailEclaim extends Component {
               <View
                 style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
-                  {(this.props.claimdata.claim == '1') ? "General Practice" : (this.props.claimdata.claim == "2") ? "Health Screening" : (this.props.claimdata.claim == "3") ? "Traditional Chinese Medicine" : (this.props.claimdata.claim == "4") ? "Medical Specialist" : "-"}
+                  {this.claimTypeProcess()}
                 </Common.Texti>
               </View>
             </View>
@@ -293,13 +336,13 @@ class DetailEclaim extends Component {
               >
               </Text>
               <View
-                style={{ flexDirection: 'row' }}>
+                style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
                 <Image
                   source={require('../../assets/apps/calendar.png')}
-                  style={{ height: 20, resizeMode: 'center', width: 20 }}
+                  style={{ marginLeft: 5, height: 15, resizeMode: 'center', width: 15 }}
                 />
               </View>
             </View>
@@ -321,22 +364,14 @@ class DetailEclaim extends Component {
                 Visit Time
               </Text>
               <View
-                style={{ flexDirection: 'row' }}>
+                style={{ flexDirection: 'row',  justifyContent: 'center', alignItems: 'center' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <ResponsiveImage
-                    source={require('../../assets/apps/clocks.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="15"
-                  />
-                </View>
+                <Image
+                  source={require('../../assets/apps/clocks.png')}
+                  style={{ marginLeft: 5, height: 15, resizeMode: 'center', width: 15 }}
+                />
               </View>
             </View>
             <Common.Divider noMargin />
@@ -454,6 +489,7 @@ class DetailEclaim extends Component {
                   )}
               </View>
             </View>
+            <Common.Divider noMargin />
             <View
               style={{
                 flex: 1,

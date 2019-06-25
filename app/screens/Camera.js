@@ -269,6 +269,266 @@ class Camera extends Component {
 
   }
 
+  renderActionAlternative = () => {
+    return(
+      <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+          marginTop: 10
+      }}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginLeft: 15, marginRight: 15}}>
+          {(this.state.previewState !== 0) ? (
+            <TouchableOpacity
+              onPress={() => this.setState({ previewState: 0 })}
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: 30 / 2,
+                backgroundColor: "white",
+                padding: 3,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderWidth: 1,
+                borderColor: 'black',
+                marginTop: 5,
+                marginLeft: 15
+              }}
+            >
+              <Icon type="Feather" name="camera" style={{ color: 'black', fontSize: 20, justifyContent: 'center' }} />
+            </TouchableOpacity>
+          ) : (
+              <TouchableOpacity
+                onPress={this.changeFlash}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 5,
+                  marginLeft: 15
+                }}>
+                <ImageBackground
+                  source={(this.state.flashMode) ? require("../../assets/apps/flash-active.png") : require("../../assets/apps/flash.png")}
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            )}
+          <View style={{flex:1, alignItems: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{width: 40, justifyContent: 'center', alignItems: 'center'}}>
+              {(this.state.shootType == 'batch') ? (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.changeViewCamera('single')}
+                    style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti
+                      fontColor={(this.state.shootType !== 'single') ? "grey" : "#0392cf"}
+                      fontSize={11}
+                      style={{
+                        paddingBottom:5
+                      }}
+                    >
+                      Single{" "}
+                    </Common.Texti>
+                  </TouchableOpacity>
+                </View>
+              ) : (<View />)}
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center', width: 40}}>
+              {(this.state.shootType == 'single') ? (
+              <View>
+                <TouchableOpacity
+                  onPress={() => this.changeViewCamera('single')}
+                  style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                  <Common.Texti
+                    fontColor={(this.state.shootType !== 'single') ? "grey" : "#0392cf"}
+                    fontSize={11}
+                  >
+                    Single{" "}
+                  </Common.Texti>
+                  <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
+                </TouchableOpacity>
+              </View>
+              ) : (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.changeViewCamera('batch')}
+                    style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti
+                      fontColor={(this.state.shootType !== 'batch') ? "grey" : "#0392cf"}
+                      fontSize={11}
+                    >
+                      Batch{" "}
+                    </Common.Texti>
+                    <View style={{ width: 4, height: 4, borderRadius: 4 / 2, backgroundColor: '#0392cf', marginTop: 2 }} />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+            <View style={{width: 40, justifyContent: 'center', alignItems: 'center'}}>
+              {(this.state.shootType == 'single') ? (
+                <View>
+                  <TouchableOpacity
+                    onPress={() => this.changeViewCamera('batch')}
+                    style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti
+                      fontColor={(this.state.shootType !== 'batch') ? "grey" : "#0392cf"}
+                      fontSize={11}
+                      style={{
+                        paddingBottom:5
+                      }}
+                    >
+                      Batch{" "}
+                    </Common.Texti>
+                  </TouchableOpacity>
+                </View>
+              ) : (<View></View>)}
+            </View>
+          </View>
+          {(this.state.images.length == 5) ? (
+            <View />
+          ) : (
+              <TouchableOpacity
+                onPress={this.openGallery}
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: 5,
+                  marginRight: 15
+                }}>
+                <ImageBackground
+                  source={require('../../assets/apps/gallery-round.png')}
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            )}
+        </View>
+        <View style={{flex: 1, alignItems: 'stretch', flexDirection: 'row', justifyContent: 'space-between', marginLeft: 15, marginRight: 15}}>
+          <View style={{width: 100}}>
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              >
+              <View style={{
+                flex: 1,
+                flexGrow: 2,
+              }}>
+                {((this.state.images.length > 0) && (this.state.shootType == 'batch') && (this.state.preview !== false)) ? (
+                  this.state.images.map((value, index) => (
+                    <View
+                      key={index}
+                      style={{
+                        flex: 1,
+                        alignItems: 'flex-start',
+                        paddingTop: 3,
+                        position: (index == 0) ? 'relative' : 'absolute',
+                        zIndex: 5
+                      }}
+                    >
+                      <TouchableOpacity
+                        onPress={() => this.setPreview(index + 1)}
+                        style={{
+                          alignItems: 'flex-end',
+                          marginLeft: 5,
+                        }}
+                      >
+                        <View style={{
+                          width: 20,
+                          height: 20,
+                          borderRadius: 30 / 2,
+                          backgroundColor: "#0392cf",
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          marginRight: -5,
+                          marginBottom: -10,
+                          zIndex: 99,
+                        }}>
+                          <Common.Texti fontColor="#FFFFFF" fontSize={8}>{index + 1}</Common.Texti>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                          <ImageBackground
+                            source={{ uri: value.preview }}
+                            style={[styles.preview, { borderWidth: (this.state.previewState == (index + 1)) ? 2 : 0, borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF" }]}
+                          />
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  ))
+                ) : (<View />)}
+              </View>
+            </ScrollView>
+          </View>
+          <View style={{width: 50, justifyContent:'center', alignItems: 'center'}}>
+            {
+              ((this.state.preview !== true) || (this.state.previewState == 0)) ? (
+                <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+                  <Icon type="Feather" name="camera" style={{ color: 'white', fontSize: 26, justifyContent: 'center' }} />
+                </TouchableOpacity>
+              ) : (<TouchableOpacity
+                onPress={() => this.removeImage(this.state.previewState - 1)}
+                style={{
+                  width: 30,
+                  height: 30,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <ImageBackground
+                  source={require('../../assets/delete-button.png')}
+                  style={{
+                    width: 30,
+                    height: 30
+                  }}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>)
+            }
+          </View>
+          <View style={{width: 100, justifyContent:'center', alignItems: 'center'}}>
+            {
+              (this.state.images.length > 0) ?
+                (
+                  <TouchableOpacity
+                    onPress={() => Actions.CameraPreview({ shootType: this.state.shootType, claimdata: Object.assign({}, { images: this.state.images }, this.props.claimdata) })}
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginRight: '4%'
+                    }}>
+                    <Common.Texti
+                      fontColor={"grey"}
+                      fontSize={18}
+                    >
+                      Finish
+                  </Common.Texti>
+                  </TouchableOpacity>
+                ) : (
+                  <Text
+                    style={{
+                      fontFamily: 'HelveticaNeue-Roman',
+                      fontSize: 14,
+                      color: '#FFFFFF',
+                      marginRight: 15,
+                      opacity: 0
+                    }}
+                  >
+                    DONE
+                </Text>
+                )
+            }
+          </View>
+        </View>
+      </View>
+    )
+  }
+
   renderAction = () => {
     return (
       <View style={styles.actionPanel}>
@@ -283,8 +543,15 @@ class Camera extends Component {
             }}
           />
         </TouchableOpacity> */}
-        <View style={{ width: "100%", backgroundColor: '#efeff4', justifyContent: 'space-between', flexDirection: 'row', display: (this.state.attachedPanel) ? 'none' : 'flex', paddingBottom: 5 }}>
-          <View style={{ width: "33.3%", alignItems: 'flex-start', paddingTop: 5 }}>
+        <View style={{
+            flex: 1,
+            backgroundColor: 'blue',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            display: (this.state.attachedPanel) ? 'none' : 'flex',
+            paddingBottom: 5
+          }}>
+          <View style={{ alignItems: 'flex-start', paddingTop: 5 }}>
             {(this.state.previewState !== 0) ? (
               <TouchableOpacity
                 onPress={() => this.setState({ previewState: 0 })}
@@ -324,7 +591,7 @@ class Camera extends Component {
                 </TouchableOpacity>
               )}
           </View>
-          <View style={{ width: "33.3%", paddingTop: 5 }}>
+          <View style={{paddingTop: 5 }}>
             {((this.state.preview !== true) || (this.state.previewState == 0)) ? (
               <View style={{ paddingTop: 5, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', display: (this.state.preview && (this.state.shootType == 'single')) ? 'none' : 'flex' }}>
                 <TouchableOpacity
@@ -377,7 +644,7 @@ class Camera extends Component {
                 </View>
               )}
           </View>
-          <View style={{ width: "33.3%", alignItems: 'flex-end', paddingTop: 5 }}>
+          <View style={{ alignItems: 'flex-end', paddingTop: 5 }}>
             {(this.state.images.length == 5) ? (
               <View />
             ) : (
@@ -574,7 +841,6 @@ class Camera extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
     return (
       <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
         <View style={{ zIndex: 99 }}>
@@ -588,7 +854,9 @@ class Camera extends Component {
         <View style={{ flex: 0.8, backgroundColor: '#efeff4' }}>
           {this.renderContainer()}
         </View>
-        {this.renderAction()}
+        <View style={styles.actionPanel}>
+          {this.renderActionAlternative()}
+        </View>
       </View>
     );
   }
@@ -610,8 +878,9 @@ const styles = StyleSheet.create({
   actionPanel: {
     flex: 0.23,
     backgroundColor: '#efeff4',
-    justifyContent: 'center',
-    alignItems: 'center'
+    // backgroundColor: 'red',
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   capture: {
     height: 60,

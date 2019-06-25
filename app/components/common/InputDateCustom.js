@@ -130,12 +130,13 @@ class DatePicker extends Component {
 
   getDateObj = () => {
     const { date } = this.state
+    const months    = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
     return {
       date,
       year: date ? date.getFullYear() : '',
       day: date ? `${date.getDate()}`.padStart(2, '0') : '',
-      month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : ''
+      month: date ? months[date.getMonth()] : ''
     }
   }
 

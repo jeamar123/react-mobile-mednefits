@@ -166,6 +166,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
+    console.warn(this.state.currency)
     return (
       <View
         style={styles.container}
@@ -212,7 +213,9 @@ export default class EclaimForm extends Component {
             <View
               style={[styles.fieldStyle, { marginTop: "3%" }]}
             >
-              <Common.Texti>
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                >
                 Claim Type
               </Common.Texti>
               <Common.InputSelectListClaim
@@ -224,12 +227,18 @@ export default class EclaimForm extends Component {
               />
             </View>
 
-            <Common.Divider />
+            <Common.Divider
+              style={{
+                marginRight: -15
+              }}
+            />
 
             <View
               style={styles.fieldStyleNoPadding}
             >
-              <Common.Texti style={{
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                style={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
@@ -248,22 +257,32 @@ export default class EclaimForm extends Component {
               />
             </View>
 
-            <Common.Divider />
+            <Common.Divider
+              style={{
+                marginRight: -15
+              }}
+            />
 
             <View
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                alignItems: 'center'
+                alignItems: 'center',
               }}
             >
-              <Common.Texti style={{
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                style={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
                 Visit Date
             </Common.Texti>
 
+            <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
               <Common.InputDateCustom
                 style={{
                   backgroundColor: "white",
@@ -271,7 +290,8 @@ export default class EclaimForm extends Component {
                   borderBottomWidth: 0,
                   justifyContent: 'center',
                   borderRadius: 2,
-                  height: 50
+                  height: 50,
+                  paddingTop: 5,
                 }}
                 startDate={new Date()}
                 minDate={new Date()}
@@ -281,21 +301,28 @@ export default class EclaimForm extends Component {
                   if (!date) {
                     return <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_LIGHT} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
                   }
-                  const dateStr = `${day}-${month}-${year}`
+                  const dateStr = `${day} ${month} ${year}`
                   return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                 }}
                 onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
 
               />
+            </View>
 
             </View>
 
-            <Common.Divider />
+            <Common.Divider
+              style={{
+                marginRight: -15
+              }}
+            />
 
             <View
               style={styles.fieldStyle}
             >
-              <Common.Texti style={{
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                style={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
@@ -325,7 +352,11 @@ export default class EclaimForm extends Component {
               </View>
             </View>
 
-            <Common.Divider />
+            <Common.Divider
+              style={{
+                marginRight: -15
+              }}
+            />
 
             {/*   */}
 
@@ -352,7 +383,9 @@ export default class EclaimForm extends Component {
             <View
               style={styles.fieldStyleNoPadding}
             >
-              <Common.Texti style={{
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                style={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
@@ -361,6 +394,7 @@ export default class EclaimForm extends Component {
 
               <View style={{flexDirection: 'row'}}>
                 <Common.InputAmount
+                  keyboardType={"number-pad"}
                   value={this.state.amount}
                   keyboardType="numeric"
                   onChangeText={text => this.setState({ amount: text })}
@@ -379,10 +413,8 @@ export default class EclaimForm extends Component {
                 <View style={{marginLeft: 10, justifyContent: 'center', alignItems: 'center'}}>
                   <Common.InputSelectListCurrency
                     title="Currency"
-                    placeholder={this.state.currencyState}
-                    titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
                     data={this.state.currencyData}
-                    value={this.state.currency}
+                    titleValue={this.state.currency}
                     onValueChange={(value) => this.setState({ currency: value })}
                   />
                   {/*<Common.InputSelect
@@ -395,12 +427,18 @@ export default class EclaimForm extends Component {
               </View>
             </View>
 
-            <Common.Divider />
+            <Common.Divider
+              style={{
+                marginRight: -15
+              }}
+            />
 
             <View
               style={styles.fieldStyle}
             >
-              <Common.Texti style={{
+              <Common.Texti
+                fontFamily={Config.FONT_FAMILY_MEDIUM}
+                style={{
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
