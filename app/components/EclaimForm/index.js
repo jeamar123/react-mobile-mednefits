@@ -181,6 +181,7 @@ export default class EclaimForm extends Component {
   render() {
     let Tanggal = new Date()
     console.warn("props: " + JSON.stringify(this.props))
+    console.warn(this.state.claim)
     return (
       <KeyboardAvoidingView
         style={styles.container}
@@ -238,8 +239,8 @@ export default class EclaimForm extends Component {
                   title="Claim Type"
                   placeholder={this.state.claimTypeState}
                   dataclaim={this.state.claimType}
-                  value={this.state.claim}
-                  onValueChange={(value) => this.setState({ claim: value })}
+                  label={this.state.claim}
+                  onValueChange={(label) => this.setState({ claim: label })}
                 />
               </View>
 

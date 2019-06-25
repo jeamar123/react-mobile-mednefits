@@ -22,13 +22,13 @@ class SelectList extends Component {
     this.renderChildComponent = this.renderChildComponent.bind(this)
   }
 
-  changeValue(value) {
+  changeValue(label) {
 
     this.setState({
       isVisible: false
     })
 
-    this.props.onValueChange(value)
+    this.props.onValueChange(label)
 
   }
 
@@ -37,7 +37,7 @@ class SelectList extends Component {
       this.props.dataclaim.map((value, index) =>
         <View>
           <TouchableOpacity
-            onPress={() => this.changeValue(value.value)}
+            onPress={() => this.changeValue(value.label)}
             style={{
               marginTop: 15,
               marginBottom: 15,
@@ -56,9 +56,9 @@ class SelectList extends Component {
   }
 
   setTitle() {
-    if (this.props.value) {
+    if (this.props.label) {
       this.props.dataclaim.filter((value, index) => {
-        if (value.value == this.props.value) {
+        if (value.label == this.props.label) {
           label = value.label
         }
       });
@@ -171,7 +171,7 @@ class SelectList extends Component {
             fontSize={12}
             fontFamily={Config.FONT_FAMILY_LIGHT}
             style={{
-              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
+              color: (this.props.label) ? "#2c3e50" : "#9e9e9e"
             }}
           >
             {this.setTitle()}

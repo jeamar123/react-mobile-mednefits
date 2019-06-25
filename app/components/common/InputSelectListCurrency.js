@@ -59,7 +59,7 @@ class SelectList extends Component {
     if (this.props.value) {
       this.props.data.filter((value, index) => {
         if (value.value == this.props.value) {
-          label = value.label
+          label = value.value
         }
       });
     } else if (this.props.titleValue) {

@@ -60,7 +60,7 @@ const style = {
   inputStyle: {
     color: '#2c3e50',
     fontFamily: Config.FONT_FAMILY_LIGHT,
-    fontSize: 12,
+    fontSize: 14,
     paddingRight: 10
   },
 };

@@ -12,8 +12,8 @@ class ItemRender extends Component {
     this.setState({
       isVisible: false
     })
-
-    this.props.onValueChange(value)
+    Actions.EclaimSubmit({ claimTypeState: this.props.label, claim: this.props.label })
+    // this.props.onValueChange(value)
 
   }
 

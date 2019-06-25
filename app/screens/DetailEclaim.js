@@ -57,7 +57,7 @@ class DetailEclaim extends Component {
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
         'currency_type': this.props.claimdata.currency,
-        'currency_exchange_rate': this.state.currency_exchange
+        'currency_exchange_rate': (this.props.claimdata.currency === 'SGD') ? '1.00' : '3.00'
       }
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {
@@ -85,7 +85,7 @@ class DetailEclaim extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.renderMember();
     this.GetCurrency();
   }
@@ -93,7 +93,7 @@ class DetailEclaim extends Component {
   async GetCurrency() {
     await Core.CurrencyList((err, result) => {
       if (result) {
-        if ((result.currency_name == "SGD - Singapore Dollar") && (this.props.claimdata.currency == "$S")) {
+        if ((result.currency_name === "SGD - Singapore Dollar") && (this.props.claimdata.currency === "SGD")) {
           this.setState({
             currency_exchange: result.currency_exchange_rate
           })
@@ -104,6 +104,22 @@ class DetailEclaim extends Component {
         }
       }
     })
+  }
+
+  _renderExcangeRate() {
+    if (this.props.claimdata.currency !== 'SGD') {
+      <Text
+        style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+      >
+        1.00
+      </Text>
+    } else {
+      <Text
+        style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+      >
+        3.00
+      </Text>
+    }
   }
 
   isVisibleUpdate() {
@@ -163,6 +179,8 @@ class DetailEclaim extends Component {
 
   render() {
     console.warn("props: " + JSON.stringify(this.props))
+    console.warn(this.state.currency_exchange)
+    console.warn(this.props.claimdata.currency)
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -187,7 +205,7 @@ class DetailEclaim extends Component {
           <GiftedForm
             style={{
               backgroundColor: '#fff',
-              paddingLeft: 5,
+              paddingLeft: 8,
               paddingRight: 15,
             }}
             formName="signupForm"
@@ -228,7 +246,7 @@ class DetailEclaim extends Component {
                 </View> */}
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -262,7 +280,7 @@ class DetailEclaim extends Component {
                 </View> */}
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -286,7 +304,7 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -322,7 +340,7 @@ class DetailEclaim extends Component {
                 </View>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -358,7 +376,7 @@ class DetailEclaim extends Component {
                 </View>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -385,7 +403,7 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -404,12 +422,10 @@ class DetailEclaim extends Component {
               </Text>
               <View
                 style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={16}>
-                  {this.state.currency_exchange}
-                </Common.Texti>
+                <Common.Texti>{(this.props.claimdata.currency === 'SGD') ? '1.00' : '3.00'}</Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -436,7 +452,7 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -476,7 +492,7 @@ class DetailEclaim extends Component {
                 </View> */}
               </View>
             </View>
-            <Common.Divider noMargin />
+            <Common.Divider noMargin Side />
             <View
               style={{
                 flex: 1,
@@ -536,6 +552,15 @@ class DetailEclaim extends Component {
                   )}
               </View>
             </View>
+
+            <View
+              style={{
+                borderBottomColor: '#DBDBDB',
+                borderBottomWidth: 0.8,
+                marginTop: -5,
+              }}
+            />
+
             <View
               style={{
                 flex: 1,
