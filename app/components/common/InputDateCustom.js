@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ResponsiveImage from 'react-native-responsive-image';
+import moment from 'moment';
 import { Icon } from 'native-base';
 import * as Common from '../common';
 
@@ -33,7 +34,7 @@ class DatePicker extends Component {
   static defaultProps = {
     renderDate: ({ year, month, day, date }) => {
       if (date) {
-        const str = `${year}-${month}-${day}`
+        const str = `${year} ${month} ${day}`
         return <Common.Text fontColor={"#2c3e50"} >{str}</Common.Text>
       }
 
@@ -128,12 +129,14 @@ class DatePicker extends Component {
 
   getDateObj = () => {
     const { date } = this.state
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     return {
       date,
       year: date ? date.getFullYear() : new Date().getFullYear(),
       day: date ? `${date.getDate()}`.padStart(2, '0') : `${new Date().getDate()}`.padStart(2, '0'),
-      month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : `${new Date().getMonth() + 1}`.padStart(2, '0')
+      // month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : `${new Date().getMonth() + 1}`.padStart(2, '0')
+      month: date ? months[date.getMonth()] : months[new Date().getMonth()]
     }
   }
 

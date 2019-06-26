@@ -7,11 +7,12 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
+import moment from 'moment';
 import styles from './styles';
 import * as Common from '../common';
 import * as Core from '../../core';
 import * as Config from '../../config';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default class EclaimForm extends Component {
   constructor(props) {
@@ -231,7 +232,9 @@ export default class EclaimForm extends Component {
               <View
                 style={styles.fieldStyle}
               >
-                <Common.Texti>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                >
                   Claim Type
                 </Common.Texti>
 
@@ -249,10 +252,12 @@ export default class EclaimForm extends Component {
               <View
                 style={styles.fieldStyle}
               >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   Provider
                 </Common.Texti>
                 <Common.InputText
@@ -280,10 +285,12 @@ export default class EclaimForm extends Component {
                   alignItems: 'center'
                 }}
               >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   Visit Date
                 </Common.Texti>
 
@@ -306,14 +313,14 @@ export default class EclaimForm extends Component {
                         fontFamily={Config.FONT_FAMILY_LIGHT}
                       >{this.state.date}</Common.Texti>
                     }
-                    const dateStr = `${day}-${month}-${year}`
+                    const dateStr = `${day} ${month} ${year}`
                     return <Common.Texti
                       fontColor={"#2c3e50"}
                       fontSize={13}
                       fontFamily={Config.FONT_FAMILY_LIGHT}
                     >{dateStr}</Common.Texti>
                   }}
-                  onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
+                  onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}
                 />
 
               </View>
@@ -323,10 +330,12 @@ export default class EclaimForm extends Component {
               <View
                 style={styles.fieldStyle}
               >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   Visit Time
                 </Common.Texti>
                 <View
@@ -359,10 +368,12 @@ export default class EclaimForm extends Component {
               <View
                 style={styles.fieldStyle}
               >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   Receipt Amount
                 </Common.Texti>
 
@@ -404,10 +415,12 @@ export default class EclaimForm extends Component {
               <View
                 style={styles.fieldStyle}
               >
-                <Common.Texti style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   Member
                 </Common.Texti>
 

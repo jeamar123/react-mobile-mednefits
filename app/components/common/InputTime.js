@@ -55,6 +55,7 @@ export default class InputTime extends Component {
 
         <DateTimePicker
           {...this.props}
+          hideTitleContainerIOS={true}
           is24Hour={true}
           mode={"time"}
           isVisible={this.state.isDateTimePickerVisible}
