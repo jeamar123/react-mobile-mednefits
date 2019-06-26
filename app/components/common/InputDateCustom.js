@@ -170,7 +170,8 @@ class DatePicker extends Component {
         <View
           style={{
             alignItems: 'flex-end',
-            marginLeft: 10
+            marginLeft: 10,
+            marginTop: -2
           }}
         >
           <Image
@@ -199,7 +200,6 @@ class DatePicker extends Component {
       ...props
     } = this.props
 
-    console.warn(this.state.maxDate)
     return (
       <TouchableOpacity style={style} onPress={this.handlePressed}>
         <Modal

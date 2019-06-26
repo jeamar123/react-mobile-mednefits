@@ -13,7 +13,6 @@ export default class InputTime extends Component {
   };
 
   msToTime(duration) {
-    console.warn(duration);
     var milliseconds = parseInt((duration % 1000) / 100),
       seconds = parseInt((duration / 1000) % 60),
       minutes = parseInt((duration / (1000 * 60)) % 60),
@@ -24,14 +23,13 @@ export default class InputTime extends Component {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    return (hours-4) + ":" + minutes + " "+ampm;
+    return (hours-5) + ":" + minutes + " "+ampm;
   }
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _handleDatePicked = (date) => {
-    console.warn(date);
     this.props.onTimeChange(this.msToTime(date))
     this._hideDateTimePicker();
   };
@@ -42,8 +40,7 @@ export default class InputTime extends Component {
         onPress={() => this._showDateTimePicker()}
       >
         <Common.Texti
-          fontSize={12}
-          fontFamily={Config.FONT_FAMILY_LIGHT}
+          fontFamily={Config.FONT_FAMILY_MEDIUM}
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}

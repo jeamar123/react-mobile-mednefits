@@ -19,7 +19,6 @@ export default class InputText extends Component {
           alignItems: (this.props.alignItems) ? this.props.alignItems : 'center',
         }, this.props.style]}
       >
-
         <TextInput
           {...this.props}
           value={this.props.value}
@@ -27,14 +26,14 @@ export default class InputText extends Component {
           placeholder={this.props.placeholder}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
-            fontFamily: Config.FONT_FAMILY_ROMAN,
+            fontFamily: Config.FONT_FAMILY_MEDIUM,
+            fontSize: 15
           }, this.props.placeholderStyle]}
-          style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
+          style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left', fontSize: 15, marginRight: 10 }]}
         />
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontSize={12}
-            fontFamily={Config.FONT_FAMILY_LIGHT}
+            fontFamily={Config.FONT_FAMILY_MEDIUM}
             fontColor={"#2c3e50"}
           >
             {this.props.currency}
@@ -60,8 +59,6 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     color: '#2c3e50',
-    fontFamily: Config.FONT_FAMILY_LIGHT,
-    fontSize: 12,
-    paddingRight: 10
+    fontFamily: Config.FONT_FAMILY_MEDIUM,
   },
 };

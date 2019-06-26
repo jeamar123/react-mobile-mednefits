@@ -37,15 +37,16 @@ export default class InputText extends Component {
             )}
         <TextInput
           {...this.props}
+          allowFontScaling={false}
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
           placeholderStyle={[{
             color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
-            fontFamily: Config.FONT_FAMILY_ROMAN,
-            fontSize: 12
+            fontFamily: Config.FONT_FAMILY_MEDIUM,
+            fontSize: 15,
           }, this.props.placeholderStyle]}
-          style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
+          style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left', fontSize: 14, marginRight: -10 }]}
         />
         {(this.props.isClearSearch) ? (
           <TouchableOpacity
@@ -72,7 +73,7 @@ export default class InputText extends Component {
 const style = {
   inputStyle: {
     color: '#2c3e50',
-    fontFamily: Config.FONT_FAMILY_LIGHT,
-    fontSize: 12
+    fontFamily: Config.FONT_FAMILY_MEDIUM,
+    padding: 15
   },
 };

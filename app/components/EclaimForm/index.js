@@ -36,7 +36,7 @@ export default class EclaimForm extends Component {
       provider: false,
       file: false,
       isLoading: false,
-      currency: false,
+      currency: 'SGD',
       updateDataSelect: false,
       currencyData: [],
       currencyState: "Select"
@@ -102,7 +102,7 @@ export default class EclaimForm extends Component {
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
-          currency: "Select",
+          currency: "SGD",
         })
       }
     })
@@ -166,7 +166,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
-    console.warn(this.state.currency)
+    console.warn(this.state.currency+"Currency")
     return (
       <View
         style={styles.container}
@@ -247,9 +247,8 @@ export default class EclaimForm extends Component {
               <Common.InputText
                 value={this.state.provider}
                 onChangeText={text => this.setState({ provider: text })}
-                placeholder="Name of Provider"
+                placeholder="Name of Provider "
                 inputStyle={{
-                  fontSize: 12,
                   color: "#2C3E50"
                 }}
                 iconColor="#9e9e9e"
@@ -267,47 +266,30 @@ export default class EclaimForm extends Component {
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                alignItems: 'center',
+                paddingTop: 10,
+                paddingBottom: 10
               }}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
-                style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                >
                 Visit Date
-            </Common.Texti>
+              </Common.Texti>
 
-            <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
               <Common.InputDateCustom
-                style={{
-                  backgroundColor: "white",
-                  borderBottomColor: "#9e9e9e",
-                  borderBottomWidth: 0,
-                  justifyContent: 'center',
-                  borderRadius: 2,
-                  height: 50,
-                  paddingTop: 5,
-                }}
                 startDate={new Date()}
                 minDate={new Date()}
                 maxDate={() => Tanggal.now()}
                 onError={() => Common.getNotify("", "Error loading, please try again")}
                 renderDate={({ year, month, day, date }) => {
                   if (!date) {
-                    return <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_LIGHT} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
+                    return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
                   }
                   const dateStr = `${day} ${month} ${year}`
-                  return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
+                  return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM}  fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                 }}
                 onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
-
               />
-            </View>
 
             </View>
 
@@ -398,7 +380,7 @@ export default class EclaimForm extends Component {
                   value={this.state.amount}
                   keyboardType="numeric"
                   onChangeText={text => this.setState({ amount: text })}
-                  placeholder="Enter amount"
+                  placeholder="Enter amount "
                   currency={this.state.currency}
                   leftToRight
                 />
