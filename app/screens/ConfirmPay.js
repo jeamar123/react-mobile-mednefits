@@ -352,7 +352,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingBottom: responsiveHeight(3.5),
+                paddingBottom: responsiveHeight(4),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -414,7 +414,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingTop: responsiveHeight(0.5),
-                paddingBottom: responsiveHeight(3.5),
+                paddingBottom: responsiveHeight(4),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}

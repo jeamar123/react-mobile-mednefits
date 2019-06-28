@@ -12,6 +12,8 @@ target 'MednefitsMobile' do
     # Pods for testing
     pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+    pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
+
   end
 
   target 'MednefitsMobileTests' do

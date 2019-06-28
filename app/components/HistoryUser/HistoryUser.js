@@ -112,7 +112,7 @@ class HistoryUser extends Component {
             >
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                 Transaction Time
-                </Text>
+              </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.props.date_of_transaction ? this.props.date_of_transaction.toUpperCase() : ' '}
               </Text>
@@ -152,7 +152,7 @@ class HistoryUser extends Component {
                 Cap
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
-                {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_per_visit == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
+                {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_transaction == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
               </Text>
             </View>
 

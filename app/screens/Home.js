@@ -5,23 +5,22 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator,
   ScrollView,
-  ImageBackground
+  Linking
 } from 'react-native';
-import { Container, Content, Drawer } from 'native-base';
+import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import Svg, { Image } from 'react-native-svg';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveHeight, } from 'react-native-responsive-dimensions';
 import Navbar from '../components/common/Navbar';
-import { HomeContent, MenuSide, SearchHome, HomeContentStatic } from '../components/HomeContent';
+import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
+import VersionCheck from 'react-native-version-check';
 import { Text } from '../common';
 import * as Config from '../config';
-import * as Core from '../core'
-import * as Common from '../components/common'
+import * as Core from '../core';
+import * as Common from '../components/common';
 
 const { width, height, fontScale } = Dimensions.get('window');
 
@@ -283,7 +282,8 @@ class Home extends Component {
     this.state = {
       data: false,
       searchdata: false,
-      isLoadingSearch: false
+      isLoadingSearch: false,
+      update: false
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -321,6 +321,23 @@ class Home extends Component {
     await Core.GetLocationPermission(async (error, result) => {
       await this.getClinicType()
     });
+
+    this.checkversion()
+
+    VersionCheck.getLatestVersion({
+      provider: 'appStore'  // for iOS
+    })
+      .then(latestVersion => {
+        console.warn('latest - ' + latestVersion);    // 0.1.2
+      });
+  }
+
+  checkversion = async () => {
+    version = await Core.CheckVersion()
+
+    this.setState({
+      update: true
+    })
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -361,6 +378,7 @@ class Home extends Component {
 
 
   render() {
+    console.warn('Version-' + VersionCheck.getCurrentVersion());     // 0.1.1
     console.warn("props: " + JSON.stringify(this.props))
     return (
       <Drawer
@@ -375,6 +393,13 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+          <Common.Popup
+            kind="update-application"
+            isVisible={this.state.update}
+            title={"Your application is out of date"}
+            message={"Please click below button to update your application"}
+          />
+
           {/* <View style={{ flex: 1 }}>
             {(!this.state.data || this.state.isLoadingSearch) ? (
               <View

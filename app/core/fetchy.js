@@ -519,13 +519,14 @@ export const SendEClaim = async (params, callback) => {
           uri: value.preview,
           type: value.filetype,
           name: value.filename
-        }
-        )
+        })
       })
       formdata.append("amount", params.amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
       formdata.append("time", params.time);
+      formdata.append("currency_type", params.currency_type);
+      formdata.append("currency_exchange_rate", params.currency_exchange_rate);
 
       params = {
         url: Config.USER_CREATE_E_CLAIM,

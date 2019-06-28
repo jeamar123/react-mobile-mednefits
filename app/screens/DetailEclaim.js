@@ -34,7 +34,8 @@ class DetailEclaim extends Component {
       member: null,
       showPopUp: false,
       button: 'Submit',
-      currency_exchange: ''
+      currency_exchange: '',
+      amountTotal: ''
     }
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -57,7 +58,7 @@ class DetailEclaim extends Component {
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
         'currency_type': this.props.claimdata.currency,
-        'currency_exchange_rate': (this.props.claimdata.currency === 'SGD') ? '1.00' : '3.00'
+        'currency_exchange_rate': this.state.currency_exchange
       }
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {
@@ -91,18 +92,8 @@ class DetailEclaim extends Component {
   }
 
   async GetCurrency() {
-    await Core.CurrencyList((err, result) => {
-      if (result) {
-        if ((result.currency_name === "SGD - Singapore Dollar") && (this.props.claimdata.currency === "SGD")) {
-          this.setState({
-            currency_exchange: result.currency_exchange_rate
-          })
-        } else {
-          this.setState({
-            currency_exchange: result.currency_exchange_rate
-          })
-        }
-      }
+    this.setState({
+      currency_exchange: (this.props.claimdata.currency === 'SGD') ? '0' : '3'
     })
   }
 
@@ -404,55 +395,61 @@ class DetailEclaim extends Component {
               </View>
             </View>
             <Common.Divider noMargin Side />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingTop: 15,
-                paddingBottom: 15
-              }}
-            >
-              <Text
-                style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
-              >
-                Exchange Rate
-              </Text>
-              <View
-                style={{ flexDirection: 'row' }}>
-                <Common.Texti>{(this.props.claimdata.currency === 'SGD') ? '1.00' : '3.00'}</Common.Texti>
-              </View>
-            </View>
-            <Common.Divider noMargin Side />
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingTop: 15,
-                paddingBottom: 15
-              }}
-            >
-              <Text
-                style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
-              >
-                Total
-              </Text>
-              <View
-                style={{ flexDirection: 'row' }}>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
-                  {this.props.claimdata.amount}{" "}
-                </Common.Texti>
-                <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
-                  {this.props.claimdata.currency}
-                </Common.Texti>
-              </View>
-            </View>
-            <Common.Divider noMargin Side />
+
+            {(this.props.claimdata.currency === 'MYR') ?
+              <View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignContent: 'space-between',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: 15,
+                    paddingBottom: 15
+                  }}
+                >
+                  <Text
+                    style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+                  >
+                    Exchange Rate
+                  </Text>
+                  <View
+                    style={{ flexDirection: 'row' }}>
+                    <Common.Texti>3.00</Common.Texti>
+                  </View>
+                </View>
+                <Common.Divider noMargin Side />
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignContent: 'space-between',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: 15,
+                    paddingBottom: 15
+                  }}
+                >
+                  <Text
+                    style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+                  >
+                    Total
+                  </Text>
+                  <View
+                    style={{ flexDirection: 'row' }}>
+                    <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
+                      {Number(this.props.claimdata.amount) * 3}{" "}
+                    </Common.Texti>
+                    <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
+                      {this.props.claimdata.currency}
+                    </Common.Texti>
+                  </View>
+                </View>
+                <Common.Divider noMargin Side />
+              </View> : <View />
+            }
+
             <View
               style={{
                 flex: 1,
@@ -558,6 +555,7 @@ class DetailEclaim extends Component {
                 borderBottomColor: '#DBDBDB',
                 borderBottomWidth: 0.8,
                 marginTop: -5,
+                marginLeft: 7
               }}
             />
 

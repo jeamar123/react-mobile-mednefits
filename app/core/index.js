@@ -7,4 +7,6 @@ export * from './local'
 export * from './app'
 export * from './networkhandler'
 export * from './Permissions'
-export {Network}
+export * from './version'
+
+export { Network }
