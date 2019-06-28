@@ -527,7 +527,12 @@ export function SendEClaim(params, callback) {
       formdata.append("amount", params.amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
-      formdata.append("time", params.time);
+      formdata.append("time", params.time)
+      formdata.append("currency_type", params.currency_type)
+      formdata.append("currency_exchange", (params.currency_type == 'SGD') ? 0.00 : 3.00)
+      console.warn('params eclaim send'+JSON.stringify(params));
+      console.warn('formdata '+JSON.stringify(formdata))
+      console.warn(params.currency_type);
 
       params = {
         url: Config.USER_CREATE_E_CLAIM,
@@ -1075,4 +1080,3 @@ export function CancelVisit(param, callback) {
     })
   });
 }
-

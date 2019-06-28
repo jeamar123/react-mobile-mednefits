@@ -20,7 +20,7 @@ class HistoryClaim extends Component {
     Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      // console.warn(data);
       this.setState({
         Full_name: data.profile.full_name,
       });

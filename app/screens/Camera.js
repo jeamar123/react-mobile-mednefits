@@ -69,7 +69,7 @@ class Camera extends Component {
           preview: data.uri,
           previewHeight: data.height * ratio,
           previewWidth: data.width * ratio,
-          filename: 'receipt' + this.props.member + '.jpg',
+          filename: 'receipt' + this.props.claimdata.member + '.jpg',
           filetype: 'images/jpg'
         }
 

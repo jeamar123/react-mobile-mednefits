@@ -202,7 +202,7 @@ class DetailEclaim extends Component {
 
   render() {
     // console.warn("props: " + JSON.stringify(this.props))
-    console.warn(this.props.claimdata);
+    // console.warn(this.state.currency_exchange);
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -392,6 +392,61 @@ class DetailEclaim extends Component {
               </View>
             </View>
             <Common.Divider noMargin />
+            {(this.props.claimdata.currency == 'MYR') ? (
+              <View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignContent: 'space-between',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: 15,
+                    paddingBottom: 15
+                  }}
+                >
+                  <Text
+                    style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+                  >
+                    Currency Exchange
+                  </Text>
+                  <View
+                    style={{ flexDirection: 'row' }}>
+                    <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
+                      {this.state.currency_exchange}
+                    </Common.Texti>
+                  </View>
+                </View>
+                <Common.Divider noMargin />
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    alignContent: 'space-between',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingTop: 15,
+                    paddingBottom: 15
+                  }}
+                >
+                  <Text
+                    style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+                  >
+                    Total
+                  </Text>
+                  <View
+                    style={{ flexDirection: 'row' }}>
+                    <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
+                      {parseInt(this.props.claimdata.amount*this.state.currency_exchange)}{" "}
+                    </Common.Texti>
+                    <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
+                      {this.props.claimdata.currency}
+                    </Common.Texti>
+                  </View>
+                </View>
+                <Common.Divider noMargin />
+              </View>
+            ) : (<View />)}
             <View
               style={{
                 flex: 1,
