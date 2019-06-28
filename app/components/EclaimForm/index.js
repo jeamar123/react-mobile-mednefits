@@ -126,11 +126,32 @@ export default class EclaimForm extends Component {
   }
 
   setClaimValue(val) {
-    this.state.claimType.map((value, index) => {
-      if (val == value.value) {
-        this.setState({ claim: value.label })
-      }
-    })
+    try {
+      this.state.claimType.map((value, index) => {
+        if (val == value.value) {
+          this.setState({
+            claimLabel: value.label
+          })
+        }
+      })
+    } catch (e) {
+      console.warn('unset eclaim');
+    }
+  }
+
+  updateClaim(val){
+    try {
+      this.state.claimType.map((value, index) => {
+        if (val == value.value) {
+          this.setState({
+            claim: value.value,
+            claimLabel: value.label
+          })
+        }
+      })
+    } catch (e) {
+      console.warn('unset eclaim');
+    }
   }
 
   nextSnapPhoto() {
@@ -147,7 +168,7 @@ export default class EclaimForm extends Component {
       } else {
         claimData = {
           type_spending: this.state.type,
-          claim: this.state.claim,
+          claim: this.state.claimLabel,
           provider: this.state.provider,
           amount: this.state.amount,
           member: this.state.member,
@@ -166,7 +187,7 @@ export default class EclaimForm extends Component {
 
   render() {
     let Tanggal = new Date()
-    console.warn(this.state.currency+"Currency")
+    console.warn(this.state.claimLabel);
     return (
       <View
         style={styles.container}
@@ -223,7 +244,7 @@ export default class EclaimForm extends Component {
                 placeholder={this.state.claimTypeState}
                 dataclaim={this.state.claimType}
                 value={this.state.claim}
-                onValueChange={(value) => this.setState({ claim: value })}
+                onValueChange={(value) => this.updateClaim(value)}
               />
             </View>
 
@@ -288,7 +309,7 @@ export default class EclaimForm extends Component {
                   const dateStr = `${day} ${month} ${year}`
                   return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM}  fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                 }}
-                onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
+                onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}
               />
 
             </View>

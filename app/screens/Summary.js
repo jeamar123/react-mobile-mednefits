@@ -19,33 +19,30 @@ class Summary extends Component {
   }
 
   detailPaymentOpened(data) {
-    let toggleID = 'toggleID';
+    let toggleID = 'detailPaymentButton';
     let id = 'detailPayment';
 
     if (this.state.isActive == true) {
-      // close menu
       this.state.isActive = false;
       this.refs[id].setNativeProps({
         display: 'none',
       });
       this.refs[toggleID].setNativeProps({
-        transform: [{ rotate: '0deg' }],
+        display: 'flex',
       });
     } else {
-      //show menu
       this.state.isActive = true;
       this.refs[id].setNativeProps({
         display: 'flex',
       });
-
       this.refs[toggleID].setNativeProps({
-        transform: [{ rotate: '180deg' }],
+        display: 'none',
       });
     }
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("props: " + JSON.stringify(this.props))
     return (
       <View style={{ flex: 1, backgroundColor: '#3F9D59' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -122,7 +119,7 @@ class Summary extends Component {
                     backgroundColor: '#f3f3f7',
                     width: '90%',
                     marginTop: responsiveHeight(1),
-                    height: responsiveHeight(9),
+                    height: responsiveHeight(11),
                     marginBottom: responsiveHeight(1),
                   }}
                 >
@@ -136,14 +133,11 @@ class Summary extends Component {
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        marginTop: '2%',
-                        marginLeft: '5%',
-                        marginRight: '5%'
                       }}
                     >
                       <Image
                         source={{ uri: this.props.clinic_image }}
-                        style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
+                        style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%', marginLeft: '5%', marginTop: '3%', marginBottom: '2%' }}
                       />
                       <View>
                         <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
@@ -161,7 +155,9 @@ class Summary extends Component {
               </View>
             </View>
 
-            <View style={{ marginTop: responsiveHeight(2) }}>
+            <View
+              ref={"detailPaymentButton"}
+              style={{ marginTop: responsiveHeight(2) }}>
               <TouchableOpacity
                 onPress={() => this.detailPaymentOpened(data.number)}
                 style={{
@@ -192,8 +188,9 @@ class Summary extends Component {
 
             <View
               ref={'detailPayment'}
-              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(-5) }}>
-              <View
+              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(5), display: "none" }}>
+              <TouchableOpacity
+                onPress={()=>this.detailPaymentOpened()}
                 style={{
                   backgroundColor: '#f8f8fa',
                   width: '100%',
@@ -223,7 +220,7 @@ class Summary extends Component {
 
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
               <View>
                 <View
                   style={{

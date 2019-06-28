@@ -93,18 +93,8 @@ class DetailEclaim extends Component {
   }
 
   async GetCurrency() {
-    await Core.CurrencyList((err, result) => {
-      if (result) {
-        if ((result.currency_name == "SGD - Singapore Dollar") && (this.props.claimdata.currency == "$S")) {
-          this.setState({
-            currency_exchange: result.currency_exchange_rate
-          })
-        } else {
-          this.setState({
-            currency_exchange: result.currency_exchange_rate
-          })
-        }
-      }
+    this.setState({
+      currency_exchange: (this.props.currency == "SGD") ? '0.00' : '3.00'
     })
   }
 
@@ -121,10 +111,10 @@ class DetailEclaim extends Component {
   }
 
   statusModal = () => {
-    console.log('modal hide completely')
+    // console.log('modal hide completely')
     if (this.state.failed) {
       this.setState({ showPopUp: true });
-      console.log('this.state.showPopUp', this.state.showPopUp);
+      // console.log('this.state.showPopUp', this.state.showPopUp);
     }
   }
 
@@ -212,7 +202,7 @@ class DetailEclaim extends Component {
 
   render() {
     // console.warn("props: " + JSON.stringify(this.props))
-    console.warn(this.props.claimdata)
+    console.warn(this.props.claimdata);
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -284,7 +274,7 @@ class DetailEclaim extends Component {
               <View
                 style={{ flexDirection: 'row' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
-                  {this.claimTypeProcess()}
+                  {this.props.claimdata.claim}
                 </Common.Texti>
               </View>
             </View>

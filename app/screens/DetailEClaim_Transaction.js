@@ -58,7 +58,8 @@ class DetailEClaim_Transaction extends Component {
         data: data,
         filesData: data.files
       });
-      console.warn(this.state.filesData);
+      console.warn(data);
+      // console.warn(this.state.filesData);
     });
 
     Core.UserDetail((err, result) => {
@@ -462,8 +463,8 @@ class DetailEClaim_Transaction extends Component {
                   editable={false} selectTextOnFocus={false}
                   placeholder="Member"
                   underlineColorAndroid="transparent"
-                  
-                  
+
+
                   value=
                 /> */}
               </View>
