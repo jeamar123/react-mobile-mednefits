@@ -73,7 +73,7 @@ class Camera extends Component {
           filetype: 'images/jpg'
         }
 
-        if (this.state.images.length !== 4) {
+        if (this.state.images.length !== 5) {
           imagesdata = [...this.state.images, images]
 
           this.setState({
@@ -81,11 +81,11 @@ class Camera extends Component {
             preview: true,
           })
 
-          if (imagesdata.length == 4) {
+          if (imagesdata.length == 5) {
             this.setPreview(4)
           }
         } else {
-          Core.getNotify("", "Only 4 images can be upload")
+          Core.getNotify("", "Only 5 images can be upload")
         }
 
       }
@@ -112,8 +112,8 @@ class Camera extends Component {
   }
 
   retakeAction = () => {
-    if (this.state.images.length == 4) {
-      Core.getNotify("", "Only 4 images can be upload")
+    if (this.state.images.length == 5) {
+      Core.getNotify("", "Only 5 images can be upload")
     } else {
       this.setState({
         preview: false
@@ -208,13 +208,13 @@ class Camera extends Component {
           filetype: response.type,
         }
 
-        if (this.state.images.length !== 4) {
+        if (this.state.images.length !== 5) {
           this.setState({
             images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
             preview: true
           })
         } else {
-          Core.getNotify("", "Only 4 images can be upload")
+          Core.getNotify("", "Only 5 images can be upload")
         }
       }
     });

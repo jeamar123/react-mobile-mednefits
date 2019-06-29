@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, Dimensions, ScrollView, StyleSheet, Platform } from 'react-native';
+import {
+  StatusBar,
+  View,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Platform,
+  SafeAreaView
+} from 'react-native';
 import { Button } from 'native-base';
 import Modal from 'react-native-modal'
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import * as Common from './index'
 import * as Config from '../../config'
 const { height, width } = Dimensions.get('window');
@@ -73,61 +82,62 @@ class SelectList extends Component {
 
   renderNavbar() {
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => this.setState({ isVisible: false })}
+      <SafeAreaView style={{ backgroundColor: '#efeff4' }}>
+        <View style={styles.container}>
+          <View
             style={{
-              paddingStart: 11,
-              flexDirection: 'row',
+              width: 50,
+              height: 50,
               justifyContent: 'center',
-              alignItems: 'center',
+              alignItems: 'flex-start',
             }}
           >
-            <Icons
-              name="angle-left"
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 32, paddingEnd: 5 }}
-            />
-            <Common.Texti
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 14, fontFamily: 'Helvetica' }}
+            <TouchableOpacity
+              onPress={() => this.setState({ isVisible: false })}
+              style={{
+                paddingStart: 11,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
-              Back
+              <Icons
+                name="angle-left"
+                style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 32, paddingEnd: 5 }}
+              />
+              <Common.Texti
+                style={{ color: (this.props.fontColor) ? this.props.fontColor : '#000', fontSize: 14, fontFamily: 'Helvetica' }}
+              >
+                Back
             </Common.Texti>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            paddingTop: 5
-          }}
-        >
-          <Common.Texti
-            fontFamily={Config.FONT_FAMILY_BOLD}
-            fontSize={18}
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
           >
-            {this.props.title}
-          </Common.Texti>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_BOLD}
+              fontSize={18}
+            >
+              {this.props.title}
+            </Common.Texti>
+          </View>
+          <View
+            style={{
+              width: 50,
+              height: 50,
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+            }}
+          >
+            <Button transparent style={{ paddingLeft: 15 }} />
+          </View>
         </View>
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-        >
-          <Button transparent style={{ paddingLeft: 15 }} />
-        </View>
-      </View>
+      </SafeAreaView>
     )
   }
 
@@ -168,10 +178,12 @@ class SelectList extends Component {
           }}
         >
           <Common.Text
-            fontSize={12}
-            fontFamily={Config.FONT_FAMILY_LIGHT}
+            fontSize={RF(1.8)}
+            fontFamily={Config.FONT_FAMILY_ROMAN}
             style={{
-              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
+              color: (this.props.value) ? "#2c3e50" : "#9e9e9e",
+              fontWeight: '500',
+              textDecorationLine: 'underline'
             }}
           >
             {this.setTitle()}
@@ -208,9 +220,9 @@ const styles = StyleSheet.create({
   container: {
     height: Platform.OS === 'ios' ? 64 : 54,
     flexDirection: 'row',
-    paddingTop: 15,
+    paddingTop: 10,
     backgroundColor: "#efeff4",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   navBarItem: {
     justifyContent: 'center',

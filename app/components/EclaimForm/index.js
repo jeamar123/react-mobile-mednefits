@@ -8,6 +8,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import moment from 'moment';
 import styles from './styles';
 import * as Common from '../common';
@@ -228,12 +229,13 @@ export default class EclaimForm extends Component {
               </Common.Texti>
             </View>
 
-            <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%", marginTop: 10 }}>
+            <View style={{ flex: 1, marginTop: 10 }}>
               <View
                 style={styles.fieldStyle}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                 >
                   Claim Type
                 </Common.Texti>
@@ -247,13 +249,16 @@ export default class EclaimForm extends Component {
                 />
               </View>
 
-              <Common.Divider />
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
               <View
                 style={styles.fieldStyle}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -262,6 +267,8 @@ export default class EclaimForm extends Component {
                 </Common.Texti>
                 <Common.InputText
                   value={this.state.provider}
+                  returnKeyType='done'
+                  keyboardType="email-address"
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
@@ -276,17 +283,22 @@ export default class EclaimForm extends Component {
 
               </View>
 
-              <Common.Divider />
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
               <View
                 style={{
                   justifyContent: 'space-between',
                   flexDirection: 'row',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  marginRight: '5%',
+                  marginLeft: "5%",
                 }}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -309,14 +321,14 @@ export default class EclaimForm extends Component {
                     if (!date) {
                       return <Common.Texti
                         fontColor={"#9e9e9e"}
-                        fontSize={13}
+                        fontSize={RF(1.8)}
                         fontFamily={Config.FONT_FAMILY_LIGHT}
                       >{this.state.date}</Common.Texti>
                     }
                     const dateStr = `${day} ${month} ${year}`
                     return <Common.Texti
                       fontColor={"#2c3e50"}
-                      fontSize={13}
+                      fontSize={RF(1.8)}
                       fontFamily={Config.FONT_FAMILY_LIGHT}
                     >{dateStr}</Common.Texti>
                   }}
@@ -325,13 +337,16 @@ export default class EclaimForm extends Component {
 
               </View>
 
-              <Common.Divider />
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
               <View
                 style={styles.fieldStyle}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -363,13 +378,16 @@ export default class EclaimForm extends Component {
                 </View>
               </View>
 
-              <Common.Divider />
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
               <View
                 style={styles.fieldStyle}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -382,7 +400,7 @@ export default class EclaimForm extends Component {
                   <Common.InputAmount
                     value={this.state.amount}
                     returnKeyType='done'
-                    keyboardType="numeric"
+                    keyboardType="decimal-pad"
                     onChangeText={text => this.setState({ amount: text })}
                     placeholder="Enter amount"
                     leftToRight
@@ -410,13 +428,16 @@ export default class EclaimForm extends Component {
                 </View>
               </View>
 
-              <Common.Divider />
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
               <View
                 style={styles.fieldStyle}
               >
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -431,6 +452,8 @@ export default class EclaimForm extends Component {
                   onValueChange={(value) => this.setState({ member: value })}
                 />
               </View>
+
+              <Common.Divider />
 
             </View>
           </View>

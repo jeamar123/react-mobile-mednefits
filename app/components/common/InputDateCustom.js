@@ -176,7 +176,7 @@ class DatePicker extends Component {
           <ResponsiveImage
             source={require('../../../assets/apps/calendar.png')}
             style={{ resizeMode: 'center' }}
-            initWidth="15" initHeight="15"
+            initWidth="15" initHeight="16.5"
           />
         </View>
       )
