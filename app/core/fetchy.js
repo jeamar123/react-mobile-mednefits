@@ -1063,3 +1063,42 @@ export function CancelVisit(param, callback) {
     })
   });
 }
+
+export const ReceiptUpload = async (params, callback) => {
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      let myHeaders = new Headers();
+      let formdata = new FormData();
+
+      myHeaders.append('Authorization', result);
+      formdata.append("transaction_id", params.transaction_id)
+      params.images.map((value, index) => {
+        formdata.append("files[]", {
+          uri: value.preview,
+          type: value.filetype,
+          name: value.filename
+        })
+      })
+
+      params = {
+        url: Config.USER_UPLOAD_RECEIPT_BULK,
+        method: 'POST',
+        header: myHeaders,
+        body: formdata,
+        mode: 'cors',
+        cache: 'default',
+        bodyType: 'multipart'
+      };
+
+      console.warn(params);
+
+      fetching(params, result => {
+        console.warn(result)
+        callback('', result);
+      });
+
+    });
+  } catch (e) {
+    getNotify('', 'Failed get data, try again');
+  }
+}

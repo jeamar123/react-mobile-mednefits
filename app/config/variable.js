@@ -48,18 +48,19 @@ export const CLINIC_CREATE_PAYMENT          = CLINIC + '/create_payment';
 export const CANCEL_VISIT                   = CLINIC + '/cancel_visit';
 
 /* USER VARIABLE */
-export const USER                           = MAIN+"/user"
-export const USER_CREDITS                   = USER+"/credits"
-export const USER_NETWORK_TRANSACTION       = USER+"/in_network_transactions"
-export const USER_SPECIFIC_IN_NETWORK       = USER+"/specific_in_network"
-export const USER_ECLAIM_TRANSACTION        = USER+"/e_claim_transactions"
-export const USER_SPECIFIC_E_CLAIM          = USER+"/specific_e_claim_transaction"
-export const USER_CREATE_E_CLAIM            = USER+"/create_e_claim"
-export const USER_HEALT_TYPE_LIST           = USER+"/health_type_lists"
-export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER +"/upload_in_network_receipt"
-export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt"
-export const USER_MEMBERLIST                = USER+"/member_lists"
-export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
+export const USER                           = MAIN + "/user"
+export const USER_CREDITS                   = USER + "/credits"
+export const USER_NETWORK_TRANSACTION       = USER + "/in_network_transactions"
+export const USER_SPECIFIC_IN_NETWORK       = USER + "/specific_in_network"
+export const USER_ECLAIM_TRANSACTION        = USER + "/e_claim_transactions"
+export const USER_SPECIFIC_E_CLAIM          = USER + "/specific_e_claim_transaction"
+export const USER_CREATE_E_CLAIM            = USER + "/create_e_claim"
+export const USER_HEALT_TYPE_LIST           = USER + "/health_type_lists"
+export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER + "/upload_in_network_receipt"
+export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER + "/save_out_of_network_receipt"
+export const USER_UPLOAD_RECEIPT_BULK       = USER + "/upload_in_network_receipt_bulk"
+export const USER_MEMBERLIST                = USER + "/member_lists"
+export const FAMILY_COVERAGE                = USER + "/family_coverage_user_lists"
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN                   = "access_token"

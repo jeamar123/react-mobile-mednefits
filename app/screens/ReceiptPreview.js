@@ -89,7 +89,8 @@ export default class ReceiptPreview extends Component {
       previewImage: false,
       isModalVisible: false,
       changeData: false,
-      dataimage: []
+      dataimage: [],
+      Data: [],
     };
 
     this.removeImage = this.removeImage.bind(this)
@@ -102,13 +103,13 @@ export default class ReceiptPreview extends Component {
       index={index + 1}
       shootType={this.props.shootType}
       preview={item.preview}
-      images={this.props.claimdata.images}
+      images={this.props.receiptFiles.images}
       removeCallback={(index) => this.removeImage(index)}
     />
   );
 
   removeImage = (index) => {
-    arr = this.props.claimdata.images
+    arr = this.props.receiptFiles.images
     remove = arr.splice(parseInt(index - 1), 1);
 
     this.setState({
@@ -123,7 +124,7 @@ export default class ReceiptPreview extends Component {
   renderPreview() {
     return (
       <FlatList
-        data={(this.state.changeData) ? this.state.dataimage : this.props.claimdata.images}
+        data={(this.state.changeData) ? this.state.dataimage : this.props.receiptFiles.images}
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
@@ -131,8 +132,34 @@ export default class ReceiptPreview extends Component {
         showsVerticalScrollIndicator={false}
       />
     )
+  }
 
+  UploadReceiptProses = async () => {
 
+    try {
+      await this.setState({
+        isLoading: true,
+        button: 'Submitting...'
+      })
+
+      receiptFile = {
+        'transaction_id': this.props.transaction_id,
+        'images': this.props.receiptFiles.images,
+      }
+
+      await Core.ReceiptUpload(receiptFile, async (err, result) => {
+        // Core.getNotify("",result.message)
+        if (result.message == "Success.") {
+          this.setState({ isLoading: false, Data: result.data })
+          Actions.HistoryGeneral({ type: 'reset', transaction_id: this.state.Data.map((Id, index) => (Id.transaction_id)) })
+        } else {
+          console.warn('Failed to upload receipt')
+          await this.setState({ message: result.message, title: 'Upload Receipt', Failed: true, isLoading: false, button: 'Submit' })
+        }
+      })
+    } catch (e) {
+      Core.getNotify("", "Failed to upload receipt")
+    }
   }
 
   renderButton() {
@@ -141,7 +168,7 @@ export default class ReceiptPreview extends Component {
         justifyContent: 'flex-end',
       }}>
         <TouchableOpacity
-          onPress={() => Actions.DetailEclaim({ claimdata: this.props.claimdata })}
+          onPress={() => this.UploadReceiptProses({ receiptFiles: this.props.receiptFiles })}
           style={{
             backgroundColor: "#0392CF",
             width: "100%",
@@ -156,7 +183,7 @@ export default class ReceiptPreview extends Component {
             style={{
               padding: 10
             }}>
-            Next
+            Submit
           </Common.Texti>
         </TouchableOpacity>
       </View>
@@ -183,14 +210,38 @@ export default class ReceiptPreview extends Component {
     }, 2000)
   }
 
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >Uploading</Common.Texti>
+        </Modal>
+      </View>
+    );
+  }
+
+
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <View style={{ flex: 1, backgroundColor: '#EFEFF4' }}>
+        {this.customLoader()}
         <Navbar
           leftNav="back"
-          title="Receipt Verification"
-          subtitle="E-Claim"
+          title="Upload Receipt"
+          subtitle="In-Network"
         />
         <Modal
           animationIn={"fadeIn"}

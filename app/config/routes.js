@@ -53,7 +53,6 @@ import MedicalConditionAdd from '../screens/MedicalConditionAdd';
 import MedicalAllergiesAdd from '../screens/MedicalAllergiesAdd';
 import HomeSearch from '../screens/HomeSearch';
 import Wallet from '../screens/Wallet';
-import WalletWellness from '../screens/WalletWellness';
 import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
@@ -64,7 +63,7 @@ import cancelVisit from '../screens/cancelVisit';
 import ExpireMember from '../screens/ExpireMember';
 import ReceiptPreview from '../screens/ReceiptPreview';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -239,7 +238,6 @@ class RouterComponent extends Component {
           <Scene key="MedicalAllergiesAdd" component={MedicalAllergiesAdd} hideNavBar />
           <Scene key="HomeSearch" component={HomeSearch} hideNavBar />
           <Scene key="Wallet" component={Wallet} hideNavBar />
-          <Scene key="WalletWellness" component={WalletWellness} hideNavBar />
           <Scene key="checkinUser" component={checkinUser} hideNavBar />
           <Scene key="SelectList" component={SelectList} hideNavBar />
           <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
