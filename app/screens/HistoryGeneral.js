@@ -3,18 +3,14 @@ import {
   StatusBar,
   View,
   ActivityIndicator,
-  Easing,
   ScrollView,
   RefreshControl,
   TouchableOpacity
-}
-  from 'react-native';
-import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+} from 'react-native';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
-import ZoomImage from 'react-native-zoom-image';
-import Icon from 'react-native-vector-icons/Feather';
 import Modal from 'react-native-modal';
 import RF from "react-native-responsive-fontsize";
 import { HistoryUser } from '../components/HistoryUser';
@@ -159,7 +155,7 @@ class History extends Component {
         }}>
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => this.detailPaymentOpened(data.number)}
+              onPress={() => Actions.ReceiptPreview()}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -185,7 +181,7 @@ class History extends Component {
 
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => Actions.Camera()}
+              onPress={() => Actions.ReceiptUpload({ transaction_id: this.props.transaction_id })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -245,7 +241,7 @@ class History extends Component {
           }}>
           <View style={{ flex: 1, width: '100%', marginTop: responsiveHeight(2), marginBottom: responsiveHeight(10) }}>
             <TouchableOpacity
-              onPress={() => Actions.Camera()}
+              onPress={() => Actions.ReceiptUpload({ transaction_id: this.props.transaction_id })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',

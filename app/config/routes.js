@@ -58,12 +58,13 @@ import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
-import receiptUpload from '../screens/receiptUpload';
+import ReceiptUpload from '../screens/ReceiptUpload';
 import CurrencySelect from '../screens/CurrencySelect';
 import cancelVisit from '../screens/cancelVisit';
 import ExpireMember from '../screens/ExpireMember';
+import ReceiptPreview from '../screens/ReceiptPreview';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -242,10 +243,11 @@ class RouterComponent extends Component {
           <Scene key="checkinUser" component={checkinUser} hideNavBar />
           <Scene key="SelectList" component={SelectList} hideNavBar />
           <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
-          <Scene key="receiptUpload" component={receiptUpload} hideNavBar />
+          <Scene key="ReceiptUpload" component={ReceiptUpload} hideNavBar />
           <Scene key="CurrencySelect" component={CurrencySelect} hideNavBar />
           <Scene key="cancelVisit" component={cancelVisit} hideNavBar />
           <Scene key="ExpireMember" component={ExpireMember} hideNavBar />
+          <Scene key="ReceiptPreview" component={ReceiptPreview} hideNavBar />
         </Stack>
       </Router>
     );

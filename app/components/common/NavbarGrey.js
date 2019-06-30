@@ -449,33 +449,6 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'done') {
-      return (
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => Actions.receiptUpload({
-              transactionID: this.props.transaction_id, type: 'reset',
-            })}>
-            <Text
-              style={{
-                fontFamily: 'HelveticaNeue-Roman',
-                fontSize: 14,
-                color: '#000',
-                marginRight: 18,
-              }}
-            >
-              Done
-            </Text>
-          </TouchableOpacity>
-        </View>
-      );
     } else if (this.props.rightNav == 'skip') {
       return (
         <View
