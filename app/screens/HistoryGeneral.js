@@ -38,86 +38,23 @@ class History extends Component {
       isLoading: false,
       refreshing: false,
     };
-    this.selectPhoto = this.selectPhoto.bind(this);
   }
 
   _onRefresh = () => {
     this.setState({ refreshing: true });
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-      console.warn(data)
+      console.warn(JSON.stringify(data, null, 4))
       this.setState({
         data: data, refreshing: false
       })
     })
   }
 
-
-  selectPhoto() {
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel) {
-        console.warn('User cancelled image picker');
-      } else if (response.error) {
-        console.warn('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.warn('User tapped custom button: ', response.customButton);
-      } else {
-        let source = { uri: response.uri };
-        this.setState({ imageSource: source, photo_url: response.uri, isLoading: true });
-
-        const file = {
-          uri: response.uri,
-          name: 'receipt',
-          type: 'image/jpeg',
-        };
-
-        Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
-          let myHeaders = new Headers();
-          let formdata = new FormData();
-
-          myHeaders.append('Authorization', result);
-          myHeaders.append('Content-Type', 'multipart/form-data');
-          formdata.append("file", file)
-          formdata.append("transaction_id", this.props.transaction_id)
-
-          params = {
-            url: Config.USER_UPLOAD_IN_NETWORK_RECEIPT,
-            method: 'POST',
-            header: myHeaders,
-            body: formdata,
-          };
-
-          fetch(Config.USER_UPLOAD_IN_NETWORK_RECEIPT, {
-            method: 'POST',
-            headers: myHeaders,
-            body: formdata,
-          })
-            .then(response => response.json())
-            .then(response => {
-              console.warn(JSON.stringify(response, null, 4))
-              Core.getNotify('', response.message);
-              Actions.HistoryGeneral(this.props.transaction_id)
-              this.setState({ isLoading: false, refreshing: true });
-              Core.GetUserNetwork(this.props.transaction_id, (result) => {
-                data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-                console.warn(data)
-                this.setState({
-                  data: data, refreshing: false
-                })
-              })
-            })
-            .catch(error => {
-              console.warn('error fetching', error.message);
-            });
-        });
-      }
-    });
-  }
-
   componentWillMount() {
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-      console.warn(data)
+      console.warn(JSON.stringify(data, null, 4))
       this.setState({
         data: data
       })
@@ -155,7 +92,12 @@ class History extends Component {
         }}>
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => Actions.ReceiptPreview()}
+              onPress={() => Actions.ReceiptView({
+                receiptFiles: Object.assign({}, {
+                  images: this.state.data.files.map((Images, index) => (Images.file))
+                }),
+                imageFile: this.state.data.files
+              })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -436,7 +378,7 @@ class History extends Component {
   }
 
   render() {
-    console.warn("datanya " + (this.state.data.clinic_name) ? this.state.data.clinic_name : "");
+    // console.warn("datanya " + (this.state.data.clinic_name) ? this.state.data.clinic_name : "");
     return (
       <Container>
         {this.customLoader()}

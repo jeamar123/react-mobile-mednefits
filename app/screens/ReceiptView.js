@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, FlatList, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
-import { RNCamera } from 'react-native-camera';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Easing,
+  ActivityIndicator,
+  ImageBackground
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import ImagePicker from 'react-native-image-picker';
-import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/NavbarGrey';
-import { Text } from '../common';
-import * as Common from '../components/common';
-import * as Core from '../core';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import ZoomImage from 'react-native-zoom-image';
 import Modal from "react-native-modal";
 import Swipeable from 'react-native-swipeable';
+import * as Common from '../components/common';
+import * as Core from '../core';
 
 class CameraBatchImage extends Component {
   constructor(props) {
@@ -46,12 +49,15 @@ class CameraBatchImage extends Component {
     if (this.props.shootType == 'single') {
       return (
         <View style={{ padding: 15, alignItems: 'center', height: "100%" }}>
-          <ImageBackground
-            source={{ uri: this.props.preview }}
-            style={{
+          <ZoomImage
+            imgStyle={{
               width: '100%',
               height: 500,
             }}
+            enableScaling={true}
+            easingFunc={Easing.ease}
+            duration={200}
+            source={{ uri: this.props.preview }}
           />
         </View>
       )
@@ -66,12 +72,15 @@ class CameraBatchImage extends Component {
             </Common.Texti></View>)}
           <View style={{ padding: 15 }}>
             <Swipeable rightButtons={rightButtons}>
-              <ImageBackground
-                source={{ uri: this.props.preview }}
-                style={{
+              <ZoomImage
+                imgStyle={{
                   width: '100%',
                   height: 230,
                 }}
+                enableScaling={true}
+                easingFunc={Easing.ease}
+                duration={200}
+                source={{ uri: this.props.preview }}
               />
             </Swipeable>
           </View>
@@ -81,7 +90,7 @@ class CameraBatchImage extends Component {
   }
 }
 
-export default class ReceiptPreview extends Component {
+export default class ReceiptView extends Component {
   constructor(props) {
     super(props);
 
@@ -102,14 +111,14 @@ export default class ReceiptPreview extends Component {
     <CameraBatchImage
       index={index + 1}
       shootType={this.props.shootType}
-      preview={item.preview}
-      images={this.props.receiptFiles.images}
+      preview={item.file}
+      images={this.props.imageFile}
       removeCallback={(index) => this.removeImage(index)}
     />
   );
 
   removeImage = (index) => {
-    arr = this.props.receiptFiles.images
+    arr = this.props.imageFile
     remove = arr.splice(parseInt(index - 1), 1);
 
     this.setState({
@@ -124,72 +133,13 @@ export default class ReceiptPreview extends Component {
   renderPreview() {
     return (
       <FlatList
-        data={(this.state.changeData) ? this.state.dataimage : this.props.receiptFiles.images}
+        data={(this.state.changeData) ? this.state.dataimage : this.props.imageFile}
         extraData={this.state}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       />
-    )
-  }
-
-  UploadReceiptProses = async () => {
-
-    try {
-      await this.setState({
-        isLoading: true,
-        button: 'Submitting...'
-      })
-
-      receiptFile = {
-        'transaction_id': this.props.transaction_id,
-        'images': this.props.receiptFiles.images,
-      }
-
-      await Core.ReceiptUpload(receiptFile, async (err, result) => {
-        // Core.getNotify("",result.message)
-        if (result.message == "Success.") {
-          this.setState({ isLoading: false, Data: result.data })
-          Actions.HistoryGeneral({
-            type: 'reset',
-            transaction_id: this.state.Data.map((Id, index) => (Id.transaction_id))
-          })
-        } else {
-          console.warn('Failed to upload receipt')
-          await this.setState({ message: result.message, title: 'Upload Receipt', Failed: true, isLoading: false, button: 'Submit' })
-        }
-      })
-    } catch (e) {
-      Core.getNotify("", "Failed to upload receipt")
-    }
-  }
-
-  renderButton() {
-    return (
-      <View style={{
-        justifyContent: 'flex-end',
-      }}>
-        <TouchableOpacity
-          onPress={() => this.UploadReceiptProses({ receiptFiles: this.props.receiptFiles })}
-          style={{
-            backgroundColor: "#0392CF",
-            width: "100%",
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingBottom: '3%'
-          }}
-        >
-          <Common.Texti
-            fontSize={16}
-            fontColor={"#ffffff"}
-            style={{
-              padding: 10
-            }}>
-            Submit
-          </Common.Texti>
-        </TouchableOpacity>
-      </View>
     )
   }
 
@@ -243,7 +193,7 @@ export default class ReceiptPreview extends Component {
         {this.customLoader()}
         <Navbar
           leftNav="back"
-          title="Upload Receipt"
+          title="Review Receipt"
           subtitle="In-Network"
         />
         <Modal
@@ -262,14 +212,13 @@ export default class ReceiptPreview extends Component {
               <Common.Texti
                 fontColor={"#FFFFFF"}
               >
-                {" "}Receipt attached
+                {" "}Render Receipt
               </Common.Texti>
             </TouchableOpacity>
           </View>
         </Modal>
         <View style={{ flex: 1 }}>
           {this.renderPreview()}
-          {this.renderButton()}
         </View>
       </View>
     )
