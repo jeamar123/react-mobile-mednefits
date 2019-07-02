@@ -53,7 +53,7 @@ class Camera extends Component {
     try {
       if (this.camera) {
         const options = {
-          quality: 0,
+          quality: 1.0,
           base64: false,
           orientation: "portrait",
           fixOrientation: true,

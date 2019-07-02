@@ -470,10 +470,10 @@ class DetailEclaim extends Component {
                   <View
                     style={{ flexDirection: 'row' }}>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
-                      {(Numeral(this.props.claimdata.amount).value() * 3.00).toFixed(2)}{" "}
+                      {(Numeral(this.props.claimdata.amount).value() / 3.00).toFixed(2)}{" "}
                     </Common.Texti>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={14}>
-                      {this.props.claimdata.currency}
+                      SGD
                     </Common.Texti>
                   </View>
                 </View>

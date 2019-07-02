@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, FlatList, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
-import { RNCamera } from 'react-native-camera';
-import Icon from 'react-native-vector-icons/Feather';
-import ImagePicker from 'react-native-image-picker';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  ImageBackground
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Navbar from '../components/common/NavbarGrey';
-import { Text } from '../common';
-import * as Common from '../components/common';
-import * as Core from '../core';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import Icon from 'react-native-vector-icons/Feather';
 import Modal from "react-native-modal";
 import Swipeable from 'react-native-swipeable';
+import FastImage from 'react-native-fast-image';
+import Navbar from '../components/common/NavbarGrey';
+import * as Common from '../components/common';
+import * as Core from '../core';
 
 class CameraBatchImage extends Component {
   constructor(props) {
@@ -46,6 +49,19 @@ class CameraBatchImage extends Component {
     if (this.props.shootType == 'single') {
       return (
         <View style={{ padding: 15, alignItems: 'center', height: "100%" }}>
+          {/* <FastImage
+            style={{
+              width: '100%',
+              height: 500,
+            }}
+            source={{
+              uri: this.props.preview,
+              priority: FastImage.priority.medium,
+              cache: FastImage.cacheControl.immutable
+            }}
+            resizeMode={FastImage.resizeMode.contain}
+          // onError={(err) => console.warn(err.message)}
+          /> */}
           <ImageBackground
             source={{ uri: this.props.preview }}
             style={{
@@ -66,6 +82,19 @@ class CameraBatchImage extends Component {
             </Common.Texti></View>)}
           <View style={{ padding: 15 }}>
             <Swipeable rightButtons={rightButtons}>
+              {/* <FastImage
+                style={{
+                  width: '100%',
+                  height: 230,
+                }}
+                source={{
+                  uri: this.props.preview,
+                  priority: FastImage.priority.medium,
+                  cache: FastImage.cacheControl.immutable
+                }}
+                resizeMode={FastImage.resizeMode.contain}
+              // onError={(err) => console.warn(err.message)}
+              /> */}
               <ImageBackground
                 source={{ uri: this.props.preview }}
                 style={{

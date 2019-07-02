@@ -10,7 +10,7 @@ class checkinUser extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />

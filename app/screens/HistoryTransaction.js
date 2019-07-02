@@ -401,13 +401,29 @@ class HistoryTransaction extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back-home" title="History" />
+        <Navbar
+          leftNav="back-home"
+          title="History"
+          Services={this.props.services}
+          clinic_Id={this.props.clinicid}
+          member={this.props.member}
+          nric={this.props.nric}
+          check_Id={this.props.checkId}
+          checkTime={this.props.checkTime}
+          capCurrency={this.props.capCurrency}
+          capAmount={this.props.capAmount}
+          clinic_image={this.props.clinic_image}
+          clinic_name={this.props.clinic_name}
+          consultation_fee_symbol={this.props.consultation_fee_symbol}
+          consultation_status={this.props.consultation_status}
+          consultation_fees={this.props.consultation_fees}
+        />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
           tabContainerStyle={{ elevation: 0 }}
         >
           <Tab
-            heading="In-Network Transactions"
+            heading="In-Network"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
@@ -434,7 +450,7 @@ class HistoryTransaction extends Component {
             </Content>
           </Tab>
           <Tab
-            heading="E-Claim Transactions"
+            heading="Out-of-Network"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}

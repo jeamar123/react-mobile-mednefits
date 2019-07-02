@@ -193,7 +193,7 @@ export default class ReceiptView extends Component {
         {this.customLoader()}
         <Navbar
           leftNav="back"
-          title="Review Receipt"
+          title="Retrieve Receipt"
           subtitle="In-Network"
         />
         <Modal

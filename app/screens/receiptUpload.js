@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  ImageBackground,
+  Platform,
+  Dimensions,
+  PermissionsAndroid
+} from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
-import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
 import * as Core from '../core';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 const options = {
   title: 'Select Photo',
@@ -53,7 +63,7 @@ class UploadReceipt extends Component {
     try {
       if (this.camera) {
         const options = {
-          quality: 0,
+          quality: 1.0,
           base64: false,
           orientation: "portrait",
           fixOrientation: true,

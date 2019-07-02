@@ -192,7 +192,8 @@ class ConfirmPay extends Component {
           </Text>
         </View>
       )
-    } else {
+    }
+    else {
       return (
         <View>
           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
