@@ -72,8 +72,8 @@ class SelectList extends Component {
     return label
   }
 
-  renderNavbar(){
-    return(
+  renderNavbar() {
+    return (
       <View style={styles.container}>
         <View
           style={{
@@ -84,7 +84,7 @@ class SelectList extends Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => this.setState({isVisible: false})}
+            onPress={() => this.setState({ isVisible: false })}
             style={{
               paddingStart: 11,
               flexDirection: 'row',
@@ -150,7 +150,7 @@ class SelectList extends Component {
             margin: 0
           }}
         >
-          <View style={{ flex: 1, backgroundColor: "white"}}>
+          <View style={{ flex: 1, backgroundColor: "white" }}>
             {this.renderNavbar()}
             <ScrollView
               showsHorizontalScrollIndicator={false}
@@ -171,6 +171,7 @@ class SelectList extends Component {
           <Common.Text
             fontFamily={Config.FONT_FAMILY_MEDIUM}
             fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
+            style={{ textDecorationLine: 'underline' }}
           >
             {this.setTitle()}
           </Common.Text>

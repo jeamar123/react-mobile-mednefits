@@ -51,7 +51,7 @@ export default class EclaimForm extends Component {
     this.getCurrency()
   }
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.currencyState !== this.props.currencyState) {
       this.setState({
         currency: this.props.currency
@@ -59,7 +59,7 @@ export default class EclaimForm extends Component {
     }
   }
 
-  updateDataSelect(){
+  updateDataSelect() {
     this.setState({
       type_spending: this.props.type_spending,
       provider: this.props.provider,
@@ -139,7 +139,7 @@ export default class EclaimForm extends Component {
     }
   }
 
-  updateClaim(val){
+  updateClaim(val) {
     try {
       this.state.claimType.map((value, index) => {
         if (val == value.value) {
@@ -230,13 +230,14 @@ export default class EclaimForm extends Component {
             </Common.Texti>
           </View>
 
-          <View style={{ flex: 1, marginLeft: "5%", marginRight: "5%" }}>
+          <View style={{ flex: 1 }}>
             <View
               style={[styles.fieldStyle, { marginTop: "3%" }]}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
-                >
+                fontColor={'#2C3E50'}
+              >
                 Claim Type
               </Common.Texti>
               <Common.InputSelectListClaim
@@ -248,21 +249,21 @@ export default class EclaimForm extends Component {
               />
             </View>
 
-            <Common.Divider
-              style={{
-                marginRight: -15
-              }}
-            />
+            <View style={{ marginLeft: '5%' }}>
+              <Common.Divider />
+            </View>
+
 
             <View
               style={styles.fieldStyleNoPadding}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
+                fontColor={'#2C3E50'}
                 style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 Provider
               </Common.Texti>
               <Common.InputText
@@ -277,23 +278,25 @@ export default class EclaimForm extends Component {
               />
             </View>
 
-            <Common.Divider
-              style={{
-                marginRight: -15
-              }}
-            />
+            <View style={{ marginLeft: '5%' }}>
+              <Common.Divider />
+            </View>
+
 
             <View
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
                 paddingTop: 10,
-                paddingBottom: 10
+                paddingBottom: 10,
+                marginRight: '5%',
+                marginLeft: "5%",
               }}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
-                >
+                fontColor={'#2C3E50'}
+              >
                 Visit Date
               </Common.Texti>
 
@@ -307,28 +310,28 @@ export default class EclaimForm extends Component {
                     return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
                   }
                   const dateStr = `${day} ${month} ${year}`
-                  return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM}  fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
+                  return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                 }}
                 onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}
               />
 
             </View>
 
-            <Common.Divider
-              style={{
-                marginRight: -15
-              }}
-            />
+            <View style={{ marginLeft: '5%' }}>
+              <Common.Divider />
+            </View>
+
 
             <View
               style={styles.fieldStyle}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
+                fontColor={'#2C3E50'}
                 style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 Visit Time
               </Common.Texti>
               <View
@@ -355,11 +358,10 @@ export default class EclaimForm extends Component {
               </View>
             </View>
 
-            <Common.Divider
-              style={{
-                marginRight: -15
-              }}
-            />
+            <View style={{ marginLeft: '5%' }}>
+              <Common.Divider />
+            </View>
+
 
             {/*   */}
 
@@ -388,14 +390,15 @@ export default class EclaimForm extends Component {
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
+                fontColor={'#2C3E50'}
                 style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 Receipt Amount
               </Common.Texti>
 
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: 'row' }}>
                 <Common.InputAmount
                   keyboardType={"number-pad"}
                   value={this.state.amount}
@@ -413,7 +416,7 @@ export default class EclaimForm extends Component {
                     marginBottom: -10
                   }}
                 />
-                <View style={{marginLeft: 10, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
                   <Common.InputSelectListCurrency
                     title="Currency"
                     data={this.state.currencyData}
@@ -430,21 +433,21 @@ export default class EclaimForm extends Component {
               </View>
             </View>
 
-            <Common.Divider
-              style={{
-                marginRight: -15
-              }}
-            />
+            <View style={{ marginLeft: '5%' }}>
+              <Common.Divider />
+            </View>
+
 
             <View
               style={styles.fieldStyle}
             >
               <Common.Texti
                 fontFamily={Config.FONT_FAMILY_MEDIUM}
+                fontColor={'#2C3E50'}
                 style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 Member
               </Common.Texti>
 

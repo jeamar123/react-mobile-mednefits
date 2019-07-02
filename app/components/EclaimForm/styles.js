@@ -72,11 +72,15 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 15,
-    paddingBottom: 15
+    paddingBottom: 15,
+    marginRight: '5%',
+    marginLeft: "5%",
   },
   fieldStyleNoPadding: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginRight: '5%',
+    marginLeft: "5%",
   }
 });

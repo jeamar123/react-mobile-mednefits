@@ -54,7 +54,7 @@ class DetailEclaim extends Component {
         'service': this.props.claimdata.claim,
         'merchant': this.props.claimdata.provider,
         'images': this.props.claimdata.images,
-        'amount': (this.props.currency == 'SGD') ? this.props.claimdata.amount : parseInt(this.props.claimdata.amount*this.state.currency_exchange),
+        'amount': (this.props.currency == 'SGD') ? this.props.claimdata.amount : parseInt(this.props.claimdata.amount * this.state.currency_exchange),
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
@@ -153,11 +153,11 @@ class DetailEclaim extends Component {
     );
   }
 
-  Capitalize(str){
+  Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  claimTypeProcess(){
+  claimTypeProcess() {
     if (this.props.claimdata.type_spending == 'medical') {
       switch (this.props.claimdata.claim) {
         case '1':
@@ -228,7 +228,6 @@ class DetailEclaim extends Component {
             style={{
               backgroundColor: '#fff',
               paddingLeft: 5,
-              paddingRight: 15,
             }}
             formName="signupForm"
             openModal={route => {
@@ -243,7 +242,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
@@ -256,7 +257,11 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -265,7 +270,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
@@ -278,7 +285,11 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -287,7 +298,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text
@@ -302,7 +315,11 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -311,7 +328,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Common.Texti style={{
@@ -336,7 +355,11 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -345,7 +368,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text
@@ -354,7 +379,7 @@ class DetailEclaim extends Component {
                 Visit Time
               </Text>
               <View
-                style={{ flexDirection: 'row',  justifyContent: 'center', alignItems: 'center' }}>
+                style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
@@ -364,7 +389,11 @@ class DetailEclaim extends Component {
                 />
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -373,7 +402,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text
@@ -391,7 +422,11 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             {(this.props.claimdata.currency == 'MYR') ? (
               <View>
                 <View
@@ -402,7 +437,9 @@ class DetailEclaim extends Component {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingTop: 15,
-                    paddingBottom: 15
+                    paddingBottom: 15,
+                    paddingRight: 15,
+                    paddingLeft: 3,
                   }}
                 >
                   <Text
@@ -417,7 +454,11 @@ class DetailEclaim extends Component {
                     </Common.Texti>
                   </View>
                 </View>
-                <Common.Divider noMargin />
+
+                <View>
+                  <Common.Divider noMargin Side />
+                </View>
+
                 <View
                   style={{
                     flex: 1,
@@ -426,7 +467,9 @@ class DetailEclaim extends Component {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingTop: 15,
-                    paddingBottom: 15
+                    paddingBottom: 15,
+                    paddingRight: 15,
+                    paddingLeft: 3,
                   }}
                 >
                   <Text
@@ -437,14 +480,18 @@ class DetailEclaim extends Component {
                   <View
                     style={{ flexDirection: 'row' }}>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      {parseInt(this.props.claimdata.amount*this.state.currency_exchange)}{" "}
+                      {parseInt(this.props.claimdata.amount / this.state.currency_exchange)}{" "}
                     </Common.Texti>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      {this.props.claimdata.currency}
+                      SGD
                     </Common.Texti>
                   </View>
                 </View>
-                <Common.Divider noMargin />
+
+                <View>
+                  <Common.Divider noMargin Side />
+                </View>
+
               </View>
             ) : (<View />)}
             <View
@@ -455,7 +502,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text
@@ -474,7 +523,11 @@ class DetailEclaim extends Component {
                 </Common.Texti>
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,
@@ -483,7 +536,9 @@ class DetailEclaim extends Component {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingTop: 15,
-                paddingBottom: 15
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 3,
               }}
             >
               <Text
@@ -534,7 +589,11 @@ class DetailEclaim extends Component {
                   )}
               </View>
             </View>
-            <Common.Divider noMargin />
+
+            <View style={{ paddingLeft: 3 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
             <View
               style={{
                 flex: 1,

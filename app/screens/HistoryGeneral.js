@@ -149,7 +149,7 @@ class History extends Component {
     );
   }
 
-  renderReceiptUpload() {
+  renderreceiptUpload() {
     if (this.state.data.files.length > 0) {
       return (
         <View style={{
@@ -158,7 +158,12 @@ class History extends Component {
         }}>
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => this.detailPaymentOpened(data.number)}
+              onPress={() => Actions.ReceiptView({
+                receiptFiles: Object.assign({}, {
+                  images: this.state.data.files.map((Images, index) => (Images.file))
+                }),
+                imageFile: this.state.data.files
+              })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -184,7 +189,7 @@ class History extends Component {
 
           <View style={{ marginTop: responsiveHeight(2) }}>
             <TouchableOpacity
-              onPress={() => this.selectPhoto()}
+              onPress={() => Actions.receiptUpload({ transaction_id: this.props.transaction_id })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -244,7 +249,7 @@ class History extends Component {
           }}>
           <View style={{ flex: 1, width: '100%', marginTop: responsiveHeight(2), marginBottom: responsiveHeight(10) }}>
             <TouchableOpacity
-              onPress={() => this.selectPhoto()}
+              onPress={() => Actions.receiptUpload({ transaction_id: this.props.transaction_id })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
@@ -267,27 +272,6 @@ class History extends Component {
                 </Common.Texti>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity
-              onPress={() => this.selectPhoto()}
-              style={{
-                paddingTop: 2,
-                paddingBottom: 2,
-                backgroundColor: '#0392cf',
-                borderRadius: 5,
-                margin: 15,
-                width: '120%',
-                height: '50%'
-              }}>
-              <View style={{
-                flexDirection: 'row',
-                alignContent: 'space-between',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }} >
-                <Icon name="camera" style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} />
-                <Text style={{ color: '#fff', fontSize: 15, margin: 5 }}> Upload Receipt</Text>
-              </View>
-            </TouchableOpacity> */}
           </View>
         </View >
       )
@@ -345,7 +329,7 @@ class History extends Component {
         //           width: '100%',
         //           fontSize: 13
         //         }}>
-        //           {this.renderReceiptUpload()}
+        //           {this.renderreceiptUpload()}
         //         </View>
         //       </View>
         //     </View>
@@ -499,7 +483,7 @@ class History extends Component {
                 <View style={{
                   width: '100%',
                 }}>
-                  {this.renderReceiptUpload()}
+                  {this.renderreceiptUpload()}
                 </View>
               </View>
             </View>
