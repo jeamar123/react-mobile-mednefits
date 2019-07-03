@@ -13,16 +13,28 @@ export default class InputTime extends Component {
   };
 
   msToTime(duration) {
-    date = new Date(duration)
-    hour = date.getHours()
-    minute = date.getMinutes()
+    console.warn(duration);
+    var milliseconds = parseInt((duration % 1000) / 100),
+      seconds = parseInt((duration / 1000) % 60),
+      minutes = duration.getMinutes(),
+      hours = duration.getHours()
 
-    ampm = hour >= 12 ? 'PM' : 'AM';
-    hours = (hour.toString().length == 1) ? "0"+hour : hour
-    minutes = (minute.toString().length == 1) ? "0"+minute : minute
+    var mid = 'AM';
+    if (hours == 0) { //At 00 hours we need to show 12 am
+      hours = 12;
+    }
+    else if (hours > 12) {
+      hours = hours % 12;
+      mid = 'PM';
+    }
 
-    return hours + ":" + minutes + " "+ampm;
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + ":" + minutes + ' ' + mid;
   }
+
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });

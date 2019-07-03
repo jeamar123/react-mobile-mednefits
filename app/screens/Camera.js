@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, ImageBackground, Platform, Dimensions, PermissionsAndroid } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  ImageBackground,
+  Platform,
+  Dimensions,
+  PermissionsAndroid
+} from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { Actions } from 'react-native-router-flux';
+import { swipeDirections } from 'react-native-swipe-gestures';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
-import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
 import * as Core from '../core';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 const options = {
   title: 'Select Photo',
@@ -73,7 +84,7 @@ class Camera extends Component {
           filetype: 'images/jpg'
         }
 
-        if (this.state.images.length !== 4) {
+        if (this.state.images.length !== 5) {
           imagesdata = [...this.state.images, images]
 
           this.setState({
@@ -81,11 +92,11 @@ class Camera extends Component {
             preview: true,
           })
 
-          if (imagesdata.length == 4) {
+          if (imagesdata.length == 5) {
             this.setPreview(4)
           }
         } else {
-          Core.getNotify("", "Only 4 images can be upload")
+          Core.getNotify("", "Only 5 images can be upload")
         }
 
       }
@@ -112,8 +123,8 @@ class Camera extends Component {
   }
 
   retakeAction = () => {
-    if (this.state.images.length == 4) {
-      Core.getNotify("", "Only 4 images can be upload")
+    if (this.state.images.length == 5) {
+      Core.getNotify("", "Only 5 images can be upload")
     } else {
       this.setState({
         preview: false
@@ -208,13 +219,13 @@ class Camera extends Component {
           filetype: response.type,
         }
 
-        if (this.state.images.length !== 4) {
+        if (this.state.images.length !== 5) {
           this.setState({
             images: (this.state.shootType == 'single') ? [images] : [...this.state.images, images],
             preview: true
           })
         } else {
-          Core.getNotify("", "Only 4 images can be upload")
+          Core.getNotify("", "Only 5 images can be upload")
         }
       }
     });
@@ -345,6 +356,7 @@ class Camera extends Component {
                     height: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    marginLeft: responsiveWidth(-10)
                   }}
                 >
                   <ImageBackground
@@ -478,10 +490,11 @@ class Camera extends Component {
                         <ImageBackground
                           source={{ uri: value.preview }}
                           style={[styles.preview, {
-                            width: (this.state.previewState !== 0) ? 45 : 55,
-                            height: (this.state.previewState !== 0) ? 45 : 55,
+                            width: (this.state.previewState !== 0) ? 39 : 48,
+                            height: (this.state.previewState !== 0) ? 39 : 48,
                             marginBottom: (this.state.previewState !== 0) ? 10 : 0,
-                            borderWidth: (this.state.previewState == (index + 1)) ? 2 : 0, borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF"
+                            borderWidth: (this.state.previewState == (index + 1)) ? 2 : 0,
+                            borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF"
                           }]}
                         />
                       </View>

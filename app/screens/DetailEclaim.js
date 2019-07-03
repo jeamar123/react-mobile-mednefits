@@ -54,7 +54,7 @@ class DetailEclaim extends Component {
         'service': this.props.claimdata.claim,
         'merchant': this.props.claimdata.provider,
         'images': this.props.claimdata.images,
-        'amount': (this.props.currency == 'SGD') ? this.props.claimdata.amount : parseInt(this.props.claimdata.amount * this.state.currency_exchange),
+        'amount': this.props.claimdata.amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,

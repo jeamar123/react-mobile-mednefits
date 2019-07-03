@@ -14,8 +14,6 @@ import com.rnfs.RNFSPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import org.reactnative.camera.RNCameraPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -46,7 +44,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new RNVersionCheckPackage(),
         new MainReactPackage(),
-        new ReactNativePushNotificationPackage(),
         new VectorIconsPackage(),
         new SystemSettingPackage(),
         new MapsPackage(),

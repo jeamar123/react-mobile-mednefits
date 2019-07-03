@@ -65,7 +65,7 @@ import ExpireMember from '../screens/ExpireMember';
 import ReceiptPreview from '../screens/ReceiptPreview';
 import ReceiptView from '../screens/ReceiptView';
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

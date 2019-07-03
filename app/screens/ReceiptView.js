@@ -193,7 +193,7 @@ export default class ReceiptView extends Component {
         {this.customLoader()}
         <Navbar
           leftNav="back"
-          title="Retrieve Receipt"
+          title="Review Receipt"
           subtitle="In-Network"
         />
         <Modal
@@ -212,7 +212,7 @@ export default class ReceiptView extends Component {
               <Common.Texti
                 fontColor={"#FFFFFF"}
               >
-                {" "}Render Receipt
+                {" "}Retrieve Receipt
               </Common.Texti>
             </TouchableOpacity>
           </View>

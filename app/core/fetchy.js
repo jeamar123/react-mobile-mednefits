@@ -521,17 +521,16 @@ export function SendEClaim(params, callback) {
           uri: value.preview,
           type: value.filetype,
           name: value.filename
-        }
-        )
+        })
       })
       formdata.append("amount", params.amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
-      formdata.append("time", params.time)
-      formdata.append("currency_type", params.currency_type)
-      formdata.append("currency_exchange", (params.currency_type == 'SGD') ? 0.00 : 3.00)
-      console.warn('params eclaim send'+JSON.stringify(params));
-      console.warn('formdata '+JSON.stringify(formdata))
+      formdata.append("time", params.time);
+      formdata.append("currency_type", params.currency_type);
+      formdata.append("currency_exchange_rate", (params.currency_type == 'SGD') ? 0.00 : 3.00)
+      console.warn('params eclaim send' + JSON.stringify(params, null, 4));
+      console.warn('formdata ' + JSON.stringify(formdata, null, 4))
       console.warn(params.currency_type);
 
       params = {
