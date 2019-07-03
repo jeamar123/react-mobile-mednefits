@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, Animated, Easing } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
 // import PushNotification from 'react-native-push-notification';
 import Logins from '../screens/Login';
@@ -57,14 +57,14 @@ import HistoryTransactionWallet from '../screens/HistoryTransactionWallet';
 import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
-import ReceiptUpload from '../screens/ReceiptUpload';
+import ReceiptUpload from '../screens/receiptUpload';
 import CurrencySelect from '../screens/CurrencySelect';
 import cancelVisit from '../screens/cancelVisit';
 import ExpireMember from '../screens/ExpireMember';
 import ReceiptPreview from '../screens/ReceiptPreview';
 import ReceiptView from '../screens/ReceiptView';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

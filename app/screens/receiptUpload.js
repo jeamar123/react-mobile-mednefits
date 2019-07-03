@@ -11,7 +11,8 @@ import {
   PermissionsAndroid
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import { swipeDirections } from 'react-native-swipe-gestures';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
@@ -355,6 +356,7 @@ class UploadReceipt extends Component {
                     height: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    marginLeft: responsiveWidth(-10)
                   }}
                 >
                   <ImageBackground
@@ -461,8 +463,9 @@ class UploadReceipt extends Component {
                     <TouchableOpacity
                       onPress={() => this.setPreview(index + 1)}
                       style={{
-                        alignItems: 'flex-end',
-                        marginLeft: 5,
+                        alignItems: 'flex-start',
+                        marginLeft: 4,
+                        width: '100%'
                       }}
                     >
                       <View style={{
@@ -488,10 +491,11 @@ class UploadReceipt extends Component {
                         <ImageBackground
                           source={{ uri: value.preview }}
                           style={[styles.preview, {
-                            width: (this.state.previewState !== 0) ? 45 : 55,
-                            height: (this.state.previewState !== 0) ? 45 : 55,
+                            width: (this.state.previewState !== 0) ? 39 : 48,
+                            height: (this.state.previewState !== 0) ? 39 : 48,
                             marginBottom: (this.state.previewState !== 0) ? 10 : 0,
-                            borderWidth: (this.state.previewState == (index + 1)) ? 2 : 0, borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF"
+                            borderWidth: (this.state.previewState == (index + 1)) ? 1.5 : 0,
+                            borderColor: (this.state.previewState == (index + 1)) ? "#0392cf" : "#FFFFFF"
                           }]}
                         />
                       </View>
@@ -883,8 +887,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   preview: {
-    width: 55,
-    height: 55,
+    width: 65,
+    height: 65,
   },
   actionPanel: {
     flex: 0.23,

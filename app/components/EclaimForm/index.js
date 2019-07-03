@@ -272,12 +272,12 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
-                    fontSize: 12,
+                    fontSize: RF(1.6),
                     color: "#2C3E50",
-                    fontFamily: Config.FONT_FAMILY_LIGHT
+                    fontFamily: Config.FONT_FAMILY_MEDIUM
                   }}
                   iconColor="#9e9e9e"
-                  fontFamily={Config.FONT_FAMILY_LIGHT}
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
                   leftToRight
                 />
 
@@ -322,14 +322,14 @@ export default class EclaimForm extends Component {
                       return <Common.Texti
                         fontColor={"#9e9e9e"}
                         fontSize={RF(1.8)}
-                        fontFamily={Config.FONT_FAMILY_LIGHT}
+                        fontFamily={Config.FONT_FAMILY_MEDIUM}
                       >{this.state.date}</Common.Texti>
                     }
                     const dateStr = `${day} ${month} ${year}`
                     return <Common.Texti
                       fontColor={"#2c3e50"}
                       fontSize={RF(1.8)}
-                      fontFamily={Config.FONT_FAMILY_LIGHT}
+                      fontFamily={Config.FONT_FAMILY_MEDIUM}
                     >{dateStr}</Common.Texti>
                   }}
                   onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}

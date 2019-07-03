@@ -177,7 +177,7 @@ class SelectList extends Component {
         >
           <Common.Text
             fontSize={RF(1.8)}
-            fontFamily={Config.FONT_FAMILY_LIGHT}
+            fontFamily={Config.FONT_FAMILY_MEDIUM}
             style={{
               color: (this.props.label) ? "#2c3e50" : "#9e9e9e"
             }}
