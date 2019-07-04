@@ -192,6 +192,14 @@ class ConfirmPay extends Component {
           </Text>
         </View>
       )
+    } else if (this.state.amountTotal == this.state.amountCap) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.props.capAmount).toFixed(2)}
+          </Text>
+        </View>
+      )
     }
     else {
       return (
@@ -353,7 +361,7 @@ class ConfirmPay extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingBottom: responsiveHeight(4),
+                paddingBottom: responsiveHeight(4.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
@@ -374,7 +382,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingTop: responsiveHeight(0.5),
-                paddingBottom: responsiveHeight(1),
+                paddingBottom: responsiveHeight(1.5),
                 marginBottom: '5%',
                 marginLeft: '5%',
                 marginRight: '5%'
@@ -415,7 +423,7 @@ class ConfirmPay extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 paddingTop: responsiveHeight(0.5),
-                paddingBottom: responsiveHeight(4),
+                paddingBottom: responsiveHeight(4.5),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}

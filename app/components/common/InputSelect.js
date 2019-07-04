@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Modal from 'react-native-modal';
 import ResponsiveImage from 'react-native-responsive-image';
+import RF from "react-native-responsive-fontsize";
 import * as Common from './index';
 import * as Config from '../../config';
 const { height, width } = Dimensions.get('window');
@@ -101,11 +102,11 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Text
-            style={{
-              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
-            }}
-            fontSize={13}
+            fontSize={RF(1.9)}
             fontFamily={Config.FONT_FAMILY_MEDIUM}
+            style={{
+              color: (this.props.label) ? "#2c3e50" : "#9e9e9e"
+            }}
           >
             {this.setTitle()}
           </Common.Text>

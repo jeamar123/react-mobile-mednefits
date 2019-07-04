@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, TouchableOpacity } from 'react-native'
+import { View, TextInput, TouchableOpacity } from 'react-native';
+import RF from "react-native-responsive-fontsize";
+import Icons from 'react-native-vector-icons/FontAwesome';
 import * as Config from '../../config'
 import * as Common from './index'
-import Icons from 'react-native-vector-icons/FontAwesome';
 
 export default class InputText extends Component {
 
@@ -70,6 +71,7 @@ export default class InputText extends Component {
 
 const style = {
   inputStyle: {
+    fontSize: RF(2.4),
     color: '#2c3e50',
     fontFamily: Config.FONT_FAMILY_MEDIUM
   },
