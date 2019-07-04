@@ -64,6 +64,7 @@ import cancelVisit from '../screens/cancelVisit';
 import ExpireMember from '../screens/ExpireMember';
 import ReceiptPreview from '../screens/ReceiptPreview';
 import ReceiptView from '../screens/ReceiptView';
+import updateApps from '../screens/updateApps';
 
 // console.disableYellowBox = true;
 
@@ -282,6 +283,7 @@ class RouterComponent extends Component {
             <Scene key="ExpireMember" component={ExpireMember} hideNavBar />
             <Scene key="ReceiptPreview" component={ReceiptPreview} hideNavBar />
             <Scene key="ReceiptView" component={ReceiptView} hideNavBar />
+            <Scene key="updateApps" component={updateApps} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

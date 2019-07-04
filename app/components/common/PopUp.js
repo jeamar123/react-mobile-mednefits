@@ -137,7 +137,7 @@ export default class Popup extends Component {
 
         </View>
       );
-    }  else if (this.props.kind == 'update-application') {
+    } else if (this.props.kind == 'update-application') {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
           {/* <ImageBackground
@@ -168,27 +168,27 @@ export default class Popup extends Component {
             >
               {this.props.message}
             </Common.Texti>
-            <Common.ButtonPay
+            <Common.ButtonUpdate
               style={{
                 padding: 5
               }}
-              onPress={() => this.CheckVersion()}>
+              onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.sg.medicloud')}>
               Update Now
-            </Common.ButtonPay>
+            </Common.ButtonUpdate>
           </View>
         </View>
       );
     }
   }
 
-  async CheckVersion(){
+  async CheckVersion() {
     try {
       version = await Core.CheckVersion()
 
       Linking.openURL(version);
 
     } catch (e) {
-      console.warn(e+"sa");
+      console.warn(e + "sa");
       // Common.getNotify("","Failed to request url")
     }
   }

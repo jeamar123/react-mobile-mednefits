@@ -15,6 +15,7 @@ import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
+import VersionCheck from 'react-native-version-check';
 import { Text } from '../common';
 import * as Config from '../config';
 import * as Core from '../core'
@@ -294,13 +295,20 @@ class Home extends Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
+      update: false,
+      thisVersion: VersionCheck.getCurrentVersion(),
+      appstoreVersion: ''
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
     this.onUpdateSearch = this.onUpdateSearch.bind(this)
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
 
+  isVisibleUpdate() {
+    this.setState({ update: false })
   }
 
   closeDrawer() {
@@ -327,53 +335,6 @@ class Home extends Component {
     })
   }
 
-
-  // Getting Data Clinic
-
-  // async componentWillMount() {
-  //   await Core.GetClinicMapList(2, async (error, result) => {
-  //     console.warn(error);
-  //     console.warn(result);
-  //     if (result) {
-  //       if (result.status) {
-  //         data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-  //         // console.warn(data.current_page);
-  //         // console.warn(data.last_page);
-  //         await this.setState({ AllClinic: data.clinics });
-  //       } else {
-  //         setTimeout(function () {
-  //           Actions.pop();
-  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-  //         }, 2000);
-  //       }
-  //     } else {
-  //       if (error.code === 3) {
-  //         setTimeout(function () {
-  //           Actions.pop();
-  //           Core.getNotifyLong("", 'Unable to get location. Please try again.');
-  //         }, 1000);
-  //       } else {
-  //         setTimeout(function () {
-  //           Actions.pop();
-  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-  //         }, 2000);
-  //       }
-  //     }
-  //     // console.warn(data);
-  //   });
-  // }
-
-  // componentWillMount() {
-  //   this.getClinics()
-  // }
-
-  // getClinics = async () => {
-  //   console.warn('anjing' + this.state.clinicType);
-  //   await Core.GetClinicMap(this.state.clinicType, (err, result) => {
-  //     console.warn(result);
-  //   })
-  // }
-
   getCurrentPosition = async () => {
     latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
     longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
@@ -396,7 +357,36 @@ class Home extends Component {
     await Core.GetLocationPermission(async (error, result) => {
       await this.getClinicType()
     });
+    //Get Pop Up
+    if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
+      console.warn('UP TO DATE')
+    } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
+      Actions.updateApps({type: 'reset'})
+      console.warn('Updating...')
+    } else {
+      console.warn('Checking...')
+    }
   }
+
+  componentWillMount() {
+    //Version Check
+    VersionCheck.getLatestVersion({
+      provider: 'playStore'  // for Android
+    })
+      .then(latestVersion => {
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
+        this.setState({
+          appstoreVersion: latestVersion,
+        })
+      });
+    // this.checkversion()
+
+  }
+
+  // checkversion = async () =
+  //   version = await Core.CheckVersion()
+  // }
+
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
 
@@ -436,8 +426,9 @@ class Home extends Component {
 
 
   render() {
-    // console.warn("clinisc " + JSON.stringify(this.state.AllClinic));
-    console.warn("props: " + JSON.stringify(this.props))
+    console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Drawer
         type="displace"
@@ -451,73 +442,14 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          {/* <View style={{ flex: 1 }}>
-            {(!this.state.data || this.state.isLoadingSearch) ? (
-              <View
-                style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
-              >
-                <ActivityIndicator size="large" color="#0392cf" />
-              </View>
-            ) : (this.state.searchdata) ? (
-              <View>
-                <Navbar
-                  leftNav="back-home"
-                />
-                <SearchHome
-                  onUpdateSearch={this.onUpdateSearch}
-                  isLoadingSearch={this.isLoadingSearch}
-                  clearProcess={this.clearSearch}
-                />
-                <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}
-                >
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center', marginLeft: '5%' }}
-                  >
-                    Search Result
-                  </Text>
-                </View>
-                <SearchResult
-                  searchdata={this.state.searchdata}
-                />
-              </View>
-            ) : (
-                  <View style={{ flex: 1 }}>
-                    <Navbar
-                      drawerAction={this.drawerActionCallback}
-                      leftNav={true}
-                      rightNav={true}
-                    />
-                    <HomeContent
-                      onUpdateSearch={this.onUpdateSearch}
-                      isLoadingSearch={this.isLoadingSearch}
-                      clearProcess={this.clearSearch}
-                    />
-                    <View
-                      style={{ justifyContent: 'center', alignItems: 'flex-start' }}
-                    >
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', marginLeft: '2.5%' }}
-                      >
-                        Benefits Category
-                      </Text>
-                    </View>
-                    <View style={styles.contain}>
-                      <FlatList
-                        data={this.state.data}
-                        extraData={this.state}
-                        keyExtractor={this.data}
-                        renderItem={this._renderItem}
-                        horizontal={false}
-                        numColumns={3}
-                      />
-                    </View>
-                  </View>
-                )}
-          </View> */}
-
+          <Common.Popup
+            kind="update-application"
+            isVisible={this.state.update}
+            closeSection={true}
+            closeSectionUpdate={this.isVisibleUpdate}
+            title={"Your application is out of date"}
+            message={"Please click below button to update your application"}
+          />
           <View style={{ flex: 1 }}>
             <Navbar
               drawerAction={this.drawerActionCallback}
