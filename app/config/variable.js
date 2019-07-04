@@ -58,6 +58,7 @@ export const USER_CREATE_E_CLAIM            = USER+"/create_e_claim"
 export const USER_HEALT_TYPE_LIST           = USER+"/health_type_lists"
 export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER+"/upload_in_network_receipt"
 export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt"
+export const USER_UPLOAD_RECEIPT_BULK       = USER + "/upload_in_network_receipt_bulk"
 export const USER_MEMBERLIST                = USER+"/member_lists"
 export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
 
