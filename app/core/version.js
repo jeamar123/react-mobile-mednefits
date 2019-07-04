@@ -7,10 +7,10 @@ export function CheckVersion() {
       VersionCheck.needUpdate()
         .then(async res => {
           console.warn('hasil - ' + res.isNeeded);    // true
-          if (res.isNeeded) {
+          if (res.isNeeded == true) {
             resolve(Linking.openURL(await VersionCheck.getStoreUrl()))
           } else {
-            reject('Up TO DATE')
+            reject('uptodate')
           }
         });
     } catch (e) {

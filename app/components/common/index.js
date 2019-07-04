@@ -1,6 +1,7 @@
 export * from './Buttons';
 export * from './ButtonPay';
 export * from './ButtonDone';
+export * from './ButtonUpdate'
 export * from './Spinner';
 export * from './ButtonFooter';
 export * from './Notify';

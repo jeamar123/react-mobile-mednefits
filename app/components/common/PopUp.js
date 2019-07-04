@@ -166,13 +166,13 @@ export default class Popup extends Component {
             >
               {this.props.message}
             </Common.Texti>
-            <Common.ButtonPay
+            <Common.ButtonUpdate
               style={{
-                padding: 5
+                padding: 7
               }}
-              onPress={() => this.CheckVersion()}>
+              onPress={() => Linking.openURL('https://apps.apple.com/sg/app/mednefits/id972694931')}>
               Update Now
-            </Common.ButtonPay>
+            </Common.ButtonUpdate>
           </View>
         </View>
       );

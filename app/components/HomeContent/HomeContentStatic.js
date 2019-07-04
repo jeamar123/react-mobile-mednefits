@@ -15,13 +15,15 @@ class HomeContent extends Component {
       Full_name: '',
       currency: false,
       isClearSearch: false,
-      isLoadingSearch: false
+      isLoadingSearch: false,
+      kickout: false
     };
   }
 
   async componentWillMount() {
     await this.getUserDetail();
     await this.getUserBalance();
+    await this.StatusUseronClinic();
   }
 
   async getUserBalance() {
@@ -71,11 +73,25 @@ class HomeContent extends Component {
     }
   }
 
+  async StatusUseronClinic() {
+    await Core.CancelVisiByClinic(this.props.check_Id, async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      if (data.status == false) {
+        this.setState({
+          kickout: true
+        });
+      }
+      console.warn('data ' + result.data.check_in_status_removed);
+      // await this.setState({
+      //   kickout: result.data.check_in_status_removed,
+      // });
+
+    });
+  }
 
   async getUserDetail() {
-    console.log('in progress fetching getUserDetail')
     await Core.UserDetail(async (error, result) => {
-      console.log('fetching done for getUserDetail');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
@@ -85,7 +101,27 @@ class HomeContent extends Component {
     });
   }
 
+  redNotif() {
+    if (this.props.check_Id !== null) {
+      <View style={{
+        marginTop: '-7%',
+        marginLeft: '55%',
+        marginBottom: '-8%',
+        width: 15,
+        height: 15,
+        borderRadius: 15 / 2,
+        backgroundColor: '#f44336',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+      </View>
+    } else {
+      < View />
+    }
+  }
+
   render() {
+    console.warn('kickout ' + this.state.kickout)
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <View style={styles.container}>
@@ -241,6 +277,7 @@ class HomeContent extends Component {
                     ) : (
                         <View />
                       )}
+                    {/* {this.redNotif()} */}
 
                     <Image
                       style={{ marginBottom: 8, width: 23, height: 35 }}

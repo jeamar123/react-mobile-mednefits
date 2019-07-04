@@ -1102,3 +1102,46 @@ export const ReceiptUpload = async (params, callback) => {
     getNotify('', 'Failed get data, try again');
   }
 }
+
+// export const CancelVisiByClinic = async (check_in_id, callback) => {
+//   try {
+//     console.warn('triggered CancelVisiByClinic')
+//     await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+//       params = {
+//         url: Config.CANCEL_VISIT_BYCLINIC + "?check_in_id=" + check_in_id,
+//         method: 'GET',
+//         header: {
+//           Accept: 'application/json',
+//           'Content-Type': 'application/json',
+//           Authorization: result,
+//         },
+//       };
+//       await fetching(params, async result => {
+//         console.warn('done CancelVisiByClinic');
+//         await callback('', result);
+//       });
+//     });
+//   } catch (e) {
+//     console.warn('error CancelVisiByClinic' + e.message);
+//     getNotify('', 'Failed get data, try again');
+//   }
+// }
+
+export function CancelVisiByClinic(check_in_id, callback) {
+  console.warn('triggered CancelVisiByClinic')
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.CANCEL_VISIT_BYCLINIC + "?check_in_id=" + check_in_id,
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      }
+    };
+
+    fetching(params, result => {
+      console.warn('done CancelVisiByClinic');
+      callback('', result)
+    })
+  });
+}

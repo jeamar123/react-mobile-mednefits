@@ -18,6 +18,7 @@ import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
 import VersionCheck from 'react-native-version-check';
 import { Text } from '../common';
+import { Popup } from '../components/common';
 import * as Config from '../config';
 import * as Core from '../core';
 import * as Common from '../components/common';
@@ -283,7 +284,9 @@ class Home extends Component {
       data: false,
       searchdata: false,
       isLoadingSearch: false,
-      update: false
+      update: false,
+      thisVersion: VersionCheck.getCurrentVersion(),
+      appstoreVersion: ''
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -322,22 +325,30 @@ class Home extends Component {
       await this.getClinicType()
     });
 
-    this.checkversion()
-
+    //Version Check
     VersionCheck.getLatestVersion({
       provider: 'appStore'  // for iOS
     })
       .then(latestVersion => {
-        console.warn('latest - ' + latestVersion);    // 0.1.2
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
+        this.setState({
+          appstoreVersion: latestVersion,
+        })
       });
+    this.checkversion()
+
+    //Get Pop Up
+    if (this.state.thisVersion > this.state.appstoreVersion) {
+      this.setState({
+        update: true
+      })
+    } else {
+      console.warn('UP TO DATE')
+    }
   }
 
   checkversion = async () => {
     version = await Core.CheckVersion()
-
-    this.setState({
-      update: true
-    })
   }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
@@ -378,7 +389,8 @@ class Home extends Component {
 
 
   render() {
-    console.warn('Version-' + VersionCheck.getCurrentVersion());     // 0.1.1
+    console.warn('ThisVersion-' + this.state.thisVersion);     // this version check
+    console.warn('appStoreVersion-' + this.state.appstoreVersion);     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Drawer
@@ -408,7 +420,7 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-          <Common.Popup
+          <Popup
             kind="update-application"
             isVisible={this.state.update}
             title={"Your application is out of date"}
