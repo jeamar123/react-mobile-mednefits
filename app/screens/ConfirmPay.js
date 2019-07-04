@@ -181,7 +181,16 @@ class ConfirmPay extends Component {
           </Text>
         </View>
       )
-    } else {
+    } else if (this.state.amountTotal == this.state.amountCap) {
+      return (
+        <View>
+          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+            {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.props.capAmount).toFixed(2)}
+          </Text>
+        </View>
+      )
+    }
+    else {
       return (
         <View>
           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
