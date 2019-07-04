@@ -236,7 +236,6 @@ export default class EclaimForm extends Component {
                 <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
                   fontColor={'#2C3E50'}
-                  style={{ fontSize: RF(2.2) }}
                 >
                   Claim Type
                 </Common.Texti>
@@ -263,7 +262,6 @@ export default class EclaimForm extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: RF(2.2),
                   }}>
                   Provider
                 </Common.Texti>
@@ -274,7 +272,7 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
-                    fontSize: RF(1.9),
+                    fontSize: RF(1.6),
                     color: "#2C3E50",
                     fontFamily: Config.FONT_FAMILY_MEDIUM
                   }}
@@ -304,7 +302,6 @@ export default class EclaimForm extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: RF(2.2),
                   }}>
                   Visit Date
                 </Common.Texti>
@@ -324,14 +321,14 @@ export default class EclaimForm extends Component {
                     if (!date) {
                       return <Common.Texti
                         fontColor={"#9e9e9e"}
-                        fontSize={RF(1.9)}
+                        fontSize={RF(1.8)}
                         fontFamily={Config.FONT_FAMILY_MEDIUM}
                       >{this.state.date}</Common.Texti>
                     }
                     const dateStr = `${day} ${month} ${year}`
                     return <Common.Texti
                       fontColor={"#2c3e50"}
-                      fontSize={RF(1.9)}
+                      fontSize={RF(1.8)}
                       fontFamily={Config.FONT_FAMILY_MEDIUM}
                     >{dateStr}</Common.Texti>
                   }}
@@ -353,7 +350,6 @@ export default class EclaimForm extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: RF(2.2),
                   }}>
                   Visit Time
                 </Common.Texti>
@@ -395,7 +391,6 @@ export default class EclaimForm extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: RF(2.2),
                   }}>
                   Receipt Amount
                 </Common.Texti>
@@ -446,7 +441,6 @@ export default class EclaimForm extends Component {
                   style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    fontSize: RF(2.2),
                   }}>
                   Member
                 </Common.Texti>

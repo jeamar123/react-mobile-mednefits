@@ -48,7 +48,7 @@ export default class InputTime extends Component {
       >
         <Common.Texti
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
-          fontSize={RF(1.9)}
+          fontSize={RF(1.8)}
           fontFamily={Config.FONT_FAMILY_MEDIUM}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}
