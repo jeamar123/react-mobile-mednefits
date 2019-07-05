@@ -227,7 +227,6 @@ class DetailEclaim extends Component {
           <GiftedForm
             style={{
               backgroundColor: '#fff',
-              paddingLeft: 5,
             }}
             formName="signupForm"
             openModal={route => {
@@ -244,7 +243,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
@@ -258,7 +257,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -272,7 +271,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text style={{ color: '#000', marginLeft: '2%' }}>
@@ -286,7 +285,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -300,7 +299,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text
@@ -316,7 +315,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -330,7 +329,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Common.Texti style={{
@@ -356,7 +355,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -370,7 +369,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text
@@ -390,7 +389,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -404,7 +403,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text
@@ -423,7 +422,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -439,7 +438,7 @@ class DetailEclaim extends Component {
                     paddingTop: 15,
                     paddingBottom: 15,
                     paddingRight: 15,
-                    paddingLeft: 3,
+                    paddingLeft: 8,
                   }}
                 >
                   <Text
@@ -455,7 +454,7 @@ class DetailEclaim extends Component {
                   </View>
                 </View>
 
-                <View>
+                <View style={{ paddingLeft: 8 }}>
                   <Common.Divider noMargin Side />
                 </View>
 
@@ -469,7 +468,7 @@ class DetailEclaim extends Component {
                     paddingTop: 15,
                     paddingBottom: 15,
                     paddingRight: 15,
-                    paddingLeft: 3,
+                    paddingLeft: 8,
                   }}
                 >
                   <Text
@@ -488,7 +487,7 @@ class DetailEclaim extends Component {
                   </View>
                 </View>
 
-                <View>
+                <View style={{ paddingLeft: 8 }}>
                   <Common.Divider noMargin Side />
                 </View>
 
@@ -504,7 +503,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text
@@ -524,7 +523,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
+            <View style={{ paddingLeft: 8 }}>
               <Common.Divider noMargin Side />
             </View>
 
@@ -538,7 +537,7 @@ class DetailEclaim extends Component {
                 paddingTop: 15,
                 paddingBottom: 15,
                 paddingRight: 15,
-                paddingLeft: 3,
+                paddingLeft: 8,
               }}
             >
               <Text
@@ -590,8 +589,8 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{ paddingLeft: 3 }}>
-              <Common.Divider noMargin Side />
+            <View>
+              <Common.Divider noMargin />
             </View>
 
             <View
