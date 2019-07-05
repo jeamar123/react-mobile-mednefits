@@ -466,7 +466,40 @@ class Summary extends Component {
                 </View>
               </View>
 
-              <View style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(2) }}>
+              <View
+                ref={"detailPaymentButton"}
+                style={{ marginTop: responsiveHeight(2) }}>
+                <TouchableOpacity
+                  onPress={() => this.detailPaymentOpened(data.number)}
+                  style={{
+                    backgroundColor: "#3F9D59",
+                    width: "90%",
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 5,
+                    borderColor: '#fff',
+                    borderWidth: 1,
+                    paddingRight: '32.5%',
+                    paddingLeft: '32.5%'
+                  }}
+                >
+                  <Common.Texti
+                    fontSize={16}
+                    fontColor={"#ffffff"}
+                    style={{
+                      paddingTop: 10,
+                      paddingBottom: 10,
+                    }}>
+                    View Details
+                </Common.Texti>
+                  <View ref={'toggleID'}>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                ref={'detailPayment'}
+                style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(2), display: "none" }}>
                 <View
                   style={{
                     backgroundColor: '#f8f8fa',
