@@ -16,7 +16,7 @@ export default EStyleSheet.create({
   input: {
     fontFamily: Config.FONT_FAMILY_LIGHT,
     flex: 1,
-    height: 48,
+    height: 38,
     paddingHorizontal: 8,
     color: '$inputText',
     fontSize: 18,

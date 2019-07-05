@@ -324,10 +324,21 @@ class Home extends Component {
     await Core.GetLocationPermission(async (error, result) => {
       await this.getClinicType()
     });
+    //Get Pop Up
+    if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
+      console.warn('UP TO DATE')
+    } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
+      Actions.updateApps({ type: 'reset' })
+      console.warn('Updating...')
+    } else {
+      console.warn('Checking...')
+    }
+  }
 
+  componentWillMount() {
     //Version Check
     VersionCheck.getLatestVersion({
-      provider: 'appStore'  // for iOS
+      provider: 'appStore'  // for Android
     })
       .then(latestVersion => {
         // console.warn('latest - ' + latestVersion);    // 0.1.2
@@ -335,21 +346,13 @@ class Home extends Component {
           appstoreVersion: latestVersion,
         })
       });
-    this.checkversion()
+    // this.checkversion()
 
-    //Get Pop Up
-    if (this.state.thisVersion > this.state.appstoreVersion) {
-      this.setState({
-        update: true
-      })
-    } else {
-      console.warn('UP TO DATE')
-    }
   }
 
-  checkversion = async () => {
-    version = await Core.CheckVersion()
-  }
+  // checkversion = async () =
+  //   version = await Core.CheckVersion()
+  // }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
 
@@ -389,8 +392,8 @@ class Home extends Component {
 
 
   render() {
-    console.warn('ThisVersion-' + this.state.thisVersion);     // this version check
-    console.warn('appStoreVersion-' + this.state.appstoreVersion);     // AppStore version check
+    console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Drawer
