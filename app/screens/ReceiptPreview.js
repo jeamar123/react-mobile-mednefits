@@ -180,7 +180,7 @@ export default class ReceiptPreview extends Component {
         // Core.getNotify("",result.message)
         if (result.message == "Success.") {
           this.setState({ isLoading: false, Data: result.data })
-          Actions.HistoryGeneral({
+          Actions.HistoryAfterUpload({
             type: 'reset',
             transaction_id: this.state.Data.map((Id, index) => (Id.transaction_id))
           })
