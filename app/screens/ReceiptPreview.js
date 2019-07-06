@@ -228,19 +228,19 @@ export default class ReceiptPreview extends Component {
     })
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        isModalVisible: true
-      })
-    }, 300)
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     this.setState({
+  //       isModalVisible: true
+  //     })
+  //   }, 300)
 
-    setTimeout(() => {
-      this.setState({
-        isModalVisible: false
-      })
-    }, 2000)
-  }
+  //   setTimeout(() => {
+  //     this.setState({
+  //       isModalVisible: false
+  //     })
+  //   }, 2000)
+  // }
 
   customLoader() {
     return (
