@@ -182,7 +182,7 @@ export default class ReceiptPreview extends Component {
           this.setState({ isLoading: false, Data: result.data })
           Actions.HistoryAfterUpload({
             type: 'reset',
-            transaction_id: this.state.Data.map((Id, index) => (Id.transaction_id))
+            transaction_id: this.props.transaction_id,
           })
         } else {
           console.warn('Failed to upload receipt')
