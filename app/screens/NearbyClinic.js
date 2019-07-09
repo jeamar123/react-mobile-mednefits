@@ -330,14 +330,14 @@ class NearbyClinic extends Component {
                 <Text style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>{this.props.NameCategory}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => Actions.NearbyClinicMaps({
                 clinicType: this.props.ClinicTypeID,
                 NameCategory: this.props.NameCategory
               })}
             >
               <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>MAP</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
           </View>
         </View>

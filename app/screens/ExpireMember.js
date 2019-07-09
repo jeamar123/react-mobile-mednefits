@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, Dimensions, TouchableOpacity } from 'react-native';
+import { StatusBar, Image, View, Dimensions, TouchableOpacity, Linking } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
