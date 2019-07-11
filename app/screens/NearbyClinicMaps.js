@@ -14,6 +14,7 @@ import Svg, { Image } from 'react-native-svg'
 import { Actions } from 'react-native-router-flux';
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
+import userLocationIndicator from '../../assets/apps/userLocation.png';
 import * as Config from '../config';
 import * as Core from '../core';
 import MapView, { Callout, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -23,8 +24,9 @@ const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE = 1.352083;
 const LONGITUDE = 103.819839;
-const LATITUDE_DELTA = 0.6;
+const LATITUDE_DELTA = 0.02;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const SPACE = 0.01;
 
 class NearbyClinic extends Component {
   constructor(props) {
@@ -43,97 +45,141 @@ class NearbyClinic extends Component {
       current_page: null,
       last_page: null,
       processing: false,
+      lastLat: null,
+      lastLong: null,
+      error: null,
+
+      // Maps Nearby
+      // lastLat: null,
+      // lastLong: null,
+      // mapCirlce: null,
+      // placeLocation: null,
+      // distanceCount: null,
+      // placeCount: null,
+      // showView: false,
+      // showLoader: false,
+      // distance: 30,
+      // minDistance: 5,
+      // maxDistance: 55,
+      // circleView: {
+      //   latitude: LATITUDE + SPACE,
+      //   longitude: LONGITUDE + SPACE,
+      // },
+      // circle: {
+      //   center: {
+      //     latitude: LATITUDE + SPACE,
+      //     longitude: LONGITUDE + SPACE,
+      //   },
+      //   radius: 200,
+      // },
+      // zero: false
     };
   }
 
   // Loading Data Clinic in Maps with Pagination
-  async componentWillMount() {
-    await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
-      console.warn(error);
-      console.warn(result);
-      if (result) {
-        if (result.status) {
-          data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-          // console.warn(data.current_page);
-          // console.warn(data.last_page);
-          await this.setState({ DataClinics: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
-        } else {
-          setTimeout(function () {
-            Actions.pop();
-            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-          }, 2000);
-        }
-      } else {
-        if (error.code === 3) {
-          setTimeout(function () {
-            Actions.pop();
-            Core.getNotifyLong("", 'Unable to get location. Please try again.');
-          }, 1000);
-        } else {
-          setTimeout(function () {
-            Actions.pop();
-            Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
-          }, 2000);
-        }
-      }
-      // console.warn(data);
-    });
+  // async componentWillMount() {
+  //   await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
+  //     console.warn(error);
+  //     console.warn(result);
+  //     if (result) {
+  //       if (result.status) {
+  //         data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+  //         // console.warn(data.current_page);
+  //         // console.warn(data.last_page);
+  //         await this.setState({ DataClinics: data.clinics, current_page: data.current_page, last_page: data.last_page, processing: false, data: true });
+  //       } else {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+  //         }, 2000);
+  //       }
+  //     } else {
+  //       if (error.code === 3) {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong("", 'Unable to get location. Please try again.');
+  //         }, 1000);
+  //       } else {
+  //         setTimeout(function () {
+  //           Actions.pop();
+  //           Core.getNotifyLong('', 'Sorry, no registered clinics nearby');
+  //         }, 2000);
+  //       }
+  //     }
+  //     // console.warn(data);
+  //   });
 
-    setInterval(() => {
-      console.warn('I Love Karnela');
-      this.paginateClinicResults();
-    }, 2000);
-  }
+  //   setInterval(() => {
+  //     console.warn('I Love Karnela');
+  //     this.paginateClinicResults();
+  //   }, 2000);
+  // }
 
-  async paginateClinicResults() {
-    console.warn('paginate');
-    // console.warn(this.state);
-    // console.warn(event)
-    if (!this.state.processing) {
-      console.warn(this.state.current_page);
-      console.warn(this.state.last_page);
-      var current_page = await this.state.current_page + 1;
-      console.warn(current_page);
-      // if(current_page != this.state.last_page) {
-      console.warn('query more')
-      this.setState({ processing: true });
-      await Core.paginateClinicResults(this.props.clinicType, current_page, async (error, result) => {
-        if (result) {
-          console.warn(result);
-          if (result.status) {
-            data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-            var new_data = this.state.DataClinics.concat(data.clinics);
-            this.setState({ DataClinics: new_data, current_page: current_page, processing: false });
-          } else {
-            this.setState({ processing: false });
-          }
-        } else {
-          this.setState({ processing: false });
-        }
-      })
-      // } else {
-      // 	console.warn('stop');
-      // }
-    }
-  }
+  // async paginateClinicResults() {
+  //   console.warn('paginate');
+  //   // console.warn(this.state);
+  //   // console.warn(event)
+  //   if (!this.state.processing) {
+  //     console.warn(this.state.current_page);
+  //     console.warn(this.state.last_page);
+  //     var current_page = await this.state.current_page + 1;
+  //     console.warn(current_page);
+  //     // if(current_page != this.state.last_page) {
+  //     console.warn('query more')
+  //     this.setState({ processing: true });
+  //     await Core.paginateClinicResults(this.props.clinicType, current_page, async (error, result) => {
+  //       if (result) {
+  //         console.warn(result);
+  //         if (result.status) {
+  //           data = await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+  //           var new_data = this.state.DataClinics.concat(data.clinics);
+  //           this.setState({ DataClinics: new_data, current_page: current_page, processing: false });
+  //         } else {
+  //           this.setState({ processing: false });
+  //         }
+  //       } else {
+  //         this.setState({ processing: false });
+  //       }
+  //     })
+  //     // } else {
+  //     // 	console.warn('stop');
+  //     // }
+  //   }
+  // }
 
   // Loading Data Clinic in Maps with All Data in one loading
-  // componentWillMount() {
-  //   this.getClinics()
-  // }
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("wokeeey");
+        console.log(position);
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+    );
+  }
 
-  // getClinics = async () => {
-  //   console.warn(this.props);
-  //   await Core.GetClinicMap(this.props.clinicType, (err, result) => {
-  //     console.warn('result', result)
-  //     if (result) {
-  //       this.setState({
-  //         clinics: result
-  //       })
-  //       this.getCurrentPosition()
-  //     }
-  //   })
-  // }
+  componentWillMount() {
+    this.getClinics()
+  }
+
+  getClinics = async () => {
+    console.warn(this.props);
+    await Core.GetClinicMap(this.props.clinicType, (err, result) => {
+      console.warn('result', result)
+      if (result) {
+        this.setState({
+          DataClinics: result
+        })
+        this.getCurrentPosition()
+      }
+    })
+  }
 
   getCurrentPosition = async () => {
     latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
@@ -152,6 +198,95 @@ class NearbyClinic extends Component {
       }
     })
   }
+
+
+  // Nearby Function
+  // componentWillMount() {
+  //   this.getDataLocation()
+  // }
+
+  // getDataLocation = async () => {
+  //   try {
+  //     latitude = await Core.GetDataLocalReturn(Config.LATITUDE)
+  //     longitude = await Core.GetDataLocalReturn(Config.LONGITUDE)
+
+  //     let region = {
+  //       latitude: latitude,
+  //       longitude: longitude,
+  //       latitudeDelta: 1.0,
+  //       longitudeDelta: 1.0,
+  //     };
+  //     let circleLoc = {
+  //       latitude: latitude,
+  //       longitude: longitude,
+  //     };
+  //     this.onCircle(circleLoc);
+  //     this.getPlaceResult(
+  //       latitude,
+  //       longitude,
+  //       this.state.distance
+  //     );
+  //     this.onRegionChange(region, region.latitude, region.longitude);
+  //     console.warn('latitude ' + latitude);
+  //     console.warn('longitude ' + longitude);
+  //   } catch (e) {
+  //     this.getDataLocationNow()
+  //   }
+  // }
+
+  // getDataLocationNow() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     position => {
+  //       let region = {
+  //         latitude: position.coords.latitude,
+  //         longitude: position.coords.longitude,
+  //         latitudeDelta: 1.0,
+  //         longitudeDelta: 1.0,
+  //       };
+  //       let circleLoc = {
+  //         latitude: position.coords.latitude,
+  //         longitude: position.coords.longitude,
+  //       };
+  //       this.onCircle(circleLoc);
+  //       this.getPlaceResult(
+  //         position.coords.latitude,
+  //         position.coords.longitude,
+  //         this.state.distance
+  //       );
+  //       this.onRegionChange(region, region.latitude, region.longitude);
+  //       console.warn("latitude " + position.coords.latitude);
+  //       console.warn("longitude " + position.coords.longitude);
+
+  //     },
+  //     error => this.setState({ error: error.message }),
+  //     { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 }
+  //   );
+
+  // }
+
+  // onCircle(center) {
+  //   this.setState({
+  //     circleView: center,
+  //   });
+  // }
+
+  // /**************************************************************
+  //  *
+  //  *
+  //  * Region change
+  //  *
+  //  */
+
+  // onRegionChange(region, lastLat, lastLong) {
+  //   this.setState({
+  //     mapRegion: region,
+  //     // If there are no new values set the current ones
+  //     lastLat: lastLat || this.state.lastLat,
+  //     lastLong: lastLong || this.state.lastLong,
+  //   });
+  // }
+
+
 
   renderCallOut = async (image_url) => {
     if (Platform.OS == "ios") {
@@ -191,7 +326,8 @@ class NearbyClinic extends Component {
   }
 
   render() {
-    console.warn("DataClinic " + JSON.stringify(this.state.DataClinics));
+    console.warn("DataClinic " + JSON.stringify(this.state.DataClinics, null, 4));
+    console.warn("anjing" + JSON.stringify(this.state.region, null, 4))
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -208,11 +344,28 @@ class NearbyClinic extends Component {
           // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
           region={this.state.region}
           initialRegion={this.state.region}
-          // showsUserLocation={true}
+          showsUserLocation={true}
           loadingEnabled={true}
           moveOnMarkerPress={true}
           onPress={this.onMapPress}
         >
+          {/* 
+
+          <MapView.Marker
+            coordinate={{
+              latitude: this.state.lastLat,
+              longitude: this.state.lastLong,
+            }}
+            stopPropagation={false}
+            image={userLocationIndicator}
+          >
+            {/* <Callout tooltip>
+              <UserCallout
+                imageUrl={'https://empatkali.co.id/assets/img/logo-final.png?v=1'}
+                title="Anda berada disini"
+              />
+            </Callout> */}
+          {/* </MapView.Marker>  */}
 
           {(this.state.DataClinics) ? (
             this.state.DataClinics.map(dataMarker => (

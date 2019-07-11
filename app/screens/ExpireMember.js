@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, Dimensions, TouchableOpacity, Linking } from 'react-native';
-import { Container, Content, Text } from 'native-base';
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import {
+  StatusBar,
+  Image,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Linking
+} from 'react-native';
+import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { Buttons2 } from '../components/common/Buttons2';
-import Navbar from '../components/common/NavbarGrey';
 import * as Common from '../components/common';
 import * as Config from '../config';
+
 const { width, height } = Dimensions.get('window');
 
 class ExpireMember extends Component {
