@@ -589,7 +589,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View>
+            <View style={{marginLeft: -15, marginRight: -15}}>
               <Common.Divider noMargin />
             </View>
 

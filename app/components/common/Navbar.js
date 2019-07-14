@@ -232,7 +232,8 @@ export default class Navbar extends React.Component {
                 color: '#fff',
                 fontSize: RF(1.7),
                 fontFamily: Config.FONT_FAMILY_THIN,
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                width: 40
               }}
             >
               Home
@@ -541,6 +542,7 @@ export default class Navbar extends React.Component {
                 fontSize: 16,
                 color: '#FFFFFF',
                 marginRight: 10,
+                width: 50
               }}
             >
               Done
