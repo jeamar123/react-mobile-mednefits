@@ -361,7 +361,7 @@ class Home extends Component {
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
     } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
-      Actions.updateApps({type: 'reset'})
+      Actions.updateApps({ type: 'reset' })
       console.warn('Updating...')
     } else {
       console.warn('Checking...')
@@ -437,7 +437,22 @@ class Home extends Component {
         ref={ref => {
           this._drawer = ref;
         }}
-        content={<MenuSide navigator={this._navigator} />}
+        content={<MenuSide
+          navigator={this._navigator}
+          Services={this.props.services}
+          clinic_Id={this.props.clinicid}
+          check_Id={this.props.checkId}
+          capCurrency={this.props.capCurrency}
+          capAmount={this.props.capAmount}
+          member={this.props.member}
+          nric={this.props.nric}
+          checkTime={this.props.checkTime}
+          clinic_image={this.props.clinic_image}
+          clinic_name={this.props.clinic_name}
+          consultation_fee_symbol={this.props.consultation_fee_symbol}
+          consultation_status={this.props.consultation_status}
+          consultation_fees={this.props.consultation_fees}
+        />}
         onClose={() => this.closeDrawer()}
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>

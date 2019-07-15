@@ -121,8 +121,22 @@ class SelectService extends Component {
         ) : (
             <View style={{ flex: 1 }}>
               <Navbar
-                leftNav="back"
+                leftNav="back-home"
                 title="Select Service/s"
+                subtitle="Scan & Pay"
+                Services={this.props.services}
+                clinic_Id={this.props.clinicid}
+                check_Id={this.props.checkId}
+                capCurrency={this.props.capCurrency}
+                capAmount={this.props.capAmount}
+                member={this.props.member}
+                nric={this.props.nric}
+                checkTime={this.props.checkTime}
+                clinic_image={this.props.clinic_image}
+                clinic_name={this.props.clinic_name}
+                consultation_fee_symbol={this.props.consultation_fee_symbol}
+                consultation_status={this.props.consultation_status}
+                consultation_fees={this.props.consultation_fees}
               />
               <Content padder>
                 <View style={styles.contain}>

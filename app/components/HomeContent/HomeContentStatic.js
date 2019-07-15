@@ -85,6 +85,7 @@ class HomeContent extends Component {
   }
 
   render() {
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
@@ -255,7 +256,21 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.ECardUser()
+                Actions.ECardUser({
+                  services: this.props.Services,
+                  clinicid: this.props.clinic_Id,
+                  member: this.props.member,
+                  nric: this.props.nric,
+                  checkId: this.props.check_Id,
+                  checkTime: this.props.checkTime,
+                  capCurrency: this.props.capCurrency,
+                  capAmount: this.props.capAmount,
+                  clinic_image: this.props.clinic_image,
+                  clinic_name: this.props.clinic_name,
+                  consultation_fee_symbol: this.props.consultation_fee_symbol,
+                  consultation_status: this.props.consultation_status,
+                  consultation_fees: this.props.consultation_fees
+                })
               }
             >
               <View style={styles.gridBox}>
@@ -275,7 +290,21 @@ class HomeContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
-                Actions.Wallet()
+                Actions.Wallet({
+                  services: this.props.Services,
+                  clinicid: this.props.clinic_Id,
+                  member: this.props.member,
+                  nric: this.props.nric,
+                  checkId: this.props.check_Id,
+                  checkTime: this.props.checkTime,
+                  capCurrency: this.props.capCurrency,
+                  capAmount: this.props.capAmount,
+                  clinic_image: this.props.clinic_image,
+                  clinic_name: this.props.clinic_name,
+                  consultation_fee_symbol: this.props.consultation_fee_symbol,
+                  consultation_status: this.props.consultation_status,
+                  consultation_fees: this.props.consultation_fees
+                })
               }
             >
               <View style={styles.gridBox}>
