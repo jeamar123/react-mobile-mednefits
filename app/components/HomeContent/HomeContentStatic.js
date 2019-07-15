@@ -76,13 +76,13 @@ class HomeContent extends Component {
   async StatusUseronClinic() {
     await Core.CancelVisiByClinic(this.props.check_Id, async (error, result) => {
       data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == false) {
         this.setState({
           kickout: true
         });
       }
-      console.warn('data ' + result.data.check_in_status_removed);
+      console.warn('data ' + data.check_in_status_removed);
       // await this.setState({
       //   kickout: result.data.check_in_status_removed,
       // });
