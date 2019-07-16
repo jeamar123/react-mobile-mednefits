@@ -40,9 +40,10 @@ export default class InputText extends Component {
           value={this.props.value}
           onChangeText={this.props.onChangeText}
           placeholder={this.props.placeholder}
+          placeholderTextColor={(this.props.iconColor) ? '#2C3E50' : "#9e9e9e"}
           placeholderStyle={[{
-            color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
-            fontFamily: Config.FONT_FAMILY_MEDIUM,
+            fontSize: 14,
+            fontFamily: Config.FONT_FAMILY_REGULAR,
           }, this.props.placeholderStyle]}
           style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
         />

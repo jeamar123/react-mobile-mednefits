@@ -105,7 +105,7 @@ export default class InputSelect extends Component {
             fontSize={RF(1.9)}
             fontFamily={Config.FONT_FAMILY_MEDIUM}
             style={{
-              color: (this.props.label) ? "#2c3e50" : "#9e9e9e"
+              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
             }}
           >
             {this.setTitle()}

@@ -188,7 +188,7 @@ class HistoryUser extends Component {
                       source={{ uri: this.props.clinicimage }}
                       style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                     />
-                    <View>
+                  <View style={{width: '80%'}}>
                       <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9), fontWeight: 'bold', marginTop: '2%' }}>
                         {(this.props.clinicname) ? this.props.clinicname : ""}
                       </Text>
