@@ -110,7 +110,8 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.leftNav == 'back-eclaim') {
+    }
+    else if (this.props.leftNav == 'back-eclaim') {
       return (
         <View
           style={{
@@ -141,7 +142,38 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.leftNav == 'back-History') {
+    } else if (this.props.leftNav == 'homeback') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home()}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: Config.FONT_FAMILY_ROMAN, }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'back_history') {
       return (
         <View
           style={{
@@ -172,51 +204,6 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.leftNav == 'homeback') {
-      return (
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => Actions.Home({
-              services: this.props.Services,
-              clinicid: this.props.clinic_Id,
-              member: this.props.member,
-              nric: this.props.nric,
-              checkId: this.props.check_Id,
-              checkTime: this.props.checkTime,
-              capCurrency: this.props.capCurrency,
-              capAmount: this.props.capAmount,
-              clinic_image: this.props.clinic_image,
-              clinic_name: this.props.clinic_name,
-              consultation_fee_symbol: this.props.consultation_fee_symbol,
-              consultation_status: this.props.consultation_status,
-              consultation_fees: this.props.consultation_fees
-            })}
-            style={{
-              paddingStart: 11,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Icons
-              name="angle-left"
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
-            />
-            <Text
-              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: Config.FONT_FAMILY_ROMAN, }}
-            >
-              Back
-            </Text>
-          </TouchableOpacity>
-        </View>
-      );
     } else if (this.props.leftNav == 'back-home') {
       return (
         <View
@@ -228,21 +215,7 @@ export default class Navbar extends React.Component {
           }}
         >
           <TouchableOpacity
-            onPress={() => Actions.Home({
-              services: this.props.Services,
-              clinicid: this.props.clinic_Id,
-              member: this.props.member,
-              nric: this.props.nric,
-              checkId: this.props.check_Id,
-              checkTime: this.props.checkTime,
-              capCurrency: this.props.capCurrency,
-              capAmount: this.props.capAmount,
-              clinic_image: this.props.clinic_image,
-              clinic_name: this.props.clinic_name,
-              consultation_fee_symbol: this.props.consultation_fee_symbol,
-              consultation_status: this.props.consultation_status,
-              consultation_fees: this.props.consultation_fees
-            })}
+            onPress={() => Actions.Home()}
             style={{
               paddingStart: 11,
               flexDirection: 'row',
@@ -259,7 +232,8 @@ export default class Navbar extends React.Component {
                 color: '#fff',
                 fontSize: RF(1.7),
                 fontFamily: Config.FONT_FAMILY_THIN,
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                width: 40
               }}
             >
               Home
@@ -503,7 +477,6 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
-            marginTop: '-1.7%'
           }}
         >
           <Text
@@ -519,7 +492,7 @@ export default class Navbar extends React.Component {
       );
     } else {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '-0.9%' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
             source={require('../../../assets/LogoMednefits.png')}
             style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -8 }}
@@ -569,6 +542,7 @@ export default class Navbar extends React.Component {
                 fontSize: 16,
                 color: '#FFFFFF',
                 marginRight: 10,
+                width: 50
               }}
             >
               Done
