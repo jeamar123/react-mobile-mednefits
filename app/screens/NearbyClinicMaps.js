@@ -12,12 +12,16 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import IconR from 'react-native-vector-icons/Feather';
 import Svg, { Image } from 'react-native-svg'
 import { Actions } from 'react-native-router-flux';
+import MapView, { Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import Navbar from '../components/common/Navbar';
+import CustomCallout from '../components/Maps/CustomCallout';
+import CustomList from '../components/Maps/CustomList';
+import styles from '../components/Maps/styles';
+import UserCallout from '../components/Maps/UserCallout';
 import { MenuSide } from '../components/HomeContent';
 import userLocationIndicator from '../../assets/apps/userLocation.png';
 import * as Config from '../config';
 import * as Core from '../core';
-import MapView, { Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Common from '../components/common'
 
 const { width, height } = Dimensions.get('window');
@@ -31,6 +35,7 @@ const SPACE = 0.01;
 class NearbyClinic extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       status: '',
       data: false,
@@ -45,38 +50,40 @@ class NearbyClinic extends Component {
       current_page: null,
       last_page: null,
       processing: false,
-      lastLat: null,
-      lastLong: null,
+      // lastLat: null,
+      // lastLong: null,
       error: null,
 
       // Maps Nearby
-      // lastLat: null,
-      // lastLong: null,
-      // mapCirlce: null,
-      // placeLocation: null,
-      // distanceCount: null,
-      // placeCount: null,
-      // showView: false,
-      // showLoader: false,
-      // distance: 30,
-      // minDistance: 5,
-      // maxDistance: 55,
-      // circleView: {
-      //   latitude: LATITUDE + SPACE,
-      //   longitude: LONGITUDE + SPACE,
-      // },
-      // circle: {
-      //   center: {
-      //     latitude: LATITUDE + SPACE,
-      //     longitude: LONGITUDE + SPACE,
-      //   },
-      //   radius: 200,
-      // },
-      // zero: false
+      mapRegion: null,
+      lastLat: null,
+      lastLong: null,
+      mapCirlce: null,
+      placeLocation: null,
+      distanceCount: null,
+      placeCount: null,
+      showView: false,
+      showLoader: false,
+      distance: 30,
+      minDistance: 5,
+      maxDistance: 55,
+      circleView: {
+        latitude: LATITUDE + SPACE,
+        longitude: LONGITUDE + SPACE,
+      },
+      circle: {
+        center: {
+          latitude: LATITUDE + SPACE,
+          longitude: LONGITUDE + SPACE,
+        },
+        radius: 200,
+      },
+      zero: false
     };
   }
 
   // Loading Data Clinic in Maps with Pagination
+
   // async componentWillMount() {
   //   await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
   //     console.warn(error);
@@ -147,187 +154,280 @@ class NearbyClinic extends Component {
   //   }
   // }
 
+
+
   // Loading Data Clinic in Maps with All Data in one loading
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        console.log("wokeeey");
-        console.log(position);
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-        });
-      },
-      (error) => this.setState({ error: error.message }),
-      { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
-    );
-  }
+  // componentDidMount() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       console.log("wokeeey");
+  //       console.log(position);
+  //       this.setState({
+  //         latitude: position.coords.latitude,
+  //         longitude: position.coords.longitude,
+  //         error: null,
+  //       });
+  //     },
+  //     (error) => this.setState({ error: error.message }),
+  //     { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+  //   );
+  // }
 
-  componentWillMount() {
-    this.getClinics()
-  }
+  // componentWillMount() {
+  //   this.getClinics()
+  // }
 
-  getClinics = async () => {
-    console.warn(this.props);
-    await Core.GetClinicMap(this.props.clinicType, (err, result) => {
-      console.warn('result', result)
-      if (result) {
-        this.setState({
-          DataClinics: result
-        })
-        this.getCurrentPosition()
-      }
-    })
-  }
+  // getClinics = async () => {
+  //   console.warn(this.props);
+  //   await Core.GetClinicMap(this.props.clinicType, (err, result) => {
+  //     console.warn('result', result)
+  //     if (result) {
+  //       this.setState({
+  //         DataClinics: result
+  //       })
+  //       this.getCurrentPosition()
+  //     }
+  //   })
+  // }
 
-  getCurrentPosition = async () => {
-    latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
-    longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
-    dataClinicNearby = await Code.GetAllClinic(dataClinicNearby)
+  // getCurrentPosition = async () => {
+  //   latitude = await Core.GetDataLocalReturnNew(Config.LATITUDE)
+  //   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
+  //   dataClinicNearby = await Code.GetAllClinic(dataClinicNearby)
 
-    console.warn(latitude);
-    // console.warn(dataClinicNearby);
-    // console.warn(longitude);
-    this.setState({
-      region: {
-        latitude: parseFloat(latitude),
-        longitude: parseFloat(longitude),
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      }
-    })
-  }
+  //   console.warn(latitude);
+  //   // console.warn(dataClinicNearby);
+  //   // console.warn(longitude);
+  //   this.setState({
+  //     region: {
+  //       latitude: parseFloat(latitude),
+  //       longitude: parseFloat(longitude),
+  //       latitudeDelta: LATITUDE_DELTA,
+  //       longitudeDelta: LONGITUDE_DELTA,
+  //     }
+  //   })
+  // }
+
+
 
 
   // Nearby Function
-  // componentWillMount() {
-  //   this.getDataLocation()
-  // }
 
-  // getDataLocation = async () => {
-  //   try {
-  //     latitude = await Core.GetDataLocalReturn(Config.LATITUDE)
-  //     longitude = await Core.GetDataLocalReturn(Config.LONGITUDE)
+  componentWillMount() {
+    this.getDataLocation()
+  }
 
-  //     let region = {
-  //       latitude: latitude,
-  //       longitude: longitude,
-  //       latitudeDelta: 1.0,
-  //       longitudeDelta: 1.0,
-  //     };
-  //     let circleLoc = {
-  //       latitude: latitude,
-  //       longitude: longitude,
-  //     };
-  //     this.onCircle(circleLoc);
-  //     this.getPlaceResult(
-  //       latitude,
-  //       longitude,
-  //       this.state.distance
-  //     );
-  //     this.onRegionChange(region, region.latitude, region.longitude);
-  //     console.warn('latitude ' + latitude);
-  //     console.warn('longitude ' + longitude);
-  //   } catch (e) {
-  //     this.getDataLocationNow()
-  //   }
-  // }
+  getDataLocation = async () => {
+    try {
+      latitude = await Core.GetDataLocalReturn(Config.LATITUDE)
+      longitude = await Core.GetDataLocalReturn(Config.LONGITUDE)
 
-  // getDataLocationNow() {
-  //   navigator.geolocation.getCurrentPosition(
-  //     position => {
-  //       let region = {
-  //         latitude: position.coords.latitude,
-  //         longitude: position.coords.longitude,
-  //         latitudeDelta: 1.0,
-  //         longitudeDelta: 1.0,
-  //       };
-  //       let circleLoc = {
-  //         latitude: position.coords.latitude,
-  //         longitude: position.coords.longitude,
-  //       };
-  //       this.onCircle(circleLoc);
-  //       this.getPlaceResult(
-  //         position.coords.latitude,
-  //         position.coords.longitude,
-  //         this.state.distance
-  //       );
-  //       this.onRegionChange(region, region.latitude, region.longitude);
-  //       console.warn("latitude " + position.coords.latitude);
-  //       console.warn("longitude " + position.coords.longitude);
-
-  //     },
-  //     error => this.setState({ error: error.message }),
-  //     { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 }
-  //   );
-
-  // }
-
-  // onCircle(center) {
-  //   this.setState({
-  //     circleView: center,
-  //   });
-  // }
-
-  // /**************************************************************
-  //  *
-  //  *
-  //  * Region change
-  //  *
-  //  */
-
-  // onRegionChange(region, lastLat, lastLong) {
-  //   this.setState({
-  //     mapRegion: region,
-  //     // If there are no new values set the current ones
-  //     lastLat: lastLat || this.state.lastLat,
-  //     lastLong: lastLong || this.state.lastLong,
-  //   });
-  // }
-
-
-
-  renderCallOut = async (image_url) => {
-    if (Platform.OS == "ios") {
-      return (
-        <View>
-          <Image
-            source={{ uri: image_url }}
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 2,
-            }}
-            resizeMode="cover"
-          />
-        </View>
+      let region = {
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 1.0,
+        longitudeDelta: 1.0,
+      };
+      let circleLoc = {
+        latitude: latitude,
+        longitude: longitude,
+      };
+      this.onCircle(circleLoc);
+      this.getPlaceResult(
+        latitude,
+        longitude,
+        this.state.distance
       );
-    } else {
-      return (
-        <View>
-          <Svg width={50} height={50}>
-            <Image
-              x="5%"
-              y="5%"
-              width="100%"
-              height="100%"
-              preserveAspectRatio="xMidYMid slice"
-              href={{ uri: image_url }}
-              style={{
-                borderRadius: 2
-              }}
-              resizeMode="contain"
-            />
-          </Svg>
-        </View>
-      );
+      this.onRegionChange(region, region.latitude, region.longitude);
+      console.warn('latitudeOld ' + position.coords.latitude);
+      console.warn('longitudeOld ' + position.coords.longitude);
+      console.warn('distance ' + this.state.distance)
+    } catch (e) {
+      this.getDataLocationNow()
     }
   }
 
+  getDataLocationNow() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        let region = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 1.0,
+          longitudeDelta: 1.0,
+        };
+        let circleLoc = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        this.onCircle(circleLoc);
+        this.getPlaceResult(
+          position.coords.latitude,
+          position.coords.longitude,
+          this.state.distance
+        );
+        this.onRegionChange(region, region.latitude, region.longitude);
+        console.warn("latitudeNew " + position.coords.latitude);
+        console.warn("longitudeNew " + position.coords.longitude);
+
+      },
+      error => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 }
+    );
+
+  }
+
+  onCircle(center) {
+    this.setState({
+      circleView: center,
+    });
+  }
+
+  /**************************************************************
+   *
+   *
+   * Region change
+   *
+   */
+
+  onRegionChange(region, lastLat, lastLong) {
+    this.setState({
+      mapRegion: region,
+      // If there are no new values set the current ones
+      lastLat: lastLat || this.state.lastLat,
+      lastLong: lastLong || this.state.lastLong,
+    });
+  }
+
+  onChangeSlider(value) {
+    this.getPlaceResult(this.state.lastLat, this.state.lastLong, value);
+  }
+
+  getPlaceResult = async (lat, long, distance) => {
+    this.setState({ showLoader: true, placeLocation: null, placeCount: null, zero: false });
+    // console.warn("latitude "+lat);
+    // console.warn("longitude "+long);
+    // console.warn("distance "+distance);
+    try {
+      fetchData = await Core.GetNearbyStore(lat, long, distance)
+
+      this.setState({ showLoader: false });
+
+      console.warn(distance);
+      console.warn(fetchData.length)
+      console.warn(this.state.placeLocation);
+
+      const getValue = fetchData;
+      var count = Object.keys(getValue).length;
+      this.setState({
+        placeCount: count,
+        placeLocation: getValue,
+      });
+
+      console.warn(this.state.placeCount);
+
+    } catch (e) {
+      if (e == "store does'nt exist") {
+        this.setState({ zero: true, placeLocation: [], placeCount: 0 })
+      }
+      this.setState({ showLoader: false });
+      // Alert.alert('Not Working' + e);
+      this.setState({ loaded: false });
+    }
+
+  };
+
+
+  // renderCallOut = async (image_url) => {
+  //   if (Platform.OS == "ios") {
+  //     return (
+  //       <View>
+  //         <Image
+  //           source={{ uri: image_url }}
+  //           style={{
+  //             width: 50,
+  //             height: 50,
+  //             borderRadius: 2,
+  //           }}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   } else {
+  //     return (
+  //       <View>
+  //         <Svg width={50} height={50}>
+  //           <Image
+  //             x="5%"
+  //             y="5%"
+  //             width="100%"
+  //             height="100%"
+  //             preserveAspectRatio="xMidYMid slice"
+  //             href={{ uri: image_url }}
+  //             style={{
+  //               borderRadius: 2
+  //             }}
+  //             resizeMode="contain"
+  //           />
+  //         </Svg>
+  //       </View>
+  //     );
+  //   }
+  // }
+
   render() {
     console.warn("DataClinic " + JSON.stringify(this.state.DataClinics, null, 4));
-    console.warn("anjing" + JSON.stringify(this.state.region, null, 4))
+    console.warn("location " + JSON.stringify(this.state.mapRegion, null, 4))
+
+
+    // let MarkerView = [MapView.Marker];
+    // let listView = [];
+    // console.warn('placelocation ' + this.state.placeLocation);
+
+    // if ((this, this.state.placeLocation !== null)) {
+    //   for (let i = 0; i < this.state.placeCount; i++) {
+    //     MarkerView.push(
+    //       <Marker
+    //         key={i}
+    //         coordinate={{
+    //           latitude: parseFloat(this.state.placeLocation[i].lat),
+    //           longitude: parseFloat(this.state.placeLocation[i].lng),
+    //         }}
+    //         centerOffset={{ x: -18, y: -60 }}
+    //         anchor={{ x: 0.69, y: 1 }}
+    //         image={markerImg}
+    //       >
+    //         <Callout
+    //           onPress={() => Linking.openURL('http://maps.google.com/maps?daddr=' + this.state.placeLocation[i].lat + ',' + this.state.placeLocation[i].lng)}
+    //           tooltip>
+    //           <CustomCallout
+    //             imageUrl={this.state.placeLocation[i].image}
+    //             title={this.state.placeLocation[i].name}
+    //             description={this.state.placeLocation[i].title}
+    //             distance={this.state.placeLocation[i].distance}
+    //             latitude={this.state.placeLocation[i].lat}
+    //             longitude={this.state.placeLocation[i].lng}
+    //           />
+    //         </Callout>
+    //       </Marker>
+    //     );
+
+    //     listView.push(
+    //       <View style={{ backgroundColor: 'white' }} key={i}>
+    //         <CustomList
+    //           imageUrl={this.state.placeLocation[i].image}
+    //           title={this.state.placeLocation[i].name}
+    //           description={this.state.placeLocation[i].title}
+    //           distance={this.state.placeLocation[i].distance}
+    //           latitude={this.state.placeLocation[i].lat}
+    //           longitude={this.state.placeLocation[i].lng}
+    //         />
+    //       </View>
+    //     );
+    //   }
+    // }
+
+    // const { mapRegion, circleView } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -343,7 +443,7 @@ class NearbyClinic extends Component {
           }}
           // region={(this.props.newLocation == null) ? this.state.region : this.props.newLocation}
           region={this.state.region}
-          initialRegion={this.state.region}
+          // initialRegion={this.state.region}
           showsUserLocation={true}
           loadingEnabled={true}
           moveOnMarkerPress={true}
