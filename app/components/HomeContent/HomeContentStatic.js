@@ -102,23 +102,16 @@ class HomeContent extends Component {
     });
   }
 
-  redNotif() {
-    if (this.props.check_Id !== null) {
-      <View style={{
-        marginTop: '-7%',
-        marginLeft: '55%',
-        marginBottom: '-8%',
-        width: 15,
-        height: 15,
-        borderRadius: 15 / 2,
-        backgroundColor: '#f44336',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-      </View>
-    } else {
-      < View />
-    }
+  prosesCancel = async () => {
+    await Core.CancelVisit({ check_in_id: this.props.checkId }, async (err, result) => {
+      console.warn(result);
+      if (result.status == true) {
+        Core.getNotify('', result.message);
+        Actions.Home({ type: 'reset' });
+      } else {
+        Core.getNotify('', 'Failed Cancel Check In, please try again');
+      }
+    });
   }
 
   render() {
