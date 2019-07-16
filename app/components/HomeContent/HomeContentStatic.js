@@ -179,7 +179,7 @@ class HomeContent extends Component {
             }}
           /> */}
           <View style={styles.contain}>
-            {(this.props.check_Id) ? (
+            {(this.props.check_Id && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.cancelVisit({
@@ -215,29 +215,53 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
-            ) : (
-                <TouchableOpacity
-                  onPress={() =>
-                    Actions.Barcode()
-                  }
-                >
-                  <View style={styles.gridBox}>
-                    <View style={{ flex: 1 }}>
-                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                        <Image
-                          style={{ marginBottom: 15, width: 30, height: 30 }}
-                          source={require('../../../assets/apps/Scan&Pay.png')}
-                        />
-                      </View>
-                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                        <Text style={styles.title}>Register {this.props.clinic_id} </Text>
-                        {/* <Text style={styles.title}>Scan & Pay</Text>
+
+            ) : (this.state.kickout == true) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.Barcode()
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <Image
+                        style={{ marginBottom: 15, width: 30, height: 30 }}
+                        source={require('../../../assets/apps/Scan&Pay.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                      <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                      {/* <Text style={styles.title}>Scan & Pay</Text>
                     <Text style={styles.detail}>In-Network</Text> */}
-                      </View>
                     </View>
                   </View>
-                </TouchableOpacity>
-              )}
+                </View>
+              </TouchableOpacity>
+
+            ) : (
+                  <TouchableOpacity
+                    onPress={() =>
+                      Actions.Barcode()
+                    }
+                  >
+                    <View style={styles.gridBox}>
+                      <View style={{ flex: 1 }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                          <Image
+                            style={{ marginBottom: 15, width: 30, height: 30 }}
+                            source={require('../../../assets/apps/Scan&Pay.png')}
+                          />
+                        </View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                          <Text style={styles.title}>Register {this.props.clinic_id} </Text>
+                          {/* <Text style={styles.title}>Scan & Pay</Text>
+                    <Text style={styles.detail}>In-Network</Text> */}
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
 
             <TouchableOpacity
               onPress={() =>
@@ -261,7 +285,7 @@ class HomeContent extends Component {
               <View style={styles.gridBox}>
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
-                    {(this.props.check_Id) ? (
+                    {(this.props.check_Id && this.state.kickout == false) ? (
                       <View style={{
                         marginTop: '-7%',
                         marginLeft: '55%',
@@ -272,11 +296,14 @@ class HomeContent extends Component {
                         backgroundColor: '#f44336',
                         alignItems: 'center',
                         justifyContent: 'center'
-                      }}>
-                      </View>
+                      }} />
+                    ) : (!this.props.check_Id && this.state.kickout == true) ? (
+                      <View />
                     ) : (
-                        <View />
-                      )}
+                          <View />
+                        )}
+
+
                     {/* {this.redNotif()} */}
 
                     <Image
