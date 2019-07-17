@@ -74,7 +74,9 @@ class HomeContent extends Component {
   }
 
   async StatusUseronClinic() {
-    await Core.CancelVisiByClinic(this.props.check_Id, async (error, result) => {
+    checkId = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT)
+
+    await Core.CancelVisiByClinic(checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == false) {
@@ -279,6 +281,7 @@ class HomeContent extends Component {
                   consultation_fees: this.props.consultation_fees,
                   clinic_image: this.props.clinic_image,
                   clinic_name: this.props.clinic_name,
+                  kickout: this.state.kickout,
                 })
               }
             >
@@ -318,80 +321,184 @@ class HomeContent extends Component {
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={() =>
-                Actions.ECardUser({
-                  services: this.props.Services,
-                  clinicid: this.props.clinic_Id,
-                  member: this.props.member,
-                  nric: this.props.nric,
-                  checkId: this.props.check_Id,
-                  checkTime: this.props.checkTime,
-                  capCurrency: this.props.capCurrency,
-                  capAmount: this.props.capAmount,
-                  clinic_image: this.props.clinic_image,
-                  clinic_name: this.props.clinic_name,
-                  consultation_fee_symbol: this.props.consultation_fee_symbol,
-                  consultation_status: this.props.consultation_status,
-                  consultation_fees: this.props.consultation_fees
-                })
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
-                    <Image
-                      style={{ marginBottom: 15, width: 26, height: 35, }}
-                      source={require('../../../assets/apps/E-Card.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-                    <Text style={styles.title}>E-Card</Text>
-                    <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Actions.Wallet({
-                  services: this.props.Services,
-                  clinicid: this.props.clinic_Id,
-                  member: this.props.member,
-                  nric: this.props.nric,
-                  checkId: this.props.check_Id,
-                  checkTime: this.props.checkTime,
-                  capCurrency: this.props.capCurrency,
-                  capAmount: this.props.capAmount,
-                  clinic_image: this.props.clinic_image,
-                  clinic_name: this.props.clinic_name,
-                  consultation_fee_symbol: this.props.consultation_fee_symbol,
-                  consultation_status: this.props.consultation_status,
-                  consultation_fees: this.props.consultation_fees
-                })
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                    <Image
-                      style={{
-                        marginBottom: 15,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 30,
-                        height: 30,
-                      }}
-                      source={require('../../../assets/apps/wallet.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
-                    <Text style={styles.title}>Wallet</Text>
-                    <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+
+            {(this.props.check_Id && this.state.kickout == false) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.ECardUser({
+                    services: this.props.Services,
+                    clinicid: this.props.clinic_Id,
+                    member: this.props.member,
+                    nric: this.props.nric,
+                    checkId: this.props.check_Id,
+                    checkTime: this.props.checkTime,
+                    capCurrency: this.props.capCurrency,
+                    capAmount: this.props.capAmount,
+                    clinic_image: this.props.clinic_image,
+                    clinic_name: this.props.clinic_name,
+                    consultation_fee_symbol: this.props.consultation_fee_symbol,
+                    consultation_status: this.props.consultation_status,
+                    consultation_fees: this.props.consultation_fees
+                  })
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                      <Image
+                        style={{ marginBottom: 15, width: 26, height: 35, }}
+                        source={require('../../../assets/apps/E-Card.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                      <Text style={styles.title}>E-Card</Text>
+                      <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.ECardUser()
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                      <Image
+                        style={{ marginBottom: 15, width: 26, height: 35, }}
+                        source={require('../../../assets/apps/E-Card.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                      <Text style={styles.title}>E-Card</Text>
+                      <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ) : (
+                  <TouchableOpacity
+                    onPress={() =>
+                      Actions.ECardUser()
+                    }
+                  >
+                    <View style={styles.gridBox}>
+                      <View style={{ flex: 1 }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+                          <Image
+                            style={{ marginBottom: 15, width: 26, height: 35, }}
+                            source={require('../../../assets/apps/E-Card.png')}
+                          />
+                        </View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
+                          <Text style={styles.title}>E-Card</Text>
+                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
+
+
+            {(this.props.check_Id && this.state.kickout == false) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.Wallet({
+                    services: this.props.Services,
+                    clinicid: this.props.clinic_Id,
+                    member: this.props.member,
+                    nric: this.props.nric,
+                    checkId: this.props.check_Id,
+                    checkTime: this.props.checkTime,
+                    capCurrency: this.props.capCurrency,
+                    capAmount: this.props.capAmount,
+                    clinic_image: this.props.clinic_image,
+                    clinic_name: this.props.clinic_name,
+                    consultation_fee_symbol: this.props.consultation_fee_symbol,
+                    consultation_status: this.props.consultation_status,
+                    consultation_fees: this.props.consultation_fees
+                  })
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <Image
+                        style={{
+                          marginBottom: 15,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 30,
+                          height: 30,
+                        }}
+                        source={require('../../../assets/apps/wallet.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
+                      <Text style={styles.title}>Wallet</Text>
+                      <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.Wallet()
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <Image
+                        style={{
+                          marginBottom: 15,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          width: 30,
+                          height: 30,
+                        }}
+                        source={require('../../../assets/apps/wallet.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
+                      <Text style={styles.title}>Wallet</Text>
+                      <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            ) : (
+                  <TouchableOpacity
+                    onPress={() =>
+                      Actions.Wallet()
+                    }
+                  >
+                    <View style={styles.gridBox}>
+                      <View style={{ flex: 1 }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                          <Image
+                            style={{
+                              marginBottom: 15,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              width: 30,
+                              height: 30,
+                            }}
+                            source={require('../../../assets/apps/wallet.png')}
+                          />
+                        </View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
+                          <Text style={styles.title}>Wallet</Text>
+                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
+
           </View>
         </View>
       </View>

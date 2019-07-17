@@ -96,13 +96,73 @@ class SelectService extends Component {
     }
   }
 
+  async componentWillMount() {
+    await this.StatusUseronClinic();
+  }
+
+  async StatusUseronClinic() {
+    await Core.CancelVisiByClinic(this.props.checkId, async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      if (data.status == false) {
+        this.setState({
+          kickout: true
+        });
+      }
+      console.warn('data ' + data.check_in_status_removed);
+      // await this.setState({
+      //   kickout: result.data.check_in_status_removed,
+      // });
+
+    });
+  }
+
   render() {
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-        {(this.props.services == undefined) ? (
+        {(this.props.checkId && this.props.kickout == false) ? (
+          <View style={{ flex: 1 }}>
+            <Navbar
+              leftNav="back-home"
+              title="Select Service/s"
+              subtitle="Scan & Pay"
+              Services={this.props.services}
+              clinic_Id={this.props.clinicid}
+              check_Id={this.props.checkId}
+              capCurrency={this.props.capCurrency}
+              capAmount={this.props.capAmount}
+              member={this.props.member}
+              nric={this.props.nric}
+              checkTime={this.props.checkTime}
+              clinic_image={this.props.clinic_image}
+              clinic_name={this.props.clinic_name}
+              consultation_fee_symbol={this.props.consultation_fee_symbol}
+              consultation_status={this.props.consultation_status}
+              consultation_fees={this.props.consultation_fees}
+            />
+            <Content padder>
+              <View style={styles.contain}>
+                {this.props.services.map((data, key) => (
+                  <TouchableOpacity
+                    key={key}
+                    ref={"services-" + data.procedureid}
+                    style={styles.gridBox} onPress={() => this.selectedService(data)}>
+                    <Text style={{ fontFamily: 'HelveticaNeue-Roman', textAlign: 'center', fontSize: 14 }}>
+                      {data.name}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
+                Proceed
+                </Buttons2>
+            </Content>
+          </View>
+        ) : (!this.props.checkId && this.props.kickout == true) ? (
           <View style={{ flex: 1 }}>
             <Navbar
               leftNav="back"
@@ -117,47 +177,22 @@ class SelectService extends Component {
               <Text style={{ textAlign: 'center', fontFamily: Config.FONT_FAMILY_ROMAN }}>making payment</Text>
             </View>
           </View>
-
         ) : (
-            <View style={{ flex: 1 }}>
-              <Navbar
-                leftNav="back-home"
-                title="Select Service/s"
-                subtitle="Scan & Pay"
-                Services={this.props.services}
-                clinic_Id={this.props.clinicid}
-                check_Id={this.props.checkId}
-                capCurrency={this.props.capCurrency}
-                capAmount={this.props.capAmount}
-                member={this.props.member}
-                nric={this.props.nric}
-                checkTime={this.props.checkTime}
-                clinic_image={this.props.clinic_image}
-                clinic_name={this.props.clinic_name}
-                consultation_fee_symbol={this.props.consultation_fee_symbol}
-                consultation_status={this.props.consultation_status}
-                consultation_fees={this.props.consultation_fees}
-              />
-              <Content padder>
-                <View style={styles.contain}>
-                  {this.props.services.map((data, key) => (
-                    <TouchableOpacity
-                      key={key}
-                      ref={"services-" + data.procedureid}
-                      style={styles.gridBox} onPress={() => this.selectedService(data)}>
-                      <Text style={{ fontFamily: 'HelveticaNeue-Roman', textAlign: 'center', fontSize: 14 }}>
-                        {data.name}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
+              <View style={{ flex: 1 }}>
+                <Navbar
+                  leftNav="back"
+                  title="Payment Type"
+                />
+                <View style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                  <Text style={{ textAlign: 'center', fontFamily: Config.FONT_FAMILY_ROMAN }}>Please register before</Text>
+                  <Text style={{ textAlign: 'center', fontFamily: Config.FONT_FAMILY_ROMAN }}>making payment</Text>
                 </View>
-
-                <Buttons2 style={{ width: '100%' }} onPress={() => this.validationField()}>
-                  Proceed
-                </Buttons2>
-              </Content>
-            </View>
-          )}
+              </View>
+            )}
 
       </Container>
     );

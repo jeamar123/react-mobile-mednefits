@@ -341,10 +341,40 @@ export function GetBarcodeData(url, callback) {
         },
       };
 
+      // fetching(params, result => {
+      //   console.warn(result);
+      //   callback(result);
+      // });
+
       fetching(params, result => {
-        console.warn(result);
-        callback(result);
-      });
+        if (!result.error) {
+          callback(result);
+        } else {
+          getNotify('', 'Success! Wait a second...');
+
+          data = result.data;
+          data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+          CheckIDaccess_token = data_parse.check_in_id;
+
+          params = {
+            key: 'checkIdVisit',
+            value: CheckIDaccess_token,
+          };
+
+          Core.SetDataLocal(params, (err, result) => {
+            if (result) {
+              callback('', true);
+              getNotify('', 'Success');
+              console.warn('anjing');
+              // Actions.Home({ type: 'reset' });
+            } else {
+              getNotify('', 'Failed');
+              console.warn('anjing');
+            }
+          });
+        }
+      })
+
     });
   } catch (e) {
     console.warn(e.message);
