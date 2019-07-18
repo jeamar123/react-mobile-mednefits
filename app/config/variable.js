@@ -67,6 +67,7 @@ export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
 export const ACCESS_TOKEN                   = "access_token"
 export const LATITUDE                       = 'latitude'
 export const LONGITUDE                      = 'longitude'
+export const CHECKIDVISIT                   = 'checkIdVisit'
 
 
 /* AWS VARIABLE */

@@ -11,6 +11,9 @@ import * as Core from '../core';
 class checkinUser extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      kickout: false
+    };
   }
 
   prosesCancel = async () => {
@@ -25,8 +28,30 @@ class checkinUser extends Component {
     });
   }
 
+  async componentWillMount() {
+    await this.StatusUseronClinic();
+  }
+
+  async StatusUseronClinic() {
+    await Core.CancelVisiByClinic(this.props.checkId, async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      if (data.status == false) {
+        this.setState({
+          kickout: true
+        });
+      }
+      console.warn('data ' + data);
+      // await this.setState({
+      //   kickout: result.data.check_in_status_removed,
+      // });
+
+    });
+  }
+
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    console.warn('kickout ' + this.state.kickout)
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
