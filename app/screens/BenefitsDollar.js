@@ -133,7 +133,6 @@ class BenefitsDollar extends Component {
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                         color: '#666666',
                         fontSize: 18,
-                        width: '100%'
                       }}
                       numberOfLines={2}
                     >
