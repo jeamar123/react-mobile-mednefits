@@ -4,12 +4,8 @@ import {
   Content,
   ListItem,
   Text,
-  Icon,
   Left,
   Body,
-  Right,
-  Switch,
-  Button,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';

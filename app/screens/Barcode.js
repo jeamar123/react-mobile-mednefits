@@ -26,7 +26,8 @@ class Barcode extends Component {
       failed: false,
       title: null,
       message: null,
-      timeNow: ''
+      timeNow: '',
+      checkId: '',
     };
 
     this.scanBarcode = this.scanBarcode.bind(this)
