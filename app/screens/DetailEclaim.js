@@ -7,8 +7,8 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
-  Image,
-  Easing
+  Easing,
+  ImageBackground
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Container } from 'native-base';
@@ -348,10 +348,21 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.date}
                 </Common.Texti>
-                <Image
-                  source={require('../../assets/apps/calendar.png')}
-                  style={{ marginLeft: 5, height: 15, resizeMode: 'center', width: 15 }}
-                />
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                    marginLeft: 10
+                  }}
+                >
+                  <ImageBackground
+                    source={require('../../assets/apps/calendar.png')}
+                    style={{
+                      width: 15,
+                      height: 15,
+                      resizeMode: 'center'
+                    }}
+                  />
+                </View>
               </View>
             </View>
 
@@ -382,10 +393,21 @@ class DetailEclaim extends Component {
                 <Common.Texti fontColor={"#2C3E50"}>
                   {this.props.claimdata.time}
                 </Common.Texti>
-                <Image
-                  source={require('../../assets/apps/clocks.png')}
-                  style={{ marginLeft: 5, height: 15, resizeMode: 'center', width: 15 }}
-                />
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                    marginLeft: 10
+                  }}
+                >
+                  <ImageBackground
+                    source={require('../../assets/apps/clocks.png')}
+                    style={{
+                      width: 15,
+                      height: 15,
+                      resizeMode: 'center'
+                    }}
+                  />
+                </View>
               </View>
             </View>
 
