@@ -7,7 +7,8 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
-  Easing
+  Easing,
+  ImageBackground
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Container } from 'native-base';
@@ -339,10 +340,13 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <ResponsiveImage
+                  <ImageBackground
                     source={require('../../assets/apps/calendar.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="16.5"
+                    style={{
+                      width: 15,
+                      height: 15,
+                      resizeMode: 'center'
+                    }}
                   />
                 </View>
               </View>
@@ -379,10 +383,13 @@ class DetailEclaim extends Component {
                     marginLeft: 10
                   }}
                 >
-                  <ResponsiveImage
+                  <ImageBackground
                     source={require('../../assets/apps/clocks.png')}
-                    style={{ resizeMode: 'center' }}
-                    initWidth="15" initHeight="15"
+                    style={{
+                      width: 15,
+                      height: 15,
+                      resizeMode: 'center'
+                    }}
                   />
                 </View>
               </View>

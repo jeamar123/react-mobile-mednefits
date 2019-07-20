@@ -316,7 +316,7 @@ export default class EclaimForm extends Component {
                   renderDate={({ year, month, day, date }) => {
                     if (!date) {
                       return <Common.Texti
-                        fontColor={"#9e9e9e"}
+                        fontColor={(this.state.date == 'Input Date') ? "#9e9e9e" : "#2c3e50"}
                         fontSize={RF(1.9)}
                         fontFamily={Config.FONT_FAMILY_MEDIUM}
                       >{this.state.date}</Common.Texti>
