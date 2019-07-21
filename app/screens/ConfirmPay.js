@@ -286,9 +286,10 @@ class ConfirmPay extends Component {
                         fontFamily: Config.FONT_FAMILY_ROMAN,
                         color: '#666666',
                         fontSize: 18,
-                        width: '100%'
+                        width: responsiveWidth(65),
+                        marginRight: responsiveWidth(5),
                       }}
-                      numberOfLines={2}
+                      numberOfLines={3}
                     >
                       {this.props.clinic_name}
                     </Text>

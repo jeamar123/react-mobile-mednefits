@@ -99,7 +99,7 @@ class Barcode extends Component {
 
           userCheckinID = {
             key: Config.CHECKIDVISIT,
-            value: JSON.stringify(result.data.check_in_id)
+            value: JSON.stringify(result.data)
           }
 
           Core.SetDataLocal(userCheckinID, (err, result) => {
