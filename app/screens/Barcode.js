@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
-import * as Core from '../core'
 import { RNCamera } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
 import { Spinner } from '../components/common/Spinner'
 import { Popup } from '../components/common';
+import * as Core from '../core';
+import * as Config from '../config';
 
 const PendingView = () => (
   <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, position: 'absolute' }}>
@@ -66,7 +67,7 @@ class Barcode extends Component {
   scanBarcode = (data) => {
     this.setState({ isLoading: true })
     barcodeData = data
-    console.warn(barcodeData);
+    console.warn('databarcode ' + barcodeData);
 
     try {
       Core.GetBarcodeData(barcodeData.data + "?check_in_time=" + this.state.timeNow, (result) => {
@@ -92,6 +93,19 @@ class Barcode extends Component {
             isLoading: false,
             failed: false,
           })
+
+          userCheckinID = {
+            key: Config.CHECKIDVISIT,
+            value: JSON.stringify(result.data)
+          }
+
+          Core.SetDataLocal(userCheckinID, (err, result) => {
+            if (result) {
+              console.warn("Set a new userCheckinID");
+            }
+          })
+
+
         } else {
           Actions.ExpireMember({ type: 'reset' })
           this.setState({
@@ -99,8 +113,6 @@ class Barcode extends Component {
             failed: false,
           })
         }
-
-
       })
     } catch (e) {
       this.setState({

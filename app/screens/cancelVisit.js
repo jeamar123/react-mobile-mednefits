@@ -3,6 +3,7 @@ import { StatusBar, Image, View, TouchableOpacity } from 'react-native';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import RF from "react-native-responsive-fontsize";
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import Navbar from '../components/common/NavbarGreen';
 import * as Config from '../config';
 import * as Common from '../components/common';
@@ -130,7 +131,16 @@ class checkinUser extends Component {
                 source={{ uri: this.props.clinic_image }}
                 style={{ height: 55, resizeMode: 'center', width: 55 }}
               />
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 18, marginTop: '2%' }}>
+              <Text
+                style={{
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                  color: '#2C3E50',
+                  fontSize: 18,
+                  marginTop: responsiveHeight(0.5),
+                  width: responsiveWidth(57),
+                  marginRight: responsiveWidth(5),
+                }}
+                numberOfLines={3}>
                 {this.props.clinic_name}
               </Text>
 

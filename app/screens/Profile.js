@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StatusBar, View, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import * as Config from '../config';

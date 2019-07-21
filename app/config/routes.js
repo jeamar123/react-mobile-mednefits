@@ -67,7 +67,7 @@ import ReceiptView from '../screens/ReceiptView';
 import updateApps from '../screens/updateApps';
 import HistoryAfterUpload from '../screens/HistoryAfterUpload';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

@@ -27,6 +27,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
         new ReactNativeDocumentPicker(),
         new RNCameraPackage(),
         new RNFusedLocationPackage(),
+        new AsyncStoragePackage(),
         new SvgPackage());
     }
 

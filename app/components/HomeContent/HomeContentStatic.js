@@ -5,7 +5,8 @@ import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
-import * as Common from '../common'
+import * as Common from '../common';
+import * as Config from '../../config';
 
 class HomeContent extends Component {
   constructor(props) {
@@ -17,6 +18,19 @@ class HomeContent extends Component {
       isClearSearch: false,
       isLoadingSearch: false,
       kickout: false,
+      services: '',
+      clinicid: '',
+      member: '',
+      nric: '',
+      checkId: '',
+      checkTime: '',
+      capCurrency: '',
+      capAmount: '',
+      clinic_image: '',
+      clinic_name: '',
+      consultation_fee_symbol: '',
+      consultation_status: '',
+      consultation_fees: ''
     };
   }
 
@@ -27,15 +41,33 @@ class HomeContent extends Component {
   }
 
   async StatusUseronClinic() {
-    checkId = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT)
+    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
+    data =
+      await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
+    console.warn('storageData ' + JSON.stringify(data, 4, null))
 
-    await Core.CancelVisiByClinic(this.props.check_Id, async (error, result) => {
+    this.setState({
+      services: data.clinic_procedures,
+      clinicid: data.clinic_id,
+      member: data.member,
+      nric: data.nric,
+      checkId: data.check_in_id,
+      checkTime: data.check_in_time,
+      capCurrency: data.cap_currency_symbol,
+      capAmount: data.cap_per_visit_amount,
+      clinic_image: data.image_url,
+      clinic_name: data.name,
+      consultation_fee_symbol: data.consultation_fee_symbol,
+      consultation_status: data.consultation_status,
+      consultation_fees: data.consultation_fees
+    })
+
+    await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == false) {
         this.setState({
           kickout: true,
-          // kickout: data.check_in_status_removed
         });
       }
       console.warn('data ' + data.check_in_status_removed);
@@ -104,18 +136,6 @@ class HomeContent extends Component {
     });
   }
 
-  prosesCancel = async () => {
-    await Core.CancelVisit({ check_in_id: this.props.checkId }, async (err, result) => {
-      console.warn(result);
-      if (result.status == true) {
-        Core.getNotify('', result.message);
-        Actions.Home({ type: 'reset' });
-      } else {
-        Core.getNotify('', 'Failed Cancel Check In, please try again');
-      }
-    });
-  }
-
   render() {
     console.warn('kickout ' + this.state.kickout)
     console.warn("props: " + JSON.stringify(this.props, null, 4))
@@ -176,23 +196,23 @@ class HomeContent extends Component {
           /> */}
           <View style={styles.contain}>
 
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.cancelVisit({
-                    services: this.props.Services,
-                    clinicid: this.props.clinic_Id,
-                    member: this.props.member,
-                    nric: this.props.nric,
-                    checkId: this.props.check_Id,
-                    checkTime: this.props.checkTime,
-                    capCurrency: this.props.capCurrency,
-                    capAmount: this.props.capAmount,
-                    clinic_image: this.props.clinic_image,
-                    clinic_name: this.props.clinic_name,
-                    consultation_fee_symbol: this.props.consultation_fee_symbol,
-                    consultation_status: this.props.consultation_status,
-                    consultation_fees: this.props.consultation_fees
+                    services: this.state.services,
+                    clinicid: this.state.clinicid,
+                    member: this.state.member,
+                    nric: this.state.nric,
+                    checkId: this.state.checkId,
+                    checkTime: this.state.checkTime,
+                    capCurrency: this.state.capCurrency,
+                    capAmount: this.state.capAmount,
+                    clinic_image: this.state.clinic_image,
+                    clinic_name: this.state.clinic_name,
+                    consultation_fee_symbol: this.state.consultation_fee_symbol,
+                    consultation_status: this.state.consultation_status,
+                    consultation_fees: this.state.consultation_fees
                   })
                 }
               >
@@ -212,6 +232,7 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
+
             ) : (this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
@@ -234,7 +255,9 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
+
             ) : (
+
                   <TouchableOpacity
                     onPress={() =>
                       Actions.Barcode()
@@ -261,19 +284,19 @@ class HomeContent extends Component {
             <TouchableOpacity
               onPress={() =>
                 Actions.SelectService({
-                  services: this.props.Services,
-                  clinicid: this.props.clinic_Id,
-                  member: this.props.member,
-                  nric: this.props.nric,
-                  checkId: this.props.check_Id,
-                  checkTime: this.props.checkTime,
-                  capCurrency: this.props.capCurrency,
-                  capAmount: this.props.capAmount,
-                  consultation_fee_symbol: this.props.consultation_fee_symbol,
-                  consultation_status: this.props.consultation_status,
-                  consultation_fees: this.props.consultation_fees,
-                  clinic_image: this.props.clinic_image,
-                  clinic_name: this.props.clinic_name,
+                  services: this.state.services,
+                  clinicid: this.state.clinicid,
+                  member: this.state.member,
+                  nric: this.state.nric,
+                  checkId: this.state.checkId,
+                  checkTime: this.state.checkTime,
+                  capCurrency: this.state.capCurrency,
+                  capAmount: this.state.capAmount,
+                  clinic_image: this.state.clinic_image,
+                  clinic_name: this.state.clinic_name,
+                  consultation_fee_symbol: this.state.consultation_fee_symbol,
+                  consultation_status: this.state.consultation_status,
+                  consultation_fees: this.state.consultation_fees,
                   kickout: this.state.kickout,
                 })
               }
@@ -282,7 +305,9 @@ class HomeContent extends Component {
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
 
-                    {(this.props.check_Id && this.state.kickout == false) ? (
+                    {(!this.state.checkId && this.state.kickout == true) ? (
+                      <View />
+                    ) : (this.state.checkId && this.state.kickout == false) ? (
                       <View style={{
                         marginTop: '-7%',
                         marginLeft: '55%',
@@ -294,8 +319,6 @@ class HomeContent extends Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                       }} />
-                    ) : (!this.props.check_Id && this.state.kickout == true) ? (
-                      <View />
                     ) : (
                           <View />
                         )}
@@ -312,23 +335,23 @@ class HomeContent extends Component {
               </View>
             </TouchableOpacity>
 
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.ECardUser({
-                    services: this.props.Services,
-                    clinicid: this.props.clinic_Id,
-                    member: this.props.member,
-                    nric: this.props.nric,
-                    checkId: this.props.check_Id,
-                    checkTime: this.props.checkTime,
-                    capCurrency: this.props.capCurrency,
-                    capAmount: this.props.capAmount,
-                    clinic_image: this.props.clinic_image,
-                    clinic_name: this.props.clinic_name,
-                    consultation_fee_symbol: this.props.consultation_fee_symbol,
-                    consultation_status: this.props.consultation_status,
-                    consultation_fees: this.props.consultation_fees
+                    services: this.state.services,
+                    clinicid: this.state.clinicid,
+                    member: this.state.member,
+                    nric: this.state.nric,
+                    checkId: this.state.checkId,
+                    checkTime: this.state.checkTime,
+                    capCurrency: this.state.capCurrency,
+                    capAmount: this.state.capAmount,
+                    clinic_image: this.state.clinic_image,
+                    clinic_name: this.state.clinic_name,
+                    consultation_fee_symbol: this.state.consultation_fee_symbol,
+                    consultation_status: this.state.consultation_status,
+                    consultation_fees: this.state.consultation_fees,
                   })
                 }
               >
@@ -347,7 +370,8 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
-            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+            ) : (!this.state.checkId && this.state.kickout == true) ? (
+
               <TouchableOpacity
                 onPress={() =>
                   Actions.ECardUser()
@@ -368,7 +392,9 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
+
             ) : (
+
                   <TouchableOpacity
                     onPress={() =>
                       Actions.ECardUser()
@@ -391,23 +417,23 @@ class HomeContent extends Component {
                   </TouchableOpacity>
                 )}
 
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.Wallet({
-                    services: this.props.Services,
-                    clinicid: this.props.clinic_Id,
-                    member: this.props.member,
-                    nric: this.props.nric,
-                    checkId: this.props.check_Id,
-                    checkTime: this.props.checkTime,
-                    capCurrency: this.props.capCurrency,
-                    capAmount: this.props.capAmount,
-                    clinic_image: this.props.clinic_image,
-                    clinic_name: this.props.clinic_name,
-                    consultation_fee_symbol: this.props.consultation_fee_symbol,
-                    consultation_status: this.props.consultation_status,
-                    consultation_fees: this.props.consultation_fees
+                    services: this.state.services,
+                    clinicid: this.state.clinicid,
+                    member: this.state.member,
+                    nric: this.state.nric,
+                    checkId: this.state.checkId,
+                    checkTime: this.state.checkTime,
+                    capCurrency: this.state.capCurrency,
+                    capAmount: this.state.capAmount,
+                    clinic_image: this.state.clinic_image,
+                    clinic_name: this.state.clinic_name,
+                    consultation_fee_symbol: this.state.consultation_fee_symbol,
+                    consultation_status: this.state.consultation_status,
+                    consultation_fees: this.state.consultation_fees,
                   })
                 }
               >
@@ -432,7 +458,9 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
-            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+
+            ) : (!this.state.checkId && this.state.kickout == true) ? (
+
               <TouchableOpacity
                 onPress={() =>
                   Actions.Wallet()
@@ -459,7 +487,9 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
+
             ) : (
+
                   <TouchableOpacity
                     onPress={() =>
                       Actions.Wallet()
@@ -487,7 +517,6 @@ class HomeContent extends Component {
                     </View>
                   </TouchableOpacity>
                 )}
-
 
           </View>
         </View>

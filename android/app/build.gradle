@@ -169,6 +169,7 @@ dependencies {
     implementation project(':react-native-document-picker')
     implementation project(':react-native-svg')
     implementation project(':react-native-fs')
+    implementation project(':@react-native-community_async-storage')
     implementation (project(':react-native-camera')) {
       exclude group: "com.google.android.gms"
       implementation 'com.android.support:exifinterface:25.+'

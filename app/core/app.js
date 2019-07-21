@@ -3,9 +3,7 @@
 * @year 2018
 */
 
-import {
-  AsyncStorage
-} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Actions } from 'react-native-router-flux';
 import {
   getAlert,
@@ -19,12 +17,12 @@ const headerLogin = {
   'Content-Type': 'application/json'
 }
 
-export function AppStatus(){
-  Core.UserDetail((err, result)=>{
+export function AppStatus() {
+  Core.UserDetail((err, result) => {
     if (result.expired) {
-    	Actions.Login({type: 'reset'})
+      Actions.Login({ type: 'reset' })
     } else {
-      Actions.Home({type: 'reset'})
+      Actions.Home({ type: 'reset' })
     }
   })
 }
