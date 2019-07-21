@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar, AsyncStorage } from 'react-native';
+import { StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import * as Core from '../core';
