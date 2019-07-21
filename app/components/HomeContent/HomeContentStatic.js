@@ -5,7 +5,8 @@ import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
-import * as Common from '../common'
+import * as Common from '../common';
+import * as Config from '../../config';
 
 class HomeContent extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class HomeContent extends Component {
       currency: false,
       isClearSearch: false,
       isLoadingSearch: false,
-      kickout: false
+      kickout: false,
+      storagecheckId: ''
     };
   }
 
@@ -74,9 +76,15 @@ class HomeContent extends Component {
   }
 
   async StatusUseronClinic() {
-    checkId = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT)
+    storagecheckId = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
 
-    await Core.CancelVisiByClinic(checkId, async (error, result) => {
+    console.warn('storageData ' + storagecheckId)
+
+    this.setState({
+      storagecheckId: storagecheckId
+    })
+
+    await Core.CancelVisiByClinic(this.state.storagecheckId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == false) {
@@ -104,7 +112,7 @@ class HomeContent extends Component {
   }
 
   redNotif() {
-    if (this.props.check_Id !== null) {
+    if (this.state.storagecheckId !== null) {
       <View style={{
         marginTop: '-7%',
         marginLeft: '55%',
@@ -181,7 +189,7 @@ class HomeContent extends Component {
             }}
           /> */}
           <View style={styles.contain}>
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.storagecheckId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.cancelVisit({
@@ -189,7 +197,7 @@ class HomeContent extends Component {
                     clinicid: this.props.clinic_Id,
                     member: this.props.member,
                     nric: this.props.nric,
-                    checkId: this.props.check_Id,
+                    checkId: this.state.storagecheckId,
                     checkTime: this.props.checkTime,
                     capCurrency: this.props.capCurrency,
                     capAmount: this.props.capAmount,
@@ -272,7 +280,7 @@ class HomeContent extends Component {
                   clinicid: this.props.clinic_Id,
                   member: this.props.member,
                   nric: this.props.nric,
-                  checkId: this.props.check_Id,
+                  checkId: this.state.storagecheckId,
                   checkTime: this.props.checkTime,
                   capCurrency: this.props.capCurrency,
                   capAmount: this.props.capAmount,
@@ -288,7 +296,7 @@ class HomeContent extends Component {
               <View style={styles.gridBox}>
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
-                    {(this.props.check_Id && this.state.kickout == false) ? (
+                    {(this.state.storagecheckId && this.state.kickout == false) ? (
                       <View style={{
                         marginTop: '-7%',
                         marginLeft: '55%',
@@ -300,7 +308,7 @@ class HomeContent extends Component {
                         alignItems: 'center',
                         justifyContent: 'center'
                       }} />
-                    ) : (!this.props.check_Id && this.state.kickout == true) ? (
+                    ) : (!this.state.storagecheckId && this.state.kickout == true) ? (
                       <View />
                     ) : (
                           <View />
@@ -322,7 +330,7 @@ class HomeContent extends Component {
             </TouchableOpacity>
 
 
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.storagecheckId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.ECardUser({
@@ -330,7 +338,7 @@ class HomeContent extends Component {
                     clinicid: this.props.clinic_Id,
                     member: this.props.member,
                     nric: this.props.nric,
-                    checkId: this.props.check_Id,
+                    checkId: this.state.storagecheckId,
                     checkTime: this.props.checkTime,
                     capCurrency: this.props.capCurrency,
                     capAmount: this.props.capAmount,
@@ -357,7 +365,7 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
-            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+            ) : (!this.state.storagecheckId && this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.ECardUser()
@@ -402,7 +410,7 @@ class HomeContent extends Component {
                 )}
 
 
-            {(this.props.check_Id && this.state.kickout == false) ? (
+            {(this.state.storagecheckId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.Wallet({
@@ -410,7 +418,7 @@ class HomeContent extends Component {
                     clinicid: this.props.clinic_Id,
                     member: this.props.member,
                     nric: this.props.nric,
-                    checkId: this.props.check_Id,
+                    checkId: this.state.storagecheckId,
                     checkTime: this.props.checkTime,
                     capCurrency: this.props.capCurrency,
                     capAmount: this.props.capAmount,
@@ -443,7 +451,7 @@ class HomeContent extends Component {
                   </View>
                 </View>
               </TouchableOpacity>
-            ) : (!this.props.check_Id && this.state.kickout == true) ? (
+            ) : (!this.state.storagecheckId && this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
                   Actions.Wallet()

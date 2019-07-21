@@ -330,9 +330,9 @@ export function GetECardDetail(callback) {
   }
 }
 
-export function GetBarcodeData(url, callback) {
+export async function GetBarcodeData(url, callback) {
   try {
-    Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
         url: url,
         method: 'GET',
@@ -346,30 +346,31 @@ export function GetBarcodeData(url, callback) {
       //   callback(result);
       // });
 
-      fetching(params, result => {
+      await fetching(params, async result => {
         if (!result.error) {
-          callback(result);
+          // getNotify('', result.error_description);
+          await callback(result);
         } else {
-          getNotify('', 'Success! Wait a second...');
+          Core.getNotify('', 'Success!');
 
           data = result.data;
           data_parse = typeof data == 'string' ? JSON.parse(data) : data;
-          CheckIDaccess_token = data_parse.check_in_id;
+          check_in_id = data_parse.check_in_id;
 
           params = {
-            key: 'checkIdVisit',
-            value: CheckIDaccess_token,
+            key: 'check_in_id',
+            value: check_in_id,
           };
 
-          Core.SetDataLocal(params, (err, result) => {
+          await Core.SetDataLocal(params, async (err, result) => {
             if (result) {
-              callback('', true);
-              getNotify('', 'Success');
-              console.warn('anjing');
+              await callback('', true);
+              Core.getNotify('', 'Success');
+              console.warn('Success Saving data');
               // Actions.Home({ type: 'reset' });
             } else {
-              getNotify('', 'Failed');
-              console.warn('anjing');
+              Core.getNotify('', 'Failed');
+              console.warn('Failed Saving Data');
             }
           });
         }
