@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
+import { StatusBar, View, Dimensions, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Container, Content, Text } from 'native-base';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
+import Modal from 'react-native-modal';
 import { Buttons2 } from '../components/common/Buttons2';
 import Navbar from '../components/common/NavbarGrey';
+import Texti from "../components/common/Texti";
 import * as Commmon from '../components/common';
 import * as Config from '../config';
+import * as Core from '../core';
 const { width, height } = Dimensions.get('window');
 
 class SelectService extends Component {
@@ -16,10 +19,79 @@ class SelectService extends Component {
 
     this.state = {
       services: [],
-      clinic: false
+      clinic: false,
+      kickout: false,
+      isLoading: false,
+      services: '',
+      clinicid: '',
+      member: '',
+      nric: '',
+      checkId: '',
+      checkTime: '',
+      capCurrency: '',
+      capAmount: '',
+      clinic_image: '',
+      clinic_name: '',
+      consultation_fee_symbol: '',
+      consultation_status: '',
+      consultation_fees: ''
     }
 
     this.selectedService = this.selectedService.bind(this)
+  }
+
+  async componentDidMount() {
+    await this.StatusUseronClinic();
+  }
+
+  async StatusUseronClinic() {
+    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
+    data =
+      await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
+    console.warn('storageData ' + JSON.stringify(data, 4, null))
+
+    this.setState({
+      services: data.clinic_procedures,
+      clinicid: data.clinic_id,
+      member: data.member,
+      nric: data.nric,
+      checkId: data.check_in_id,
+      checkTime: data.check_in_time,
+      capCurrency: data.cap_currency_symbol,
+      capAmount: data.cap_per_visit_amount,
+      clinic_image: data.image_url,
+      clinic_name: data.name,
+      consultation_fee_symbol: data.consultation_fee_symbol,
+      consultation_status: data.consultation_status,
+      consultation_fees: data.consultation_fees,
+      isLoading: true
+    })
+
+    await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      if (data.status == false) {
+        this.setState({
+          kickout: true,
+        });
+        setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
+        }, 1500)
+      } else {
+        setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
+        }, 1500)
+      }
+      console.warn('data ' + data.check_in_status_removed);
+      // await this.setState({
+      //   kickout: result.data.check_in_status_removed,
+      // });
+
+    });
   }
 
   remove(array, element) {
@@ -96,34 +168,36 @@ class SelectService extends Component {
     }
   }
 
-  async componentWillMount() {
-    await this.StatusUseronClinic();
-  }
-
-  async StatusUseronClinic() {
-    await Core.CancelVisiByClinic(this.props.checkId, async (error, result) => {
-      data =
-        await typeof result == 'string' ? JSON.parse(result) : result;
-      if (data.status == false) {
-        this.setState({
-          kickout: true
-        });
-      }
-      console.warn('data ' + data.check_in_status_removed);
-      // await this.setState({
-      //   kickout: result.data.check_in_status_removed,
-      // });
-
-    });
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+          >Checking Registration...</Texti>
+        </Modal>
+      </View>
+    );
   }
 
   render() {
     console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
+        {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
 
-        {(this.props.checkId && this.props.kickout == false) ? (
+        {(this.props.checkId && this.state.kickout == false) ? (
           <View style={{ flex: 1 }}>
             <Navbar
               leftNav="back-home"
@@ -162,7 +236,7 @@ class SelectService extends Component {
                 </Buttons2>
             </Content>
           </View>
-        ) : (!this.props.checkId && this.props.kickout == true) ? (
+        ) : (!this.props.checkId && this.state.kickout == true) ? (
           <View style={{ flex: 1 }}>
             <Navbar
               leftNav="back"

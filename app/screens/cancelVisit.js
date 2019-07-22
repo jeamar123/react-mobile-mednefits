@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { StatusBar, Image, View, TouchableOpacity } from 'react-native';
+import {
+  StatusBar,
+  Image,
+  View,
+  ActivityIndicator,
+  TouchableOpacity
+} from 'react-native';
 import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import RF from "react-native-responsive-fontsize";
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
+import Modal from 'react-native-modal';
 import Navbar from '../components/common/NavbarGreen';
+import Texti from "../components/common/Texti";
 import * as Config from '../config';
 import * as Common from '../components/common';
 import * as Core from '../core';
@@ -13,7 +21,21 @@ class checkinUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      kickout: false
+      kickout: false,
+      isLoading: false,
+      services: '',
+      clinicid: '',
+      member: '',
+      nric: '',
+      checkId: '',
+      checkTime: '',
+      capCurrency: '',
+      capAmount: '',
+      clinic_image: '',
+      clinic_name: '',
+      consultation_fee_symbol: '',
+      consultation_status: '',
+      consultation_fees: ''
     };
   }
 
@@ -34,15 +56,49 @@ class checkinUser extends Component {
   }
 
   async StatusUseronClinic() {
-    await Core.CancelVisiByClinic(this.props.checkId, async (error, result) => {
+    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
+    data =
+      await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
+    console.warn('storageData ' + JSON.stringify(data, 4, null))
+
+    this.setState({
+      services: data.clinic_procedures,
+      clinicid: data.clinic_id,
+      member: data.member,
+      nric: data.nric,
+      checkId: data.check_in_id,
+      checkTime: data.check_in_time,
+      capCurrency: data.cap_currency_symbol,
+      capAmount: data.cap_per_visit_amount,
+      clinic_image: data.image_url,
+      clinic_name: data.name,
+      consultation_fee_symbol: data.consultation_fee_symbol,
+      consultation_status: data.consultation_status,
+      consultation_fees: data.consultation_fees,
+      isLoading: true
+    })
+
+    await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == false) {
         this.setState({
-          kickout: true
+          kickout: true,
         });
+        setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
+        }, 1500)
+        Actions.Barcode()
+      } else {
+        setTimeout(() => {
+          this.setState({
+            isLoading: false
+          })
+        }, 1500)
       }
-      console.warn('data ' + data);
+      console.warn('data ' + data.check_in_status_removed);
       // await this.setState({
       //   kickout: result.data.check_in_status_removed,
       // });
@@ -50,11 +106,34 @@ class checkinUser extends Component {
     });
   }
 
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Texti
+            fontColor="#FFFFFF"
+          >Checking Registration...</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
   render() {
     console.warn('kickout ' + this.state.kickout)
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
+        {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           title="Register"
