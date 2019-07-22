@@ -281,59 +281,142 @@ class HomeContent extends Component {
                   </TouchableOpacity>
                 )}
 
-            <TouchableOpacity
-              onPress={() =>
-                Actions.SelectService({
-                  services: this.state.services,
-                  clinicid: this.state.clinicid,
-                  member: this.state.member,
-                  nric: this.state.nric,
-                  checkId: this.state.checkId,
-                  checkTime: this.state.checkTime,
-                  capCurrency: this.state.capCurrency,
-                  capAmount: this.state.capAmount,
-                  clinic_image: this.state.clinic_image,
-                  clinic_name: this.state.clinic_name,
-                  consultation_fee_symbol: this.state.consultation_fee_symbol,
-                  consultation_status: this.state.consultation_status,
-                  consultation_fees: this.state.consultation_fees,
-                  kickout: this.state.kickout,
-                })
-              }
-            >
-              <View style={styles.gridBox}>
-                <View style={{ flex: 1 }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+            {(this.state.checkId && this.state.kickout == false) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.SelectService({
+                    services: this.state.services,
+                    clinicid: this.state.clinicid,
+                    member: this.state.member,
+                    nric: this.state.nric,
+                    checkId: this.state.checkId,
+                    checkTime: this.state.checkTime,
+                    capCurrency: this.state.capCurrency,
+                    capAmount: this.state.capAmount,
+                    clinic_image: this.state.clinic_image,
+                    clinic_name: this.state.clinic_name,
+                    consultation_fee_symbol: this.state.consultation_fee_symbol,
+                    consultation_status: this.state.consultation_status,
+                    consultation_fees: this.state.consultation_fees,
+                    kickout: this.state.kickout,
+                  })
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
 
-                    {(!this.state.checkId && this.state.kickout == true) ? (
-                      <View />
-                    ) : (this.state.checkId && this.state.kickout == false) ? (
-                      <View style={{
-                        marginTop: '-7%',
-                        marginLeft: '55%',
-                        marginBottom: '-8%',
-                        width: 15,
-                        height: 15,
-                        borderRadius: 15 / 2,
-                        backgroundColor: '#f44336',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }} />
-                    ) : (
-                          <View />
-                        )}
+                      {(!this.state.checkId && this.state.kickout == true) ? (
+                        <View />
+                      ) : (this.state.checkId && this.state.kickout == false) ? (
+                        <View style={{
+                          marginTop: '-7%',
+                          marginLeft: '55%',
+                          marginBottom: '-8%',
+                          width: 15,
+                          height: 15,
+                          borderRadius: 15 / 2,
+                          backgroundColor: '#f44336',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }} />
+                      ) : (
+                            <View />
+                          )}
 
-                    <Image
-                      style={{ marginBottom: 8, width: 23, height: 35 }}
-                      source={require('../../../assets/apps/payIcon.png')}
-                    />
-                  </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
-                    <Text style={styles.title}>Checkout</Text>
+                      <Image
+                        style={{ marginBottom: 8, width: 23, height: 35 }}
+                        source={require('../../../assets/apps/payIcon.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
+                      <Text style={styles.title}>Checkout</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            ) : (this.state.kickout == true) ? (
+              <TouchableOpacity
+                onPress={() =>
+                  Actions.notRegister()
+                }
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+
+                      {(!this.state.checkId && this.state.kickout == true) ? (
+                        <View />
+                      ) : (this.state.checkId && this.state.kickout == false) ? (
+                        <View style={{
+                          marginTop: '-7%',
+                          marginLeft: '55%',
+                          marginBottom: '-8%',
+                          width: 15,
+                          height: 15,
+                          borderRadius: 15 / 2,
+                          backgroundColor: '#f44336',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }} />
+                      ) : (
+                            <View />
+                          )}
+
+                      <Image
+                        style={{ marginBottom: 8, width: 23, height: 35 }}
+                        source={require('../../../assets/apps/payIcon.png')}
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
+                      <Text style={styles.title}>Checkout</Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
+            ) : (
+                  <TouchableOpacity
+                    onPress={() =>
+                      Actions.notRegister()
+                    }
+                  >
+                    <View style={styles.gridBox}>
+                      <View style={{ flex: 1 }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '10%' }}>
+
+                          {(!this.state.checkId && this.state.kickout == true) ? (
+                            <View />
+                          ) : (this.state.checkId && this.state.kickout == false) ? (
+                            <View style={{
+                              marginTop: '-7%',
+                              marginLeft: '55%',
+                              marginBottom: '-8%',
+                              width: 15,
+                              height: 15,
+                              borderRadius: 15 / 2,
+                              backgroundColor: '#f44336',
+                              alignItems: 'center',
+                              justifyContent: 'center'
+                            }} />
+                          ) : (
+                                <View />
+                              )}
+
+                          <Image
+                            style={{ marginBottom: 8, width: 23, height: 35 }}
+                            source={require('../../../assets/apps/payIcon.png')}
+                          />
+                        </View>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
+                          <Text style={styles.title}>Checkout</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
+
+
 
             {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
