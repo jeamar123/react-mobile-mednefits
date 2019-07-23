@@ -65,6 +65,7 @@ import ReceiptPreview from '../screens/ReceiptPreview';
 import ReceiptView from '../screens/ReceiptView';
 import updateApps from '../screens/updateApps';
 import HistoryAfterUpload from '../screens/HistoryAfterUpload';
+import notRegister from '../screens/notRegister';
 
 console.disableYellowBox = true;
 
@@ -252,6 +253,7 @@ class RouterComponent extends Component {
           <Scene key="ReceiptView" component={ReceiptView} hideNavBar />
           <Scene key="updateApps" component={updateApps} hideNavBar />
           <Scene key="HistoryAfterUpload" component={HistoryAfterUpload} hideNavBar />
+          <Scene key="notRegister" component={notRegister} hideNavBar />
         </Stack>
       </Router>
     );
