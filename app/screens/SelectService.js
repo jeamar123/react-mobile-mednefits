@@ -22,7 +22,6 @@ class SelectService extends Component {
       clinic: false,
       kickout: false,
       isLoading: false,
-      services: '',
       clinicid: '',
       member: '',
       nric: '',
@@ -51,7 +50,6 @@ class SelectService extends Component {
     console.warn('storageData ' + JSON.stringify(data, 4, null))
 
     this.setState({
-      services: data.clinic_procedures,
       clinicid: data.clinic_id,
       member: data.member,
       nric: data.nric,
