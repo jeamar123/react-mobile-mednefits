@@ -143,7 +143,17 @@ class Summary extends Component {
                         style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                       />
                       <View>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
+                        <Text
+                          style={{
+                            fontFamily: Config.FONT_FAMILY_ROMAN,
+                            color: '#2C3E50',
+                            fontSize: RF(2.0),
+                            fontWeight: 'bold',
+                            width: responsiveWidth(50),
+                            marginRight: responsiveWidth(5),
+                          }}
+                          numberOfLines={3}
+                        >
                           {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                         </Text>
                         <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }} numberOfLines={3}>
@@ -410,7 +420,17 @@ class Summary extends Component {
                           style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                         />
                         <View>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
+                          <Text
+                            style={{
+                              fontFamily: Config.FONT_FAMILY_ROMAN,
+                              color: '#2C3E50',
+                              fontSize: RF(2.0),
+                              fontWeight: 'bold',
+                              width: responsiveWidth(50),
+                              marginRight: responsiveWidth(5),
+                            }}
+                            numberOfLines={3}
+                          >
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
                           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }} numberOfLines={3}>
