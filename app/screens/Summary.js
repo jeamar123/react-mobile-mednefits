@@ -3,7 +3,7 @@ import { StatusBar, View, Image, TouchableOpacity } from 'react-native';
 import {
   Text,
 } from 'native-base';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import styles from '../components/SummaryComp/styles';
 import Navbar from '../components/common/NavbarGreen';
@@ -140,7 +140,17 @@ class Summary extends Component {
                         style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%', marginLeft: '5%', marginTop: '3%', marginBottom: '2%' }}
                       />
                       <View>
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
+                        <Text
+                          style={{
+                            fontFamily: Config.FONT_FAMILY_ROMAN,
+                            color: '#2C3E50',
+                            fontSize: RF(2.0),
+                            fontWeight: 'bold',
+                            width: responsiveWidth(55),
+                            marginRight: responsiveWidth(5),
+                          }}
+                          numberOfLines={3}
+                        >
                           {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                         </Text>
                         <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }} numberOfLines={3}>
@@ -412,7 +422,17 @@ class Summary extends Component {
                           style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                         />
                         <View>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.0), fontWeight: 'bold', marginTop: '2%' }}>
+                          <Text
+                            style={{
+                              fontFamily: Config.FONT_FAMILY_ROMAN,
+                              color: '#2C3E50',
+                              fontSize: RF(2.0),
+                              fontWeight: 'bold',
+                              width: responsiveWidth(55),
+                              marginRight: responsiveWidth(5),
+                            }}
+                            numberOfLines={3}
+                          >
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
                           <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }} numberOfLines={3}>
