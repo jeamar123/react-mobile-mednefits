@@ -17,7 +17,7 @@ class HomeContent extends Component {
       currency: false,
       isClearSearch: false,
       isLoadingSearch: false,
-      kickout: false,
+      kickout: true,
       services: '',
       clinicid: '',
       member: '',
@@ -112,9 +112,9 @@ class HomeContent extends Component {
     await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
-      if (data.status == false) {
+      if (data.status == true) {
         this.setState({
-          kickout: true,
+          kickout: false,
         });
       }
       console.warn('data ' + data.check_in_status_removed);
