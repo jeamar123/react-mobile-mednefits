@@ -27,7 +27,8 @@ class Wallet extends Component {
       wellnessinNetwork: [],
       wellnessoutNetwork: [],
       visible: true,
-      isLoading: this.props.isLoading
+      isLoading: this.props.isLoading,
+      type: 'in_network_transactions'
     };
     this.selectSpending = this.selectSpending.bind(this);
     this.selectWallet = this.selectWallet.bind(this);
@@ -50,12 +51,15 @@ class Wallet extends Component {
 
   componentWillMount() {
     this.selectWallet("Medical")
-    this.selectSpending("in_network_transactions");
     this.getMedicalWallet();
     this.getWelnnessWallet();
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
+  }
+
+  componentDidMount() {
+    this.selectSpending("in_network_transactions");
   }
 
   async selectSpending(type) {
@@ -460,6 +464,7 @@ class Wallet extends Component {
   }
 
   render() {
+    console.warn('type ' + this.state.type)
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -753,11 +758,29 @@ class Wallet extends Component {
               >
                 <TouchableOpacity
                   onPress={() => this.selectSpending("in_network_transactions")}
-                  refs="in_network_transactions"
-                  style={[(this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive]}
+                  // refs="in_network_transactions"
+                  style={[
+                    (this.state.type == 'in_network_transactions') ? (
+                      styles.spendingActive
+                    ) : (this.state.type == 'e_claim_transactions') ? (
+                      styles.spendingNotactive
+                    ) : (
+                          styles.spendingActive
+                        )
+                    // (this.state.type == 'in_network_transactions') ? styles.spendingActive : styles.spendingNotactive
+                  ]}
                 >
                   <Text
-                    style={(this.state.type == 'in_network_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
+                    style={[
+                      (this.state.type == 'in_network_transactions') ? (
+                        styles.textRecentNoactive
+                      ) : (this.state.type == 'e_claim_transactions' && this.state.type == 'in_network_transactions') ? (
+                        styles.textRecentNoactive
+                      ) : (
+                            styles.textRecentNoactive
+                          )
+                      // (this.state.type == 'in_network_transactions') ? styles.textRecentActive : styles.textRecentNoactive
+                    ]}
                   >
                     In-Network
                     </Text>
@@ -774,8 +797,8 @@ class Wallet extends Component {
                 />
                 <TouchableOpacity
                   onPress={() => this.selectSpending("e_claim_transactions")}
-                  refs="e_claim_transactions"
-                  style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive : styles.spendingNotactive]}
+                  // refs="e_claim_transactions"
+                  style={[(this.state.type == 'e_claim_transactions') ? styles.spendingActive2 : styles.spendingNotactive2]}
                 >
                   <Text
                     style={(this.state.type == 'e_claim_transactions') ? styles.textRecentActive : styles.textRecentNoactive}

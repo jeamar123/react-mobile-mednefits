@@ -87,6 +87,22 @@ export default EStyleSheet.create({
     paddingLeft: 15,
     color: '#A8A8A8'
   },
+  spendingActive2: {
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingRight: 15,
+    paddingLeft: 15,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: "#0392cf",
+  },
+  spendingNotactive2: {
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingRight: 15,
+    paddingLeft: 15,
+    color: '#A8A8A8'
+  },
   sectionComponent: {
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -116,6 +132,22 @@ export default EStyleSheet.create({
     lineHeight: 20
   },
   textRecentNoactive: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#A8A8A8',
+    letterSpacing: 1.5,
+    lineHeight: 20
+  },
+  textRecentActive2: {
+    fontSize: RF(1.6),
+    fontWeight: '500',
+    fontFamily: Config.FONT_FAMILY_ROMAN,
+    color: '#2C3E50',
+    letterSpacing: 1.5,
+    lineHeight: 20
+  },
+  textRecentNoactive2: {
     fontSize: RF(1.6),
     fontWeight: '500',
     fontFamily: Config.FONT_FAMILY_ROMAN,

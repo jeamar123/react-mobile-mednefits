@@ -386,6 +386,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: responsiveHeight(1)
           }}
         >
           <Text
@@ -769,8 +770,8 @@ export default class Navbar extends React.Component {
             width: responsiveWidth(12),
             justifyContent: 'center',
             alignItems: 'flex-end',
-            paddingRight: '5%',
-            marginTop: responsiveHeight(1)
+            paddingRight: responsiveWidth(6.5),
+            marginTop: responsiveHeight(1.5)
           }}
         >
           <TouchableOpacity
