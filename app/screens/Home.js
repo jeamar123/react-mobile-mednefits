@@ -6,19 +6,21 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  Linking
+  Linking,
+  ActivityIndicator
 } from 'react-native';
 import { Container, Drawer } from 'native-base';
-import Icons from 'react-native-vector-icons/FontAwesome';
 import { responsiveHeight, } from 'react-native-responsive-dimensions';
-import Navbar from '../components/common/Navbar';
-import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
 import VersionCheck from 'react-native-version-check';
+import Modal from 'react-native-modal';
+import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Text } from '../common';
 import { Popup } from '../components/common';
+import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
 import * as Core from '../core';
 import * as Common from '../components/common';
@@ -286,7 +288,8 @@ class Home extends Component {
       isLoadingSearch: false,
       update: false,
       thisVersion: VersionCheck.getCurrentVersion(),
-      appstoreVersion: ''
+      appstoreVersion: '',
+      isLoading: false,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -332,6 +335,21 @@ class Home extends Component {
       console.warn('Updating...')
     } else {
       console.warn('Checking...')
+    }
+  }
+
+  async componentDidUpdate() {
+    await this.linkToDBS()
+  }
+
+  linkToDBS() {
+    if (this.state.isLoading == true) {
+
+      setInterval(() => {
+        this.setState({ isLoading: false })
+        Linking.openURL('https://www.dbs.com.sg')
+      }, 500);
+
     }
   }
 
@@ -390,6 +408,34 @@ class Home extends Component {
     this.setState({ searchdata: false })
   }
 
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >Redirecting you to DBS
+          </Common.Texti>
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >environment.</Common.Texti>
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >...</Common.Texti>
+        </Modal>
+      </View>
+    );
+  }
 
   render() {
     console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
@@ -422,6 +468,7 @@ class Home extends Component {
         onClose={() => this.closeDrawer()}
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
+          {this.customLoader()}
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Popup
             kind="update-application"
@@ -529,14 +576,185 @@ class Home extends Component {
               </Text>
             </View>
             <View style={styles.contain}>
-              <FlatList
+              {/* <FlatList
                 data={this.state.data}
                 extraData={this.state}
                 keyExtractor={this.data}
                 renderItem={this._renderItem}
                 horizontal={false}
                 numColumns={3}
-              />
+              /> */}
+
+
+              <View style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                // marginTop: responsiveHeight(-28)
+              }}>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newScreening.png')}
+                        initWidth="30" initHeight="40"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        Screening
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newGeneralPractice.png')}
+                        initWidth="32" initHeight="37"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        General Practice
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newDentalCare.png')}
+                        initWidth="32" initHeight="41"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        Dental
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newTCM.png')}
+                        initWidth="37" initHeight="37"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        TCM
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newHealtSpecialist.png')}
+                        initWidth="36" initHeight="37"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        Specialist
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/newWellnessBenefits.png')}
+                        initWidth="37" initHeight="37"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        Wellness
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({ isLoading: true })
+                  }
+
+                >
+                  <View style={styles.gridBox}>
+                    <View style={{ flex: 1 }}>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                        <ResponsiveImage
+                          source={require('../../assets/apps/new/newProtectionHub.png')}
+                          initWidth="32" initHeight="37"
+                        />
+                      </View>
+                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                        <Text
+                          fontFamily={Config.FONT_FAMILY_ROMAN}
+                          style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                        >
+                          Protection Hub
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </TouchableOpacity >
+
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={require('../../assets/apps/new/more.png')}
+                        initWidth="32" initHeight="37"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                      >
+                        More
+                        </Text>
+                    </View>
+                  </View>
+                </View>
+
+              </View>
+
+
             </View>
           </View>
         </Container>
@@ -545,17 +763,30 @@ class Home extends Component {
   }
 }
 const styles = {
+  // contain: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   marginLeft: '2%'
+  // },
   contain: {
     flex: 1,
-    justifyContent: 'center',
-    marginLeft: '2%'
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10
   },
+  // gridBox: {
+  //   width: width / 3.23,
+  //   height: responsiveHeight(18),
+  //   backgroundColor: '#fff',
+  //   margin: 2,
+  //   justifyContent: 'space-around',
+  //   alignItems: 'center',
+  // },
   gridBox: {
-    width: width / 3.23,
-    height: responsiveHeight(18),
+    width: width / 4.03,
+    height: responsiveHeight(15),
+    justifyContent: 'center',
     backgroundColor: '#fff',
-    margin: 2,
-    justifyContent: 'space-around',
     alignItems: 'center',
   },
 };
