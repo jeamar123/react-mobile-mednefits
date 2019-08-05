@@ -94,7 +94,7 @@ class SearchResult extends Component {
                             <ResponsiveImage
                               style={{ marginTop: '8%' }}
                               source={{ uri: ke.clinic_image }}
-                              initWidth="85" initHeight="85"
+                              initWidth="40" initHeight="40"
                             />
                           </View>
                           <View
@@ -238,6 +238,15 @@ class ResultList extends Component {
 
 class ClinicList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    }
+    this.cekTypeLink = this.cekTypeLink.bind(this)
+
+  }
+
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
       console.log(error)
@@ -248,19 +257,37 @@ class ClinicList extends Component {
     });
   }
 
+  sendtoHome() {
+    <Home
+      isloading={true}
+    />
+  }
+
+  cekTypeLink() {
+    if (this.props.typeLink === "dbs") {
+      // console.warn('ado coy')
+      // this.setState({ isLoading: true })
+      Linking.openURL(this.props.urlLink)
+    } else {
+      // console.warn('atek coy')
+      this.getClinicMap(this.props.id)
+    }
+  }
+
   render() {
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.getClinicMap(this.props.id)
-        }
+        // onPress={() =>
+        //   this.getClinicMap(this.props.id)
+        // }
+        onPress={this.cekTypeLink}
       >
         <View style={styles.gridBox}>
           <View style={{ flex: 1 }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
               <ResponsiveImage
                 source={{ uri: this.props.image }}
-                initWidth="40" initHeight="40"
+                initWidth="35" initHeight="35"
               />
             </View>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -269,6 +296,24 @@ class ClinicList extends Component {
                 style={{ textAlign: 'center', fontSize: RF(1.7), }}
               >
                 {this.props.name}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.gridBox}>
+          <View style={{ flex: 1 }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+              <ResponsiveImage
+                source={{ source: this.props.newImage }}
+                initWidth="35" initHeight="35"
+              />
+            </View>
+            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+              <Text
+                fontFamily={Config.FONT_FAMILY_ROMAN}
+                style={{ textAlign: 'center', fontSize: RF(1.7), }}
+              >
+                {this.props.newName}
               </Text>
             </View>
           </View>
@@ -380,6 +425,12 @@ class Home extends Component {
       id={item.ClinicTypeID}
       name={item.Name}
       image={item.clinic_type_image_url}
+      urlLink={item.web_link}
+      typeLink={item.type}
+      promoLink={item.promotional_link}
+      newName={more}
+      newImage={require('../../assets/apps/trynew/more.png')}
+
     />
   );
 
@@ -491,7 +542,7 @@ class Home extends Component {
                 />
                 <SearchHome
                   onUpdateSearch={this.onUpdateSearch}
-                  isLoadingSearch={this.isLoadingSearch}
+                  isLoadingSearch={this.isLoadingSearch}1
                   clearProcess={this.clearSearch}
                 />
                 <View
@@ -576,17 +627,17 @@ class Home extends Component {
               </Text>
             </View>
             <View style={styles.contain}>
-              {/* <FlatList
+              <FlatList
                 data={this.state.data}
                 extraData={this.state}
                 keyExtractor={this.data}
                 renderItem={this._renderItem}
                 horizontal={false}
-                numColumns={3}
-              /> */}
+                numColumns={4}
+              />
 
 
-              <View style={{
+              {/* <View style={{
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 // marginTop: responsiveHeight(-28)
@@ -596,8 +647,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newScreening.png')}
-                        initWidth="30" initHeight="40"
+                        source={require('../../assets/apps/trynew/newScreening.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -615,8 +666,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newGeneralPractice.png')}
-                        initWidth="32" initHeight="37"
+                        source={require('../../assets/apps/trynew/newGeneralPractice.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -634,8 +685,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newDentalCare.png')}
-                        initWidth="32" initHeight="41"
+                        source={require('../../assets/apps/trynew/newDentalCare.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -653,8 +704,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newTCM.png')}
-                        initWidth="37" initHeight="37"
+                        source={require('../../assets/apps/trynew/newTCM.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -672,8 +723,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newHealtSpecialist.png')}
-                        initWidth="36" initHeight="37"
+                        source={require('../../assets/apps/trynew/newHealtSpecialist.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -691,8 +742,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/newWellnessBenefits.png')}
-                        initWidth="37" initHeight="37"
+                        source={require('../../assets/apps/trynew/newWellnessBenefits.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -717,8 +768,8 @@ class Home extends Component {
                     <View style={{ flex: 1 }}>
                       <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                         <ResponsiveImage
-                          source={require('../../assets/apps/new/newProtectionHub.png')}
-                          initWidth="32" initHeight="37"
+                          source={require('../../assets/apps/trynew/newProtectionHub.png')}
+                          initWidth="40" initHeight="40"
                         />
                       </View>
                       <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -737,8 +788,8 @@ class Home extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                       <ResponsiveImage
-                        source={require('../../assets/apps/new/more.png')}
-                        initWidth="32" initHeight="37"
+                        source={require('../../assets/apps/trynew/more.png')}
+                        initWidth="40" initHeight="40"
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -752,7 +803,7 @@ class Home extends Component {
                   </View>
                 </View>
 
-              </View>
+              </View> */}
 
 
             </View>

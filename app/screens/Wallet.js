@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Dimensions, TouchableOpacity } from 'react-native';
+import {
+  StatusBar,
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity
+} from 'react-native';
 import { Container, Text } from 'native-base';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
@@ -545,7 +551,7 @@ class Wallet extends Component {
               </View>
             </View>
 
-            <Text
+            {/* <Text
               style={{
                 fontSize: RF(2.2),
                 fontFamily: Config.FONT_FAMILY_MEDIUM,
@@ -554,14 +560,14 @@ class Wallet extends Component {
               }}
             >
               Balance
-            </Text>
+            </Text> */}
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}
             >
-              <Text
+              {/* <Text
                 style={{
                   fontSize: 20,
                   color: '#fff',
@@ -571,9 +577,12 @@ class Wallet extends Component {
                 }}
               >
                 {
+                  // (this.state.walletType == 'Medical') ?
+                  //   (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                  //   (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+
                   (this.state.walletType == 'Medical') ?
-                    (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                    (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    this.state.wellnessurrency : ''
                 }
               </Text>
               <Text
@@ -587,11 +596,38 @@ class Wallet extends Component {
                 }}
               >
                 {
+                  // (this.state.walletType == 'Medical') ?
+                  //   (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
+                  //   (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
                   (this.state.walletType == 'Medical') ?
-                    (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
-                    (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
+                    this.state.wellnessBalance : '0'
                 }
-              </Text>
+              </Text> */}
+
+              {
+                // (this.state.walletType == 'Medical') ?
+                //   (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
+                //   (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+
+                (this.state.walletType == 'Medical') ?
+                  <Image
+                    style={{ marginBottom: 15, width: 60, height: 60 }}
+                    source={require('../../assets/apps/trynew/starUser.png')}
+                  /> : ''
+              }
+
+
+              {/* {
+                // (this.state.walletType == 'Medical') ?
+                //   (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
+                //   (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
+                (this.state.walletType == 'Medical') ?
+                  <Image
+                    style={{ marginBottom: 15, width: 30, height: 30 }}
+                    source={require('../../assets/apps/trynew/starUser.png')}
+                  /> : '0'
+              } */}
+
             </View>
           </View>
 

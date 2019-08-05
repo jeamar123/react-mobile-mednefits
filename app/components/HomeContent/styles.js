@@ -6,6 +6,7 @@ const { width, height } = Dimensions.get('window');
 const imageWidth = Dimensions.get('window').width / 2;
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import * as Config from '../../config';
+import styles from '../HomeContent/styles.js';
 
 export default EStyleSheet.create({
   container: {
