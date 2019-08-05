@@ -292,13 +292,16 @@ class ClinicList extends Component {
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
               <ResponsiveImage
                 source={{ uri: this.props.image }}
-                initWidth="35" initHeight="35"
+                initWidth="50" initHeight="50"
               />
             </View>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
               <Text
                 fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center', fontSize: RF(1.7), }}
+                style={{
+                  textAlign: 'center',
+                  fontSize: RF(1.7),
+                }}
               >
                 {this.props.name}
               </Text>
@@ -395,7 +398,7 @@ class Home extends Component {
   linkToDBS() {
     if (this.state.isLoading == true) {
 
-      setInterval(() => {
+      setTimeout(() => {
         this.setState({ isLoading: false })
         Linking.openURL('https://www.dbs.com.sg')
       }, 500);
@@ -849,7 +852,7 @@ const styles = {
   // },
   gridBox: {
     width: width / 4.03,
-    height: responsiveHeight(15),
+    height: responsiveHeight(17),
     justifyContent: 'center',
     backgroundColor: '#fff',
     alignItems: 'center',
