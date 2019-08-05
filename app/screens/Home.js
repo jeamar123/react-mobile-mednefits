@@ -244,6 +244,7 @@ class ClinicList extends Component {
       isLoading: false,
     }
     this.cekTypeLink = this.cekTypeLink.bind(this)
+    this.sendtoHome = this.sendtoHome.bind(this)
 
   }
 
@@ -258,16 +259,20 @@ class ClinicList extends Component {
   }
 
   sendtoHome() {
-    <Home
-      isloading={true}
-    />
+    return (
+      <Home
+        isloading={true}
+      />
+    )
   }
 
   cekTypeLink() {
     if (this.props.typeLink === "dbs") {
-      // console.warn('ado coy')
+      console.warn('true')
       // this.setState({ isLoading: true })
-      Linking.openURL(this.props.urlLink)
+      // Linking.openURL(this.props.urlLink)
+      this.props.isLoadingHome("true")
+      // this.sendtoHome()
     } else {
       // console.warn('atek coy')
       this.getClinicMap(this.props.id)
@@ -300,7 +305,7 @@ class ClinicList extends Component {
             </View>
           </View>
         </View>
-        <View style={styles.gridBox}>
+        {/* <View style={styles.gridBox}>
           <View style={{ flex: 1 }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
               <ResponsiveImage
@@ -317,7 +322,7 @@ class ClinicList extends Component {
               </Text>
             </View>
           </View>
-        </View>
+        </View> */}
       </TouchableOpacity >
     )
   }
@@ -417,6 +422,13 @@ class Home extends Component {
   //   version = await Core.CheckVersion()
   // }
 
+  isLoadingHandler(value) {
+    console.warn("isloadinghome " + value)
+    if (value === "true") {
+      this.setState({ isLoading: true })
+    }
+  }
+
   _keyExtractor = (item, index) => item.ClinicTypeID;
 
   _renderItem = ({ item }) => (
@@ -427,9 +439,10 @@ class Home extends Component {
       image={item.clinic_type_image_url}
       urlLink={item.web_link}
       typeLink={item.type}
+      isLoadingHome={(value) => this.isLoadingHandler(value)}
       promoLink={item.promotional_link}
-      newName={more}
-      newImage={require('../../assets/apps/trynew/more.png')}
+    // newName={more}
+    // newImage={require('../../assets/apps/trynew/more.png')}
 
     />
   );
@@ -492,6 +505,7 @@ class Home extends Component {
     console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
     console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
+    console.warn(this.props.isloadingHome + " isLoading")
     return (
       <Drawer
         type="displace"
