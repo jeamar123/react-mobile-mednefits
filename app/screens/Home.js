@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  Linking,
+  ActivityIndicator
 } from 'react-native';
 import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
@@ -16,7 +18,9 @@ import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
 import VersionCheck from 'react-native-version-check';
+import Modal from 'react-native-modal';
 import { Text } from '../common';
+import { Popup } from '../components/common';
 import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
@@ -238,6 +242,15 @@ class ResultList extends Component {
 
 
 class ClinicList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+    }
+    this.cekTypeLink = this.cekTypeLink.bind(this)
+
+  }
+
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
@@ -249,12 +262,30 @@ class ClinicList extends Component {
     });
   }
 
+  sendtoHome() {
+    <Home
+      isloading={true}
+    />
+  }
+
+  cekTypeLink() {
+    if (this.props.typeLink === "dbs") {
+      // console.warn('ado coy')
+      // this.setState({ isLoading: true })
+      Linking.openURL(this.props.urlLink)
+    } else {
+      // console.warn('atek coy')
+      this.getClinicMap(this.props.id)
+    }
+  }
+
   render() {
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.getClinicMap(this.props.id)
-        }
+        // onPress={() =>
+        //   this.getClinicMap(this.props.id)
+        // }
+        onPress={this.cekTypeLink}
       >
         <View style={styles.gridBox}>
           <View style={{ flex: 1 }}>
@@ -287,17 +318,18 @@ class Home extends Component {
       data: false,
       searchdata: false,
       isLoadingSearch: false,
-      clinicType: 2,
-      AllClinic: [],
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
+      // clinicType: 2,
+      // AllClinic: [],
+      // region: {
+      //   latitude: LATITUDE,
+      //   longitude: LONGITUDE,
+      //   latitudeDelta: LATITUDE_DELTA,
+      //   longitudeDelta: LONGITUDE_DELTA,
+      // },
       update: false,
       thisVersion: VersionCheck.getCurrentVersion(),
-      appstoreVersion: ''
+      appstoreVersion: '',
+      isLoading: false,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -396,6 +428,11 @@ class Home extends Component {
       id={item.ClinicTypeID}
       name={item.Name}
       image={item.clinic_type_image_url}
+      urlLink={item.web_link}
+      typeLink={item.type}
+      promoLink={item.promotional_link}
+      // newName={more}
+    // newImage={require('../../assets/apps/trynew/more.png')}
     />
   );
 
@@ -424,6 +461,34 @@ class Home extends Component {
     this.setState({ searchdata: false })
   }
 
+  customLoader() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >Redirecting you to DBS
+          </Common.Texti>
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >environment.</Common.Texti>
+          <Common.Texti
+            fontColor="#FFFFFF"
+          >...</Common.Texti>
+        </Modal>
+      </View>
+    );
+  }
 
   render() {
     console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
@@ -456,6 +521,7 @@ class Home extends Component {
         onClose={() => this.closeDrawer()}
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
+          {this.customLoader()}
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
             kind="update-application"
@@ -503,7 +569,7 @@ class Home extends Component {
                 keyExtractor={this.data}
                 renderItem={this._renderItem}
                 horizontal={false}
-                numColumns={3}
+                numColumns={4}
               />
             </View>
           </View>
@@ -515,16 +581,17 @@ class Home extends Component {
 const styles = {
   contain: {
     flex: 1,
-    justifyContent: 'center',
-    marginLeft: '2%'
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10
   },
   gridBox: {
-    width: width / 3.23,
+    width: width / 4.05,
     height: responsiveHeight(18),
+    justifyContent: 'center',
     backgroundColor: '#fff',
-    margin: 2,
-    justifyContent: 'space-around',
     alignItems: 'center',
+
   },
 };
 
