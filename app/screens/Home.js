@@ -248,9 +248,9 @@ class ClinicList extends Component {
       isLoading: false,
     }
     this.cekTypeLink = this.cekTypeLink.bind(this)
+    this.sendtoHome = this.sendtoHome.bind(this)
 
   }
-
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
@@ -270,42 +270,78 @@ class ClinicList extends Component {
 
   cekTypeLink() {
     if (this.props.typeLink === "dbs") {
-      // console.warn('ado coy')
+      console.warn('true')
       // this.setState({ isLoading: true })
-      Linking.openURL(this.props.urlLink)
+      // Linking.openURL(this.props.urlLink)
+      this.props.isLoadingHome("true")
+      // this.sendtoHome()
     } else {
       // console.warn('atek coy')
       this.getClinicMap(this.props.id)
     }
   }
 
+
   render() {
     return (
-      <TouchableOpacity
-        // onPress={() =>
-        //   this.getClinicMap(this.props.id)
-        // }
-        onPress={this.cekTypeLink}
-      >
-        <View style={styles.gridBox}>
-          <View style={{ flex: 1 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-              <ResponsiveImage
-                source={{ uri: this.props.image }}
-                initWidth="40" initHeight="40"
-              />
-            </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-              <Text
-                fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center', fontSize: RF(1.7), }}
-              >
-                {this.props.name}
-              </Text>
+      <View>
+        {(this.props.typeLink === "more") ?
+          <View style={styles.gridBox}>
+            <View style={{ flex: 1 }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                <ResponsiveImage
+                  source={{ uri: this.props.image }}
+                  initWidth="50" initHeight="50"
+                />
+              </View>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                <Text
+                  fontFamily={Config.FONT_FAMILY_ROMAN}
+                  style={{
+                    textAlign: 'center',
+                    fontSize: RF(1.7),
+                    color: '#DCDCDC'
+                  }}
+                >
+                  {this.props.name}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity >
+
+          :
+
+          <TouchableOpacity
+            onPress={this.cekTypeLink}
+          >
+            <View style={styles.gridBox}>
+              <View style={{ flex: 1 }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                  <ResponsiveImage
+                    source={{ uri: this.props.image }}
+                    initWidth="50" initHeight="50"
+                  />
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      textAlign: 'center',
+                      fontSize: RF(1.7),
+                      color: '#2C3E50'
+                    }}
+                  >
+                    {this.props.name}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity >
+
+        }
+
+      </View>
+
     )
   }
 }
@@ -400,6 +436,21 @@ class Home extends Component {
     }
   }
 
+  async componentDidUpdate() {
+    await this.linkToDBS()
+  }
+
+  linkToDBS() {
+    if (this.state.isLoading == true) {
+
+      setTimeout(() => {
+        this.setState({ isLoading: false })
+        Linking.openURL('https://www.dbs.com.sg')
+      }, 500);
+
+    }
+  }
+
   componentWillMount() {
     //Version Check
     VersionCheck.getLatestVersion({
@@ -419,6 +470,12 @@ class Home extends Component {
   //   version = await Core.CheckVersion()
   // }
 
+  isLoadingHandler(value) {
+    console.warn("isloadinghome " + value)
+    if (value === "true") {
+      this.setState({ isLoading: true })
+    }
+  }
 
   _keyExtractor = (item, index) => item.ClinicTypeID;
 
@@ -430,8 +487,9 @@ class Home extends Component {
       image={item.clinic_type_image_url}
       urlLink={item.web_link}
       typeLink={item.type}
+      isLoadingHome={(value) => this.isLoadingHandler(value)}
       promoLink={item.promotional_link}
-      // newName={more}
+    // newName={more}
     // newImage={require('../../assets/apps/trynew/more.png')}
     />
   );
@@ -494,6 +552,7 @@ class Home extends Component {
     console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
     console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
+    console.warn(this.props.isloadingHome + " isLoading")
     return (
       <Drawer
         type="displace"
