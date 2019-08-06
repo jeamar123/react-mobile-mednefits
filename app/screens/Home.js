@@ -281,52 +281,64 @@ class ClinicList extends Component {
 
   render() {
     return (
-      <TouchableOpacity
-        // onPress={() =>
-        //   this.getClinicMap(this.props.id)
-        // }
-        onPress={this.cekTypeLink}
-      >
-        <View style={styles.gridBox}>
-          <View style={{ flex: 1 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-              <ResponsiveImage
-                source={{ uri: this.props.image }}
-                initWidth="50" initHeight="50"
-              />
-            </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-              <Text
-                fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{
-                  textAlign: 'center',
-                  fontSize: RF(1.7),
-                }}
-              >
-                {this.props.name}
-              </Text>
+      <View>
+        {(this.props.typeLink === "more") ?
+          <View style={styles.gridBox}>
+            <View style={{ flex: 1 }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                <ResponsiveImage
+                  source={{ uri: this.props.image }}
+                  initWidth="50" initHeight="50"
+                />
+              </View>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                <Text
+                  fontFamily={Config.FONT_FAMILY_ROMAN}
+                  style={{
+                    textAlign: 'center',
+                    fontSize: RF(1.7),
+                    color: '#DCDCDC'
+                  }}
+                >
+                  {this.props.name}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-        {/* <View style={styles.gridBox}>
-          <View style={{ flex: 1 }}>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-              <ResponsiveImage
-                source={{ source: this.props.newImage }}
-                initWidth="35" initHeight="35"
-              />
+
+          :
+
+          <TouchableOpacity
+            onPress={this.cekTypeLink}
+          >
+            <View style={styles.gridBox}>
+              <View style={{ flex: 1 }}>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                  <ResponsiveImage
+                    source={{ uri: this.props.image }}
+                    initWidth="50" initHeight="50"
+                  />
+                </View>
+                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                  <Text
+                    fontFamily={Config.FONT_FAMILY_ROMAN}
+                    style={{
+                      textAlign: 'center',
+                      fontSize: RF(1.7),
+                      color: '#2C3E50'
+                    }}
+                  >
+                    {this.props.name}
+                  </Text>
+                </View>
+              </View>
             </View>
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-              <Text
-                fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center', fontSize: RF(1.7), }}
-              >
-                {this.props.newName}
-              </Text>
-            </View>
-          </View>
-        </View> */}
-      </TouchableOpacity >
+          </TouchableOpacity >
+
+        }
+
+
+      </View>
     )
   }
 }
