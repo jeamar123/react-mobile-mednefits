@@ -285,23 +285,19 @@ class ClinicList extends Component {
         {(this.props.typeLink === "more") ?
           <View style={styles.gridBox}>
             <View style={{ flex: 1 }}>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2) }}>
                 <ResponsiveImage
                   source={{ uri: this.props.image }}
-                  initWidth="50" initHeight="50"
+                  initWidth="39" initHeight="39"
                 />
               </View>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    textAlign: 'center',
-                    fontSize: RF(1.7),
-                    color: '#DCDCDC'
-                  }}
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(1.5), marginLeft: 10, marginRight: 10 }}>
+                <Common.Texti
+                  // fontSize={RF(1.7)}
+                  fontColor="#CDCDCD"
                 >
                   {this.props.name}
-                </Text>
+                </Common.Texti>
               </View>
             </View>
           </View>
@@ -316,7 +312,7 @@ class ClinicList extends Component {
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                   <ResponsiveImage
                     source={{ uri: this.props.image }}
-                    initWidth="50" initHeight="50"
+                    initWidth="46" initHeight="46"
                   />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -557,73 +553,6 @@ class Home extends Component {
             message={"Please click below button to update your application"}
           />
 
-          {/* <View style={{ flex: 1 }}>
-            {(!this.state.data || this.state.isLoadingSearch) ? (
-              <View
-                style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}
-              >
-                <ActivityIndicator size="large" color="#0392cf" />
-              </View>
-            ) : (this.state.searchdata) ? (
-              <View>
-                <Navbar
-                  leftNav="back-home"
-                />
-                <SearchHome
-                  onUpdateSearch={this.onUpdateSearch}
-                  isLoadingSearch={this.isLoadingSearch}1
-                  clearProcess={this.clearSearch}
-                />
-                <View
-                  style={{ justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}
-                >
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{ textAlign: 'center', marginLeft: '5%' }}
-                  >
-                    Search Result
-                  </Text>
-                </View>
-                <SearchResult
-                  searchdata={this.state.searchdata}
-                />
-              </View>
-            ) : (
-                  <View style={{ flex: 1 }}>
-                    <Navbar
-                      drawerAction={this.drawerActionCallback}
-                      leftNav={true}
-                      rightNav={true}
-                    />
-                    <HomeContent
-                      onUpdateSearch={this.onUpdateSearch}
-                      isLoadingSearch={this.isLoadingSearch}
-                      clearProcess={this.clearSearch}
-                    />
-                    <View
-                      style={{ justifyContent: 'center', alignItems: 'flex-start' }}
-                    >
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', marginLeft: '2.5%' }}
-                      >
-                        Benefits Category
-                      </Text>
-                    </View>
-                    <View style={styles.contain}>
-                      <FlatList
-                        data={this.state.data}
-                        extraData={this.state}
-                        keyExtractor={this.data}
-                        renderItem={this._renderItem}
-                        horizontal={false}
-                        numColumns={3}
-                      />
-                    </View>
-                  </View>
-                )}
-          </View> */}
-
           <View style={{ flex: 1 }}>
             <Navbar
               drawerAction={this.drawerActionCallback}
@@ -665,176 +594,6 @@ class Home extends Component {
                 numColumns={4}
               />
 
-
-              {/* <View style={{
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                // marginTop: responsiveHeight(-28)
-              }}>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newScreening.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        Screening
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newGeneralPractice.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        General Practice
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newDentalCare.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        Dental
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newTCM.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        TCM
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newHealtSpecialist.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        Specialist
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/newWellnessBenefits.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        Wellness
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-
-                <TouchableOpacity
-                  onPress={() =>
-                    this.setState({ isLoading: true })
-                  }
-
-                >
-                  <View style={styles.gridBox}>
-                    <View style={{ flex: 1 }}>
-                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                        <ResponsiveImage
-                          source={require('../../assets/apps/trynew/newProtectionHub.png')}
-                          initWidth="40" initHeight="40"
-                        />
-                      </View>
-                      <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                        <Text
-                          fontFamily={Config.FONT_FAMILY_ROMAN}
-                          style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                        >
-                          Protection Hub
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                </TouchableOpacity >
-
-                <View style={styles.gridBox}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
-                        source={require('../../assets/apps/trynew/more.png')}
-                        initWidth="40" initHeight="40"
-                      />
-                    </View>
-                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
-                        fontFamily={Config.FONT_FAMILY_ROMAN}
-                        style={{ textAlign: 'center', fontSize: RF(1.7), }}
-                      >
-                        More
-                        </Text>
-                    </View>
-                  </View>
-                </View>
-
-              </View> */}
-
-
             </View>
           </View>
         </Container>
@@ -843,25 +602,12 @@ class Home extends Component {
   }
 }
 const styles = {
-  // contain: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   marginLeft: '2%'
-  // },
   contain: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10
   },
-  // gridBox: {
-  //   width: width / 3.23,
-  //   height: responsiveHeight(18),
-  //   backgroundColor: '#fff',
-  //   margin: 2,
-  //   justifyContent: 'space-around',
-  //   alignItems: 'center',
-  // },
   gridBox: {
     width: width / 4.03,
     height: responsiveHeight(17),

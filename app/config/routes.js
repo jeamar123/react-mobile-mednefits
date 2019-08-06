@@ -67,7 +67,7 @@ import updateApps from '../screens/updateApps';
 import HistoryAfterUpload from '../screens/HistoryAfterUpload';
 import notRegister from '../screens/notRegister';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
