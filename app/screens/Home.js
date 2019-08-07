@@ -12,7 +12,7 @@ import {
 import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../components/common/Navbar';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
@@ -288,23 +288,20 @@ class ClinicList extends Component {
         {(this.props.typeLink === "more") ?
           <View style={styles.gridBox}>
             <View style={{ flex: 1 }}>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(1.5) }}>
                 <ResponsiveImage
                   source={{ uri: this.props.image }}
-                  initWidth="50" initHeight="50"
+                  initWidth="42" initHeight="42"
                 />
               </View>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                <Text
-                  fontFamily={Config.FONT_FAMILY_ROMAN}
-                  style={{
-                    textAlign: 'center',
-                    fontSize: RF(1.7),
-                    color: '#DCDCDC'
-                  }}
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1), marginLeft: 10, marginRight: 10 }}>
+                <Common.Texti
+                  // fontSize={RF(1.7)}
+                  fontColor="#CDCDCD"
                 >
                   {this.props.name}
-                </Text>
+                </Common.Texti>
+
               </View>
             </View>
           </View>
@@ -312,6 +309,7 @@ class ClinicList extends Component {
           :
 
           <TouchableOpacity
+            activeOpacity={.7}
             onPress={this.cekTypeLink}
           >
             <View style={styles.gridBox}>
@@ -319,7 +317,7 @@ class ClinicList extends Component {
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
                   <ResponsiveImage
                     source={{ uri: this.props.image }}
-                    initWidth="50" initHeight="50"
+                    initWidth="46" initHeight="46"
                   />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
@@ -612,11 +610,17 @@ class Home extends Component {
               consultation_fees={this.props.consultation_fees}
             />
             <View
-              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+              style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}
             >
               <Text
-                fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center', marginLeft: '2.5%' }}
+                fontFamily={Config.FONT_FAMILY_THIN}
+                style={{
+                  textAlign: 'center',
+                  fontSize: RF(1.7),
+                  fontWeight: '600',
+                  color: '#2C3E50',
+                  marginLeft: responsiveWidth(6)
+                }}
               >
                 Benefits Category
               </Text>
