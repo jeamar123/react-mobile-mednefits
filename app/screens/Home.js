@@ -282,59 +282,69 @@ class ClinicList extends Component {
   render() {
     return (
       <View>
-        {(this.props.typeLink === "more") ?
-          <View style={styles.gridBox}>
-            <View style={{ flex: 1 }}>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2) }}>
-                <ResponsiveImage
-                  source={{ uri: this.props.image }}
-                  initWidth="39" initHeight="39"
-                />
+        <View style={{
+          backgroundColor: '#fff',
+        }}>
+          <View >
+            {(this.props.typeLink === "more") ?
+              <View style={styles.gridBox}>
+                <View style={{ flex: 1 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.2) }}>
+                    <ResponsiveImage
+                      source={{ uri: this.props.image }}
+                      initWidth="38.5" initHeight="38.5"
+                    />
+                  </View>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1), marginLeft: 10, marginRight: 10 }}>
+                    <Common.Texti
+                      // fontSize={RF(1.7)}
+                      fontColor="#CDCDCD"
+                      style={{
+                        fontWeight: '600'
+                      }}
+                    >
+                      {this.props.name}
+                    </Common.Texti>
+                  </View>
+                </View>
               </View>
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(1.5), marginLeft: 10, marginRight: 10 }}>
-                <Common.Texti
-                  // fontSize={RF(1.7)}
-                  fontColor="#CDCDCD"
-                >
-                  {this.props.name}
-                </Common.Texti>
-              </View>
-            </View>
+
+              :
+
+              <TouchableOpacity
+                // activeOpacity={.6}
+                onPress={this.cekTypeLink}
+              >
+                <View style={styles.gridBox}>
+                  <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
+                      <ResponsiveImage
+                        source={{ uri: this.props.image }}
+                        initWidth="46" initHeight="46"
+                      />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
+                      <Text
+                        fontFamily={Config.FONT_FAMILY_ROMAN}
+                        style={{
+                          textAlign: 'center',
+                          fontSize: RF(1.7),
+                          color: '#2C3E50',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {this.props.name}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </TouchableOpacity >
+
+            }
+
+
           </View>
-
-          :
-
-          <TouchableOpacity
-            activeOpacity={.7}
-            onPress={this.cekTypeLink}
-          >
-            <View style={styles.gridBox}>
-              <View style={{ flex: 1 }}>
-                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                  <ResponsiveImage
-                    source={{ uri: this.props.image }}
-                    initWidth="46" initHeight="46"
-                  />
-                </View>
-                <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                  <Text
-                    fontFamily={Config.FONT_FAMILY_ROMAN}
-                    style={{
-                      textAlign: 'center',
-                      fontSize: RF(1.7),
-                      color: '#2C3E50'
-                    }}
-                  >
-                    {this.props.name}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity >
-
-        }
-
-
+        </View>
       </View>
     )
   }
@@ -585,7 +595,7 @@ class Home extends Component {
                   fontSize: RF(1.7),
                   fontWeight: '600',
                   color: '#2C3E50',
-                  marginLeft: responsiveWidth(6)
+                  marginLeft: responsiveWidth(4.2)
                 }}
               >
                 Benefits Category
