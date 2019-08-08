@@ -256,6 +256,7 @@ class HomeContent extends Component {
               </TouchableOpacity>
 
             ) : (
+
                   <TouchableOpacity
                     onPress={() =>
                       Actions.Barcode()

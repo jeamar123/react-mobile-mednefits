@@ -10,7 +10,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import { Container, Drawer } from 'native-base';
-import { responsiveHeight, } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
 import Icons from 'react-native-vector-icons/FontAwesome';
@@ -305,6 +305,7 @@ class ClinicList extends Component {
           :
 
           <TouchableOpacity
+            activeOpacity={.7}
             onPress={this.cekTypeLink}
           >
             <View style={styles.gridBox}>
@@ -575,11 +576,17 @@ class Home extends Component {
               consultation_fees={this.props.consultation_fees}
             />
             <View
-              style={{ justifyContent: 'center', alignItems: 'flex-start' }}
+              style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1.5) }}
             >
               <Text
-                fontFamily={Config.FONT_FAMILY_ROMAN}
-                style={{ textAlign: 'center', marginLeft: '2.5%' }}
+                fontFamily={Config.FONT_FAMILY_THIN}
+                style={{
+                  textAlign: 'center',
+                  fontSize: RF(1.7),
+                  fontWeight: '600',
+                  color: '#2C3E50',
+                  marginLeft: responsiveWidth(6)
+                }}
               >
                 Benefits Category
               </Text>
