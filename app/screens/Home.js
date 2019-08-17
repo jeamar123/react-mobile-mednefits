@@ -296,10 +296,10 @@ class ClinicList extends Component {
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1) }}>
                     <ResponsiveImage
                       source={{ uri: this.props.image }}
-                      initWidth="36.5" initHeight="36.5"
+                      initWidth="40" initHeight="40"
                     />
                   </View>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1), marginLeft: 10, marginRight: 10 }}>
+                  <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(1), marginLeft: 10, marginRight: 10 }}>
                     <Common.Texti
                       // fontSize={RF(1.7)}
                       fontColor="#CDCDCD"
@@ -318,7 +318,7 @@ class ClinicList extends Component {
               :
 
               <TouchableOpacity
-                // activeOpacity={.7}
+                // activeOpacity={.6}
                 onPress={this.cekTypeLink}
               >
                 <View style={styles.gridBox}>
@@ -330,21 +330,25 @@ class ClinicList extends Component {
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
-                      <Text
+
+                      <Common.Texti
                         fontFamily={Config.FONT_FAMILY_ROMAN}
                         style={{
                           textAlign: 'center',
-                          fontSize: RF(1.5),
+                          fontSize: RF(1.6),
                           color: '#2C3E50',
                           fontWeight: '600'
                         }}
                       >
                         {this.props.name}
-                      </Text>
+                      </Common.Texti>
+
                     </View>
                   </View>
                 </View>
               </TouchableOpacity >
+
+
 
             }
 
