@@ -67,8 +67,9 @@ import ReceiptView from '../screens/ReceiptView';
 import updateApps from '../screens/updateApps';
 import HistoryAfterUpload from '../screens/HistoryAfterUpload';
 import notRegister from '../screens/notRegister';
+import PlanCovarage from '../screens/PlanCovarage';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -288,6 +289,7 @@ class RouterComponent extends Component {
             <Scene key="updateApps" component={updateApps} hideNavBar />
             <Scene key="HistoryAfterUpload" component={HistoryAfterUpload} hideNavBar />
             <Scene key="notRegister" component={notRegister} hideNavBar />
+            <Scene key="PlanCovarage" component={PlanCovarage} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

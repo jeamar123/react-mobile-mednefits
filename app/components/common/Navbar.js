@@ -14,6 +14,7 @@ import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ResponsiveImage from 'react-native-responsive-image';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
 import * as Config from '../../config';
@@ -498,6 +499,35 @@ export default class Navbar extends React.Component {
           </Text>
         </View>
       );
+    } else if (this.props.title2 && this.props.subtitle2) {
+      return (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: 'HelveticaNeue-Bold',
+              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              fontSize: 18,
+            }}
+          >
+            {this.props.title2}
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'HelveticaNeue-Bold',
+              color: (this.props.fontColor) ? this.props.fontColor : '#fff',
+              fontSize: 18,
+            }}
+          >
+            {this.props.subtitle2}
+          </Text>
+        </View>
+      );
     } else if (this.props.title) {
       return (
         <View
@@ -819,6 +849,43 @@ export default class Navbar extends React.Component {
             >
               Add
             </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Close') {
+      return (
+        <View
+          style={{
+            width: responsiveWidth(12),
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            paddingRight: responsiveWidth(6.5),
+            marginTop: responsiveHeight(1.1)
+          }}
+        >
+          <TouchableOpacity
+            // style={{ paddingStart: '23%' }}
+            onPress={() => Actions.Home({
+              services: this.props.Services,
+              clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
+              checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
+              capCurrency: this.props.capCurrency,
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
+              consultation_fee_symbol: this.props.consultation_fee_symbol,
+              consultation_status: this.props.consultation_status,
+              consultation_fees: this.props.consultation_fees
+            })}
+          >
+            <ResponsiveImage
+              source={require('../../../assets/apps/Close.png')}
+              style={{ resizeMode: "center", }}
+              initWidth="20" initHeight="20"
+            />
           </TouchableOpacity>
         </View>
       );
