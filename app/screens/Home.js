@@ -515,10 +515,7 @@ class Home extends Component {
           </Common.Texti>
           <Common.Texti
             fontColor="#FFFFFF"
-          >environment.</Common.Texti>
-          <Common.Texti
-            fontColor="#FFFFFF"
-          >...</Common.Texti>
+          >Bank environment.</Common.Texti>
         </Modal>
       </View>
     );
