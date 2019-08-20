@@ -506,13 +506,14 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: responsiveHeight(2.2)
           }}
         >
           <Text
             style={{
               fontFamily: 'HelveticaNeue-Bold',
               color: (this.props.fontColor) ? this.props.fontColor : '#fff',
-              fontSize: 18,
+              fontSize: 16,
             }}
           >
             {this.props.title2}
@@ -521,7 +522,7 @@ export default class Navbar extends React.Component {
             style={{
               fontFamily: 'HelveticaNeue-Bold',
               color: (this.props.fontColor) ? this.props.fontColor : '#fff',
-              fontSize: 18,
+              fontSize: 16,
             }}
           >
             {this.props.subtitle2}
@@ -860,7 +861,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: responsiveWidth(6.5),
-            marginTop: responsiveHeight(1.1)
+            // marginTop: responsiveHeight(0.8)
           }}
         >
           <TouchableOpacity

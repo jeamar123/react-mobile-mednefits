@@ -143,10 +143,10 @@ class checkinUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
                 Your Plan Type
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.state.PlanType}
               </Text>
             </View>
@@ -161,10 +161,10 @@ class checkinUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
                 Plan Add-on
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.state.PlanAddon}
               </Text>
             </View>
@@ -178,16 +178,16 @@ class checkinUser extends Component {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginTop: responsiveHeight(1.5),
-                marginBottom: responsiveHeight(1.5),
+                marginTop: responsiveHeight(1),
+                marginBottom: responsiveHeight(1),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
                 Cap per visit
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
                 {(this.state.cap_per_visit === 0) ? 'Not applicable' : (this.state.cap_per_visit)}
               </Text>
             </View>
@@ -206,10 +206,10 @@ class checkinUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
                 Start Date
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.state.StartDate}
               </Text>
             </View>
@@ -225,10 +225,10 @@ class checkinUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
                 End Date
               </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
                 {this.state.EndDate}
               </Text>
             </View>
@@ -236,7 +236,13 @@ class checkinUser extends Component {
 
           </View>
 
-          <View style={{ backgroundColor: '#fff', width: '90%', marginTop: responsiveHeight(2.5) }}>
+          <View
+            style={{
+              backgroundColor: '#fff',
+              width: '90%',
+              marginTop: responsiveHeight(2.5),
+              elevation: 5,
+            }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -250,12 +256,12 @@ class checkinUser extends Component {
             >
               <Image
                 source={require('../../assets/apps/listCoverage.png')}
-                style={{ height: 37, width: 37, resizeMode: 'contain' }}
+                style={{ height: 37, width: 38, resizeMode: 'contain' }}
               />
               <TouchableOpacity
                 onPress={() => Actions.PlanCovarage()}
               >
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#0392CF', fontSize: RF(2.1) }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#0392CF', fontSize: RF(1.8) }}>
                   Click here for plan coverage
                 </Text>
               </TouchableOpacity>

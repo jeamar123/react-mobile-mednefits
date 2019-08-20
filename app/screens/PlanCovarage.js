@@ -50,49 +50,6 @@ class ECardUser extends Component {
 
   renderCoverage() {
     return this.state.resultPackage.map(Data => (
-      // <View>
-      //   <View
-      //     style={{
-      //       flexDirection: 'row',
-      //       justifyContent: 'space-between',
-      //       marginLeft: '5%',
-      //       marginRight: '5%',
-      //     }}
-      //   >
-      //     <Text
-      //       style={{
-      //         marginTop: '3%',
-      //         fontFamily: Config.FONT_FAMILY_ROMAN,
-      //         color: '#808080',
-      //         fontSize: 11,
-      //         marginRight: '10%',
-      //       }}
-      //     >
-      //       {Data.package_name}
-      //     </Text>
-      //     <Text
-      //       style={{
-      //         marginTop: '3%',
-      //         fontFamily: Config.FONT_FAMILY_ROMAN,
-      //         color: '#808080',
-      //         fontSize: 11,
-      //         width: '60%',
-      //       }}
-      //     >
-      //       {Data.package_description}
-      //     </Text>
-
-      //   </View>
-      //   <View
-      //     style={{
-      //       marginLeft: '5%',
-      //       marginRight: '5%',
-      //     }}>
-      //     <Common.Divider />
-      //   </View>
-
-
-      // </View>
       <View>
 
         <View
@@ -100,8 +57,8 @@ class ECardUser extends Component {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginTop: responsiveHeight(2),
-            marginBottom: '5%',
+            marginTop: responsiveHeight(1.1),
+            marginBottom: responsiveHeight(1.1),
             marginLeft: '5%',
             marginRight: '5%'
           }}
@@ -111,7 +68,7 @@ class ECardUser extends Component {
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
                 fontWeight: 'bold', color: '#2C3E50',
-                fontSize: RF(2.1)
+                fontSize: RF(2.0)
               }}
             >
               {Data.package_name}
@@ -121,7 +78,25 @@ class ECardUser extends Component {
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
                 color: '#848484',
-                fontSize: RF(1.7)
+                fontSize: RF(1.6),
+                marginTop: responsiveHeight(0.5)
+              }}
+            >
+              In-Network
+              <Text style={{
+                fontFamily: Config.FONT_FAMILY_BOLD,
+                color: '#2C3E50',
+                fontSize: RF(1.6),
+                marginTop: responsiveHeight(0.5)
+              }}> {Data.package_discount} </Text>
+            </Text>
+
+            <Text
+              style={{
+                fontFamily: Config.FONT_FAMILY_ROMAN,
+                color: '#848484',
+                fontSize: RF(1.6),
+                marginTop: responsiveHeight(0.5)
               }}
             >
               {Data.package_description}
@@ -134,25 +109,21 @@ class ECardUser extends Component {
           />
 
         </View>
+
         <View>
-          <Common.Divider />
+          <View
+            style={[this.props.style, {
+              borderBottomColor: '#DBDBDB',
+              borderBottomWidth: 0.8,
+              marginTop: (this.props.noMargin) ? 0 : 10,
+              // marginBottom: (this.props.noMargin) ? 0 : 5,
+              marginLeft: (this.props.Side) ? 7 : 0
+            }]}
+          />
         </View>
 
       </View>
     ));
-  }
-
-  _renderDivider() {
-    return (
-      <View
-        style={{
-          borderBottomColor: '#cccccc',
-          borderBottomWidth: 0.8,
-          marginTop: '-2%',
-          marginBottom: '5%',
-        }}
-      />
-    );
   }
 
   render() {
@@ -177,7 +148,6 @@ class ECardUser extends Component {
           consultation_fee_symbol={this.props.consultation_fee_symbol}
           consultation_status={this.props.consultation_status}
           consultation_fees={this.props.consultation_fees}
-
         />
         <View
           style={{
@@ -196,7 +166,6 @@ class ECardUser extends Component {
 
           </View>
         </View>
-
       </Container>
     );
   }
