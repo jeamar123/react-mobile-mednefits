@@ -289,7 +289,7 @@ class RouterComponent extends Component {
             <Scene key="updateApps" component={updateApps} hideNavBar />
             <Scene key="HistoryAfterUpload" component={HistoryAfterUpload} hideNavBar />
             <Scene key="notRegister" component={notRegister} hideNavBar />
-            <Scene key="PlanCovarage" component={PlanCovarage} hideNavBar initial />
+            <Scene key="PlanCovarage" component={PlanCovarage} hideNavBar />
           </Stack>
         </Router>
       </SafeAreaView>

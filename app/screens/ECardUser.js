@@ -57,7 +57,7 @@ class checkinUser extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           title="E-Card"
-          rightNav="Close"
+          rightNav="ClosetoHome"
           leftNav="null"
           Services={this.props.services}
           clinic_Id={this.props.clinicid}

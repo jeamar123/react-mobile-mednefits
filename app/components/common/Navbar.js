@@ -853,7 +853,7 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'Close') {
+    } else if (this.props.rightNav == 'ClosetoHome') {
       return (
         <View
           style={{
@@ -881,6 +881,29 @@ export default class Navbar extends React.Component {
               consultation_status: this.props.consultation_status,
               consultation_fees: this.props.consultation_fees
             })}
+          >
+            <ResponsiveImage
+              source={require('../../../assets/apps/Close.png')}
+              style={{ resizeMode: "center", }}
+              initWidth="20" initHeight="20"
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'Close') {
+      return (
+        <View
+          style={{
+            width: responsiveWidth(12),
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            paddingRight: responsiveWidth(6.5),
+            // marginTop: responsiveHeight(0.8)
+          }}
+        >
+          <TouchableOpacity
+            // style={{ paddingStart: '23%' }}
+            onPress={() => Actions.ECardUser()}
           >
             <ResponsiveImage
               source={require('../../../assets/apps/Close.png')}
