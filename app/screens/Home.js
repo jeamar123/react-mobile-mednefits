@@ -553,7 +553,7 @@ class Home extends Component {
           </Common.Texti>
           <Common.Texti
             fontColor="#FFFFFF"
-          >Bank environment.</Common.Texti>
+          >Protection Hub webpage.</Common.Texti>
         </Modal>
       </View>
     );
