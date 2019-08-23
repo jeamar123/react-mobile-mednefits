@@ -459,7 +459,7 @@ class Home extends Component {
 
       setTimeout(() => {
         this.setState({ isLoading: false })
-        Linking.openURL('https://www.dbs.com.sg')
+        Linking.openURL('https://www.dbs.com.sg/personal/insurance/protection/protection-plans/protection-hub?cid=sg:en:cbg:dbs:ptnr:own:pst:iapp:gi:insurance:na:mednefits')
       }, 500);
 
     }
