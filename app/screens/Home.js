@@ -663,11 +663,11 @@ const styles = {
   },
   gridBox: {
     width: width / 4.05,
-    height: responsiveHeight(18),
+    height: responsiveHeight(16),
     justifyContent: 'center',
     backgroundColor: '#fff',
     alignItems: 'center',
-
+    marginTop: responsiveHeight(1.5)
   },
 };
 
