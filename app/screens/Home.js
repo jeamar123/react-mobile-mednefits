@@ -625,10 +625,11 @@ const styles = {
   },
   gridBox: {
     width: width / 4.03,
-    height: responsiveHeight(17),
+    height: responsiveHeight(15),
     justifyContent: 'center',
     backgroundColor: '#fff',
     alignItems: 'center',
+    marginTop: responsiveHeight(1.5),
   },
 };
 
