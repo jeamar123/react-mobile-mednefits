@@ -150,7 +150,7 @@ class SelectService extends Component {
 
   validationField() {
     if (this.state.services == "") {
-      Commmon.getAlert("Mednefits", "Please at least chooseone service to proceed")
+      Commmon.getAlert("Mednefits", "Choose at least one service to proceed")
     } else {
       Actions.BenefitsDollar({
         services: this.state.services,
