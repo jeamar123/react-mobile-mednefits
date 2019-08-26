@@ -304,7 +304,9 @@ class ClinicList extends Component {
                       // fontSize={RF(1.7)}
                       fontColor="#CDCDCD"
                       style={{
-                        fontWeight: '600'
+                        textAlign: 'center',
+                        fontSize: RF(1.3),
+                        color: '#CDCDCD',
                       }}
 
                     >
@@ -335,9 +337,8 @@ class ClinicList extends Component {
                         fontFamily={Config.FONT_FAMILY_ROMAN}
                         style={{
                           textAlign: 'center',
-                          fontSize: RF(1.6),
+                          fontSize: RF(1.3),
                           color: '#2C3E50',
-                          fontWeight: '600'
                         }}
                       >
                         {this.props.name}
