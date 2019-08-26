@@ -773,9 +773,9 @@ class Wallet extends Component {
                   <Text
                     style={[
                       (this.state.type == 'in_network_transactions') ? (
-                        styles.textRecentNoactive
+                        styles.textRecentActive
                       ) : (this.state.type == 'e_claim_transactions' && this.state.type == 'in_network_transactions') ? (
-                        styles.textRecentNoactive
+                        styles.textRecentActive
                       ) : (
                             styles.textRecentNoactive
                           )

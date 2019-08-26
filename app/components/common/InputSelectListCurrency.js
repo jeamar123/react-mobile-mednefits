@@ -46,7 +46,9 @@ class SelectList extends Component {
               alignItems: 'flex-start'
             }}
           >
-            <Common.Texti>
+            <Common.Texti
+              fontColor={"#2C3E50"}
+              >
               {value.label}
             </Common.Texti>
           </TouchableOpacity>
@@ -164,17 +166,18 @@ class SelectList extends Component {
           onPress={() => this.setState({ isVisible: true })}
           style={{
             flexDirection: "row",
-            alignItems: 'center',
-            justifyContent: 'flex-end'
+            alignItems: "center",
+            justifyContent: "flex-end"
           }}
         >
-          <Common.Text
+
+          <Common.Texti
             fontFamily={Config.FONT_FAMILY_MEDIUM}
-            fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
+            fontColor={"#2C3E50"}
             style={{ textDecorationLine: 'underline' }}
           >
             {this.setTitle()}
-          </Common.Text>
+          </Common.Texti>
 
           <View
             style={{

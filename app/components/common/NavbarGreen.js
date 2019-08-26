@@ -770,12 +770,16 @@ export default class Navbar extends React.Component {
             width: responsiveWidth(12),
             justifyContent: 'center',
             alignItems: 'flex-end',
-            paddingRight: responsiveWidth(6.5),
+            paddingRight: responsiveWidth(2),
             marginTop: responsiveHeight(1.5)
           }}
         >
           <TouchableOpacity
             // style={{ paddingStart: '23%' }}
+            style={{
+              padding: 15,
+              textAlign: 'right'
+            }}
             onPress={() => Actions.Home({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,

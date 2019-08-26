@@ -448,6 +448,37 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'wallet') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: 15
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Wallet()}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+          <Icons
+            name="angle-left"
+            style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+          />
+          <Text
+            style={{ paddingTop: 3, color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+          >
+            Wallet
+          </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else {
       return (
         <View

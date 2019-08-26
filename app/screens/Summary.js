@@ -14,15 +14,17 @@ class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: true
+      isActive: false
     };
+
+    this.detailPaymentOpened = this.detailPaymentOpened.bind(this)
   }
 
-  detailPaymentOpened(data) {
+  detailPaymentOpened() {
     let toggleID = 'detailPaymentButton';
     let id = 'detailPayment';
 
-    if (this.state.isActive == true) {
+    if (this.state.isActive) {
       this.state.isActive = false;
       this.refs[id].setNativeProps({
         display: 'none',
@@ -169,7 +171,7 @@ class Summary extends Component {
               ref={"detailPaymentButton"}
               style={{ marginTop: responsiveHeight(2) }}>
               <TouchableOpacity
-                onPress={() => this.detailPaymentOpened(data.number)}
+                onPress={() => this.detailPaymentOpened()}
                 style={{
                   backgroundColor: "#3F9D59",
                   width: "90%",
@@ -198,7 +200,7 @@ class Summary extends Component {
 
             <View
               ref={'detailPayment'}
-              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(5), display: "none" }}>
+              style={{ backgroundColor: '#ffffff', width: '90%', marginTop: responsiveHeight(5), display: "none", borderRadius: 5 }}>
               <TouchableOpacity
                 onPress={() => this.detailPaymentOpened()}
                 style={{
@@ -486,7 +488,7 @@ class Summary extends Component {
                 </View>
               </View>
 
-              <View
+              {/*<View
                 ref={"detailPaymentButton"}
                 style={{ marginTop: responsiveHeight(2) }}>
                 <TouchableOpacity
@@ -515,7 +517,7 @@ class Summary extends Component {
                   <View ref={'toggleID'}>
                   </View>
                 </TouchableOpacity>
-              </View>
+              </View>*/}
 
               <View
                 ref={'detailPayment'}

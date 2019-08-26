@@ -499,7 +499,7 @@ class History extends Component {
       <Container>
         {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back_history" title="History" />
+        <Navbar leftNav="wallet" title="History" />
         <HistoryUser
           Currency={this.state.data.currency_symbol}
           Amount={this.state.data.total_amount}
