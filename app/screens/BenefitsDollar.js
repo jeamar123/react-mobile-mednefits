@@ -79,6 +79,26 @@ class BenefitsDollar extends Component {
     });
   }
 
+  validationField() {
+    if (!this.state.amount) {
+      Common.getAlert("Mednefits", "Choose at least one service to proceed")
+    } else {
+      Actions.PayScan({
+        services: this.props.services,
+        clinicid: this.props.clinicid,
+        amount: this.state.amount,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        checkId: this.props.checkId,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
+      })
+    }
+  }
+
   render() {
     console.warn("props: " + JSON.stringify(this.props))
     console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
@@ -241,19 +261,25 @@ class BenefitsDollar extends Component {
           </View>
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() => Actions.PayScan({
-            services: this.props.services,
-            clinicid: this.props.clinicid,
-            amount: this.state.amount,
-            capCurrency: this.props.capCurrency,
-            capAmount: this.props.capAmount,
-            checkId: this.props.checkId,
-            consultation_fee_symbol: this.props.consultation_fee_symbol,
-            consultation_status: this.props.consultation_status,
-            consultation_fees: this.props.consultation_fees,
-            clinic_image: this.props.clinic_image,
-            clinic_name: this.props.clinic_name,
-          })}>
+          <ButtonPay onPress={() =>
+            (!this.state.amount) ?
+              Common.getAlert("Mednefits", "Please Enter amount more than 0")
+
+              :
+
+              Actions.PayScan({
+                services: this.props.services,
+                clinicid: this.props.clinicid,
+                amount: this.state.amount,
+                capCurrency: this.props.capCurrency,
+                capAmount: this.props.capAmount,
+                checkId: this.props.checkId,
+                consultation_fee_symbol: this.props.consultation_fee_symbol,
+                consultation_status: this.props.consultation_status,
+                consultation_fees: this.props.consultation_fees,
+                clinic_image: this.props.clinic_image,
+                clinic_name: this.props.clinic_name,
+              })}>
             Next
           </ButtonPay>
         </Content>
