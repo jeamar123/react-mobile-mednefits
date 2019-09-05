@@ -241,19 +241,25 @@ class BenefitsDollar extends Component {
           </View>
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() => Actions.PayScan({
-            services: this.props.services,
-            clinicid: this.props.clinicid,
-            amount: this.state.amount,
-            capCurrency: this.props.capCurrency,
-            capAmount: this.props.capAmount,
-            checkId: this.props.checkId,
-            consultation_fee_symbol: this.props.consultation_fee_symbol,
-            consultation_status: this.props.consultation_status,
-            consultation_fees: this.props.consultation_fees,
-            clinic_image: this.props.clinic_image,
-            clinic_name: this.props.clinic_name,
-          })}>
+          <ButtonPay onPress={() =>
+            (!this.state.amount) ?
+              Common.getAlert("Mednefits", "Please Enter amount more than 0")
+
+              :
+
+              Actions.PayScan({
+                services: this.props.services,
+                clinicid: this.props.clinicid,
+                amount: this.state.amount,
+                capCurrency: this.props.capCurrency,
+                capAmount: this.props.capAmount,
+                checkId: this.props.checkId,
+                consultation_fee_symbol: this.props.consultation_fee_symbol,
+                consultation_status: this.props.consultation_status,
+                consultation_fees: this.props.consultation_fees,
+                clinic_image: this.props.clinic_image,
+                clinic_name: this.props.clinic_name,
+              })}>
             Next
           </ButtonPay>
         </Content>
