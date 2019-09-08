@@ -130,6 +130,7 @@ class BenefitsDollar extends Component {
                 height: responsiveHeight(11)
               }}
             >
+
               {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
