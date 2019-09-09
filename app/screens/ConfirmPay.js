@@ -58,6 +58,8 @@ class ConfirmPay extends Component {
   }
 
   calculateValues() {
+    console.log( this.props );
+    console.log( this.state );
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
         this.setState({
@@ -125,12 +127,13 @@ class ConfirmPay extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      input_amount: this.props.amount,
+      input_amount: Number( this.props.amount.replace(',','') ),
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
     };
+    console.log( params );
 
     Core.CreatePayment(params, (err, result) => {
       console.warn(result);
