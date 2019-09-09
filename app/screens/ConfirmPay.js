@@ -105,7 +105,7 @@ class ConfirmPay extends Component {
     }
 
     this.setState({
-      amountTotal: (totalAmount).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
       byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
       byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
     });
