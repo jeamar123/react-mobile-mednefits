@@ -58,8 +58,6 @@ class ConfirmPay extends Component {
   }
 
   calculateValues() {
-    console.log( this.props );
-    console.log( this.state );
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
         this.setState({
@@ -84,9 +82,17 @@ class ConfirmPay extends Component {
           payCredit = Number( totalAmount );
           payCash = 0;
         }
+      }else if( Number( cap ) == Number( totalAmount ) ){
+        payCredit = Number( totalAmount );
+        payCash = 0;
       }else{
-        payCredit = Number( cap );
-        payCash = Number( totalAmount ) - Number( cap );
+        if( Number( totalAmount ) > Number( cap ) ){
+          payCredit = Number( cap );
+          payCash = Number( totalAmount ) - Number( cap );
+        }else if( Number( cap ) > Number( totalAmount ) ){
+          payCredit = Number( totalAmount );
+          payCash = 0;
+        }
       }
     }else{
       if( Number( totalAmount ) > Number( balance ) ){
@@ -133,7 +139,6 @@ class ConfirmPay extends Component {
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
     };
-    console.log( params );
 
     Core.CreatePayment(params, (err, result) => {
       console.warn(result);
@@ -448,7 +453,7 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               <Text>
-                {this.state.byCredit}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCredit}
               </Text>
             </View>
             <View>
@@ -469,7 +474,7 @@ class ConfirmPay extends Component {
                 Payable by Cash
               </Text>
               <Text>
-                {this.state.byCash}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCash}
               </Text>
             </View>
           </View>
