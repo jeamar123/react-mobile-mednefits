@@ -241,7 +241,7 @@ class Home extends Component {
       <Container style={{ flex: 1, backgroundColor: '#EEEEEE' }}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         <Navbar
-          leftNav="back-home"
+          leftNav="back-fav"
         />
         <View style={{
           backgroundColor: '#0392cf',

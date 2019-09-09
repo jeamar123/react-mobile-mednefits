@@ -270,6 +270,57 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'back-fav') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop({
+              services: this.props.Services,
+              clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
+              checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
+              capCurrency: this.props.capCurrency,
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
+              consultation_fee_symbol: this.props.consultation_fee_symbol,
+              consultation_status: this.props.consultation_status,
+              consultation_fees: this.props.consultation_fees
+            })}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: '#fff', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: RF(1.7),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold',
+                width: 40
+              }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'cancel') {
       return (
         <View
@@ -467,14 +518,14 @@ export default class Navbar extends React.Component {
               alignItems: 'center',
             }}
           >
-          <Icons
-            name="angle-left"
-            style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
-          />
-          <Text
-            style={{ paddingTop: 3, color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
-          >
-            Wallet
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ paddingTop: 3, color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+            >
+              Wallet
           </Text>
           </TouchableOpacity>
         </View>

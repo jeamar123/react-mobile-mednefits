@@ -32,8 +32,9 @@ class ConfirmPay extends Component {
       inputAmount: this.props.amount,
       amountCap: this.props.capAmount,
       feeConsultation: this.props.consultation_fees,
-      byCash: '',
-      amountTotal: '',
+      byCash: 0,
+      byCredit: 0,
+      amountTotal: 0,
       timeNow: ''
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -51,12 +52,12 @@ class ConfirmPay extends Component {
         Balance: data.balance,
         currency: result.data.currency_symbol
       });
+
+      this.calculateValues();
     });
   }
 
-  componentDidMount() {
-    this.getUserBalance();
-
+  calculateValues() {
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
         this.setState({
@@ -65,15 +66,41 @@ class ConfirmPay extends Component {
       })
     );
 
-    const amounts = this.state.inputAmount;
-    const cap = this.state.amountCap;
     const consultationAmount = this.state.feeConsultation;
+    const totalAmount = Number(this.state.inputAmount.replace(',', '')) + Number(consultationAmount);
+    const balance = this.state.Balance.replace(',', '');
+    const cap = this.state.amountCap;
+    var payCredit = 0;
+    var payCash = 0;
 
-    if (this.props.consultation_status == false) {
-      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount), byCash: (Number(amounts) + Number(consultationAmount)) - cap });
+    if (Number(cap) > 0) {
+      if (Number(cap) > Number(balance)) {
+        if (Number(totalAmount) > Number(balance)) {
+          payCredit = Number(balance);
+          payCash = Number(totalAmount) - Number(balance);
+        } else {
+          payCredit = Number(totalAmount);
+          payCash = 0;
+        }
+      } else {
+        payCredit = Number(cap);
+        payCash = Number(totalAmount) - Number(cap);
+      }
     } else {
-      this.setState({ amountTotal: Number(amounts) + Number(consultationAmount), byCash: (Number(amounts) + Number(consultationAmount)) - cap });
+      if (Number(totalAmount) > Number(balance)) {
+        payCredit = Number(balance);
+        payCash = Number(totalAmount) - Number(balance);
+      } else {
+        payCredit = Number(totalAmount);
+        payCash = 0;
+      }
     }
+
+    this.setState({
+      amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+    });
 
     var that = this;
     var date = new Date().getDate(); //Current Date
@@ -90,6 +117,9 @@ class ConfirmPay extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getUserBalance();
+  }
 
   SendPayment() {
     this.setState({ isLoading: true });
@@ -101,7 +131,6 @@ class ConfirmPay extends Component {
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
     };
-
 
     Core.CreatePayment(params, (err, result) => {
       console.warn(result);
@@ -439,7 +468,9 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Cash
               </Text>
-              {this.PaybyCash()}
+              <Text>
+                {this.state.byCash}
+              </Text>
             </View>
           </View>
 

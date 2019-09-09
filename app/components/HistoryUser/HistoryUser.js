@@ -191,10 +191,20 @@ class HistoryUser extends Component {
                       style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                     />
                     <View>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(2.1), fontWeight: 'bold', marginTop: '2%' }}>
+                      <Text
+                        style={{
+                          fontFamily: Config.FONT_FAMILY_ROMAN,
+                          color: '#2C3E50',
+                          fontSize: RF(1.85),
+                          fontWeight: 'bold',
+                          marginTop: responsiveHeight(-1),
+                          width: responsiveWidth(50)
+                        }}
+                        numberOfLines={3}
+                      >
                         {(this.props.clinicname) ? this.props.clinicname : ""}
                       </Text>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.7), marginTop: '2%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
                         Service : {(this.props.services) ? this.props.services : ""}
                       </Text>
                     </View>
