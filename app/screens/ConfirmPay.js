@@ -67,39 +67,47 @@ class ConfirmPay extends Component {
     );
 
     const consultationAmount = this.state.feeConsultation;
-    const totalAmount = Number(this.state.inputAmount.replace(',', '')) + Number(consultationAmount);
-    const balance = this.state.Balance.replace(',', '');
+    const totalAmount = Number( this.state.inputAmount.replace(',','') ) + Number( consultationAmount );
+    const balance = this.state.Balance.replace(',','');
     const cap = this.state.amountCap;
     var payCredit = 0;
     var payCash = 0;
 
-    if (Number(cap) > 0) {
-      if (Number(cap) > Number(balance)) {
-        if (Number(totalAmount) > Number(balance)) {
-          payCredit = Number(balance);
-          payCash = Number(totalAmount) - Number(balance);
-        } else {
-          payCredit = Number(totalAmount);
+    if( Number( cap ) > 0 ){
+      if( Number( cap ) > Number( balance ) ){
+        if( Number( totalAmount ) > Number( balance ) ){
+          payCredit = Number( balance );
+          payCash = Number( totalAmount ) - Number( balance );
+        }else{
+          payCredit = Number( totalAmount );
           payCash = 0;
         }
-      } else {
-        payCredit = Number(cap);
-        payCash = Number(totalAmount) - Number(cap);
+      }else if( Number( cap ) == Number( totalAmount ) ){
+        payCredit = Number( totalAmount );
+        payCash = 0;
+      }else{
+        if( Number( totalAmount ) > Number( cap ) ){
+          payCredit = Number( cap );
+          payCash = Number( totalAmount ) - Number( cap );
+        }else if( Number( cap ) > Number( totalAmount ) ){
+          payCredit = Number( totalAmount );
+          payCash = 0;
+        }
       }
-    } else {
-      if (Number(totalAmount) > Number(balance)) {
-        payCredit = Number(balance);
-        payCash = Number(totalAmount) - Number(balance);
-      } else {
-        payCredit = Number(totalAmount);
+    }else{
+      if( Number( totalAmount ) > Number( balance ) ){
+        payCredit = Number( balance );
+        payCash = Number( totalAmount ) - Number( balance );
+      }else{
+        payCredit = Number( totalAmount );
         payCash = 0;
       }
     }
 
-    this.setState({
-      amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
-      byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
-      byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+    this.setState({ 
+      amountTotal: ( Number(totalAmount) ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}), 
+      byCash: ( payCash ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}),
+      byCredit: ( payCredit ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}),
     });
 
     var that = this;
@@ -125,7 +133,7 @@ class ConfirmPay extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      input_amount: this.props.amount,
+      input_amount: Number( this.props.amount.replace(',','') ),
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
@@ -360,7 +368,7 @@ class ConfirmPay extends Component {
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
-                {this.props.amount}
+                { this.props.amount }
               </Text>
             </View>
             <View
@@ -444,8 +452,8 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Credits
               </Text>
-              <Text>
-                {this.state.byCredit}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCredit}
               </Text>
             </View>
             <View>
@@ -465,8 +473,8 @@ class ConfirmPay extends Component {
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
                 Payable by Cash
               </Text>
-              <Text>
-                {this.state.byCash}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCash}
               </Text>
             </View>
           </View>

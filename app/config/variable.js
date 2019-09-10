@@ -3,8 +3,8 @@
 * @year 2018
 */
 
-export const MAIN                           = 'http://staging.medicloud.sg/v2';
-// export const MAIN                           = 'https://medicloud.sg/v2';
+// export const MAIN                           = 'http://staging.medicloud.sg/v2';
+export const MAIN                           = 'https://medicloud.sg/v2';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
 export const CURRENCY_LIST                  = MAIN + '/get/currency_lists';
@@ -35,7 +35,7 @@ export const CLINIC_CLINIC_DETAILS          = CLINIC + '/clinicdetails';
 export const CLINIC_NEW_NEARBY              = CLINIC + '/new_nearby';
 export const CLINIC_PROCEDURE_DETAILS       = CLINIC + '/procedure_details';
 export const CLINIC_DOCTOR_PROCEDURE        = CLINIC + '/doctor_procedure';
-export const CLINIC_CLINIC_TYPE             = CLINIC + '/clinic_type';
+export const CLINIC_CLINIC_TYPE             = CLINIC + '/clinic_type?type=with_dbs';
 export const CLINIC_DETAILS                 = CLINIC + '/details';
 export const CLINIC_NEARBY                  = CLINIC + '/nearby';
 export const CLINIC_MAIN_SEARCH             = CLINIC + '/main_search';
