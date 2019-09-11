@@ -488,7 +488,7 @@ class Summary extends Component {
                 </View>
               </View>
 
-              {/*<View
+              <View
                 ref={"detailPaymentButton"}
                 style={{ marginTop: responsiveHeight(2) }}>
                 <TouchableOpacity
@@ -517,7 +517,7 @@ class Summary extends Component {
                   <View ref={'toggleID'}>
                   </View>
                 </TouchableOpacity>
-              </View>*/}
+              </View>
 
               <View
                 ref={'detailPayment'}
