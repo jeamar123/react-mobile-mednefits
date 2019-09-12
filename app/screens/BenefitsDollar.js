@@ -264,7 +264,7 @@ class BenefitsDollar extends Component {
           <View style={{ marginBottom: '5%' }} />
           <ButtonPay onPress={() =>
             (!this.state.amount) ?
-              Common.getAlert("Mednefits", "Please Enter amount more than 0")
+              Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
 
               :
 
