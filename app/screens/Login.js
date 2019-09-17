@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, Text, TouchableOpacity, KeyboardAvoidingView, Platform, View } from 'react-native';
+import { StatusBar, Image, Text, TouchableOpacity, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
+import { IDChangeNotif } from '../components/IDChangeNotif';
 import { Buttons2, Popup } from '../components/common';
 import * as Core from '../core'
 import Toast from 'react-native-simple-toast';
@@ -20,7 +21,8 @@ class Login extends Component {
       failed: false,
       title: null,
       message: null,
-      button: 'Log in'
+      button: 'Log in',
+      showUpdateNotif : true,
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -87,9 +89,12 @@ class Login extends Component {
         <KeyboardAvoidingView behavior="padding" enabled>
 
           <Logo />
+
+          { this.state.showUpdateNotif ? <IDChangeNotif /> : null }
+
           <InputWithButton
             onChangeText={(text) => this.setState({ username: text })}
-            placeholder="Email or NRIC"
+            placeholder="Mobile Number"
             autoCapitalize='none'
             returnKeyType={"next"}
           />

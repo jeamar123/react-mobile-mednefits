@@ -35,6 +35,7 @@ class checkinUser extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
+      console.log(data);
       this.setState({
         FullName: data.fullname,
         MemberID: data.member_id,
@@ -46,6 +47,7 @@ class checkinUser extends Component {
         StartDate: data.start_date,
         EndDate: data.valid_date,
         resultPackage: data.packages,
+        mobile: data.mobile,
       });
     });
   }
@@ -122,7 +124,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: responsiveHeight(3),
           }}>
-            {this.state.Company}
+            Mobile no.: {this.state.mobile}
           </Text>
 
           <View
@@ -139,6 +141,29 @@ class checkinUser extends Component {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 marginTop: responsiveHeight(2),
+                marginBottom: responsiveHeight(1),
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
+                Company
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
+                {this.state.Company}
+              </Text>
+            </View>
+
+            <View>
+              <Common.Divider />
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: responsiveHeight(1),
                 marginLeft: '5%',
                 marginRight: '5%'
               }}
