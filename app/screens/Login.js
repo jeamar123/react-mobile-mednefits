@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
+import { IDChangeNotif } from '../components/IDChangeNotif';
 import { Buttons, Popup } from '../components/common';
 import * as Core from '../core';
 
@@ -18,7 +19,8 @@ class Login extends Component {
       isLoading: false,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      showUpdateNotif : true,
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -64,6 +66,9 @@ class Login extends Component {
           message={this.state.message}
         />
         <Logo />
+
+        { this.state.showUpdateNotif ? <IDChangeNotif /> : null }
+
         <InputWithButton
           onChangeText={(text) => this.setState({ username: text })}
           placeholder="Email or NRIC"
