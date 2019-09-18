@@ -5,6 +5,8 @@
 
 // export const MAIN                           = 'https://medicloud.sg/v2';
 export const MAIN                           = 'http://staging.medicloud.sg/v2';
+export const WEB                           = 'http://medicloud.local';
+// export const WEB                           = 'https://medicloud.sg';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
 export const CURRENCY_LIST                  = MAIN + '/get/currency_lists';
