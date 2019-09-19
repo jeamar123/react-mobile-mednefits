@@ -62,7 +62,7 @@ class checkinUser extends Component {
             paddingTop: 2,
             paddingBottom: 10
           }}>
-            {this.props.nric}
+            {this.props.dob}
           </Text>
 
           <Text style={{

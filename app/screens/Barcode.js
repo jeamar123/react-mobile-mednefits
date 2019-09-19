@@ -87,7 +87,8 @@ class Barcode extends Component {
             clinic_name: result.data.name,
             consultation_fee_symbol: result.data.consultation_fee_symbol,
             consultation_status: result.data.consultation_status,
-            consultation_fees: result.data.consultation_fees
+            consultation_fees: result.data.consultation_fees,
+            dob: result.data.dob,
           })
           this.setState({
             isLoading: false,

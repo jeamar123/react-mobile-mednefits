@@ -47,6 +47,7 @@ class checkinUser extends Component {
         EndDate: data.valid_date,
         resultPackage: data.packages,
         mobile: data.mobile,
+        dob: data.dob,
       });
     });
   }
@@ -102,7 +103,7 @@ class checkinUser extends Component {
             paddingTop: 2,
             paddingBottom: 10
           }}>
-            {this.state.Nric}
+            {this.state.dob}
           </Text>
 
           <Text style={{
