@@ -73,7 +73,7 @@ class Barcode extends Component {
       Core.GetBarcodeData(barcodeData.data + "?check_in_time=" + this.state.timeNow, (result) => {
         if (result.status) {
           console.warn("res " + JSON.stringify(result));
-
+          console.log( result );
 
 
           Actions.checkinUser({
@@ -90,7 +90,8 @@ class Barcode extends Component {
             clinic_name: result.data.name,
             consultation_fee_symbol: result.data.consultation_fee_symbol,
             consultation_status: result.data.consultation_status,
-            consultation_fees: result.data.consultation_fees
+            consultation_fees: result.data.consultation_fees,
+            dob: result.data.dob,
           })
           this.setState({
             isLoading: false,
