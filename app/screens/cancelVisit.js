@@ -26,6 +26,7 @@ class checkinUser extends Component {
       clinicid: '',
       member: '',
       nric: '',
+      dob: '',
       checkId: '',
       checkTime: '',
       capCurrency: '',
@@ -65,6 +66,7 @@ class checkinUser extends Component {
       clinicid: data.clinic_id,
       member: data.member,
       nric: data.nric,
+      dob: data.dob,
       checkId: data.check_in_id,
       checkTime: data.check_in_time,
       capCurrency: data.cap_currency_symbol,
@@ -179,7 +181,7 @@ class checkinUser extends Component {
             paddingTop: 2,
             paddingBottom: 10
           }}>
-            {this.props.nric}
+            {this.state.dob}
           </Text>
 
           <Text style={{
