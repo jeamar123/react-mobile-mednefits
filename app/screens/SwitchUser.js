@@ -17,7 +17,7 @@ class FamilyList extends Component {
 
   constructor(props) {
     super(props);
-
+    console.log(props);
     this.state = {
       isLoading: false
     }
@@ -94,7 +94,7 @@ class FamilyList extends Component {
                       fontSize: 11,
                     }}
                   >
-                    {this.props.nric}
+                    {this.props.dob ? this.props.dob : 'N/A'}
                   </Text>
                   <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
                 </View>
@@ -155,6 +155,7 @@ class SwitchUser extends Component {
       id={item.user_id}
       name={item.name}
       nric={item.nric}
+      dob={item.dob}
       type={item.type}
     />
   );
