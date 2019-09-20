@@ -3,8 +3,8 @@
 * @year 2018
 */
 
-// export const MAIN                           = 'http://staging.medicloud.sg/v2';
-export const MAIN                           = 'https://medicloud.sg/v2';
+export const MAIN                           = 'http://staging.medicloud.sg/v2';
+// export const MAIN                           = 'https://medicloud.sg/v2';
 // export const WEB                           = 'http://medicloud.local';
 // export const WEB                           = 'https://medicloud.sg';
 export const WEB                           = 'http://staging.medicloud.sg/';
