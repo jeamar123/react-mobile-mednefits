@@ -97,7 +97,7 @@ class FamilyList extends Component {
                       fontSize: 11,
                     }}
                   >
-                    {this.props.nric}
+                    {this.props.dob}
                   </Text>
                   <Text style={{ color: '#c4c4c4', fontSize: 11 }}>{this.props.type}</Text>
                 </View>
@@ -144,6 +144,7 @@ class SwitchUser extends Component {
 
   getFamilyCoverage() {
     Core.GetFamilyCoverage((error, result) => {
+      console.log( result.data );
       this.setState({
         data: result.data.users
       })

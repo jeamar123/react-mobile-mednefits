@@ -353,7 +353,7 @@ class ClinicList extends Component {
 class Home extends Component {
   constructor(props) {
     super(props);
-
+    console.log( props );
     this.state = {
       data: false,
       searchdata: false,

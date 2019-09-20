@@ -380,7 +380,7 @@ class manageProfile extends Component {
           </View>
           {this._renderDivider()}
 
-          <View
+          {/* <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
             <TextInput
@@ -405,7 +405,7 @@ class manageProfile extends Component {
               NIRC Number
             </Text>
           </View>
-          {this._renderDivider()}
+          {this._renderDivider()} */}
 
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}

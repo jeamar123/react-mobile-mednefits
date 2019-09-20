@@ -596,6 +596,7 @@ export default class Navbar extends React.Component {
               clinicid: this.props.clinic_Id,
               member: this.props.member,
               nric: this.props.nric,
+              dob: this.props.dob,
               checkId: this.props.check_Id,
               checkTime: this.props.checkTime,
               capCurrency: this.props.capCurrency,
