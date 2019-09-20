@@ -27,6 +27,7 @@ class checkinUser extends Component {
       clinicid: '',
       member: '',
       nric: '',
+      dob: '',
       checkId: '',
       checkTime: '',
       capCurrency: '',
@@ -60,12 +61,13 @@ class checkinUser extends Component {
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
-
+    console.log( data );
     this.setState({
       services: data.clinic_procedures,
       clinicid: data.clinic_id,
       member: data.member,
       nric: data.nric,
+      dob: data.dob,
       checkId: data.check_in_id,
       checkTime: data.check_in_time,
       capCurrency: data.cap_currency_symbol,
@@ -180,7 +182,7 @@ class checkinUser extends Component {
             paddingTop: 2,
             paddingBottom: 10
           }}>
-            {this.props.nric}
+            {this.state.dob}
           </Text>
 
           <Text style={{
