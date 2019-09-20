@@ -6,8 +6,8 @@ import * as Config from '../../config';
 export default class UserSwitch extends Component {
   goToUpdateForm() {
     console.log('IN');
-    console.log( Config.WEB + "/app/mobile_exercise?platform=mobile&os=" + Platform.OS );
-    Linking.openURL( Config.WEB + "/app/mobile_exercise?platform=mobile&os=" + Platform.OS );
+    console.log( Config.WEB + "/app/mobile_exercise" );
+    Linking.openURL( Config.WEB + "/app/mobile_exercise" );
   }
 
   render() {
