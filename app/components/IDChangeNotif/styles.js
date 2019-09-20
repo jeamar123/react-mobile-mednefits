@@ -49,7 +49,5 @@ export default EStyleSheet.create({
   textItem3: {
     color: '#338BC2',
     textDecorationLine: 'underline',
-    height: 30,
-    width: 30,
   },
 });
