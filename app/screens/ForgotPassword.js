@@ -48,7 +48,7 @@ class ForgotPass extends Component {
         />
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <ForgotPassword />
-        <InputWithButton placeholder="Email address or NRIC/FIN" onChangeText={(text) => this.setState({ email: text })} />
+        <InputWithButton placeholder="Mobile Number" onChangeText={(text) => this.setState({ email: text })} />
         <Buttons
           onPress={this.resetPassword}
         >Reset password</Buttons>

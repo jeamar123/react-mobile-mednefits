@@ -71,7 +71,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: 40
           }}>
-            Checked in {(this.props.checkTime).toUpperCase()}
+            Checked in {this.props.checkTime}
           </Text>
 
           <View style={{ backgroundColor: '#fff', width: '90%' }}>
