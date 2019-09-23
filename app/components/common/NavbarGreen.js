@@ -438,18 +438,18 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: responsiveWidth(15),
+            width: responsiveWidth(13.5),
             justifyContent: 'center',
             alignItems: 'flex-end',
             paddingRight: responsiveWidth(2.5),
-            marginTop: responsiveHeight(0.5)
+            marginTop: responsiveHeight(1.2)
           }}
         >
           <TouchableOpacity onPress={() => Actions.Home({ type: 'reset' })}>
             <Text
               style={{
                 fontFamily: 'HelveticaNeue-Roman',
-                fontSize: 16,
+                fontSize: RF(2.0),
                 color: '#FFFFFF',
                 marginRight: 10,
               }}
