@@ -20,7 +20,7 @@ class Login extends Component {
       failed: false,
       title: null,
       message: null,
-      showUpdateNotif : true,
+      showUpdateNotif: true,
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -40,7 +40,7 @@ class Login extends Component {
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
-        this.setState({ failed: true, title: 'Login Failed', message: err.error_description })
+        this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password' })
         // Core.getNotify('', err.error_description);
       }
     })
@@ -67,14 +67,14 @@ class Login extends Component {
         />
         <Logo />
 
-        { this.state.showUpdateNotif ? <IDChangeNotif /> : null }
+        {this.state.showUpdateNotif ? <IDChangeNotif /> : null}
 
         <InputWithButton
           onChangeText={(text) => this.setState({ username: text })}
           placeholder="Mobile Number"
           autoCapitalize='none'
           returnKeyType={"next"}
-          keyboardType='numeric'  
+          keyboardType='numeric'
         />
         <InputWithButton
           onChangeText={(text) => this.setState({ password: text })}
