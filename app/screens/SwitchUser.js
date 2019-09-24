@@ -159,6 +159,7 @@ class SwitchUser extends Component {
       id={item.user_id}
       name={item.name}
       nric={item.nric}
+      dob={item.dob}
       type={item.type}
     />
   );
