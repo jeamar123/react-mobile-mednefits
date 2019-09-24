@@ -73,7 +73,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: 40
           }}>
-            Checked in {this.props.checkTime}
+            Checked in {this.props.checkTime.replace('am','AM').replace('pm','PM')}
           </Text>
 
           <View style={{ backgroundColor: '#fff', width: '90%' }}>
