@@ -74,7 +74,7 @@ class Login extends Component {
           placeholder="Mobile Number"
           autoCapitalize='none'
           returnKeyType={"next"}
-          keyboardType='numeric'
+          keyboardType='numeric'  
         />
         <InputWithButton
           onChangeText={(text) => this.setState({ password: text })}
