@@ -119,7 +119,7 @@ class checkinUser extends Component {
                 marginRight: '5%'
               }}
             >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: 16 }}>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#bbb', fontSize: 16 }}>
                 Cap per visit
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(2.1) }}>

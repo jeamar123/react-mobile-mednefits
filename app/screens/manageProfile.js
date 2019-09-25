@@ -62,7 +62,7 @@ class manageProfile extends Component {
         nirc_number: data.profile.nric,
         email: data.profile.email,
         PhoneNumber: data.profile.mobile_phone,
-        Dob: moment( data.profile.dob, 'DD-MM-YYYY' ).format('DD/MM/YYYY'),
+        Dob: moment( data.profile.dob, ['DD-MM-YYYY','YYYY-MM-DD'] ).format('DD/MM/YYYY'),
         today: moment( ).format('DD/MM/YYYY'),
         Weight: data.profile.weight,
         Height: data.profile.height,
