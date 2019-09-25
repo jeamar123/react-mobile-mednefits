@@ -4,6 +4,7 @@ import { Container, Content, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modal';
 import ResponsiveImage from 'react-native-responsive-image';
+import AsyncStorage from '@react-native-community/async-storage';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import { Spinner, Popup } from '../components/common';
@@ -140,10 +141,13 @@ class ConfirmPay extends Component {
       check_out_time: this.state.timeNow
     };
 
-    Core.CreatePayment(params, (err, result) => {
+    Core.CreatePayment(params, async (err, result) => {
       console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
+        user = await Core.GetDataLocalReturnNew('user_id');
+        newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+        AsyncStorage.removeItem(newUserCheckinIDName);
         Actions.Summary({ result: result, clinic_image: this.props.clinic_image, type: 'reset' });
         this.setState({ isLoading: false });
       } else if (!result.status) {

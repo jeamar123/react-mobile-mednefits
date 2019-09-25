@@ -18,10 +18,13 @@ const headerLogin = {
 }
 
 export function AppStatus() {
-  Core.UserDetail((err, result) => {
+  Core.UserDetail( async (err, result) => {
     if (result.expired) {
       Actions.Login({ type: 'reset' })
     } else {
+      await Core.SetDataLocal(params, async (err, result) => {
+       console.log('result user_id key', result)
+      });
       Actions.Home({ type: 'reset' })
     }
   })

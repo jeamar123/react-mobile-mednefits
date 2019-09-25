@@ -427,8 +427,8 @@ class manageProfile extends Component {
               format="DD/MM/YYYY"
               minDate="30-01-1945"
               maxDate={ this.state.today }
-              confirmBtnText="Oke"
-              cancelBtnText="Batal"
+              confirmBtnText="Done"
+              cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: { width: 0, height: 0 },
                 dateInput: {

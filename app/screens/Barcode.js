@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 import { Container } from 'native-base';
 import Navbar from '../components/common/Navbar';
+import AsyncStorage from '@react-native-community/async-storage';
 import { RNCamera } from 'react-native-camera';
 import { Actions } from 'react-native-router-flux'
 import { Spinner } from '../components/common/Spinner'
@@ -95,9 +96,10 @@ class Barcode extends Component {
             failed: false,
           })
 
+          newUserCheckinIDName = Config.CHECKIDVISIT + '_' + String(result.data.user_id)
           userCheckinID = {
-            key: Config.CHECKIDVISIT,
-            value: JSON.stringify(result.data)
+           key: newUserCheckinIDName,
+           value: JSON.stringify(result.data)
           }
 
           Core.SetDataLocal(userCheckinID, (err, result) => {
