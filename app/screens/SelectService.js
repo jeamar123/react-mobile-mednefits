@@ -44,9 +44,12 @@ class SelectService extends Component {
   }
 
   async StatusUseronClinic() {
-    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
-    data =
-      await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
+    user = await Core.GetDataLocalReturnNew('user_id');
+    console.log('user data from home', user)
+    newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+    console.log('newUserCheckinIDName from home', newUserCheckinIDName)
+    storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
+    data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
 
     this.setState({
