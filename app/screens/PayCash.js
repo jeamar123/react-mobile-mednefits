@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, Image, View } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import AsyncStorage from '@react-native-community/async-storage';
 import { ButtonDone, Spinner } from '../components/common';
 import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
@@ -52,9 +53,12 @@ class PayCash extends Component {
       clinic_id: this.props.clinicid,
     };
 
-    Core.PayDirect(params, (err, result) => {
+    Core.PayDirect(params, async (err, result) => {
       if (result.status) {
         Core.getNotify('', result.message);
+        user = await Core.GetDataLocalReturnNew('user_id');
+        newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+        AsyncStorage.removeItem(newUserCheckinIDName);
         Actions.Home({ result: result });
       } else if (!result.status) {
         Core.getNotify('', result.message);
