@@ -66,7 +66,7 @@ class Profile extends Component {
   async logoutProcess(index) {
     if (index == 0) {
       try {
-        await AsyncStorage.removeItem('check_in_id');
+        // await AsyncStorage.removeItem('check_in_id');
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
         await AsyncStorage.removeItem('longitude');

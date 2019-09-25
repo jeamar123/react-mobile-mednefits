@@ -103,6 +103,15 @@ export async function LoginProcess(username, password, callback) {
 
         await Core.SetDataLocal(params, async (err, result) => {
           if (result) {
+              user_data = {
+                key: 'user_id',
+                value: String(data_parse.user_id),
+              };
+
+              await Core.SetDataLocal(user_data, async (err, result) => {
+                console.log('result user_id key from login', result)
+              });
+
             await callback('', true);
             // Actions.Home({ type: 'reset' });
           } else {
@@ -1029,8 +1038,18 @@ export function SwitchAccount(param, callback) {
           value: access_token,
         };
 
+        console.log('data from switch', data)
+
         Core.SetDataLocal(params, async (err, result) => {
           if (result) {
+             user_data = {
+                key: 'user_id',
+                value: String(data_parse.user_id),
+              };
+
+            await Core.SetDataLocal(user_data, async (err, result) => {
+              console.log('result user_id key from login', result)
+            });
             callback('', true);
             Actions.Home({ type: 'reset' });
           } else {

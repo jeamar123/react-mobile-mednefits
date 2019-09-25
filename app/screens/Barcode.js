@@ -98,14 +98,15 @@ class Barcode extends Component {
             failed: false,
           })
 
+          newUserCheckinIDName = Config.CHECKIDVISIT + '_' + String(result.data.user_id)
           userCheckinID = {
-            key: Config.CHECKIDVISIT,
+            key: newUserCheckinIDName,
             value: JSON.stringify(result.data)
           }
-
+          console.warn("new user checkin name", userCheckinID);
           Core.SetDataLocal(userCheckinID, (err, result) => {
             if (result) {
-              console.warn("Set a new userCheckinID");
+              console.warn("Set a new userCheckinID", userCheckinID);
             }
           })
 

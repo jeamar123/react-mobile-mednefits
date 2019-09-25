@@ -3,10 +3,12 @@ import { StatusBar, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Card, CardItem, Text, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import AsyncStorage from '@react-native-community/async-storage';
 import ResponsiveImage from 'react-native-responsive-image';
 import Navbar from '../components/common/NavbarGrey';
 import * as Commmon from '../components/common';
 import * as Core from '../core';
+import * as Config from '../config';
 
 class ScanPay extends Component {
   constructor(props) {
@@ -63,9 +65,12 @@ class ScanPay extends Component {
       check_out_time: this.state.timeNow
     };
 
-    Core.PayDirect(params, (err, result) => {
+    Core.PayDirect(params, async (err, result) => {
       if (result.status) {
         Core.getNotify('', 'Transaction Successful');
+        user = await Core.GetDataLocalReturnNew('user_id');
+        newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+        AsyncStorage.removeItem(newUserCheckinIDName);
         Actions.Home({ result: result, type: 'reset' });
       } else if (!result.status) {
         Core.getNotify('', result.message);
