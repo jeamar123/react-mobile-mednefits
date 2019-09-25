@@ -35,6 +35,7 @@ class checkinUser extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
+      console.log( data );
       this.setState({
         FullName: data.fullname,
         MemberID: data.member_id,
@@ -46,7 +47,7 @@ class checkinUser extends Component {
         StartDate: data.start_date,
         EndDate: data.valid_date,
         resultPackage: data.packages,
-        mobile: data.mobile,
+        mobile: data.mobile.replace("+",""),
         dob: data.dob,
       });
     });
@@ -124,7 +125,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: responsiveHeight(3),
           }}>
-            Mobile no.: {this.state.mobile}
+            Mobile no.: +{this.state.mobile}
           </Text>
 
           <View
