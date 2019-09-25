@@ -100,6 +100,7 @@ class checkinUser extends Component {
                   marginTop: responsiveHeight(0.5),
                   width: responsiveWidth(57),
                   marginRight: responsiveWidth(5),
+                  textAlign: 'right'
                 }}
                 numberOfLines={3}>
                 {this.props.clinic_name}
