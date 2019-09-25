@@ -23,6 +23,7 @@ import * as Config from '../config';
 import * as Common from '../components/common';
 import Navbar from '../components/common/Navbar';
 import { ButtonProfile } from '../components/common/ButtonProfile';
+import moment from 'moment';
 
 class manageProfile extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class manageProfile extends Component {
       nirc_number: '',
       PhoneNumber: '',
       Dob: '',
+      today: '',
       Weight: '',
       Height: '',
       bmi: '',
@@ -55,12 +57,14 @@ class manageProfile extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
+      console.log(data);
       this.setState({
         Full_name: data.profile.full_name,
         nirc_number: data.profile.nric,
         email: data.profile.email,
         PhoneNumber: data.profile.mobile_phone,
-        Dob: data.profile.dob,
+        Dob: moment( data.profile.dob, [ 'YYYY-MM-DD', 'DD-MM-YYYY' ] ).format('DD/MM/YYYY'),
+        today: moment().format('DD/MM/YYYY'),
         Weight: data.profile.weight,
         Height: data.profile.height,
         bmi: data.profile.bmi,
@@ -100,7 +104,7 @@ class manageProfile extends Component {
               email: email,
               nric: nric,
               mobile_phone: mobile_phone,
-              dob: dob,
+              dob: moment( dob, 'DD/MM/YYYY').format('YYYY-MM-DD'),
               weight: weight,
               height: height,
               bmi: bmi,
@@ -421,11 +425,11 @@ class manageProfile extends Component {
                   : this.state.Dob
               }
               mode="date"
-              format="DD-MM-YYYY"
+              format="DD/MM/YYYY"
               minDate="30-01-1945"
-              maxDate="30-12-2002"
-              confirmBtnText="Oke"
-              cancelBtnText="Batal"
+              maxDate={ this.state.today }
+              confirmBtnText="Done"
+              cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: { width: 0, height: 0 },
                 dateInput: {
