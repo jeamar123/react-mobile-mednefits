@@ -47,7 +47,7 @@ class checkinUser extends Component {
         StartDate: data.start_date,
         EndDate: data.valid_date,
         resultPackage: data.packages,
-        mobile: data.mobile.replace("+",""),
+        mobile: data.mobile ? "+" + (data.mobile.replace("+","")) : "",
         dob: data.dob,
       });
     });
@@ -117,16 +117,28 @@ class checkinUser extends Component {
             Member ID {this.state.MemberID}
           </Text>
 
-          <Text style={{
-            fontFamily: 'HelveticaNeue-Roman',
-            textAlign: 'center',
-            fontSize: 16,
-            color: '#fff',
-            paddingTop: 10,
-            paddingBottom: responsiveHeight(3),
-          }}>
-            Mobile no.: +{this.state.mobile}
-          </Text>
+          { this.state.mobile != "" ? 
+            <Text style={{
+              fontFamily: 'HelveticaNeue-Roman',
+              textAlign: 'center',
+              fontSize: 16,
+              color: '#fff',
+              paddingTop: 10,
+              paddingBottom: responsiveHeight(3),
+            }}>
+              Mobile no.: {this.state.mobile}
+            </Text>
+            : 
+            <Text style={{
+              fontFamily: 'HelveticaNeue-Roman',
+              textAlign: 'center',
+              fontSize: 16,
+              color: '#fff',
+              paddingTop: 10,
+              paddingBottom: responsiveHeight(1),
+            }}>
+            </Text>           
+          }
 
           <View
             style={{
