@@ -10,6 +10,7 @@ import { Container, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-community/async-storage';
 import Navbar from '../components/common/NavbarGreen';
 import Texti from "../components/common/Texti";
 import * as Config from '../config';
@@ -44,6 +45,9 @@ class checkinUser extends Component {
       console.warn(result);
       if (result.status == true) {
         Core.getNotify('', result.message);
+        user = await Core.GetDataLocalReturnNew('user_id');
+        newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+        AsyncStorage.removeItem(newUserCheckinIDName);
         Actions.Home({ type: 'reset' });
       } else {
         Core.getNotify('', 'Failed Cancel Check In, please try again');
@@ -56,7 +60,9 @@ class checkinUser extends Component {
   }
 
   async StatusUseronClinic() {
-    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
+    user = await Core.GetDataLocalReturnNew('user_id');
+    newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+    storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
