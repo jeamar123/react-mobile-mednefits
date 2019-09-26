@@ -57,7 +57,9 @@ class checkinUser extends Component {
   }
 
   async StatusUseronClinic() {
-    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
+    user = await Core.GetDataLocalReturnNew('user_id');
+    newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+    storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
