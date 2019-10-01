@@ -41,7 +41,8 @@ class Login extends Component {
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
-        this.setState({ failed: true, title: 'Login Failed', message: 'Mobile Number or Password is Incorrect', url: err.url })
+        this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', url: err.url })
+        // this.setState({ failed: true, title: 'Login Failed', message: 'Mobile Number or Password is Incorrect', url: err.url })
         // this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password' })
         // Core.getNotify('', err.error_description);
       }
