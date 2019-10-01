@@ -61,7 +61,7 @@ export default class Popup extends Component {
                 textAlign: 'center'
               }}
             >
-              {this.props.message}
+              { this.props.url != null ? <Common.Texti>Please click <Common.Texti fontColor={'#338BC2'} style={{ color: '#338BC2', textDecorationLine: 'underline' }} onPress={() => this.goToUrl()}>here</Common.Texti> to change your user ID to your mobile number.</Common.Texti> : this.props.message }
             </Common.Texti>
           </View>
 
@@ -191,6 +191,11 @@ export default class Popup extends Component {
       console.warn(e + "sa");
       // Common.getNotify("","Failed to request url")
     }
+  }
+
+  goToUrl( ){
+    console.log( this.props.url );
+    Linking.openURL( this.props.url );
   }
 
   _closeSection() {
