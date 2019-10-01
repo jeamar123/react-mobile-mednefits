@@ -23,6 +23,7 @@ class Login extends Component {
       message: null,
       button: 'Log in',
       showUpdateNotif: true,
+      url: null,
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
@@ -35,14 +36,15 @@ class Login extends Component {
     this.setState({ isLoading: true, button: 'Logging in...' })
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
-      // console.log(err)
-      // console.log(result);
+      console.log(err)
+      console.log(result);
       if (result) {
         this.setState({ isLoading: false, failed: false, button: 'Log in' })
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
-        this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password', isLoading: false, button: 'Log in' })
+        this.setState({ failed: true, title: 'Login Failed', message: 'Mobile Number or Password is Incorrect', isLoading: false, button: 'Log in', url: err.url })
+        // this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password', isLoading: false, button: 'Log in' })
         // Core.getNotify('', err.error_description);
       }
     })
@@ -76,6 +78,7 @@ class Login extends Component {
           closeSectionUpdate={this.isVisibleUpdate}
           title={this.state.title}
           message={this.state.message}
+          url={this.state.url}
         >
         </Popup>
       )
