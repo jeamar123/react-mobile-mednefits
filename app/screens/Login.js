@@ -43,8 +43,8 @@ class Login extends Component {
         Actions.Home({ type: 'reset' });
       } else {
         // Toast.show(err.error_description, Toast.LONG);
-        this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', isLoading: false, button: 'Log in', url: err.url })
-        // this.setState({ failed: true, title: 'Login Failed', message: 'Mobile Number or Password is Incorrect', isLoading: false, button: 'Log in', url: err.url })
+        this.setState({ failed: true, title: 'Login Failed', isLoading: false, button: 'Log in', url: err.url })
+        // this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', isLoading: false, button: 'Log in', url: err.url })
         // this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password', isLoading: false, button: 'Log in' })
         // Core.getNotify('', err.error_description);
       }
@@ -98,10 +98,9 @@ class Login extends Component {
 
           <InputWithButton
             onChangeText={(text) => this.setState({ username: text })}
-            placeholder="Mobile Number"
+            placeholder="Mobile Number or Email Address"
             autoCapitalize='none'
             returnKeyType={"next"}
-            keyboardType='numeric'
           />
           <InputWithButton
             onChangeText={(text) => this.setState({ password: text })}

@@ -15,6 +15,7 @@ import VersionCheck from 'react-native-version-check';
 export default class Popup extends Component {
   constructor(props) {
     super(props);
+    console.log( this.props );
     this.state = {
       isVisible: this.props.isVisible,
     };
@@ -33,34 +34,81 @@ export default class Popup extends Component {
   renderBody() {
     if (this.props.kind == 'loginFailed') {
       return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(20) }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(30), }}>
           {/* <ImageBackground
             style={{ width: 250, height: 100 }}
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
           /> */}
-          <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
-            <Common.Texti
-              fontFamily={Config.FONT_FAMILY_ROMAN}
-              fontSize={22}
-              style={{
-                color: '#38424B',
-                textAlign: 'center'
-              }}
-            >
-              {this.props.title}
-            </Common.Texti>
-            <Common.Texti
-              fontFamily={Config.FONT_FAMILY_MEDIUM}
-              fontSize={12}
-              numberOfLines={10}
-              style={{
-                color: '#38424B',
-                textAlign: 'center'
-              }}
-            >
-              { this.props.url != null ? <Common.Texti>Please click <Common.Texti fontColor={'#338BC2'} style={{ color: '#338BC2', textDecorationLine: 'underline' }} onPress={() => this.goToUrl()}>here</Common.Texti> to change your user ID to your mobile number.</Common.Texti> : this.props.message }
-            </Common.Texti>
+          <View style={{ marginTop: 5, marginBottom: 20, marginRight: 25, marginLeft: 25, paddingTop: 20 }}>
+            <View>
+              <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={15} marginBottom={20} style={{ color: '#38424B', height: 55, width: '70%', textAlign: 'center', alignSelf: 'center' }} >
+                Your User ID or Password is Incorrect.
+              </Common.Texti>
+              <View style={{ flex: 1, flexDirection: 'row', height: 35, width: '90%', textAlign: 'left', alignSelf: 'center' }}>
+                <View style={{ width: 13 }} >
+                  <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={14} style={{ color: '#38424B', }}>1. </Common.Texti>
+                </View>
+                <View style={{ flex: 1 }} >
+                  <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={14} style={{ color: '#38424B', }}>Make sure you have updated your User ID to your Mobile Number.</Common.Texti>
+                </View>
+              </View>
+              <View style={{ flex: 1, flexDirection: 'row', height: 35, width: '90%', textAlign: 'left', alignSelf: 'center' }}>
+                <View style={{ width: 13 }} >
+                  <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={14} style={{ color: '#38424B', }}>2. </Common.Texti>
+                </View>
+                <View style={{ flex: 1 }} >
+                  <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={14} style={{ color: '#38424B', }}>If you still can't login, reset your password.</Common.Texti>
+                </View>
+              </View>
+            </View>
+
+
+            {/* 
+            // { this.props.url != null && this.props.url != undefined ?
+            //   <View>
+            //     <Common.Texti
+            //       fontFamily={Config.FONT_FAMILY_ROMAN}
+            //       fontSize={15}
+            //       marginBottom={22}
+            //       style={{
+            //         color: '#38424B',
+            //         textAlign: 'center'
+            //       }}
+            //     >
+            //       {this.props.title}
+            //     </Common.Texti>
+            //     <Common.Texti
+            //       fontSize={12}
+            //       marginBottom={10}
+            //     >
+            //       Please click <Common.Texti fontColor={'#338BC2'} style={{ color: '#338BC2', textDecorationLine: 'underline' }} onPress={() => this.goToUrl()}>here</Common.Texti> to change your user ID to your mobile number.
+            //     </Common.Texti>
+            //   </View>
+            //   :
+            //   <View>
+            //     <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontSize={15} marginBottom={20} style={{ color: '#38424B', marginBottom: 20, height: 30 }} >
+            //       Your User ID or Password is incorrect.
+            //     </Common.Texti>
+            //     <View style={{ flex: 1, flexDirection: 'row', }}>
+            //       <View style={{ width: 20 }} >
+            //         <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={12} style={{ color: '#38424B', }}>1. </Common.Texti>
+            //       </View>
+            //       <View style={{ flex: 1 }} >
+            //         <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={12} style={{ color: '#38424B', }}>Make sure you have updated your User ID to your Mobile Number.</Common.Texti>
+            //       </View>
+            //     </View>
+            //     <View style={{ flex: 1, flexDirection: 'row', }}>
+            //       <View style={{ width: 20 }} >
+            //         <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={12} style={{ color: '#38424B', }}>2. </Common.Texti>
+            //       </View>
+            //       <View style={{ flex: 1 }} >
+            //         <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={12} style={{ color: '#38424B', }}>If you still can't login, reset your password.</Common.Texti>
+            //       </View>
+            //     </View>
+            //   </View>
+            // }
+            */}
           </View>
 
         </View>
