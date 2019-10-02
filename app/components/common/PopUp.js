@@ -41,30 +41,7 @@ export default class Popup extends Component {
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
           /> */}
-<<<<<<< HEAD
-          <View style={{ marginTop: 5, marginBottom: 20, marginRight: 5, marginLeft: 5 }}>
-            <Common.Texti
-              fontFamily={Config.FONT_FAMILY_ROMAN}
-              fontSize={22}
-              style={{
-                color: '#38424B',
-                textAlign: 'center'
-              }}
-            >
-              {this.props.title}
-            </Common.Texti>
-            <Common.Texti
-              fontFamily={Config.FONT_FAMILY_MEDIUM}
-              fontSize={12}
-              numberOfLines={10}
-              style={{
-                color: '#38424B',
-                textAlign: 'center'
-              }}
-            >
-              { this.props.url != null ? <Common.Texti>Please click <Common.Texti fontColor={'#338BC2'} style={{ color: '#338BC2', textDecorationLine: 'underline' }} onPress={() => this.goToUrl()}>here</Common.Texti> to change your user ID to your mobile number.</Common.Texti> : this.props.message }
-            </Common.Texti>
-=======
+          
           <View style={{ marginTop: 5, marginBottom: 20, marginRight: 25, marginLeft: 25, paddingTop: 20 }}>
             <View>
               <Common.Texti fontFamily={Config.FONT_FAMILY_ROMAN} fontSize={15} marginBottom={20} style={{ color: '#38424B', height: 55, width: '70%', textAlign: 'center', alignSelf: 'center' }} >
@@ -111,7 +88,6 @@ export default class Popup extends Component {
                 {this.props.message}
               </Common.Texti>
             /> */}
->>>>>>> d2f1106b15edb6864cbe1e41ddac2a3353b71792
           </View>
 
         </View>
