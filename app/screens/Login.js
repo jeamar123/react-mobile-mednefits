@@ -98,9 +98,10 @@ class Login extends Component {
 
           <InputWithButton
             onChangeText={(text) => this.setState({ username: text })}
-            placeholder="Mobile Number or Email Address"
+            placeholder="Mobile Number"
             autoCapitalize='none'
             returnKeyType={"next"}
+            keyboardType={'numeric'}
           />
           <InputWithButton
             onChangeText={(text) => this.setState({ password: text })}
