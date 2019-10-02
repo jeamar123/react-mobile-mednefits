@@ -33,7 +33,7 @@ class Login extends Component {
     this.setState({ isLoading: true })
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
-      // console.log(err)
+      console.log(err)
       // console.log(result);
       this.setState({ isLoading: false })
       if (result) {

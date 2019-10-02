@@ -50,8 +50,7 @@ class ForgotPass extends Component {
         <ForgotPassword />
         <InputWithButton
           onChangeText={(text) => this.setState({ email: text })}
-          placeholder="Mobile Number"
-          keyboardType='numeric'
+          placeholder="Mobile Number or Email Address"
         />
         <Buttons
           onPress={this.resetPassword}
