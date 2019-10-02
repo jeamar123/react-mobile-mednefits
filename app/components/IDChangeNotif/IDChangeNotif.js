@@ -24,7 +24,7 @@ export default class UserSwitch extends Component {
             <Text style={styles.textInfo}>
               <Text style={styles.textItem}>Notification: User ID Change {'\n'}</Text>
               <Text style={styles.textItemBreak}>{'\n'}</Text>
-              <Text style={styles.textItem2}>NRIC number and email address will no longer be valid as your user ID. {'\n'}</Text> 
+              <Text style={styles.textItem2}>NRIC/FIN and email address will no longer be valid as your user ID. {'\n'}</Text> 
               <Text style={styles.textItem2}>
                 Please click <Text style={styles.textItem3} onPress={() => this.goToUpdateForm()}>here</Text> to change your user ID to your mobile number.
               </Text>
