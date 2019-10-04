@@ -14,20 +14,23 @@ class Email extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {/*
+          : (
+            <Text style={{
+              color: "#ff0000",
+              fontFamily: 'helvetica',
+              fontSize: 32,
+              fontWeight: '300',
+              marginBottom: 120,
+            }}>User Not Found!</Text>
+          )
+        */}
         {
           (this.props.Type == 'email') ? (
             <Text style={styles.textTitle}>Email Sent!</Text>
           ) : (this.props.Type == 'sms') ? (
             <Text style={styles.textTitle}>SMS Sent!</Text>
-          ) : (
-                <Text style={{
-                  color: "#ff0000",
-                  fontFamily: 'helvetica',
-                  fontSize: 32,
-                  fontWeight: '300',
-                  marginBottom: 120,
-                }}>User Not Found!</Text>
-              )
+          ) : null
         }
         <Text style={styles.text}>{this.props.Message}</Text>
       </View>

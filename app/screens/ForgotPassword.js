@@ -24,19 +24,24 @@ class ForgotPass extends Component {
   }
 
   resetPassword = () => {
-    this.setState({ isLoading: true })
-    try {
-      Core.ResetPassword(this.state.email, (err, result) => {
-        this.setState({ isLoading: false })
-        if (result) {
-          console.warn(result)
-          Actions.EmailSend({ Email: this.state.email, Message: result.message, Type: result.type })
-        } else {
-          throw result.message;
-        }
-      })
-    } catch (e) {
-      Core.getNotify("", e)
+    console.log( this.state.email );
+    if( this.state.email != null && this.state.email != "" && this.state.email != "null" ){
+      this.setState({ isLoading: true })
+      try {
+        Core.ResetPassword(this.state.email, (err, result) => {
+          this.setState({ isLoading: false })
+          if (result) {
+            console.warn(result)
+            Actions.EmailSend({ Email: this.state.email, Message: result.message, Type: result.type })
+          } else {
+            throw result.message;
+          }
+        })
+      } catch (e) {
+        Core.getNotify("", e)
+      }
+    }else{
+      Core.getNotify("Error!", "Mobile Number or Email is Required.")
     }
   }
 

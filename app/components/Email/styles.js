@@ -14,7 +14,9 @@ export default EStyleSheet.create({
   },
   text: {
     fontFamily: 'Helvetica',
-    width: width / 1.3,
+    width: width - 50,
+    // width: width / 1.3,
     textAlign: 'center',
+    marginBottom: 120,
   },
 });
