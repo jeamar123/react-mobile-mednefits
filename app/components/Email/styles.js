@@ -7,15 +7,16 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   textTitle: {
-    fontFamily: 'helvetica',
+    fontFamily: 'Helvetica',
     fontSize: 32,
     fontWeight: '300',
-    marginBottom: 100,
+    marginBottom: 120,
   },
   text: {
-    fontFamily: 'helvetica',
-    width: width / 1.3,
+    fontFamily: 'Helvetica',
+    width: width - 90,
+    // width: width / 1.3,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 120,
   },
 });

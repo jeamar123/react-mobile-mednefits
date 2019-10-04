@@ -6,8 +6,8 @@ import * as Config from '../../config';
 export default class UserSwitch extends Component {
   goToUpdateForm() {
     console.log('IN');
-    console.log( Config.WEB + "/app/mobile_exercise" );
-    Linking.openURL( Config.WEB + "/app/mobile_exercise" );
+    console.log( Config.WEB + "/app/update_user_id_web" );
+    Linking.openURL( Config.WEB + "/app/update_user_id_web" );
   }
 
   render() {
