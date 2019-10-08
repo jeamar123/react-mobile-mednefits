@@ -561,8 +561,8 @@ class Home extends Component {
   }
 
   render() {
-    console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
-    console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
+    console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
     console.warn(this.props.isloadingHome + " isLoading")
     return (
