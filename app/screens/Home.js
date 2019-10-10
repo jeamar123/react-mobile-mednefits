@@ -396,6 +396,17 @@ class Home extends Component {
   }
 
   componentWillMount() {
+    // Fetch Details and check autologout trigger
+    Core.UserDetail(async (err, result)=>{
+      console.log( result );
+      if( result.data.profile.to_update_auto_logout == true ){
+        await AsyncStorage.removeItem('access_token');
+        await AsyncStorage.removeItem('latitude');
+        await AsyncStorage.removeItem('longitude');
+        Actions.Login({type: 'reset'});
+      }
+    })
+
     //Version Check
     VersionCheck.getLatestVersion({
       provider: 'appStore'  // for Android

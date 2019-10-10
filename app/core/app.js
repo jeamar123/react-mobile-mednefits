@@ -21,18 +21,26 @@ import * as Config from '../config'
 
 export function AppStatus(){
   Core.UserDetail(async (err, result)=>{
-    if (result.expired) {
-    	Actions.Login({type: 'reset'})
-    } else {
-      params = {
-        key: 'user_id',
-        value: String(result.data.profile.user_id),
-      };
-      console.log('params', params)
-      await Core.SetDataLocal(params, async (err, result) => {
-        console.log('result user_id key', result)
-      });
-      Actions.Home({type: 'reset'})
+    console.log( result );
+    if( result.data.profile.to_update_auto_logout == true ){
+      await AsyncStorage.removeItem('access_token');
+      await AsyncStorage.removeItem('latitude');
+      await AsyncStorage.removeItem('longitude');
+      Actions.Login({type: 'reset'});
+    }else{
+      if (result.expired) {
+        Actions.Login({type: 'reset'})
+      } else {
+        params = {
+          key: 'user_id',
+          value: String(result.data.profile.user_id),
+        };
+        console.log('params', params)
+        await Core.SetDataLocal(params, async (err, result) => {
+          console.log('result user_id key', result)
+        });
+        Actions.Home({type: 'reset'})
+      }
     }
   })
 }
