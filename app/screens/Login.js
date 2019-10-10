@@ -6,8 +6,11 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { IDChangeNotif } from '../components/IDChangeNotif';
 import { Buttons2, Popup } from '../components/common';
-import * as Core from '../core'
+import VersionCheck from 'react-native-version-check';
 import Toast from 'react-native-simple-toast';
+import * as Config from '../config';
+import * as Core from '../core'
+import * as Common from '../components/common'
 
 class Login extends Component {
 
@@ -24,9 +27,48 @@ class Login extends Component {
       button: 'Log in',
       showUpdateNotif: true,
       url: null,
+      thisVersion: VersionCheck.getCurrentVersion(),
+      appstoreVersion: '',
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
+
+  async componentDidMount() {
+    await Core.GetLocationPermission(async (error, result) => {
+      // await this.getClinicType()
+    });
+    //Get Pop Up
+    if (parseInt(this.state.thisVersion.substring(4, 10)) == parseInt(this.state.appstoreVersion.substring(4, 10))) {
+      console.warn('UP TO DATE')
+    } else if (this.state.thisVersion.substring(4, 10) > 5) {
+      Actions.updateApps({ type: 'reset' })
+      console.warn('Updating...')
+    } else {
+      Actions.updateApps({ type: 'reset' })
+      console.warn('Checking...')
+    }
+  }
+
+  componentWillMount() {
+    //Version Check
+    VersionCheck.getLatestVersion({
+      provider: 'playStore'  // for Android
+    })
+      .then(latestVersion => {
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
+        this.setState({
+          appstoreVersion: latestVersion,
+        })
+      });
+    // this.checkversion()
+
+  }
+
+  // checkversion = async () =
+  //   version = await Core.CheckVersion()
+  // }
+
+
 
   isVisibleUpdate() {
     this.setState({ failed: false })
@@ -87,6 +129,10 @@ class Login extends Component {
   }
 
   render() {
+    console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
+
     return (
       <Container>
         {this.renderError()}

@@ -353,7 +353,7 @@ class ClinicList extends Component {
 class Home extends Component {
   constructor(props) {
     super(props);
-    console.log( props );
+    console.log(props);
     this.state = {
       data: false,
       searchdata: false,
@@ -395,6 +395,21 @@ class Home extends Component {
     })
   }
 
+  componentWillMount() {
+    //Version Check
+    VersionCheck.getLatestVersion({
+      provider: 'appStore'  // for Android
+    })
+      .then(latestVersion => {
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
+        this.setState({
+          appstoreVersion: latestVersion,
+        })
+      });
+    // this.checkversion()
+
+  }
+
   async componentDidMount() {
     await Core.GetLocationPermission(async (error, result) => {
       await this.getClinicType()
@@ -402,7 +417,7 @@ class Home extends Component {
     //Get Pop Up
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
-    } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
+    } else if (parseInt(this.state.thisVersion.substring(4, 10)) < parseInt(this.state.appstoreVersion.substring(4, 10))) {
       Actions.updateApps({ type: 'reset' })
       console.warn('Updating...')
     } else {
@@ -423,21 +438,6 @@ class Home extends Component {
       }, 500);
 
     }
-  }
-
-  componentWillMount() {
-    //Version Check
-    VersionCheck.getLatestVersion({
-      provider: 'appStore'  // for Android
-    })
-      .then(latestVersion => {
-        // console.warn('latest - ' + latestVersion);    // 0.1.2
-        this.setState({
-          appstoreVersion: latestVersion,
-        })
-      });
-    // this.checkversion()
-
   }
 
   // checkversion = async () =
