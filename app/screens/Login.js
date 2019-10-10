@@ -39,11 +39,10 @@ class Login extends Component {
     //Get Pop Up
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
-    } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
+    } else if (this.state.thisVersion.substring(4, 10) != this.state.appstoreVersion.substring(4, 10)) {
       Actions.updateApps({ type: 'reset' })
       console.warn('Updating...')
     } else {
-      Actions.updateApps({ type: 'reset' })
       console.warn('Checking...')
     }
   }

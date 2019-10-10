@@ -80,7 +80,7 @@ export async function LoginProcess(username, password, callback) {
     };
 
     params = {
-      url: Config.AUTH_LOGIN,
+      url: Config.AUTH_NEWLOGIN,
       method: 'POST',
       header: headerLogin,
       body: loginParameter,

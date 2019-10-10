@@ -3,10 +3,10 @@
 * @year 2018
 */
 
-// export const MAIN                           = 'https://medicloud.sg/v2';
-// export const WEB                            = 'https://medicloud.sg';
-export const MAIN                           = 'http://staging.medicloud.sg/v2';
-export const WEB                            = 'http://staging.medicloud.sg';
+export const MAIN                           = 'https://medicloud.sg/v2';
+export const WEB                            = 'https://medicloud.sg';
+// export const MAIN                           = 'http://staging.medicloud.sg/v2';
+// export const WEB                            = 'http://staging.medicloud.sg';
 // export const WEB                            = 'http://medicloud.local';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
@@ -16,6 +16,7 @@ export const CANCEL_VISIT_BYCLINIC          = MAIN + '/get/check_in_data';
 /** AUTHENTICATION VARIABLE */
 export const AUTH                           = MAIN + '/auth';
 export const AUTH_LOGIN                     = AUTH + '/login';
+export const AUTH_NEWLOGIN                  = AUTH + '/new_login';
 export const AUTH_USER_PROFILE              = AUTH + '/userprofile';
 export const AUTH_CARD_DETAILS              = AUTH + '/e_card_details';
 export const AUTH_NEW_HISTORY               = AUTH + '/newhistory';

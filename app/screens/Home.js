@@ -443,12 +443,24 @@ class Home extends Component {
     //Get Pop Up
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
-    } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
+    } else if (this.state.thisVersion.substring(4, 10) != this.state.appstoreVersion.substring(4, 10)) {
       Actions.updateApps({ type: 'reset' })
       console.warn('Updating...')
     } else {
       console.warn('Checking...')
     }
+
+    // Fetch Details and check autologout trigger
+    Core.UserDetail(async (err, result)=>{
+      console.log( result );
+      if( result.data.profile.to_update_auto_logout == true ){
+        await AsyncStorage.removeItem('access_token');
+        await AsyncStorage.removeItem('latitude');
+        await AsyncStorage.removeItem('longitude');
+        Actions.Login({type: 'reset'});
+      }
+    })
+
   }
 
   async componentDidUpdate() {
