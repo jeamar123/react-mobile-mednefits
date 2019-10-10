@@ -34,34 +34,39 @@ class Login extends Component {
   }
 
   async componentDidMount() {
+    
     await Core.GetLocationPermission(async (error, result) => {
       // await this.getClinicType()
     });
-    //Get Pop Up
-    if (parseInt(this.state.thisVersion.substring(4, 10)) == parseInt(this.state.appstoreVersion.substring(4, 10))) {
-      console.warn('UP TO DATE')
-    } else if (this.state.thisVersion.substring(4, 10) > 5) {
-      Actions.updateApps({ type: 'reset' })
-      console.warn('Updating...')
-    } else {
-      Actions.updateApps({ type: 'reset' })
-      console.warn('Checking...')
-    }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     //Version Check
-    VersionCheck.getLatestVersion({
-      provider: 'playStore'  // for Android
+    await VersionCheck.getLatestVersion({
+      provider: 'appStore'  // for Android
     })
       .then(latestVersion => {
         // console.warn('latest - ' + latestVersion);    // 0.1.2
         this.setState({
           appstoreVersion: latestVersion,
         })
+
+        this.inAppTrigger();
       });
     // this.checkversion()
 
+  }
+
+  inAppTrigger(){
+    //Get Pop Up
+    if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
+      console.warn('UP TO DATE')
+    } else if (parseInt(this.state.thisVersion.substring(4, 10)) != parseInt(this.state.appstoreVersion.substring(4, 10))) {
+      Actions.updateApps({ type: 'reset' })
+      console.warn('Updating...')
+    } else {
+      console.warn('Checking...')
+    }
   }
 
   // checkversion = async () =

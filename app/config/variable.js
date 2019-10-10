@@ -15,7 +15,8 @@ export const CANCEL_VISIT_BYCLINIC          = MAIN + '/get/check_in_data';
 
 /** AUTHENTICATION VARIABLE */
 export const AUTH                           = MAIN + '/auth';
-export const AUTH_LOGIN                     = AUTH + '/login';
+export const AUTH_LOGIN_OLD                 = AUTH + '/login';
+export const AUTH_LOGIN                     = AUTH + '/new_login';
 export const AUTH_USER_PROFILE              = AUTH + '/userprofile';
 export const AUTH_CARD_DETAILS              = AUTH + '/e_card_details';
 export const AUTH_NEW_HISTORY               = AUTH + '/newhistory';

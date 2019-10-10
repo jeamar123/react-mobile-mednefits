@@ -395,7 +395,41 @@ class Home extends Component {
     })
   }
 
-  componentWillMount() {
+  async componentWillMount() {
+    //Version Check
+    await VersionCheck.getLatestVersion({
+      provider: 'appStore'  // for Android
+    })
+      .then(latestVersion => {
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
+        console.log('latest - ' + latestVersion);    // 0.1.2
+        this.setState({
+          appstoreVersion: latestVersion,
+        })
+
+        this.inAppTrigger();
+      });
+    // this.checkversion()
+
+  }
+
+  inAppTrigger(){
+    //Get Pop Up
+    if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
+      console.warn('UP TO DATE')
+    } else if (parseInt(this.state.thisVersion.substring(4, 10)) != parseInt(this.state.appstoreVersion.substring(4, 10))) {
+      Actions.updateApps({ type: 'reset' })
+      console.warn('Updating...')
+    } else {
+      console.warn('Checking...')
+    }
+  }
+
+  async componentDidMount() {
+    await Core.GetLocationPermission(async (error, result) => {
+      await this.getClinicType()
+    });
+
     // Fetch Details and check autologout trigger
     Core.UserDetail(async (err, result)=>{
       console.log( result );
@@ -406,34 +440,6 @@ class Home extends Component {
         Actions.Login({type: 'reset'});
       }
     })
-
-    //Version Check
-    VersionCheck.getLatestVersion({
-      provider: 'appStore'  // for Android
-    })
-      .then(latestVersion => {
-        // console.warn('latest - ' + latestVersion);    // 0.1.2
-        this.setState({
-          appstoreVersion: latestVersion,
-        })
-      });
-    // this.checkversion()
-
-  }
-
-  async componentDidMount() {
-    await Core.GetLocationPermission(async (error, result) => {
-      await this.getClinicType()
-    });
-    //Get Pop Up
-    if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
-      console.warn('UP TO DATE')
-    } else if (parseInt(this.state.thisVersion.substring(4, 10)) < parseInt(this.state.appstoreVersion.substring(4, 10))) {
-      Actions.updateApps({ type: 'reset' })
-      console.warn('Updating...')
-    } else {
-      console.warn('Checking...')
-    }
   }
 
   async componentDidUpdate() {
