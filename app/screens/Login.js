@@ -41,27 +41,38 @@ class Login extends Component {
   }
 
   async componentWillMount() {
-    //Version Check
-    await VersionCheck.getLatestVersion({
-      provider: 'appStore'  // for Android
-    })
-      .then(latestVersion => {
-        // console.warn('latest - ' + latestVersion);    // 0.1.2
-        this.setState({
-          appstoreVersion: latestVersion,
-        })
+    // //Version Check
+    // await VersionCheck.getLatestVersion({
+    //   provider: 'appStore'  // for Android
+    // })
+    //   .then(latestVersion => {
+    //     // console.warn('latest - ' + latestVersion);    // 0.1.2
+    //     this.setState({
+    //       appstoreVersion: latestVersion,
+    //     })
 
+    //     this.inAppTrigger();
+    //   });
+    // // this.checkversion()
+
+    fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
+      .then( res => res.json() )
+      .then( json => {
+        console.log( json.results[0].version );
+        this.setState({
+          appstoreVersion: json.results[0].version,
+        })
         this.inAppTrigger();
       });
-    // this.checkversion()
-
   }
 
   inAppTrigger(){
     //Get Pop Up
+    console.log( 'app store version', this.state.appstoreVersion );
+    console.log( 'my app version', this.state.thisVersion );
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
-    } else if (parseInt(this.state.thisVersion.substring(4, 10)) != parseInt(this.state.appstoreVersion.substring(4, 10))) {
+    } else if (parseInt(this.state.thisVersion.substring(4, 10)) < parseInt(this.state.appstoreVersion.substring(4, 10))) {
       Actions.updateApps({ type: 'reset' })
       console.warn('Updating...')
     } else {
