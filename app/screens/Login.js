@@ -58,7 +58,6 @@ class Login extends Component {
     fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
       .then( res => res.json() )
       .then( json => {
-        console.log( json.results[0].version );
         this.setState({
           appstoreVersion: json.results[0].version,
         })
@@ -94,8 +93,6 @@ class Login extends Component {
     this.setState({ isLoading: true, button: 'Logging in...' })
 
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
-      console.log(err)
-      console.log(result);
       if (result) {
         this.setState({ isLoading: false, failed: false, button: 'Log in' })
         Actions.Home({ type: 'reset' });
@@ -127,7 +124,6 @@ class Login extends Component {
         )
       }
     } else if (this.state.failed) {
-      console.log('called')
       return (
         <Popup
           kind="loginFailed"

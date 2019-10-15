@@ -60,7 +60,7 @@ class BenefitsDollar extends Component {
     };
 
     Core.SendPayment(params, (err, result) => {
-      console.log(result);
+      // console.log(result);
       if (result.status) {
         Core.getNotify('', result.message);
 
@@ -100,8 +100,8 @@ class BenefitsDollar extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
-    console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
+    // console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />

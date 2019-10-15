@@ -21,7 +21,7 @@ import * as Config from '../config'
 
 export function AppStatus(){
   Core.UserDetail(async (err, result)=>{
-    console.log( result );
+    // console.log( result );
     if( result.data.profile.to_update_auto_logout == true ){
       await AsyncStorage.removeItem('access_token');
       await AsyncStorage.removeItem('latitude');
@@ -35,9 +35,8 @@ export function AppStatus(){
           key: 'user_id',
           value: String(result.data.profile.user_id),
         };
-        console.log('params', params)
         await Core.SetDataLocal(params, async (err, result) => {
-          console.log('result user_id key', result)
+          // console.log('result user_id key', result)
         });
         Actions.Home({type: 'reset'})
       }

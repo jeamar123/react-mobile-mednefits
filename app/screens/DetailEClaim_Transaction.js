@@ -30,14 +30,14 @@ class DetailEClaim_Transaction extends Component {
 
   selectPhoto() {
     ImagePicker.showImagePicker(options, response => {
-      console.log('Response = ', response);
+      // console.log('Response = ', response);
 
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        // console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        // console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        // console.log('User tapped custom button: ', response.customButton);
       } else {
         let source = { uri: response.uri };
 
@@ -51,7 +51,7 @@ class DetailEClaim_Transaction extends Component {
 
   componentWillMount() {
     Core.GetSpesificEclaim(this.props.transaction_id, result => {
-      console.log(result);
+      // console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
 
       if (data.files) {
@@ -64,7 +64,7 @@ class DetailEClaim_Transaction extends Component {
           data: data
         });
       }
-      console.warn(this.state.filesData);
+      // console.warn(this.state.filesData);
     });
 
     // Core.UserDetail((err, result) => {

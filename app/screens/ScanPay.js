@@ -85,7 +85,7 @@ class ScanPay extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />

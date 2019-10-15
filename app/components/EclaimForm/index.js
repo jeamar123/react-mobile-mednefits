@@ -3,7 +3,8 @@ import {
   View,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
+  Text
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
@@ -40,6 +41,7 @@ export default class EclaimForm extends Component {
       provider: false,
       file: false,
       isLoading: false,
+      company_currency: 'SGD',
       currency: false,
       currencyData: [
         {
@@ -109,10 +111,13 @@ export default class EclaimForm extends Component {
         result.data.map((currency) => {
           dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
+
+        var curr = this.state.company_currency != null ? this.state.company_currency : "SGD";
+
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
-          currency: "SGD",
+          currency: curr,
         })
       }
     })
@@ -190,7 +195,7 @@ export default class EclaimForm extends Component {
           isVisible={this.state.isLoading}
         />
         <ScrollView showsVerticalScrollIndicator={false} >
-          <View>
+          <View style={{ marginBottom: 70 }}>
             <View
               style={styles.sectionComponent}
             >
@@ -377,6 +382,33 @@ export default class EclaimForm extends Component {
               <View style={{ marginLeft: '5%' }}>
                 <Common.Divider />
               </View>
+              { ( this.state.company_currency == 'SGD' ) ?
+                <View>
+                  <View
+                    style={styles.fieldStyle}
+                  >
+                    <Common.Texti
+                      fontFamily={Config.FONT_FAMILY_MEDIUM}
+                      fontColor={'#2C3E50'}
+                    >
+                      Currency
+                    </Common.Texti>
+
+                    <Common.InputSelectListCurrency
+                      title="Currency"
+                      placeholder={this.state.currencyState}
+                      titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
+                      data={this.state.currencyData}
+                      value={this.state.currency}
+                      onValueChange={(value) => this.setState({ currency: value })}
+                    />
+                  </View>
+
+                  <View style={{ marginLeft: '5%' }}>
+                    <Common.Divider />
+                  </View>
+                </View>
+              : null }
 
               <View
                 style={styles.fieldStyle}
@@ -402,25 +434,35 @@ export default class EclaimForm extends Component {
                     leftToRight
                   />
 
-                  <View
-                    style={{
-                      borderRightColor: '#DBDBDB',
-                      borderRightWidth: 0.8,
-                      marginTop: -10,
-                      marginBottom: -10
-                    }}
-                  />
-
-                  <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
-                    <Common.InputSelectListCurrency
-                      title="Currency"
-                      placeholder={this.state.currencyState}
-                      titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
-                      data={this.state.currencyData}
-                      value={this.state.currency}
-                      onValueChange={(value) => this.setState({ currency: value })}
+                  {/*
+                    <View
+                      style={{
+                        borderRightColor: '#DBDBDB',
+                        borderRightWidth: 0.8,
+                        marginTop: -10,
+                        marginBottom: -10
+                      }}
                     />
+                    
+                  */}
+
+                  <View style={{ marginLeft: 0, justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti fontSize={RF(1.8)} fontFamily={Config.FONT_FAMILY_MEDIUM}>
+                      { this.state.currency }
+                    </Common.Texti>
+                    {/*
+                      <Common.InputSelectListCurrency
+                        title="Currency"
+                        placeholder={this.state.currencyState}
+                        titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
+                        data={this.state.currencyData}
+                        value={this.state.currency}
+                        onValueChange={(value) => this.setState({ currency: value })}
+                      />
+                    */}
+
                   </View>
+
                 </View>
               </View>
 
@@ -457,6 +499,10 @@ export default class EclaimForm extends Component {
         <View style={{
           flex: 1,
           justifyContent: 'flex-end',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
         }}>
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
@@ -470,7 +516,7 @@ export default class EclaimForm extends Component {
               width: "100%",
               justifyContent: 'center',
               alignItems: 'center',
-              paddingBottom: responsiveHeight(0.1)
+              paddingBottom: responsiveHeight(0.1),
             }}
           >
             <Common.Texti

@@ -44,7 +44,7 @@ class History extends Component {
     this.setState({ refreshing: true });
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-      console.warn(JSON.stringify(data, null, 4))
+      // console.warn(JSON.stringify(data, null, 4))
       this.setState({
         data: data, refreshing: false
       })
@@ -54,7 +54,7 @@ class History extends Component {
   componentWillMount() {
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-      console.warn(JSON.stringify(data, null, 4))
+      // console.warn(JSON.stringify(data, null, 4))
       this.setState({
         data: data
       })

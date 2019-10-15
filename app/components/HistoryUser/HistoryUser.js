@@ -5,6 +5,7 @@ import styles from './styles';
 import * as Core from '../../core';
 import * as Config from '../../config';
 import RF from "react-native-responsive-fontsize";
+import moment from 'moment';
 
 class HistoryUser extends Component {
   constructor(props) {
@@ -23,7 +24,6 @@ class HistoryUser extends Component {
     Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
       this.setState({
         Full_name: data.profile.full_name,
       });
@@ -114,7 +114,7 @@ class HistoryUser extends Component {
                 Transaction Time
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.props.date_of_transaction ? this.props.date_of_transaction.toUpperCase() : ' '}
+                {this.props.date_of_transaction ? ( moment( this.props.date_of_transaction, 'DD-MM-YYYY, hh:mm a' ).format('DD/MM/YYYY hh:mm a') ).toUpperCase() : ' '}
               </Text>
             </View>
 

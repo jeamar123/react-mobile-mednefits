@@ -7,6 +7,7 @@ import Navbar from '../components/common/NavbarGreen';
 import * as Common from '../components/common';
 import * as Config from '../config';
 import RF from 'react-native-responsive-fontsize';
+import moment from 'moment';
 
 class Summary extends Component {
   constructor(props) {
@@ -43,7 +44,9 @@ class Summary extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("props: " + JSON.stringify(this.props))
+    this.props.result.data.transaction_time = moment( this.props.result.data.transaction_time,'MM-DD-YYYY hh:mm a').format('DD/MM/YYYY hh:mm a');
+
     return (
       <View style={{ flex: 1, backgroundColor: '#3F9D59' }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />

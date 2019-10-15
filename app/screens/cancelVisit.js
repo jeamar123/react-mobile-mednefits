@@ -42,7 +42,7 @@ class checkinUser extends Component {
 
   prosesCancel = async () => {
     await Core.CancelVisit({ check_in_id: this.props.checkId }, async (err, result) => {
-      console.warn(result);
+      // console.warn(result);
       if (result.status == true) {
         Core.getNotify('', result.message);
         user = await Core.GetDataLocalReturnNew('user_id');
@@ -65,8 +65,8 @@ class checkinUser extends Component {
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
-    console.warn('storageData ' + JSON.stringify(data, 4, null))
-
+    // console.warn('storageData ' + JSON.stringify(data, 4, null))
+    console.log( data );
     this.setState({
       services: data.clinic_procedures,
       clinicid: data.clinic_id,
@@ -105,7 +105,7 @@ class checkinUser extends Component {
           })
         }, 1500)
       }
-      console.warn('data ' + data.check_in_status_removed);
+      // console.warn('data ' + data.check_in_status_removed);
       // await this.setState({
       //   kickout: result.data.check_in_status_removed,
       // });
@@ -136,8 +136,8 @@ class checkinUser extends Component {
   }
 
   render() {
-    console.warn('kickout ' + this.state.kickout)
-    console.warn("props: " + JSON.stringify(this.props, null, 4))
+    // console.warn('kickout ' + this.state.kickout)
+    // console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
         {this.customLoader()}

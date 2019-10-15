@@ -42,9 +42,7 @@ class HomeContent extends Component {
   }
 
   async getUserBalance() {
-    // console.log('in progress fetching getUserBalance')
     await Core.GetBalance(async (error, result) => {
-      // console.log('fetching done for getUserBalance');
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
