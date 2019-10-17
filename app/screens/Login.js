@@ -55,13 +55,21 @@ class Login extends Component {
     //   });
     // // this.checkversion()
 
+    // Core.GetUpdateNotifStatus( (err, result) => {
+    //   if (result) {
+    //     console.log( result );
+    //   } else {
+    //     console.log( err );
+    //   }
+    // });
+
     fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
       .then( res => res.json() )
       .then( json => {
         this.setState({
           appstoreVersion: json.results[0].version,
         })
-        this.inAppTrigger();
+        // this.inAppTrigger();
       });
   }
 
