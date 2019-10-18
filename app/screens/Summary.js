@@ -12,7 +12,6 @@ import moment from 'moment';
 class Summary extends Component {
   constructor(props) {
     super(props);
-    console.log( this.props );
     this.state = {
       isActive: false,
       currency_symbol: this.props.result.data.currency_symbol == 'S$' || this.props.result.data.currency_symbol == 'SGD' ? 'SGD' : 'MYR',
@@ -21,7 +20,10 @@ class Summary extends Component {
       bill_amount: this.props.result.data.bill_amount,
       consultation_fees: this.props.result.data.consultation_fees,
       total_amount: this.props.result.data.total_amount,
+      malaysia_exchange_rate: '3.00'
     };
+    console.log( this.props );
+    console.log( this.state );
   }
 
   detailPaymentOpened(data) {
@@ -51,29 +53,26 @@ class Summary extends Component {
   }
 
   toggleCurrency(){
-    
-
     if( this.state.currency_symbol == 'SGD' ){
       this.setState({
         currency_symbol: 'MYR',
-        paid_by_cash: parseFloat( this.state.paid_by_cash /= 3 ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits /= 3 ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount /= 3 ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees /= 3 ).toFixed(2),
-        total_amount: parseFloat( this.state.total_amount /= 3 ).toFixed(2),
+        paid_by_cash: parseFloat( this.state.paid_by_cash /= this.state.malaysia_exchange_rate ).toFixed(2),
+        paid_by_credits: parseFloat( this.state.paid_by_credits /= this.state.malaysia_exchange_rate ).toFixed(2),
+        bill_amount: parseFloat( this.state.bill_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
+        consultation_fees: parseFloat( this.state.consultation_fees /= this.state.malaysia_exchange_rate ).toFixed(2),
+        total_amount: parseFloat( this.state.total_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
       });
     }else{
       this.setState({
         currency_symbol: 'SGD',
-        paid_by_cash: parseFloat( this.state.paid_by_cash *= 3 ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits *= 3 ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount *= 3 ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees *= 3 ).toFixed(2), 
-        total_amount: parseFloat( this.state.total_amount *= 3 ).toFixed(2),
+        paid_by_cash: parseFloat( this.state.paid_by_cash *= this.state.malaysia_exchange_rate ).toFixed(2),
+        paid_by_credits: parseFloat( this.state.paid_by_credits *= this.state.malaysia_exchange_rate ).toFixed(2),
+        bill_amount: parseFloat( this.state.bill_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
+        consultation_fees: parseFloat( this.state.consultation_fees *= this.state.malaysia_exchange_rate ).toFixed(2), 
+        total_amount: parseFloat( this.state.total_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
       });
     }
-
-    console.log( this.state );
+    // console.log( this.state );
   }
 
   render() {

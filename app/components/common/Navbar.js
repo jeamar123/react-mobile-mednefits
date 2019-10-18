@@ -28,7 +28,17 @@ export default class Navbar extends React.Component {
       loading: false,
       right: false,
       left: false,
+      currency_symbol: this.props.currency_symbol == 'S$' || this.props.currency_symbol == 'SGD' ? 'SGD' : 'MYR',
     };
+    console.log( this.props );
+    console.log( this.state );
+  }
+
+  toggleCurrency(){
+    this.setState({
+      currency_symbol: this.state.currency_symbol == 'SGD' ? 'MYR' : 'SGD',
+    });
+    this.props.updateCurrency();
   }
 
   componentWillMount() {
@@ -58,6 +68,39 @@ export default class Navbar extends React.Component {
             onPress={() => Actions.pop()}
             style={{
               paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'history-back') {
+      return (
+        <View
+          style={{
+            width: 60,
+            height: 50,
+            paddingLeft: 10,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.pop()}
+            style={{
+              paddingStart: 11,
+              marginTop: 5,
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
@@ -1014,6 +1057,38 @@ export default class Navbar extends React.Component {
             >
               Add
             </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.rightNav == 'currency-toggle') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            paddingRight: 5,
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}
+        >
+          <TouchableOpacity 
+            style={{ paddingEnd: '15%' }}
+            onPress={() => this.toggleCurrency()}
+          >
+            {
+              this.state.currency_symbol == 'SGD' ?
+                <ResponsiveImage
+                  source={require('../../../assets/toggle-currency-myr.png')}
+                  style={{ resizeMode: 'contain', marginTop: 10 }}
+                  initWidth="100" initHeight="30"
+                />
+              :
+              <ResponsiveImage
+                source={require('../../../assets/toggle-currency-sgd.png')}
+                style={{ resizeMode: 'contain', marginTop: 10 }}
+                initWidth="100" initHeight="30"
+              />
+            }
           </TouchableOpacity>
         </View>
       );

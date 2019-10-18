@@ -38,7 +38,7 @@ class HistoryUser extends Component {
             style={{
               backgroundColor: '#fff',
               width: '90%',
-              height: responsiveHeight(36.5),
+              height: responsiveHeight(42),
               borderRadius: 5
             }}
           >
@@ -153,6 +153,25 @@ class HistoryUser extends Component {
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
                 {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_transaction == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: responsiveHeight(1),
+                marginBottom: responsiveHeight(1.5),
+                marginLeft: '5%',
+                marginRight: '5%'
+              }}
+            >
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
+                Exchange Rate
+              </Text>
+              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
+                {this.props.malaysia_exchange_rate}
               </Text>
             </View>
 
