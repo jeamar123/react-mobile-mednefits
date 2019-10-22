@@ -43,6 +43,7 @@ class manageProfile extends Component {
       medCondition: [],
       medication: [],
       loaderProcess: false,
+      isLoading: false
     };
     this.updateProfile = this.updateProfile.bind(this);
   }
@@ -52,18 +53,21 @@ class manageProfile extends Component {
   }
 
   GetDataProfile() {
+    this.setState({ isLoading: true })
     Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      console.log( data );
+      console.warn(JSON.stringify(data, null, 4))
+      setInterval(() => {
+        this.setState({ isLoading: false })
+      }, 200);
       this.setState({
         Full_name: data.profile.full_name,
         nirc_number: data.profile.nric,
         email: data.profile.email,
         PhoneNumber: data.profile.mobile_phone,
-        Dob: moment( data.profile.dob, ['DD-MM-YYYY','YYYY-MM-DD'] ).format('DD/MM/YYYY'),
-        today: moment( ).format('DD/MM/YYYY'),
+        Dob: moment(data.profile.dob, ['DD-MM-YYYY', 'YYYY-MM-DD']).format('DD/MM/YYYY'),
+        today: moment().format('DD/MM/YYYY'),
         Weight: data.profile.weight,
         Height: data.profile.height,
         bmi: data.profile.bmi,
@@ -103,7 +107,7 @@ class manageProfile extends Component {
               email: email,
               nric: nric,
               mobile_phone: mobile_phone,
-              dob: moment( dob, 'DD/MM/YYYY' ).format('DD-MM-YYYY'),
+              dob: moment(dob, 'DD/MM/YYYY').format('DD-MM-YYYY'),
               weight: weight,
               height: height,
               bmi: bmi,
@@ -317,6 +321,9 @@ class manageProfile extends Component {
         >
           {this.showPhotoProfile()}
         </View>
+        <Core.Loader
+          isVisible={this.state.isLoading}
+        />
 
         {/* <ProfileManage photo_url={this.state.photo_url} /> */}
         <GiftedForm
@@ -336,6 +343,7 @@ class manageProfile extends Component {
             <TextInput
               underlineColorAndroid="transparent"
               style={{
+                marginTop: '-4%',
                 width: '80%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -363,7 +371,7 @@ class manageProfile extends Component {
               placeholder="Phone Number"
               underlineColorAndroid="transparent"
               style={{
-                // marginTop: '-4%',
+                marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -383,7 +391,7 @@ class manageProfile extends Component {
           </View>
           {this._renderDivider()}
 
-         {/* <View
+          {/* <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
             <TextInput
@@ -416,6 +424,7 @@ class manageProfile extends Component {
             <DatePicker
               style={{
                 fontFamily: Config.FONT_FAMILY_ROMAN,
+                marginTop: '-2%',
               }}
               date={
                 this.state.Dob == '0000-00-00'
@@ -426,7 +435,7 @@ class manageProfile extends Component {
               placeholder="00-00-0000"
               format="DD/MM/YYYY"
               minDate="30-01-1945"
-              maxDate={ this.state.today }
+              maxDate={this.state.today}
               confirmBtnText="Done"
               cancelBtnText="Cancel"
               customStyles={{
@@ -475,7 +484,7 @@ class manageProfile extends Component {
               placeholder="0.0"
               underlineColorAndroid="transparent"
               style={{
-                // marginTop: '-4%',
+                marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -502,7 +511,7 @@ class manageProfile extends Component {
               placeholder="0.0"
               underlineColorAndroid="transparent"
               style={{
-                // marginTop: '-4%',
+                marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
@@ -529,7 +538,7 @@ class manageProfile extends Component {
               placeholder="Blood Type"
               underlineColorAndroid="transparent"
               style={{
-                // marginTop: '-4%',
+                marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}

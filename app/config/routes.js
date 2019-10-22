@@ -69,7 +69,7 @@ import HistoryAfterUpload from '../screens/HistoryAfterUpload';
 import notRegister from '../screens/notRegister';
 import PlanCovarage from '../screens/PlanCovarage';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {
@@ -254,7 +254,7 @@ class RouterComponent extends Component {
             <Scene key="ECardUser" component={ECardUser} hideNavBar />
             <Scene key="SwitchUser" component={SwitchUser} hideNavBar />
             <Scene key="HomeStatic" component={HomeStatic} hideNavBar />
-            <Scene key="ManageProfile" component={ManageProfile} hideNavBar />
+            <Scene key="ManageProfile" component={ManageProfile} hideNavBar initial />
             <Scene key="Profile" component={Profile} hideNavBar />
             <Scene key="Favourites" component={Favourites} hideNavBar />
             <Scene key="DetailEclaimTransaction" component={DetailEclaimTransaction} hideNavBar />
