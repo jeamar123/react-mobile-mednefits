@@ -61,7 +61,7 @@ class manageProfile extends Component {
       console.warn(JSON.stringify(data, null, 4))
       setInterval(() => {
         this.setState({ isLoading: false })
-      }, 1000);
+      }, 500);
       this.setState({
         Full_name: data.profile.full_name,
         nirc_number: data.profile.nric,
