@@ -120,9 +120,9 @@ class Summary extends Component {
                   style={{
                     backgroundColor: '#f3f3f7',
                     width: '90%',
-                    marginTop: responsiveHeight(1),
-                    height: responsiveHeight(11),
-                    marginBottom: responsiveHeight(1),
+                    height: responsiveHeight(13),
+                    // marginTop: responsiveHeight(1),
+                    // marginBottom: responsiveHeight(1),
                   }}
                 >
                   <View
@@ -150,6 +150,7 @@ class Summary extends Component {
                             fontWeight: 'bold',
                             width: responsiveWidth(55),
                             marginRight: responsiveWidth(5),
+                            marginTop: responsiveHeight(1),
                           }}
                           numberOfLines={3}
                         >
