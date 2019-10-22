@@ -30,7 +30,8 @@ class Favourites extends Component {
       resultData: [],
       DataE_Claim: [],
       data: false,
-      favourite: null
+      favourite: null,
+      isLoading: false
     };
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
   }
@@ -59,28 +60,59 @@ class Favourites extends Component {
   }
 
   getFavorites_Clinic() {
+    this.setState({ isLoading: true })
     Core.GetFavouritesClinic((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.warn(JSON.stringify(data, null, 4))
+      setInterval(() => {
+        this.setState({ isLoading: false })
+      }, 500);
       this.setState({ resultData: data, data: true });
     });
   }
 
   AddFavClinic(id_Clinic) {
     params = {
-      status: this.state.favourite == 1 ? 0 : 1,
+      status: this.state.favourite == 0 ? 1 : 0,
       clinicid: id_Clinic
     }
-
+    this.setState({ isLoading: true })
     Core.AddFavouriteClinic(params, (err, result) => {
       if (result.status) {
+        // if (this.state.favourite == 1) {
+        //   Core.getNotify('', 'Success Add Favourite Clinic');
+        //   this.setState({ favourite: 0 });
+        //   Actions.Favourites()
+        //   setInterval(() => {
+        //     this.setState({ isLoading: false })
+        //   }, 500);
+        // } else {
+        //   Core.getNotify('', 'Success Remove Favourite Clinic');
+        //   this.setState({ favourite: 0 });
+        //   Actions.Favourites()
+        //   setInterval(() => {
+        //     this.setState({ isLoading: false })
+        //   }, 500);
+        // }
+
         if (this.state.favourite == 1) {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 0 });
+          Actions.Favourites()
+          setInterval(() => {
+            this.setState({ isLoading: false })
+          }, 500);
+        } else {
           Core.getNotify('', 'Success Remove Favourite Clinic');
           this.setState({ favourite: 0 });
-        } else {
-          Core.getNotify('', 'Success Add Favourite Clinic');
-          this.setState({ favourite: 1 });
+          Actions.Favourites()
+          setInterval(() => {
+            this.setState({ isLoading: false })
+          }, 500);
         }
+
+
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {
@@ -211,7 +243,12 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginRight: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+            <TouchableOpacity
+              style={{
+                marginTop: '4%',
+                marginRight: '2%'
+              }}
+              onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
@@ -268,6 +305,9 @@ class Favourites extends Component {
                   marginTop: '2%',
                 }}
               >
+                <Core.Loader
+                  isVisible={this.state.isLoading}
+                />
                 <ScrollView>
                   {this.renderTransactionIn_Network()}
                   <TouchableOpacity onPress={() => Actions.Search()}>
