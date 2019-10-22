@@ -174,7 +174,9 @@ class SelectList extends Component {
           <Common.Texti
             fontFamily={Config.FONT_FAMILY_MEDIUM}
             fontColor={"#2C3E50"}
-            style={{ textDecorationLine: 'underline' }}
+            style={{ 
+              // textDecorationLine: 'underline' 
+            }}
           >
             {this.setTitle()}
           </Common.Texti>

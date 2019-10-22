@@ -3,7 +3,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Text
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import * as Common from '../common'
@@ -36,6 +37,7 @@ export default class EclaimForm extends Component {
       provider: false,
       file: false,
       isLoading: false,
+      company_currency: 'SGD',
       currency: 'SGD',
       updateDataSelect: false,
       currencyData: [],
@@ -99,10 +101,13 @@ export default class EclaimForm extends Component {
         result.data.map((currency) => {
           dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
+        var curr = this.state.company_currency != null ? this.state.company_currency : "SGD";
+        console.log( curr );
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
-          currency: "SGD",
+          // currency: "SGD",
+          currency: curr,
         })
       }
     })
@@ -196,273 +201,289 @@ export default class EclaimForm extends Component {
           isVisible={this.state.isLoading}
         />
         <ScrollView showsVerticalScrollIndicator={false} >
-          <View
-            style={styles.sectionComponent}
-          >
-            <Common.Texti fontColor="#848484" style={styles.title}>
-              SPENDING ACCOUNT
-            </Common.Texti>
-          </View>
-          <View style={styles.sectionSpending}>
-            <TouchableOpacity
-              onPress={() => this.selectSpending("medical")}
-              refs="medical"
-              style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
-            >
-              <Common.Texti>
-                Medical
-              </Common.Texti>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.selectSpending("wellness")}
-              refs="wellness"
-              style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
-            >
-              <Common.Texti>
-                Wellness
-              </Common.Texti>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.dividerDetail}>
-            <Common.Texti fontColor="#848484" style={styles.detailsTitle}>
-              DETAILS
-            </Common.Texti>
-          </View>
-
-          <View style={{ flex: 1 }}>
+          <View style={{ marginBottom: 60 }}>
             <View
-              style={[styles.fieldStyle, { marginTop: "3%" }]}
+              style={styles.sectionComponent}
             >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
+              <Common.Texti fontColor="#848484" style={styles.title}>
+                SPENDING ACCOUNT
+              </Common.Texti>
+            </View>
+            <View style={styles.sectionSpending}>
+              <TouchableOpacity
+                onPress={() => this.selectSpending("medical")}
+                refs="medical"
+                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
               >
-                Claim Type
-              </Common.Texti>
-              <Common.InputSelectListClaim
-                title="Claim Type"
-                placeholder={this.state.claimTypeState}
-                dataclaim={this.state.claimType}
-                value={this.state.claim}
-                onValueChange={(value) => this.updateClaim(value)}
-              />
-            </View>
-
-            <View style={{ marginLeft: '5%' }}>
-              <Common.Divider />
-            </View>
-
-
-            <View
-              style={styles.fieldStyleNoPadding}
-            >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                Provider
-              </Common.Texti>
-              <Common.InputText
-                value={this.state.provider}
-                onChangeText={text => this.setState({ provider: text })}
-                placeholder="Name of Provider "
-                inputStyle={{
-                  color: "#2C3E50"
-                }}
-                iconColor="#9e9e9e"
-                leftToRight
-              />
-            </View>
-
-            <View style={{ marginLeft: '5%' }}>
-              <Common.Divider />
-            </View>
-
-
-            <View
-              style={{
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                paddingTop: 10,
-                paddingBottom: 10,
-                marginRight: '5%',
-                marginLeft: "5%",
-              }}
-            >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
+                <Common.Texti>
+                  Medical
+                </Common.Texti>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.selectSpending("wellness")}
+                refs="wellness"
+                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
               >
-                Visit Date
-              </Common.Texti>
-
-              <Common.InputDateCustom
-                startDate={new Date()}
-                minDate={new Date()}
-                maxDate={() => Tanggal.now()}
-                onError={() => Common.getNotify("", "Error loading, please try again")}
-                renderDate={({ year, month, day, date }) => {
-                  if (!date) {
-                    return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
-                  }
-                  const dateStr = `${day} ${month} ${year}`
-                  return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
-                }}
-                onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}
-              />
-
+                <Common.Texti>
+                  Wellness
+                </Common.Texti>
+              </TouchableOpacity>
             </View>
 
-            <View style={{ marginLeft: '5%' }}>
-              <Common.Divider />
+            <View style={styles.dividerDetail}>
+              <Common.Texti fontColor="#848484" style={styles.detailsTitle}>
+                DETAILS
+              </Common.Texti>
             </View>
 
-
-            <View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                Visit Time
-              </Common.Texti>
+            <View style={{ flex: 1 }}>
               <View
-                style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+                style={[styles.fieldStyle, { marginTop: "3%" }]}
               >
-                <Common.InputTime
-                  placeholder={this.state.timeholder}
-                  onTimeChange={(time) => this.setState({ time: time })}
-                  value={this.state.time}
-                />
-
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
                 >
-                  <Image
-                    source={require('../../../assets/apps/clocks.png')}
-                    style={{ height: 20, resizeMode: 'center', width: 20 }}
-                  />
-                </View>
-
+                  Claim Type
+                </Common.Texti>
+                <Common.InputSelectListClaim
+                  title="Claim Type"
+                  placeholder={this.state.claimTypeState}
+                  dataclaim={this.state.claimType}
+                  value={this.state.claim}
+                  onValueChange={(value) => this.updateClaim(value)}
+                />
               </View>
-            </View>
 
-            <View style={{ marginLeft: '5%' }}>
-              <Common.Divider />
-            </View>
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
 
-            {/*   */}
-
-            {/*<View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Currency
-              </Common.Texti>
-
-              <Common.InputSelect
-                placeholder={this.state.currency}
-                data={this.state.currencyData}
-                value={this.state.currency}
-                onValueChange={(value) => this.setState({ currency: value })}
-              />
-            </View>
-
-            <Common.Divider />*/}
-
-            <View
-              style={styles.fieldStyleNoPadding}
-            >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                Receipt Amount
-              </Common.Texti>
-
-              <View style={{ flexDirection: 'row' }}>
-                <Common.InputAmount
-                  keyboardType={"number-pad"}
-                  value={this.state.amount}
-                  keyboardType="numeric"
-                  onChangeText={text => this.setState({ amount: text })}
-                  placeholder="Enter amount "
-                  currency={this.state.currency}
+              <View
+                style={styles.fieldStyleNoPadding}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  Provider
+                </Common.Texti>
+                <Common.InputText
+                  value={this.state.provider}
+                  onChangeText={text => this.setState({ provider: text })}
+                  placeholder="Name of Provider "
+                  inputStyle={{
+                    color: "#2C3E50"
+                  }}
+                  iconColor="#9e9e9e"
                   leftToRight
                 />
-                <View
-                  style={{
-                    borderRightColor: '#DBDBDB',
-                    borderRightWidth: 0.8,
-                    marginTop: -10,
-                    marginBottom: -10
+              </View>
+
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
+
+
+              <View
+                style={{
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  marginRight: '5%',
+                  marginLeft: "5%",
+                }}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                >
+                  Visit Date
+                </Common.Texti>
+
+                <Common.InputDateCustom
+                  startDate={new Date()}
+                  minDate={new Date()}
+                  maxDate={() => Tanggal.now()}
+                  onError={() => Common.getNotify("", "Error loading, please try again")}
+                  renderDate={({ year, month, day, date }) => {
+                    if (!date) {
+                      return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
+                    }
+                    const dateStr = `${day} ${month} ${year}`
+                    return <Common.Texti fontFamily={Config.FONT_FAMILY_MEDIUM} fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
                   }}
+                  onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day} ${month} ${year}` })}
                 />
-                <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
-                  <Common.InputSelectListCurrency
-                    title="Currency"
-                    data={this.state.currencyData}
-                    titleValue={this.state.currency}
-                    onValueChange={(value) => this.setState({ currency: value })}
+
+              </View>
+
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
+
+
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  Visit Time
+                </Common.Texti>
+                <View
+                  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
+                >
+                  <Common.InputTime
+                    placeholder={this.state.timeholder}
+                    onTimeChange={(time) => this.setState({ time: time })}
+                    value={this.state.time}
                   />
-                  {/*<Common.InputSelect
-                    placeholder={this.state.currency}
-                    data={this.state.currencyData}
-                    value={this.state.currency}
-                    onValueChange={(value) => this.setState({ currency: value })}
-                  />*/}
+
+                  <View
+                    style={{
+                      alignItems: 'flex-end',
+                      marginLeft: 10
+                    }}
+                  >
+                    <Image
+                      source={require('../../../assets/apps/clocks.png')}
+                      style={{ height: 20, resizeMode: 'center', width: 20 }}
+                    />
+                  </View>
+
                 </View>
               </View>
+
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
+
+              { ( this.state.company_currency == 'SGD' ) ?
+                <View>
+                  <View 
+                    style={styles.fieldStyle} 
+                  >
+                    <Common.Texti
+                      fontFamily={Config.FONT_FAMILY_MEDIUM}
+                      fontColor={'#2C3E50'}
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      Currency
+                    </Common.Texti>
+
+                    <Common.InputSelectListCurrency
+                      title="Currency"
+                      placeholder={this.state.currencyState}
+                      titleValue={(this.state.currency == "S$" || this.state.currency == "SGD") ? "SGD" : "MYR"}
+                      data={this.state.currencyData}
+                      onValueChange={(value) => this.setState({ currency: value })}
+                    />
+                  </View>
+
+                  <View style={{ marginLeft: '5%' }}>
+                    <Common.Divider />
+                  </View>
+                </View>
+              : null }
+
+
+              <View
+                style={styles.fieldStyleNoPadding}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  Receipt Amount
+                </Common.Texti>
+
+                <View style={{ flexDirection: 'row' }}>
+                  <Common.InputAmount
+                    keyboardType={"number-pad"}
+                    value={this.state.amount}
+                    keyboardType="numeric"
+                    onChangeText={text => this.setState({ amount: text })}
+                    placeholder="Enter amount "
+                    currency={this.state.currency}
+                    leftToRight
+                  />
+                  {/*
+                  <View
+                    style={{
+                      borderRightColor: '#DBDBDB',
+                      borderRightWidth: 0.8,
+                      marginTop: -10,
+                      marginBottom: -10
+                    }}
+                  />
+                  */}
+                  <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_BOLD}>
+                      { this.state.currency }
+                    </Common.Texti>
+                    {/*<Common.InputSelectListCurrency
+                      title="Currency"
+                      data={this.state.currencyData}
+                      titleValue={this.state.currency}
+                      onValueChange={(value) => this.setState({ currency: value })}
+                    />*/}
+                  </View>
+                </View>
+              </View>
+
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
+
+
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  Member
+                </Common.Texti>
+
+                <Common.InputSelect
+                  placeholder={this.state.memberState}
+                  data={this.state.memberData}
+                  value={this.state.member}
+                  onValueChange={(value) => this.setState({ member: value })}
+                />
+              </View>
+              <Common.Divider style={{ marginLeft: "-5%", marginRight: "-5%" }} />
             </View>
-
-            <View style={{ marginLeft: '5%' }}>
-              <Common.Divider />
-            </View>
-
-
-            <View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti
-                fontFamily={Config.FONT_FAMILY_MEDIUM}
-                fontColor={'#2C3E50'}
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                Member
-              </Common.Texti>
-
-              <Common.InputSelect
-                placeholder={this.state.memberState}
-                data={this.state.memberData}
-                value={this.state.member}
-                onValueChange={(value) => this.setState({ member: value })}
-              />
-            </View>
-            <Common.Divider style={{ marginLeft: "-5%", marginRight: "-5%" }} />
           </View>
-
-          <View style={{ marginBottom: "15%" }} />
-
+        </ScrollView>
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
             style={{
@@ -487,7 +508,7 @@ export default class EclaimForm extends Component {
               Next
           </Common.Texti>
           </TouchableOpacity>
-        </ScrollView>
+        </View>
       </View>
     )
   }

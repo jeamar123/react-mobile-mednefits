@@ -3,10 +3,10 @@
 * @year 2018
 */
 
-export const MAIN                           = 'https://medicloud.sg/v2';
-export const WEB                            = 'https://medicloud.sg';
-// export const MAIN                           = 'http://staging.medicloud.sg/v2';
-// export const WEB                            = 'http://staging.medicloud.sg';
+// export const MAIN                           = 'https://medicloud.sg/v2';
+// export const WEB                            = 'https://medicloud.sg';
+export const MAIN                           = 'http://staging.medicloud.sg/v2';
+export const WEB                            = 'http://staging.medicloud.sg';
 // export const WEB                            = 'http://medicloud.local';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
@@ -66,6 +66,7 @@ export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt
 export const USER_UPLOAD_RECEIPT_BULK       = USER + "/upload_in_network_receipt_bulk"
 export const USER_MEMBERLIST                = USER+"/member_lists"
 export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
+export const UPDATE_NOTIF                   = USER + "/update_notif_status"
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN                   = "access_token"

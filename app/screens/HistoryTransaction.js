@@ -91,7 +91,7 @@ class HistoryTransaction extends Component {
       <TouchableOpacity
         key={index}
         onPress={() =>
-          Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+          Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol })
         }
       >
         <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>
@@ -186,7 +186,7 @@ class HistoryTransaction extends Component {
   }
 
   renderEclaimStatus(data) {
-    console.log(data);
+    // console.log(data);
     if (data.status == 0) {
       return (
         <View
@@ -272,6 +272,7 @@ class HistoryTransaction extends Component {
         onPress={() =>
           Actions.DetailEclaimTransaction({
             transaction_id: Data.transaction_id,
+            currency_symbol: Data.currency_symbol
           })
         }
       >
