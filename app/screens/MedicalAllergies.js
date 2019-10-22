@@ -202,7 +202,7 @@ class MedicalAllergies extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           drawerAction={this.drawerActionCallback}
-          leftNav="back"
+          leftNav="backtoProfile"
           rightNav="Adding-MedAllergies"
         />
 
