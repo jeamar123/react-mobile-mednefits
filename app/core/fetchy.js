@@ -91,7 +91,7 @@ export async function LoginProcess(username, password, callback) {
         // getNotify('', result.error_description);
         await callback(result);
       } else {
-        getNotify('', 'Success! Wait a second...');
+        // getNotify('', 'Success! Wait a second...');
 
         data = result.data;
         data_parse = typeof data == 'string' ? JSON.parse(data) : data;
@@ -105,11 +105,11 @@ export async function LoginProcess(username, password, callback) {
         await Core.SetDataLocal(params, async (err, result) => {
           if (result) {
             user_data = {
-             key: 'user_id',
-             value: String(data_parse.user_id),
+              key: 'user_id',
+              value: String(data_parse.user_id),
             };
             await Core.SetDataLocal(user_data, async (err, result) => {
-             console.log('result user_id key from login', result)
+              console.log('result user_id key from login', result)
             });
             await callback('', true);
             // Actions.Home({ type: 'reset' });
@@ -1055,11 +1055,11 @@ export function SwitchAccount(param, callback) {
         Core.SetDataLocal(params, async (err, result) => {
           if (result) {
             user_data = {
-               key: 'user_id',
-               value: String(data_parse.user_id),
-             };
+              key: 'user_id',
+              value: String(data_parse.user_id),
+            };
             await Core.SetDataLocal(user_data, async (err, result) => {
-             console.log('result user_id key from login', result)
+              console.log('result user_id key from login', result)
             });
             callback('', true);
             Actions.Home({ type: 'reset' });
