@@ -149,7 +149,7 @@ class Summary extends Component {
                             color: '#2C3E50',
                             fontSize: RF(2.0),
                             fontWeight: 'bold',
-                            width: responsiveWidth(50),
+                            width: responsiveWidth(45),
                             marginRight: responsiveWidth(5),
                           }}
                           numberOfLines={3}
@@ -419,21 +419,23 @@ class Summary extends Component {
                           source={{ uri: this.props.clinic_image }}
                           style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                         />
-                        <View>
+                        <View
+                          style={{
+                            width: responsiveWidth(52.5),
+                            marginRight: responsiveWidth(2),
+                          }}>
                           <Text
                             style={{
                               fontFamily: Config.FONT_FAMILY_ROMAN,
                               color: '#2C3E50',
-                              fontSize: RF(2.0),
-                              fontWeight: 'bold',
-                              width: responsiveWidth(50),
-                              marginRight: responsiveWidth(5),
+                              fontSize: RF(1.8),
+                              fontWeight: 'bold'
                             }}
                             numberOfLines={3}
                           >
                             {(this.props.result.data.clinic_name) ? this.props.result.data.clinic_name : ""}
                           </Text>
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }} numberOfLines={3}>
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.5), marginTop: '2%' }} numberOfLines={3}>
                             Service : {(this.props.result.data.services) ? this.props.result.data.services : ""}
                           </Text>
                         </View>
@@ -471,7 +473,7 @@ class Summary extends Component {
                           Make Payment in Cash
                         </Text>
                         <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(0.5) }}
+                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(1.2) }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
                           <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>

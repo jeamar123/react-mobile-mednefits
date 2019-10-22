@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.7</string>
+	<string>2.0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -66,7 +66,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the react-native-permissions library, which references this permission in its code.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera.</string>
+	<string>We need this permission for user to scan QR Code to do transaction on clinic</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need this permission to look for nearby location for clinic</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -78,7 +78,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>We need this permission to access your photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app requires access to the photo library.</string>
+	<string>We need this permission for you to upload profile picture</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the react-native-permissions library, which references this permission in its code.</string>
 	<key>UIAppFonts</key>
