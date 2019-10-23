@@ -1127,10 +1127,10 @@
 			isa = PBXGroup;
 			children = (
 				070A04552220CF5B0065B0A4 /* Singapore.gpx */,
+				075412252218155800455254 /* Philippines.gpx */,
 				071F9078221EE4F800B96431 /* Default-568h@2x.png */,
 				07CE93BD221BD9A900EF98C3 /* fonts */,
 				07A594362218E82F00D16994 /* AirGoogleMaps */,
-				075412252218155800455254 /* Philippines.gpx */,
 				13B07FAE1A68108700A75B9A /* MednefitsMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* MednefitsMobileTests */,
