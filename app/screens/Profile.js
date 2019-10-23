@@ -89,7 +89,7 @@ class Profile extends Component {
           isVisible={this.state.isLoading}
         />
         <Navbar
-          leftNav="back"
+          leftNav="back-eclaim"
           Services={this.props.services}
           clinic_Id={this.props.clinicid}
           member={this.props.member}

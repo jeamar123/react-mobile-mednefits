@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import {
   StatusBar,
   View,
+  Image,
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Text } from 'native-base';
+import { Text, Drawer, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
+import { ButtonCall } from '../components/common/ButtonCall';
 import * as Config from '../config';
 import * as Core from '../core';
+import * as Common from '../components/common';
 
 class MedicalHistory extends Component {
   constructor(props) {
@@ -126,44 +131,28 @@ class MedicalHistory extends Component {
 
         <View
           style={{
-            flex: 1,
-            marginTop: 5,
-            marginBottom: 10,
-            height: 50,
             backgroundColor: '#fff',
-            opacity: 10000,
+            borderTopLeftRadius: 5,
+            borderTopRightRadius: 5,
+            // width: '90%'
+            marginBottom: responsiveHeight(1),
           }}
         >
           <View
             style={{
               flexDirection: 'row',
-              marginTop: '2%',
-              width: '38%',
-              marginLeft: 5,
-              marginRight: 5
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: responsiveHeight(2),
+              marginLeft: '5%',
+              marginRight: '5%'
             }}
           >
-            <Text
-              style={{
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-                fontSize: 16,
-                marginTop: 5,
-                marginLeft: 5,
-                width: '100%',
-              }}
-            >
-              {Data.clinic_name} {Data.record_id}
-            </Text>
-            <Text
-              style={{
-                fontFamily: Config.FONT_FAMILY_LIGHT,
-                fontSize: 14,
-                paddingLeft: '15%',
-                marginTop: 5,
-                width: '100%',
-              }}
-            >
-              {Data.date}
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
+              Clinic{' '}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_BOLD, color: '#848484', fontSize: RF(1.8) }}>
+                {'' + Data.clinic_name} - {Data.record_id}
+              </Text>
             </Text>
             <TouchableOpacity
               onPress={() =>
@@ -175,7 +164,7 @@ class MedicalHistory extends Component {
                 backgroundColor: '#ED153F',
                 borderRadius: 5,
                 alignSelf: 'center',
-                width: '45%'
+                width: responsiveWidth(20)
               }}
             >
               <Text
@@ -189,6 +178,68 @@ class MedicalHistory extends Component {
             </Text>
             </TouchableOpacity>
           </View>
+
+          <View>
+            <Common.Divider />
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: responsiveHeight(1),
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}
+          >
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
+              Type Visit{' '}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_BOLD, color: '#848484', fontSize: RF(1.8) }}>
+                {'' + Data.visit_type}
+              </Text>
+            </Text>
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
+              Date : {Data.date}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: responsiveHeight(2),
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}
+          >
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
+              Doctor{' '}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_BOLD, color: '#848484', fontSize: RF(1.8) }}>
+                {'' + Data.doctor}
+              </Text>
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: responsiveHeight(1.5),
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}
+          >
+            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.8) }}>
+              Notes from doctor : {' '}
+              <Text style={{ fontFamily: Config.FONT_FAMILY_BOLD, color: '#848484', fontSize: RF(1.8) }}>
+                {'' + Data.note}
+              </Text>
+            </Text>
+          </View>
+
         </View>
       ));
     }
@@ -196,7 +247,9 @@ class MedicalHistory extends Component {
 
 
   render() {
+    console.warn(JSON.stringify(this.state.history, null, 4))
     return (
+
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar

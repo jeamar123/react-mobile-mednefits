@@ -305,7 +305,7 @@ class manageProfile extends Component {
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
-          leftNav="back"
+          leftNav="backProfile"
           rightNav="update-profile"
           updateProfile={this.updateProfile}
           onLoaderProcess={this.state.loaderProcess}
