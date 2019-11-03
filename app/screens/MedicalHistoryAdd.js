@@ -154,8 +154,8 @@ class addMedicalHistory extends Component {
               mode="date"
               placeholder="DD-MM-YYYY   "
               format="DD-MM-YYYY"
-              confirmBtnText="Oke"
-              cancelBtnText="Batal"
+              confirmBtnText="Done"
+              cancelBtnText="Cancel"
               customStyles={{
                 dateIcon: { width: 0, height: 0 },
                 dateInput: {
