@@ -91,7 +91,7 @@ class HistoryTransaction extends Component {
       <TouchableOpacity
         key={index}
         onPress={() =>
-          Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+          Actions.HistoryGeneral2({ transaction_id: Data.transaction_id })
         }
       >
         <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>

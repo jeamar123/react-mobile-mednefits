@@ -153,11 +153,56 @@ class DetailEClaim_Transaction extends Component {
                 fontSize: 13
               }}
             >
+              Receipt Amount
+            </Text>
+            <View
+              style={{
+                // padding:-22,
+                // marginTop: '-3%',
+                marginLeft: '9.6%',
+                width: '100%',
+                fontSize: 13
+              }}>
+              <Text
+                style={{
+                  fontSize: 13
+                }}>
+                {this.state.data.amount ? this.state.data.amount : 'N/A'}
+              </Text>
+            </View>
+            {/* <TextInput
+              placeholder="Spending Account"
+              underlineColorAndroid="transparent"
+              color="#000"
+              style={{ marginLeft: '7.5%', fontSize: 13 }}
+              value={this.state.data.spending_type ? this.state.data.spending_type : 'N/A'}
+            /> */}
+          </View>
+
+          {this._renderDivider()}
+
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignContent: 'space-between',
+              marginVertical: 20,
+              marginTop: 20,
+            }}
+          >
+            <Text
+              style={{
+                color: '#c4c4c4',
+                marginLeft: '2%',
+                marginRight: '2%',
+                fontSize: 13
+              }}
+            >
               Spending Account
             </Text>
             <View
               style={{
-                padding: 5,
+                padding: -2,
                 marginTop: '-1%',
                 marginLeft: '5.6%',
                 width: '100%',
