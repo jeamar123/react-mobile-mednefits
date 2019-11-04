@@ -342,7 +342,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(5),
-                  height: responsiveHeight(47),
+                  height: responsiveHeight(44.5),
                   borderRadius: 5
                 }}
               >
@@ -397,7 +397,7 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: responsiveHeight(10)
+                      height: responsiveHeight(9.7)
                     }}
                   >
                     <View
@@ -449,7 +449,7 @@ class Summary extends Component {
                       backgroundColor: '#FF5757',
                       width: '90%',
                       marginTop: 10,
-                      height: responsiveHeight(10.5)
+                      height: responsiveHeight(10.7)
                     }}
                   >
                     <View

@@ -281,7 +281,8 @@ const styles = {
     flexWrap: 'wrap',
   },
   gridBox: {
-    width: width / 3.8,
+    // width: width / 4.2,
+    width: responsiveWidth(26),
     height: responsiveHeight(16),
     backgroundColor: '#fff',
     margin: 10,

@@ -14,6 +14,8 @@ import Modal from 'react-native-modal';
 import { Container } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import ZoomImage from 'react-native-zoom-image';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import ResponsiveImage from 'react-native-responsive-image';
 import { ButtonFooter, Popup } from '../components/common';
 import Texti from "../components/common/Texti"
@@ -611,7 +613,7 @@ class DetailEclaim extends Component {
               </View>
             </View>
 
-            <View style={{marginLeft: -15, marginRight: -15}}>
+            <View style={{ marginLeft: -15, marginRight: -15 }}>
               <Common.Divider noMargin />
             </View>
 
@@ -644,10 +646,10 @@ class DetailEclaim extends Component {
             }}
           >
             <Common.Texti
-              fontSize={16}
+              fontSize={RF(2.4)}
               fontColor={"#ffffff"}
               style={{
-                padding: 10
+                padding: responsiveHeight(1.85)
               }}>
               {this.state.button}
             </Common.Texti>
