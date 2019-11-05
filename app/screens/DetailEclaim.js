@@ -649,7 +649,8 @@ class DetailEclaim extends Component {
               fontSize={RF(2.4)}
               fontColor={"#ffffff"}
               style={{
-                padding: responsiveHeight(1.85)
+                paddingBottom: responsiveHeight(2.9),
+                paddingTop: responsiveHeight(1.7),
               }}>
               {this.state.button}
             </Common.Texti>

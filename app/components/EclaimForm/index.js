@@ -270,7 +270,7 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
-                    fontSize: RF(1.6),
+                    fontSize: RF(1.75),
                     color: "#2C3E50",
                   }}
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
@@ -477,7 +477,8 @@ export default class EclaimForm extends Component {
               fontSize={RF(2.4)}
               fontColor={"#ffffff"}
               style={{
-                padding: responsiveHeight(2.2)
+                paddingBottom: responsiveHeight(2.9),
+                paddingTop: responsiveHeight(1.7),
               }}>
               Next
             </Common.Texti>

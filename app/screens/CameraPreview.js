@@ -156,7 +156,8 @@ export default class CameraPreview extends Component {
             fontSize={RF(2.4)}
             fontColor={"#ffffff"}
             style={{
-              padding: responsiveHeight(1.6)
+              paddingBottom: responsiveHeight(2.2),
+              paddingTop: responsiveHeight(1.6),
             }}>
             Next
             </Common.Texti>

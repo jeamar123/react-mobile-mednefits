@@ -342,7 +342,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(5),
-                  height: responsiveHeight(44.5),
+                  height: responsiveHeight(41),
                   borderRadius: 5
                 }}
               >
@@ -397,7 +397,7 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: responsiveHeight(9.7)
+                      height: responsiveHeight(10.2)
                     }}
                   >
                     <View
@@ -448,8 +448,8 @@ class Summary extends Component {
                     style={{
                       backgroundColor: '#FF5757',
                       width: '90%',
-                      marginTop: 10,
-                      height: responsiveHeight(10.7)
+                      marginTop: responsiveHeight(2),
+                      height: responsiveHeight(11.5)
                     }}
                   >
                     <View
@@ -464,7 +464,7 @@ class Summary extends Component {
                         }}>
                         <Text
                           style={{
-                            marginTop: 10,
+                            marginTop: responsiveHeight(1.5),
                             color: '#fff',
                             fontSize: RF(2.2),
                             fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -473,7 +473,7 @@ class Summary extends Component {
                           Make Payment in Cash
                         </Text>
                         <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(1.2) }}
+                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
                           <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>

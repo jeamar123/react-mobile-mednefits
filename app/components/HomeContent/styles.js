@@ -42,7 +42,7 @@ export default EStyleSheet.create({
   title: {
     fontFamily: Config.FONT_FAMILY_ROMAN,
     textAlign: 'center',
-    lineHeight: 13,
+    lineHeight: 18,
     // fontSize: RF(2.3),
     fontSize: RF(2.1),
     fontWeight: '600',
