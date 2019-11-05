@@ -249,7 +249,7 @@ class History extends Component {
           }}>
           <View style={{ flex: 1, width: '100%', marginTop: responsiveHeight(2), marginBottom: responsiveHeight(10) }}>
             <TouchableOpacity
-              onPress={() => Actions.receiptUpload({ transaction_id: this.props.transaction_id })}
+              onPress={() => Actions.receiptUpload2({ transaction_id: this.props.transaction_id })}
               style={{
                 backgroundColor: "#efeff4",
                 justifyContent: 'center',
