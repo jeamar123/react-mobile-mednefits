@@ -44,6 +44,7 @@ class manageProfile extends Component {
       medCondition: [],
       medication: [],
       loaderProcess: false,
+      isLoading: false
     };
     this.updateProfile = this.updateProfile.bind(this);
   }
@@ -53,17 +54,20 @@ class manageProfile extends Component {
   }
 
   GetDataProfile() {
+    this.setState({ isLoading: true })
     Core.UserDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      console.log(data);
+      console.warn(JSON.stringify(data, null, 4))
+      setInterval(() => {
+        this.setState({ isLoading: false })
+      }, 500);
       this.setState({
         Full_name: data.profile.full_name,
         nirc_number: data.profile.nric,
         email: data.profile.email,
         PhoneNumber: data.profile.mobile_phone,
-        Dob: moment( data.profile.dob, [ 'YYYY-MM-DD', 'DD-MM-YYYY' ] ).format('DD/MM/YYYY'),
+        Dob: moment(data.profile.dob, ['YYYY-MM-DD', 'DD-MM-YYYY']).format('DD/MM/YYYY'),
         today: moment().format('DD/MM/YYYY'),
         Weight: data.profile.weight,
         Height: data.profile.height,
@@ -104,7 +108,7 @@ class manageProfile extends Component {
               email: email,
               nric: nric,
               mobile_phone: mobile_phone,
-              dob: moment( dob, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+              dob: moment(dob, 'DD/MM/YYYY').format('YYYY-MM-DD'),
               weight: weight,
               height: height,
               bmi: bmi,
@@ -301,12 +305,14 @@ class manageProfile extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
+
         <Navbar
-          leftNav="back"
+          leftNav="backProfile"
           rightNav="update-profile"
           updateProfile={this.updateProfile}
           onLoaderProcess={this.state.loaderProcess}
         />
+
         <View
           style={{
             flexDirection: 'column',
@@ -331,6 +337,9 @@ class manageProfile extends Component {
             navigator.push(route); // The ModalWidget will be opened using this method. Tested with ExNavigator
           }}
         >
+          <Core.Loader
+            isVisible={this.state.isLoading}
+          />
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
@@ -427,7 +436,7 @@ class manageProfile extends Component {
               mode="date"
               format="DD/MM/YYYY"
               minDate="30-01-1945"
-              maxDate={ this.state.today }
+              maxDate={this.state.today}
               confirmBtnText="Done"
               cancelBtnText="Cancel"
               customStyles={{

@@ -17,7 +17,30 @@ export default class InputTime extends Component {
       minutes = duration.getMinutes(),
       hours = duration.getHours()
 
-    var mid = 'AM';
+    var date_format = '12'; /* FORMAT CAN BE 12 hour (12) OR 24 hour (24)*/
+    var ext = '';
+
+    if (date_format == '12') {
+      if (hours > 12) {
+        ext = 'PM';
+        hours = (hours - 12);
+
+        if (hours < 10) {
+          result = "0" + hours;
+        } else if (hours == 12) {
+          hours = "00";
+          ext = 'AM';
+        }
+      }
+      else if (hours < 12) {
+        result = ((hours < 10) ? "0" + hours : hours);
+        ext = 'AM';
+      } else if (hours == 12) {
+        ext = 'PM';
+      }
+    }
+
+    // var mid = 'AM';
     if (hours == 0) { //At 00 hours we need to show 12 am
       hours = 12;
     }
@@ -30,7 +53,7 @@ export default class InputTime extends Component {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-    return hours + ":" + minutes + ' ' + mid;
+    return hours + ":" + minutes + ' ' + ext;
   }
   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
@@ -48,7 +71,7 @@ export default class InputTime extends Component {
       >
         <Common.Texti
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
-          fontSize={RF(1.9)}
+          fontSize={RF(1.75)}
           fontFamily={Config.FONT_FAMILY_MEDIUM}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}

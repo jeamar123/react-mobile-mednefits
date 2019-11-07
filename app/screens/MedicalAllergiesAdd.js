@@ -93,8 +93,8 @@ class AddAllergies extends Component {
         style={{
           borderBottomColor: '#cccccc',
           borderBottomWidth: 0.8,
-          marginTop: '-2%',
-          marginBottom: '5%',
+          marginTop: '3%',
+          marginBottom: '8%',
         }}
       />
     );
@@ -135,7 +135,7 @@ class AddAllergies extends Component {
               placeholder=""
               underlineColorAndroid="transparent"
               style={{
-                marginTop: '-4%',
+                // marginTop: '-4%',
                 width: '40%',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}

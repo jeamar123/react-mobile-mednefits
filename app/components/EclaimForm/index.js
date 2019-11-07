@@ -275,7 +275,7 @@ export default class EclaimForm extends Component {
                   onChangeText={text => this.setState({ provider: text })}
                   placeholder="Name of Provider"
                   inputStyle={{
-                    fontSize: RF(1.6),
+                    fontSize: RF(1.75),
                     color: "#2C3E50",
                   }}
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
@@ -322,14 +322,14 @@ export default class EclaimForm extends Component {
                     if (!date) {
                       return <Common.Texti
                         fontColor={(this.state.date == 'Input Date') ? "#9e9e9e" : "#2c3e50"}
-                        fontSize={RF(1.9)}
+                        fontSize={RF(1.75)}
                         fontFamily={Config.FONT_FAMILY_MEDIUM}
                       >{this.state.date}</Common.Texti>
                     }
                     const dateStr = `${day} ${month} ${year}`
                     return <Common.Texti
                       fontColor={"#2c3e50"}
-                      fontSize={RF(1.9)}
+                      fontSize={RF(1.75)}
                       fontFamily={Config.FONT_FAMILY_MEDIUM}
                     >{dateStr}</Common.Texti>
                   }}
@@ -520,10 +520,11 @@ export default class EclaimForm extends Component {
             }}
           >
             <Common.Texti
-              fontSize={16}
+              fontSize={RF(2.4)}
               fontColor={"#ffffff"}
               style={{
-                padding: 10
+                paddingBottom: responsiveHeight(2.9),
+                paddingTop: responsiveHeight(1.7),
               }}>
               Next
             </Common.Texti>

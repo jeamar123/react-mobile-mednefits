@@ -23,6 +23,7 @@ class checkinUser extends Component {
     this.state = {
       kickout: false,
       isLoading: false,
+      isLoading2: false,
       services: '',
       clinicid: '',
       member: '',
@@ -44,11 +45,21 @@ class checkinUser extends Component {
     await Core.CancelVisit({ check_in_id: this.props.checkId }, async (err, result) => {
       // console.warn(result);
       if (result.status == true) {
-        Core.getNotify('', result.message);
+        this.setState({ isLoading2: true })
+
+        if (this.state.isLoading2 == true) {
+
+          setTimeout(() => {
+            this.setState({ isLoading2: false })
+            Actions.Home({ type: 'reset' });
+          }, 1500);
+
+        }
+        // Core.getNotify('', result.message);
         user = await Core.GetDataLocalReturnNew('user_id');
         newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
         AsyncStorage.removeItem(newUserCheckinIDName);
-        Actions.Home({ type: 'reset' });
+
       } else {
         Core.getNotify('', 'Failed Cancel Check In, please try again');
       }
@@ -82,7 +93,7 @@ class checkinUser extends Component {
       consultation_fee_symbol: data.consultation_fee_symbol,
       consultation_status: data.consultation_status,
       consultation_fees: data.consultation_fees,
-      isLoading: true
+      isLoading: true,
     })
 
     await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
@@ -135,12 +146,32 @@ class checkinUser extends Component {
     );
   }
 
+  customLoader2() {
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isLoading2}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          onModalHide={this.statusModal}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <ActivityIndicator color="#fff" size="large" />
+        </Modal>
+      </View>
+    );
+  }
+
   render() {
     // console.warn('kickout ' + this.state.kickout)
     // console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#3F9D59' }}>
         {this.customLoader()}
+        {this.customLoader2()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           title="Register"
@@ -198,7 +229,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: 40
           }}>
-            Checked in {this.props.checkTime.replace('am','AM').replace('pm','PM')}
+            Checked in {this.props.checkTime.replace('am', 'AM').replace('pm', 'PM')}
           </Text>
 
           <View style={{ backgroundColor: '#fff', width: '90%' }}>

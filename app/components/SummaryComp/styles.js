@@ -43,7 +43,7 @@ export default EStyleSheet.create({
   detail2: {
     fontFamily: Config.FONT_FAMILY_BOLD,
     fontSize: RF(5.2),
-    lineHeight: 38,
+    lineHeight: 41,
     color: '#fff',
     fontWeight: '600',
   },

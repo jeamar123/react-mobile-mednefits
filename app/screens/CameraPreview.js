@@ -4,6 +4,8 @@ import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 import { Actions } from 'react-native-router-flux';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/NavbarGrey';
 import { Text } from '../common';
 import * as Common from '../components/common';
@@ -151,10 +153,11 @@ export default class CameraPreview extends Component {
           }}
         >
           <Common.Texti
-            fontSize={16}
+            fontSize={RF(2.4)}
             fontColor={"#ffffff"}
             style={{
-              padding: 10
+              paddingBottom: responsiveHeight(2.2),
+              paddingTop: responsiveHeight(1.6),
             }}>
             Next
             </Common.Texti>

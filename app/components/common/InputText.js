@@ -3,6 +3,7 @@ import { View, TextInput, TouchableOpacity } from 'react-native'
 import * as Config from '../../config'
 import * as Common from './index'
 import Icons from 'react-native-vector-icons/FontAwesome';
+import RF from "react-native-responsive-fontsize";
 
 export default class InputText extends Component {
 
@@ -27,7 +28,7 @@ export default class InputText extends Component {
             name="search"
             style={{
               color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
-              fontSize: 14,
+              fontSize: RF(1.75),
               paddingLeft: 10,
               paddingRight: 10
             }}
@@ -42,7 +43,7 @@ export default class InputText extends Component {
           placeholder={this.props.placeholder}
           placeholderTextColor={(this.props.iconColor) ? '#2C3E50' : "#9e9e9e"}
           placeholderStyle={[{
-            fontSize: 14,
+            fontSize: RF(1.75),
             fontFamily: Config.FONT_FAMILY_REGULAR,
           }, this.props.placeholderStyle]}
           style={[style.inputStyle, { textAlign: (this.props.leftToRight) ? 'right' : 'left' }]}
@@ -55,7 +56,7 @@ export default class InputText extends Component {
               name="remove"
               style={{
                 color: (this.props.iconColor) ? this.props.iconColor : '#9e9e9e',
-                fontSize: 14,
+                fontSize: RF(1.75),
                 paddingLeft: 10,
                 paddingRight: 10,
               }}
