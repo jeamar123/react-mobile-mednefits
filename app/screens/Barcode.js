@@ -67,14 +67,12 @@ class Barcode extends Component {
   scanBarcode = (data) => {
     this.setState({ isLoading: true })
     barcodeData = data
-    console.warn('databarcode ' + barcodeData);
+    // console.warn('databarcode ' + barcodeData);
 
     try {
       Core.GetBarcodeData(barcodeData.data + "?check_in_time=" + this.state.timeNow, (result) => {
         if (result.status) {
-          console.warn("res " + JSON.stringify(result));
-          console.log( result );
-
+          // console.warn("res " + JSON.stringify(result));
 
           Actions.checkinUser({
             type: 'reset',
@@ -103,10 +101,10 @@ class Barcode extends Component {
             key: newUserCheckinIDName,
             value: JSON.stringify(result.data)
           }
-          console.warn("new user checkin name", userCheckinID);
+          // console.warn("new user checkin name", userCheckinID);
           Core.SetDataLocal(userCheckinID, (err, result) => {
             if (result) {
-              console.warn("Set a new userCheckinID", userCheckinID);
+              // console.warn("Set a new userCheckinID", userCheckinID);
             }
           })
 
@@ -133,21 +131,21 @@ class Barcode extends Component {
   }
 
   barcodeHandler(data) {
-    console.warn('setdata');
-    console.warn(data);
+    // console.warn('setdata');
+    // console.warn(data);
     if (data) {
       this.setState({ data: data, isLoading: true })
     }
   }
 
   onBarCodeRead = async obj => {
-    console.log('reading...');
+    // console.log('reading...');
     if (this.state.data == obj.data) return;
     this.setState({ data: obj, isLoading: true })
   }
 
   render() {
-    console.warn(this.state.data);
+    // console.warn(this.state.data);
     return (
       <Container>
         <Navbar leftNav="back-home" />

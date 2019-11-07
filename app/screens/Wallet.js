@@ -75,6 +75,7 @@ class Wallet extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(JSON.stringify(data, null, 4))
+      console.log( data );
       this.setState({ isLoading: false })
       this.setState({
         medicalData: data,
@@ -94,6 +95,7 @@ class Wallet extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.warn(data);
+      console.log( data );
       this.setState({ isLoading: false })
       this.setState({
         wellnessData: data,

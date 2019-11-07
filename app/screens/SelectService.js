@@ -45,12 +45,12 @@ class SelectService extends Component {
 
   async StatusUseronClinic() {
     user = await Core.GetDataLocalReturnNew('user_id');
-    console.log('user data from home', user)
+    // console.log('user data from home', user)
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
-    console.log('newUserCheckinIDName from home', newUserCheckinIDName)
+    // console.log('newUserCheckinIDName from home', newUserCheckinIDName)
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
-    console.warn('storageData ' + JSON.stringify(data, 4, null))
+    // console.warn('storageData ' + JSON.stringify(data, 4, null))
 
     this.setState({
       clinicid: data.clinic_id,
@@ -88,7 +88,7 @@ class SelectService extends Component {
           })
         }, 1500)
       }
-      console.warn('data ' + data.check_in_status_removed);
+      // console.warn('data ' + data.check_in_status_removed);
       // await this.setState({
       //   kickout: result.data.check_in_status_removed,
       // });
@@ -193,7 +193,7 @@ class SelectService extends Component {
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props, null, 4))
+    // console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         {this.customLoader()}

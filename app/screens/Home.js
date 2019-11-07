@@ -250,8 +250,6 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-      console.log(error)
-      console.log(result)
       // if(result) {
       Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
       // }
@@ -353,7 +351,6 @@ class ClinicList extends Component {
 class Home extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       data: false,
       searchdata: false,
@@ -402,7 +399,6 @@ class Home extends Component {
     // })
     //   .then(latestVersion => {
     //     // console.warn('latest - ' + latestVersion);    // 0.1.2
-    //     console.log('latest - ' + latestVersion);    // 0.1.2
     //     this.setState({
     //       appstoreVersion: latestVersion,
     //     })
@@ -414,11 +410,10 @@ class Home extends Component {
     fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
       .then( res => res.json() )
       .then( json => {
-        console.log( json.results[0].version );
         this.setState({
           appstoreVersion: json.results[0].version,
         })
-        this.inAppTrigger();
+        // this.inAppTrigger();
       });
 
   }
@@ -444,7 +439,6 @@ class Home extends Component {
 
     // Fetch Details and check autologout trigger
     Core.UserDetail(async (err, result)=>{
-      console.log( result );
       if( result.data.profile.to_update_auto_logout == true ){
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');

@@ -183,7 +183,7 @@ class SelectList extends Component {
             style={{
               color: (this.props.value) ? "#2c3e50" : "#9e9e9e",
               fontWeight: '500',
-              textDecorationLine: 'underline'
+              // textDecorationLine: 'underline'
             }}
           >
             {this.setTitle()}

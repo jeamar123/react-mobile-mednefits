@@ -142,7 +142,7 @@ class ConfirmPay extends Component {
     };
 
     Core.CreatePayment(params, async (err, result) => {
-      console.warn(result);
+      // console.warn(result);
       if (result.status) {
         Core.getNotify('', result.message);
         user = await Core.GetDataLocalReturnNew('user_id');
@@ -159,7 +159,7 @@ class ConfirmPay extends Component {
   }
 
   statusModal = () => {
-    console.warn('modal hide completely')
+    // console.warn('modal hide completely')
     if (this.state.failed) {
       this.setState({ showPopUp: true });
     } else {
@@ -287,7 +287,7 @@ class ConfirmPay extends Component {
 
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    // console.warn("props: " + JSON.stringify(this.props))
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         {this.customLoader()}
