@@ -42,7 +42,7 @@ export default class EclaimForm extends Component {
       file: false,
       isLoading: false,
       company_currency: 'SGD',
-      currency: false,
+      currency: 'SGD',
       currencyData: [
         {
           label: "Please choose currency first",
@@ -58,6 +58,7 @@ export default class EclaimForm extends Component {
   }
 
   componentWillMount() {
+    this.getUserDetail();
     this.getMember();
     this.selectSpending("medical");
     this.getCurrency();
@@ -66,7 +67,7 @@ export default class EclaimForm extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.currencyState !== this.props.currencyState) {
       this.setState({
-        currency: this.props.currency
+        currency: this.state.currency
       })
     }
   }
@@ -81,6 +82,17 @@ export default class EclaimForm extends Component {
       time: this.props.time,
       updateDataSelect: true
     })
+  }
+
+  async getUserDetail() {
+    await Core.UserDetail(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        currency: data.profile.currency_type.toUpperCase(),
+        company_currency: data.profile.currency_type.toUpperCase(),
+      });
+    });
   }
 
   async getMember() {
@@ -112,12 +124,9 @@ export default class EclaimForm extends Component {
           dataCurrency.push({ label: currency.currency_name, value: (currency.currency_name == "SGD - Singapore Dollar") ? "SGD" : "MYR" })
         });
 
-        var curr = this.state.company_currency != null ? this.state.company_currency : "SGD";
-
         this.setState({
           currencyState: "Select",
           currencyData: dataCurrency,
-          currency: curr,
         })
       }
     })

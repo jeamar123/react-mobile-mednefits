@@ -38,7 +38,7 @@ class History extends Component {
       data: false,
       isLoading: false,
       refreshing: false,
-      currency_symbol: this.props.currency_symbol == 'S$' || this.props.currency_symbol == 'SGD' ? 'SGD' : 'MYR',
+      currency_symbol: this.props.currency_symbol,
       malaysia_exchange_rate: '3.00',
     };
     console.log( this.props );
@@ -432,6 +432,7 @@ class History extends Component {
           leftNav="history-back" 
           rightNav="currency-toggle" 
           currency_symbol={ this.props.currency_symbol } 
+          company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
           title="History" 
         />

@@ -129,7 +129,6 @@ class HomeContent extends Component {
     await Core.UserDetail(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
       await this.setState({
         Full_name: data.profile.full_name,
       });
