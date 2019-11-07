@@ -66,6 +66,7 @@ export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt
 export const USER_UPLOAD_RECEIPT_BULK       = USER + "/upload_in_network_receipt_bulk"
 export const USER_MEMBERLIST                = USER+"/member_lists"
 export const FAMILY_COVERAGE                = USER+"/family_coverage_user_lists"
+export const UPDATE_NOTIF                   = USER + "/update_notif_status"
 
 /* LOCAL VARIABLE */
 export const ACCESS_TOKEN                   = "access_token"

@@ -28,7 +28,8 @@ class Wallet extends Component {
       wellnessoutNetwork: [],
       visible: true,
       isLoading: this.props.isLoading,
-      type: 'in_network_transactions'
+      type: 'in_network_transactions',
+      company_currency: null
     };
     this.selectSpending = this.selectSpending.bind(this);
     this.selectWallet = this.selectWallet.bind(this);
@@ -50,6 +51,7 @@ class Wallet extends Component {
   }
 
   componentWillMount() {
+    this.getUserDetail()
     this.selectWallet("Medical")
     this.getMedicalWallet();
     this.getWelnnessWallet();
@@ -60,6 +62,18 @@ class Wallet extends Component {
 
   componentDidMount() {
     this.selectSpending("in_network_transactions");
+  }
+
+  async getUserDetail() {
+    await Core.UserDetail(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        console.log( data );
+      await this.setState({
+        company_currency: data.profile.currency_type.toUpperCase(),
+      });
+      console.log( this.state );
+    });
   }
 
   async selectSpending(type) {
@@ -78,7 +92,7 @@ class Wallet extends Component {
     Core.GetBalanceMedical((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      console.log(data);
       this.setState({ isLoading: false })
       this.setState({
         medicalData: data,
@@ -97,7 +111,7 @@ class Wallet extends Component {
     Core.GetBalanceWellness((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
+      console.log(data);
       this.setState({ isLoading: false })
       this.setState({
         wellnessData: data,
@@ -119,7 +133,7 @@ class Wallet extends Component {
             <TouchableOpacity
               key={index}
               onPress={() =>
-                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id , currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
               }
             >
               <View
@@ -293,7 +307,7 @@ class Wallet extends Component {
             <TouchableOpacity
               key={index}
               onPress={() =>
-                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id , currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
               }
             >
               <View

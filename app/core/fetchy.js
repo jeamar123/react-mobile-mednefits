@@ -154,6 +154,29 @@ export async function UserDetail(callback) {
   }, 100);
 }
 
+export const GetUpdateNotifStatus = async (callback) => {
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      params = {
+        url: Config.UPDATE_NOTIF,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      await fetching(params, async result => {
+        await callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error ' + e.message);
+    getNotify('', 'Failed, try again');
+  }
+}
+
+
 export async function GetBalance(callback) {
   await setTimeout(async function () {
     try {
