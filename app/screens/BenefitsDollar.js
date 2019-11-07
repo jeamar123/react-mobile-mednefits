@@ -221,7 +221,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'RM') ? (Numeral(this.state.Balance).value() * 3).toFixed(2) : this.state.Balance}
+                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'MYR') ? (Numeral(this.state.Balance).value() * 3).toFixed(2) : this.state.Balance}
               </Text>
             </View>
 

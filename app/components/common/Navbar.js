@@ -28,7 +28,7 @@ export default class Navbar extends React.Component {
       loading: false,
       right: false,
       left: false,
-      currency_symbol: this.props.currency_symbol == 'S$' || this.props.currency_symbol == 'SGD' ? 'SGD' : 'MYR',
+      currency_symbol: this.props.currency_symbol,
     };
     console.log( this.props );
     console.log( this.state );
@@ -1112,7 +1112,7 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'currency-toggle') {
+    } else if (this.props.rightNav == 'currency-toggle' && this.props.company_currency == 'MYR') {
       return (
         <View
           style={{
