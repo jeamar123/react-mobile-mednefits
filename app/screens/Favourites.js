@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { Text, Drawer } from 'native-base';
+import { Text, Drawer, Icon } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import ResponsiveImage from 'react-native-responsive-image';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
+import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import { MenuSide } from '../components/HomeContent';
 import * as Config from '../config';
@@ -64,7 +66,7 @@ class Favourites extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(JSON.stringify(data, null, 4))
       setInterval(() => {
-      0
+        this.setState({ isLoading: false })
       }, 500);
       this.setState({ resultData: data, data: true });
     });
@@ -75,10 +77,33 @@ class Favourites extends Component {
       status: this.state.favourite == 0 ? 1 : 0,
       clinicid: id_Clinic
     }
-
+    this.setState({ isLoading: true })
     Core.AddFavouriteClinic(params, (err, result) => {
       if (result.status) {
+        // if (this.state.favourite == 1) {
+        //   Core.getNotify('', 'Success Add Favourite Clinic');
+        //   this.setState({ favourite: 0 });
+        //   Actions.Favourites()
+        //   setInterval(() => {
+        //     this.setState({ isLoading: false })
+        //   }, 500);
+        // } else {
+        //   Core.getNotify('', 'Success Remove Favourite Clinic');
+        //   this.setState({ favourite: 0 });
+        //   Actions.Favourites()
+        //   setInterval(() => {
+        //     this.setState({ isLoading: false })
+        //   }, 500);
+        // }
+
         if (this.state.favourite == 1) {
+          Core.getNotify('', 'Success Add Favourite Clinic');
+          this.setState({ favourite: 0 });
+          Actions.Favourites()
+          setInterval(() => {
+            this.setState({ isLoading: false })
+          }, 500);
+        } else {
           Core.getNotify('', 'Success Remove Favourite Clinic');
           this.setState({ favourite: 0 });
           Actions.Favourites()
@@ -86,6 +111,8 @@ class Favourites extends Component {
             this.setState({ isLoading: false })
           }, 500);
         }
+
+
       } else if (!result.status) {
         Core.getNotify('', result.message);
       } else {
@@ -99,8 +126,8 @@ class Favourites extends Component {
       return (
         <ResponsiveImage
           source={require('../../assets/apps/like_fav.png')}
+          resizeMode="contain"
           style={{
-            resizeMode: 'center',
             marginRight: '5%',
             marginTop: '50%'
           }}
@@ -111,8 +138,8 @@ class Favourites extends Component {
       return (
         <ResponsiveImage
           source={require('../../assets/apps/likes.png')}
+          resizeMode="contain"
           style={{
-            resizeMode: 'center',
             marginRight: '5%',
             marginTop: '50%'
           }}
@@ -136,7 +163,7 @@ class Favourites extends Component {
             flex: 1,
             marginTop: 5,
             marginBottom: 10,
-            height: 90,
+            height: responsiveHeight(14),
             backgroundColor: '#fff',
             opacity: 10000,
           }}
@@ -144,23 +171,21 @@ class Favourites extends Component {
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Image
+            <ResponsiveImage
               source={{ uri: Data.image_url }}
+              resizeMode="contain"
               style={{
-                height: 80,
-                width: 80,
-                resizeMode: 'center',
-                alignItems: 'center',
                 marginTop: '2%',
                 marginLeft: '2%',
                 marginRight: '2%',
               }}
+              initWidth="80" initHeight="80"
             />
             <View
               style={{
                 flexDirection: 'column',
                 marginTop: '2%',
-                width: '50%',
+                width: '60%',
               }}
             >
               <Text
@@ -168,7 +193,7 @@ class Favourites extends Component {
                 numberOfLines={2}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
-                  fontSize: 12,
+                  fontSize: RF(1.9),
                   marginTop: 5,
                   width: '100%',
                 }}
@@ -177,10 +202,10 @@ class Favourites extends Component {
               </Text>
               <Text
                 ellipsizeMode='tail'
-                numberOfLines={3}
+                numberOfLines={2}
                 style={{
                   color: '#8c8b7f',
-                  fontSize: 10,
+                  fontSize: RF(1.7),
                   fontFamily: Config.FONT_FAMILY_LIGHT,
                 }}
               >
@@ -218,7 +243,12 @@ class Favourites extends Component {
                   </Text>
                 )}
             </View>
-            <TouchableOpacity style={{ marginTop: '4%', marginLeft: '2%' }} onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
+            <TouchableOpacity
+              style={{
+                marginTop: '4%',
+                marginRight: '2%'
+              }}
+              onPress={() => this.AddFavClinic(JSON.stringify(Data.clinic_id))}>
               {this.renderFavourite(Data.favourite)}
             </TouchableOpacity>
           </View>
@@ -271,7 +301,6 @@ class Favourites extends Component {
               <View
                 style={{
                   flex: 1,
-                  marginLeft: '2%',
                   marginRight: '2%',
                   marginTop: '2%',
                 }}
@@ -293,25 +322,26 @@ class Favourites extends Component {
                       }}
                     >
                       <View
-                        style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                        style={{ flexDirection: 'row' }}
                       >
                         <Image
                           source={require('../../assets/apps/plus.png')}
+                          resizeMode="contain"
                           style={{
-                            height: 70,
-                            width: 70,
-                            resizeMode: 'center',
-                            alignItems: 'center',
+                            // flex: 1,
+                            height: 60,
+                            width: 60,
+                            // alignItems: 'center',
                             marginTop: '2%',
-                            marginLeft: '2%',
-                            marginRight: '-5%',
+                            marginLeft: '4%',
+                            // marginRight: '-5%',
                           }}
                         />
                         <View
                           style={{
                             flexDirection: 'column',
                             marginTop: '4%',
-                            marginLeft: '4%',
+                            marginLeft: '2%',
                             width: '45%',
                           }}
                         >
@@ -334,13 +364,6 @@ class Favourites extends Component {
                             Tap here to search and add your favourite clinic to the list
                         </Text>
                         </View>
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            resizeMode: 'center',
-                          }}
-                        />
                       </View>
                     </View>
                   </TouchableOpacity>

@@ -20,7 +20,7 @@ import RF from "react-native-responsive-fontsize";
 import VersionCheck from 'react-native-version-check';
 import Modal from 'react-native-modal';
 import { Text } from '../common';
-import { Popup } from '../components/common';
+import { PopAds } from '../components/common';
 import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
@@ -381,6 +381,7 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
+      popAds: true
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -388,8 +389,12 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    this.isVisibleAds = this.isVisibleAds.bind(this);
   }
 
+  isVisibleAds() {
+    this.setState({ popAds: false })
+  }
   isVisibleUpdate() {
     this.setState({ update: false })
   }
@@ -451,13 +456,13 @@ class Home extends Component {
     }
 
     // Fetch Details and check autologout trigger
-    Core.UserDetail(async (err, result)=>{
-      console.log( result );
-      if( result.data.profile.to_update_auto_logout == true ){
+    Core.UserDetail(async (err, result) => {
+      console.log(result);
+      if (result.data.profile.to_update_auto_logout == true) {
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
         await AsyncStorage.removeItem('longitude');
-        Actions.Login({type: 'reset'});
+        Actions.Login({ type: 'reset' });
       }
     })
 
@@ -572,6 +577,22 @@ class Home extends Component {
     );
   }
 
+  popupAds() {
+    return (
+      <PopAds
+        kind="popAds"
+        //just for example the right parameter is like this isVisible={this.props.isVisible}
+        isVisible={this.state.popAds}
+        closeSection={true}
+        closeSectionUpdate={this.isVisibleAds}
+        title={this.state.title}
+        message={this.state.message}
+        url={this.state.url}
+      >
+      </PopAds>
+    );
+  }
+
   render() {
     console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
     console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
@@ -604,6 +625,7 @@ class Home extends Component {
         onClose={() => this.closeDrawer()}
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
+          {this.popupAds()}
           {this.customLoader()}
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
