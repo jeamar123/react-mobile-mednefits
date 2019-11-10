@@ -78,7 +78,7 @@ console.disableYellowBox = true;
 const transitionConfig = () => {
   return {
     transitionSpec: {
-      duration: 600,
+      duration: 200,
       easing: Easing.out(Easing.poly(4)),
       timing: Animated.timing,
       useNativeDriver: true,
@@ -117,7 +117,7 @@ const transitionConfig = () => {
       const scaleWithOpacity = { opacity, transform: [{ scaleX: scale }, { scaleY: scale }] }
       const slideInFromBottom = { transform: [{ translateY }] }
 
-      return slideFromRight
+      return scaleWithOpacity
     },
   }
 }

@@ -564,7 +564,7 @@ class Home extends Component {
             alignItems: 'center'
           }}
         >
-          <ActivityIndicator color="#fff" size="large" />
+          <ActivityIndicator color="#0392cf" size="large" />
           <Common.Texti
             fontColor="#FFFFFF"
           >Redirecting you to DBS
