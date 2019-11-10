@@ -15,7 +15,7 @@ import VersionCheck from 'react-native-version-check';
 export default class Popup extends Component {
   constructor(props) {
     super(props);
-    console.log( this.props );
+    console.log(this.props);
     this.state = {
       isVisible: this.props.isVisible,
     };
@@ -239,9 +239,9 @@ export default class Popup extends Component {
     }
   }
 
-  goToUrl( ){
-    console.log( this.props.url );
-    Linking.openURL( this.props.url );
+  goToUrl() {
+    console.log(this.props.url);
+    Linking.openURL(this.props.url);
   }
 
   _closeSection() {

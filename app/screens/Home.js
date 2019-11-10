@@ -19,7 +19,7 @@ import VersionCheck from 'react-native-version-check';
 import Modal from 'react-native-modal';
 import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Text } from '../common';
-import { Popup } from '../components/common';
+import { Popup, PopAds } from '../components/common';
 import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
 import * as Core from '../core';
@@ -359,13 +359,18 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
+      popAds: true,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
     this.onUpdateSearch = this.onUpdateSearch.bind(this)
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
+    this.isVisibleAds = this.isVisibleAds.bind(this);
+  }
 
+  isVisibleAds() {
+    this.setState({ popAds: false })
   }
 
   closeDrawer() {
@@ -407,9 +412,9 @@ class Home extends Component {
     //   });
     // // this.checkversion()
 
-    fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
-      .then( res => res.json() )
-      .then( json => {
+    fetch("https://itunes.apple.com/lookup?bundleId=sg.medicloud.user")
+      .then(res => res.json())
+      .then(json => {
         this.setState({
           appstoreVersion: json.results[0].version,
         })
@@ -418,10 +423,10 @@ class Home extends Component {
 
   }
 
-  inAppTrigger(){
+  inAppTrigger() {
     //Get Pop Up
-    console.log( 'app store version', this.state.appstoreVersion );
-    console.log( 'my app version', this.state.thisVersion );
+    console.log('app store version', this.state.appstoreVersion);
+    console.log('my app version', this.state.thisVersion);
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
     } else if (parseInt(this.state.thisVersion.substring(4, 10)) < parseInt(this.state.appstoreVersion.substring(4, 10))) {
@@ -438,12 +443,12 @@ class Home extends Component {
     });
 
     // Fetch Details and check autologout trigger
-    Core.UserDetail(async (err, result)=>{
-      if( result.data.profile.to_update_auto_logout == true ){
+    Core.UserDetail(async (err, result) => {
+      if (result.data.profile.to_update_auto_logout == true) {
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
         await AsyncStorage.removeItem('longitude');
-        Actions.Login({type: 'reset'});
+        Actions.Login({ type: 'reset' });
       }
     })
   }
@@ -543,6 +548,22 @@ class Home extends Component {
     );
   }
 
+  popupAds() {
+    return (
+      <PopAds
+        kind="popAds"
+        //just for example the right parameter is like this isVisible={this.props.isVisible}
+        isVisible={this.state.popAds}
+        closeSection={true}
+        closeSectionUpdate={this.isVisibleAds}
+        title={this.state.title}
+        message={this.state.message}
+        url={this.state.url}
+      >
+      </PopAds>
+    );
+  }
+
   render() {
     console.warn('ThisVersion-' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
     console.warn('appStoreVersion-' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
@@ -575,6 +596,7 @@ class Home extends Component {
         onClose={() => this.closeDrawer()}
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
+          {this.popupAds()}
           {this.customLoader()}
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Popup

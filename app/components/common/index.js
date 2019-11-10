@@ -11,6 +11,7 @@ export * from './ButtonsConfirm';
 
 import buttonSearch from './ButtonSearch'
 import Popup from './PopUp'
+import PopAds from './PopAds'
 import Texti from './Texti'
 import Body from './Body';
 import Divider from './Divider'
@@ -32,4 +33,4 @@ import Text from './Text'
 import SimpleCurrencyInput from './SimpleCurrencyInput'
 import TextInputMask from './text-input-mask'
 
-export { buttonSearch, Body, Text, Texti, Divider, DividerWallet, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, InputAmount, Popup, Error, SimpleCurrencyInput, TextInputMask, InputSelectListClaim, InputSelectListCurrency }
+export { buttonSearch, Body, Text, Texti, Divider, DividerWallet, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputText2, InputFile, InputAmount, Popup, PopAds, Error, SimpleCurrencyInput, TextInputMask, InputSelectListClaim, InputSelectListCurrency }
