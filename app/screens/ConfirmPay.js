@@ -396,8 +396,8 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {this.props.consultation_fees}
-                {/* {Number(this.props.consultation_fees).toFixed(2)} */}
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol}
+                {Number(this.props.consultation_fees).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
             </View>
             <View
@@ -414,8 +414,8 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.amountTotal}
-                {/* {Number(this.state.amountTotal).toFixed(2)} */}
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
+                {Number(this.state.amountTotal).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
             </View>
           </View>
@@ -437,7 +437,7 @@ class ConfirmPay extends Component {
                 Cap
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2)}
+                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
 
             </View>
@@ -459,8 +459,8 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCredit}
-                {/* {Number(this.state.byCredit).toFixed(2)} */}
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
+                {Number(this.state.byCredit).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
 
               {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
@@ -487,8 +487,8 @@ class ConfirmPay extends Component {
                 Payable by Cash
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCash}
-                {/* {Number(this.state.byCash).toFixed(2)} */}
+                {this.props.capCurrency ? this.props.capCurrency : ' '}
+                {Number(this.state.byCash).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
             </View>
           </View>
