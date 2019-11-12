@@ -50,7 +50,7 @@ class ConfirmPay extends Component {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
-        Balance: data.balance,
+        Balance: String(this.props.balance),
         currency: result.data.currency_symbol
       });
 
@@ -66,13 +66,16 @@ class ConfirmPay extends Component {
         });
       })
     );
-
+    console.log( this.props );
+    console.log( this.state );
     const consultationAmount = this.state.feeConsultation;
     const totalAmount = Number( this.state.inputAmount.replace(',','') ) + Number( consultationAmount );
     const balance = this.state.Balance.replace(',','');
     const cap = this.state.amountCap;
     var payCredit = 0;
     var payCash = 0;
+    console.log( this.props );
+    console.log( this.state );
 
     if( Number( cap ) > 0 ){
       if( Number( cap ) > Number( balance ) ){
@@ -143,6 +146,7 @@ class ConfirmPay extends Component {
 
     Core.CreatePayment(params, async (err, result) => {
       // console.warn(result);
+      console.log( result );
       if (result.status) {
         Core.getNotify('', result.message);
         user = await Core.GetDataLocalReturnNew('user_id');
@@ -397,7 +401,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {Number(this.props.consultation_fees).toFixed(2)}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.props.consultation_fees).toFixed(2)}
               </Text>
             </View>
             <View

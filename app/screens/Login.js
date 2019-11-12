@@ -69,7 +69,7 @@ class Login extends Component {
         this.setState({
           appstoreVersion: json.results[0].version,
         })
-        // this.inAppTrigger();
+        this.inAppTrigger();
       });
   }
 

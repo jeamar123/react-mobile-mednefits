@@ -22,13 +22,14 @@ class BenefitsDollar extends Component {
       amount: 0,
       currency: false,
       isLoading: false,
-      Balance: '0',
+      Balance: this.props.balance,
       placeholder: null,
       failed: false,
       title: null,
       message: null
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    console.log( this.props );
   }
 
   isVisibleUpdate() {
@@ -43,8 +44,9 @@ class BenefitsDollar extends Component {
     await Core.GetBalance(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.log( data );
       await this.setState({
-        Balance: data.balance,
+        // Balance: data.balance,
         currency: result.data.currency_symbol
       });
     });
@@ -242,7 +244,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'MYR') ? (Numeral(this.state.Balance).value() * 3).toFixed(2) : this.state.Balance}
+                Balance: {'\n'} {this.props.capCurrency} {this.state.Balance}
               </Text>
             </View>
 
@@ -274,6 +276,7 @@ class BenefitsDollar extends Component {
                 amount: this.state.amount,
                 capCurrency: this.props.capCurrency,
                 capAmount: this.props.capAmount,
+                balance: this.state.Balance,
                 checkId: this.props.checkId,
                 consultation_fee_symbol: this.props.consultation_fee_symbol,
                 consultation_status: this.props.consultation_status,

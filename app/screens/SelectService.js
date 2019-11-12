@@ -29,6 +29,7 @@ class SelectService extends Component {
       checkTime: '',
       capCurrency: '',
       capAmount: '',
+      current_balance: '',
       clinic_image: '',
       clinic_name: '',
       consultation_fee_symbol: '',
@@ -51,7 +52,7 @@ class SelectService extends Component {
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     // console.warn('storageData ' + JSON.stringify(data, 4, null))
-
+    console.log( data );
     this.setState({
       clinicid: data.clinic_id,
       member: data.member,
@@ -60,6 +61,7 @@ class SelectService extends Component {
       checkTime: data.check_in_time,
       capCurrency: data.cap_currency_symbol,
       capAmount: data.cap_per_visit_amount,
+      balance: data.balance,
       clinic_image: data.image_url,
       clinic_name: data.name,
       consultation_fee_symbol: data.consultation_fee_symbol,
@@ -160,6 +162,7 @@ class SelectService extends Component {
         clinicid: this.props.clinicid,
         capCurrency: this.props.capCurrency,
         capAmount: this.props.capAmount,
+        balance: this.state.balance,
         checkId: this.props.checkId,
         consultation_fee_symbol: this.props.consultation_fee_symbol,
         consultation_status: this.props.consultation_status,

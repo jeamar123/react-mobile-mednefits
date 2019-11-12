@@ -10,6 +10,7 @@ class HistoryClaim extends Component {
       Balance: '0',
       Full_name: '',
     };
+    console.log( this.props );
   }
 
   componentWillMount() {
@@ -50,8 +51,8 @@ class HistoryClaim extends Component {
             adjustsFontSizeToFit={true}
             style={styles.amount}
           >
-            Claim Amount:  {this.props.Currency ? this.props.Currency : 'N/A'}
-            {/* {this.props.Amount ? this.props.Amount : '0.00'} */}
+            Claim Amount:  
+            { this.props.Amount ? ' ' + this.props.Amount : '0.00' } {this.props.Currency ? this.props.Currency : 'N/A'}
           </Text>
           <Text
             numberOfLines={2}
