@@ -38,8 +38,9 @@ class History extends Component {
       data: false,
       isLoading: false,
       refreshing: false,
-      currency_symbol: this.props.currency_symbol,
+      currency_symbol: 'SGD',
       malaysia_exchange_rate: '3.00',
+      convert_option: false,
     };
     console.log( this.props );
     console.log( this.state );
@@ -58,7 +59,7 @@ class History extends Component {
         consultation_fee: data.consultation_fee,
         paid_by_credits: data.paid_by_credits,
         paid_by_cash: data.paid_by_cash,
-        malaysia_exchange_rate: data.malaysia_exchange_rate ? data.malaysia_exchange_rate : 3,
+        malaysia_exchange_rate: data.malaysia_exchange_rate ? parseFloat( data.malaysia_exchange_rate ).toFixed(2) : '3.00',
         refreshing: false,
       })
     })
@@ -68,22 +69,22 @@ class History extends Component {
     if( this.state.currency_symbol == 'SGD' ){
       this.setState({
         currency_symbol: 'MYR',
-        total_amount: parseFloat( this.state.total_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
-        cap_per_visit: parseFloat( this.state.cap_per_visit /= this.state.malaysia_exchange_rate ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
-        consultation_fee: parseFloat( this.state.consultation_fee /= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits /= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_cash: parseFloat( this.state.paid_by_cash /= this.state.malaysia_exchange_rate ).toFixed(2),
+        total_amount: parseFloat( this.state.total_amount_myr ).toFixed(2),
+        cap_per_visit: parseFloat( this.state.cap_per_visit_myr ).toFixed(2),
+        bill_amount: parseFloat( this.state.bill_amount_myr ).toFixed(2),
+        consultation_fee: parseFloat( this.state.consultation_fee_myr ).toFixed(2),
+        paid_by_credits: parseFloat( this.state.paid_by_credits_myr ).toFixed(2),
+        paid_by_cash: parseFloat( this.state.paid_by_cash_myr ).toFixed(2),
       });
     }else{
       this.setState({
         currency_symbol: 'SGD',
-        total_amount: parseFloat( this.state.total_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
-        cap_per_visit: parseFloat( this.state.cap_per_visit *= this.state.malaysia_exchange_rate ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
-        consultation_fee: parseFloat( this.state.consultation_fee *= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits *= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_cash: parseFloat( this.state.paid_by_cash *= this.state.malaysia_exchange_rate ).toFixed(2),
+        total_amount: parseFloat( this.state.total_amount_sgd ).toFixed(2),
+        cap_per_visit: parseFloat( this.state.cap_per_visit_sgd ).toFixed(2),
+        bill_amount: parseFloat( this.state.bill_amount_sgd ).toFixed(2),
+        consultation_fee: parseFloat( this.state.consultation_fee_sgd ).toFixed(2),
+        paid_by_credits: parseFloat( this.state.paid_by_credits_sgd ).toFixed(2),
+        paid_by_cash: parseFloat( this.state.paid_by_cash_sgd ).toFixed(2),
       });
     }
     // console.log( this.state );
@@ -95,14 +96,33 @@ class History extends Component {
       // console.warn(JSON.stringify(data, null, 4))
       this.setState({
         data: data,
+        convert_option: data.convert_option,
+        malaysia_exchange_rate: parseFloat( data.currency_amount ).toFixed(2),
+        currency_symbol: data.currency_symbol,
+
+        total_amount_sgd: ( data.currency_symbol == 'SGD' ) ? data.total_amount : data.total_amount / 3,
+        cap_per_visit_sgd: ( data.currency_symbol == 'SGD' ) ? data.cap_per_visit : data.cap_per_visit / 3,
+        bill_amount_sgd: ( data.currency_symbol == 'SGD' ) ? data.bill_amount : data.bill_amount / 3 ,
+        consultation_fee_sgd: ( data.currency_symbol == 'SGD' ) ? data.consultation_fee : data.consultation_fee / 3 ,
+        paid_by_credits_sgd: ( data.currency_symbol == 'SGD' ) ? data.paid_by_credits : data.paid_by_credits / 3 ,
+        paid_by_cash_sgd: ( data.currency_symbol == 'SGD' ) ? data.paid_by_cash : data.paid_by_cash / 3 ,
+
+        total_amount_myr: ( data.currency_symbol == 'MYR' ) ? data.total_amount : data.total_amount * 3,
+        cap_per_visit_myr: ( data.currency_symbol == 'MYR' ) ? data.cap_per_visit : data.cap_per_visit * 3,
+        bill_amount_myr: ( data.currency_symbol == 'MYR' ) ? data.bill_amount : data.bill_amount * 3 ,
+        consultation_fee_myr: ( data.currency_symbol == 'MYR' ) ? data.consultation_fee : data.consultation_fee * 3 ,
+        paid_by_credits_myr: ( data.currency_symbol == 'MYR' ) ? data.paid_by_credits : data.paid_by_credits * 3 ,
+        paid_by_cash_myr: ( data.currency_symbol == 'MYR' ) ? data.paid_by_cash : data.paid_by_cash * 3 ,
+
         total_amount: data.total_amount,
         cap_per_visit: data.cap_per_visit,
         bill_amount: data.bill_amount,
         consultation_fee: data.consultation_fee,
         paid_by_credits: data.paid_by_credits,
         paid_by_cash: data.paid_by_cash,
-        malaysia_exchange_rate: data.malaysia_exchange_rate ? data.malaysia_exchange_rate : 3,
       })
+
+      console.log( this.state );
     })
   }
 
@@ -431,7 +451,8 @@ class History extends Component {
         <Navbar 
           leftNav="history-back" 
           rightNav="currency-toggle" 
-          currency_symbol={ this.props.currency_symbol } 
+          currency_symbol={ this.state.currency_symbol } 
+          convert_option={ this.state.convert_option } 
           company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
           title="History" 

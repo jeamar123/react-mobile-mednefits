@@ -21,6 +21,7 @@ import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Text } from '../common';
 import { Popup, PopAds } from '../components/common';
 import Navbar from '../components/common/Navbar';
+import GlobaLoadingState from '../components/common/GlobaLoadingState';
 import * as Config from '../config';
 import * as Core from '../core';
 import * as Common from '../components/common';
@@ -359,7 +360,9 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
-      popAds: true,
+      popAds: false,
+      isMainLoaderShow: false,
+      mainLoaderText: '',
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -367,6 +370,19 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleAds = this.isVisibleAds.bind(this);
+    this.toggleLoadingState = this.toggleLoadingState.bind(this);
+  }
+
+  toggleLoadingState( text ) {
+    if( this.isMainLoaderShow == true ){
+      this.isMainLoaderShow = false;
+    }else{
+      this.isMainLoaderShow = true;
+    }
+    this.mainLoaderText = text;
+
+    console.log( this.isMainLoaderShow );
+    console.log( this.mainLoaderText );
   }
 
   isVisibleAds() {
@@ -418,7 +434,7 @@ class Home extends Component {
         this.setState({
           appstoreVersion: json.results[0].version,
         })
-        // this.inAppTrigger();
+        this.inAppTrigger();
       });
 
   }
@@ -598,6 +614,10 @@ class Home extends Component {
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           {this.popupAds()}
           {this.customLoader()}
+          <GlobaLoadingState
+            loadingShow={this.isMainLoaderShow}
+            loadingText={this.mainLoaderText}
+          />
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Popup
             kind="update-application"
@@ -626,6 +646,7 @@ class Home extends Component {
               consultation_fee_symbol={this.props.consultation_fee_symbol}
               consultation_status={this.props.consultation_status}
               consultation_fees={this.props.consultation_fees}
+              toggleLoadingState={this.toggleLoadingState}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1.5) }}

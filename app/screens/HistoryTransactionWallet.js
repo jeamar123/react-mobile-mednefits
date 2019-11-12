@@ -30,13 +30,27 @@ class HistoryTransaction extends Component {
       resultData: [],
       DataE_Claim: [],
       in_network: false,
-      out_network: false
+      out_network: false,
+      company_currency: null,
     };
   }
 
   async componentWillMount() {
+    await this.getUserDetail();
     await this.getDataIn_Network();
     await this.getDataE_Claim();
+  }
+
+  async getUserDetail() {
+    await Core.UserDetail(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        console.log( data );
+      await this.setState({
+        company_currency: data.profile.currency_type.toUpperCase(),
+      });
+      console.log( this.state );
+    });
   }
 
   async getDataIn_Network() {
@@ -52,6 +66,7 @@ class HistoryTransaction extends Component {
     await Core.GetEClaimTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      console.log(data);
       this.setState({ DataE_Claim: data, out_network: true });
     });
   }
@@ -93,7 +108,7 @@ class HistoryTransaction extends Component {
       <TouchableOpacity
         key={index}
         onPress={() =>
-          Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+          Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
         }
       >
         <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>
@@ -189,7 +204,6 @@ class HistoryTransaction extends Component {
   }
 
   renderEclaimStatus(data) {
-    console.log(data);
     if (data.status == 0) {
       return (
         <View
@@ -275,6 +289,7 @@ class HistoryTransaction extends Component {
         onPress={() =>
           Actions.DetailEclaimTransaction({
             transaction_id: Data.transaction_id,
+            currency_symbol: Data.currency_symbol
           })
         }
       >

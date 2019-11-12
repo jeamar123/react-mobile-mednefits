@@ -53,7 +53,7 @@ class DetailEClaim_Transaction extends Component {
     Core.GetSpesificEclaim(this.props.transaction_id, result => {
       // console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;
-
+      console.log( data );
       if (data.files) {
         this.setState({
           data: data,
@@ -171,7 +171,7 @@ class DetailEClaim_Transaction extends Component {
                 style={{
                   fontSize: 13
                 }}>
-                {this.state.data.amount ? this.state.data.amount : 'N/A'}
+                {this.state.data.amount ? this.state.data.amount : 'N/A'} { this.state.data.currency_symbol }
               </Text>
             </View>
             {/* <TextInput

@@ -87,12 +87,13 @@ class HomeContent extends Component {
   }
 
   async StatusUseronClinic() {
+    this.props.toggleLoadingState('');
     user = await Core.GetDataLocalReturnNew('user_id');
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
-
+    this.props.toggleLoadingState('');
     this.setState({
       services: data.clinic_procedures,
       clinicid: data.clinic_id,
@@ -123,6 +124,7 @@ class HomeContent extends Component {
       // });
 
     });
+
   }
 
   async getUserDetail() {

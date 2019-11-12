@@ -27,7 +27,8 @@ class Wallet extends Component {
       wellnessinNetwork: [],
       wellnessoutNetwork: [],
       visible: true,
-      isLoading: this.props.isLoading
+      isLoading: this.props.isLoading,
+      company_currency: null,
     };
     this.selectSpending = this.selectSpending.bind(this);
     this.selectWallet = this.selectWallet.bind(this);
@@ -49,6 +50,7 @@ class Wallet extends Component {
   }
 
   componentWillMount() {
+    this.getUserDetail();
     this.selectWallet("Medical")
     this.selectSpending("in_network_transactions");
     this.getMedicalWallet();
@@ -56,6 +58,18 @@ class Wallet extends Component {
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
+  }
+
+  async getUserDetail() {
+    await Core.UserDetail(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        console.log( data );
+      await this.setState({
+        company_currency: data.profile.currency_type.toUpperCase(),
+      });
+      console.log( this.state );
+    });
   }
 
   async selectSpending(type) {
@@ -117,7 +131,7 @@ class Wallet extends Component {
             <TouchableOpacity
               key={index}
               onPress={() =>
-                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
               }
             >
               <View
@@ -291,7 +305,7 @@ class Wallet extends Component {
             <TouchableOpacity
               key={index}
               onPress={() =>
-                Actions.HistoryGeneral({ transaction_id: Data.transaction_id })
+                Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
               }
             >
               <View
@@ -640,9 +654,9 @@ class Wallet extends Component {
                 >
                   {
                     (this.state.walletType == 'Medical') ?
-                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                  }
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
+                  } 
                   {
                     (this.state.walletType == 'Medical') ?
                       (this.state.medicalInNetwork_Credit_spent) ? this.state.medicalInNetwork_Credit_spent : '0' :
@@ -700,9 +714,9 @@ class Wallet extends Component {
                 >
                   {
                     (this.state.walletType == 'Medical') ?
-                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
-                  }
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
+                  } 
                   {
                     (this.state.walletType == 'Medical') ?
                       (this.state.medicalEclaim_Credit_spent) ? this.state.medicalEclaim_Credit_spent : '0' :
