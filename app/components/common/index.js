@@ -12,6 +12,7 @@ export * from './Notify';
 
 import buttonSearch from './ButtonSearch'
 import Popup from './PopUp'
+import PopAds from './PopAds'
 import Texti from './Texti'
 import Body from './Body';
 import Divider from './Divider'
@@ -31,4 +32,4 @@ import Text from './Text'
 import SimpleCurrencyInput from './SimpleCurrencyInput'
 import TextInputMask from './text-input-mask'
 
-export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputAmount, InputFile, Popup, Error, SimpleCurrencyInput, TextInputMask, InputSelectListClaim, InputSelectListCurrency }
+export { buttonSearch, Body, Text, Texti, Divider, InputDate, InputDateCustom, InputTime, InputSelect2, InputSelect, InputSearch, InputText, InputAmount, InputFile, Popup, PopAds, Error, SimpleCurrencyInput, TextInputMask, InputSelectListClaim, InputSelectListCurrency }

@@ -75,23 +75,23 @@ class ConfirmPay extends Component {
     var payCash = 0;
 
     if (Number(cap) > 0) {
-      if( Number( cap ) > Number( balance ) ){
-        if( Number( totalAmount ) > Number( balance ) ){
-          payCredit = Number( balance );
-          payCash = Number( totalAmount ) - Number( balance );
-        }else{
-          payCredit = Number( totalAmount );
+      if (Number(cap) > Number(balance)) {
+        if (Number(totalAmount) > Number(balance)) {
+          payCredit = Number(balance);
+          payCash = Number(totalAmount) - Number(balance);
+        } else {
+          payCredit = Number(totalAmount);
           payCash = 0;
         }
-      }else if( Number( cap ) == Number( totalAmount ) ){
-        payCredit = Number( totalAmount );
+      } else if (Number(cap) == Number(totalAmount)) {
+        payCredit = Number(totalAmount);
         payCash = 0;
-      }else{
-        if( Number( totalAmount ) > Number( cap ) ){
-          payCredit = Number( cap );
-          payCash = Number( totalAmount ) - Number( cap );
-        }else if( Number( cap ) > Number( totalAmount ) ){
-          payCredit = Number( totalAmount );
+      } else {
+        if (Number(totalAmount) > Number(cap)) {
+          payCredit = Number(cap);
+          payCash = Number(totalAmount) - Number(cap);
+        } else if (Number(cap) > Number(totalAmount)) {
+          payCredit = Number(totalAmount);
           payCash = 0;
         }
       }
@@ -134,7 +134,7 @@ class ConfirmPay extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      input_amount: Number( this.props.amount.replace(',','') ),
+      input_amount: Number(this.props.amount.replace(',', '')),
       services: this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
@@ -371,7 +371,7 @@ class ConfirmPay extends Component {
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
-                { this.props.amount }
+                {this.props.amount}
               </Text>
             </View>
             <View
@@ -396,7 +396,8 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {Number(this.props.consultation_fees).toFixed(2)}
+                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {this.props.consultation_fees}
+                {/* {Number(this.props.consultation_fees).toFixed(2)} */}
               </Text>
             </View>
             <View
@@ -413,7 +414,8 @@ class ConfirmPay extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.amountTotal).toFixed(2)}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.amountTotal}
+                {/* {Number(this.state.amountTotal).toFixed(2)} */}
               </Text>
             </View>
           </View>
@@ -457,7 +459,8 @@ class ConfirmPay extends Component {
                 Payable by Credits
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.byCredit).toFixed(2)}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCredit}
+                {/* {Number(this.state.byCredit).toFixed(2)} */}
               </Text>
 
               {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
@@ -484,7 +487,8 @@ class ConfirmPay extends Component {
                 Payable by Cash
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {Number(this.state.byCash).toFixed(2)}
+                {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCash}
+                {/* {Number(this.state.byCash).toFixed(2)} */}
               </Text>
             </View>
           </View>

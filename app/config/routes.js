@@ -17,6 +17,7 @@ import Member from '../screens/Member';
 import HistoryDentalCare from '../screens/HistoryDentalCare';
 import HistoryChieneseMedicine from '../screens/HistoryChieneseMedicine';
 import HistoryGeneral from '../screens/HistoryGeneral';
+import HistoryGeneral2 from '../screens/HistoryGeneral2';
 import HistoryReject from '../screens/RejectHistory';
 import HistoryTransaction from '../screens/HistoryTransaction';
 import ScanPay from '../screens/ScanPay';
@@ -59,13 +60,16 @@ import checkinUser from '../screens/checkinUser';
 import SelectList from '../screens/SelectList';
 import CameraPreview from '../screens/CameraPreview';
 import receiptUpload from '../screens/receiptUpload';
+import receiptUpload2 from '../screens/receiptUpload2';
 // import CurrencySelect from '../screens/CurrencySelect';
 import cancelVisit from '../screens/cancelVisit';
 import ExpireMember from '../screens/ExpireMember';
 import ReceiptPreview from '../screens/ReceiptPreview';
+import ReceiptPreview2 from '../screens/ReceiptPreview2';
 import ReceiptView from '../screens/ReceiptView';
 import updateApps from '../screens/updateApps';
 import HistoryAfterUpload from '../screens/HistoryAfterUpload';
+import HistoryAfterUpload2 from '../screens/HistoryAfterUpload2';
 import notRegister from '../screens/notRegister';
 import PlanCovarage from '../screens/PlanCovarage';
 
@@ -217,6 +221,7 @@ class RouterComponent extends Component {
             />
             <Scene key="HistoryReject" component={HistoryReject} hideNavBar />
             <Scene key="HistoryGeneral" component={HistoryGeneral} hideNavBar />
+            <Scene key="HistoryGeneral2" component={HistoryGeneral2} hideNavBar />
             <Scene
               key="HistoryChieneseMedicine"
               component={HistoryChieneseMedicine}
@@ -281,13 +286,16 @@ class RouterComponent extends Component {
             <Scene key="SelectList" component={SelectList} hideNavBar />
             <Scene key="CameraPreview" component={CameraPreview} hideNavBar />
             <Scene key="receiptUpload" component={receiptUpload} hideNavBar />
+            <Scene key="receiptUpload2" component={receiptUpload2} hideNavBar />
             {/* <Scene key="CurrencySelect" component={CurrencySelect} hideNavBar /> */}
             <Scene key="cancelVisit" component={cancelVisit} hideNavBar />
             <Scene key="ExpireMember" component={ExpireMember} hideNavBar />
             <Scene key="ReceiptPreview" component={ReceiptPreview} hideNavBar />
+            <Scene key="ReceiptPreview2" component={ReceiptPreview2} hideNavBar />
             <Scene key="ReceiptView" component={ReceiptView} hideNavBar />
             <Scene key="updateApps" component={updateApps} hideNavBar />
             <Scene key="HistoryAfterUpload" component={HistoryAfterUpload} hideNavBar />
+            <Scene key="HistoryAfterUpload2" component={HistoryAfterUpload2} hideNavBar />
             <Scene key="notRegister" component={notRegister} hideNavBar />
             <Scene key="PlanCovarage" component={PlanCovarage} hideNavBar />
           </Stack>
