@@ -66,16 +66,12 @@ class ConfirmPay extends Component {
         });
       })
     );
-    console.log( this.props );
-    console.log( this.state );
     const consultationAmount = this.state.feeConsultation;
     const totalAmount = Number( this.state.inputAmount.replace(',','') ) + Number( consultationAmount );
     const balance = this.state.Balance.replace(',','');
     const cap = this.state.amountCap;
     var payCredit = 0;
     var payCash = 0;
-    console.log( this.props );
-    console.log( this.state );
 
     if( Number( cap ) > 0 ){
       if( Number( cap ) > Number( balance ) ){

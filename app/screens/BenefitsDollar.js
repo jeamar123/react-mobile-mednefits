@@ -101,6 +101,40 @@ class BenefitsDollar extends Component {
     }
   }
 
+  nextButton(){
+    if( this.props.plan_type == 'enterprise_plan' ){
+      Actions.ConfirmPay({
+        services: this.props.services,
+        clinicid: this.props.clinicid,
+        amount: this.state.amount,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        balance: this.state.Balance,
+        checkId: this.props.checkId,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
+      })
+    }else{
+      Actions.PayScan({
+        services: this.props.services,
+        clinicid: this.props.clinicid,
+        amount: this.state.amount,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        balance: this.state.Balance,
+        checkId: this.props.checkId,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
+      })
+    }
+  }
+
   render() {
     // console.warn("props: " + JSON.stringify(this.props))
     // console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
@@ -263,27 +297,17 @@ class BenefitsDollar extends Component {
             </View>
           </View>
 
+
+            {/**/}
+
           <View style={{ marginBottom: '5%' }} />
           <ButtonPay onPress={() =>
             (!this.state.amount) ?
               Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
-
               :
-
-              Actions.PayScan({
-                services: this.props.services,
-                clinicid: this.props.clinicid,
-                amount: this.state.amount,
-                capCurrency: this.props.capCurrency,
-                capAmount: this.props.capAmount,
-                balance: this.state.Balance,
-                checkId: this.props.checkId,
-                consultation_fee_symbol: this.props.consultation_fee_symbol,
-                consultation_status: this.props.consultation_status,
-                consultation_fees: this.props.consultation_fees,
-                clinic_image: this.props.clinic_image,
-                clinic_name: this.props.clinic_name,
-              })}>
+              this.nextButton()
+            }
+            >
             Next
           </ButtonPay>
         </Content>

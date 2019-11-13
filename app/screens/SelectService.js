@@ -34,7 +34,8 @@ class SelectService extends Component {
       clinic_name: '',
       consultation_fee_symbol: '',
       consultation_status: '',
-      consultation_fees: ''
+      consultation_fees: '',
+      plan_type: null,
     }
 
     this.selectedService = this.selectedService.bind(this)
@@ -67,6 +68,7 @@ class SelectService extends Component {
       consultation_fee_symbol: data.consultation_fee_symbol,
       consultation_status: data.consultation_status,
       consultation_fees: data.consultation_fees,
+      plan_type: data.plan_type,
       isLoading: true
     })
 
@@ -169,6 +171,7 @@ class SelectService extends Component {
         consultation_fees: this.props.consultation_fees,
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
+        plan_type: this.state.plan_type
       })
     }
   }

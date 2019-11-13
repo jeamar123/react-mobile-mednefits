@@ -16,12 +16,12 @@ class Summary extends Component {
       isActive: false,
       currency_symbol: this.props.result.data.currency_symbol,
 
-      paid_by_cash: parseFloat( this.props.result.data.paid_by_cash ).toFixed(2),
-      paid_by_credits: parseFloat( this.props.result.data.paid_by_credits ).toFixed(2),
-      bill_amount: parseFloat( this.props.result.data.bill_amount ).toFixed(2),
-      consultation_fees: parseFloat( this.props.result.data.consultation_fees ).toFixed(2),
-      total_amount: parseFloat( this.props.result.data.total_amount ).toFixed(2), 
-
+      paid_by_cash: (Number( this.props.result.data.paid_by_cash )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      paid_by_credits: (Number( this.props.result.data.paid_by_credits )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) ,
+      bill_amount: (Number( this.props.result.data.bill_amount )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) ,
+      consultation_fees: (Number( this.props.result.data.consultation_fees )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) ,
+      total_amount: (Number( this.props.result.data.total_amount )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) , 
+      
       paid_by_cash_sgd: ( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_cash : this.props.result.data.paid_by_cash / 3,
       paid_by_credits_sgd: ( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_credits : this.props.result.data.paid_by_credits / 3,
       bill_amount_sgd: ( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.bill_amount : this.props.result.data.bill_amount / 3,
@@ -72,23 +72,23 @@ class Summary extends Component {
     if( this.state.currency_symbol == 'SGD' ){
       this.setState({
         currency_symbol: 'MYR',
-        paid_by_cash: parseFloat( this.state.paid_by_cash_myr ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits_myr ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount_myr ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees_myr ).toFixed(2),
-        total_amount: parseFloat( this.state.total_amount_myr ).toFixed(2),
+        paid_by_cash: (Number( this.state.paid_by_cash_myr )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        paid_by_credits: (Number( this.state.paid_by_credits_myr )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        bill_amount: (Number( this.state.bill_amount_myr )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        consultation_fees: (Number( this.state.consultation_fees_myr )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        total_amount: (Number( this.state.total_amount_myr )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
       });
     }else{
       this.setState({
         currency_symbol: 'SGD',
-        paid_by_cash: parseFloat( this.state.paid_by_cash_sgd ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits_sgd ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount_sgd ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees_sgd ).toFixed(2), 
-        total_amount: parseFloat( this.state.total_amount_sgd ).toFixed(2),
+        paid_by_cash: (Number( this.state.paid_by_cash_sgd )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        paid_by_credits: (Number( this.state.paid_by_credits_sgd )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        bill_amount: (Number( this.state.bill_amount_sgd )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        consultation_fees: (Number( this.state.consultation_fees_sgd )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+        total_amount: (Number( this.state.total_amount_sgd )).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
       });
     }
-    // console.log( this.state );
+    console.log( this.state );
   }
 
   render() {
@@ -116,7 +116,7 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(5),
-                  height: responsiveHeight(47),
+                  height: responsiveHeight(35),
                   borderRadius: 5
                 }}
               >
@@ -214,44 +214,6 @@ class Summary extends Component {
                           </Text>
                         </View>
 
-                      </View>
-                    </View>
-                  </View>
-
-                  <View
-                    style={{
-                      backgroundColor: '#FF5757',
-                      width: '90%',
-                      marginTop: responsiveHeight(2),
-                      height: responsiveHeight(11.5)
-                    }}
-                  >
-                    <View
-                      style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <View
-                        style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                        <Text
-                          style={{
-                            marginTop: responsiveHeight(1.5),
-                            color: '#fff',
-                            fontSize: RF(2.2),
-                            fontFamily: Config.FONT_FAMILY_ROMAN,
-                          }}
-                        >
-                          Make Payment in Cash
-                        </Text>
-                        <View
-                          style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}
-                        >
-                          <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                          <Text style={styles.detail2}>{(this.state.paid_by_cash) ? this.state.paid_by_cash : ""}</Text>
-                        </View>
                       </View>
                     </View>
                   </View>

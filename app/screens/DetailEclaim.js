@@ -452,7 +452,7 @@ class DetailEclaim extends Component {
               <Common.Divider noMargin Side />
             </View>
 
-            {(this.props.claimdata.currency == 'MYR') ? (
+            {(this.props.claimdata.company_currency == 'SGD' && this.props.claimdata.currency == 'MYR') ? (
               <View>
                 <View
                   style={{

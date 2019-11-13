@@ -69,22 +69,22 @@ class History extends Component {
     if( this.state.currency_symbol == 'SGD' ){
       this.setState({
         currency_symbol: 'MYR',
-        total_amount: parseFloat( this.state.total_amount_myr ).toFixed(2),
-        cap_per_visit: parseFloat( this.state.cap_per_visit_myr ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount_myr ).toFixed(2),
-        consultation_fee: parseFloat( this.state.consultation_fee_myr ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits_myr ).toFixed(2),
-        paid_by_cash: parseFloat( this.state.paid_by_cash_myr ).toFixed(2),
+        total_amount: this.state.total_amount_myr,
+        cap_per_visit: this.state.cap_per_visit_myr,
+        bill_amount: this.state.bill_amount_myr,
+        consultation_fee: this.state.consultation_fee_myr,
+        paid_by_credits: this.state.paid_by_credits_myr,
+        paid_by_cash: this.state.paid_by_cash_myr,
       });
     }else{
       this.setState({
         currency_symbol: 'SGD',
-        total_amount: parseFloat( this.state.total_amount_sgd ).toFixed(2),
-        cap_per_visit: parseFloat( this.state.cap_per_visit_sgd ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount_sgd ).toFixed(2),
-        consultation_fee: parseFloat( this.state.consultation_fee_sgd ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits_sgd ).toFixed(2),
-        paid_by_cash: parseFloat( this.state.paid_by_cash_sgd ).toFixed(2),
+        total_amount: this.state.total_amount_sgd,
+        cap_per_visit: this.state.cap_per_visit_sgd,
+        bill_amount: this.state.bill_amount_sgd,
+        consultation_fee: this.state.consultation_fee_sgd,
+        paid_by_credits: this.state.paid_by_credits_sgd,
+        paid_by_cash: this.state.paid_by_cash_sgd,
       });
     }
     // console.log( this.state );
@@ -469,6 +469,7 @@ class History extends Component {
           cap_per_visit={this.state.cap_per_visit}
           cap_transaction={this.state.data.cap_transaction}
           malaysia_exchange_rate={this.state.malaysia_exchange_rate}
+          convert_option={ this.state.convert_option } 
         />
         <ScrollView
           refreshControl={
