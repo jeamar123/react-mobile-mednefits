@@ -405,7 +405,7 @@ class Summary extends Component {
                       { this.state.currency_symbol } {(this.state.paid_by_cash) ? this.state.paid_by_cash : ""}
                     </Text>
                   </View>
-                  { this.state.currency_symbol == 'SGD' ? 
+                  { this.state.convert_option == true ? 
                     <View>
                       <View>
                         <Common.Divider />
@@ -771,7 +771,7 @@ class Summary extends Component {
                         { this.state.currency_symbol } {(this.state.paid_by_cash) ? this.state.paid_by_cash : ""}
                       </Text>
                     </View>
-                    { this.state.currency_symbol == 'SGD' ? 
+                    { this.state.convert_option == true ? 
                       <View>
                         <View>
                           <Common.Divider />

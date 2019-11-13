@@ -55,6 +55,8 @@ export default class EclaimForm extends Component {
 
     this.selectSpending = this.selectSpending.bind(this)
     this.inputDate = {};
+
+    console.log( this.props );
   }
 
   componentWillMount() {
