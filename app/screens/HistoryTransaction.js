@@ -106,11 +106,7 @@ class HistoryTransaction extends Component {
       <TouchableOpacity
         key={index}
         onPress={() =>
-<<<<<<< HEAD
-          Actions.HistoryGeneral2({ transaction_id: Data.transaction_id })
-=======
           Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
->>>>>>> 90edfee230e5e188cebe55e27bf42adb33e41732
         }
       >
         <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>

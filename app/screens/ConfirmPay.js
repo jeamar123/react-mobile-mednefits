@@ -39,6 +39,7 @@ class ConfirmPay extends Component {
       timeNow: ''
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    console.log( this.props );
   }
 
   isVisibleUpdate() {
@@ -50,7 +51,7 @@ class ConfirmPay extends Component {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
-        Balance: data.balance,
+        Balance: String(this.props.balance),
         currency: result.data.currency_symbol
       });
 
@@ -66,7 +67,6 @@ class ConfirmPay extends Component {
         });
       })
     );
-
     const consultationAmount = this.state.feeConsultation;
     const totalAmount = Number(this.state.inputAmount.replace(',', '')) + Number(consultationAmount);
     const balance = this.state.Balance.replace(',', '');
@@ -105,11 +105,19 @@ class ConfirmPay extends Component {
       }
     }
 
+    // this.setState({
+    //   amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+    //   byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+    //   byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+    // });
+
     this.setState({
-      amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
-      byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
-      byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      amountTotal: (parseFloat(totalAmount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      byCash: (parseFloat(payCash).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      byCredit: (parseFloat(payCredit).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     });
+
+    console.log( this.state );
 
     var that = this;
     var date = new Date().getDate(); //Current Date
@@ -396,8 +404,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency : this.props.consultation_fee_symbol} {this.props.consultation_fees}
-                {/* {Number(this.props.consultation_fees).toFixed(2)} */}
+                {this.props.capCurrency} {Number(this.props.consultation_fees).toFixed(2)}
               </Text>
             </View>
             <View
@@ -415,7 +422,6 @@ class ConfirmPay extends Component {
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.amountTotal}
-                {/* {Number(this.state.amountTotal).toFixed(2)} */}
               </Text>
             </View>
           </View>
@@ -460,14 +466,7 @@ class ConfirmPay extends Component {
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCredit}
-                {/* {Number(this.state.byCredit).toFixed(2)} */}
               </Text>
-
-              {/* <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
-                {this.props.capCurrency ? this.props.capCurrency : ' '} {
-                  (this.state.amountTotal > this.state.amountCap) ? Number(this.state.amountCap).toFixed(2) : Number(this.state.amountTotal).toFixed(2)
-                }
-              </Text> */}
             </View>
             <View>
               <Common.Divider />
@@ -488,7 +487,6 @@ class ConfirmPay extends Component {
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#3f9d59', fontSize: 16 }}>
                 {this.props.capCurrency ? this.props.capCurrency : ' '} {this.state.byCash}
-                {/* {Number(this.state.byCash).toFixed(2)} */}
               </Text>
             </View>
           </View>

@@ -16,17 +16,31 @@ class Summary extends Component {
     super(props);
     this.state = {
       isActive: false,
-      currency_symbol: this.props.result.data.currency_symbol == 'S$' || this.props.result.data.currency_symbol == 'SGD' ? 'SGD' : 'MYR',
-      paid_by_cash: this.props.result.data.paid_by_cash,
-      paid_by_credits: this.props.result.data.paid_by_credits,
-      bill_amount: this.props.result.data.bill_amount,
-      consultation_fees: this.props.result.data.consultation_fees,
-      total_amount: this.props.result.data.total_amount,
-      malaysia_exchange_rate: '3.00'
+      currency_symbol: this.props.result.data.currency_symbol,
+      paid_by_cash: (parseFloat( this.props.result.data.paid_by_cash ).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      paid_by_credits: (parseFloat( this.props.result.data.paid_by_credits ).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ,
+      bill_amount: (parseFloat( this.props.result.data.bill_amount ).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ,
+      consultation_fees: (parseFloat( this.props.result.data.consultation_fees ).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ,
+      total_amount: (parseFloat( this.props.result.data.total_amount ).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") , 
+      
+      paid_by_cash_sgd: (parseFloat(( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_cash : this.props.result.data.paid_by_cash / 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      paid_by_credits_sgd: (parseFloat(( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_credits : this.props.result.data.paid_by_credits / 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      bill_amount_sgd: (parseFloat(( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.bill_amount : this.props.result.data.bill_amount / 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      consultation_fees_sgd: (parseFloat(( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.consultation_fees : this.props.result.data.consultation_fees / 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      total_amount_sgd: (parseFloat(( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.total_amount : this.props.result.data.total_amount / 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+
+      paid_by_cash_myr: (parseFloat(( this.props.result.data.currency_symbol == 'MYR' ) ? this.props.result.data.paid_by_cash : this.props.result.data.paid_by_cash * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      paid_by_credits_myr: (parseFloat(( this.props.result.data.currency_symbol == 'MYR' ) ? this.props.result.data.paid_by_credits : this.props.result.data.paid_by_credits * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      bill_amount_myr: (parseFloat(( this.props.result.data.currency_symbol == 'MYR' ) ? this.props.result.data.bill_amount : this.props.result.data.bill_amount * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      consultation_fees_myr: (parseFloat(( this.props.result.data.currency_symbol == 'MYR' ) ? this.props.result.data.consultation_fees : this.props.result.data.consultation_fees * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      total_amount_myr: (parseFloat(( this.props.result.data.currency_symbol == 'MYR' ) ? this.props.result.data.total_amount : this.props.result.data.total_amount * 3)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+
+      malaysia_exchange_rate: '3.00',
+      convert_option: this.props.result.data.convert_option,
+      transaction_time: moment( this.props.result.data.transaction_time,'MM-DD-YYYY hh:mm a').format('DD/MM/YYYY hh:mm a'),
     };
     console.log( this.props );
     console.log( this.state );
-    this.props.result.data.transaction_time = moment( this.props.result.data.transaction_time,'MM-DD-YYYY hh:mm a').format('DD/MM/YYYY hh:mm a');
     this.detailPaymentOpened = this.detailPaymentOpened.bind(this)
   }
 
@@ -57,20 +71,20 @@ class Summary extends Component {
     if( this.state.currency_symbol == 'SGD' ){
       this.setState({
         currency_symbol: 'MYR',
-        paid_by_cash: parseFloat( this.state.paid_by_cash /= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits /= this.state.malaysia_exchange_rate ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees /= this.state.malaysia_exchange_rate ).toFixed(2),
-        total_amount: parseFloat( this.state.total_amount /= this.state.malaysia_exchange_rate ).toFixed(2),
+        paid_by_cash: this.state.paid_by_cash_myr,
+        paid_by_credits: this.state.paid_by_credits_myr,
+        bill_amount: this.state.bill_amount_myr,
+        consultation_fees: this.state.consultation_fees_myr,
+        total_amount: this.state.total_amount_myr,
       });
     }else{
       this.setState({
         currency_symbol: 'SGD',
-        paid_by_cash: parseFloat( this.state.paid_by_cash *= this.state.malaysia_exchange_rate ).toFixed(2),
-        paid_by_credits: parseFloat( this.state.paid_by_credits *= this.state.malaysia_exchange_rate ).toFixed(2),
-        bill_amount: parseFloat( this.state.bill_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
-        consultation_fees: parseFloat( this.state.consultation_fees *= this.state.malaysia_exchange_rate ).toFixed(2), 
-        total_amount: parseFloat( this.state.total_amount *= this.state.malaysia_exchange_rate ).toFixed(2),
+        paid_by_cash: this.state.paid_by_cash_sgd,
+        paid_by_credits: this.state.paid_by_credits_sgd,
+        bill_amount: this.state.bill_amount_sgd,
+        consultation_fees: this.state.consultation_fees_sgd,
+        total_amount: this.state.total_amount_sgd,
       });
     }
     console.log( this.state );
@@ -79,7 +93,6 @@ class Summary extends Component {
 
   render() {
     // console.warn("props: " + JSON.stringify(this.props))
-    console.log( this.props.result.data.transaction_time );
     
     return (
       <View style={{ flex: 1, backgroundColor: '#3F9D59' }}>
@@ -103,7 +116,7 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(3),
-                height: responsiveHeight(47),
+                height: responsiveHeight(35),
                 borderRadius: 5
               }}
             >
@@ -149,7 +162,7 @@ class Summary extends Component {
                       fontFamily: Config.FONT_FAMILY_THIN,
                     }}
                   >
-                    Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
+                    Paid on: {(this.state.transaction_time) ? (this.state.transaction_time).toUpperCase() : ""}
                   </Text>
                 </View>
 
@@ -284,21 +297,23 @@ class Summary extends Component {
                         flex: 1,
                       }}
                     >
-                      <TouchableOpacity
-                        onPress={() => this.toggleCurrency()}
-                        style={{
-                          justifyContent: 'flex-end',
-                          textAlign: 'right',
-                          alignItems: 'flex-end',
-                        }}
-                      >
-                        <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#3593CF', fontSize: RF(2.0), marginTop: responsiveHeight(-1), justifyContent: 'flex-end', textAlign: 'right', alignItems: 'flex-end', }}>
-                          Click to View in { this.state.currency_symbol == 'MYR' ? 'SGD' : 'MYR' }
-                        </Text>
-                      </TouchableOpacity>
+                      { this.state.convert_option == true ? 
+                        <TouchableOpacity
+                          onPress={() => this.toggleCurrency()}
+                          style={{
+                            justifyContent: 'flex-end',
+                            textAlign: 'right',
+                            alignItems: 'flex-end',
+                          }}
+                        >
+                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#3593CF', fontSize: RF(2.0), marginTop: responsiveHeight(-1), justifyContent: 'flex-end', textAlign: 'right', alignItems: 'flex-end', }}>
+                            Click to View in { this.state.currency_symbol == 'MYR' ? 'SGD' : 'MYR' }
+                          </Text>
+                        </TouchableOpacity>
+                        :
+                        null
+                      }
                     </View>
-
-
                   </View>
                 </View>
               </TouchableOpacity>
@@ -400,7 +415,7 @@ class Summary extends Component {
                   </Text>
                 </View>
 
-                { this.state.currency_symbol == 'SGD' ? 
+                { this.state.convert_option == true ? 
                   <View>
                     <View>
                       <Common.Divider />
@@ -489,7 +504,7 @@ class Summary extends Component {
                         fontFamily: Config.FONT_FAMILY_THIN,
                       }}
                     >
-                      Paid on: {(this.props.result.data.transaction_time) ? (this.props.result.data.transaction_time).toUpperCase() : ""}
+                      Paid on: {(this.state.transaction_time) ? (this.state.transaction_time).toUpperCase() : ""}
                     </Text>
                   </View>
 
@@ -586,6 +601,7 @@ class Summary extends Component {
                         >
                           <Text style={styles.detailUp2}>{(this.state.currency_symbol) ? this.state.currency_symbol : ""}</Text>
                           <Text style={styles.detail2}>{(this.state.paid_by_cash) ? this.state.paid_by_cash : ""}</Text>
+                          
                         </View>
                       </View>
                     </View>
@@ -663,18 +679,22 @@ class Summary extends Component {
                           flex: 1,
                         }}
                       >
-                        <TouchableOpacity
-                          onPress={() => this.toggleCurrency()}
-                          style={{
-                            justifyContent: 'flex-end',
-                            textAlign: 'right',
-                            alignItems: 'flex-end',
-                          }}
-                        >
-                          <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#3593CF', fontSize: RF(2.0), marginTop: responsiveHeight(-1), justifyContent: 'flex-end', textAlign: 'right', alignItems: 'flex-end', }}>
-                            Click to View in { this.state.currency_symbol == 'MYR' ? 'SGD' : 'MYR' }
-                          </Text>
-                        </TouchableOpacity>
+                        { this.state.convert_option == true ? 
+                          <TouchableOpacity
+                            onPress={() => this.toggleCurrency()}
+                            style={{
+                              justifyContent: 'flex-end',
+                              textAlign: 'right',
+                              alignItems: 'flex-end',
+                            }}
+                          >
+                            <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#3593CF', fontSize: RF(2.0), marginTop: responsiveHeight(-1), justifyContent: 'flex-end', textAlign: 'right', alignItems: 'flex-end', }}>
+                              Click to View in { this.state.currency_symbol == 'MYR' ? 'SGD' : 'MYR' }
+                            </Text>
+                          </TouchableOpacity>
+                          :
+                          null
+                        }
                       </View>
 
                     </View>
@@ -778,7 +798,7 @@ class Summary extends Component {
                     </Text>
                   </View>
 
-                  { this.state.currency_symbol == 'SGD' ? 
+                  { this.state.convert_option == true ? 
                     <View>
                       <View>
                         <Common.Divider />
