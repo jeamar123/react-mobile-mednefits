@@ -16,11 +16,11 @@ class Summary extends Component {
       isActive: false,
       currency_symbol: this.props.result.data.currency_symbol,
 
-      paid_by_cash: this.props.result.data.paid_by_cash,
-      paid_by_credits: this.props.result.data.paid_by_credits,
-      bill_amount: this.props.result.data.bill_amount,
-      consultation_fees: this.props.result.data.consultation_fees,
-      total_amount: this.props.result.data.total_amount,
+      paid_by_cash: parseFloat( this.props.result.data.paid_by_cash ).toFixed(2),
+      paid_by_credits: parseFloat( this.props.result.data.paid_by_credits ).toFixed(2),
+      bill_amount: parseFloat( this.props.result.data.bill_amount ).toFixed(2),
+      consultation_fees: parseFloat( this.props.result.data.consultation_fees ).toFixed(2),
+      total_amount: parseFloat( this.props.result.data.total_amount ).toFixed(2), 
 
       paid_by_cash_sgd: ( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_cash : this.props.result.data.paid_by_cash / 3,
       paid_by_credits_sgd: ( this.props.result.data.currency_symbol == 'SGD' ) ? this.props.result.data.paid_by_credits : this.props.result.data.paid_by_credits / 3,
@@ -250,7 +250,7 @@ class Summary extends Component {
                           style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}
                         >
                           <Text style={styles.detailUp2}>{(this.props.result.data.currency_symbol) ? this.props.result.data.currency_symbol : ""}</Text>
-                          <Text style={styles.detail2}>{(this.props.result.data.paid_by_cash) ? this.props.result.data.paid_by_cash : ""}</Text>
+                          <Text style={styles.detail2}>{(this.state.paid_by_cash) ? this.state.paid_by_cash : ""}</Text>
                         </View>
                       </View>
                     </View>

@@ -143,6 +143,7 @@ class ConfirmPay extends Component {
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
     };
+    console.log( params );
 
     Core.CreatePayment(params, async (err, result) => {
       // console.warn(result);
