@@ -381,6 +381,7 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
+      isMainLoaderShow: null,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -388,6 +389,19 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    this.toggleLoadingState = this.toggleLoadingState.bind(this);
+  }
+
+  toggleLoadingState( text ) {
+    if( this.isMainLoaderShow == true ){
+      this.isMainLoaderShow = false;
+    }else{
+      this.isMainLoaderShow = true;
+    }
+    this.mainLoaderText = text;
+
+    console.log( this.isMainLoaderShow );
+    console.log( this.mainLoaderText );
   }
 
   isVisibleUpdate() {
@@ -605,6 +619,10 @@ class Home extends Component {
       >
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           {this.customLoader()}
+          <GlobaLoadingState
+            loadingShow={this.isMainLoaderShow}
+            loadingText={this.mainLoaderText}
+          />
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
             kind="update-application"
