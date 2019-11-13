@@ -88,6 +88,7 @@ class ScanPay extends Component {
             amount: this.props.amount,
             capCurrency: this.props.capCurrency,
             capAmount: this.props.capAmount,
+            balance: this.props.balance,
             checkId: this.props.checkId,
             consultation_fee_symbol: this.props.consultation_fee_symbol,
             consultation_status: this.props.consultation_status,

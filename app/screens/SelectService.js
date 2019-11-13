@@ -29,11 +29,13 @@ class SelectService extends Component {
       checkTime: '',
       capCurrency: '',
       capAmount: '',
+      current_balance: '',
       clinic_image: '',
       clinic_name: '',
       consultation_fee_symbol: '',
       consultation_status: '',
-      consultation_fees: ''
+      consultation_fees: '',
+      plan_type: null,
     }
 
     this.selectedService = this.selectedService.bind(this)
@@ -44,11 +46,14 @@ class SelectService extends Component {
   }
 
   async StatusUseronClinic() {
-    storageCheckinUser = await Core.GetDataLocalReturnNew(Config.CHECKIDVISIT);
-    data =
-      await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
+    user = await Core.GetDataLocalReturnNew('user_id');
+    // console.log('user data from home', user)
+    newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
+    // console.log('newUserCheckinIDName from home', newUserCheckinIDName)
+    storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
+    data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
-
+    console.log( data );
     this.setState({
       clinicid: data.clinic_id,
       member: data.member,
@@ -57,11 +62,13 @@ class SelectService extends Component {
       checkTime: data.check_in_time,
       capCurrency: data.cap_currency_symbol,
       capAmount: data.cap_per_visit_amount,
+      balance: data.balance,
       clinic_image: data.image_url,
       clinic_name: data.name,
       consultation_fee_symbol: data.consultation_fee_symbol,
       consultation_status: data.consultation_status,
       consultation_fees: data.consultation_fees,
+      plan_type: data.plan_type,
       isLoading: true
     })
 
@@ -157,12 +164,14 @@ class SelectService extends Component {
         clinicid: this.props.clinicid,
         capCurrency: this.props.capCurrency,
         capAmount: this.props.capAmount,
+        balance: this.state.balance,
         checkId: this.props.checkId,
         consultation_fee_symbol: this.props.consultation_fee_symbol,
         consultation_status: this.props.consultation_status,
         consultation_fees: this.props.consultation_fees,
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
+        plan_type: this.state.plan_type
       })
     }
   }

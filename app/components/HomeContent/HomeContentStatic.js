@@ -41,6 +41,7 @@ class HomeContent extends Component {
   }
 
   async StatusUseronClinic() {
+    console.log( this.props );
     this.props.toggleLoadingState('');
     user = await Core.GetDataLocalReturnNew('user_id');
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
@@ -48,6 +49,7 @@ class HomeContent extends Component {
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
+    console.log( data );
     this.props.toggleLoadingState('');
     this.setState({
       services: data.clinic_procedures,
@@ -79,6 +81,8 @@ class HomeContent extends Component {
       // });
 
     });
+
+
   }
 
   async getUserBalance() {

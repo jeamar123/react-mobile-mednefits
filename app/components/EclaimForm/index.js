@@ -190,7 +190,8 @@ export default class EclaimForm extends Component {
           member: this.state.member,
           date: this.state.date,
           time: this.state.time,
-          currency: this.state.currency
+          currency: this.state.currency,
+          company_currency: this.state.company_currency,
         }
 
         Actions.ReceiptVerification({ claimdata: Object.assign({}, claimData, { memberData: this.state.memberData }) })

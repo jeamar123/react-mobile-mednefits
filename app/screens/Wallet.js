@@ -590,8 +590,8 @@ class Wallet extends Component {
               >
                 {
                   (this.state.walletType == 'Medical') ?
-                    (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                    (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                    (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                    (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
                 }
               </Text>
               <Text
@@ -650,8 +650,8 @@ class Wallet extends Component {
                 >
                   {
                     (this.state.walletType == 'Medical') ?
-                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
                   }
                   {
                     (this.state.walletType == 'Medical') ?
@@ -704,8 +704,8 @@ class Wallet extends Component {
                 >
                   {
                     (this.state.walletType == 'Medical') ?
-                      (this.state.medicalcurrency) ? this.state.medicalcurrency : '' :
-                      (this.state.wellnessurrency) ? this.state.wellnessurrency : ''
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
                   }
                   {
                     (this.state.walletType == 'Medical') ?

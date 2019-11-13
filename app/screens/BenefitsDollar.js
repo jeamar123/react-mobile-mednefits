@@ -22,13 +22,14 @@ class BenefitsDollar extends Component {
       amount: 0,
       currency: false,
       isLoading: false,
-      Balance: '0',
+      Balance: this.props.balance,
       placeholder: null,
       failed: false,
       title: null,
       message: null
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    console.log( this.props );
   }
 
   isVisibleUpdate() {
@@ -44,7 +45,7 @@ class BenefitsDollar extends Component {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
-        Balance: data.balance,
+        // Balance: data.balance,
         currency: result.data.currency_symbol
       });
     });
@@ -77,6 +78,40 @@ class BenefitsDollar extends Component {
         this.setState({ isLoading: false });
       }
     });
+  }
+
+  nextButton(){
+    if( this.props.plan_type == 'enterprise_plan' ){
+      Actions.ConfirmPay({
+        services: this.props.services,
+        clinicid: this.props.clinicid,
+        amount: this.state.amount,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        balance: this.state.Balance,
+        checkId: this.props.checkId,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
+      })
+    }else{
+      Actions.PayScan({
+        services: this.props.services,
+        clinicid: this.props.clinicid,
+        amount: this.state.amount,
+        capCurrency: this.props.capCurrency,
+        capAmount: this.props.capAmount,
+        balance: this.state.Balance,
+        checkId: this.props.checkId,
+        consultation_fee_symbol: this.props.consultation_fee_symbol,
+        consultation_status: this.props.consultation_status,
+        consultation_fees: this.props.consultation_fees,
+        clinic_image: this.props.clinic_image,
+        clinic_name: this.props.clinic_name,
+      })
+    }
   }
 
   render() {
@@ -221,7 +256,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency ? this.props.capCurrency : ' '} {(this.props.capCurrency == 'MYR') ? (Numeral(this.state.Balance).value() * 3).toFixed(2) : this.state.Balance}
+                Balance: {'\n'}{this.props.capCurrency} {(this.state.Balance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Text>
             </View>
 
@@ -240,26 +275,30 @@ class BenefitsDollar extends Component {
             </View>
           </View>
 
-          <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() =>
-            (!this.state.amount) ?
-              Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
-
-              :
-
-              Actions.PayScan({
+          
+              {/*Actions.PayScan({
                 services: this.props.services,
                 clinicid: this.props.clinicid,
                 amount: this.state.amount,
                 capCurrency: this.props.capCurrency,
                 capAmount: this.props.capAmount,
+                balance: this.state.Balance,
                 checkId: this.props.checkId,
                 consultation_fee_symbol: this.props.consultation_fee_symbol,
                 consultation_status: this.props.consultation_status,
                 consultation_fees: this.props.consultation_fees,
                 clinic_image: this.props.clinic_image,
                 clinic_name: this.props.clinic_name,
-              })}>
+              })*/}
+
+          <View style={{ marginBottom: '5%' }} />
+          <ButtonPay onPress={() =>
+            (!this.state.amount) ?
+              Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
+              :
+              this.nextButton()
+            }
+            >
             Next
           </ButtonPay>
         </Content>

@@ -247,6 +247,7 @@ export default class Navbar extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
+      )
     }
     else if (this.props.leftNav == 'back-eclaim') {
       return (
@@ -1203,7 +1204,7 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'currency-toggle' && this.props.company_currency == 'MYR') {
+    } else if (this.props.rightNav == 'currency-toggle' && this.props.convert_option == true) {
       return (
         <View
           style={{
