@@ -479,7 +479,7 @@ class DetailEclaim extends Component {
                   <View
                     style={{ flexDirection: 'row' }}>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      {parseInt(this.props.claimdata.amount * this.state.currency_exchange)}{" "}
+                      {parseInt(this.props.claimdata.amount / this.state.currency_exchange)}{" "}
                     </Common.Texti>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
                       SGD

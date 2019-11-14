@@ -381,7 +381,8 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
-      popAds: true
+      isMainLoaderShow: null,
+      popAds: false
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -389,7 +390,20 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+    this.toggleLoadingState = this.toggleLoadingState.bind(this);
     this.isVisibleAds = this.isVisibleAds.bind(this);
+  }
+
+  toggleLoadingState( text ) {
+    if( this.isMainLoaderShow == true ){
+      this.isMainLoaderShow = false;
+    }else{
+      this.isMainLoaderShow = true;
+    }
+    this.mainLoaderText = text;
+
+    console.log( this.isMainLoaderShow );
+    console.log( this.mainLoaderText );
   }
 
   isVisibleAds() {
@@ -627,6 +641,10 @@ class Home extends Component {
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           {this.popupAds()}
           {this.customLoader()}
+          <GlobaLoadingState
+            loadingShow={this.isMainLoaderShow}
+            loadingText={this.mainLoaderText}
+          />
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
             kind="update-application"
