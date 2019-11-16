@@ -820,7 +820,7 @@ export default class Navbar extends React.Component {
                 fontSize: 16,
                 color: '#FFFFFF',
                 marginRight: 10,
-                width: 50
+                width: 70
               }}
             >
               Done
@@ -932,7 +932,7 @@ export default class Navbar extends React.Component {
                 fontSize: 14,
                 color: '#FFFFFF',
                 marginRight: '2%',
-                width: 65,
+                width: 70,
               }}
             >
               DONE
@@ -959,7 +959,7 @@ export default class Navbar extends React.Component {
                 fontSize: 14,
                 color: '#FFFFFF',
                 marginRight: '2%',
-                width: 65,
+                width: 70,
               }}
             >
               DONE
@@ -986,7 +986,7 @@ export default class Navbar extends React.Component {
                 fontSize: 14,
                 color: '#FFFFFF',
                 marginRight: '2%',
-                width: 65,
+                width: 70,
               }}
             >
               DONE
@@ -1013,7 +1013,7 @@ export default class Navbar extends React.Component {
                 fontSize: 14,
                 color: '#FFFFFF',
                 marginRight: '2%',
-                width: 65,
+                width: 70,
               }}
             >
               DONE
@@ -1040,7 +1040,7 @@ export default class Navbar extends React.Component {
                 fontSize: 14,
                 color: '#FFFFFF',
                 marginRight: '2%',
-                width: 65,
+                width: 70,
               }}
             >
               DONE

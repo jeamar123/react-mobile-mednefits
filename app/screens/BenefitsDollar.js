@@ -256,7 +256,7 @@ class BenefitsDollar extends Component {
               paddingBottom: responsiveWidth(3)
             }}>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency} {(this.state.Balance).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                Balance: {'\n'}{this.props.capCurrency} {(parseFloat(this.state.Balance).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Text>
             </View>
 

@@ -34,6 +34,7 @@ const options = {
 class History extends Component {
   constructor(props) {
     super(props);
+    this.toggleCurrency = this.toggleCurrency.bind(this);
     this.state = {
       imageSource: {
         uri: '',
@@ -41,6 +42,9 @@ class History extends Component {
       data: false,
       isLoading: false,
       refreshing: false,
+      currency_symbol: 'SGD',
+      malaysia_exchange_rate: '3.00',
+      convert_option: false,
     };
     this.selectPhoto = this.selectPhoto.bind(this);
   }
@@ -54,6 +58,32 @@ class History extends Component {
         data: data, refreshing: false
       })
     })
+  }
+
+  toggleCurrency(){
+    if( this.state.currency_symbol == 'SGD' ){
+      this.setState({
+        currency_symbol: 'MYR',
+        total_amount: this.state.total_amount_myr,
+        cap_per_visit: this.state.cap_per_visit_myr,
+        bill_amount: this.state.bill_amount_myr,
+        consultation_fee: this.state.consultation_fee_myr,
+        paid_by_credits: this.state.paid_by_credits_myr,
+        paid_by_cash: this.state.paid_by_cash_myr,
+      });
+    }else{
+      this.setState({
+        currency_symbol: 'SGD',
+        total_amount: this.state.total_amount_sgd ,
+        cap_per_visit: this.state.cap_per_visit_sgd ,
+        bill_amount: this.state.bill_amount_sgd ,
+        consultation_fee: this.state.consultation_fee_sgd ,
+        paid_by_credits: this.state.paid_by_credits_sgd ,
+        paid_by_cash: this.state.paid_by_cash_sgd ,
+
+      });
+    }
+    // console.log( this.state );
   }
 
   selectPhoto() {
@@ -122,7 +152,32 @@ class History extends Component {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
       console.warn(data)
       this.setState({
-        data: data
+        data: data, 
+
+        convert_option: data.convert_option,
+        malaysia_exchange_rate: parseFloat( data.currency_amount ).toFixed(2),
+        currency_symbol: data.currency_symbol,
+
+        total_amount_sgd: data.total_amount,
+        cap_per_visit_sgd: data.cap_per_visit,
+        bill_amount_sgd: data.bill_amount,
+        consultation_fee_sgd: data.consultation_fee,
+        paid_by_credits_sgd: data.paid_by_credits,
+        paid_by_cash_sgd: data.paid_by_cash,
+
+        total_amount_myr: data.total_amount_converted,
+        cap_per_visit_myr: data.cap_per_visit_converted,
+        bill_amount_myr: data.bill_amount_converted,
+        consultation_fee_myr: data.consultation_fee_converted,
+        paid_by_credits_myr: data.paid_by_credits_converted,
+        paid_by_cash_myr: data.paid_by_cash_converted,
+
+        total_amount: data.total_amount,
+        cap_per_visit: data.cap_per_visit,
+        bill_amount: data.bill_amount,
+        consultation_fee: data.consultation_fee,
+        paid_by_credits: data.paid_by_credits,
+        paid_by_cash: data.paid_by_cash,
       })
     })
   }
@@ -385,7 +440,7 @@ class History extends Component {
                 Bill Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.bill_amount) ? this.state.data.bill_amount : "0.00"}
+                {(this.strrency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.bill_amount) ? this.state.bill_amount : "0.00"}
               </Text>
             </View>
 
@@ -403,7 +458,7 @@ class History extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.consultation_fee) ? this.state.data.consultation_fee : "0.00"}
+                {(this.state.currency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.consultation_fee) ? this.state.consultation_fee : "0.00"}
               </Text>
             </View>
 
@@ -422,7 +477,7 @@ class History extends Component {
                 Total Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.total_amount) ? this.state.data.total_amount : "0.00"}
+                {(this.state.currency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.total_amount) ? this.state.total_amount : "0.00"}
               </Text>
             </View>
 
@@ -444,7 +499,7 @@ class History extends Component {
                 Paid by Credits
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_credits) ? this.state.data.paid_by_credits : "0.00"}
+                {(this.state.currency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.paid_by_credits) ? this.state.paid_by_credits : "0.00"}
               </Text>
             </View>
             <View>
@@ -465,7 +520,7 @@ class History extends Component {
                 Paid by Cash
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.state.data.currency_symbol) ? this.state.data.currency_symbol : "N/A"} {(this.state.data.paid_by_cash) ? this.state.data.paid_by_cash : "0.00"}
+                {(this.state.currency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.paid_by_cash) ? this.state.paid_by_cash : "0.00"}
               </Text>
             </View>
           </View>
@@ -499,18 +554,28 @@ class History extends Component {
       <Container>
         {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="wallet" title="History" />
+        <Navbar 
+          leftNav="wallet" 
+          rightNav="currency-toggle" 
+          currency_symbol={ this.state.currency_symbol } 
+          convert_option={ this.state.convert_option } 
+          company_currency={ this.props.company_currency } 
+          updateCurrency={ this.toggleCurrency }
+          title="History" 
+        />
         <HistoryUser
-          Currency={this.state.data.currency_symbol}
-          Amount={this.state.data.total_amount}
+          Currency={this.state.currency_symbol}
+          Amount={this.state.total_amount}
           transaction_id={this.state.data.transaction_id}
           date_of_transaction={this.state.data.date_of_transaction}
           customer={this.state.data.customer}
           clinicname={this.state.data.clinic_name}
           clinicimage={this.state.data.clinic_image}
           services={this.state.data.services}
-          cap_per_visit={this.state.data.cap_per_visit}
+          cap_per_visit={this.state.cap_per_visit}
           cap_transaction={this.state.data.cap_transaction}
+          malaysia_exchange_rate={this.state.malaysia_exchange_rate}
+          convert_option={this.state.convert_option}
         />
         <ScrollView
           refreshControl={
