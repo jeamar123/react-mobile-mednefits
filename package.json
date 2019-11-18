@@ -11,7 +11,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "build": "sh build_dev.sh",
-    "clean_build": "sh clean_build_dev.sh"
+    "clean_build": "sh clean_build_dev.sh",
+    "device": "sh build_device.sh"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.5.1",
