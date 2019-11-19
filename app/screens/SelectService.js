@@ -274,7 +274,7 @@ const styles = {
     flexWrap: 'wrap',
   },
   gridBox: {
-    width: width / 3.8,
+    width: width / 3.85,
     height: height / 7.3,
     backgroundColor: '#fff',
     margin: 10,

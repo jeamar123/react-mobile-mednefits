@@ -39,7 +39,7 @@ class DetailEclaim extends Component {
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
-    console.log( this.props );
+    // console.log( this.props );
   }
 
   EclaimProcess = async () => {
@@ -62,6 +62,7 @@ class DetailEclaim extends Component {
         'currency_type': this.props.claimdata.currency,
         'currency_exchange_rate': this.state.currency_exchange
       }
+      console.log( eclaimFile );
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {
         // Core.getNotify("",result.message)
@@ -72,7 +73,7 @@ class DetailEclaim extends Component {
           })
           Actions.ThanksEclaim({ type: 'reset' })
         } else {
-          console.log('failed to submit')
+          // console.log('failed to submit')
           await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit' })
         }
 
@@ -84,7 +85,7 @@ class DetailEclaim extends Component {
         message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit'
       })
     } finally {
-      console.log('finally called')
+      // console.log('finally called')
     }
   }
 

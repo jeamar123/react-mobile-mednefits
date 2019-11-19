@@ -56,7 +56,6 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log(data);
       await this.setState({ resultData: data, in_network: true });
     });
   }
@@ -201,7 +200,6 @@ class HistoryTransaction extends Component {
   }
 
   renderEclaimStatus(data) {
-    console.log(data);
     if (data.status == 0) {
       return (
         <View

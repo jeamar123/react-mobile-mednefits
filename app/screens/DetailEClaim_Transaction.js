@@ -129,8 +129,9 @@ class DetailEClaim_Transaction extends Component {
         <Navbar leftNav="back" title="History" />
         <HistoryClaim
           Status={this.state.data.status_text}
-          Date={this.state.data.claim_date}
-          Amount={this.state.data.amount}
+          status_number={this.state.data.status}
+          Date={this.state.data.date}
+          Amount={this.state.data.claim_amount}
           Currency={this.state.data.currency_symbol}
         />
         <GiftedForm
@@ -171,7 +172,7 @@ class DetailEClaim_Transaction extends Component {
                 style={{
                   fontSize: 13
                 }}>
-                {this.state.data.amount ? this.state.data.amount : 'N/A'} { this.state.data.currency_symbol }
+                { this.state.data.currency_symbol } {this.state.data.amount ? this.state.data.amount : 'N/A'}
               </Text>
             </View>
             {/* <TextInput
@@ -360,7 +361,7 @@ class DetailEClaim_Transaction extends Component {
                 style={{
                   fontSize: 13
                 }}>
-                {this.state.data.date ? this.state.data.date : 'N/A'}
+                {this.state.data.visit_date ? this.state.data.visit_date : 'N/A'}
               </Text>
             </View>
             {/* <TextInput

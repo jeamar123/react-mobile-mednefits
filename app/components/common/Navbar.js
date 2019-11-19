@@ -119,6 +119,41 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'history-back-after-upload') {
+      return (
+        <View
+          style={{
+            width: 60,
+            height: 50,
+            paddingLeft: 10,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() =>
+              Actions.HistoryTransaction()
+            }
+            style={{
+              paddingStart: 11,
+              marginTop: 5,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 32, paddingEnd: 5 }}
+            />
+            <Text
+              style={{ color: (this.props.fontColor) ? this.props.fontColor : '#fff', fontSize: 14, fontFamily: 'Helvetica' }}
+            >
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'to-home') {
       return (
         <View
@@ -807,7 +842,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -917,7 +952,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -944,7 +979,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -971,7 +1006,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -998,7 +1033,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -1025,7 +1060,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-end',
@@ -1222,13 +1257,13 @@ export default class Navbar extends React.Component {
             {
               this.state.currency_symbol == 'SGD' ?
                 <ResponsiveImage
-                  source={require('../../../assets/toggle-currency-myr.png')}
+                  source={require('../../../assets/toggle-currency-myr.jpg')}
                   style={{ resizeMode: 'contain', marginTop: 10 }}
                   initWidth="100" initHeight="30"
                 />
               :
               <ResponsiveImage
-                source={require('../../../assets/toggle-currency-sgd.png')}
+                source={require('../../../assets/toggle-currency-sgd.jpg')}
                 style={{ resizeMode: 'contain', marginTop: 10 }}
                 initWidth="100" initHeight="30"
               />
