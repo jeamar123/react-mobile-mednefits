@@ -52,7 +52,11 @@ class HistoryClaim extends Component {
             style={styles.amount}
           >
             Claim Amount:  
-            { this.props.Amount ? ' ' + this.props.Amount : '0.00' } {this.props.Currency ? this.props.Currency : 'N/A'}
+            { this.props.status_number == 1 ?
+              ' ' + this.props.Currency + ' ' + this.props.Amount
+              :
+              null
+            }
           </Text>
           <Text
             numberOfLines={2}

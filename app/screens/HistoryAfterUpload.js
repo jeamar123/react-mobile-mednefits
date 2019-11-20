@@ -439,13 +439,14 @@ class HistoryAfterUpload extends Component {
 				{this.customLoader()}
 				<StatusBar backgroundColor="white" barStyle="dark-content" />
 				<Navbar  
-					leftNav="back_wallet"
+					leftNav="history-back-after-upload" 
           rightNav="currency-toggle" 
           currency_symbol={ this.state.currency_symbol } 
           convert_option={ this.state.convert_option } 
           company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
           title="History"
+          transaction_id={ this.state.data.transaction_id } 
 				/>
 				<HistoryUser
 					Currency={this.state.currency_symbol}
