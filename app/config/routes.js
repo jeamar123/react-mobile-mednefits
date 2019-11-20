@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BackHandler, SafeAreaView, Animated, Easing } from 'react-native';
 import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
+import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
@@ -128,49 +129,36 @@ class RouterComponent extends Component {
     this.state = {
       doubleBackToExitPressedOnce: false
     }
+    OneSignal.init("ac4b020b-c0eb-4044-8020-a9f7f18027ba");
+
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived(notification) {
+    console.log("Notification received: ", notification);
+  }
+
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
+
+  onIds(device) {
+    console.log('Device info: ', device);
   }
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-
-    // PushNotification.configure({
-
-    //   // (optional) Called when Token is generated (iOS and Android)
-    //   onRegister: function (token) {
-    //     console.log('TOKEN:', token);
-    //   },
-
-    //   // (required) Called when a remote or local notification is opened or received
-    //   onNotification: function (notification) {
-    //     console.log('NOTIFICATION:', notification);
-
-    //     // process the notification
-
-    //     // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
-    //     // notification.finish(PushNotificationIOS.FetchResult.NoData);
-    //   },
-
-    //   // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
-    //   senderID: "864568376301",
-
-    //   // IOS ONLY (optional): default: all - Permissions to register.
-    //   permissions: {
-    //     alert: true,
-    //     badge: true,
-    //     sound: true
-    //   },
-
-    //   // Should the initial notification be popped automatically
-    //   // default: true
-    //   popInitialNotification: true,
-
-    //   /**
-    //     * (optional) default: true
-    //     * - Specified if permissions (ios) and token (android and ios) will requested or not,
-    //     * - if not, you must call PushNotificationsHandler.requestPermissions() later
-    //     */
-    //   requestPermissions: true,
-    // });
   }
 
   componentWillMount() {

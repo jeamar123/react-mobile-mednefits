@@ -28,6 +28,7 @@ import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +55,9 @@ public class MainApplication extends Application implements ReactApplication {
         new RNCameraPackage(),
         new RNFusedLocationPackage(),
         new AsyncStoragePackage(),
-        new SvgPackage());
+        new ReactNativeOneSignalPackage(),
+        new SvgPackage()
+      );
     }
 
     @Override
