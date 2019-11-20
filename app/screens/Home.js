@@ -12,6 +12,7 @@ import {
 import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../components/common/Navbar';
+import GlobaLoadingState from '../components/common/GlobaLoadingState';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
@@ -381,8 +382,9 @@ class Home extends Component {
       thisVersion: VersionCheck.getCurrentVersion(),
       appstoreVersion: '',
       isLoading: false,
-      isMainLoaderShow: null,
-      popAds: false
+      isMainLoaderShow: false,
+      mainLoaderText: '',
+      popAds: false,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -395,15 +397,19 @@ class Home extends Component {
   }
 
   toggleLoadingState( text ) {
-    if( this.isMainLoaderShow == true ){
-      this.isMainLoaderShow = false;
+    if( this.state.isMainLoaderShow == true ){
+      this.setState({
+        isMainLoaderShow : false,
+        mainLoaderText : text
+      });
     }else{
-      this.isMainLoaderShow = true;
+      this.setState({
+        isMainLoaderShow : true,
+        mainLoaderText : text
+      });
     }
-    this.mainLoaderText = text;
-
-    console.log( this.isMainLoaderShow );
-    console.log( this.mainLoaderText );
+    console.log( this.state.isMainLoaderShow );
+    console.log( this.state.mainLoaderText );
   }
 
   isVisibleAds() {
@@ -509,7 +515,6 @@ class Home extends Component {
         })
       });
     // this.checkversion()
-
   }
 
   // checkversion = async () =
@@ -642,8 +647,8 @@ class Home extends Component {
           {this.popupAds()}
           {this.customLoader()}
           <GlobaLoadingState
-            loadingShow={this.isMainLoaderShow}
-            loadingText={this.mainLoaderText}
+            loadingShow={this.state.isMainLoaderShow}
+            loadingText={this.state.mainLoaderText}
           />
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
@@ -674,6 +679,7 @@ class Home extends Component {
               consultation_fee_symbol={this.props.consultation_fee_symbol}
               consultation_status={this.props.consultation_status}
               consultation_fees={this.props.consultation_fees}
+              toggleLoadingState={this.toggleLoadingState}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}

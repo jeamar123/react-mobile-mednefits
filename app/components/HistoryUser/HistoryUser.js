@@ -14,6 +14,7 @@ class HistoryUser extends Component {
       Balance: '0',
       Full_name: '',
     };
+    console.log(this.props);
   }
 
   componentWillMount() {
@@ -157,25 +158,28 @@ class HistoryUser extends Component {
                 {(this.props.cap_transaction == false) ? '' : this.props.Currency} {(this.props.cap_per_visit == false) ? 'Not applicable' : Number(this.props.cap_per_visit).toFixed(2)}
               </Text>
             </View>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginTop: responsiveHeight(1),
-                marginBottom: responsiveHeight(1.5),
-                marginLeft: '5%',
-                marginRight: '5%'
-              }}
-            >
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
-                Exchange Rate
-              </Text>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.props.malaysia_exchange_rate}
-              </Text>
-            </View>
+            { this.props.convert_option == true ? 
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginTop: responsiveHeight(1),
+                  marginBottom: responsiveHeight(1.5),
+                  marginLeft: '5%',
+                  marginRight: '5%'
+                }}
+              >
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
+                  Exchange Rate
+                </Text>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
+                  {this.props.malaysia_exchange_rate}
+                </Text>
+              </View>
+              :
+              null
+            }
 
 
             <View
