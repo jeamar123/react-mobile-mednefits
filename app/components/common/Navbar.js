@@ -32,7 +32,7 @@ export default class Navbar extends React.Component {
     };
   }
 
-  toggleCurrency(){
+  toggleCurrency() {
     this.setState({
       currency_symbol: this.state.currency_symbol == 'SGD' ? 'MYR' : 'SGD',
     });
@@ -1162,23 +1162,23 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity 
+          <TouchableOpacity
             style={{ paddingEnd: '15%' }}
             onPress={() => this.toggleCurrency()}
           >
             {
               this.state.currency_symbol == 'SGD' ?
                 <ResponsiveImage
-                  source={require('../../../assets/toggle-currency-myr.png')}
+                  source={require('../../../assets/toggle-currency-myr.jpg')}
                   style={{ resizeMode: 'contain', marginTop: 10 }}
                   initWidth="100" initHeight="30"
                 />
-              :
-              <ResponsiveImage
-                source={require('../../../assets/toggle-currency-sgd.png')}
-                style={{ resizeMode: 'contain', marginTop: 10 }}
-                initWidth="100" initHeight="30"
-              />
+                :
+                <ResponsiveImage
+                  source={require('../../../assets/toggle-currency-sgd.jpg')}
+                  style={{ resizeMode: 'contain', marginTop: 10 }}
+                  initWidth="100" initHeight="30"
+                />
             }
           </TouchableOpacity>
         </View>
