@@ -1169,13 +1169,13 @@ export default class Navbar extends React.Component {
             {
               this.state.currency_symbol == 'SGD' ?
                 <ResponsiveImage
-                  source={require('../../../assets/toggle-currency-myr.png')}
+                  source={require('../../../assets/toggle-currency-myr.jpg')}
                   style={{ resizeMode: 'contain', marginTop: 10 }}
                   initWidth="100" initHeight="30"
                 />
               :
               <ResponsiveImage
-                source={require('../../../assets/toggle-currency-sgd.png')}
+                source={require('../../../assets/toggle-currency-sgd.jpg')}
                 style={{ resizeMode: 'contain', marginTop: 10 }}
                 initWidth="100" initHeight="30"
               />
