@@ -394,33 +394,33 @@ export default class EclaimForm extends Component {
               <View style={{ marginLeft: '5%' }}>
                 <Common.Divider />
               </View>
-              { ( this.state.company_currency == 'SGD' ) ?
-                <View>
-                  <View
-                    style={styles.fieldStyle}
+              {/* ( this.state.company_currency == 'SGD' ) ? : null */}
+
+              <View>
+                <View
+                  style={styles.fieldStyle}
+                >
+                  <Common.Texti
+                    fontFamily={Config.FONT_FAMILY_MEDIUM}
+                    fontColor={'#2C3E50'}
                   >
-                    <Common.Texti
-                      fontFamily={Config.FONT_FAMILY_MEDIUM}
-                      fontColor={'#2C3E50'}
-                    >
-                      Currency
-                    </Common.Texti>
+                    Currency
+                  </Common.Texti>
 
-                    <Common.InputSelectListCurrency
-                      title="Currency"
-                      placeholder={this.state.currencyState}
-                      titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
-                      data={this.state.currencyData}
-                      value={this.state.currency}
-                      onValueChange={(value) => this.setState({ currency: value })}
-                    />
-                  </View>
-
-                  <View style={{ marginLeft: '5%' }}>
-                    <Common.Divider />
-                  </View>
+                  <Common.InputSelectListCurrency
+                    title="Currency"
+                    placeholder={this.state.currencyState}
+                    titleValue={(this.state.currency == "SGD - Singapore Dollar") ? "SGD" : "MYR"}
+                    data={this.state.currencyData}
+                    value={this.state.currency}
+                    onValueChange={(value) => this.setState({ currency: value })}
+                  />
                 </View>
-              : null }
+
+                <View style={{ marginLeft: '5%' }}>
+                  <Common.Divider />
+                </View>
+              </View>
 
               <View
                 style={styles.fieldStyle}
