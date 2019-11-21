@@ -96,7 +96,7 @@ class DetailEclaim extends Component {
 
   async GetCurrency() {
     this.setState({
-      currency_exchange: (this.props.claimdata.currency == "SGD") ? '0.00' : '3.00'
+      currency_exchange: (this.props.claimdata.currency == "SGD") ? '3.00' : '3.00'
     })
   }
 
@@ -481,10 +481,15 @@ class DetailEclaim extends Component {
                   <View
                     style={{ flexDirection: 'row' }}>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      {parseFloat(this.props.claimdata.amount / this.state.currency_exchange).toFixed(2)}{" "}
+                      { ( this.props.claimdata.company_currency == 'SGD' && this.props.claimdata.currency == 'MYR' ) ?
+                        parseFloat(this.props.claimdata.amount / this.state.currency_exchange).toFixed(2)
+                        :
+                        parseFloat(this.props.claimdata.amount * this.state.currency_exchange).toFixed(2)
+                      }
+                      {" "}
                     </Common.Texti>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      SGD
+                      {this.props.claimdata.company_currency}
                     </Common.Texti>
                   </View>
                 </View>
