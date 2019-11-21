@@ -291,7 +291,7 @@ export default class EclaimForm extends Component {
                     color: "#2C3E50",
                   }}
                   placeholderStyle={{
-                    fontSize: RF(1.85),
+                    fontSize: 18,
                   }}
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
                   leftToRight

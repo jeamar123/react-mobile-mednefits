@@ -686,7 +686,7 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 10
+    marginTop: 10,
   },
   gridBox: {
     width: width / 4.03,
@@ -695,6 +695,7 @@ const styles = {
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: responsiveHeight(1.5),
+    marginBottom: responsiveHeight(1.8),
   },
 };
 
