@@ -107,6 +107,9 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [manifestApplicationId: "${applicationId}",
+                                onesignal_app_id: "ac4b020b-c0eb-4044-8020-a9f7f18027ba",
+                                onesignal_google_project_number: "864568376301"]
     }
     signingConfigs {
         release {
@@ -167,6 +170,7 @@ dependencies {
     compile project(':react-native-geolocation-service')
     compile project(':react-native-fs')
     compile project(':react-native-document-picker')
+    implementation project(':react-native-onesignal')
     implementation project(':react-native-version-check')
 	implementation project(':react-native-geolocation-service')
     implementation project(':react-native-vector-icons')

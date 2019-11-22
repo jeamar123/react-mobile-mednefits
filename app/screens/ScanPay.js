@@ -95,6 +95,7 @@ class ScanPay extends Component {
             consultation_fees: this.props.consultation_fees,
             clinic_image: this.props.clinic_image,
             clinic_name: this.props.clinic_name,
+            plan_type: this.props.plan_type,
           })}>
             <Card>
               <CardItem>

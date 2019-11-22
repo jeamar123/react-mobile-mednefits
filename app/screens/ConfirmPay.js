@@ -39,7 +39,7 @@ class ConfirmPay extends Component {
       timeNow: ''
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
-    console.log( this.props );
+    console.log(this.props);
   }
 
   isVisibleUpdate() {
@@ -74,8 +74,39 @@ class ConfirmPay extends Component {
     var payCredit = 0;
     var payCash = 0;
 
-    if (Number(cap) > 0) {
-      if (Number(cap) > Number(balance)) {
+    
+
+    if( this.props.plan_type == 'enterprise_plan' ){
+      if (Number(cap) > 0) {
+        payCredit = Number(cap);
+        payCash = Number(totalAmount) - Number(cap);
+      }else{
+        payCredit = Number(totalAmount);
+        payCash = 0;
+      }
+    }else{
+      if (Number(cap) > 0) {
+        if (Number(cap) > Number(balance)) {
+          if (Number(totalAmount) > Number(balance)) {
+            payCredit = Number(balance);
+            payCash = Number(totalAmount) - Number(balance);
+          } else {
+            payCredit = Number(totalAmount);
+            payCash = 0;
+          }
+        } else if (Number(cap) == Number(totalAmount)) {
+          payCredit = Number(totalAmount);
+          payCash = 0;
+        } else {
+          if (Number(totalAmount) > Number(cap)) {
+            payCredit = Number(cap);
+            payCash = Number(totalAmount) - Number(cap);
+          } else if (Number(cap) > Number(totalAmount)) {
+            payCredit = Number(totalAmount);
+            payCash = 0;
+          }
+        }
+      } else {
         if (Number(totalAmount) > Number(balance)) {
           payCredit = Number(balance);
           payCash = Number(totalAmount) - Number(balance);
@@ -83,25 +114,6 @@ class ConfirmPay extends Component {
           payCredit = Number(totalAmount);
           payCash = 0;
         }
-      } else if (Number(cap) == Number(totalAmount)) {
-        payCredit = Number(totalAmount);
-        payCash = 0;
-      } else {
-        if (Number(totalAmount) > Number(cap)) {
-          payCredit = Number(cap);
-          payCash = Number(totalAmount) - Number(cap);
-        } else if (Number(cap) > Number(totalAmount)) {
-          payCredit = Number(totalAmount);
-          payCash = 0;
-        }
-      }
-    } else {
-      if (Number(totalAmount) > Number(balance)) {
-        payCredit = Number(balance);
-        payCash = Number(totalAmount) - Number(balance);
-      } else {
-        payCredit = Number(totalAmount);
-        payCash = 0;
       }
     }
 
@@ -116,8 +128,6 @@ class ConfirmPay extends Component {
       byCash: (parseFloat(payCash).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       byCredit: (parseFloat(payCredit).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
     });
-
-    console.log( this.state );
 
     var that = this;
     var date = new Date().getDate(); //Current Date
@@ -404,7 +414,8 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {this.props.capCurrency} {Number(this.props.consultation_fees).toFixed(2)}
+                {(this.props.consultation_status == false) ? this.props.capCurrency + ' ' : this.props.consultation_fee_symbol}
+                {Number(this.props.consultation_fees).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
             </View>
             <View
@@ -443,7 +454,7 @@ class ConfirmPay extends Component {
                 Cap
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2)}
+                {(this.props.capAmount === 0) ? '' : this.props.capCurrency} {(this.props.capAmount === 0) ? 'Not applicable' : Number(this.props.capAmount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
 
             </View>

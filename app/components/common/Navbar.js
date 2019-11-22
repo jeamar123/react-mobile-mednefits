@@ -30,11 +30,11 @@ export default class Navbar extends React.Component {
       left: false,
       currency_symbol: this.props.currency_symbol,
     };
-    console.log( this.props );
-    console.log( this.state );
+    console.log(this.props);
+    console.log(this.state);
   }
 
-  toggleCurrency(){
+  toggleCurrency() {
     this.setState({
       currency_symbol: this.state.currency_symbol == 'SGD' ? 'MYR' : 'SGD',
     });
@@ -282,7 +282,7 @@ export default class Navbar extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-      )
+      );
     }
     else if (this.props.leftNav == 'back-eclaim') {
       return (
@@ -1250,7 +1250,7 @@ export default class Navbar extends React.Component {
             alignItems: 'flex-end',
           }}
         >
-          <TouchableOpacity 
+          <TouchableOpacity
             style={{ paddingEnd: '15%' }}
             onPress={() => this.toggleCurrency()}
           >
