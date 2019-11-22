@@ -100,6 +100,7 @@
 		58A94EDE968947709E2B177D /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08200272013445B1A458A199 /* Roboto_medium.ttf */; };
 		5D07EA9722C3EF4200DCF503 /* libRNVersionCheck.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D07EA9622C3EF2600DCF503 /* libRNVersionCheck.a */; };
 		5D0A74FC22E48F370054A20E /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0A74F322E48EF80054A20E /* libRNCAsyncStorage.a */; };
+		5D4FD77A23823CCA002D4FED /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D4FD75623823CBB002D4FED /* libRCTOneSignal.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		64200F0194204A4DAB3CA5A9 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F09B0AAEF118442F815F3B75 /* MaterialCommunityIcons.ttf */; };
 		69572E2A0C3F473DB2C38EFD /* HelveticaNeue-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 935C8EA0DC0A411B8670C4CE /* HelveticaNeue-Bold.otf */; };
@@ -406,6 +407,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNCAsyncStorage;
 		};
+		5D4FD75523823CBB002D4FED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5D4FD74323823CBB002D4FED /* RCTOneSignal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTOneSignal;
+		};
 		5D73D002236A786700562C2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -599,6 +607,8 @@
 		5AEB01EC8CF58847C0865478 /* Pods-MednefitsMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MednefitsMobileTests.debug.xcconfig"; path = "Target Support Files/Pods-MednefitsMobileTests/Pods-MednefitsMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5D07EA6022C3EF2600DCF503 /* RNVersionCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVersionCheck.xcodeproj; path = "../node_modules/react-native-version-check/ios/RNVersionCheck.xcodeproj"; sourceTree = "<group>"; };
 		5D0A74C222E48EF80054A20E /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
+		5D4FD74323823CBB002D4FED /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
+		5DA169CD23823DA40083F4A6 /* MednefitsMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MednefitsMobile.entitlements; path = MednefitsMobile/MednefitsMobile.entitlements; sourceTree = "<group>"; };
 		5DD2FD8323435346001B0BC7 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		600CCB0A55422D05348B2363 /* Pods-MednefitsMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MednefitsMobileTests.release.xcconfig"; path = "Target Support Files/Pods-MednefitsMobileTests/Pods-MednefitsMobileTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -652,6 +662,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D4FD77A23823CCA002D4FED /* libRCTOneSignal.a in Frameworks */,
 				5D0A74FC22E48F370054A20E /* libRNCAsyncStorage.a in Frameworks */,
 				5D07EA9722C3EF4200DCF503 /* libRNVersionCheck.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
@@ -951,6 +962,7 @@
 		13B07FAE1A68108700A75B9A /* MednefitsMobile */ = {
 			isa = PBXGroup;
 			children = (
+				5DA169CD23823DA40083F4A6 /* MednefitsMobile.entitlements */,
 				075A32422220F56A00D2D8A0 /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1025,6 +1037,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5D4FD74423823CBB002D4FED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D4FD75623823CBB002D4FED /* libRCTOneSignal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5DD2FD8423435346001B0BC7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1087,6 +1107,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5D4FD74323823CBB002D4FED /* RCTOneSignal.xcodeproj */,
 				5DD2FD8323435346001B0BC7 /* RNSVG.xcodeproj */,
 				5D0A74C222E48EF80054A20E /* RNCAsyncStorage.xcodeproj */,
 				5D07EA6022C3EF2600DCF503 /* RNVersionCheck.xcodeproj */,
@@ -1261,6 +1282,17 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = BB42S6H242;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1323,6 +1355,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 5D4FD74423823CBB002D4FED /* Products */;
+					ProjectRef = 5D4FD74323823CBB002D4FED /* RCTOneSignal.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1656,6 +1692,13 @@
 			fileType = archive.ar;
 			path = libRNCAsyncStorage.a;
 			remoteRef = 5D0A74F222E48EF80054A20E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5D4FD75623823CBB002D4FED /* libRCTOneSignal.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOneSignal.a;
+			remoteRef = 5D4FD75523823CBB002D4FED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5D73D003236A786700562C2B /* libjschelpers.a */ = {
@@ -2116,6 +2159,7 @@
 			baseConfigurationReference = 6E6B7A2A7A87EFDE499314E1 /* Pods-MednefitsMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MednefitsMobile/MednefitsMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2135,6 +2179,7 @@
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-system-setting/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 				);
 				INFOPLIST_FILE = MednefitsMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2155,6 +2200,7 @@
 			baseConfigurationReference = 6F15599AC3E6CF25B32A1B3F /* Pods-MednefitsMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MednefitsMobile/MednefitsMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2173,6 +2219,7 @@
 					"$(SRCROOT)/../node_modules/react-native-simple-toast/ios/LRDRCTSimpleToast",
 					"$(SRCROOT)/../node_modules/react-native-system-setting/ios",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/AirMaps/**",
+					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 				);
 				INFOPLIST_FILE = MednefitsMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

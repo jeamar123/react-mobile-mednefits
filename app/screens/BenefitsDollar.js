@@ -116,6 +116,7 @@ class BenefitsDollar extends Component {
         consultation_fees: this.props.consultation_fees,
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
+        plan_type: this.props.plan_type,
       })
     }else{
       Actions.PayScan({
@@ -131,6 +132,7 @@ class BenefitsDollar extends Component {
         consultation_fees: this.props.consultation_fees,
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
+        plan_type: this.props.plan_type,
       })
     }
   }
@@ -277,9 +279,15 @@ class BenefitsDollar extends Component {
               paddingTop: responsiveWidth(3),
               paddingBottom: responsiveWidth(3)
             }}>
-              <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
-                Balance: {'\n'}{this.props.capCurrency} {(this.state.Balance).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 })}
-              </Text>
+              { this.props.plan_type == 'enterprise_plan' ?
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
+                  Balance: {'\n'}N.A.
+                </Text>
+                :
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
+                  Balance: {'\n'}{this.props.capCurrency} {(this.state.Balance).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 })}
+                </Text>
+              }
             </View>
 
             <View style={{

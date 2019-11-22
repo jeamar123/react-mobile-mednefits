@@ -9,7 +9,10 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "build": "sh build_dev.sh",
+    "clean_build": "sh clean_build_dev.sh",
+    "device": "sh build_device.sh"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.5.1",
@@ -35,6 +38,7 @@
     "react-native-modal": "^6.5.0",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-modalbox": "^1.6.0",
+    "react-native-onesignal": "^3.5.0",
     "react-native-permissions": "^1.1.1",
     "react-native-picker-select": "^5.2.1",
     "react-native-responsive-dimensions": "^2.0.1",

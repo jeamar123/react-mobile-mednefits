@@ -73,8 +73,40 @@ class ConfirmPay extends Component {
     var payCredit = 0;
     var payCash = 0;
 
-    if( Number( cap ) > 0 ){
-      if( Number( cap ) > Number( balance ) ){
+    if( this.props.plan_type == 'enterprise_plan' ){
+      if (Number(cap) > 0) {
+        payCredit = Number(cap);
+        payCash = Number(totalAmount) - Number(cap);
+      }else{
+        payCredit = Number(totalAmount);
+        payCash = 0;
+      }
+
+      console.log( payCredit );
+      console.log( payCash );
+    }else{
+      if( Number( cap ) > 0 ){
+        if( Number( cap ) > Number( balance ) ){
+          if( Number( totalAmount ) > Number( balance ) ){
+            payCredit = Number( balance );
+            payCash = Number( totalAmount ) - Number( balance );
+          }else{
+            payCredit = Number( totalAmount );
+            payCash = 0;
+          }
+        }else if( Number( cap ) == Number( totalAmount ) ){
+          payCredit = Number( totalAmount );
+          payCash = 0;
+        }else{
+          if( Number( totalAmount ) > Number( cap ) ){
+            payCredit = Number( cap );
+            payCash = Number( totalAmount ) - Number( cap );
+          }else if( Number( cap ) > Number( totalAmount ) ){
+            payCredit = Number( totalAmount );
+            payCash = 0;
+          }
+        }
+      }else{
         if( Number( totalAmount ) > Number( balance ) ){
           payCredit = Number( balance );
           payCash = Number( totalAmount ) - Number( balance );
@@ -82,25 +114,6 @@ class ConfirmPay extends Component {
           payCredit = Number( totalAmount );
           payCash = 0;
         }
-      }else if( Number( cap ) == Number( totalAmount ) ){
-        payCredit = Number( totalAmount );
-        payCash = 0;
-      }else{
-        if( Number( totalAmount ) > Number( cap ) ){
-          payCredit = Number( cap );
-          payCash = Number( totalAmount ) - Number( cap );
-        }else if( Number( cap ) > Number( totalAmount ) ){
-          payCredit = Number( totalAmount );
-          payCash = 0;
-        }
-      }
-    }else{
-      if( Number( totalAmount ) > Number( balance ) ){
-        payCredit = Number( balance );
-        payCash = Number( totalAmount ) - Number( balance );
-      }else{
-        payCredit = Number( totalAmount );
-        payCash = 0;
       }
     }
 

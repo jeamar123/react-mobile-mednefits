@@ -45,11 +45,11 @@ class HistoryTransaction extends Component {
     await Core.UserDetail(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-        console.log( data );
+        // console.log( data );
       await this.setState({
         company_currency: data.profile.currency_type.toUpperCase(),
       });
-      console.log( this.state );
+      // console.log( this.state );
     });
   }
 
@@ -57,7 +57,7 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log(data);
+      // console.log(data);
       await this.setState({ resultData: data, in_network: true });
     });
   }
@@ -66,7 +66,7 @@ class HistoryTransaction extends Component {
     await Core.GetEClaimTransaction(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log(data);
+      // console.log(data);
       this.setState({ DataE_Claim: data, out_network: true });
     });
   }

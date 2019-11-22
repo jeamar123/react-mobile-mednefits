@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
-// import PushNotification from 'react-native-push-notification';
+import OneSignal from 'react-native-onesignal'; // Import package from node modules
+
+
+
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
 import EmailSend from '../screens/EmailSend';
@@ -111,48 +114,40 @@ const transitionConfig = () => {
   }
 }
 
+
+  
 class RouterComponent extends Component {
-  // componentDidMount() {
-  //   PushNotification.configure({
+  
+  constructor(props) {
+    super(props);
 
-  //     // (optional) Called when Token is generated (iOS and Android)
-  //     onRegister: function (token) {
-  //       console.log('TOKEN:', token);
-  //       Core.SaveDeviceToken(null, token.token, token.os);
-  //     },
+    OneSignal.init("ac4b020b-c0eb-4044-8020-a9f7f18027ba");
 
-  //     // (required) Called when a remote or local notification is opened or received
-  //     onNotification: function (notification) {
-  //       console.log('NOTIFICATION:', notification);
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
 
-  //       // process the notification
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
 
-  //       // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
-  //       // notification.finish(PushNotificationIOS.FetchResult.NoData);
-  //     },
+  onReceived(notification) {
+    console.log("Notification received: ", notification);
+  }
 
-  //     // ANDROID ONLY: GCM or FCM Sender ID (product_number) (optional - not required for local notifications, but is need to receive remote push notifications)
-  //     senderID: "864568376301",
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
 
-  //     // IOS ONLY (optional): default: all - Permissions to register.
-  //     permissions: {
-  //       alert: true,
-  //       badge: true,
-  //       sound: true
-  //     },
-
-  //     // Should the initial notification be popped automatically
-  //     // default: true
-  //     popInitialNotification: true,
-
-  //     /**
-  //       * (optional) default: true
-  //       * - Specified if permissions (ios) and token (android and ios) will requested or not,
-  //       * - if not, you must call PushNotificationsHandler.requestPermissions() later
-  //       */
-  //     requestPermissions: true,
-  //   });
-  // }
+  onIds(device) {
+    console.log('Device info: ', device);
+  }
 
   render() {
     return (
