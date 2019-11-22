@@ -116,8 +116,10 @@ class Summary extends Component {
                 backgroundColor: '#fff',
                 width: '90%',
                 marginTop: responsiveHeight(3),
-                height: responsiveHeight(35),
-                borderRadius: 5
+                flex: 1,
+                // height: responsiveHeight(35),
+                borderRadius: 5,
+                paddingBottom: 15
               }}
             >
               <View
@@ -170,7 +172,8 @@ class Summary extends Component {
                   style={{
                     backgroundColor: '#f3f3f7',
                     width: '90%',
-                    height: responsiveHeight(13),
+                    flex: 1,
+                    // height: responsiveHeight(13),
                     // marginTop: responsiveHeight(1),
                     // marginBottom: responsiveHeight(1),
                   }}
@@ -458,8 +461,10 @@ class Summary extends Component {
                   backgroundColor: '#fff',
                   width: '90%',
                   marginTop: responsiveHeight(3),
-                  height: responsiveHeight(47),
-                  borderRadius: 5
+                  flex: 1,
+                  // height: responsiveHeight(47),
+                  borderRadius: 5,
+                  paddingBottom: 15
                 }}
               >
                 <View
@@ -513,7 +518,7 @@ class Summary extends Component {
                       backgroundColor: '#f3f3f7',
                       width: '90%',
                       marginTop: responsiveHeight(1),
-                      height: responsiveHeight(10.5),
+                      height: responsiveHeight(10),
                       marginBottom: responsiveHeight(1),
                     }}
                   >

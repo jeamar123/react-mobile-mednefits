@@ -42,7 +42,7 @@ class History extends Component {
       data: false,
       isLoading: false,
       refreshing: false,
-      currency_symbol: 'SGD',
+      currency_symbol: this.props.currency_symbol,
       malaysia_exchange_rate: '3.00',
       convert_option: false,
     };
@@ -168,7 +168,7 @@ class History extends Component {
 
         convert_option: data.convert_option,
         malaysia_exchange_rate: parseFloat( data.currency_amount ).toFixed(2),
-        currency_symbol: data.currency_symbol,
+        currency_symbol: data.default_currency.toUpperCase(),
 
         total_amount_sgd: data.total_amount,
         cap_per_visit_sgd: data.cap_per_visit,
@@ -184,12 +184,12 @@ class History extends Component {
         paid_by_credits_myr: data.paid_by_credits_converted,
         paid_by_cash_myr: data.paid_by_cash_converted,
 
-        total_amount: data.total_amount,
-        cap_per_visit: data.cap_per_visit,
-        bill_amount: data.bill_amount,
-        consultation_fee: data.consultation_fee,
-        paid_by_credits: data.paid_by_credits,
-        paid_by_cash: data.paid_by_cash,
+        total_amount: data.default_currency.toUpperCase() == 'SGD' ? data.total_amount : data.total_amount_converted,
+        cap_per_visit: data.default_currency.toUpperCase() == 'SGD' ? data.cap_per_visit : data.cap_per_visit_converted,
+        bill_amount: data.default_currency.toUpperCase() == 'SGD' ? data.bill_amount : data.bill_amount_converted,
+        consultation_fee: data.default_currency.toUpperCase() == 'SGD' ? data.consultation_fee : data.consultation_fee_converted,
+        paid_by_credits: data.default_currency.toUpperCase() == 'SGD' ? data.paid_by_credits : data.paid_by_credits_converted,
+        paid_by_cash: data.default_currency.toUpperCase() == 'SGD' ? data.paid_by_cash : data.paid_by_cash_converted,
       })
     })
   }

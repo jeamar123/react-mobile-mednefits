@@ -47,6 +47,7 @@ class History extends Component {
       convert_option: false,
     };
     this.selectPhoto = this.selectPhoto.bind(this);
+    console.log( this.props );
   }
 
   _onRefresh = () => {
@@ -440,7 +441,7 @@ class History extends Component {
                 Bill Amount
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.9) }}>
-                {(this.strrency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.bill_amount) ? this.state.bill_amount : "0.00"}
+                {(this.state.currency_symbol) ? this.state.currency_symbol : "N/A"} {(this.state.bill_amount) ? this.state.bill_amount : "0.00"}
               </Text>
             </View>
 
@@ -555,13 +556,14 @@ class History extends Component {
         {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar 
-          leftNav="wallet" 
+          leftNav="history-back-after-upload" 
           rightNav="currency-toggle" 
           currency_symbol={ this.state.currency_symbol } 
           convert_option={ this.state.convert_option } 
           company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
           title="History" 
+          transaction_id={ this.state.data.transaction_id } 
         />
         <HistoryUser
           Currency={this.state.currency_symbol}

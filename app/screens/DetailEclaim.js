@@ -39,7 +39,7 @@ class DetailEclaim extends Component {
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
-    console.log( this.props );
+    // console.log( this.props );
   }
 
   EclaimProcess = async () => {
@@ -62,6 +62,7 @@ class DetailEclaim extends Component {
         'currency_type': this.props.claimdata.currency,
         'currency_exchange_rate': this.state.currency_exchange
       }
+      console.log( eclaimFile );
 
       await Core.SendEClaim(eclaimFile, async (err, result) => {
         // Core.getNotify("",result.message)
@@ -72,7 +73,7 @@ class DetailEclaim extends Component {
           })
           Actions.ThanksEclaim({ type: 'reset' })
         } else {
-          console.log('failed to submit')
+          // console.log('failed to submit')
           await this.setState({ message: result.message, title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit' })
         }
 
@@ -84,7 +85,7 @@ class DetailEclaim extends Component {
         message: "Failed to send e claim", title: 'E-Claim Submission', failed: true, isLoading: false, button: 'Submit'
       })
     } finally {
-      console.log('finally called')
+      // console.log('finally called')
     }
   }
 
@@ -95,7 +96,7 @@ class DetailEclaim extends Component {
 
   async GetCurrency() {
     this.setState({
-      currency_exchange: (this.props.claimdata.currency == "SGD") ? '0.00' : '3.00'
+      currency_exchange: (this.props.claimdata.currency == "SGD") ? '3.00' : '3.00'
     })
   }
 
@@ -427,7 +428,7 @@ class DetailEclaim extends Component {
               <Common.Divider noMargin Side />
             </View>
 
-            {(this.props.claimdata.company_currency == 'SGD' && this.props.claimdata.currency == 'MYR') ? (
+            {(this.props.claimdata.company_currency != this.props.claimdata.currency) ? (
               <View>
                 <View
                   style={{
@@ -480,10 +481,15 @@ class DetailEclaim extends Component {
                   <View
                     style={{ flexDirection: 'row' }}>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      {parseFloat(this.props.claimdata.amount / this.state.currency_exchange).toFixed(2)}{" "}
+                      { ( this.props.claimdata.company_currency == 'SGD' && this.props.claimdata.currency == 'MYR' ) ?
+                        parseFloat(this.props.claimdata.amount / this.state.currency_exchange).toFixed(2)
+                        :
+                        parseFloat(this.props.claimdata.amount * this.state.currency_exchange).toFixed(2)
+                      }
+                      {" "}
                     </Common.Texti>
                     <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                      SGD
+                      {this.props.claimdata.company_currency}
                     </Common.Texti>
                   </View>
                 </View>
