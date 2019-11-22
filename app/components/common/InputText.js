@@ -74,6 +74,7 @@ const style = {
   inputStyle: {
     color: '#2c3e50',
     fontFamily: Config.FONT_FAMILY_MEDIUM,
-    fontSize: RF(1.85),
+    // fontSize: 12,
+    fontSize: RF(1.73),
   },
 };

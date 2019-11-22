@@ -552,8 +552,8 @@ class Summary extends Component {
                         backgroundColor: '#FF5757',
                         width: '90%',
                         marginTop: 10,
-                        height: responsiveHeight(10),
-                        paddingBottom: 10
+                        paddingBottom: 5
+                        // height: responsiveHeight(10),
                       }}
                     >
                       <View

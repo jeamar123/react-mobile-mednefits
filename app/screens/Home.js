@@ -695,7 +695,7 @@ const styles = {
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: responsiveHeight(1.5),
-    marginBottom: responsiveHeight(1.8),
+    marginBottom: responsiveHeight(1.5),
   },
 };
 

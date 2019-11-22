@@ -7,9 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import <React/RCTLinkingManager.h>
+#import <RCTOneSignal.h> /* <--- Add this */
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property (strong, nonatomic) RCTOneSignal* oneSignal; /* <--- Add this */
 
 @end
