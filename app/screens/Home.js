@@ -431,9 +431,11 @@ class Home extends Component {
     fetch("https://itunes.apple.com/lookup?bundleId=sg.medicloud.user")
       .then(res => res.json())
       .then(json => {
+        // console.warn(res)
         this.setState({
           appstoreVersion: json.results[0].version,
         })
+        console.warn("appstore Datas: " + JSON.stringify(json, null, 4))
         this.inAppTrigger();
       });
 
