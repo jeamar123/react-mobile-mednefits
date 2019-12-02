@@ -38,7 +38,7 @@ class History extends Component {
       data: false,
       isLoading: false,
       refreshing: false,
-      currency_symbol: this.props.currency_symbol,
+      currency_symbol: null,
       malaysia_exchange_rate: '3.00',
       convert_option: false,
     };
@@ -453,10 +453,8 @@ class History extends Component {
         <Navbar 
           leftNav="history-back" 
           rightNav="currency-toggle" 
-          currency_symbol={ this.state.currency_symbol } 
-          convert_option={ this.state.convert_option } 
-          company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
+          trans_id={ this.props.transaction_id }
           title="History" 
         />
         <HistoryUser

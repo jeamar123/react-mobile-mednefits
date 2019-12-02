@@ -38,7 +38,7 @@ class HistoryAfterUpload extends Component {
 			data: false,
 			isLoading: false,
 			refreshing: false,
-			currency_symbol: 'SGD',
+			currency_symbol: null,
       malaysia_exchange_rate: '3.00',
       convert_option: false,
 		};
@@ -90,7 +90,7 @@ class HistoryAfterUpload extends Component {
 
         convert_option: data.convert_option,
         malaysia_exchange_rate: parseFloat( data.currency_amount ).toFixed(2),
-        currency_symbol: data.currency_symbol,
+        currency_symbol: data.default_currency.toUpperCase(),
 
         total_amount_sgd: data.total_amount,
         cap_per_visit_sgd: data.cap_per_visit,
@@ -438,16 +438,14 @@ class HistoryAfterUpload extends Component {
 			<Container>
 				{this.customLoader()}
 				<StatusBar backgroundColor="white" barStyle="dark-content" />
-				<Navbar  
-					leftNav="history-back-after-upload" 
+				<Navbar 
+          leftNav="history-back-after-upload" 
           rightNav="currency-toggle" 
-          currency_symbol={ this.state.currency_symbol } 
-          convert_option={ this.state.convert_option } 
-          company_currency={ this.props.company_currency } 
           updateCurrency={ this.toggleCurrency }
-          title="History"
+          trans_id={ this.props.transaction_id }
           transaction_id={ this.state.data.transaction_id } 
-				/>
+          title="History" 
+        />
 				<HistoryUser
 					Currency={this.state.currency_symbol}
           Amount={this.state.total_amount}
