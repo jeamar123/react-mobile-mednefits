@@ -414,7 +414,7 @@ class ConfirmPay extends Component {
                 Consultation Fee
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: 16 }}>
-                {(this.props.consultation_status == false) ? this.props.capCurrency + ' ' : this.props.consultation_fee_symbol}
+                {(this.props.consultation_status == false) ? this.props.capCurrency + ' ' : this.props.consultation_fee_symbol + ' '}
                 {Number(this.props.consultation_fees).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Text>
             </View>

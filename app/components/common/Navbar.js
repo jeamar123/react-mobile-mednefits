@@ -29,6 +29,7 @@ export default class Navbar extends React.Component {
       right: false,
       left: false,
       currency_symbol: this.props.currency_symbol,
+      convert_option: false,
     };
     console.log(this.props);
     console.log(this.state);
@@ -50,6 +51,22 @@ export default class Navbar extends React.Component {
     if (this.props.rightNav) {
       this.setState({ right: true });
     }
+
+    if ( this.props.trans_id ) {
+      this.getTransactionCurrency();
+    }
+  }
+
+  getTransactionCurrency() {
+    Core.GetUserNetwork(this.props.trans_id, (result) => {
+      data = (typeof result == "string") ? JSON.parse(result.data) : result.data
+      console.log( data );
+      this.setState({
+        currency_symbol: data.default_currency.toUpperCase(),
+        convert_option: data.convert_option,
+      })
+      console.log( this.state );
+    })
   }
 
   renderLeft() {
@@ -1239,7 +1256,7 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
-    } else if (this.props.rightNav == 'currency-toggle' && this.props.convert_option == true) {
+    } else if (this.props.rightNav == 'currency-toggle' && this.state.convert_option == true && this.state.currency_symbol != null) {
       return (
         <View
           style={{

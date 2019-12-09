@@ -173,7 +173,7 @@ class HistoryUser extends Component {
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#949494', fontSize: RF(1.8) }}>
                   Exchange Rate
                 </Text>
-                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8) }}>
+                <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2C3E50', fontSize: RF(1.8), flexWrap: "wrap" }}>
                   {this.props.malaysia_exchange_rate}
                 </Text>
               </View>
