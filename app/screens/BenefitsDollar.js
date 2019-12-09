@@ -116,6 +116,15 @@ class BenefitsDollar extends Component {
     }
   }
 
+  formatInputValue( number ){
+    console.log( number );
+    if( number == '' || number == 0 ){
+      this.setState({ amount: 0 });
+    }else{
+      this.setState({ amount: number });
+    }
+  }
+
   render() {
     console.warn("props: " + JSON.stringify(this.props))
     console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
@@ -228,7 +237,7 @@ class BenefitsDollar extends Component {
                 returnKeyType='done'
                 placeholder="0.00"
                 value={this.state.amount}
-                onChangeText={number => this.setState({ amount: number })}
+                onChangeText={number => this.formatInputValue( number )}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
                   height: 70,

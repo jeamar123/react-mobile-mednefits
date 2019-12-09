@@ -215,7 +215,7 @@ class HistoryUser extends Component {
                       source={{ uri: this.props.clinicimage }}
                       style={{ height: 50, resizeMode: 'center', width: 50, marginRight: '4%' }}
                     />
-                    <View>
+                    <View style={{ flex: 1, flexWrap: 'wrap' }}>
                       <Text
                         style={{
                           fontFamily: Config.FONT_FAMILY_ROMAN,
@@ -229,7 +229,7 @@ class HistoryUser extends Component {
                       >
                         {(this.props.clinicname) ? this.props.clinicname : ""}
                       </Text>
-                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%' }}>
+                      <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#848484', fontSize: RF(1.6), marginTop: '2%'}}>
                         Service : {(this.props.services) ? this.props.services : ""}
                       </Text>
                     </View>
