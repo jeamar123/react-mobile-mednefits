@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
+import com.smixx.fabric.FabricPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.ninty.system.setting.SystemSettingPackage;
 import com.horcrux.svg.SvgPackage;
@@ -29,6 +30,8 @@ import com.horcrux.svg.SvgPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new RNVersionCheckPackage(),
         new MainReactPackage(),
+        new FabricPackage(),
         new VectorIconsPackage(),
         new SystemSettingPackage(),
         new MapsPackage(),
@@ -75,5 +79,6 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    Fabric.with(this, new Crashlytics());
   }
 }

@@ -29,6 +29,7 @@
     "react-native-datepicker-modal": "^1.0.2",
     "react-native-document-picker": "^2.2.0",
     "react-native-extended-stylesheet": "^0.8.1",
+    "react-native-fabric": "0.5.2",
     "react-native-fs": "^2.13.3",
     "react-native-geolocation-service": "^2.0.0",
     "react-native-gifted-form": "^0.1.1",
