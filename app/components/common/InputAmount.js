@@ -33,7 +33,8 @@ export default class InputText extends Component {
         />
         {(this.props.type == 'currency') ? (
           <Common.Texti
-            fontFamily={Config.FONT_FAMILY_MEDIUM}
+            fontSize={12}
+            fontFamily={Config.FONT_FAMILY_LIGHT}
             fontColor={"#2c3e50"}
           >
             {this.props.currency}

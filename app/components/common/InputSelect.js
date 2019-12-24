@@ -102,7 +102,8 @@ export default class InputSelect extends Component {
           }}
         >
           <Common.Text
-            fontFamily={Config.FONT_FAMILY_MEDIUM}
+            fontSize={12}
+            fontFamily={Config.FONT_FAMILY_LIGHT}
             style={{
               color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
             }}
