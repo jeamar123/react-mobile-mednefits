@@ -25,6 +25,7 @@ import { PopAds } from '../components/common';
 import * as Config from '../config';
 import * as Core from '../core'
 import * as Common from '../components/common'
+import FastImage from 'react-native-fast-image'
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -295,10 +296,19 @@ class ClinicList extends Component {
               <View style={styles.gridBox}>
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1) }}>
-                    <ResponsiveImage
+                    <FastImage
+                      style={{width: 46, height: 46}}
+                      source={{
+                        uri: this.props.image,
+                        priority: FastImage.priority.low,
+                        cache: FastImage.cacheControl.immutable
+                      }}
+                      resizeMode={FastImage.resizeMode.cover}
+                    />
+                    {/*<ResponsiveImage
                       source={{ uri: this.props.image }}
                       initWidth="40" initHeight="40"
-                    />
+                    />*/}
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(1), marginLeft: 10, marginRight: 10 }}>
                     <Common.Texti
@@ -327,10 +337,20 @@ class ClinicList extends Component {
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
-                      <ResponsiveImage
+
+                    <FastImage
+                      style={{width: 46, height: 46}}
+                      source={{
+                        uri: this.props.image,
+                        priority: FastImage.priority.low,
+                        cache: FastImage.cacheControl.immutable
+                      }}
+                      resizeMode={FastImage.resizeMode.cover}
+                    />
+                      {/*<ResponsiveImage
                         source={{ uri: this.props.image }}
                         initWidth="46" initHeight="46"
-                      />
+                      />*/}
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 5, marginLeft: 10, marginRight: 10 }}>
 

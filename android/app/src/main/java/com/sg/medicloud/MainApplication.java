@@ -32,6 +32,8 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
+import com.dylanvann.fastimage.FastImageViewPackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +51,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
         new RNVersionCheckPackage(),
         new MainReactPackage(),
+        new FastImageViewPackage(),
         new FabricPackage(),
         new VectorIconsPackage(),
         new SystemSettingPackage(),

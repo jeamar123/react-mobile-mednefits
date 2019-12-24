@@ -11,7 +11,6 @@ import * as Common from '../common'
 import styles from './styles'
 import * as Core from '../../core'
 import * as Config from '../../config'
-import { Actions } from 'react-native-router-flux'
 
 export default class EclaimForm extends Component {
   constructor(props) {
@@ -224,27 +223,22 @@ export default class EclaimForm extends Component {
             </View>
             <View style={styles.sectionSpending}>
               <TouchableOpacity
-                onPress={() => Actions.SelectList({ title: "Claim Type", data: this.state.claimType })}
-                style={{ flexDirection: 'row' }}>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Common.Texti
-                    fontSize={12}
-                    fontFamily={Config.FONT_FAMILY_LIGHT}
-                    fontColor={((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? "#9e9e9e" : "black"}>
-                    {((this.props.claimTypeState == "") || (this.props.claimTypeState == undefined) || (this.props.claimTypeState == null)) ? this.state.claimTypeState : this.props.claimTypeState}
-                  </Common.Texti>
-                </View>
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    marginLeft: 10
-                  }}
-                >
-                  <Image
-                    source={require('../../../assets/apps/arrow.png')}
-                    style={{ height: 20, resizeMode: 'center', width: 20 }}
-                  />
-                </View>
+                onPress={() => this.selectSpending("medical")}
+                refs="medical"
+                style={[(this.state.type == 'medical') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
+              >
+                <Common.Texti>
+                  Medical
+                </Common.Texti>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.selectSpending("wellness")}
+                refs="wellness"
+                style={[(this.state.type == 'wellness') ? styles.spendingActive : styles.spendingNotactive, { width: '45%' }]}
+              >
+                <Common.Texti>
+                  Wellness
+                </Common.Texti>
               </TouchableOpacity>
             </View>
 
@@ -273,41 +267,10 @@ export default class EclaimForm extends Component {
                 />
               </View>
 
-            <View
-              style={{
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Visit Date
-            </Common.Texti>
+              <View style={{ marginLeft: '5%' }}>
+                <Common.Divider />
+              </View>
 
-              <Common.InputDateCustom
-                style={{
-                  backgroundColor: "white",
-                  borderBottomColor: "#9e9e9e",
-                  borderBottomWidth: 0,
-                  justifyContent: 'center',
-                  borderRadius: 2,
-                  height: 50
-                }}
-                startDate={new Date()}
-                minDate={new Date()}
-                maxDate={() => Tanggal.now()}
-                onError={() => Common.getNotify("", "Error loading, please try again")}
-                renderDate={({ year, month, day, date }) => {
-                  if (!date) {
-                    return <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_LIGHT} fontColor={"#9e9e9e"}>{this.state.date}</Common.Texti>
-                  }
-                  const dateStr = `${day}-${month}-${year}`
-                  return <Common.Texti fontColor={"#2c3e50"} >{dateStr}</Common.Texti>
-                }}
-                onDateChanged={({ year, month, day, date }) => this.setState({ date: `${day}-${month}-${year}` })}
 
               <View
                 style={styles.fieldStyleNoPadding}
@@ -338,15 +301,6 @@ export default class EclaimForm extends Component {
               </View>
 
 
-            <View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Visit Time
-              </Common.Texti>
               <View
                 style={{
                   justifyContent: 'space-between',
@@ -470,30 +424,57 @@ export default class EclaimForm extends Component {
                   Receipt Amount
                 </Common.Texti>
 
-            <View
-              style={styles.fieldStyleNoPadding}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Receipt Amount
-              </Common.Texti>
+                <View style={{ flexDirection: 'row' }}>
+                  <Common.InputAmount
+                    keyboardType={"number-pad"}
+                    value={this.state.amount}
+                    keyboardType="numeric"
+                    onChangeText={text => this.setState({ amount: text })}
+                    placeholder="Enter amount "
+                    currency={this.state.currency}
+                    leftToRight
+                  />
+                  {/*
+                  <View
+                    style={{
+                      borderRightColor: '#DBDBDB',
+                      borderRightWidth: 0.8,
+                      marginTop: -10,
+                      marginBottom: -10
+                    }}
+                  />
+                  */}
+                  <View style={{ marginLeft: 10, justifyContent: 'center', alignItems: 'center' }}>
+                    <Common.Texti fontSize={12} fontFamily={Config.FONT_FAMILY_BOLD}>
+                      { this.state.currency }
+                    </Common.Texti>
+                    {/*<Common.InputSelectListCurrency
+                      title="Currency"
+                      data={this.state.currencyData}
+                      titleValue={this.state.currency}
+                      onValueChange={(value) => this.setState({ currency: value })}
+                    />*/}
+                  </View>
+                </View>
+              </View>
 
               <View style={{ marginLeft: '5%' }}>
                 <Common.Divider />
               </View>
 
 
-            <View
-              style={styles.fieldStyle}
-            >
-              <Common.Texti style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-                Member
-              </Common.Texti>
+              <View
+                style={styles.fieldStyle}
+              >
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  Member
+                </Common.Texti>
 
                 <Common.InputSelect
                   placeholder={this.state.memberState}
@@ -504,13 +485,16 @@ export default class EclaimForm extends Component {
               </View>
               <Common.Divider style={{ marginLeft: "-5%", marginRight: "-5%" }} />
             </View>
-
-            <Common.Divider style={{marginLeft:"-5%", marginRight:"-5%"}}/>
-
           </View>
-
-          <View style={{marginBottom: "15%"}} />
-
+        </ScrollView>
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
           <TouchableOpacity
             onPress={() => this.nextSnapPhoto()}
             style={{
