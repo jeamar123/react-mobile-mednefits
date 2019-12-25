@@ -73,6 +73,13 @@ class HistoryTransaction extends Component {
 
   selectTerm(term){
     console.log( term );
+    this.setState({ 
+      selectedTerm : term 
+    }, () => {
+      console.log(this.state)
+      this.getDataIn_Network( );
+      this.getDataE_Claim( );
+    })
   }
 
   handleTouch(){

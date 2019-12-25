@@ -3,10 +3,10 @@
 * @year 2018
 */
 
-export const MAIN                           = 'https://medicloud.sg/v2';
-export const WEB                            = 'https://medicloud.sg';
-// export const MAIN                           = 'http://staging.medicloud.sg/v2';
-// export const WEB                            = 'http://staging.medicloud.sg';
+// export const MAIN                           = 'https://medicloud.sg/v2';
+// export const WEB                            = 'https://medicloud.sg';
+export const MAIN                           = 'http://staging.medicloud.sg/v2';
+export const WEB                            = 'http://staging.medicloud.sg';
 // export const WEB                            = 'http://medicloud.local';
 export const CLIENT_SECRET                  = 'b6589fc6ab0dc82cf12099d1c2d40ab994e8410c';
 export const CLIENT_ID                      = 'cfcd208495d565ef66e7dff9f98764da';
@@ -60,6 +60,7 @@ export const USER_SPECIFIC_IN_NETWORK       = USER+"/specific_in_network"
 export const USER_ECLAIM_TRANSACTION        = USER+"/e_claim_transactions"
 export const USER_SPECIFIC_E_CLAIM          = USER+"/specific_e_claim_transaction"
 export const USER_CREATE_E_CLAIM            = USER+"/create_e_claim"
+export const USER_CHECK_E_CLAIM             = USER+"/check_e_claim_visit"
 export const USER_HEALT_TYPE_LIST           = USER+"/health_type_lists"
 export const USER_UPLOAD_IN_NETWORK_RECEIPT = USER+"/upload_in_network_receipt"
 export const USER_SAVE_OUT_NETWORK_RECEIPT  = USER+"/save_out_of_network_receipt"
