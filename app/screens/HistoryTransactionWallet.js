@@ -30,7 +30,10 @@ class HistoryTransaction extends Component {
       in_network: false,
       out_network: false,
       company_currency: null,
+      selectedTerm: 'Current term',
+      isTermDropShow: false,
     };
+    this.selectTerm = this.selectTerm.bind(this);
   }
 
   async componentWillMount() {
@@ -53,7 +56,8 @@ class HistoryTransaction extends Component {
 
 
   async getDataIn_Network() {
-    await Core.GetHistoryTransaction(async (error, result) => {
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    await Core.GetHistoryTransaction(term,async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({ resultData: data, in_network: true });
@@ -61,11 +65,22 @@ class HistoryTransaction extends Component {
   }
 
   async getDataE_Claim() {
-    await Core.GetEClaimTransaction(async (error, result) => {
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    await Core.GetEClaimTransaction(term,async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       this.setState({ DataE_Claim: data, out_network: true });
     });
+  }
+
+  selectTerm(term){
+    console.log( term );
+  }
+
+  handleTouch(){
+    this.refs.transNav.closeDrop();
+    var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
+    this.setState({ isTermDropShow: opt });
   }
 
   renderInNetworkStatus(data) {
@@ -411,12 +426,31 @@ class HistoryTransaction extends Component {
 
   render() {
     return (
-      <Container>
+      <Container
+        onTouchEnd={() => this.handleTouch()}
+      >
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back" title="History" />
+        <Navbar 
+          ref="transNav"
+          leftNav="back-home-wallet" 
+          rightNav="term-drop"
+          title="History" 
+          updateSelectedTerm={(term) => this.selectTerm( term )}
+          headerBgColor={ this.state.isTermDropShow == true ? 'transparent' : '#0392cf'}
+          backgroundColor={ this.state.isTermDropShow == true ? 'transparent' : '#0392cf'}
+        />
+        <View 
+          pointerEvents={ this.state.isTermDropShow == true ? 'none' : 'auto' } 
+          style={{ 
+            backgroundColor: '#0392cf',
+            paddingTop: this.state.isTermDropShow == true ? 50 : 0, 
+            position: this.state.isTermDropShow == true ? 'absolute' : 'relative',
+            flex: 1
+          }}
+        >
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          tabContainerStyle={{ elevation: 0 }}
+          tabContainerStyle={{ elevation: 0, zIndex: 1 }}
         >
           <Tab
             heading="In-Network"
@@ -473,6 +507,7 @@ class HistoryTransaction extends Component {
             </Content>
           </Tab>
         </Tabs>
+        </View>
       </Container>
     );
   }

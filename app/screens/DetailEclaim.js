@@ -35,7 +35,9 @@ class DetailEclaim extends Component {
       member: null,
       showPopUp: false,
       button: 'Submit',
-      currency_exchange: '3.00'
+      currency_exchange: '3.00',
+      checkEclaim: {},
+      isPromptShow: false,
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -56,6 +58,7 @@ class DetailEclaim extends Component {
         'merchant': this.props.claimdata.provider,
         'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
+        'claim_amount': this.state.checkEclaim.claim_amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
@@ -90,8 +93,44 @@ class DetailEclaim extends Component {
   }
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     this.renderMember();
     this.GetCurrency();
+    this.userCheckEclaim();
+  }
+
+  async userCheckEclaim() {
+    
+    eclaim_data = {
+      visit_date: this.props.claimdata.date,
+      spending_type: this.props.claimdata.type_spending
+    }
+    await Core.CheckEclaimVisit(eclaim_data, async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      this.setState({ checkEclaim: data }, () =>{
+        var claim_amount = 0;
+        console.log( this.state );
+        if( this.props.claimdata.amount <= this.state.checkEclaim.balance ){
+          this.setState({
+            claim_amount: this.state.checkEclaim.balance,
+            isSufficient: true,
+            isLoading: false,
+            isPromptShow: true
+          });
+          
+        }
+        if( this.props.claimdata.amount > this.state.checkEclaim.balance ){
+          this.setState({
+            claim_amount: this.state.checkEclaim.balance,
+            isSufficient: false,
+            isLoading: false,
+            isPromptShow: true
+          });
+          
+        }
+      });
+    });
   }
 
   async GetCurrency() {
@@ -150,6 +189,60 @@ class DetailEclaim extends Component {
           <Texti
             fontColor="#FFFFFF"
           >Just a sec...</Texti>
+        </Modal>
+      </View>
+    );
+  }
+
+  renderPromptModal = () =>{
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isPromptShow}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <View 
+            style={{ 
+              backgroundColor: '#F1F1F1', 
+              borderRadius: 2, 
+              width: '80%', 
+              height: 278,
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 20,
+            }}>
+            <Image
+              source={require('../../assets/bell.png')}
+              style={{ height: 40, resizeMode: 'contain', width: 33}}
+            />
+
+            <Text>Based on Visit Date, this claim will be recorded on <Text>{ this.state.checkEclaim.term_status }</Text>.</Text>
+            
+            {
+              this.state.isSufficient == true ?
+              <Text>Last term’s balance is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text> and is <Text>sufficient</Text> for this claim.</Text>
+              :
+              <Text>Last term’s balance is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text>; hence your Claim Amount is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text></Text>
+            }
+
+            <TouchableOpacity 
+              style={{  
+                backgroundColor: '#fff',
+                height: 35,
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => this.setState({ isPromptShow : false })}
+            >
+              <Text style={{ color: '#18A4E0', fontSize: 14, }}>Close</Text>
+            </TouchableOpacity>
+          </View>
         </Modal>
       </View>
     );
@@ -224,6 +317,7 @@ class DetailEclaim extends Component {
         </View>
         {this.customLoader()}
         {this.renderPopUp()}
+        {this.renderPromptModal()}
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <GiftedForm

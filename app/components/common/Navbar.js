@@ -8,17 +8,21 @@ import {
   StyleSheet,
   StatusBar,
   SafeAreaView,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from 'react-native';
 import { Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import ResponsiveImage from 'react-native-responsive-image';
+import { CustomDropdown } from '../../components/CustomDropdown';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
 import * as Config from '../../config';
 
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -30,9 +34,32 @@ export default class Navbar extends React.Component {
       left: false,
       currency_symbol: this.props.currency_symbol,
       convert_option: false,
+      selectedTerm: 'Current term',
+      isDropShow: false,
     };
     console.log(this.props);
     console.log(this.state);
+  }
+
+  toggleDrop( ){
+    this.setState({ isDropShow: this.refs.termDrop.state.showDrop == true ? false : true })
+  }
+
+  selectTerm( term ) {
+    this.setState({ 
+      selectedTerm: term ,
+      isDropShow: false
+    })
+    this.props.updateSelectedTerm( term );
+  }
+
+  closeDrop(){
+    if( this.state.isDropShow == true ){
+      this.setState({ 
+        isDropShow: false
+      })
+    }
+    this.refs.termDrop.closeDrop();
   }
 
   toggleCurrency() {
@@ -459,6 +486,57 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.leftNav == 'back-home-wallet') {
+      return (
+        <View
+          style={{
+            width: 150,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home({
+              services: this.props.Services,
+              clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
+              checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
+              capCurrency: this.props.capCurrency,
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
+              consultation_fee_symbol: this.props.consultation_fee_symbol,
+              consultation_status: this.props.consultation_status,
+              consultation_fees: this.props.consultation_fees
+            })}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: '#fff', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: RF(1.7),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold',
+                width: 40
+              }}
+            >
+              Home
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
     } else if (this.props.leftNav == 'back-fav') {
       return (
         <View
@@ -807,6 +885,7 @@ export default class Navbar extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            marginTop: this.state.isDropShow == true ? -36 : 0
           }}
         >
           <Text
@@ -1288,6 +1367,47 @@ export default class Navbar extends React.Component {
           </TouchableOpacity>
         </View>
       );
+    } else if (this.props.rightNav == 'term-drop') {
+      return (
+        <View
+          style={{
+            width: 150,
+            paddingRight: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9,
+            elevation: 3,
+          }}
+        >
+          <CustomDropdown
+            ref="termDrop"
+            style={{ 
+              width: 140,
+              height: 'auto',
+              borderWidth: 0,
+              position: 'absolute',
+              top: 8,
+              right: 0,
+            }}
+            labelContainerStyle={{ 
+              borderWidth: 0,
+            }}
+            dropArrowStyle={{
+              top: 0,
+              marginTop: -7,
+            }}
+            dropContainerStyle={{
+              marginTop: -4.3,
+            }}
+            labelOverlay={ this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {} }
+            labelStyle={{ textAlign: 'right' }}
+            value={ this.state.selectedTerm }
+            DropdownData={[ 'Current term', 'Last term' ]}
+            onChangeValue={ ( value ) => this.selectTerm( value ) }
+            onChangeStatus={ (  ) => this.toggleDrop(  ) }
+          />
+        </View>
+      );
     } else {
       return (
         <View
@@ -1307,7 +1427,7 @@ export default class Navbar extends React.Component {
   render() {
     // console.warn(this.props.rightNav);
     return (
-      <SafeAreaView style={{ backgroundColor: '#0392cf' }}>
+      <SafeAreaView style={{ backgroundColor: this.props.headerBgColor ? this.props.headerBgColor : '#0392cf', zIndex: 10 }}>
         <View style={{ flexDirection: 'column' }}>
           <View
             style={[
@@ -1318,12 +1438,28 @@ export default class Navbar extends React.Component {
                     ? 'center'
                     : 'space-between',
                 backgroundColor: (this.props.backgroundColor) ? this.props.backgroundColor : '#0392cf',
+                height: this.state.isDropShow == true ? 90 : 54
               },
             ]}
           >
             <StatusBar backgroundColor="#0392cf" barStyle="dark-content" />
             {this.renderLeft()}
             {this.renderMiddle()}
+            {
+              this.state.isDropShow == true ?
+                <View 
+                  style={{ 
+                    backgroundColor: 'rgba(0,0,0,.5)', 
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: screenWidth,
+                    height: screenHeight,
+                    zIndex: 2,
+                    elevation: 2
+                  }}></View>
+              : null
+            }
             {this.renderRight()}
           </View>
           <Core.Network />

@@ -5,6 +5,7 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from '../components/BalanceComp/styles';
+import { CustomDropdown } from '../components/CustomDropdown';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
@@ -29,7 +30,12 @@ class Wallet extends Component {
       visible: true,
       isLoading: this.props.isLoading,
       type: 'in_network_transactions',
-      company_currency: null
+      company_currency: null,
+      selectedTerm: 'Current term',
+      selectedTermValue: 'current_term',
+      walletType: 'Medical',
+      isTermDropShow: false,
+      isWalletDropShow: false,
     };
     this.selectSpending = this.selectSpending.bind(this);
     this.selectWallet = this.selectWallet.bind(this);
@@ -53,6 +59,7 @@ class Wallet extends Component {
   componentWillMount() {
     this.getUserDetail()
     this.selectWallet("Medical")
+    this.selectTerm("Current term")
     this.getMedicalWallet();
     this.getWelnnessWallet();
     // Core.GetBalance((err, result)=>{
@@ -82,14 +89,29 @@ class Wallet extends Component {
 
   async selectWallet(walletType) {
     this.setState({ walletType: walletType })
-    setInterval(() => {
-      this.setState({ isLoading: false })
-    }, 2000);
+    // setInterval(() => {
+    //   this.setState({ isLoading: false })
+    // }, 2000);
+  }
+
+  async selectTerm( term ) {
+    this.setState({ 
+      selectedTerm: term, 
+      selectedTermValue: term == 'Current term' ? 'current_term' : 'last_term' 
+    }, () => {
+      console.log(this.state)
+      this.getMedicalWallet( );
+      this.getWelnnessWallet( );
+    })
+    
+    // setInterval(() => {
+    //   this.setState({ isLoading: false })
+    // }, 1000);
   }
 
   getMedicalWallet() {
     this.setState({ isLoading: true })
-    Core.GetBalanceMedical((error, result) => {
+    Core.GetBalanceMedical(this.state.selectedTermValue, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.log(data);
@@ -108,7 +130,7 @@ class Wallet extends Component {
 
   getWelnnessWallet() {
     this.setState({ isLoading: true })
-    Core.GetBalanceWellness((error, result) => {
+    Core.GetBalanceWellness(this.state.selectedTermValue, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.log(data);
@@ -122,6 +144,16 @@ class Wallet extends Component {
         wellnessinNetwork: data.in_network_transactions,
         wellnessoutNetwork: data.e_claim_transactions
       });
+    });
+  }
+
+  handleTouch(){
+    this.refs.termDrop.closeDrop();
+    this.refs.walletTypeDrop.closeDrop();
+
+    this.setState({ 
+      isTermDropShow: this.refs.termDrop.state.showDrop == true ? false : true,
+      isWalletDropShow: this.refs.walletTypeDrop.state.showDrop == true ? false : true,
     });
   }
 
@@ -480,7 +512,10 @@ class Wallet extends Component {
   render() {
     console.warn('type ' + this.state.type)
     return (
-      <Container style={{ backgroundColor: '#efeff4' }}>
+      <Container 
+        style={{ backgroundColor: '#efeff4' }}
+        onTouchEnd={() => this.handleTouch()}
+      >
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="homeback"
@@ -510,7 +545,7 @@ class Wallet extends Component {
             alignItems: 'center',
           }}>
 
-
+            {/*
             <View
               style={{
                 flexDirection: 'row',
@@ -562,22 +597,77 @@ class Wallet extends Component {
                 />
               </View>
             </View>
+            */}
+
+            <View 
+              style={{ 
+                width: '100%', 
+                paddingLeft: 10, 
+                paddingRight: 10,
+                zIndex: 9,
+              }}
+            >
+              <View style={{ flexDirection: 'row', width: '100%', }}>
+                <View style={{ flex: 1 }}>
+                  <CustomDropdown
+                    ref="termDrop"
+                    style={{ 
+                      borderWidth: 0
+                    }}
+                    labelContainerStyle={{ 
+                      borderTopWidth: 1,
+                      borderBottomWidth: 1,
+                      borderLeftWidth: 1,
+                      borderRightWidth: 0.25,
+                      borderColor: '#fff',
+                    }}
+                    value={ this.state.selectedTerm }
+                    DropdownData={[ 'Current term', 'Last term' ]}
+                    onChangeValue={ ( value ) => this.selectTerm( value ) }
+                  />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <CustomDropdown
+                    ref="walletTypeDrop"
+                    style={{ 
+                      borderWidth: 0
+                    }}
+                    labelContainerStyle={{ 
+                      borderTopWidth: 1,
+                      borderBottomWidth: 1,
+                      borderLeftWidth: 0.25,
+                      borderRightWidth: 1,
+                      borderColor: '#fff',
+                    }}
+                    value={ this.state.walletType }
+                    DropdownData={[ 'Medical', 'Wellness' ]}
+                    onChangeValue={ ( value ) => this.selectWallet( value ) }
+                  />
+                </View>
+              </View>
+            </View>
 
             <Text
-              style={{
+              style={[{
                 fontSize: RF(2.2),
                 fontFamily: Config.FONT_FAMILY_MEDIUM,
                 marginTop: responsiveHeight(4),
                 color: '#2C3E50'
-              }}
+              }, 
+              this.state.isTermDropShow == true ? { position: 'absolute', top: 42.5 } : {},
+              this.state.isWalletDropShow == true ? { position: 'absolute', top: 42.5 } : {},
+              ]}
             >
               Balance
             </Text>
             <View
-              style={{
+              style={[{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-              }}
+              }, 
+              this.state.isTermDropShow == true ? { position: 'absolute', top: 88 } : {},
+              this.state.isWalletDropShow == true ? { position: 'absolute', top: 88 } : {},
+              ]}
             >
               <Text
                 style={{
@@ -836,7 +926,7 @@ class Wallet extends Component {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginTop: responsiveHeight(2),
+                  marginTop: 0,
                 }}
               >
                 <TouchableOpacity onPress={() => Actions.HistoryTransactionWallet()}>
