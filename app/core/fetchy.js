@@ -585,6 +585,7 @@ export function SendEClaim(params, callback) {
         })
       })
       formdata.append("amount", params.amount)
+      formdata.append("claim_amount", params.claim_amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
       formdata.append("time", params.time);

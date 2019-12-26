@@ -21,6 +21,7 @@ import Navbar from '../components/common/NavbarGrey';
 import * as Common from '../components/common';
 import EclaimStep from '../components/EclaimStep';
 import * as Core from '../core';
+import * as Config from '../config';
 
 class DetailEclaim extends Component {
 
@@ -58,7 +59,7 @@ class DetailEclaim extends Component {
         'merchant': this.props.claimdata.provider,
         'images': this.props.claimdata.images,
         'amount': this.props.claimdata.amount,
-        'claim_amount': this.state.checkEclaim.claim_amount,
+        'claim_amount': this.state.claim_amount,
         'date': this.props.claimdata.date,
         'spending_type': this.props.claimdata.type_spending,
         'time': this.props.claimdata.time,
@@ -210,37 +211,45 @@ class DetailEclaim extends Component {
             style={{ 
               backgroundColor: '#F1F1F1', 
               borderRadius: 2, 
-              width: '80%', 
-              height: 278,
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: 20,
+              width: '75%', 
+              textAlign: 'center'
             }}>
-            <Image
-              source={require('../../assets/bell.png')}
-              style={{ height: 40, resizeMode: 'contain', width: 33}}
-            />
 
-            <Text>Based on Visit Date, this claim will be recorded on <Text>{ this.state.checkEclaim.term_status }</Text>.</Text>
-            
-            {
-              this.state.isSufficient == true ?
-              <Text>Last term’s balance is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text> and is <Text>sufficient</Text> for this claim.</Text>
-              :
-              <Text>Last term’s balance is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text>; hence your Claim Amount is <Text>{ this.state.checkEclaim.currency_type } { (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text></Text>
-            }
+            <View
+              style={{ 
+                paddingVertical: 30,
+                paddingHorizontal: 30,
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}>
+
+              <Image
+                source={require('../../assets/bell.png')}
+                style={{ height: 40, resizeMode: 'contain', width: 33, marginBottom: 20 }}
+              />
+
+              <Text style={{ lineHeight: 18, marginBottom: 10, fontSize: 16 }}>Based on Visit Date, this claim will be recorded on <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.term_status }</Text>.</Text>
+              
+              {
+                this.state.isSufficient == true ?
+                <Text style={{ lineHeight: 18, marginBottom: 15, fontSize: 16 }}>Last term’s balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text> and is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>sufficient</Text> for this claim.</Text>
+                :
+                <Text style={{ lineHeight: 18, marginBottom: 5, fontSize: 16 }}>Last term’s balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text>; hence your Claim Amount is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text></Text>
+              }
+            </View>
 
             <TouchableOpacity 
               style={{  
                 backgroundColor: '#fff',
-                height: 35,
+                height: 40,
                 width: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
               onPress={() => this.setState({ isPromptShow : false })}
             >
-              <Text style={{ color: '#18A4E0', fontSize: 14, }}>Close</Text>
+              <Text style={{ color: '#18A4E0', fontSize: 16 }}>Close</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -514,6 +523,39 @@ class DetailEclaim extends Component {
                 </Common.Texti>
                 <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
                   {this.props.claimdata.currency}
+                </Common.Texti>
+              </View>
+            </View>
+
+            <View style={{ paddingLeft: 8 }}>
+              <Common.Divider noMargin Side />
+            </View>
+
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignContent: 'space-between',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingTop: 15,
+                paddingBottom: 15,
+                paddingRight: 15,
+                paddingLeft: 8,
+              }}
+            >
+              <Text
+                style={{ color: '#000', marginLeft: '2%', marginRight: '3%' }}
+              >
+                Claim Amount
+              </Text>
+              <View
+                style={{ flexDirection: 'row' }}>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
+                  {parseFloat(this.state.claim_amount).toFixed(2)}{" "}
+                </Common.Texti>
+                <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
+                  {this.state.checkEclaim.currency_type}
                 </Common.Texti>
               </View>
             </View>

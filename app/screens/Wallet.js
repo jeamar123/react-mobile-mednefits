@@ -88,7 +88,12 @@ class Wallet extends Component {
   }
 
   async selectWallet(walletType) {
-    this.setState({ walletType: walletType })
+    this.setState({ isLoading: true, walletType: walletType });
+
+    setTimeout(() => {
+      this.setState({ isLoading: false })
+    }, 100);
+    
     // setInterval(() => {
     //   this.setState({ isLoading: false })
     // }, 2000);

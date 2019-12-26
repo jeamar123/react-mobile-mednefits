@@ -60,7 +60,9 @@ class HistoryTransaction extends Component {
     await Core.GetHistoryTransaction(term,async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      await this.setState({ resultData: data, in_network: true });
+      await setTimeout(() => {
+        this.setState({ resultData: data, in_network: true });
+      }, 0);
     });
   }
 
@@ -69,19 +71,26 @@ class HistoryTransaction extends Component {
     await Core.GetEClaimTransaction(term,async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      this.setState({ DataE_Claim: data, out_network: true });
+      
+      await setTimeout(() => {
+        this.setState({ DataE_Claim: data, out_network: true });
+      }, 0);
     });
   }
 
   selectTerm(term){
     console.log( term );
-    this.setState({ 
-      selectedTerm : term 
-    }, () => {
-      console.log(this.state)
-      this.getDataIn_Network( );
-      this.getDataE_Claim( );
-    })
+    setTimeout(() => {
+      this.setState({ 
+        selectedTerm : term ,
+        in_network: false,
+        out_network: false,
+      }, () => {
+        console.log(this.state)
+        this.getDataIn_Network( );
+        this.getDataE_Claim( );
+      })
+    }, 0);
   }
 
   handleTouch(){
