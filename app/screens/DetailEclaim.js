@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Easing,
-  ImageBackground
+  ImageBackground,
+  Image
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { Container } from 'native-base';
@@ -36,6 +37,7 @@ class DetailEclaim extends Component {
       message: null,
       member: null,
       showPopUp: false,
+      isPromptShow: true,
       button: 'Submit',
       currency_exchange: '3.00'
     }
@@ -157,6 +159,53 @@ class DetailEclaim extends Component {
     );
   }
 
+  renderPromptModal(){
+    return (
+      <View>
+        <Modal
+          isVisible={this.state.isPromptShow}
+          backdropTransitionOutTiming={0}
+          hideModalContentWhileAnimating={true}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <View 
+            style={{ 
+              backgroundColor: '#F1F1F1', 
+              borderRadius: 2, 
+              width: '80%', 
+              height: 278,
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: 20,
+            }}>
+            <Image
+              source={require('../../assets/bell.png')}
+              style={{ height: 40, resizeMode: 'contain', width: 33}}
+            />
+
+            <Text>Based on Visit Date, this claim will be recorded on Last term’s data.</Text>
+            <Text>Last term’s balance is S$70.00 and is sufficient for this claim.</Text>
+
+            <TouchableOpacity 
+              style={{  
+                backgroundColor: '#fff',
+                height: 35,
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Text style={{ color: '#18A4E0', fontSize: 14, }}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
   Capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
@@ -226,6 +275,7 @@ class DetailEclaim extends Component {
         </View>
         {this.customLoader()}
         {this.renderPopUp()}
+        {this.renderPromptModal()}
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <GiftedForm

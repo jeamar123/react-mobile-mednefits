@@ -5,6 +5,7 @@ import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimen
 import { Actions } from 'react-native-router-flux';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import styles from '../components/BalanceComp/styles';
+import { CustomDropdown } from '../components/CustomDropdown';
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
@@ -29,6 +30,8 @@ class Wallet extends Component {
       visible: true,
       isLoading: this.props.isLoading,
       company_currency: null,
+      selectedTerm: 'Current term',
+      walletType: 'Medical',
     };
     this.selectSpending = this.selectSpending.bind(this);
     this.selectWallet = this.selectWallet.bind(this);
@@ -52,6 +55,7 @@ class Wallet extends Component {
   componentWillMount() {
     this.getUserDetail();
     this.selectWallet("Medical")
+    this.selectTerm("Current term")
     this.selectSpending("in_network_transactions");
     this.getMedicalWallet();
     this.getWelnnessWallet();
@@ -78,9 +82,16 @@ class Wallet extends Component {
 
   async selectWallet(walletType) {
     this.setState({ walletType: walletType })
-    setInterval(() => {
-      this.setState({ isLoading: false })
-    }, 1000);
+    // setInterval(() => {
+    //   this.setState({ isLoading: false })
+    // }, 1000);
+  }
+
+  async selectTerm( term ) {
+    this.setState({ selectedTerm: term })
+    // setInterval(() => {
+    //   this.setState({ isLoading: false })
+    // }, 1000);
   }
 
   getMedicalWallet() {
@@ -88,7 +99,7 @@ class Wallet extends Component {
     Core.GetBalanceMedical((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(JSON.stringify(data, null, 4))
+      // console.warn(JSON.stringify(data, null, 4))
       console.log( data );
       this.setState({ isLoading: false })
       this.setState({
@@ -123,11 +134,16 @@ class Wallet extends Component {
     });
   }
 
+  handleTouch(){
+    this.refs.termDrop.closeDrop();
+    this.refs.walletTypeDrop.closeDrop();
+  }
+
   renderRecentActivity() {
     if (this.state.walletType == 'Medical') {
       if (this.state.type == 'in_network_transactions') {
         return this.state.medicalinNetwork.map((Data, index) => (
-          <View>
+          <View key={index}>
             <TouchableOpacity
               key={index}
               onPress={() =>
@@ -213,7 +229,7 @@ class Wallet extends Component {
         ));
       } else if (this.state.type == 'e_claim_transactions') {
         return this.state.medicaloutNetwork.map((Data, index) => (
-          <View>
+          <View key={index}>
             <TouchableOpacity
               key={index}
               onPress={() =>
@@ -301,7 +317,7 @@ class Wallet extends Component {
     } else if (this.state.walletType == 'Wellness') {
       if (this.state.type == 'in_network_transactions') {
         return this.state.wellnessinNetwork.map((Data, index) => (
-          <View>
+          <View key={index}>
             <TouchableOpacity
               key={index}
               onPress={() =>
@@ -386,7 +402,7 @@ class Wallet extends Component {
         ));
       } else if (this.state.type == 'e_claim_transactions') {
         return this.state.wellnessoutNetwork.map((Data, index) => (
-          <View>
+          <View key={index}>
             <TouchableOpacity
               key={index}
               onPress={() =>
@@ -475,10 +491,15 @@ class Wallet extends Component {
 
   }
 
+
+
   render() {
-    console.warn("props: " + JSON.stringify(this.props, null, 4))
+    // console.warn("props: " + JSON.stringify(this.props, null, 4))
     return (
-      <Container style={{ backgroundColor: '#efeff4' }}>
+      <Container 
+        style={{ backgroundColor: '#efeff4' }} 
+        onTouchEnd={() => this.handleTouch()}
+      >
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="homeback"
@@ -497,18 +518,20 @@ class Wallet extends Component {
           consultation_status={this.props.consultation_status}
           consultation_fees={this.props.consultation_fees}
         />
-        <View style={styles.wrapperTop}>
+        <View style={styles.wrapperTop} >
           <Core.Loader
             isVisible={this.state.isLoading}
           />
-          <View style={{
-            backgroundColor: '#0392cf',
-            height: responsiveHeight(28),
-            width: width,
-            alignItems: 'center',
-          }}>
+          <View 
+            style={{
+              backgroundColor: '#0392cf',
+              height: responsiveHeight(28),
+              width: width,
+              alignItems: 'center',
+            }}
+          >
 
-
+            {/*
             <View
               style={{
                 flexDirection: 'row',
@@ -560,13 +583,45 @@ class Wallet extends Component {
                 />
               </View>
             </View>
+            */}
+            
+            <View 
+              style={{ 
+                width: '100%', 
+                paddingLeft: 10, 
+                paddingRight: 10,
+                zIndex: 9,
+              }}
+            >
+              <View style={{ borderColor: '#fff', borderWidth: 1, flexDirection: 'row', width: '100%', }}>
+                <View style={{ flex: 1, borderColor: '#fff', borderRightWidth: 0.5,}}>
+                  <CustomDropdown
+                    ref="termDrop"
+                    style={{ borderColor: 'transparent', }}
+                    value={ this.state.selectedTerm }
+                    DropdownData={[ 'Current term', 'Last term' ]}
+                    onChangeValue={ ( value ) => this.selectTerm( value ) }
+                  />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <CustomDropdown
+                    ref="walletTypeDrop"
+                    style={{ borderColor: 'transparent', }}
+                    value={ this.state.walletType }
+                    DropdownData={[ 'Medical', 'Wellness' ]}
+                    onChangeValue={ ( value ) => this.selectWallet( value ) }
+                  />
+                </View>
+              </View>
+            </View>
 
             <Text
               style={{
                 fontSize: RF(2.2),
                 fontFamily: Config.FONT_FAMILY_MEDIUM,
                 marginTop: responsiveHeight(4),
-                color: '#2C3E50'
+                color: '#2C3E50',
+                zIndex: 1,
               }}
             >
               Balance

@@ -32,7 +32,9 @@ class HistoryTransaction extends Component {
       in_network: false,
       out_network: false,
       company_currency: null,
+      selectedTerm: 'Current term',
     };
+    this.selectTerm = this.selectTerm.bind(this);
   }
 
   async componentWillMount() {
@@ -70,6 +72,20 @@ class HistoryTransaction extends Component {
         // console.log( data );
       this.setState({ DataE_Claim: data, out_network: true });
     });
+  }
+
+  selectTerm(term){
+    console.log( term );
+  }
+
+  handleTouch(){
+    this.refs.transNav.closeDrop();
+    setTimeout(() => {
+      var opt = this.refs.transNav.refs.termDrop.state.showDrop;
+      console.log( opt );
+      this.refs.transNav.toggleDrop( opt );
+    },50);
+    // console.log( this.refs.termDrop.state.showDrop );
   }
 
   renderInNetworkStatus(data) {
@@ -415,10 +431,13 @@ class HistoryTransaction extends Component {
 
   render() {
     return (
-      <Container>
+      <Container
+        onTouchEnd={() => this.handleTouch()}
+      >
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="back-home"
+          rightNav="term-drop"
           title="History"
           Services={this.props.services}
           clinic_Id={this.props.clinicid}
@@ -433,10 +452,13 @@ class HistoryTransaction extends Component {
           consultation_fee_symbol={this.props.consultation_fee_symbol}
           consultation_status={this.props.consultation_status}
           consultation_fees={this.props.consultation_fees}
+          rightNav="term-drop"
+          ref="transNav"
+          updateSelectedTerm={(term) => this.selectTerm( term )}
         />
         <Tabs
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          tabContainerStyle={{ elevation: 0 }}
+          tabContainerStyle={{ elevation: 0, zIndex: 1 }}
         >
           <Tab
             heading="In-Network"
