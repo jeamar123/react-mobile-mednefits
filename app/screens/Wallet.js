@@ -81,14 +81,25 @@ class Wallet extends Component {
   }
 
   async selectWallet(walletType) {
-    this.setState({ walletType: walletType })
+    this.setState({ isLoading: true, walletType: walletType });
+
+    setTimeout(() => {
+      this.setState({ isLoading: false })
+    }, 500);
     // setInterval(() => {
     //   this.setState({ isLoading: false })
     // }, 1000);
   }
 
   async selectTerm( term ) {
-    this.setState({ selectedTerm: term })
+    this.setState({ 
+      selectedTerm: term, 
+      selectedTermValue: term == 'Current term' ? 'current_term' : 'last_term' 
+    }, () => {
+      console.log(this.state)
+      this.getMedicalWallet( );
+      this.getWelnnessWallet( );
+    })
     // setInterval(() => {
     //   this.setState({ isLoading: false })
     // }, 1000);
@@ -96,7 +107,7 @@ class Wallet extends Component {
 
   getMedicalWallet() {
     this.setState({ isLoading: true })
-    Core.GetBalanceMedical((error, result) => {
+    Core.GetBalanceMedical(this.state.selectedTermValue, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.warn(JSON.stringify(data, null, 4))
@@ -116,7 +127,7 @@ class Wallet extends Component {
 
   getWelnnessWallet() {
     this.setState({ isLoading: true })
-    Core.GetBalanceWellness((error, result) => {
+    Core.GetBalanceWellness(this.state.selectedTermValue, (error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.warn(data);
@@ -137,6 +148,11 @@ class Wallet extends Component {
   handleTouch(){
     this.refs.termDrop.closeDrop();
     this.refs.walletTypeDrop.closeDrop();
+
+    this.setState({ 
+      isTermDropShow: this.refs.termDrop.state.showDrop == true ? false : true,
+      isWalletDropShow: this.refs.walletTypeDrop.state.showDrop == true ? false : true,
+    });
   }
 
   renderRecentActivity() {

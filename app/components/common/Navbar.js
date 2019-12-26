@@ -43,16 +43,25 @@ export default class Navbar extends React.Component {
     console.log( this.props );
   }
 
-  toggleDrop( opt ){
-    this.setState({ isDropShow: opt })
+  toggleDrop( ){
+    console.log( this.refs.termDrop.state.showDrop );
+    this.setState({ isDropShow: this.refs.termDrop.state.showDrop == true ? false : true })
   }
 
   selectTerm( term ) {
-    this.setState({ selectedTerm: term })
+    this.setState({ 
+      selectedTerm: term ,
+      isDropShow: false
+    })
     this.props.updateSelectedTerm( term );
   }
 
   closeDrop(){
+    if( this.state.isDropShow == true ){
+      this.setState({ 
+        isDropShow: false
+      })
+    }
     this.refs.termDrop.closeDrop();
   }
 
@@ -450,6 +459,57 @@ export default class Navbar extends React.Component {
         <View
           style={{
             width: 50,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => Actions.Home({
+              services: this.props.Services,
+              clinicid: this.props.clinic_Id,
+              member: this.props.member,
+              nric: this.props.nric,
+              checkId: this.props.check_Id,
+              checkTime: this.props.checkTime,
+              capCurrency: this.props.capCurrency,
+              capAmount: this.props.capAmount,
+              clinic_image: this.props.clinic_image,
+              clinic_name: this.props.clinic_name,
+              consultation_fee_symbol: this.props.consultation_fee_symbol,
+              consultation_status: this.props.consultation_status,
+              consultation_fees: this.props.consultation_fees
+            })}
+            style={{
+              paddingStart: 11,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Icons
+              name="angle-left"
+              style={{ color: '#fff', fontSize: 32, paddingStart: 2, paddingEnd: 2 }}
+            />
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: RF(1.7),
+                fontFamily: Config.FONT_FAMILY_THIN,
+                fontWeight: 'bold',
+                width: 40
+              }}
+            >
+              Home
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (this.props.leftNav == 'back-home-wallet') {
+      return (
+        <View
+          style={{
+            width: 150,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-start',
@@ -1262,7 +1322,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 150,
             paddingRight: 5,
             justifyContent: 'center',
             alignItems: 'center',
@@ -1286,6 +1346,7 @@ export default class Navbar extends React.Component {
             value={ this.state.selectedTerm }
             DropdownData={[ 'Current term', 'Last term' ]}
             onChangeValue={ ( value ) => this.selectTerm( value ) }
+            onChangeStatus={ (  ) => this.toggleDrop(  ) }
           />
         </View>
       );

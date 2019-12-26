@@ -27,6 +27,9 @@ class CustomDropdown extends Component{
     this.setState({ 
       showDrop : this.state.showDrop == true ? false : true,
     });
+    if( this.props.onChangeStatus ){
+      this.props.onChangeStatus( );
+    }
   }
 
   setSelectedValue( value ){
@@ -40,8 +43,7 @@ class CustomDropdown extends Component{
   render() {
     return (
       <View 
-        style={ styles.container } 
-        {...this.props} 
+        style={ [ styles.container, this.props.style ] } 
       >
         <TouchableOpacity style={ [ styles.labelStyle, this.props.labelContainerStyle ] } onPress={() => this.toggleDrop()} >
           <Text 

@@ -56,35 +56,46 @@ class HistoryTransaction extends Component {
   }
 
   async getDataIn_Network() {
-    await Core.GetHistoryTransaction(async (error, result) => {
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    await Core.GetHistoryTransaction(term, async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.log(data);
-      await this.setState({ resultData: data, in_network: true });
+      await setTimeout(() => {
+        this.setState({ resultData: data, in_network: true });
+      }, 0);
     });
   }
 
   async getDataE_Claim() {
-    await Core.GetEClaimTransaction(async (error, result) => {
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    await Core.GetEClaimTransaction(term, async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.log(data);
-      this.setState({ DataE_Claim: data, out_network: true });
+      await setTimeout(() => {
+        this.setState({ DataE_Claim: data, out_network: true });
+      }, 0);
     });
   }
 
   selectTerm(term){
     console.log( term );
+    setTimeout(() => {
+      this.setState({ 
+        selectedTerm : term,
+        in_network: false,
+        out_network: false,
+      }, () => {
+        console.log(this.state)
+        this.getDataIn_Network( );
+        this.getDataE_Claim( );
+      })
+    }, 0);
   }
 
   handleTouch(){
     this.refs.transNav.closeDrop();
-    setTimeout(() => {
-      var opt = this.refs.transNav.refs.termDrop.state.showDrop;
-      console.log( opt );
-      this.refs.transNav.toggleDrop( opt );
-    },50);
-    // console.log( this.refs.termDrop.state.showDrop );
   }
 
   renderInNetworkStatus(data) {
@@ -414,12 +425,13 @@ class HistoryTransaction extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar 
           ref="transNav"
-          leftNav="back" 
+          leftNav="back-home-wallet" 
           rightNav="term-drop"
           title="History" 
           updateSelectedTerm={(term) => this.selectTerm( term )}
         />
         <Tabs
+          onChangeTab={({ i }) => this.setState.bind({ currentTab: i })}
           tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
           tabContainerStyle={{ elevation: 0, zIndex: 1 }}
         >

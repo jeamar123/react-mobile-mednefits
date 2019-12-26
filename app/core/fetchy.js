@@ -199,12 +199,12 @@ export const GetBalance = async (callback) => {
   }
 }
 
-export async function GetBalanceMedical(callback) {
+export async function GetBalanceMedical(filter, callback) {
   await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_CREDITS + "?spending_type=medical",
+          url: Config.USER_CREDITS + "?spending_type=medical&filter=" + filter,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -223,12 +223,12 @@ export async function GetBalanceMedical(callback) {
   }, 100);
 }
 
-export async function GetBalanceWellness(callback) {
+export async function GetBalanceWellness(filter, callback) {
   await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_CREDITS + "?spending_type=wellness",
+          url: Config.USER_CREDITS + "?spending_type=wellness&filter=" + filter,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -248,12 +248,12 @@ export async function GetBalanceWellness(callback) {
 }
 
 
-export async function GetHistoryTransaction(callback) {
+export async function GetHistoryTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_NETWORK_TRANSACTION,
+          url: Config.USER_NETWORK_TRANSACTION + "?filter=" + filter,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -272,12 +272,12 @@ export async function GetHistoryTransaction(callback) {
   }, 10);
 }
 
-export async function GetEClaimTransaction(callback) {
+export async function GetEClaimTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_ECLAIM_TRANSACTION,
+          url: Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -584,6 +584,7 @@ export const SendEClaim = async (params, callback) => {
         })
       })
       formdata.append("amount", params.amount)
+      formdata.append("claim_amount", params.claim_amount)
       formdata.append("date", params.date)
       formdata.append("spending_type", params.spending_type)
       formdata.append("time", params.time);
@@ -611,6 +612,24 @@ export const SendEClaim = async (params, callback) => {
   } catch (e) {
     getNotify('', 'Failed get data, try again');
   }
+}
+
+export function CheckEclaimVisit(param, callback) {
+  Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
+    params = {
+      url: Config.USER_CHECK_E_CLAIM,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: result,
+      },
+      body: param
+    };
+
+    fetching(params, result => {
+      callback('', result)
+    })
+  });
 }
 
 export function ResetPassword(param, callback) {
