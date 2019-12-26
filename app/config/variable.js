@@ -74,7 +74,55 @@ export const LATITUDE                       = 'latitude'
 export const LONGITUDE                      = 'longitude'
 export const CHECKIDVISIT                   = "check_in_id"
 
-
+/* CLINIC */
+export const CLINIC_TYPE                    = [
+    {
+        "ClinicTypeID": 12,
+        "Name": "Screening",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651701/services_v1/Screening_touad3.png"
+    },
+    {
+        "ClinicTypeID": 1,
+        "Name": "GP",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651702/services_v1/General_Practice_e3gpfb.png"
+    },
+    {
+        "ClinicTypeID": 2,
+        "Name": "Dental",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651702/services_v1/Dental_mo24n1.png"
+    },
+    {
+        "ClinicTypeID": 3,
+        "Name": "TCM",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651702/services_v1/TCM_vmms0h.png"
+    },
+    {
+        "ClinicTypeID": 13,
+        "Name": "Wellness",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651702/services_v1/Wellness_fheexi.png"
+    },
+    {
+        "ClinicTypeID": 14,
+        "Name": "Specialist",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564651700/services_v1/Specialist_z6itzq.png"
+    },
+    {
+        "ClinicTypeID": "01",
+        "Name": "Protection Hub",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1565330121/services_v1/Frame-6_zwlb9l.png",
+        "web_link": "https://www.dbs.com.sg/personal/insurance/protection/protection-plans/protection-hub?cid=sg:en:cbg:dbs:ptnr:own:pst:iapp:gi:insurance:na:mednefits",
+        "promotional_link": true,
+        "type": "dbs"
+    },
+    {
+        "ClinicTypeID": "02",
+        "Name": "More",
+        "clinic_type_image_url": "https://res.cloudinary.com/mednefits-com/image/upload/v1564994547/services_v1/more_wsq4sr.png",
+        "web_link": "",
+        "promotional_link": true,
+        "type": "more"
+    }
+]
 
 /* AWS VARIABLE */
 export const AWS_KEY                        = "AKIAI7NRA4S54ZAGYH5A"
