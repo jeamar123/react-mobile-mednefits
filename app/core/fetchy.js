@@ -252,9 +252,10 @@ export async function GetBalanceWellness(filter, callback) {
 export async function GetHistoryTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
+      console.log( Config.USER_NETWORK_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page );
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_NETWORK_TRANSACTION + "?filter=" + filter,
+          url: Config.USER_NETWORK_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page,
           method: 'GET',
           header: {
             Accept: 'application/json',
@@ -276,9 +277,10 @@ export async function GetHistoryTransaction(filter, callback) {
 export async function GetEClaimTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
+      console.log( Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page );
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
-          url: Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter,
+          url: Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page,
           method: 'GET',
           header: {
             Accept: 'application/json',

@@ -61,7 +61,8 @@ export default class Text extends Component {
           fontSize: this.state.fontSize,
           marginBottom: (!this.props.marginBottom) ? 0 : 5,
           marginTop: (!this.props.marginTop) ? 0 : 5,
-          color: (this.props.fontColor) ? this.props.fontColor : 'black'
+          color: (this.props.fontColor) ? this.props.fontColor : 'black',
+          fontWeight: this.props.fontWeight
         }]}
       >
         {this.props.children}

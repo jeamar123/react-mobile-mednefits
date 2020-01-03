@@ -76,6 +76,7 @@ export default class InputTime extends Component {
           fontSize={12}
           fontFamily={Config.FONT_FAMILY_LIGHT}
           fontColor={(this.props.value) ? "#2c3e50" : "#9e9e9e"}
+          fontWeight={(this.props.fontWeight) ? this.props.fontWeight : "400"}
         >
           {(this.props.value) ? this.props.value : this.props.placeholder}
         </Common.Texti>

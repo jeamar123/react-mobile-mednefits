@@ -42,7 +42,10 @@ export default class Navbar extends React.Component {
   }
 
   toggleDrop( ){
-    this.setState({ isDropShow: this.refs.termDrop.state.showDrop == true ? false : true })
+    setTimeout(() => {
+      console.log( this.refs.termDrop.state.showDrop );
+      this.setState({ isDropShow: this.refs.termDrop.state.showDrop });
+    }, 0);
   }
 
   selectTerm( term ) {

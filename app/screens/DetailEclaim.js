@@ -39,6 +39,7 @@ class DetailEclaim extends Component {
       currency_exchange: '3.00',
       checkEclaim: {},
       isPromptShow: false,
+      claim_amount: 0
     }
 
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
@@ -104,7 +105,8 @@ class DetailEclaim extends Component {
     
     eclaim_data = {
       visit_date: this.props.claimdata.date,
-      spending_type: this.props.claimdata.type_spending
+      spending_type: this.props.claimdata.type_spending,
+      currency_type: this.props.claimdata.currency,
     }
     await Core.CheckEclaimVisit(eclaim_data, async (error, result) => {
       data =
@@ -114,7 +116,7 @@ class DetailEclaim extends Component {
         console.log( this.state );
         if( this.props.claimdata.amount <= this.state.checkEclaim.balance ){
           this.setState({
-            claim_amount: this.state.checkEclaim.balance,
+            claim_amount: this.props.claimdata.amount,
             isSufficient: true,
             isLoading: false,
             isPromptShow: true
@@ -229,13 +231,13 @@ class DetailEclaim extends Component {
                 style={{ height: 40, resizeMode: 'contain', width: 33, marginBottom: 20 }}
               />
 
-              <Text style={{ lineHeight: 18, marginBottom: 10, fontSize: 16 }}>Based on Visit Date, this claim will be recorded on <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.term_status }</Text>.</Text>
+              <Text style={{ lineHeight: 18, marginBottom: 10, fontSize: 16 }}>Based on Visit Date, this claim will be recorded on <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.term_status } term's data</Text>.</Text>
               
               {
                 this.state.isSufficient == true ?
-                <Text style={{ lineHeight: 18, marginBottom: 15, fontSize: 16 }}>Last term’s balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text> and is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>sufficient</Text> for this claim.</Text>
+                <Text style={{ lineHeight: 18, marginBottom: 15, fontSize: 16 }}>{ this.state.checkEclaim.term_status } term's balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.checkEclaim.balance).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text> and is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>sufficient</Text> for this claim.</Text>
                 :
-                <Text style={{ lineHeight: 18, marginBottom: 5, fontSize: 16 }}>Last term’s balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text>; hence your Claim Amount is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.claim_amount).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text></Text>
+                <Text style={{ lineHeight: 18, marginBottom: 5, fontSize: 16 }}>{ this.state.checkEclaim.term_status } term’s balance is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.checkEclaim.balance).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text>; hence your Claim Amount is <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: '500' }}>{ this.state.checkEclaim.currency_type }{ (parseFloat(this.state.checkEclaim.balance).toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }</Text></Text>
               }
             </View>
 
@@ -555,7 +557,7 @@ class DetailEclaim extends Component {
                   {parseFloat(this.state.claim_amount).toFixed(2)}{" "}
                 </Common.Texti>
                 <Common.Texti fontColor={"#2C3E50"} fontSize={15}>
-                  {this.state.checkEclaim.currency_type}
+                  {this.props.claimdata.currency}
                 </Common.Texti>
               </View>
             </View>

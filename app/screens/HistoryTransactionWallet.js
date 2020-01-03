@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
-import {
-  Container,
-  Content,
-  Card,
-  CardItem,
-  Text,
-  Body,
-  Tab,
-  Tabs,
-} from 'native-base';
+import { StatusBar, View, Text, TouchableOpacity, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import RF from "react-native-responsive-fontsize";
 import Navbar from '../components/common/Navbar';
 import * as Core from '../core';
 import * as Config from '../config';
@@ -20,18 +9,23 @@ class HistoryTransaction extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isMainLoaderShow: true,
       idTransaction: '0',
       date: '',
       customerName: '',
       price: '',
       status: '',
-      resultData: [],
-      DataE_Claim: [],
-      in_network: false,
+      inNetworkList: [],
+      outNetworkList: [],
+      in_network: true,
       out_network: false,
       company_currency: null,
       selectedTerm: 'Current term',
       isTermDropShow: false,
+      inNetworkData: {},
+      outNetworkData: {},
+      inNetworkActivePage: 1,
+      outNetworkActivePage: 1,
     };
     this.selectTerm = this.selectTerm.bind(this);
   }
@@ -39,7 +33,7 @@ class HistoryTransaction extends Component {
   async componentWillMount() {
     await this.getUserDetail();
     await this.getDataIn_Network();
-    await this.getDataE_Claim();
+    // await this.getDataE_Claim();
   }
 
   async getUserDetail() {
@@ -54,50 +48,208 @@ class HistoryTransaction extends Component {
     });
   }
 
-
-  async getDataIn_Network() {
-    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
-    await Core.GetHistoryTransaction(term,async (error, result) => {
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      await setTimeout(() => {
-        this.setState({ resultData: data, in_network: true });
-      }, 0);
+  selectTab( opt ){
+    this.setState({
+      in_network : opt == 1 ? true : false,
+      out_network : opt == 2 ? true : false,
+      isMainLoaderShow : true,
+      inNetworkData: {},
+      outNetworkData: {},
+      inNetworkActivePage: 1,
+      outNetworkActivePage: 1,
+      inNetworkList: [],
+      outNetworkList: [],
+    }, () => {
+      if( opt == 1 ){
+        this.getDataIn_Network( );
+      }
+      if( opt == 2 ){
+        this.getDataE_Claim( );
+      }
     });
-  }
-
-  async getDataE_Claim() {
-    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
-    await Core.GetEClaimTransaction(term,async (error, result) => {
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      
-      await setTimeout(() => {
-        this.setState({ DataE_Claim: data, out_network: true });
-      }, 0);
-    });
+    
   }
 
   selectTerm(term){
-    console.log( term );
+    // console.log( term );
     setTimeout(() => {
       this.setState({ 
         selectedTerm : term ,
-        in_network: false,
-        out_network: false,
+        isMainLoaderShow : true,
+        inNetworkData: {},
+        outNetworkData: {},
+        inNetworkActivePage: 1,
+        outNetworkActivePage: 1,
       }, () => {
         console.log(this.state)
-        this.getDataIn_Network( );
-        this.getDataE_Claim( );
+        if( this.state.in_network == true ){
+          this.getDataIn_Network( );
+        }
+        if( this.state.out_network == true ){
+          this.getDataE_Claim( );
+        }
       })
     }, 0);
   }
 
   handleTouch(){
     this.refs.transNav.closeDrop();
-    var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
-    this.setState({ isTermDropShow: opt });
+    // setTimeout(() => {
+      var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
+      console.log( opt );
+      this.setState({ isTermDropShow: opt });
+    // }, 0);
   }
+
+  async getDataIn_Network() {
+    this.setState({ isMainLoaderShow: true });
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    var params = {
+      term : term,
+      page : this.state.inNetworkActivePage,
+      per_page : 50,
+    }
+    await Core.GetHistoryTransaction( params ,async (error, result) => {
+      console.log( result );
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      result.data.range = await [...Array( result.data.last_page ).keys()];
+      this.setState({ 
+        inNetworkData: result.data,
+        inNetworkList: result.data.data, 
+        in_network: true,
+        out_network: false,
+        isMainLoaderShow: false
+      },() => {
+        console.log( this.state );
+      });
+    });
+  }
+
+  // INNETWORK PAGINATION 
+    inNetworkBackPage(){
+      if( this.state.inNetworkActivePage != 1 ){
+        this.state.inNetworkActivePage -= 1;
+        this.getDataIn_Network();
+      }
+    }
+    inNetworkNextPage(){
+      if( this.state.inNetworkActivePage != this.state.inNetworkData.range.length ){
+        this.state.inNetworkActivePage += 1;
+        this.getDataIn_Network();
+      }
+    }
+    inNetworkToPage( page ){
+      this.state.inNetworkActivePage = page;
+      this.getDataIn_Network();
+    }
+    inNetworkPagination(){
+      if( this.state.inNetworkList.length > 0 ){
+        return this.state.inNetworkData.range.map((data, index) => {
+          return (
+            <TouchableOpacity 
+              style={{ 
+                // flex: 1,
+                width: 20, 
+                borderWidth: 0.5, 
+                borderColor: '#FFF',
+                backgroundColor: this.state.inNetworkActivePage == (data + 1) ? '#FFF' : 'transparent', 
+              }} 
+              onPress={() => this.inNetworkToPage( data + 1 )} 
+              key={index}
+            >
+              <Text 
+                style={{ 
+                  textAlign: 'center', 
+                  paddingVertical: 10, 
+                  color: this.state.inNetworkActivePage == (data + 1) ? '#0392cf' : '#FFF' 
+                }} 
+              >
+                { data + 1 }
+              </Text>
+            </TouchableOpacity>
+          )
+        })
+      }else{
+        return null;
+      }
+    }
+  // 
+
+  async getDataE_Claim() {
+    this.setState({ isMainLoaderShow: true });
+    var term = this.state.selectedTerm == 'Current term' ? 'current_term' : 'last_term';
+    var params = {
+      term : term,
+      page : this.state.outNetworkActivePage,
+      per_page : 50,
+    }
+    await Core.GetEClaimTransaction(params, async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data.data) : result.data.data;
+        result.data.range = await [...Array( result.data.last_page ).keys()];
+        console.log( result );
+        this.setState({ 
+          outNetworkData: result.data,
+          outNetworkList: result.data.data, 
+          in_network: false,
+          out_network: true,
+          isMainLoaderShow: false
+        },() => {
+          console.log( this.state );
+        });
+    });
+  }
+
+  // INNETWORK PAGINATION 
+    outNetworkBackPage(){
+      if( this.state.outNetworkActivePage != 1 ){
+        this.state.outNetworkActivePage -= 1;
+        this.getDataE_Claim();
+      }
+    }
+    outNetworkNextPage(){
+      if( this.state.outNetworkActivePage != this.state.outNetworkData.range.length ){
+        this.state.outNetworkActivePage += 1;
+        this.getDataE_Claim();
+      }
+    }
+    outNetworkToPage( page ){
+      this.state.outNetworkActivePage = page;
+      this.getDataE_Claim();
+    }
+    outNetworkPagination(){
+      if( this.state.outNetworkList.length > 0 ){
+        return this.state.outNetworkData.range.map((data, index) => {
+          return (
+            <TouchableOpacity 
+              style={{ 
+                // flex: 1,
+                width: 20,
+                borderWidth: 0.5, 
+                borderColor: '#FFF',
+                backgroundColor: this.state.outNetworkActivePage == (data + 1) ? '#FFF' : 'transparent', 
+              }} 
+              onPress={() => this.outNetworkToPage( data + 1 )} 
+              key={index}
+            >
+              <Text 
+                style={{ 
+                  textAlign: 'center', 
+                  paddingVertical: 10, 
+                  color: this.state.outNetworkActivePage == (data + 1) ? '#0392cf' : '#FFF' 
+                }} 
+              >
+                { data + 1 }
+              </Text>
+            </TouchableOpacity>
+          )
+        })
+      }else{
+        return null;
+      }
+    }
+  //
 
   renderInNetworkStatus(data) {
     if (data.health_provider_status == true && data.type == 'cash') {
@@ -132,102 +284,137 @@ class HistoryTransaction extends Component {
   }
 
   renderTransactionIn_Network() {
-    return this.state.resultData.map((Data, index) => (
-      <TouchableOpacity
-        key={index}
-        onPress={() =>
-          Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
-        }
-      >
-        <Card key={index} style={{ marginLeft: -5, marginRight: -5 }}>
-          <CardItem
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              borderBottomWidth: 0.5,
-              borderColor: 'grey',
-              marginLeft: 10,
-              marginRight: 10,
-            }}
-          >
-            <Text style={{ fontSize: 13, fontWeight: 'bold', marginLeft: -10 }}>
-              Transaction #: <Text style={{ fontWeight: '400', fontSize: 13 }}>{Data.transaction_id}</Text>
-            </Text>
-            <Text style={{ fontSize: 13, fontWeight: '500', marginRight: -10 }}>
-              {Data.date_of_transaction}
-            </Text>
-          </CardItem>
-          <CardItem>
-            <Body
+    return this.state.inNetworkList.map((Data, index) => {
+      return (
+        <TouchableOpacity
+          key={index}
+          onPress={() =>
+            Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
+          }
+          style={{
+            borderWidth: 1,
+            borderRadius: 4,
+            borderColor: '#ddd',
+            marginTop: 5,
+            marginBottom: 10, 
+            marginLeft: 1,
+            marginRight: 1,
+            paddingVertical: 5,
+            flex: 1,
+          }}
+        >
+          <View>
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                borderBottomWidth: 0.5,
+                borderColor: 'grey',
+                marginLeft: 5,
+                marginRight: 5,
+                padding: 10,
               }}
             >
-              <Text style={{ fontSize: 13, color: '#616161' }}>
-                {Data.clinic_type_and_service}
+              <Text style={{ fontSize: 13, fontWeight: 'bold', }}>
+                Transaction #: <Text style={{ fontWeight: '400', fontSize: 13 }}>{Data.transaction_id}</Text>
               </Text>
-              <Text />
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+              <Text style={{ fontSize: 13, fontWeight: '500', }}>
+                {Data.date_of_transaction}
+              </Text>
+            </View>
+            <View 
+              style={{ 
+                marginLeft: 5,
+                marginRight: 5,
+                padding: 10, 
+                flex: 1 
               }}
             >
-              <Image
+              <View
                 style={{
-                  marginTop: -10,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  aspectRatio: 0.4,
-                  resizeMode: 'contain',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
                 }}
-                source={require('../../assets/apps/dotted.png')}
-              />
+              >
+                <Text style={{ fontSize: 13, color: '#616161' }}>
+                  {Data.clinic_type_and_service}
+                </Text>
+                <Text />
+              </View>
+            </View>
+            <View style={{ 
+              marginLeft: 5,
+              marginRight: 5,
+              padding: 10,
+              flex: 1 
+            }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Image
+                  style={{
+                    marginTop: -10,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    aspectRatio: 0.4,
+                    resizeMode: 'contain',
+                  }}
+                  source={require('../../assets/apps/dotted.png')}
+                />
 
-              <Text style={{ marginTop: '-2%', color: '#0392cf' }}>
-                {Data.currency_symbol} {Data.converted_amount}
+                <Text style={{ marginTop: '-2%', color: '#0392cf', fontWeight: '700' }}>
+                  {Data.currency_symbol} {Data.converted_amount}
+                </Text>
+              </View>
+            </View>
+            <View style={{ 
+              marginTop: -10, 
+              marginLeft: 5, 
+              marginRight: 5, 
+              paddingHorizontal: 10, 
+              flex: 1, 
+              backgroundColor: 'transparent' }}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontWeight: '400',
+                  color: '#616161',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                }}
+              >
+                {Data.clinic_name}
               </Text>
-            </Body>
-          </CardItem>
-          <CardItem style={{ marginTop: -20, backgroundColor: 'transparent' }}>
-            <Text
+            </View>
+            <View
               style={{
-                fontSize: 13,
-                fontWeight: '400',
-                color: '#616161',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
+                flexDirection: 'row',
+                marginLeft: 5,
+                marginRight: 5,
+                padding: 10,
+                flex: 1,
+                justifyContent: 'space-between',
+                alignItems: 'center'
               }}
             >
-              {Data.clinic_name}
-            </Text>
-          </CardItem>
-          <CardItem
-            footer
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: -10,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 12,
-                fontWeight: '400',
-                color: '#0392cf',
-                fontFamily: Config.FONT_FAMILY_ROMAN,
-              }}
-            >
-              {Data.customer}
-            </Text>
-            {this.renderInNetworkStatus(Data)}
-          </CardItem>
-        </Card>
-      </TouchableOpacity>
-    ));
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: '400',
+                  color: '#0392cf',
+                  fontFamily: Config.FONT_FAMILY_ROMAN,
+                }}
+              >
+                {Data.customer}
+              </Text>
+              {this.renderInNetworkStatus(Data)}
+            </View>
+          </View>
+        </TouchableOpacity>
+      )
+    });
   }
 
   renderEclaimStatus(data) {
@@ -277,7 +464,7 @@ class HistoryTransaction extends Component {
               color: '#fff',
             }}
           >
-            Approve
+            Approved
           </Text>
         </View>
       );
@@ -310,7 +497,7 @@ class HistoryTransaction extends Component {
   }
 
   renderTransactionE_Claim() {
-    return this.state.DataE_Claim.map((Data, index) => (
+    return this.state.outNetworkList.map((Data, index) => (
       <TouchableOpacity
         key={index}
         onPress={() =>
@@ -319,14 +506,30 @@ class HistoryTransaction extends Component {
             currency_symbol: Data.currency_symbol
           })
         }
+        style={{
+          borderWidth: 1,
+          borderRadius: 4,
+          borderColor: '#ddd',
+          marginTop: 5,
+          marginBottom: 10, 
+          marginLeft: 1,
+          marginRight: 1,
+          paddingVertical: 5,
+          flex: 1,
+        }}
       >
-        <Card key={index}>
-          <CardItem
-            bordered
+        <View>
+          <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
+              borderBottomWidth: 0.5,
+              borderColor: 'grey',
+              marginLeft: 5,
+              marginRight: 5,
+              padding: 10,
             }}
+
           >
             <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
               Claim #: {Data.transaction_id}
@@ -334,9 +537,16 @@ class HistoryTransaction extends Component {
             <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
               Claim Date: {Data.claim_date}
             </Text>
-          </CardItem>
-          <CardItem>
-            <Body
+          </View>
+          <View 
+            style={{ 
+              marginLeft: 5,
+              marginRight: 5,
+              padding: 10, 
+              flex: 1 
+            }}
+          >
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -344,10 +554,17 @@ class HistoryTransaction extends Component {
             >
               <Text style={{ fontSize: 13 }}>{Data.merchant}</Text>
               <Text />
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body
+            </View>
+          </View>
+          <View
+            style={{ 
+              marginLeft: 5,
+              marginRight: 5,
+              padding: 10, 
+              flex: 1 
+            }}
+          >
+            <View
               style={{
                 marginTop: '-8%',
                 marginBottom: '-8%',
@@ -365,84 +582,79 @@ class HistoryTransaction extends Component {
               />
 
               <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body
+            </View>
+          </View>
+          <View
+            style={{ 
+              marginTop: -5, 
+              marginLeft: 5, 
+              marginRight: 5, 
+              paddingHorizontal: 10, 
+              flex: 1, 
+            }}
+          >
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-4%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.service}
               </Text>
               <Text style={{ color: '#0392cf', marginTop: '-1%' }}>{Data.currency_symbol} {Data.amount}</Text>
-            </Body>
-          </CardItem>
-          {/* <CardItem>
-            <Body
-              style={{
-                marginTop: '-8%',
-                marginBottom: '-8%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Image
-                style={{
-                  margin: 8,
-                  aspectRatio: 0.4,
-                  resizeMode: 'contain',
-                }}
-                source={require('../../assets/apps/dotted.png')}
-              />
-
-              <Text style={{ marginTop: '-5%', color: '#0392cf' }} />
-            </Body>
-          </CardItem> */}
-          <CardItem>
-            <Body
+            </View>
+          </View>
+          <View
+            style={{ 
+              marginLeft: 5,
+              marginRight: 5,
+              paddingHorizontal: 10, 
+              flex: 1 
+            }}
+          >
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '-6%'
               }}
             >
               <Text style={{ fontSize: 12, color: '#B5B5B5' }}>
                 {Data.visit_date}
               </Text>
               {this.renderEclaimStatus(Data)}
-            </Body>
-          </CardItem>
-          <CardItem
-            footer
+            </View>
+          </View>
+          <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: '-3.5%'
+              marginLeft: 5,
+              marginRight: 5,
+              padding: 10, 
+              flex: 1 
             }}
           >
             <Text
               style={{
                 fontSize: 11,
-                fontWeight: '400',
+                fontWeight: '700',
                 color: '#0392cf',
                 fontFamily: Config.FONT_FAMILY_ROMAN,
               }}
             >
               {Data.member}
             </Text>
-          </CardItem>
-        </Card>
+          </View>
+        </View>
       </TouchableOpacity>
     ));
   }
 
   render() {
     return (
-      <Container
+      <View
+        style={{ flex: 1, width: '100%', height: '100%', backgroundColor: 'transparent' }}
         onTouchEnd={() => this.handleTouch()}
       >
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -459,72 +671,129 @@ class HistoryTransaction extends Component {
           pointerEvents={ this.state.isTermDropShow == true ? 'none' : 'auto' } 
           style={{ 
             backgroundColor: '#0392cf',
-            paddingTop: this.state.isTermDropShow == true ? 50 : 0, 
+            paddingTop: this.state.isTermDropShow == true ? 54 : 0, 
             position: this.state.isTermDropShow == true ? 'absolute' : 'relative',
-            flex: 1
+            flex: 1,
+            width: '100%',
+            height: '100%',
           }}
         >
-        <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'transparent' }}
-          tabContainerStyle={{ elevation: 0, zIndex: 1 }}
-        >
-          <Tab
-            heading="In-Network"
-            tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
-            textStyle={{
-              fontFamily: Config.FONT_FAMILY_ROMAN,
-              color: '#fff',
-              fontSize: RF(2.1),
-            }}
-          >
-            <Content>
-              {(!this.state.in_network) ? (
-                <View style={{ flex: 1 }}>
-                  <View
-                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
-                  >
-                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+          <View style={{ flexDirection: 'row', height: 50, width: '100%' }}>
+            <TouchableOpacity 
+              style={{ 
+                flex: 1,
+                backgroundColor: this.state.in_network == true ? '#FFF' : '#0392cf',
+                justifyContent: 'center'
+              }}
+              onPress={() => this.selectTab(1)}
+            >
+              <Text 
+                style={{ 
+                  textAlign: 'center',
+                  color: this.state.in_network == true ? '#0392cf' : '#FFF', 
+                  fontWeight: '700'
+                }}
+              >
+                In-Network
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={{ 
+                flex: 1,
+                backgroundColor: this.state.out_network == true ? '#FFF' : '#0392cf',
+                justifyContent: 'center'
+              }}
+              onPress={() => this.selectTab(2)}
+            >
+              <Text 
+                style={{ 
+                  textAlign: 'center',
+                  color: this.state.out_network == true ? '#0392cf' : '#FFF', 
+                  fontWeight: '700'
+                }}
+              >
+                Out-of-Network
+              </Text>
+            </TouchableOpacity>
+          </View>
+          
+          <ScrollView style={{ backgroundColor: '#FFF' }}>
+            <View style={{ width: '100%', flexDirection: 'column' }}>
+              {
+                this.state.isMainLoaderShow == true ?
+                  <View style={{ flex: 1 }}>
+                    <View
+                      style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
+                    >
+                      <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
+                    </View>
                   </View>
+                : null
+              }
+
+              { 
+                this.state.isMainLoaderShow == false && this.state.in_network == true ?
+                  this.renderTransactionIn_Network() 
+                : null
+              }
+
+              { 
+                this.state.isMainLoaderShow == false && this.state.out_network == true ?
+                  this.renderTransactionE_Claim() 
+                : null
+              }
+            </View>
+
+            { 
+              this.state.isMainLoaderShow == false && this.state.inNetworkList.length > 0 ?
+                <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
+                 }}>
+                  <TouchableOpacity style={{ width: 55 }} onPress={() => this.inNetworkBackPage()} >
+                    <Text style={{ textAlign: 'center', padding: 10, color: '#FFF' }} >
+                      Prev
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: '#FFF'  }}>
+                      { this.inNetworkPagination() }
+                    </View>
+                  </View>
+                  <TouchableOpacity style={{ width: 55 }} onPress={() => this.inNetworkNextPage()} >
+                    <Text style={{ textAlign: 'center', padding: 10, color: '#FFF' }} >
+                      Next
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-              ) : (
-                  <View style={{ marginBottom: 10 }}>
-                    {this.renderTransactionIn_Network()}
+              : null
+            }
+
+
+            { 
+              this.state.isMainLoaderShow == false && this.state.outNetworkList.length > 0 ?
+                <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
+                 }}>
+                  <TouchableOpacity style={{ width: 55 }} onPress={() => this.outNetworkBackPage()} >
+                    <Text style={{ textAlign: 'center', padding: 10, color: '#FFF' }} >
+                      Prev
+                    </Text>
+                  </TouchableOpacity>
+                  <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: '#FFF'  }}>
+                      { this.outNetworkPagination() }
+                    </View>
                   </View>
-                )}
-            </Content>
-          </Tab>
-          <Tab
-            heading="Out-of-Network"
-            tabStyle={{ backgroundColor: '#0392cf' }}
-            activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
-            activeTextStyle={{ color: '#3497d7', fontSize: RF(2.1) }}
-            textStyle={{
-              fontFamily: Config.FONT_FAMILY_ROMAN,
-              color: '#fff',
-              fontSize: RF(2.1),
-            }}
-          >
-            <Content>
-              {(!this.state.out_network) ? (
-                <View style={{ flex: 1 }}>
-                  <View
-                    style={{ flex: 1, marginTop: 240, justifyContent: 'center', alignItems: 'center' }}
-                  >
-                    <ActivityIndicator size="large" color="#0392cf" style={{ flex: 1, alignSelf: 'center' }} />
-                  </View>
+                  <TouchableOpacity style={{ width: 55 }} onPress={() => this.outNetworkNextPage()} >
+                    <Text style={{ textAlign: 'center', padding: 10, color: '#FFF' }} >
+                      Next
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-              ) : (
-                  <View style={{ marginBottom: 60 }}>
-                    {this.renderTransactionE_Claim()}
-                  </View>
-                )}
-            </Content>
-          </Tab>
-        </Tabs>
+              : null
+            }
+          </ScrollView>
+          
         </View>
-      </Container>
+      </View>
     );
   }
 }

@@ -359,6 +359,7 @@ export default class EclaimForm extends Component {
                     placeholder={this.state.timeholder}
                     onTimeChange={(time) => this.setState({ time: time })}
                     value={this.state.time}
+                    fontWeight="700"
                   />
 
                   <View
@@ -481,6 +482,7 @@ export default class EclaimForm extends Component {
                   data={this.state.memberData}
                   value={this.state.member}
                   onValueChange={(value) => this.setState({ member: value })}
+                  fontWeight="700"
                 />
               </View>
               <Common.Divider style={{ marginLeft: "-5%", marginRight: "-5%" }} />

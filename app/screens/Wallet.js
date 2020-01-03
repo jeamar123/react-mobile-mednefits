@@ -92,7 +92,7 @@ class Wallet extends Component {
 
     setTimeout(() => {
       this.setState({ isLoading: false })
-    }, 100);
+    }, 500);
     
     // setInterval(() => {
     //   this.setState({ isLoading: false })
