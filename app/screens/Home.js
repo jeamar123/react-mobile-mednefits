@@ -464,13 +464,16 @@ class Home extends Component {
   }
 
   getClinicType = async () => {
-    await Core.GetClinicType(async (err, result) => {
-      if (result) {
-        await this.setState({
-          data: result.data.clinic_types,
-        })
-      }
+    this.setState({
+      data: Config.CLINIC_TYPE,
     })
+    // Core.GetClinicType(async (err, result) => {
+    //   if (result) {
+    //     this.setState({
+    //       data: result.data.clinic_types,
+    //     })
+    //   }
+    // })
   }
 
   getCurrentPosition = async () => {
@@ -493,7 +496,7 @@ class Home extends Component {
 
   async componentDidMount() {
     await Core.GetLocationPermission(async (error, result) => {
-      await this.getClinicType()
+
     });
     //Get Pop Up
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
@@ -545,6 +548,8 @@ class Home extends Component {
         })
       });
     // this.checkversion()
+
+    this.getClinicType()
   }
 
   // checkversion = async () =

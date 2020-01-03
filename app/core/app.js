@@ -31,15 +31,19 @@ export function AppStatus(){
       if (result.expired) {
         Actions.Login({type: 'reset'})
       } else {
-        params = {
-          key: 'user_id',
-          value: String(result.data.profile.user_id),
-        };
-        console.log('params', params)
-        await Core.SetDataLocal(params, async (err, result) => {
-          console.log('result user_id key', result)
-        });
-        Actions.Home({type: 'reset'})
+        try {
+          params = {
+            key: 'user_id',
+            value: String(result.data.profile.user_id),
+          };
+          console.log('params', params)
+          await Core.SetDataLocal(params, async (err, result) => {
+            console.log('result user_id key', result)
+          });
+          Actions.Home({type: 'reset'})
+        } catch (e) {
+          Actions.Login({type: 'reset'})
+        }
       }
     }
   })
