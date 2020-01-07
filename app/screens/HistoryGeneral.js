@@ -567,7 +567,7 @@ class History extends Component {
         {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar 
-          leftNav="history-back" 
+          leftNav={ this.props.backTo ? this.props.backTo : "history-back"} 
           rightNav="currency-toggle" 
           updateCurrency={ this.toggleCurrency }
           trans_id={ this.props.transaction_id }

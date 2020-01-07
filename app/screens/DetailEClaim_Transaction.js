@@ -126,7 +126,10 @@ class DetailEClaim_Transaction extends Component {
     return (
       <Container>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar leftNav="back" title="History" />
+        <Navbar 
+          leftNav={ this.props.backTo ? this.props.backTo : "back"} 
+          title="History" 
+        />
         <HistoryClaim
           Status={this.state.data.status_text}
           status_number={this.state.data.status}

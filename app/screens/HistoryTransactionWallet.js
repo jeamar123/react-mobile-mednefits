@@ -59,6 +59,7 @@ class HistoryTransaction extends Component {
       outNetworkActivePage: 1,
       inNetworkList: [],
       outNetworkList: [],
+      isTermDropShow: false,
     }, () => {
       if( opt == 1 ){
         this.getDataIn_Network( );
@@ -80,6 +81,7 @@ class HistoryTransaction extends Component {
         outNetworkData: {},
         inNetworkActivePage: 1,
         outNetworkActivePage: 1,
+        isTermDropShow: false,
       }, () => {
         console.log(this.state)
         if( this.state.in_network == true ){
@@ -94,11 +96,12 @@ class HistoryTransaction extends Component {
 
   handleTouch(){
     this.refs.transNav.closeDrop();
-    // setTimeout(() => {
-      var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
+    console.log( this.refs.transNav.refs.termDrop.state.showDrop );
+    var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
+    if( opt != this.state.isTermDropShow ){
       console.log( opt );
       this.setState({ isTermDropShow: opt });
-    // }, 0);
+    }
   }
 
   async getDataIn_Network() {
@@ -119,7 +122,8 @@ class HistoryTransaction extends Component {
         inNetworkList: result.data.data, 
         in_network: true,
         out_network: false,
-        isMainLoaderShow: false
+        isMainLoaderShow: false,
+        isTermDropShow: false,
       },() => {
         console.log( this.state );
       });
@@ -194,7 +198,8 @@ class HistoryTransaction extends Component {
           outNetworkList: result.data.data, 
           in_network: false,
           out_network: true,
-          isMainLoaderShow: false
+          isMainLoaderShow: false,
+          isTermDropShow: false,
         },() => {
           console.log( this.state );
         });
@@ -289,7 +294,7 @@ class HistoryTransaction extends Component {
         <TouchableOpacity
           key={index}
           onPress={() =>
-            Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency })
+            Actions.HistoryGeneral({ transaction_id: Data.transaction_id, currency_symbol: Data.currency_symbol, company_currency: this.state.company_currency, backTo: 'back_history' })
           }
           style={{
             borderWidth: 1,
@@ -503,7 +508,8 @@ class HistoryTransaction extends Component {
         onPress={() =>
           Actions.DetailEclaimTransaction({
             transaction_id: Data.transaction_id,
-            currency_symbol: Data.currency_symbol
+            currency_symbol: Data.currency_symbol,
+            backTo: 'back_history'
           })
         }
         style={{
