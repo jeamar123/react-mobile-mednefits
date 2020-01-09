@@ -94,14 +94,20 @@ class HistoryTransaction extends Component {
     }, 0);
   }
 
+  showDropOverlay = () =>{
+    console.log('please work');
+    this.setState({ isTermDropShow: true });
+  }
+
   handleTouch(){
     this.refs.transNav.closeDrop();
-    console.log( this.refs.transNav.refs.termDrop.state.showDrop );
-    var opt = this.refs.transNav.refs.termDrop.state.showDrop == true ? false : true;
-    if( opt != this.state.isTermDropShow ){
+    console.log( this.refs.transNav.state.isDropShow );
+    if( this.state.isTermDropShow == true ){
+      var opt = this.refs.transNav.state.isDropShow == true ? false : true;
       console.log( opt );
       this.setState({ isTermDropShow: opt });
     }
+    console.log( 'this.state.isTermDropShow', this.state.isTermDropShow );
   }
 
   async getDataIn_Network() {
@@ -669,6 +675,7 @@ class HistoryTransaction extends Component {
           leftNav="back-home-wallet" 
           rightNav="term-drop"
           title="History" 
+          showDropOverlay={this.showDropOverlay}
           updateSelectedTerm={(term) => this.selectTerm( term )}
           headerBgColor={ this.state.isTermDropShow == true ? 'transparent' : '#0392cf'}
           backgroundColor={ this.state.isTermDropShow == true ? 'transparent' : '#0392cf'}
@@ -751,7 +758,7 @@ class HistoryTransaction extends Component {
             </View>
 
             { 
-              this.state.isMainLoaderShow == false && this.state.inNetworkList.length > 0 ?
+              this.state.isMainLoaderShow == false && this.state.inNetworkList.length > 0 && this.state.inNetworkData.range.length > 1 ?
                 <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
                  }}>
                   <TouchableOpacity style={{ width: 55 }} onPress={() => this.inNetworkBackPage()} >
@@ -775,7 +782,7 @@ class HistoryTransaction extends Component {
 
 
             { 
-              this.state.isMainLoaderShow == false && this.state.outNetworkList.length > 0 ?
+              this.state.isMainLoaderShow == false && this.state.outNetworkList.length > 0 && this.state.outNetworkData.range.length > 1 ?
                 <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
                  }}>
                   <TouchableOpacity style={{ width: 55 }} onPress={() => this.outNetworkBackPage()} >
