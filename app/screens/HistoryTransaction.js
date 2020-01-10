@@ -772,7 +772,7 @@ class HistoryTransaction extends Component {
             </View>
 
             { 
-              this.state.isMainLoaderShow == false && this.state.inNetworkList.length > 0 && this.state.inNetworkData.range.length > 1 ?
+              this.state.isMainLoaderShow == false && this.state.inNetworkList.length > 0 && this.state.inNetworkData.range.length > 1 && this.state.in_network == true ?
                 <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
                  }}>
                   <TouchableOpacity style={{ width: 55 }} onPress={() => this.inNetworkBackPage()} >
@@ -796,7 +796,7 @@ class HistoryTransaction extends Component {
 
 
             { 
-              this.state.isMainLoaderShow == false && this.state.outNetworkList.length > 0 && this.state.outNetworkData.range.length > 1 ?
+              this.state.isMainLoaderShow == false && this.state.outNetworkList.length > 0 && this.state.outNetworkData.range.length > 1 && this.state.out_network == true ?
                 <View style={{ paddingTop: 20, paddingBottom: 20, textAlign: 'center', alignItems: 'center', justifyContent: 'center', flex: 1, flexDirection: 'row', backgroundColor: '#0392cf'
                  }}>
                   <TouchableOpacity style={{ width: 55 }} onPress={() => this.outNetworkBackPage()} >
