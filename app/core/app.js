@@ -19,26 +19,31 @@ import * as Config from '../config'
 //   'Content-Type': 'application/json'
 // }
 
-export function AppStatus(){
-  Core.UserDetail(async (err, result)=>{
+export function AppStatus() {
+  Core.UserDetail(async (err, result) => {
     // console.log( result );
-    if( result.data.profile.to_update_auto_logout == true ){
+    if (result.data.profile.to_update_auto_logout == true) {
       await AsyncStorage.removeItem('access_token');
       await AsyncStorage.removeItem('latitude');
       await AsyncStorage.removeItem('longitude');
-      Actions.Login({type: 'reset'});
-    }else{
+      Actions.Login({ type: 'reset' });
+    } else {
       if (result.expired) {
-        Actions.Login({type: 'reset'})
+        Actions.Login({ type: 'reset' })
       } else {
-        params = {
-          key: 'user_id',
-          value: String(result.data.profile.user_id),
-        };
-        await Core.SetDataLocal(params, async (err, result) => {
-          // console.log('result user_id key', result)
-        });
-        Actions.Home({type: 'reset'})
+        try {
+          params = {
+            key: 'user_id',
+            value: String(result.data.profile.user_id),
+          };
+          console.log('params', params)
+          await Core.SetDataLocal(params, async (err, result) => {
+            console.log('result user_id key', result)
+          });
+          Actions.Home({ type: 'reset' })
+        } catch (e) {
+          Actions.Login({ type: 'reset' })
+        }
       }
     }
   })

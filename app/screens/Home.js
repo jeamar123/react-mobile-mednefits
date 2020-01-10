@@ -373,16 +373,20 @@ class Home extends Component {
     this.toggleLoadingState = this.toggleLoadingState.bind(this);
   }
 
-  toggleLoadingState( text ) {
-    if( this.isMainLoaderShow == true ){
-      this.isMainLoaderShow = false;
-    }else{
-      this.isMainLoaderShow = true;
+  toggleLoadingState(text) {
+    if (this.state.isMainLoaderShow == true) {
+      this.setState({
+        isMainLoaderShow: false,
+        mainLoaderText: text
+      });
+    } else {
+      this.setState({
+        isMainLoaderShow: true,
+        mainLoaderText: text
+      });
     }
-    this.mainLoaderText = text;
-
-    console.log( this.isMainLoaderShow );
-    console.log( this.mainLoaderText );
+    console.log(this.state.isMainLoaderShow);
+    console.log(this.state.mainLoaderText);
   }
 
   isVisibleAds() {
@@ -404,13 +408,17 @@ class Home extends Component {
   }
 
   getClinicType = async () => {
-    await Core.GetClinicType(async (err, result) => {
-      if (result) {
-        await this.setState({
-          data: result.data.clinic_types,
-        })
-      }
+    this.setState({
+      data: Config.CLINIC_TYPE,
     })
+
+    // await Core.GetClinicType(async (err, result) => {
+    //   if (result) {
+    //     await this.setState({
+    //       data: result.data.clinic_types,
+    //     })
+    //   }
+    // })
   }
 
   async componentWillMount() {
