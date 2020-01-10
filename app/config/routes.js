@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';
-import OneSignal from 'react-native-onesignal'; // Import package from node modules
+// import OneSignal from 'react-native-onesignal';
 
 
 
@@ -115,39 +115,39 @@ const transitionConfig = () => {
 }
 
 
-  
+
 class RouterComponent extends Component {
-  
-  constructor(props) {
-    super(props);
 
-    OneSignal.init("ac4b020b-c0eb-4044-8020-a9f7f18027ba");
+  // constructor(props) {
+  //   super(props);
 
-    OneSignal.addEventListener('received', this.onReceived);
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', this.onIds);
-  }
+  //   OneSignal.init("ac4b020b-c0eb-4044-8020-a9f7f18027ba");
 
-  componentWillUnmount() {
-    OneSignal.removeEventListener('received', this.onReceived);
-    OneSignal.removeEventListener('opened', this.onOpened);
-    OneSignal.removeEventListener('ids', this.onIds);
-  }
+  //   OneSignal.addEventListener('received', this.onReceived);
+  //   OneSignal.addEventListener('opened', this.onOpened);
+  //   OneSignal.addEventListener('ids', this.onIds);
+  // }
 
-  onReceived(notification) {
-    console.log("Notification received: ", notification);
-  }
+  // componentWillUnmount() {
+  //   OneSignal.removeEventListener('received', this.onReceived);
+  //   OneSignal.removeEventListener('opened', this.onOpened);
+  //   OneSignal.removeEventListener('ids', this.onIds);
+  // }
 
-  onOpened(openResult) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
-  }
+  // onReceived(notification) {
+  //   console.log("Notification received: ", notification);
+  // }
 
-  onIds(device) {
-    console.log('Device info: ', device);
-  }
+  // onOpened(openResult) {
+  //   console.log('Message: ', openResult.notification.payload.body);
+  //   console.log('Data: ', openResult.notification.payload.additionalData);
+  //   console.log('isActive: ', openResult.notification.isAppInFocus);
+  //   console.log('openResult: ', openResult);
+  // }
+
+  // onIds(device) {
+  //   console.log('Device info: ', device);
+  // }
 
   render() {
     return (

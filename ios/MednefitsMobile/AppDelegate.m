@@ -12,7 +12,7 @@
 
 @import GoogleMaps;
 @implementation AppDelegate
-@synthesize oneSignal = _oneSignal;
+// @synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,8 +39,8 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   
-  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                         appId:@"ac4b020b-c0eb-4044-8020-a9f7f18027ba"];
+  // self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+  //                                                        appId:@"ac4b020b-c0eb-4044-8020-a9f7f18027ba"];
 
   UIView* launchScreenView = [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:self options:nil] objectAtIndex:0];
   launchScreenView.frame = self.window.bounds;
