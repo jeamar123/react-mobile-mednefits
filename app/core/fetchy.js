@@ -199,6 +199,28 @@ export const GetBalance = async (callback) => {
   }
 }
 
+export const GetCoverageDates = async (callback) => {
+  try {
+    await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+      params = {
+        url: Config.USER_COVERAGE_DATES,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      await fetching(params, async result => {
+        await callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get dates' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
 export async function GetBalanceMedical(filter, callback) {
   await setTimeout(async function () {
     try {

@@ -51,6 +51,8 @@ export default class EclaimForm extends Component {
       ],
       currencyState: "SGD",
       claimData: null,
+      visitMinDate: null,
+      visitMaxDate: null,
     }
 
     this.selectSpending = this.selectSpending.bind(this)
@@ -61,6 +63,7 @@ export default class EclaimForm extends Component {
 
   componentWillMount() {
     this.getUserDetail();
+    this.getVisitDateList();
     this.getMember();
     this.selectSpending("medical");
     this.getCurrency();
@@ -93,6 +96,18 @@ export default class EclaimForm extends Component {
       await this.setState({
         currency: data.profile.currency_type.toUpperCase(),
         company_currency: data.profile.currency_type.toUpperCase(),
+      });
+    });
+  }
+
+  async getVisitDateList() {
+    await Core.GetCoverageDates(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+        console.log( data );
+      await this.setState({
+        visitMinDate: data.start,
+        visitMaxDate: data.end,
       });
     });
   }
@@ -331,7 +346,8 @@ export default class EclaimForm extends Component {
                     borderRadius: 2,
                     height: 40
                   }}
-                  maxDate={new Date()}
+                  minDate={ new Date( this.state.visitMinDate ) }
+                  maxDate={ new Date( this.state.visitMaxDate ) }
                   onError={() => Common.getNotify("", "Error loading, please try again")}
                   renderDate={({ year, month, day, date }) => {
                     if (!date) {

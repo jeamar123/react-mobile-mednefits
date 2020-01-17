@@ -55,6 +55,7 @@ export const CANCEL_VISIT = CLINIC + '/cancel_visit';
 /* USER VARIABLE */
 export const USER = MAIN + "/user"
 export const USER_CREDITS = USER + "/credits"
+export const USER_COVERAGE_DATES = USER + "/get_dates_coverage"
 export const USER_NETWORK_TRANSACTION = USER + "/in_network_transactions"
 export const USER_SPECIFIC_IN_NETWORK = USER + "/specific_in_network"
 export const USER_ECLAIM_TRANSACTION = USER + "/e_claim_transactions"
