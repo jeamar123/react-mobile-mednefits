@@ -113,7 +113,8 @@ class DatePicker extends Component {
       try {
         const { action, year, month, day } = await DatePickerAndroid.open({
           date: date || startDate,
-          maxDate: new Date()
+          maxDate: this.props.maxDate,
+          minDate: this.props.minDate,
         })
 
         if (action !== DatePickerAndroid.dismissedAction) {

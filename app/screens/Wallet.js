@@ -28,7 +28,7 @@ class Wallet extends Component {
       wellnessinNetwork: [],
       wellnessoutNetwork: [],
       visible: true,
-      isLoading: this.props.isLoading,
+      isLoading: true,
       type: 'in_network_transactions',
       company_currency: null,
       selectedTerm: 'Current term',
@@ -58,10 +58,10 @@ class Wallet extends Component {
 
   componentWillMount() {
     this.getUserDetail()
-    this.selectWallet("Medical")
+    // this.selectWallet("Medical")
     this.selectTerm("Current term")
-    this.getMedicalWallet();
-    this.getWelnnessWallet();
+    // this.getMedicalWallet();
+    // this.getWelnnessWallet();
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
@@ -106,7 +106,6 @@ class Wallet extends Component {
     }, () => {
       console.log(this.state)
       this.getMedicalWallet( );
-      this.getWelnnessWallet( );
     })
     
     // setInterval(() => {
@@ -120,7 +119,6 @@ class Wallet extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.log(data);
-      this.setState({ isLoading: false })
       this.setState({
         medicalData: data,
         medicalBalance: data.balance,
@@ -129,6 +127,8 @@ class Wallet extends Component {
         medicalcurrency: result.data.currency_symbol,
         medicalinNetwork: data.in_network_transactions,
         medicaloutNetwork: data.e_claim_transactions
+      }, () => {
+        this.getWelnnessWallet( );
       });
     });
   }
@@ -139,7 +139,6 @@ class Wallet extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.log(data);
-      this.setState({ isLoading: false })
       this.setState({
         wellnessData: data,
         wellnessBalance: data.balance,
@@ -147,7 +146,8 @@ class Wallet extends Component {
         wellnessEclaim_Credit_spent: data.e_claim_credits_spent,
         wellnessurrency: result.data.currency_symbol,
         wellnessinNetwork: data.in_network_transactions,
-        wellnessoutNetwork: data.e_claim_transactions
+        wellnessoutNetwork: data.e_claim_transactions,
+        isLoading: false
       });
     });
   }

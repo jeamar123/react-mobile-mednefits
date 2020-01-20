@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 import * as Core from '../../core';
@@ -30,7 +30,9 @@ class HomeContent extends Component {
       clinic_name: '',
       consultation_fee_symbol: '',
       consultation_status: '',
-      consultation_fees: ''
+      consultation_fees: '',
+      isWalletLoading: false,
+      isEcardLoading: false,
     };
   }
 
@@ -86,14 +88,24 @@ class HomeContent extends Component {
   }
 
   async getUserBalance() {
+    this.toggleWalletLoading( true );
     await Core.GetBalance(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
         Balance: data.balance,
         currency: result.data.currency_symbol
+      }, () => {
+        this.toggleWalletLoading( false );
       });
     });
+  }
+
+  toggleEcardLoading( opt ){
+    this.setState({ isEcardLoading : opt });
+  }
+  toggleWalletLoading( opt ){
+    this.setState({ isWalletLoading : opt });
   }
 
   onQuery = async (query) => {
@@ -131,6 +143,7 @@ class HomeContent extends Component {
   }
 
   async getUserDetail() {
+    this.toggleEcardLoading( true );
     console.log('in progress fetching getUserDetail')
     await Core.UserDetail(async (error, result) => {
       console.log('fetching done for getUserDetail');
@@ -139,6 +152,8 @@ class HomeContent extends Component {
       console.warn(data);
       await this.setState({
         Full_name: data.profile.full_name,
+      }, () => {
+        this.toggleEcardLoading( false );
       });
     });
   }
@@ -455,7 +470,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                       <Text style={styles.title}>E-Card</Text>
-                      <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                      {
+                        this.state.isEcardLoading == false ? 
+                        <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                        :
+                        <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -477,7 +497,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                       <Text style={styles.title}>E-Card</Text>
-                      <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                      {
+                        this.state.isEcardLoading == false ? 
+                        <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                        :
+                        <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -500,7 +525,12 @@ class HomeContent extends Component {
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                           <Text style={styles.title}>E-Card</Text>
-                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                          {
+                            this.state.isEcardLoading == false ? 
+                            <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                            :
+                            <ActivityIndicator color="#fff" size="small" />
+                          }
                         </View>
                       </View>
                     </View>
@@ -543,7 +573,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
                       <Text style={styles.title}>Wallet</Text>
-                      <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                      {
+                        this.state.isWalletLoading == false ? 
+                        <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                        :
+                        <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -572,7 +607,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
                       <Text style={styles.title}>Wallet</Text>
-                      <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                      {
+                        this.state.isWalletLoading == false ? 
+                        <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                        :
+                        <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -601,7 +641,12 @@ class HomeContent extends Component {
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', width: '70%' }}>
                           <Text style={styles.title}>Wallet</Text>
-                          <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                          {
+                            this.state.isWalletLoading == false ? 
+                            <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                            :
+                            <ActivityIndicator color="#fff" size="small" />
+                          }
                         </View>
                       </View>
                     </View>
