@@ -118,25 +118,23 @@ class DetailEclaim extends Component {
       this.setState({ checkEclaim: data }, () =>{
         var claim_amount = 0;
         console.log( this.state );
-        if( data.last_term ){
-          if( this.props.claimdata.amount <= this.state.checkEclaim.balance ){
-            this.setState({
-              claim_amount: this.props.claimdata.amount,
-              isSufficient: true,
-              isLoading: false,
-              isPromptShow: true
-            });
-            
-          }
-          if( this.props.claimdata.amount > this.state.checkEclaim.balance ){
-            this.setState({
-              claim_amount: this.state.checkEclaim.balance,
-              isSufficient: false,
-              isLoading: false,
-              isPromptShow: true
-            });
-            
-          }
+        if( this.props.claimdata.amount <= this.state.checkEclaim.balance ){
+          this.setState({
+            claim_amount: this.props.claimdata.amount,
+            isSufficient: true,
+            isLoading: false,
+            isPromptShow: data.last_term,
+          });
+          
+        }
+        if( this.props.claimdata.amount > this.state.checkEclaim.balance ){
+          this.setState({
+            claim_amount: this.state.checkEclaim.balance,
+            isSufficient: false,
+            isLoading: false,
+            isPromptShow: data.last_term
+          });
+          
         }
       });
     });

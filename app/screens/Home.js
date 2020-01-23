@@ -625,8 +625,8 @@ class Home extends Component {
           {this.popupAds()}
           {this.customLoader()}
           <GlobaLoadingState
-            loadingShow={this.isMainLoaderShow}
-            loadingText={this.mainLoaderText}
+            loadingShow={this.state.isMainLoaderShow}
+            loadingText={this.state.mainLoaderText}
           />
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Popup

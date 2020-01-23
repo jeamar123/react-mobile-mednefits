@@ -54,11 +54,11 @@ class Wallet extends Component {
 
   componentWillMount() {
     this.getUserDetail();
-    this.selectWallet("Medical")
+    // this.selectWallet("Medical")
     this.selectTerm("Current term")
     this.selectSpending("in_network_transactions");
-    this.getMedicalWallet();
-    this.getWelnnessWallet();
+    // await this.getMedicalWallet();
+    // await this.getWelnnessWallet();
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})
     // })
@@ -85,7 +85,7 @@ class Wallet extends Component {
 
     setTimeout(() => {
       this.setState({ isLoading: false })
-    }, 500);
+    }, 100);
     // setInterval(() => {
     //   this.setState({ isLoading: false })
     // }, 1000);
@@ -98,7 +98,6 @@ class Wallet extends Component {
     }, () => {
       console.log(this.state)
       this.getMedicalWallet( );
-      this.getWelnnessWallet( );
     })
     // setInterval(() => {
     //   this.setState({ isLoading: false })
@@ -108,11 +107,11 @@ class Wallet extends Component {
   getMedicalWallet() {
     this.setState({ isLoading: true })
     Core.GetBalanceMedical(this.state.selectedTermValue, (error, result) => {
+      console.log( result );
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.warn(JSON.stringify(data, null, 4))
       console.log( data );
-      this.setState({ isLoading: false })
       this.setState({
         medicalData: data,
         medicalBalance: data.balance,
@@ -120,7 +119,10 @@ class Wallet extends Component {
         medicalEclaim_Credit_spent: data.e_claim_credits_spent,
         medicalcurrency: data.currency_symbol,
         medicalinNetwork: data.in_network_transactions,
-        medicaloutNetwork: data.e_claim_transactions
+        medicaloutNetwork: data.e_claim_transactions,
+        // isLoading: false
+      }, () => {
+        this.getWelnnessWallet( );
       });
     });
   }
@@ -132,7 +134,6 @@ class Wallet extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       // console.warn(data);
       console.log( data );
-      this.setState({ isLoading: false })
       this.setState({
         wellnessData: data,
         wellnessBalance: data.balance,
@@ -140,7 +141,8 @@ class Wallet extends Component {
         wellnessEclaim_Credit_spent: data.e_claim_credits_spent,
         wellnessurrency: result.data.currency_symbol,
         wellnessinNetwork: data.in_network_transactions,
-        wellnessoutNetwork: data.e_claim_transactions
+        wellnessoutNetwork: data.e_claim_transactions,
+        isLoading: false
       });
     });
   }
