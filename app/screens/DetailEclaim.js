@@ -109,6 +109,7 @@ class DetailEclaim extends Component {
       currency_type: this.props.claimdata.currency,
     }
     await Core.CheckEclaimVisit(eclaim_data, async (error, result) => {
+      console.log(result);
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
         console.log( data );

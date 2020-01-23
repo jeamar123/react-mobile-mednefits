@@ -908,7 +908,7 @@ export default class Navbar extends React.Component {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            source={require('../../../assets/LogoMednefits.png')}
+            source={require('../../../assets/mobile-logo-white.png')}
             style={{ height: 135, resizeMode: 'contain', width: 135, marginTop: -8 }}
           />
         </View>

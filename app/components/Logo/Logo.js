@@ -9,7 +9,7 @@ const Logo = () => (
       <Image
         resizeMode="contain"
         style={styles.logo}
-        source={require('../../../assets/MednefitsLogoBlue.png')}
+        source={require('../../../assets/mobile-logo-blue.png')}
       />
     </ImageBackground>
   </View>
