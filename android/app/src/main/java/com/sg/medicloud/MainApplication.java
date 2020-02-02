@@ -29,7 +29,7 @@ import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+// import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import com.dylanvann.fastimage.FastImageViewPackage;
@@ -62,7 +62,7 @@ public class MainApplication extends Application implements ReactApplication {
         new RNCameraPackage(),
         new RNFusedLocationPackage(),
         new AsyncStoragePackage(),
-        new ReactNativeOneSignalPackage(),
+        // new ReactNativeOneSignalPackage(),
         new SvgPackage()
       );
     }
