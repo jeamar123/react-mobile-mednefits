@@ -375,10 +375,12 @@ class Home extends Component {
 
   toggleLoadingState(text) {
     if (this.state.isMainLoaderShow == true) {
-      this.setState({
-        isMainLoaderShow: false,
-        mainLoaderText: text
-      });
+      setTimeout(() => {
+        this.setState({
+          isMainLoaderShow: false,
+          mainLoaderText: text
+        });
+      }, 3500)
     } else {
       this.setState({
         isMainLoaderShow: true,
