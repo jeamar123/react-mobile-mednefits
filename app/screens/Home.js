@@ -99,7 +99,7 @@ class SearchResult extends Component {
                         >
                           <View style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
                             <FastImage
-                              style={{width: 85, height: 85, marginTop: '8%'}}
+                              style={{ width: 85, height: 85, marginTop: '8%' }}
                               source={{
                                 uri: ke.clinic_image,
                                 priority: FastImage.priority.low,
@@ -307,7 +307,7 @@ class ClinicList extends Component {
                 <View style={{ flex: 1 }}>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.1) }}>
                     <FastImage
-                      style={{width: 46, height: 46}}
+                      style={{ width: 46, height: 46 }}
                       source={{
                         uri: this.props.image,
                         priority: FastImage.priority.low,
@@ -348,15 +348,15 @@ class ClinicList extends Component {
                   <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '13%' }}>
 
-                    <FastImage
-                      style={{width: 46, height: 46}}
-                      source={{
-                        uri: this.props.image,
-                        priority: FastImage.priority.low,
-                        cache: FastImage.cacheControl.immutable
-                      }}
-                      resizeMode={FastImage.resizeMode.cover}
-                    />
+                      <FastImage
+                        style={{ width: 46, height: 46 }}
+                        source={{
+                          uri: this.props.image,
+                          priority: FastImage.priority.low,
+                          cache: FastImage.cacheControl.immutable
+                        }}
+                        resizeMode={FastImage.resizeMode.cover}
+                      />
                       {/*<ResponsiveImage
                         source={{ uri: this.props.image }}
                         initWidth="46" initHeight="46"
@@ -426,20 +426,23 @@ class Home extends Component {
     this.isVisibleAds = this.isVisibleAds.bind(this);
   }
 
-  toggleLoadingState( text ) {
-    if( this.state.isMainLoaderShow == true ){
+  toggleLoadingState(text) {
+    if (this.state.isMainLoaderShow == true) {
+      setTimeout(() => {
+        this.setState({
+          isMainLoaderShow: false,
+          mainLoaderText: text
+        });
+      }, 4000)
+
+    } else {
       this.setState({
-        isMainLoaderShow : false,
-        mainLoaderText : text
-      });
-    }else{
-      this.setState({
-        isMainLoaderShow : true,
-        mainLoaderText : text
+        isMainLoaderShow: true,
+        mainLoaderText: text
       });
     }
-    console.log( this.state.isMainLoaderShow );
-    console.log( this.state.mainLoaderText );
+    console.log(this.state.isMainLoaderShow);
+    console.log(this.state.mainLoaderText);
   }
 
   isVisibleAds() {

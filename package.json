@@ -10,6 +10,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "build_dev": "sh build_dev.sh",
     "clean": "sh clean_build_dev.sh"
   },
   "dependencies": {
