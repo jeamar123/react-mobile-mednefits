@@ -363,6 +363,7 @@ class Home extends Component {
       popAds: false,
       isMainLoaderShow: false,
       mainLoaderText: '',
+      kickout: true,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -370,26 +371,38 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleAds = this.isVisibleAds.bind(this);
-    this.toggleLoadingState = this.toggleLoadingState.bind(this);
+    // this.toggleLoadingState = this.toggleLoadingState.bind(this);
   }
 
-  toggleLoadingState(text) {
-    if (this.state.isMainLoaderShow == true) {
-      setTimeout(() => {
-        this.setState({
-          isMainLoaderShow: false,
-          mainLoaderText: text
-        });
-      }, 3500)
-    } else {
-      this.setState({
-        isMainLoaderShow: true,
-        mainLoaderText: text
-      });
-    }
-    console.log(this.state.isMainLoaderShow);
-    console.log(this.state.mainLoaderText);
+  toggleLoadingState(opt) {
+    this.setState({ isMainLoaderShow: opt });
   }
+
+  // toggleLoadingState(text) {
+  //   if (this.state.isMainLoaderShow == true) {
+  //     // setTimeout(() => {
+  //     //   this.setState({
+  //     //     isMainLoaderShow: false,
+  //     //     mainLoaderText: text
+  //     //   });
+  //     // }, 1500)
+  //     if (this.state.kickout == true) {
+  //       this.setState({
+  //         isMainLoaderShow: false,
+  //         mainLoaderText: text
+  //       });
+  //     }
+
+
+  //   } else {
+  //     this.setState({
+  //       isMainLoaderShow: true,
+  //       mainLoaderText: text
+  //     });
+  //   }
+  //   console.log(this.state.isMainLoaderShow);
+  //   console.log(this.state.mainLoaderText);
+  // }
 
   isVisibleAds() {
     this.setState({ popAds: false })
@@ -448,6 +461,24 @@ class Home extends Component {
         console.warn("appstore Datas: " + JSON.stringify(json, null, 4))
         this.inAppTrigger();
       });
+
+    this.toggleLoadingState(true);
+    await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      if (data.status == true) {
+        this.setState({
+          kickout: false,
+        }, () => {
+          this.toggleLoadingState(false);
+        });
+      }
+      console.warn('data ' + data.check_in_status_removed);
+      // await this.setState({
+      //   kickout: result.data.check_in_status_removed,
+      // });
+
+    });
 
   }
 
@@ -658,7 +689,7 @@ class Home extends Component {
               consultation_fee_symbol={this.props.consultation_fee_symbol}
               consultation_status={this.props.consultation_status}
               consultation_fees={this.props.consultation_fees}
-              toggleLoadingState={this.toggleLoadingState}
+            // toggleLoadingState={this.toggleLoadingState}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1.5) }}
