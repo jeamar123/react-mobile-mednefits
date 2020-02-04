@@ -426,24 +426,59 @@ class Home extends Component {
     this.isVisibleAds = this.isVisibleAds.bind(this);
   }
 
-  toggleLoadingState(text) {
-    if (this.state.isMainLoaderShow == true) {
-      setTimeout(() => {
+  componentWillMount() {
+    //Version Check
+    VersionCheck.getLatestVersion({
+      provider: 'playStore'  // for Android
+    })
+      .then(latestVersion => {
+        // console.warn('latest - ' + latestVersion);    // 0.1.2
         this.setState({
-          isMainLoaderShow: false,
-          mainLoaderText: text
-        });
-      }, 4000)
-
-    } else {
-      this.setState({
-        isMainLoaderShow: true,
-        mainLoaderText: text
+          appstoreVersion: latestVersion,
+        })
       });
-    }
-    console.log(this.state.isMainLoaderShow);
-    console.log(this.state.mainLoaderText);
+    // this.checkversion()
+
+    this.getClinicType()
+    this.getUserBalance()
   }
+
+  getUserBalance() {
+    this.toggleLoadingState(true);
+    Core.GetBalance((error, result) => {
+      data =
+        typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
+      }, () => {
+        this.toggleLoadingState(false);
+      });
+    });
+  }
+
+  toggleLoadingState(opt) {
+    this.setState({ isMainLoaderShow: opt });
+  }
+
+  // toggleLoadingState(text) {
+  //   if (this.state.isMainLoaderShow == true) {
+  //     setTimeout(() => {
+  //       this.setState({
+  //         isMainLoaderShow: false,
+  //         mainLoaderText: text
+  //       });
+  //     }, 1000)
+
+  //   } else {
+  //     this.setState({
+  //       isMainLoaderShow: true,
+  //       mainLoaderText: text
+  //     });
+  //   }
+  //   console.log(this.state.isMainLoaderShow);
+  //   console.log(this.state.mainLoaderText);
+  // }
 
   isVisibleAds() {
     this.setState({ popAds: false })
@@ -539,21 +574,7 @@ class Home extends Component {
     }
   }
 
-  componentWillMount() {
-    //Version Check
-    VersionCheck.getLatestVersion({
-      provider: 'playStore'  // for Android
-    })
-      .then(latestVersion => {
-        // console.warn('latest - ' + latestVersion);    // 0.1.2
-        this.setState({
-          appstoreVersion: latestVersion,
-        })
-      });
-    // this.checkversion()
 
-    this.getClinicType()
-  }
 
   // checkversion = async () =
   //   version = await Core.CheckVersion()
@@ -717,7 +738,7 @@ class Home extends Component {
               consultation_fee_symbol={this.props.consultation_fee_symbol}
               consultation_status={this.props.consultation_status}
               consultation_fees={this.props.consultation_fees}
-              toggleLoadingState={this.toggleLoadingState}
+            // toggleLoadingState={this.toggleLoadingState}
             />
             <View
               style={{ justifyContent: 'center', alignItems: 'flex-start', marginTop: responsiveHeight(1) }}
