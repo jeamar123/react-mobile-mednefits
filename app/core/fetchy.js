@@ -9,7 +9,7 @@ import { getAlert, getNotify } from './notify';
 import * as Config from '../config';
 import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
-import Geolocation from 'react-native-geolocation-service';
+import Geolocation from '@react-native-community/geolocation';
 import Permissions from 'react-native-permissions';
 
 const headerLogin = {

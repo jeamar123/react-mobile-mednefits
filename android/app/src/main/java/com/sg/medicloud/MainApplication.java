@@ -3,14 +3,8 @@ package com.sg.medicloud;
 import android.app.Application;
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.facebook.react.ReactApplication;
-import com.horcrux.svg.SvgPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.ninty.system.setting.SystemSettingPackage;
-import com.airbnb.android.react.maps.MapsPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.rnfs.RNFSPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
-import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -32,14 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SvgPackage(),
-            new VectorIconsPackage(),
-            new SystemSettingPackage(),
-            new MapsPackage(),
-            new ImagePickerPackage(),
             new RNFSPackage(),
             new ReactNativeDocumentPicker(),
-            new RNCameraPackage(),
             new RNFusedLocationPackage(),
             new SvgPackage()
       );
