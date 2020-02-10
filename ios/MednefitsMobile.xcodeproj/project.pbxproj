@@ -80,29 +80,19 @@
 		075A32432220F56A00D2D8A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = MednefitsMobile/Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		07CE93BE221BD9A900EF98C3 /* HelveticaNeue-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Roman.otf"; sourceTree = "<group>"; };
 		07CE93BF221BD9A900EF98C3 /* Helvetica.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica.otf; sourceTree = "<group>"; };
-		07CE93C0221BD9A900EF98C3 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
-		07CE93C1221BD9A900EF98C3 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		07CE93C2221BD9A900EF98C3 /* Roboto_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto_medium.ttf; sourceTree = "<group>"; };
-		07CE93C3221BD9A900EF98C3 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		07CE93C4221BD9A900EF98C3 /* HelveticaNeue-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Medium.otf"; sourceTree = "<group>"; };
-		07CE93C5221BD9A900EF98C3 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
-		07CE93C6221BD9A900EF98C3 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
-		07CE93C7221BD9A900EF98C3 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		07CE93C8221BD9A900EF98C3 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		07CE93C9221BD9A900EF98C3 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		07CE93CA221BD9A900EF98C3 /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
-		07CE93CB221BD9A900EF98C3 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		07CE93CC221BD9A900EF98C3 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
 		07CE93CD221BD9A900EF98C3 /* HelveticaNeue-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Bold.otf"; sourceTree = "<group>"; };
 		07CE93CE221BD9A900EF98C3 /* HelveticaNeueLT-UltraLigExtObl.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLT-UltraLigExtObl.otf"; sourceTree = "<group>"; };
-		07CE93CF221BD9A900EF98C3 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		07CE93D0221BD9A900EF98C3 /* HelveticaNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Regular.ttf"; sourceTree = "<group>"; };
 		07CE93D1221BD9A900EF98C3 /* HelveticaNeue-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Light.otf"; sourceTree = "<group>"; };
 		07CE93D2221BD9A900EF98C3 /* HelveticaNeue-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Thin.otf"; sourceTree = "<group>"; };
-		07CE93D3221BD9A900EF98C3 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		07CE93D4221BD9A900EF98C3 /* HelveticaNeue-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeue-Regular.otf"; sourceTree = "<group>"; };
 		07CE93D5221BD9A900EF98C3 /* HelveticaNeueLTStd-Lt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HelveticaNeueLTStd-Lt.otf"; sourceTree = "<group>"; };
-		07CE93D6221BD9A900EF98C3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		08200272013445B1A458A199 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = ../assets/fonts/Roboto_medium.ttf; sourceTree = "<group>"; };
 		0F5F0310E16441EE94793CB7 /* HelveticaNeueLT-UltraLigExtObl.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "HelveticaNeueLT-UltraLigExtObl.otf"; path = "../assets/fonts/HelveticaNeueLT-UltraLigExtObl.otf"; sourceTree = "<group>"; };
 		11C9AD2154673B6A5BA02FCD /* libPods-MednefitsMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MednefitsMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,29 +191,19 @@
 			children = (
 				07CE93BE221BD9A900EF98C3 /* HelveticaNeue-Roman.otf */,
 				07CE93BF221BD9A900EF98C3 /* Helvetica.otf */,
-				07CE93C0221BD9A900EF98C3 /* Octicons.ttf */,
-				07CE93C1221BD9A900EF98C3 /* Feather.ttf */,
-				07CE93C2221BD9A900EF98C3 /* Roboto_medium.ttf */,
-				07CE93C3221BD9A900EF98C3 /* Entypo.ttf */,
 				07CE93C4221BD9A900EF98C3 /* HelveticaNeue-Medium.otf */,
-				07CE93C5221BD9A900EF98C3 /* MaterialCommunityIcons.ttf */,
-				07CE93C6221BD9A900EF98C3 /* Foundation.ttf */,
-				07CE93C7221BD9A900EF98C3 /* Ionicons.ttf */,
-				07CE93C8221BD9A900EF98C3 /* rubicon-icon-font.ttf */,
-				07CE93C9221BD9A900EF98C3 /* FontAwesome.ttf */,
 				07CE93CA221BD9A900EF98C3 /* HelveticaNeue.ttf */,
-				07CE93CB221BD9A900EF98C3 /* Zocial.ttf */,
-				07CE93CC221BD9A900EF98C3 /* Roboto.ttf */,
 				07CE93CD221BD9A900EF98C3 /* HelveticaNeue-Bold.otf */,
 				07CE93CE221BD9A900EF98C3 /* HelveticaNeueLT-UltraLigExtObl.otf */,
-				07CE93CF221BD9A900EF98C3 /* EvilIcons.ttf */,
 				07CE93D0221BD9A900EF98C3 /* HelveticaNeue-Regular.ttf */,
 				07CE93D1221BD9A900EF98C3 /* HelveticaNeue-Light.otf */,
 				07CE93D2221BD9A900EF98C3 /* HelveticaNeue-Thin.otf */,
-				07CE93D3221BD9A900EF98C3 /* SimpleLineIcons.ttf */,
 				07CE93D4221BD9A900EF98C3 /* HelveticaNeue-Regular.otf */,
 				07CE93D5221BD9A900EF98C3 /* HelveticaNeueLTStd-Lt.otf */,
-				07CE93D6221BD9A900EF98C3 /* MaterialIcons.ttf */,
+				07CE93C9221BD9A900EF98C3 /* FontAwesome.ttf */,
+				07CE93CC221BD9A900EF98C3 /* Roboto.ttf */,
+				07CE93C2221BD9A900EF98C3 /* Roboto_medium.ttf */,
+				07CE93C8221BD9A900EF98C3 /* rubicon-icon-font.ttf */,
 			);
 			name = fonts;
 			path = ../assets/fonts;
@@ -838,7 +818,7 @@
 				CODE_SIGN_ENTITLEMENTS = MednefitsMobile/MednefitsMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = BB42S6H242;
 				HEADER_SEARCH_PATHS = (
@@ -874,7 +854,7 @@
 				CODE_SIGN_ENTITLEMENTS = MednefitsMobile/MednefitsMobile.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = BB42S6H242;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

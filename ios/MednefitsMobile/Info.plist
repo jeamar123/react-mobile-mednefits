@@ -93,12 +93,13 @@
 		<string>HelveticaNeue-Medium.otf</string>
 		<string>HelveticaNeueLT-UltraLigExtObl.otf</string>
 		<string>HelveticaNeueLTStd-Lt.otf</string>
-		<string>Roboto_medium.ttf</string>
-		<string>Roboto.ttf</string>
-		<string>rubicon-icon-font.ttf</string>
 		<string>HelveticaNeue-Regular.otf</string>
 		<string>HelveticaNeue-Thin.otf</string>
 		<string>HelveticaNeue.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
+		<string>FontAwesome.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
