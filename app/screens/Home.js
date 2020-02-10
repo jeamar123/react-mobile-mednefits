@@ -363,7 +363,7 @@ class Home extends Component {
       popAds: false,
       isMainLoaderShow: false,
       mainLoaderText: '',
-      kickout: true,
+      kickout: true,  
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -371,7 +371,7 @@ class Home extends Component {
     this.isLoadingSearch = this.isLoadingSearch.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.isVisibleAds = this.isVisibleAds.bind(this);
-    // this.toggleLoadingState = this.toggleLoadingState.bind(this);
+    this.toggleLoadingState = this.toggleLoadingState.bind(this);
   }
 
   toggleLoadingState(opt) {
@@ -451,6 +451,8 @@ class Home extends Component {
     //   });
     // // this.checkversion()
 
+    await this.getUserBalance();
+
     fetch("https://itunes.apple.com/lookup?bundleId=sg.medicloud.user")
       .then(res => res.json())
       .then(json => {
@@ -461,25 +463,20 @@ class Home extends Component {
         console.warn("appstore Datas: " + JSON.stringify(json, null, 4))
         this.inAppTrigger();
       });
+  }
 
+  async getUserBalance() {
     this.toggleLoadingState(true);
-    await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
+    await Core.GetBalance(async (error, result) => {
       data =
-        await typeof result == 'string' ? JSON.parse(result) : result;
-      if (data.status == true) {
-        this.setState({
-          kickout: false,
-        }, () => {
-          this.toggleLoadingState(false);
-        });
-      }
-      console.warn('data ' + data.check_in_status_removed);
-      // await this.setState({
-      //   kickout: result.data.check_in_status_removed,
-      // });
-
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Balance: data.balance,
+        currency: result.data.currency_symbol
+      }, () => {
+        this.toggleLoadingState(false);
+      });
     });
-
   }
 
   inAppTrigger() {
