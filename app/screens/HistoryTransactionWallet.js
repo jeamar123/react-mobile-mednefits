@@ -707,7 +707,7 @@ class HistoryTransaction extends Component {
                   fontWeight: '700'
                 }}
               >
-                In-Network
+                Panel
               </Text>
             </TouchableOpacity>
             <TouchableOpacity 
@@ -725,7 +725,7 @@ class HistoryTransaction extends Component {
                   fontWeight: '700'
                 }}
               >
-                Out-of-Network
+                Non-Panel
               </Text>
             </TouchableOpacity>
           </View>

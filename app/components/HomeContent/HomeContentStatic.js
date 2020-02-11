@@ -247,7 +247,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%', }}>
                       <Text style={(styles.titleRegister)}>Register {this.props.clinic_id} </Text>
                       {/* <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text> */}
+                    <Text style={styles.detail}>Panel</Text> */}
                     </View>
                   </View>
                 </View>
@@ -270,7 +270,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                       <Text style={styles.titleRegister}>Register {this.props.clinic_id} </Text>
                       {/* <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text> */}
+                    <Text style={styles.detail}>Panel</Text> */}
                     </View>
                   </View>
                 </View>
@@ -294,7 +294,7 @@ class HomeContent extends Component {
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                           <Text style={styles.titleRegister}>Register {this.props.clinic_id} </Text>
                           {/* <Text style={styles.title}>Scan & Pay</Text>
-                    <Text style={styles.detail}>In-Network</Text> */}
+                    <Text style={styles.detail}>Panel</Text> */}
                         </View>
                       </View>
                     </View>

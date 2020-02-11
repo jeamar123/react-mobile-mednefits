@@ -273,7 +273,7 @@ export default class ReceiptPreview extends Component {
         <Navbar
           leftNav="back"
           title="Upload Receipt"
-          subtitle="In-Network"
+          subtitle="Panel"
         />
         <Modal
           animationIn={"fadeIn"}

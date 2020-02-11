@@ -82,7 +82,7 @@ class ECardUser extends Component {
                 marginTop: responsiveHeight(0.5)
               }}
             >
-              In-Network
+              Panel
               <Text style={{
                 fontFamily: Config.FONT_FAMILY_BOLD,
                 color: '#2C3E50',

@@ -134,7 +134,7 @@ class HomeContent extends Component {
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
                     <Text style={styles.title}>Register</Text>
-                    <Text style={styles.detail}>In-Network</Text>
+                    <Text style={styles.detail}>Panel</Text>
                   </View>
                 </View>
               </View>

@@ -221,7 +221,7 @@ class Balance extends Component {
                       fontFamily: 'HelveticaNeue-Roman',
                     }}
                   >
-                    In-Network Account
+                    Panel Account
                   </Text>
                   <Text
                     style={{

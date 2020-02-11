@@ -9,9 +9,9 @@ const SettingWallet = () => (
     <View style={styles.sectionTitle}>
       <Text style={styles.title}>
         Set your payment passcode to allow payment using Benefit Dollars for
-        In-Network transactions.
+        Panel transactions.
       </Text>
-      <Text style={styles.detail}>IN-NETWORK PAYMENT</Text>
+      <Text style={styles.detail}>PANEL PAYMENT</Text>
     </View>
     <GiftedForm
       style={{
