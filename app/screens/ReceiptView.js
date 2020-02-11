@@ -194,7 +194,7 @@ export default class ReceiptView extends Component {
         <Navbar
           leftNav="back"
           title="Retrieve Receipt"
-          subtitle="In-Network"
+          subtitle="Panel"
         />
         <Modal
           animationIn={"fadeIn"}

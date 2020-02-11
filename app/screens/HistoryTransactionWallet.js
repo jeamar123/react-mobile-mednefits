@@ -436,7 +436,7 @@ class HistoryTransaction extends Component {
           tabContainerStyle={{ elevation: 0, zIndex: 1 }}
         >
           <Tab
-            heading="In-Network"
+            heading="Panel"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}
@@ -463,7 +463,7 @@ class HistoryTransaction extends Component {
             </Content>
           </Tab>
           <Tab
-            heading="Out-of-Network"
+            heading="Non-Panel"
             tabStyle={{ backgroundColor: '#0392cf' }}
             activeTabStyle={{ color: '#3497d7', backgroundColor: 'white' }}
             activeTextStyle={{ color: '#3497d7', fontSize: RF(1.9) }}

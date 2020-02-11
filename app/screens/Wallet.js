@@ -744,7 +744,7 @@ class Wallet extends Component {
                     lineHeight: 20
                   }}
                 >
-                  In-Network Spent
+                  Panel Spent
                   </Text>
               </View>
             </View>
@@ -804,7 +804,7 @@ class Wallet extends Component {
                     lineHeight: 20
                   }}
                 >
-                  Out-of-Network Spent
+                  Non-Panel Spent
                 </Text>
               </View>
             </View>
@@ -867,7 +867,7 @@ class Wallet extends Component {
                   <Text
                     style={(this.state.type == 'in_network_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
-                    In-Network
+                    Panel
                     </Text>
                 </TouchableOpacity>
                 <View
@@ -888,7 +888,7 @@ class Wallet extends Component {
                   <Text
                     style={(this.state.type == 'e_claim_transactions') ? styles.textRecentActive : styles.textRecentNoactive}
                   >
-                    Out-of-Network
+                    Non-Panel
                     </Text>
                 </TouchableOpacity>
               </View>

@@ -862,7 +862,7 @@ class UploadReceipt extends Component {
           <Navbar
             leftNav="back"
             title="Upload Receipt"
-            subtitle="In-Network"
+            subtitle="Panel"
             leftNavCameraCallback={this.leftNavCameraCallback}
           />
         </View>

@@ -22,7 +22,7 @@ class InNetworkBenefit extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="back-home"
-          title="In-Network"
+          title="Panel"
           subtitle="Benefits Dollars"
         />
         <InNetwork />
