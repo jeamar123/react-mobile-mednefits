@@ -90,6 +90,7 @@ class Barcode extends Component {
             consultation_status: result.data.consultation_status,
             consultation_fees: result.data.consultation_fees,
             dob: result.data.dob,
+            default_service: result.data.default_service
           })
           this.setState({
             isLoading: false,

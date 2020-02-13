@@ -32,6 +32,7 @@ class checkinUser extends Component {
           consultation_fee_symbol={this.props.consultation_fee_symbol}
           consultation_status={this.props.consultation_status}
           consultation_fees={this.props.consultation_fees}
+          default_service={this.props.default_service}
         />
         <View
           style={{
