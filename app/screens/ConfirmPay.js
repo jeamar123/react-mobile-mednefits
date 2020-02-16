@@ -153,7 +153,7 @@ class ConfirmPay extends Component {
 
     params = {
       input_amount: Number(this.props.amount.replace(',', '')),
-      services: !this.props.services ? this.props.default_service : this.props.services,
+      services: !this.props.services.length ? this.props.default_service : this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow

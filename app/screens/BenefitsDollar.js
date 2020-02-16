@@ -26,7 +26,8 @@ class BenefitsDollar extends Component {
       placeholder: null,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      default_service: [23]
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
     console.log(this.props);
@@ -70,7 +71,7 @@ class BenefitsDollar extends Component {
 
     params = {
       amount: this.state.amount,
-      services: !this.props.services ? this.props.default_service : this.props.services,
+      services: !this.props.services.length ? this.state.default_service : this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
@@ -100,7 +101,7 @@ class BenefitsDollar extends Component {
   nextButton() {
     if (this.props.plan_type == 'enterprise_plan') {
       Actions.ConfirmPay({
-        services: !this.props.services ? this.props.default_service : this.props.services,
+        services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -117,7 +118,7 @@ class BenefitsDollar extends Component {
       })
     } else {
       Actions.PayScan({
-        services: !this.props.services ? this.props.default_service : this.props.services,
+        services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -148,6 +149,8 @@ class BenefitsDollar extends Component {
     console.warn("PropsFromHome: " + JSON.stringify(this.props))
     console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
     console.warn("servicesProps: " + this.props.services)
+    // console.warn("defaultServices: " + this.props.default_service.map(ListData => (ListData.procedureid)))
+
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
