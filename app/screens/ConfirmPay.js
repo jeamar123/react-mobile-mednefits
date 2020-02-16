@@ -67,60 +67,60 @@ class ConfirmPay extends Component {
       })
     );
     const consultationAmount = this.state.feeConsultation;
-    const totalAmount = Number( this.state.inputAmount.replace(',','') ) + Number( consultationAmount );
-    const balance = this.state.Balance.replace(',','');
+    const totalAmount = Number(this.state.inputAmount.replace(',', '')) + Number(consultationAmount);
+    const balance = this.state.Balance.replace(',', '');
     const cap = this.state.amountCap;
     var payCredit = 0;
     var payCash = 0;
 
-    if( this.props.plan_type == 'enterprise_plan' ){
+    if (this.props.plan_type == 'enterprise_plan') {
       if (Number(cap) > 0) {
         payCredit = Number(cap);
         payCash = Number(totalAmount) - Number(cap);
-      }else{
+      } else {
         payCredit = Number(totalAmount);
         payCash = 0;
       }
 
-      console.log( payCredit );
-      console.log( payCash );
-    }else{
-      if( Number( cap ) > 0 ){
-        if( Number( cap ) > Number( balance ) ){
-          if( Number( totalAmount ) > Number( balance ) ){
-            payCredit = Number( balance );
-            payCash = Number( totalAmount ) - Number( balance );
-          }else{
-            payCredit = Number( totalAmount );
+      console.log(payCredit);
+      console.log(payCash);
+    } else {
+      if (Number(cap) > 0) {
+        if (Number(cap) > Number(balance)) {
+          if (Number(totalAmount) > Number(balance)) {
+            payCredit = Number(balance);
+            payCash = Number(totalAmount) - Number(balance);
+          } else {
+            payCredit = Number(totalAmount);
             payCash = 0;
           }
-        }else if( Number( cap ) == Number( totalAmount ) ){
-          payCredit = Number( totalAmount );
+        } else if (Number(cap) == Number(totalAmount)) {
+          payCredit = Number(totalAmount);
           payCash = 0;
-        }else{
-          if( Number( totalAmount ) > Number( cap ) ){
-            payCredit = Number( cap );
-            payCash = Number( totalAmount ) - Number( cap );
-          }else if( Number( cap ) > Number( totalAmount ) ){
-            payCredit = Number( totalAmount );
+        } else {
+          if (Number(totalAmount) > Number(cap)) {
+            payCredit = Number(cap);
+            payCash = Number(totalAmount) - Number(cap);
+          } else if (Number(cap) > Number(totalAmount)) {
+            payCredit = Number(totalAmount);
             payCash = 0;
           }
         }
-      }else{
-        if( Number( totalAmount ) > Number( balance ) ){
-          payCredit = Number( balance );
-          payCash = Number( totalAmount ) - Number( balance );
-        }else{
-          payCredit = Number( totalAmount );
+      } else {
+        if (Number(totalAmount) > Number(balance)) {
+          payCredit = Number(balance);
+          payCash = Number(totalAmount) - Number(balance);
+        } else {
+          payCredit = Number(totalAmount);
           payCash = 0;
         }
       }
     }
 
-    this.setState({ 
-      amountTotal: ( Number(totalAmount) ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}), 
-      byCash: ( payCash ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}),
-      byCredit: ( payCredit ).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2}),
+    this.setState({
+      amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
+      byCredit: (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
     });
 
     var that = this;
@@ -146,17 +146,17 @@ class ConfirmPay extends Component {
     this.setState({ isLoading: true });
 
     params = {
-      input_amount: Number( this.props.amount.replace(',','') ),
-      services: this.props.services,
+      input_amount: Number(this.props.amount.replace(',', '')),
+      services: !this.props.services.length ? this.props.default_service : this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
     };
-    console.log( params );
+    console.log(params);
 
     Core.CreatePayment(params, async (err, result) => {
       // console.warn(result);
-      console.log( result );
+      console.log(result);
       if (result.status) {
         Core.getNotify('', result.message);
         user = await Core.GetDataLocalReturnNew('user_id');
@@ -386,7 +386,7 @@ class ConfirmPay extends Component {
                 {this.props.capCurrency ? this.props.capCurrency : ' '}
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontSize: RF(5.8), color: '#2C3E50' }}>
-                { this.props.amount }
+                {this.props.amount}
               </Text>
             </View>
             <View

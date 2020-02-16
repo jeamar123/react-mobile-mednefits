@@ -77,7 +77,7 @@ class checkinUser extends Component {
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     // console.warn('storageData ' + JSON.stringify(data, 4, null))
-    console.log( data );
+    console.log(data);
     this.setState({
       services: data.clinic_procedures,
       clinicid: data.clinic_id,
@@ -324,7 +324,7 @@ class checkinUser extends Component {
           bottom: 0,
         }}>
           <Image
-            source={require('../../assets/apps/LogoMednefits.png')}
+            source={require('../../assets/apps/New_logo_White.png')}
             style={{ height: 25, resizeMode: 'contain', width: 25 }}
           />
         </View>

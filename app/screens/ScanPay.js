@@ -60,6 +60,7 @@ class ScanPay extends Component {
     params = {
       input_amount: this.props.amount,
       services: this.props.services,
+      services: !this.props.services.length ? this.props.default_service : this.props.services,
       clinic_id: this.props.clinicid,
       check_in_id: this.props.checkId,
       check_out_time: this.state.timeNow
@@ -92,7 +93,7 @@ class ScanPay extends Component {
         <Navbar leftNav="back" title="Payment Type" />
         <Content padder>
           <TouchableOpacity onPress={() => Actions.ConfirmPay({
-            services: this.props.services,
+            services: !this.props.services.length ? this.props.default_service : this.props.services,
             clinicid: this.props.clinicid,
             amount: this.props.amount,
             capCurrency: this.props.capCurrency,
@@ -105,6 +106,7 @@ class ScanPay extends Component {
             clinic_image: this.props.clinic_image,
             clinic_name: this.props.clinic_name,
             plan_type: this.props.plan_type,
+            default_service: this.props.default_service
           })}>
             <Card>
               <CardItem>

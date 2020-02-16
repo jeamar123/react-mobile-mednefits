@@ -26,10 +26,11 @@ class BenefitsDollar extends Component {
       placeholder: null,
       failed: false,
       title: null,
-      message: null
+      message: null,
+      default_service: [23]
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
-    console.log( this.props );
+    console.log(this.props);
   }
 
   isVisibleUpdate() {
@@ -38,13 +39,27 @@ class BenefitsDollar extends Component {
 
   async componentDidMount() {
     await this.getUserBalance();
+
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+
+    that.setState({
+      //Setting the value of the date time
+      timeNow:
+        year + '-' + month + '-' + date + ' ' + hours + ':' + min + ':' + sec,
+    });
   }
 
   async getUserBalance() {
     await Core.GetBalance(async (error, result) => {
       data =
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.log( data );
+      console.log(data);
       await this.setState({
         // Balance: data.balance,
         currency: result.data.currency_symbol
@@ -57,8 +72,10 @@ class BenefitsDollar extends Component {
 
     params = {
       amount: this.state.amount,
-      services: this.props.services,
+      services: !this.props.services.length ? this.state.default_service : this.props.services,
       clinic_id: this.props.clinicid,
+      check_in_id: this.props.checkId,
+      check_out_time: this.state.timeNow
     };
 
     Core.SendPayment(params, (err, result) => {
@@ -86,7 +103,7 @@ class BenefitsDollar extends Component {
       Common.getAlert("Mednefits", "Choose at least one service to proceed")
     } else {
       Actions.PayScan({
-        services: this.props.services,
+        services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -101,10 +118,10 @@ class BenefitsDollar extends Component {
     }
   }
 
-  nextButton(){
-    if( this.props.plan_type == 'enterprise_plan' ){
+  nextButton() {
+    if (this.props.plan_type == 'enterprise_plan') {
       Actions.ConfirmPay({
-        services: this.props.services,
+        services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -117,10 +134,11 @@ class BenefitsDollar extends Component {
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
         plan_type: this.props.plan_type,
+        default_service: this.props.default_service
       })
-    }else{
+    } else {
       Actions.PayScan({
-        services: this.props.services,
+        services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -133,6 +151,7 @@ class BenefitsDollar extends Component {
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
         plan_type: this.props.plan_type,
+        default_service: this.props.default_service
       })
     }
   }
@@ -168,7 +187,7 @@ class BenefitsDollar extends Component {
                 height: responsiveHeight(11)
               }}
             >
-            
+
               {!this.props.clinic_name ? (
                 <Spinner size="small" />
               ) : (
@@ -279,7 +298,7 @@ class BenefitsDollar extends Component {
               paddingTop: responsiveWidth(3),
               paddingBottom: responsiveWidth(3)
             }}>
-              { this.props.plan_type == 'enterprise_plan' ?
+              {this.props.plan_type == 'enterprise_plan' ?
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
                   Balance: {'\n'}N.A.
                 </Text>
@@ -306,7 +325,7 @@ class BenefitsDollar extends Component {
           </View>
 
 
-            {/**/}
+          {/**/}
 
           <View style={{ marginBottom: '5%' }} />
           <ButtonPay onPress={() =>
@@ -314,8 +333,8 @@ class BenefitsDollar extends Component {
               Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
               :
               this.nextButton()
-            }
-            >
+          }
+          >
             Next
           </ButtonPay>
         </Content>
