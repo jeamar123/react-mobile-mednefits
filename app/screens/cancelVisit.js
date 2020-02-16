@@ -323,7 +323,7 @@ class checkinUser extends Component {
           bottom: 0,
         }}>
           <Image
-            source={require('../../assets/apps/LogoMednefits.png')}
+            source={require('../../assets/apps/New_logo_White.png')}
             style={{ height: 25, resizeMode: 'contain', width: 25 }}
           />
         </View>

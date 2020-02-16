@@ -39,8 +39,8 @@ function fetching(params, callback) {
         })
           .then(response => response.json())
           .then(res => {
-            console.warn('done fetching execution');
-            console.warn(res);
+            // console.warn('done fetching execution');
+            // console.warn(res);
             if (!res.status) {
               // getAlert('', res.message);
 
@@ -55,7 +55,7 @@ function fetching(params, callback) {
             }
           })
           .catch(error => {
-            console.warn('error fetching' + error.message);
+            // console.warn('error fetching' + error.message);
             error = (typeof error.message !== 'undefined') ? error : error.message
             if (error == 'Network request failed') {
               error = 'Please check your connection'
@@ -148,7 +148,7 @@ export async function UserDetail(callback) {
         }
       });
     } catch (e) {
-      console.warn('error user detail' + e.message);
+      // console.warn('error user detail' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -171,7 +171,7 @@ export const GetUpdateNotifStatus = async (callback) => {
       });
     });
   } catch (e) {
-    console.warn('error ' + e.message);
+    // console.warn('error ' + e.message);
     getNotify('', 'Failed, try again');
   }
 }
@@ -195,7 +195,7 @@ export async function GetBalance(callback) {
         });
       });
     } catch (e) {
-      console.warn('error get balance' + e.message);
+      // console.warn('error get balance' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -218,7 +218,7 @@ export const GetCoverageDates = async (callback) => {
       });
     });
   } catch (e) {
-    console.warn('error get dates' + e.message);
+    // console.warn('error get dates' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -241,7 +241,7 @@ export async function GetBalanceMedical(filter, callback) {
         });
       });
     } catch (e) {
-      console.warn('error get balance' + e.message);
+      // console.warn('error get balance' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -265,7 +265,7 @@ export async function GetBalanceWellness(filter, callback) {
         });
       });
     } catch (e) {
-      console.warn('error get balance' + e.message);
+      // console.warn('error get balance' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -274,7 +274,7 @@ export async function GetBalanceWellness(filter, callback) {
 export async function GetHistoryTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
-      console.log( Config.USER_NETWORK_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page );
+      console.log(Config.USER_NETWORK_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page);
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
           url: Config.USER_NETWORK_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page,
@@ -290,7 +290,7 @@ export async function GetHistoryTransaction(filter, callback) {
         });
       });
     } catch (e) {
-      console.warn('error get history transaction' + e.message);
+      // console.warn('error get history transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 10);
@@ -299,7 +299,7 @@ export async function GetHistoryTransaction(filter, callback) {
 export async function GetEClaimTransaction(filter, callback) {
   await setTimeout(async function () {
     try {
-      console.log( Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page );
+      console.log(Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page);
       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
         params = {
           url: Config.USER_ECLAIM_TRANSACTION + "?filter=" + filter.term + "&paginate=true&page=" + filter.page + "&per_page=" + filter.per_page,
@@ -311,12 +311,12 @@ export async function GetEClaimTransaction(filter, callback) {
           },
         };
         await fetching(params, async result => {
-          console.warn('GetEClaimTransaction')
+          // console.warn('GetEClaimTransaction')
           await callback('', result);
         });
       });
     } catch (e) {
-      console.warn('error get Eclaim Transaction' + e.message);
+      // console.warn('error get Eclaim Transaction' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -340,7 +340,7 @@ export function GetUserNetwork(tid, callback) {
         });
       });
     } catch (e) {
-      console.warn('error get GetUserNetwork' + e.message);
+      // console.warn('error get GetUserNetwork' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -360,7 +360,7 @@ export function GetSpesificEclaim(tid, callback) {
       });
     });
   } catch (e) {
-    console.warn('error get GetSpesificEclaim' + e.message);
+    // console.warn('error get GetSpesificEclaim' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -382,7 +382,7 @@ export function GetECardDetail(callback) {
       });
     });
   } catch (e) {
-    console.warn('error get Ecard Detail' + e.message);
+    // console.warn('error get Ecard Detail' + e.message);
   }
 }
 
@@ -398,7 +398,7 @@ export function GetBarcodeData(url, callback) {
       };
 
       // fetching(params, result => {
-      //   console.warn(result);
+      // console.warn(result);
       //   callback(result);
       // });
 
@@ -421,11 +421,11 @@ export function GetBarcodeData(url, callback) {
             if (result) {
               callback('', true);
               getNotify('', 'Success');
-              console.warn('anjing');
+              // console.warn('anjing');
               // Actions.Home({ type: 'reset' });
             } else {
               getNotify('', 'Failed');
-              console.warn('anjing');
+              // console.warn('anjing');
             }
           });
         }
@@ -434,7 +434,7 @@ export function GetBarcodeData(url, callback) {
 
     });
   } catch (e) {
-    console.warn(e.message);
+    // console.warn(e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -474,7 +474,7 @@ export function GetFavouritesClinic(callback) {
       });
     });
   } catch (e) {
-    console.warn('error get favourites clinic' + e.message);
+    // console.warn('error get favourites clinic' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -496,7 +496,7 @@ export function GetClinicDetails(id, callback) {
       });
     });
   } catch (e) {
-    console.warn('error GetClinicDetails' + e.message);
+    // console.warn('error GetClinicDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -518,7 +518,7 @@ export function GetProcedureDetails(id, callback) {
       });
     });
   } catch (e) {
-    console.warn('error GetProcedureDetails' + e.message);
+    // console.warn('error GetProcedureDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -541,7 +541,7 @@ export async function GetClinicType(callback) {
         });
       });
     } catch (e) {
-      console.warn('error GetProcedureDetails' + e.message);
+      // console.warn('error GetProcedureDetails' + e.message);
       getNotify('', 'Failed get data, try again');
     }
   }, 100);
@@ -564,7 +564,7 @@ export function GetHealthTypeList(type, callback) {
       });
     });
   } catch (e) {
-    console.warn('error GetProcedureDetails' + e.message);
+    // console.warn('error GetProcedureDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -586,7 +586,7 @@ export function GetAllMember(callback) {
       });
     });
   } catch (e) {
-    console.warn('error GetProcedureDetails' + e.message);
+    // console.warn('error GetProcedureDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -615,9 +615,9 @@ export function SendEClaim(params, callback) {
       formdata.append("time", params.time);
       formdata.append("currency_type", params.currency_type);
       formdata.append("currency_exchange_rate", params.currency_exchange_rate)
-      console.warn('params eclaim send' + JSON.stringify(params, null, 4));
-      console.warn('formdata ' + JSON.stringify(formdata, null, 4))
-      console.warn(params.currency_type);
+      // console.warn('params eclaim send' + JSON.stringify(params, null, 4));
+      // console.warn('formdata ' + JSON.stringify(formdata, null, 4))
+      // console.warn(params.currency_type);
 
       params = {
         url: Config.USER_CREATE_E_CLAIM,
@@ -695,7 +695,7 @@ export function GetDetailClinic(id, callback) {
       });
     });
   } catch (e) {
-    console.warn('error GetClinicDetails' + e.message);
+    // console.warn('error GetClinicDetails' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
@@ -772,11 +772,11 @@ export function AddFavouriteClinic(param, callback) {
 
 async function enableLocationDevice(callback) {
   try {
-    console.warn('switch location');
+    // console.warn('switch location');
     await SystemSetting.isLocationEnabled().then(async (enable) => {
       if (!enable) {
         await SystemSetting.switchLocation(async () => {
-          console.warn('switch location successfully');
+          // console.warn('switch location successfully');
           // await GetLocation();
           return callback('', true);
         })
@@ -785,16 +785,16 @@ async function enableLocationDevice(callback) {
       }
     })
   } catch (e) {
-    console.warn(e.message + "error enableLocationDevice");
+    // console.warn(e.message + "error enableLocationDevice");
     callback(true);
   }
 }
 
 async function requestLocationPermission() {
-  console.warn('request permission')
+  // console.warn('request permission')
   const chckLocationPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
   if (chckLocationPermission === PermissionsAndroid.RESULTS.GRANTED) {
-    console.warn('already granted');
+    // console.warn('already granted');
     // await enableLocationDevice();
     return true;
   } else {
@@ -806,18 +806,18 @@ async function requestLocationPermission() {
         }
       )
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.warn('granted');
-        console.warn('You can use location');
+        // console.warn('granted');
+        // console.warn('You can use location');
         // await enableLocationDevice();
         // getNotify('', 'Location Permission Granted.');
         return true;
       } else {
-        console.warn('location denied');
+        // console.warn('location denied');
         getNotify('', 'Location Permission Denied.');
         return false;
       }
     } catch (err) {
-      console.warn(err);
+      // console.warn(err);
       getNotify('', err);
       return false;
     }
@@ -825,9 +825,9 @@ async function requestLocationPermission() {
 }
 
 export async function GetLocationPermission(callback) {
-  console.warn('get location');
+  // console.warn('get location');
   let result = await requestLocationPermission();
-  console.warn('result permission', result);
+  // console.warn('result permission', result);
   if (result) {
     callback('', result);
   } else {
@@ -837,7 +837,7 @@ export async function GetLocationPermission(callback) {
   // console.warn('permissionLocation', permissionLocation);
   // await Geolocation.getCurrentPosition(
   //   async (position) => {
-  //     console.warn('position', position);
+  // console.warn('position', position);
   //     latitude = await {
   //       key: Config.LATITUDE,
   //       value: JSON.stringify(position.coords.latitude)
@@ -850,14 +850,14 @@ export async function GetLocationPermission(callback) {
 
   //     await Core.SetDataLocal(latitude, (err, result) => {
   //       if (result) {
-  //         // console.warn("Set a new latitude");
+  // console.warn("Set a new latitude");
   //       }
   //     })
 
   //     await Core.SetDataLocal(longitude, (err, result) => {
   //       // Common.getNotify("","")
   //       if (result) {
-  //         // console.warn("Set a new longitude");
+  // console.warn("Set a new longitude");
   //       }
   //     })
 
@@ -912,13 +912,13 @@ export async function checkLocationFirst(clinic_type_id, callback) {
 export async function GetClinicMapList(clinic_type_id, callback) {
   // final code flow
   await enableLocationDevice(async function (error, result) {
-    console.warn(error);
-    console.warn(result);
+    // console.warn(error);
+    // console.warn(result);
     if (result) {
-      console.warn('get location clinics')
+      // console.warn('get location clinics')
       Geolocation.getCurrentPosition(
         async (position) => {
-          console.warn('position', position);
+          // console.warn('position', position);
           latitude = await {
             key: Config.LATITUDE,
             value: JSON.stringify(position.coords.latitude)
@@ -931,21 +931,21 @@ export async function GetClinicMapList(clinic_type_id, callback) {
 
           await Core.SetDataLocal(latitude, (err, result) => {
             if (result) {
-              console.warn("Set a new latitude");
+              // console.warn("Set a new latitude");
             }
           })
 
           await Core.SetDataLocal(longitude, (err, result) => {
             // Common.getNotify("","")
             if (result) {
-              console.warn("Set a new longitude");
+              // console.warn("Set a new longitude");
             }
           })
 
           // getNotify('', 'Location request successful. (' + position.coords.latitude + ', ' + position.coords.longitude + ')');
           // query location
           await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
-            console.warn('querying location clinics')
+            // console.warn('querying location clinics')
             params = {
               url: Config.CLINIC_PAGE_NEARBY + "?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&type=" + clinic_type_id + "&page=1",
               method: 'GET',
@@ -957,15 +957,15 @@ export async function GetClinicMapList(clinic_type_id, callback) {
             };
             await fetching(params, async result => {
               if (result) {
-                console.warn('Success! Wait a second...');
-                console.warn(result);
+                // console.warn('Success! Wait a second...');
+                // console.warn(result);
                 await callback('', result);
 
                 dataClinicNearby = result.data;
 
                 await Core.SetDataLocal(dataClinicNearby, async (err, result) => {
                   if (result) {
-                    console.warn("Set a pin Point Data Nearby");
+                    // console.warn("Set a pin Point Data Nearby");
                   }
                 });
               }
@@ -974,7 +974,7 @@ export async function GetClinicMapList(clinic_type_id, callback) {
           return;
         },
         function (error) {
-          console.warn(error);
+          // console.warn(error);
           callback(error, '');
         },
         { enableHighAccuracy: true, timeout: 3000 },
@@ -991,7 +991,7 @@ export async function GetClinicMap(clinic_type_id, callback) {
   // dataClinicNearbyMap = await Core.GetAllClinic(dataClinicNearbyMap)
 
   if (!latitude || !longitude) {
-    console.warn('Waiting to get device location');
+    // console.warn('Waiting to get device location');
     getNotify('', 'Waiting to get device location');
     return false;
   } else {
@@ -1018,7 +1018,7 @@ export async function GetClinicMap(clinic_type_id, callback) {
 
               await Core.SetDataLocal(dataClinicNearbyMap, async (err, result) => {
                 if (result) {
-                  console.warn("Set a pin Point Data NearbyMap");
+                  // console.warn("Set a pin Point Data NearbyMap");
                 }
               });
             }
@@ -1057,7 +1057,7 @@ export async function paginateClinicResults(clinic_type_id, page, callback) {
   longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
 
   await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, token) => {
-    console.warn('querying location clinics paginate')
+    // console.warn('querying location clinics paginate')
     params = {
       url: Config.CLINIC_PAGE_NEARBY + "?lat=" + latitude + "&lng=" + longitude + "&type=" + clinic_type_id + "&page=" + page,
       method: 'GET',
@@ -1068,7 +1068,7 @@ export async function paginateClinicResults(clinic_type_id, page, callback) {
       },
     };
     await fetching(params, async result => {
-      console.warn(result);
+      // console.warn(result);
       await callback('', result);
     });
   });
@@ -1217,10 +1217,10 @@ export const ReceiptUpload = async (params, callback) => {
         bodyType: 'multipart'
       };
 
-      console.warn(params);
+      // console.warn(params);
 
       fetching(params, result => {
-        console.warn(result)
+        // console.warn(result)
         callback('', result);
       });
 
@@ -1232,7 +1232,7 @@ export const ReceiptUpload = async (params, callback) => {
 
 export const CancelVisiByClinic = async (check_in_id, callback) => {
   try {
-    console.warn('triggered CancelVisiByClinic')
+    // console.warn('triggered CancelVisiByClinic')
     await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       params = {
         url: Config.CANCEL_VISIT_BYCLINIC + "?check_in_id=" + check_in_id,
@@ -1244,18 +1244,18 @@ export const CancelVisiByClinic = async (check_in_id, callback) => {
         },
       };
       await fetching(params, async result => {
-        console.warn('done CancelVisiByClinic');
+        // console.warn('done CancelVisiByClinic');
         await callback('', result);
       });
     });
   } catch (e) {
-    console.warn('error CancelVisiByClinic' + e.message);
+    // console.warn('error CancelVisiByClinic' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }
 
 // export function CancelVisiByClinic(check_in_id, callback) {
-//   console.warn('triggered CancelVisiByClinic')
+// console.warn('triggered CancelVisiByClinic')
 //   Core.GetDataLocal(Config.ACCESS_TOKEN, (err, result) => {
 //     params = {
 //       url: Config.CANCEL_VISIT_BYCLINIC + "?check_in_id=" + check_in_id,
@@ -1267,7 +1267,7 @@ export const CancelVisiByClinic = async (check_in_id, callback) => {
 //     };
 
 //     fetching(params, result => {
-//       console.warn('done CancelVisiByClinic');
+// console.warn('done CancelVisiByClinic');
 //       callback('', result)
 //     })
 //   });

@@ -74,7 +74,7 @@ class checkinUser extends Component {
             paddingTop: 10,
             paddingBottom: 40
           }}>
-            Checked in {this.props.checkTime.replace('am','AM').replace('pm','PM')}
+            Checked in {this.props.checkTime.replace('am', 'AM').replace('pm', 'PM')}
           </Text>
 
           <View style={{ backgroundColor: '#fff', width: '90%' }}>
@@ -140,7 +140,7 @@ class checkinUser extends Component {
           bottom: 0,
         }}>
           <Image
-            source={require('../../assets/apps/LogoMednefits.png')}
+            source={require('../../assets/apps/New_logo_White.png')}
             style={{ height: 25, resizeMode: 'contain', width: 25 }}
           />
         </View>

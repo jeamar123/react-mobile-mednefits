@@ -266,8 +266,8 @@ class ClinicList extends Component {
 
   async getClinicMap(clinic_type_id) {
     Core.GetLocationPermission((error, result) => {
-      console.warn(error)
-      console.warn(result)
+      // console.warn(error)
+      // console.warn(result)
       // if(result) {
       Actions.NearbyClinic({ ClinicTypeID: this.props.id, NameCategory: this.props.name })
       // }
@@ -282,7 +282,7 @@ class ClinicList extends Component {
 
   cekTypeLink() {
     if (this.props.typeLink === "dbs") {
-      console.warn('true')
+      // console.warn('true')
       // this.setState({ isLoading: true })
       // Linking.openURL(this.props.urlLink)
       this.props.isLoadingHome("true")
@@ -519,7 +519,7 @@ class Home extends Component {
     longitude = await Core.GetDataLocalReturnNew(Config.LONGITUDE)
     dataClinicNearby = await Code.GetAllClinic(dataClinicNearby)
 
-    console.warn(latitude);
+    // console.warn(latitude);
     // console.warn(dataClinicNearby);
     // console.warn(longitude);
     this.setState({
@@ -538,17 +538,17 @@ class Home extends Component {
     });
     //Get Pop Up
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
-      console.warn('UP TO DATE')
+      // console.warn('UP TO DATE')
     } else if (this.state.thisVersion.substring(4, 10) < this.state.appstoreVersion.substring(4, 10)) {
       Actions.updateApps({ type: 'reset' })
-      console.warn('Updating...')
+      // console.warn('Updating...')
     } else {
       console.warn('Checking...')
     }
 
     // Fetch Details and check autologout trigger
     Core.UserDetail(async (err, result) => {
-      console.log(result);
+      // console.log(result);
       if (result.data.profile.to_update_auto_logout == true) {
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
@@ -581,7 +581,7 @@ class Home extends Component {
   // }
 
   isLoadingHandler(value) {
-    console.warn("isloadinghome " + value)
+    // console.warn("isloadinghome " + value)
     if (value === "true") {
       this.setState({ isLoading: true })
     }
@@ -609,7 +609,7 @@ class Home extends Component {
   }
 
   isLoadingSearch(state) {
-    console.warn("state " + state);
+    // console.warn("state " + state);
     switch (state) {
       case 'true':
         this.setState({
@@ -672,10 +672,10 @@ class Home extends Component {
   }
 
   render() {
-    console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
-    console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
-    console.warn("props: " + JSON.stringify(this.props, null, 4))
-    console.warn(this.props.isloadingHome + " isLoading")
+    // console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    // console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
+    console.warn("CheckAllProps: " + JSON.stringify(this.props, null, 4))
+    // console.warn(this.props.isloadingHome + " isLoading")
     return (
       <Drawer
         type="displace"

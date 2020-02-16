@@ -29,7 +29,7 @@ class BenefitsDollar extends Component {
       message: null
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
-    console.log( this.props );
+    console.log(this.props);
   }
 
   isVisibleUpdate() {
@@ -38,6 +38,20 @@ class BenefitsDollar extends Component {
 
   async componentDidMount() {
     await this.getUserBalance();
+
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+
+    that.setState({
+      //Setting the value of the date time
+      timeNow:
+        year + '-' + month + '-' + date + ' ' + hours + ':' + min + ':' + sec,
+    });
   }
 
   async getUserBalance() {
@@ -56,8 +70,10 @@ class BenefitsDollar extends Component {
 
     params = {
       amount: this.state.amount,
-      services: this.props.services,
+      services: !this.props.services ? this.props.default_service : this.props.services,
       clinic_id: this.props.clinicid,
+      check_in_id: this.props.checkId,
+      check_out_time: this.state.timeNow
     };
 
     Core.SendPayment(params, (err, result) => {
@@ -69,6 +85,7 @@ class BenefitsDollar extends Component {
       } else if (!result.status) {
         // Core.getNotify('', result.message);
         this.setState({ title: result.message, message: result.sub_mesage, failed: true })
+
       } else {
         // Core.getNotify('', 'Failed to send payment, please try again');
         this.setState({ title: 'Payment Error', message: 'Failed to send payment, please try again', failed: true })
@@ -80,10 +97,10 @@ class BenefitsDollar extends Component {
     });
   }
 
-  nextButton(){
-    if( this.props.plan_type == 'enterprise_plan' ){
+  nextButton() {
+    if (this.props.plan_type == 'enterprise_plan') {
       Actions.ConfirmPay({
-        services: this.props.services,
+        services: !this.props.services ? this.props.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -96,10 +113,11 @@ class BenefitsDollar extends Component {
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
         plan_type: this.props.plan_type,
+        default_service: this.props.default_service
       })
-    }else{
+    } else {
       Actions.PayScan({
-        services: this.props.services,
+        services: !this.props.services ? this.props.default_service : this.props.services,
         clinicid: this.props.clinicid,
         amount: this.state.amount,
         capCurrency: this.props.capCurrency,
@@ -112,22 +130,24 @@ class BenefitsDollar extends Component {
         clinic_image: this.props.clinic_image,
         clinic_name: this.props.clinic_name,
         plan_type: this.props.plan_type,
+        default_service: this.props.default_service
       })
     }
   }
 
-  formatInputValue( number ){
-    console.log( number );
-    if( number == '' || number == 0 ){
+  formatInputValue(number) {
+    console.log(number);
+    if (number == '' || number == 0) {
       this.setState({ amount: 0 });
-    }else{
+    } else {
       this.setState({ amount: number });
     }
   }
 
   render() {
-    console.warn("props: " + JSON.stringify(this.props))
+    console.warn("PropsFromHome: " + JSON.stringify(this.props))
     console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
+    console.warn("servicesProps: " + this.props.services)
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>
         <Core.Loader isVisible={this.state.isLoading} />
@@ -237,7 +257,7 @@ class BenefitsDollar extends Component {
                 returnKeyType='done'
                 placeholder="0.00"
                 value={this.state.amount}
-                onChangeText={number => this.formatInputValue( number )}
+                onChangeText={number => this.formatInputValue(number)}
                 style={{
                   fontFamily: Config.FONT_FAMILY_ROMAN,
                   height: 70,
@@ -266,7 +286,7 @@ class BenefitsDollar extends Component {
               paddingTop: responsiveWidth(3),
               paddingBottom: responsiveWidth(3)
             }}>
-              { this.props.plan_type == 'enterprise_plan' ?
+              {this.props.plan_type == 'enterprise_plan' ?
                 <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, color: '#2c3e50', fontSize: 17 }}>
                   Balance: {'\n'}N.A.
                 </Text>
@@ -292,8 +312,8 @@ class BenefitsDollar extends Component {
             </View>
           </View>
 
-          
-              {/*Actions.PayScan({
+
+          {/*Actions.PayScan({
                 services: this.props.services,
                 clinicid: this.props.clinicid,
                 amount: this.state.amount,
@@ -314,8 +334,8 @@ class BenefitsDollar extends Component {
               Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
               :
               this.nextButton()
-            }
-            >
+          }
+          >
             Next
           </ButtonPay>
         </Content>

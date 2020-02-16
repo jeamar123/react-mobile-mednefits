@@ -47,7 +47,7 @@ class History extends Component {
       convert_option: false,
     };
     this.selectPhoto = this.selectPhoto.bind(this);
-    console.log( this.props );
+    console.log(this.props);
   }
 
   _onRefresh = () => {
@@ -61,8 +61,8 @@ class History extends Component {
     })
   }
 
-  toggleCurrency(){
-    if( this.state.currency_symbol == 'SGD' ){
+  toggleCurrency() {
+    if (this.state.currency_symbol == 'SGD') {
       this.setState({
         currency_symbol: 'MYR',
         total_amount: this.state.total_amount_myr,
@@ -72,15 +72,15 @@ class History extends Component {
         paid_by_credits: this.state.paid_by_credits_myr,
         paid_by_cash: this.state.paid_by_cash_myr,
       });
-    }else{
+    } else {
       this.setState({
         currency_symbol: 'SGD',
-        total_amount: this.state.total_amount_sgd ,
-        cap_per_visit: this.state.cap_per_visit_sgd ,
-        bill_amount: this.state.bill_amount_sgd ,
-        consultation_fee: this.state.consultation_fee_sgd ,
-        paid_by_credits: this.state.paid_by_credits_sgd ,
-        paid_by_cash: this.state.paid_by_cash_sgd ,
+        total_amount: this.state.total_amount_sgd,
+        cap_per_visit: this.state.cap_per_visit_sgd,
+        bill_amount: this.state.bill_amount_sgd,
+        consultation_fee: this.state.consultation_fee_sgd,
+        paid_by_credits: this.state.paid_by_credits_sgd,
+        paid_by_cash: this.state.paid_by_cash_sgd,
 
       });
     }
@@ -153,10 +153,10 @@ class History extends Component {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
       console.warn(data)
       this.setState({
-        data: data, 
+        data: data,
 
         convert_option: data.convert_option,
-        malaysia_exchange_rate: parseFloat( data.currency_amount ).toFixed(2),
+        malaysia_exchange_rate: parseFloat(data.currency_amount).toFixed(2),
         currency_symbol: data.currency_symbol,
 
         total_amount_sgd: data.total_amount,
@@ -555,12 +555,12 @@ class History extends Component {
       <Container>
         {this.customLoader()}
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Navbar 
-          leftNav="history-back-after-upload" 
-          rightNav="currency-toggle" 
-          updateCurrency={ this.toggleCurrency }
-          trans_id={ this.props.transaction_id }
-          transaction_id={ this.state.data.transaction_id } 
+        <Navbar
+          leftNav="history-back-after-upload"
+          rightNav="currency-toggle"
+          updateCurrency={this.toggleCurrency}
+          trans_id={this.props.transaction_id}
+          transaction_id={this.state.data.transaction_id}
           title="History"
         />
         <HistoryUser
