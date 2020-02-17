@@ -47,7 +47,7 @@ export function SetDataLocal(params, callback) {
     callback('', true);
   } catch (error) {
     // console.warn(error.message);
-    Core.getNotify('', 'Sorry, no registered clinics nearby');
+    Core.getNotify('', 'Sorry, no registered providers in that category');
   }
 }
 
