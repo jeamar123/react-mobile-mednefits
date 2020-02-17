@@ -61,9 +61,12 @@ class ConfirmPay extends Component {
   calculateValues() {
     this.props.services.map(value =>
       Core.GetProcedureDetails(value, (err, result) => {
-        this.setState({
-          amount: Number(result.data.price) + Number(this.state.amount),
-        });
+        if( result.status ){
+          this.setState({
+            amount: Number(result.data.price) + Number(this.state.amount),
+          });
+        }
+        
       })
     );
     const consultationAmount = this.state.feeConsultation;
@@ -116,7 +119,9 @@ class ConfirmPay extends Component {
         }
       }
     }
-
+    console.log( (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) );
+    console.log( (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) );
+    console.log( (payCredit).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }) );
     this.setState({
       amountTotal: (Number(totalAmount)).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
       byCash: (payCash).toLocaleString(undefined, { 'minimumFractionDigits': 2, 'maximumFractionDigits': 2 }),
