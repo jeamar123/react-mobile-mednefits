@@ -27,7 +27,7 @@ class BenefitsDollar extends Component {
       failed: false,
       title: null,
       message: null,
-      default_service: [23]
+      default_service: [this.props.default_service.procedureid]
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
     console.log(this.props);
@@ -149,7 +149,8 @@ class BenefitsDollar extends Component {
     console.warn("PropsFromHome: " + JSON.stringify(this.props))
     console.warn("balance" + (Numeral(this.state.Balance).value() * 3).toFixed(2))
     console.warn("servicesProps: " + this.props.services)
-    // console.warn("defaultServices: " + this.props.default_service.map(ListData => (ListData.procedureid)))
+    console.warn("defaultServices02: " + this.props.default_service.procedureid)
+    console.warn("defaultServices: " + this.state.default_service)
 
     return (
       <Container style={{ backgroundColor: '#efeff4' }}>

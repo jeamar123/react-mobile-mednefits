@@ -37,7 +37,7 @@ class MenuSide extends Component {
                 width: 40,
                 height: 40,
               }}
-              source={require('../../../assets/apps/New_logo_White.png')}
+              source={require('../../../assets/apps/logo/New_logo_White01.png')}
             />
           </Body>
           <View style={{ marginTop: 10 }} />
