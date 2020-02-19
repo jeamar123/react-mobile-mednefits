@@ -27,7 +27,7 @@ class BenefitsDollar extends Component {
       failed: false,
       title: null,
       message: null,
-      default_service: [23]
+      default_service: (this.props.default_service == null) ? null : [this.props.default_service.procedureid]
     };
     this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
     console.log(this.props);
