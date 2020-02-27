@@ -74,7 +74,7 @@ import HistoryAfterUpload2 from '../screens/HistoryAfterUpload2';
 import notRegister from '../screens/notRegister';
 import PlanCovarage from '../screens/PlanCovarage';
 
-// console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 const transitionConfig = () => {
   return {

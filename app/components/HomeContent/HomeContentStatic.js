@@ -33,6 +33,7 @@ class HomeContent extends Component {
       consultation_fees: '',
       isWalletLoading: false,
       isEcardLoading: false,
+      isCheckoutLoading: false
     };
   }
 
@@ -69,10 +70,12 @@ class HomeContent extends Component {
       default_service: data.default_service
     })
 
+    this.toggleCheckoutLoading(true);
     await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       if (data.status == true) {
+        this.toggleCheckoutLoading(false);
         this.setState({
           kickout: false,
         });
@@ -104,6 +107,9 @@ class HomeContent extends Component {
   }
   toggleWalletLoading(opt) {
     this.setState({ isWalletLoading: opt });
+  }
+  toggleCheckoutLoading(opt) {
+    this.setState({ isCheckoutLoading: opt })
   }
 
   onQuery = async (query) => {
@@ -336,7 +342,14 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
+
                   </View>
                 </View>
               </TouchableOpacity>
@@ -390,6 +403,24 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {/* {
+
+                        (this.state.kickout == true) ? (
+                          this.state.isEcardLoading == false ?
+                            <Text numberOfLines={3} style={styles.detail}></Text>
+                            :
+                            <ActivityIndicator color="#fff" size="small" />
+
+                        ) : (
+                            <View />
+                          )} */}
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
+
                     </View>
                   </View>
                 </View>
@@ -444,6 +475,23 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {/* {
+
+                        (this.state.kickout == true) ? (
+                          this.state.isEcardLoading == false ?
+                            <Text numberOfLines={3} style={styles.detail}></Text>
+                            :
+                            <ActivityIndicator color="#fff" size="small" />
+
+                        ) : (
+                            <View />
+                          )} */}
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -483,6 +531,12 @@ class HomeContent extends Component {
                           </View>
                           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                             <Text style={styles.title}>Checkout</Text>
+                            {
+                              this.state.isEcardLoading == false ?
+                                <Text numberOfLines={3} style={styles.detail}></Text>
+                                :
+                                <ActivityIndicator color="#fff" size="small" />
+                            }
                           </View>
                         </View>
                       </View>

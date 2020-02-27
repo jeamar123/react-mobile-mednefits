@@ -705,10 +705,10 @@ class Home extends Component {
         <Container style={{ backgroundColor: '#EEEEEE' }}>
           {this.popupAds()}
           {this.customLoader()}
-          <GlobaLoadingState
+          {/* <GlobaLoadingState
             loadingShow={this.state.isMainLoaderShow}
             loadingText={this.state.mainLoaderText}
-          />
+          /> */}
           <StatusBar backgroundColor="#fff" barStyle="dark-content" />
           <Common.Popup
             kind="update-application"
