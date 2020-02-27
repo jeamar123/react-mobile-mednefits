@@ -34,6 +34,7 @@ class HomeContent extends Component {
       user_id: null,
       isWalletLoading: false,
       isEcardLoading: false,
+      isCheckoutLoading: false,
     };
   }
 
@@ -105,6 +106,8 @@ class HomeContent extends Component {
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn('storageData ' + JSON.stringify(data, 4, null))
+    console.log(data);
+
     // this.props.toggleLoadingState('');
     this.setState({
       services: data.clinic_procedures,
@@ -120,15 +123,18 @@ class HomeContent extends Component {
       consultation_fee_symbol: data.consultation_fee_symbol,
       consultation_status: data.consultation_status,
       consultation_fees: data.consultation_fees,
-      default_service: data.default_service
+      default_service: data.default_service,
+      isCheckoutLoading: true,
     })
 
     await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
+        console.log(data);
       if (data.status == true) {
         this.setState({
           kickout: false,
+          isCheckoutLoading: false,
         });
       }
       console.warn('data ' + data.check_in_status_removed);
@@ -332,7 +338,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -392,7 +398,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -452,7 +458,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -496,7 +502,7 @@ class HomeContent extends Component {
                           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                             <Text style={styles.title}>Checkout</Text>
                             {
-                              this.state.isEcardLoading == false ?
+                              this.state.isCheckoutLoading == false ?
                                 <Text numberOfLines={3} style={styles.detail}></Text>
                                 :
                                 <ActivityIndicator color="#fff" size="small" />
