@@ -331,6 +331,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -385,6 +391,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -439,6 +451,12 @@ class HomeContent extends Component {
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
+                      {
+                        this.state.isEcardLoading == false ?
+                          <Text numberOfLines={3} style={styles.detail}></Text>
+                          :
+                          <ActivityIndicator color="#fff" size="small" />
+                      }
                     </View>
                   </View>
                 </View>
@@ -477,6 +495,12 @@ class HomeContent extends Component {
                           </View>
                           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                             <Text style={styles.title}>Checkout</Text>
+                            {
+                              this.state.isEcardLoading == false ?
+                                <Text numberOfLines={3} style={styles.detail}></Text>
+                                :
+                                <ActivityIndicator color="#fff" size="small" />
+                            }
                           </View>
                         </View>
                       </View>
