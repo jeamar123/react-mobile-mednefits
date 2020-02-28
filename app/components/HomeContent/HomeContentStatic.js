@@ -52,6 +52,7 @@ class HomeContent extends Component {
     data =
       await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
     console.warn("UserOnClinicData" + JSON.stringify(data, null, 4))
+    console.log(data);
     // this.props.toggleLoadingState('');
     this.setState({
       services: data.clinic_procedures,
@@ -74,6 +75,7 @@ class HomeContent extends Component {
     await Core.CancelVisiByClinic(this.state.checkId, async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
+      console.log(data);
       if (data.status == true) {
         this.toggleCheckoutLoading(false);
         this.setState({
@@ -343,7 +345,7 @@ class HomeContent extends Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                       <Text style={styles.title}>Checkout</Text>
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -415,7 +417,7 @@ class HomeContent extends Component {
                             <View />
                           )} */}
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -487,7 +489,7 @@ class HomeContent extends Component {
                             <View />
                           )} */}
                       {
-                        this.state.isEcardLoading == false ?
+                        this.state.isCheckoutLoading == false ?
                           <Text numberOfLines={3} style={styles.detail}></Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -532,7 +534,7 @@ class HomeContent extends Component {
                           <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '8.5%' }}>
                             <Text style={styles.title}>Checkout</Text>
                             {
-                              this.state.isEcardLoading == false ?
+                              this.state.isCheckoutLoading == false ?
                                 <Text numberOfLines={3} style={styles.detail}></Text>
                                 :
                                 <ActivityIndicator color="#fff" size="small" />
