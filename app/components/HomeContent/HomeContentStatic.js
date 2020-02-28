@@ -314,6 +314,8 @@ class HomeContent extends Component {
                 onPress={() =>
                   Actions.notRegister()
                 }
+                disabled={this.state.isCheckoutLoading}
+                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -375,6 +377,8 @@ class HomeContent extends Component {
                     default_service: this.state.default_service
                   })
                 }
+                disabled={this.state.isCheckoutLoading}
+                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -447,6 +451,8 @@ class HomeContent extends Component {
                     kickout: this.state.kickout,
                   })
                 }
+                disabled={this.state.isCheckoutLoading}
+                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -503,6 +509,8 @@ class HomeContent extends Component {
                       onPress={() =>
                         Actions.notRegister()
                       }
+                      disabled={this.state.isCheckoutLoading}
+                      style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
                     >
                       <View style={styles.gridBox}>
                         <View style={{ flex: 1 }}>
