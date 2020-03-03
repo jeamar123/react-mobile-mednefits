@@ -19,7 +19,7 @@ class BenefitsDollar extends Component {
     this.state = {
       clinic_name: false,
       clinic_image: false,
-      amount: 0,
+      amount: '0.00',
       currency: false,
       isLoading: false,
       Balance: this.props.balance,
@@ -99,11 +99,16 @@ class BenefitsDollar extends Component {
   }
 
   nextButton() {
+    console.log( this.state.amount );
+    // if(!this.state.amount){
+    //   Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
+    //   return false;
+    // }
     if (this.props.plan_type == 'enterprise_plan') {
       Actions.ConfirmPay({
         services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
-        amount: this.state.amount,
+        amount: this.state.amount == 0 ? '0.00' : this.state.amount,
         capCurrency: this.props.capCurrency,
         capAmount: this.props.capAmount,
         balance: this.state.Balance,
@@ -120,7 +125,7 @@ class BenefitsDollar extends Component {
       Actions.PayScan({
         services: !this.props.services.length ? this.state.default_service : this.props.services,
         clinicid: this.props.clinicid,
-        amount: this.state.amount,
+        amount: this.state.amount == 0 ? '0.00' : this.state.amount,
         capCurrency: this.props.capCurrency,
         capAmount: this.props.capAmount,
         balance: this.state.Balance,
@@ -139,7 +144,7 @@ class BenefitsDollar extends Component {
   formatInputValue(number) {
     console.log(number);
     if (number == '' || number == 0) {
-      this.setState({ amount: 0 });
+      this.setState({ amount: '0.00' });
     } else {
       this.setState({ amount: number });
     }
@@ -334,12 +339,7 @@ class BenefitsDollar extends Component {
               })*/}
 
           <View style={{ marginBottom: '5%' }} />
-          <ButtonPay onPress={() =>
-            (!this.state.amount) ?
-              Common.getAlert("Mednefits", "Enter an Amount of 0 or more")
-              :
-              this.nextButton()
-          }
+          <ButtonPay onPress={() => this.nextButton()}
           >
             Next
           </ButtonPay>
