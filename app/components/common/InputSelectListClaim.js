@@ -151,7 +151,7 @@ class SelectList extends Component {
           animationIn="zoomIn"
           animationOut="zoomOut"
           useNativeDriver={true}
-          coverScreen={false}
+          // coverScreen={false}
           hasBackdrop={false}
           style={{
             margin: 0
