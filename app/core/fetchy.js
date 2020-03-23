@@ -72,45 +72,43 @@ function fetching(params, callback) {
 export async function LoginProcess(username, password, callback) {
   try {
     loginParameter = {
-      grant_type: 'password',
-      client_secret: Config.CLIENT_SECRET,
-      client_id: Config.CLIENT_ID,
-      username: username,
-      password: password,
+      identity: username,
+    	password: password
     };
 
     params = {
-      url: Config.AUTH_NEWLOGIN,
+      url: Config.AUTH_LOGIN,
       method: 'POST',
       header: headerLogin,
       body: loginParameter,
     };
 
     await fetching(params, async result => {
-      if (!result.status) {
+      console.log(result+"LoginProcess");
+      if (result.status == undefined) {
         // getNotify('', result.error_description);
         await callback(result);
       } else {
         // getNotify('', 'Success! Wait a second...');
 
-        data = result.data;
-        data_parse = typeof data == 'string' ? JSON.parse(data) : data;
-        access_token = data_parse.access_token;
+        // data = result.data;
+        // data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+        // access_token = data_parse.access_token;
 
         params = {
           key: 'access_token',
-          value: access_token,
+          value: result.token,
         };
 
         await Core.SetDataLocal(params, async (err, result) => {
           if (result) {
-            user_data = {
-              key: 'user_id',
-              value: String(data_parse.user_id),
-            };
-            await Core.SetDataLocal(user_data, async (err, result) => {
-              console.log('result user_id key from login', result)
-            });
+            // user_data = {
+            //   key: 'user_id',
+            //   value: String(data_parse.user_id),
+            // };
+            // await Core.SetDataLocal(user_data, async (err, result) => {
+            //   console.log('result user_id key from login', result)
+            // });
             await callback('', true);
             // Actions.Home({ type: 'reset' });
           } else {
