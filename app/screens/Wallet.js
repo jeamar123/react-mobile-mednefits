@@ -153,12 +153,12 @@ class Wallet extends Component {
   }
 
   handleTouch(){
-    this.refs.termDrop.closeDrop();
-    this.refs.walletTypeDrop.closeDrop();
+    //this.refs.termDrop.closeDrop();
+    //this.refs.walletTypeDrop.closeDrop();
 
     this.setState({ 
-      isTermDropShow: this.refs.termDrop.state.showDrop == true ? false : true,
-      isWalletDropShow: this.refs.walletTypeDrop.state.showDrop == true ? false : true,
+     // isTermDropShow: this.refs.termDrop.state.showDrop == true ? false : true,
+     // isWalletDropShow: this.refs.walletTypeDrop.state.showDrop == true ? false : true,
     });
   }
 
@@ -524,7 +524,8 @@ class Wallet extends Component {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Navbar
           leftNav="homeback"
-          title="Wallet"
+          rightNav="term-drop-two"
+          title="Visits"
           Services={this.props.services}
           clinic_Id={this.props.clinicid}
           member={this.props.member}
@@ -548,7 +549,27 @@ class Wallet extends Component {
             height: responsiveHeight(28),
             width: width,
             alignItems: 'center',
+              /*height: responsiveHeight(12),
+              backgroundColor: '#fff',
+              elevation: 5,
+              borderWidth: 0.3,
+              borderColor: '#DBDBDB',
+              borderTopRightRadius: 2,
+              borderBottomRightRadius: 2,*/
           }}>
+              <View style={{
+                marginTop: responsiveHeight(-3),
+                width: responsiveWidth(90),
+                height: responsiveHeight(25),
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#fff',
+                elevation: 5,
+                borderWidth: 0.3,
+                borderColor: '#DBDBDB',
+                borderTopRightRadius: 2,
+                borderBottomRightRadius: 2,
+              }}>
 
             {/*
             <View
@@ -604,7 +625,7 @@ class Wallet extends Component {
             </View>
             */}
 
-            <View 
+             {/*<View 
               style={{ 
                 width: '100%', 
                 paddingLeft: 10, 
@@ -612,7 +633,8 @@ class Wallet extends Component {
                 zIndex: 9,
               }}
             >
-              <View style={{ flexDirection: 'row', width: '100%', }}>
+              
+             <View style={{ flexDirection: 'row', width: '100%', }>
                 <View style={{ flex: 1 }}>
                   <CustomDropdown
                     ref="termDrop"
@@ -650,62 +672,100 @@ class Wallet extends Component {
                   />
                 </View>
               </View>
-            </View>
-
+                  </View>*/}
             <Text
               style={[{
-                fontSize: RF(2.2),
+                fontSize: RF(6.6),
                 fontFamily: Config.FONT_FAMILY_MEDIUM,
                 marginTop: responsiveHeight(4),
                 color: '#2C3E50'
               }, 
-              this.state.isTermDropShow == true ? { position: 'absolute', top: 42.5 } : {},
-              this.state.isWalletDropShow == true ? { position: 'absolute', top: 42.5 } : {},
+              ]}
+            >
+              03
+            </Text>
+            <Text
+              style={[{
+                fontSize: RF(2.2),
+                fontFamily: Config.FONT_FAMILY_MEDIUM,
+                //marginTop: responsiveHeight(4),
+                color: '#2C3E50'
+              }, 
+              //this.state.isTermDropShow == true ? { position: 'absolute', top: 42.5 } : {},
+              //this.state.isWalletDropShow == true ? { position: 'absolute', top: 42.5 } : {},
               ]}
             >
               Balance
             </Text>
-            <View
-              style={[{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }, 
-              this.state.isTermDropShow == true ? { position: 'absolute', top: 88 } : {},
-              this.state.isWalletDropShow == true ? { position: 'absolute', top: 88 } : {},
-              ]}
-            >
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: '#fff',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  lineHeight: 60,
-                  letterSpacing: 1.7
-                }}
+              <View
+                style={[{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignContent: 'center'
+                },
+                //this.state.isTermDropShow == true ? { position: 'absolute', top: 88 } : {},
+                //this.state.isWalletDropShow == true ? { position: 'absolute', top: 88 } : {},
+                ]}
               >
-                {
-                  (this.state.walletType == 'Medical') ?
-                    (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
-                    (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
-                }
-              </Text>
-              <Text
-                style={{
-                  fontSize: 50,
-                  color: '#fff',
-                  fontFamily: Config.FONT_FAMILY_ROMAN,
-                  marginTop: responsiveHeight(1),
-                  lineHeight: 60,
-                  letterSpacing: 2.5
-                }}
-              >
-                {
-                  (this.state.walletType == 'Medical') ?
-                    (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
-                    (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
-                }
-              </Text>
-            </View>
+                <Text
+                  style={{
+                    //fontSize: 20,
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    color: '#2C3E50',
+                    //fontFamily: Config.FONT_FAMILY_ROMAN,
+                    lineHeight: 60,
+                    letterSpacing: 1.7,
+                  }}
+                >
+                  {/*
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalcurrency) ? this.state.medicalcurrency + ' ' : '' :
+                      (this.state.wellnessurrency) ? this.state.wellnessurrency + ' ' : ''
+                  */}
+                  Utilised: 11{' '}
+                </Text>
+                <Text
+                  style={{
+                    //fontSize: 50,
+                    color: '#2C3E50',
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    //fontFamily: Config.FONT_FAMILY_ROMAN,
+                    //marginTop: responsiveHeight(1),
+                    lineHeight: 60,
+                    letterSpacing: 1.7,
+                   
+                  }}
+                >
+                  {/*
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
+                      (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
+                  */}
+                  {' '}|{' '}
+                </Text>
+                <Text
+                  style={{
+                    //fontSize: 50,
+                    color: '#2C3E50',
+                    fontSize: RF(2.2),
+                    fontFamily: Config.FONT_FAMILY_MEDIUM,
+                    //fontFamily: Config.FONT_FAMILY_ROMAN,
+                    //marginTop: responsiveHeight(1),
+                    lineHeight: 60,
+                    letterSpacing: 1.7,
+                  }}
+                >
+                  {/*
+                    (this.state.walletType == 'Medical') ?
+                      (this.state.medicalBalance) ? this.state.medicalBalance : '0' :
+                      (this.state.wellnessBalance) ? this.state.wellnessBalance : '0'
+                  */}
+                  {' '}Total: 14
+                </Text>
+              </View>
+           </View>
           </View>
 
           <View

@@ -10,7 +10,7 @@ class Splash extends Component {
   async componentWillMount() {
     setTimeout(() => {
       Core.AppStatus()
-    }, 500);
+    }, 1000);
     await AsyncStorage.removeItem('latitude');
     await AsyncStorage.removeItem('longitude');
     console.log('removed latitude')

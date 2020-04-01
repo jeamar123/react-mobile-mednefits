@@ -219,7 +219,7 @@ class Home extends Component {
         this.setState({
           isLoading: false
         })
-      }, 10000)
+      }, 1000)
     }
   }
 
