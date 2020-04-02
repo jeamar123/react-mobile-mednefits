@@ -12,11 +12,11 @@ import {
 import { Container, Drawer } from 'native-base';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Navbar from '../components/common/Navbar';
-import GlobaLoadingState from '../components/common/GlobaLoadingState';
+//import GlobaLoadingState from '../components/common/GlobaLoadingState';
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { MenuSide, HomeContentStatic } from '../components/HomeContent';
 import { Actions } from 'react-native-router-flux';
-import ResponsiveImage from 'react-native-responsive-image';
+//import ResponsiveImage from 'react-native-responsive-image';
 import RF from "react-native-responsive-fontsize";
 import VersionCheck from 'react-native-version-check';
 import Modal from 'react-native-modal';

@@ -12,7 +12,7 @@ import * as Config from '../../config'
 import * as Core from '../../core'
 import * as Common from '../common'
 
-import VersionCheck from 'react-native-version-check';
+//import VersionCheck from 'react-native-version-check';
 
 export default class Popup extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ export default class Popup extends Component {
             source={require('../../../assets/modalAsset/loginFailed.png')}
             resizeMode="center"
           /> */}
+          
           
           <View style={{ marginTop: 5, marginBottom: 20, marginRight: 25, marginLeft: 25, paddingTop: 20 }}>
             <View>
@@ -202,6 +203,35 @@ export default class Popup extends Component {
             </Common.ButtonUpdate>
           </View>
         </View>
+      );
+    } else if (this.props.kind == 'CobaPopUp') {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(25) }}>
+          {/* <ImageBackground
+            style={{ width: 250, height: 100 }}
+            source={require('../../../assets/modalAsset/loginFailed.png')}
+            resizeMode="center"
+          /> */}
+          <Image
+              style={{ width: 150, height: 100 }}
+              source={require('../../../assets/bell.png')}
+              resizeMode="center" />
+          <View style={{ margin: 5, textAlign: 'center', alignSelf: 'center' }}>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_ROMAN}
+              fontSize={14}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.message}
+            </Common.Texti>
+            
+          </View>
+        </View>
+        
+        
       );
     }
   }

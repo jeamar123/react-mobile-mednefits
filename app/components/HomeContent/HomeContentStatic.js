@@ -7,6 +7,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
 import * as Common from '../common';
 import * as Config from '../../config';
+import { Popup } from '../../components/common'
 
 class HomeContent extends Component {
   constructor(props) {
@@ -33,8 +34,18 @@ class HomeContent extends Component {
       consultation_fees: '',
       isWalletLoading: false,
       isEcardLoading: false,
-      isCheckoutLoading: false
+      isCheckoutLoading: false,
+      title: null,
+      message: null,
+      showPopUp: false,
     };
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
+  isVisibleUpdate() {
+    this.setState({ showPopUp: false })
+  }
+  renderPopUp() {
+    this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
 
   async componentWillMount() {
@@ -170,6 +181,14 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
+        <Popup
+          kind="CobaPopUp"
+          isVisible={this.state.showPopUp}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
           <TouchableOpacity
             onPress={() =>
               Actions.HomeSearch()
@@ -227,7 +246,7 @@ class HomeContent extends Component {
             {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
-                  Actions.cancelVisit({
+                  /*Actions.cancelVisit({
                     services: this.state.services,
                     clinicid: this.state.clinicid,
                     member: this.state.member,
@@ -241,7 +260,9 @@ class HomeContent extends Component {
                     consultation_fee_symbol: this.state.consultation_fee_symbol,
                     consultation_status: this.state.consultation_status,
                     consultation_fees: this.state.consultation_fees
-                  })
+                  })*/
+                  this.renderPopUp()
+                  
                 }
               >
                 <View style={styles.gridBox}>
@@ -264,7 +285,8 @@ class HomeContent extends Component {
             ) : (this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
-                  Actions.Barcode()
+                  this.renderPopUp()
+                  //Actions.Barcode()
                 }
               >
                 <View style={styles.gridBox}>
@@ -312,7 +334,8 @@ class HomeContent extends Component {
             {(this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
-                  Actions.notRegister()
+                  this.renderPopUp()
+                  //Actions.notRegister()
                 }
                 disabled={this.state.isCheckoutLoading}
                 style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
@@ -507,7 +530,8 @@ class HomeContent extends Component {
             ) : (
                     <TouchableOpacity
                       onPress={() =>
-                        Actions.notRegister()
+                        this.renderPopUp()
+                        //Actions.notRegister()
                       }
                       disabled={this.state.isCheckoutLoading}
                       style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
