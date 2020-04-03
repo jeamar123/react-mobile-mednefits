@@ -39,9 +39,14 @@ export default class EclaimForm extends Component {
       isLoading: false,
       company_currency: 'SGD',
       currency: 'SGD',
-      updateDataSelect: false,
-      currencyData: [],
-      currencyState: "Select",
+      currencyData: [
+        {
+          label: "Please choose currency first",
+          value: null
+        }
+      ],
+      currencyState: "SGD",
+      claimData: null,
       visitMinDate: null,
       visitMaxDate: null,
     }
@@ -157,18 +162,26 @@ export default class EclaimForm extends Component {
   }
 
   setClaimValue(val) {
-    try {
-      this.state.claimType.map((value, index) => {
-        if (val == value.value) {
-          this.setState({
-            claimLabel: value.label
-          })
-        }
-      })
-    } catch (e) {
-      console.warn('unset eclaim');
-    }
+    this.state.claimType.map((value, index) => {
+      if (val == value.value) {
+        this.setState({ claim: value.label })
+      }
+    })
   }
+
+  // setClaimValue(val) {
+  //   try {
+  //     this.state.claimType.map((value, index) => {
+  //       if (val == value.value) {
+  //         this.setState({
+  //           claimLabel: value.label
+  //         })
+  //       }
+  //     })
+  //   } catch (e) {
+  //     console.warn('unset eclaim');
+  //   }
+  // }
 
   updateClaim(val) {
     try {
@@ -267,7 +280,7 @@ export default class EclaimForm extends Component {
               <View
                 style={[styles.fieldStyle, { marginTop: "3%" }]}
               >
-                <Common.Texti
+                {/* <Common.Texti
                   fontFamily={Config.FONT_FAMILY_MEDIUM}
                   fontColor={'#2C3E50'}
                 >
@@ -279,6 +292,21 @@ export default class EclaimForm extends Component {
                   dataclaim={this.state.claimType}
                   value={this.state.claim}
                   onValueChange={(value) => this.updateClaim(value)}
+                /> */}
+
+                <Common.Texti
+                  fontFamily={Config.FONT_FAMILY_MEDIUM}
+                  fontColor={'#2C3E50'}
+                >
+                  Claim Type
+                </Common.Texti>
+
+                <Common.InputSelectListClaim
+                  title="Claim Type"
+                  placeholder={this.state.claimTypeState}
+                  dataclaim={this.state.claimType}
+                  label={this.state.claim}
+                  onValueChange={(label) => this.setState({ claim: label })}
                 />
               </View>
 

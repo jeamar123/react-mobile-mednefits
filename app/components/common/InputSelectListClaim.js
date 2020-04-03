@@ -33,12 +33,51 @@ class SelectList extends Component {
 
   }
 
+  // renderChildComponent() {
+  //   return (
+  //     this.props.dataclaim.map((value, index) =>
+  //       <View>
+  //         <TouchableOpacity
+  //           onPress={() => this.changeValue(value.value)}
+  //           style={{
+  //             marginTop: 15,
+  //             marginBottom: 15,
+  //             paddingLeft: 15,
+  //             alignItems: 'flex-start'
+  //           }}
+  //         >
+  //           <Common.Texti>
+  //             {value.label}
+  //           </Common.Texti>
+  //         </TouchableOpacity>
+  //         <Common.Divider />
+  //       </View>
+  //     )
+  //   )
+  // }
+
+  // setTitle() {
+  //   if (this.props.value) {
+  //     this.props.dataclaim.filter((value, index) => {
+  //       if (value.value == this.props.value) {
+  //         label = value.label
+  //       }
+  //     });
+  //   } else if (this.props.titleValue) {
+  //     label = this.props.titleValue
+  //   } else {
+  //     label = this.props.placeholder
+  //   }
+
+  //   return label
+  // }
+
   renderChildComponent() {
     return (
       this.props.dataclaim.map((value, index) =>
         <View>
           <TouchableOpacity
-            onPress={() => this.changeValue(value.value)}
+            onPress={() => this.changeValue(value.label)}
             style={{
               marginTop: 15,
               marginBottom: 15,
@@ -57,9 +96,9 @@ class SelectList extends Component {
   }
 
   setTitle() {
-    if (this.props.value) {
+    if (this.props.label) {
       this.props.dataclaim.filter((value, index) => {
-        if (value.value == this.props.value) {
+        if (value.label == this.props.label) {
           label = value.label
         }
       });
@@ -68,7 +107,6 @@ class SelectList extends Component {
     } else {
       label = this.props.placeholder
     }
-
     return label
   }
 
@@ -172,7 +210,7 @@ class SelectList extends Component {
             fontSize={14}
             fontFamily={Config.FONT_FAMILY_MEDIUM}
             style={{
-              color: (this.props.value) ? "#2c3e50" : "#9e9e9e"
+              color: (this.props.label) ? "#2c3e50" : "#9e9e9e"
             }}
           >
             {this.setTitle()}
