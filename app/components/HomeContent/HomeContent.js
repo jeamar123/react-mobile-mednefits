@@ -140,8 +140,8 @@ class HomeContent extends Component {
           <View style={styles.contain}>
             <TouchableOpacity
               onPress={() =>
-                this.renderPopUp()
-                //Actions.Barcode()
+                //this.renderPopUp()
+                Actions.Barcode()
               }
             >
               <View style={styles.gridBox}>

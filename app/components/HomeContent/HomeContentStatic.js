@@ -246,7 +246,7 @@ class HomeContent extends Component {
             {(this.state.checkId && this.state.kickout == false) ? (
               <TouchableOpacity
                 onPress={() =>
-                  /*Actions.cancelVisit({
+                  Actions.cancelVisit({
                     services: this.state.services,
                     clinicid: this.state.clinicid,
                     member: this.state.member,
@@ -260,8 +260,8 @@ class HomeContent extends Component {
                     consultation_fee_symbol: this.state.consultation_fee_symbol,
                     consultation_status: this.state.consultation_status,
                     consultation_fees: this.state.consultation_fees
-                  })*/
-                  this.renderPopUp()
+                  })
+                  //this.renderPopUp()
                   
                 }
               >
@@ -285,8 +285,8 @@ class HomeContent extends Component {
             ) : (this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
-                  this.renderPopUp()
-                  //Actions.Barcode()
+                 // this.renderPopUp()
+                  Actions.Barcode()
                 }
               >
                 <View style={styles.gridBox}>
@@ -334,8 +334,8 @@ class HomeContent extends Component {
             {(this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
-                  this.renderPopUp()
-                  //Actions.notRegister()
+                  //this.renderPopUp()
+                  Actions.notRegister()
                 }
                 disabled={this.state.isCheckoutLoading}
                 style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
@@ -530,8 +530,8 @@ class HomeContent extends Component {
             ) : (
                     <TouchableOpacity
                       onPress={() =>
-                        this.renderPopUp()
-                        //Actions.notRegister()
+                        //this.renderPopUp()
+                        Actions.notRegister()
                       }
                       disabled={this.state.isCheckoutLoading}
                       style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
