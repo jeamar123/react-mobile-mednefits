@@ -7,15 +7,15 @@ import * as Core from '../core';
 
 class Splash extends Component {
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     setTimeout(() => {
-      // Core.AppStatus();
-      Core.NEW_AppStatus();
+      Core.AppStatus();
+      // Core.NEW_AppStatus();
     }, 500);
     await AsyncStorage.removeItem('latitude');
     await AsyncStorage.removeItem('longitude');
-    console.log('removed latitude')
-    console.log('removed longitude')
+    // console.log('removed latitude')
+    // console.log('removed longitude')
   }
 
   render() {

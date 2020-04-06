@@ -28,7 +28,7 @@ class AddMedCondition extends Component {
     this.AddMedCondition = this.AddMedCondition.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataProfile();
   }
 

@@ -61,7 +61,7 @@ export default class EclaimForm extends Component {
     console.log( this.props );
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserDetail();
     this.getVisitDateList();
     this.getMember();

@@ -45,7 +45,7 @@ class GeneralPractitioner extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getDataIn_Network();
   }
 

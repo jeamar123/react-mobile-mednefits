@@ -11,7 +11,7 @@ class DollarBenefits extends Component {
     };
   }
 
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     await this.getUserBalance();
   }
 

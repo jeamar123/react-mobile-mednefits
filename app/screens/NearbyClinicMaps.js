@@ -46,7 +46,7 @@ class NearbyClinic extends Component {
   }
 
   // Loading Data Clinic in Maps with Pagination
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await Core.GetClinicMapList(this.props.clinicType, async (error, result) => {
       console.warn(error);
       console.warn(result);

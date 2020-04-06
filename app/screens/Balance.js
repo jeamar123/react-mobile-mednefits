@@ -53,7 +53,7 @@ class Balance extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserBalance();
     // Core.GetBalance((err, result)=>{
     //   this.setState({currency: result.data.currency_symbol})

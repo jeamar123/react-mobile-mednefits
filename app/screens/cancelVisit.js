@@ -66,7 +66,7 @@ class checkinUser extends Component {
     });
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await this.StatusUseronClinic();
   }
 

@@ -72,7 +72,7 @@ export default class Navbar extends React.Component {
     this.props.updateCurrency();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.leftNav) {
       this.setState({ left: true });
     }

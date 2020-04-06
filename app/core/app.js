@@ -21,6 +21,7 @@
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { Actions } from 'react-native-router-flux';
+import { NEW_ACCESS_TOKEN } from '../config/variable';
 import * as Core from './index';
 
 // const headerLogin = {

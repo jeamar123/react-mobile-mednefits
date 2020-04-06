@@ -138,7 +138,7 @@ class SwitchUser extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getFamilyCoverage();
   }
 

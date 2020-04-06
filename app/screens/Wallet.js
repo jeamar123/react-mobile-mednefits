@@ -52,7 +52,7 @@ class Wallet extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserDetail();
     // this.selectWallet("Medical")
     this.selectTerm("Current term")

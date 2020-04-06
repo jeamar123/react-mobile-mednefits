@@ -436,7 +436,7 @@ class Home extends Component {
     // })
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     // //Version Check
     // await VersionCheck.getLatestVersion({
     //   provider: 'appStore'  // for Android

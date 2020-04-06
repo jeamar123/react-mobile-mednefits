@@ -49,10 +49,13 @@ class HomeContent extends Component {
     this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
+
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token " + New_token)
   }
 
   async getUserBalance() {
@@ -113,6 +116,7 @@ class HomeContent extends Component {
   async StatusUseronClinic() {
     // this.props.toggleLoadingState('');
     user = await Core.GetDataLocalReturnNew('user_id');
+    console.log("Storage_Data " + user)
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;

@@ -49,7 +49,7 @@ class DetailEClaim_Transaction extends Component {
     });
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     Core.GetSpesificEclaim(this.props.transaction_id, result => {
       // console.log(result);
       data = typeof result == 'string' ? JSON.parse(result.data) : result.data;

@@ -45,7 +45,7 @@ class MedicalMedications extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getFavorites_Clinic();
     this.GetMedicalMedications();
   }

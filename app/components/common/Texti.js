@@ -46,7 +46,7 @@ export default class Text extends Component {
 
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.isHeader()
     this.setFontFamily()
   }

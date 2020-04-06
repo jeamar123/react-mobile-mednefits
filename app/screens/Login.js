@@ -56,7 +56,7 @@ class Login extends Component {
     });
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
 
     fetch("https://itunes.apple.com/lookup?bundleId=sg.medicloud.user")
       .then(res => res.json())
@@ -89,7 +89,7 @@ class Login extends Component {
   LoginHandler() {
     this.setState({ isLoading: true, button: 'Logging in...' })
 
-    // this.LoginOld();
+    this.LoginOld();
     this.NEW_Login();
   }
 

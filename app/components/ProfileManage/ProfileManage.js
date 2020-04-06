@@ -12,7 +12,7 @@ class HistoryUser extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserDetail();
   }
 

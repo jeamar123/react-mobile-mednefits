@@ -21,12 +21,12 @@
 
 import { PermissionsAndroid, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { getAlert, getNotify } from './notify';
-import * as Config from '../config';
-import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
 import Geolocation from '@react-native-community/geolocation';
 import Permissions from 'react-native-permissions';
+import { getNotify } from './notify';
+import * as Config from 'MednefitsMobile/app/config';
+import * as Core from './index';
 
 const headerLogin = {
   'Accept': 'application/json',
@@ -837,7 +837,7 @@ async function requestLocationPermission(callback) {
   console.warn('request permission')
 
   await Permissions.check('location').then(async response => {
-    console.warn("response", response);
+    // console.warn("response", response);
     if (response !== "authorized") {
       await getEnablePermesssionLocation(async function (error, result) {
         if (result) {

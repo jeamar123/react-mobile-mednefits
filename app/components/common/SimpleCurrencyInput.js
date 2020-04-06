@@ -17,11 +17,11 @@ class SimpleCurrencyInput extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.notifyParentWithRawValue(this.state.rawValue)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.value || nextProps.value === 0) {
       this.setState({
         rawValue: nextProps.value
