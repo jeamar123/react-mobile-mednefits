@@ -1360,7 +1360,7 @@ export const NEW_UserDetail = async (callback) => {
           },
         };
         await fetching(params, async result => {
-          console.warn('done fetching in UserDetail');
+          console.warn('done fetching in NEW_UserDetail');
           await callback('', result)
         });
         console.warn('fetching executed');
@@ -1368,6 +1368,32 @@ export const NEW_UserDetail = async (callback) => {
     });
   } catch (e) {
     console.warn('error user detail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export const NEW_GetECardDetail = async (callback) => {
+  console.warn('NEW_GetECardDetail called in function')
+  try {
+    await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
+      console.warn('fetch Data NEW_GetECardDetail')
+      params = {
+        url: Config.NEW_ECARD,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': result,
+          Authorization: 'Basic ' + Config.BASIC_AUTH,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in NEW_GetECardDetail');
+        await callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get NEW_GetECardDetail' + e.message);
     getNotify('', 'Failed get data, try again');
   }
 }

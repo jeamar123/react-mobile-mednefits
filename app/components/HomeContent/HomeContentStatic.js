@@ -66,10 +66,13 @@ class HomeContent extends Component {
   }
 
   async UNSAFE_componentWillMount() {
+  // NEW_
+    await this.NEW_getUserDetail();
+
     await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
-    await this.NEW_getUserDetail
+    
   }
 
   async getUserBalance() {
@@ -179,19 +182,6 @@ class HomeContent extends Component {
 
   }
 
-  async getUserDetail() {
-    this.toggleEcardLoading(true);
-    await Core.UserDetail(async (error, result) => {
-      data =
-        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      await this.setState({
-        Full_name: data.profile.full_name,
-      }, () => {
-        this.toggleEcardLoading(false);
-      });
-    });
-  }
-
   async NEW_getUserDetail() {
     this.toggleEcardLoading(true);
     await Core.NEW_UserDetail(async (error, result) => {
@@ -199,6 +189,19 @@ class HomeContent extends Component {
         await typeof result == 'string' ? JSON.parse(result) : result;
       await this.setState({
         Full_name: data.Name,
+      }, () => {
+        this.toggleEcardLoading(false);
+      });
+    });
+  }
+
+  async getUserDetail() {
+    this.toggleEcardLoading(true);
+    await Core.UserDetail(async (error, result) => {
+      data =
+        await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
+      await this.setState({
+        Full_name: data.profile.full_name,
       }, () => {
         this.toggleEcardLoading(false);
       });

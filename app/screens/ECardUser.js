@@ -28,6 +28,30 @@ class checkinUser extends Component {
 
   UNSAFE_componentWillMount() {
     this.GetDataEcard();
+    // this.NEW_GetDataEcard();
+  }
+
+  NEW_GetDataEcard() {
+    Core.NEW_GetECardDetail((error, result) => {
+      data =
+        typeof result == 'string' ? JSON.parse(result) : result;
+      console.warn(data);
+      console.log(data);
+      this.setState({
+        FullName: data.Name,
+        MemberID: data.UserID,
+        Nric: data.NRIC,
+        PlanType: data.plan_type,
+        PlanAddon: data.plan_add_on,
+        cap_per_visit: data.cap_per_visit,
+        Company: data.company_name,
+        StartDate: data.start_date,
+        EndDate: data.valid_date,
+        resultPackage: data.packages,
+        mobile: data.mobile ? "+" + (data.mobile.replace("+","")) : "",
+        dob: data.dob,
+      });
+    });
   }
 
   GetDataEcard() {

@@ -1,5 +1,5 @@
 // Set your environment here
-IS_PRODUCTION = false
+IS_PRODUCTION = true
 
 export let MAIN
 export let WEB
@@ -12,7 +12,7 @@ if (IS_PRODUCTION) {
     MAIN                           = 'https://medicloud.sg/v2';
     WEB                            = 'https://medicloud.sg';
     
-    // NEW_MAIN                       = 'http://13.250.240.152:8080';
+    NEW_MAIN                       = 'http://13.250.240.152:8080';
 
 } else {
 
