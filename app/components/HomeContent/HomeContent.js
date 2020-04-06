@@ -1,3 +1,19 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -34,6 +50,7 @@ class HomeContent extends Component {
   async UNSAFE_componentWillMount() {
     await this.getUserDetail();
     await this.getUserBalance();
+    await this.NEW_getUserDetail();
   }
 
   async getUserBalance() {
@@ -83,7 +100,6 @@ class HomeContent extends Component {
     }
   }
 
-
   async getUserDetail() {
     console.log('in progress fetching getUserDetail')
     await Core.UserDetail(async (error, result) => {
@@ -97,7 +113,22 @@ class HomeContent extends Component {
     });
   }
 
+  async NEW_getUserDetail() {
+    console.log('fetching NEW_getUserDetail')
+    await Core.NEW_UserDetail(async (error, result) => {
+      console.log('fetching done for NEW_getUserDetail');
+      NEW_data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      console.warn(NEW_data);
+      await this.setState({
+        Full_name: data.Name,
+      });
+    });
+  }
+
   render() {
+    console.warn("props: " + JSON.stringify(this.props, null, 4))
+
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>

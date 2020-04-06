@@ -12,7 +12,7 @@ if (IS_PRODUCTION) {
     MAIN                           = 'https://medicloud.sg/v2';
     WEB                            = 'https://medicloud.sg';
     
-    // NEW_MAIN                       = 'http://54.255.160.249:8080';
+    // NEW_MAIN                       = 'http://13.250.240.152:8080';
 
 } else {
 
@@ -21,6 +21,6 @@ if (IS_PRODUCTION) {
     MAIN                           = 'http://staging.medicloud.sg/v2';
     WEB                            = 'http://staging.medicloud.sg';
 
-    NEW_MAIN                       = 'http://54.255.160.249:8080';
+    NEW_MAIN                       = 'http://13.250.240.152:8080';
 
 }

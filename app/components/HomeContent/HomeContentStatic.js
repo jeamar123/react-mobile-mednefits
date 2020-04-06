@@ -1,3 +1,19 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -53,9 +69,7 @@ class HomeContent extends Component {
     await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
-
-    New_token = await Core.GetDataLocalReturnNew('token');
-    console.log("New_token " + New_token)
+    await this.NEW_getUserDetail
   }
 
   async getUserBalance() {
@@ -115,8 +129,12 @@ class HomeContent extends Component {
 
   async StatusUseronClinic() {
     // this.props.toggleLoadingState('');
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token__OnHome " + New_token)
+    //
     user = await Core.GetDataLocalReturnNew('user_id');
     console.log("Storage_Data " + user)
+    console.log("NEW_Storage_Data " + New_token)
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
     data = await typeof storageCheckinUser == 'string' ? JSON.parse(storageCheckinUser) : storageCheckinUser;
@@ -168,6 +186,19 @@ class HomeContent extends Component {
         await typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       await this.setState({
         Full_name: data.profile.full_name,
+      }, () => {
+        this.toggleEcardLoading(false);
+      });
+    });
+  }
+
+  async NEW_getUserDetail() {
+    this.toggleEcardLoading(true);
+    await Core.NEW_UserDetail(async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      await this.setState({
+        Full_name: data.Name,
       }, () => {
         this.toggleEcardLoading(false);
       });

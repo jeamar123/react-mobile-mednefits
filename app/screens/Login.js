@@ -50,10 +50,10 @@ class Login extends Component {
   }
 
   async componentDidMount() {
-
     await Core.GetLocationPermission(async (error, result) => {
       // await this.getClinicType()
     });
+    await this.CheckToken();
   }
 
   async UNSAFE_componentWillMount() {
@@ -66,6 +66,11 @@ class Login extends Component {
         })
         this.inAppTrigger();
       });
+  }
+
+  async CheckToken() {
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token__OnLogin " + New_token)
   }
 
   inAppTrigger() {

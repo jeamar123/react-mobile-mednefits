@@ -29,6 +29,10 @@ export let BASIC_AUTH                     = base64.encode(U_NAME + ":" + U_PASS)
 export let NEW_AUTH                       = BASE_URL + '/auth';
 export let NEW_AUTH_LOGIN                 = NEW_AUTH + '/login';
 
+/** USER VARIABLE */
+export let NEW_USER                       = BASE_URL + '/users';
+
+
 /* LOCAL VARIABLE */
 export let NEW_ACCESS_TOKEN               = "token"
 

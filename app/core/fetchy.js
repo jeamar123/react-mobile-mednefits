@@ -1342,15 +1342,15 @@ export async function NEW_LoginProcess(username, password, callback) {
 }
 
 export const NEW_UserDetail = async (callback) => {
-  console.warn('UserDetail called in function')
+  console.warn('NEW_UserDetail called in function')
   try {
     await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
-      console.warn('GetDataLocal called in function')
+      console.warn('fetch Data NEW_UserDetail')
       if (err || result == undefined) {
         Actions.Login({ type: 'reset' });
       } else {
         params = {
-          url: Config.AUTH_USER_PROFILE,
+          url: Config.NEW_USER,
           method: 'GET',
           header: {
             Accept: 'application/json',

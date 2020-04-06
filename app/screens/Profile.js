@@ -70,9 +70,10 @@ class Profile extends Component {
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
         await AsyncStorage.removeItem('longitude');
+        await AsyncStorage.remoteItem('token')
       }
       catch (exception) {
-        Core.getNotify("", "Failed logout, please try again")
+        // Core.getNotify("", "Failed logout, please try again")
       }
       finally {
         Actions.Login({
