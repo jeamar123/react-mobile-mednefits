@@ -5,7 +5,8 @@ import styles from './styles';
 import * as Core from '../../core';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
-import * as Common from '../common'
+import * as Common from '../common';
+import { Popup } from '../../components/common';
 
 class HomeContent extends Component {
   constructor(props) {
@@ -15,8 +16,19 @@ class HomeContent extends Component {
       Full_name: '',
       currency: false,
       isClearSearch: false,
-      isLoadingSearch: false
+      isLoadingSearch: false,
+      title: null,
+      message: null,
+      showPopUp: false,
     };
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
+
+  isVisibleUpdate() {
+    this.setState({ showPopUp: false })
+  }
+  renderPopUp() {
+    this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
 
   async componentWillMount() {
@@ -89,6 +101,14 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
+          <Popup
+            kind="CobaPopUp"
+            isVisible={this.state.showPopUp}
+            closeSection={true}
+            closeSectionUpdate={this.isVisibleUpdate}
+            title={this.state.title}
+            message={this.state.message}
+          />
           <Common.InputSearch
             value={this.state.query}
             returnKeyType="search"
@@ -122,6 +142,7 @@ class HomeContent extends Component {
             <TouchableOpacity
               onPress={() =>
                 Actions.Barcode()
+                // this.renderPopUp()
               }
             >
               <View style={styles.gridBox}>

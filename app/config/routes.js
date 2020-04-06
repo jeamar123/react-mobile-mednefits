@@ -1,3 +1,20 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 import React, { Component } from 'react';
 import { Animated, Easing } from 'react-native';
 import { Scene, Router, Stack } from 'react-native-router-flux';

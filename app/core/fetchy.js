@@ -1,3 +1,19 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 /*
  * @author detatsatrio
  * @year 2018
@@ -1258,3 +1274,100 @@ export const CancelVisiByClinic = async (check_in_id, callback) => {
 //     })
 //   });
 // }
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------
+// NEW VARIABLE API Node.js
+
+export async function NEW_LoginProcess(username, password, callback) {
+  try {
+    loginParameter = {
+      identity: username,
+      password: password
+    };
+
+    params = {
+      url: Config.NEW_AUTH_LOGIN,
+      method: 'POST',
+      header: headerLogin,
+      body: loginParameter,
+    };
+
+    await fetching(params, async result => {
+      // console.log(result + "LoginProcess");
+      if (!result.status) {
+        console.log('gagal')
+
+        // getNotify('', result.message);
+        await callback(result);
+      } else {
+        console.log('sukses')
+
+        // getNotify('', 'Success! Wait a second...');
+
+        // data = result;
+        // data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+        // New_access_token = data_parse.token;
+
+        params = {
+          key: 'token',
+          value: result.token,
+        };
+
+        await Core.SetDataLocal(params, async (err, result) => {
+          if (result) {
+            console.log('Success save token NEW API', result)
+            // user_data = {
+            //   key: 'user_id',
+            //   value: String(data_parse.user_id),
+            // };
+
+            // await Core.SetDataLocal(user_data, async (err, result) => {
+            //   console.log('result user_id key from login', result)
+            // });
+
+            await callback('', true);
+            // Actions.Home({ type: 'reset' });
+          } else {
+            getNotify('', 'Failed login, try again');
+          }
+        });
+      }
+    });
+  } catch (e) {
+    Core.getNotify('', 'Failed login, try again');
+  }
+}
+
+export const NEW_UserDetail = async (callback) => {
+  console.warn('UserDetail called in function')
+  try {
+    await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
+      console.warn('GetDataLocal called in function')
+      if (err || result == undefined) {
+        Actions.Login({ type: 'reset' });
+      } else {
+        params = {
+          url: Config.AUTH_USER_PROFILE,
+          method: 'GET',
+          header: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': result,
+            Authorization: 'Basic ' + Config.BASIC_AUTH,
+          },
+        };
+        await fetching(params, async result => {
+          console.warn('done fetching in UserDetail');
+          await callback('', result)
+        });
+        console.warn('fetching executed');
+      }
+    });
+  } catch (e) {
+    console.warn('error user detail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}

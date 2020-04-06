@@ -1,6 +1,22 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 import AsyncStorage from '@react-native-community/async-storage';
 import { Actions } from 'react-native-router-flux';
-import { ACCESS_TOKEN } from '../config/variable';
+import { ACCESS_TOKEN, NEW_ACCESS_TOKEN } from '../config/variable';
 import * as Core from './index';
 
 export function GetDataLocal(key, callback) {
@@ -97,5 +113,36 @@ export function CheckUserData(callback) {
     });
   } catch (error) {
     Actions.Wallet();
+  }
+}
+
+export function NEW_GetAccessToken(callback) {
+  try {
+    AsyncStorage.getItem(NEW_ACCESS_TOKEN, async (err, result) => {
+
+      if (result) {
+        callback('', result);
+      } else {
+        Actions.login({ type: 'reset' })
+        console.log("Token Null")
+      }
+    })
+  } catch (e) {
+    Actions.login({ type: 'reset' })
+    console.log("Token Null")
+  }
+}
+
+export function NEW_CheckStatusApp(callback) {
+  try {
+    Core.NEW_GetAccessToken(result => {
+      if (result) {
+        Actions.home();
+      } else {
+        Actions.Login();
+      }
+    });
+  } catch (error) {
+    Actions.Login();
   }
 }

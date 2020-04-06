@@ -9,7 +9,8 @@ class Splash extends Component {
 
   async componentWillMount() {
     setTimeout(() => {
-      Core.AppStatus()
+      // Core.AppStatus();
+      Core.NEW_AppStatus();
     }, 500);
     await AsyncStorage.removeItem('latitude');
     await AsyncStorage.removeItem('longitude');

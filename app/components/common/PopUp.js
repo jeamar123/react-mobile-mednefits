@@ -224,6 +224,35 @@ export default class Popup extends Component {
           </View>
         </View>
       );
+    } else if (this.props.kind == 'CobaPopUp') {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center', height: responsiveHeight(25) }}>
+          {/* <ImageBackground
+            style={{ width: 250, height: 100 }}
+            source={require('../../../assets/modalAsset/loginFailed.png')}
+            resizeMode="center"
+          /> */}
+          <Image
+            style={{ width: 150, height: 100 }}
+            source={require('../../../assets/bell.png')}
+            resizeMode="contain" />
+          <View style={{ margin: 5, textAlign: 'center', alignSelf: 'center' }}>
+            <Common.Texti
+              fontFamily={Config.FONT_FAMILY_ROMAN}
+              fontSize={14}
+              style={{
+                color: '#38424B',
+                textAlign: 'center'
+              }}
+            >
+              {this.props.message}
+            </Common.Texti>
+
+          </View>
+        </View>
+
+
+      );
     }
   }
 

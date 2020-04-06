@@ -363,7 +363,7 @@ class Home extends Component {
       popAds: false,
       isMainLoaderShow: false,
       mainLoaderText: '',
-      kickout: true,  
+      kickout: true,
     }
 
     this.drawerActionCallback = this.drawerActionCallback.bind(this);
@@ -499,14 +499,14 @@ class Home extends Component {
     });
 
     // Fetch Details and check autologout trigger
-    Core.UserDetail(async (err, result) => {
-      if (result.data.profile.to_update_auto_logout == true) {
-        await AsyncStorage.removeItem('access_token');
-        await AsyncStorage.removeItem('latitude');
-        await AsyncStorage.removeItem('longitude');
-        Actions.Login({ type: 'reset' });
-      }
-    })
+    // Core.UserDetail(async (err, result) => {
+    //   if (result.data.profile.to_update_auto_logout == true) {
+    //     await AsyncStorage.removeItem('access_token');
+    //     await AsyncStorage.removeItem('latitude');
+    //     await AsyncStorage.removeItem('longitude');
+    //     Actions.Login({ type: 'reset' });
+    //   }
+    // })
   }
 
   async componentDidUpdate() {

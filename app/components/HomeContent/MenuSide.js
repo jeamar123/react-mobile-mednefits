@@ -9,19 +9,40 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
+import { Popup } from '../../components/common';
 
 class MenuSide extends Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      title: null,
+      message: null,
+      showPopUp: false,
+    }
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
   }
+  isVisibleUpdate() {
+    this.setState({ showPopUp: false })
+  }
+  renderPopUp() {
+    this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
+  }
+
   render() {
     return (
       <ImageBackground
         source={require('../../../assets/andriod_splash.png')}
         style={styles.DrawerContain}
       >
+        <Popup
+          kind="CobaPopUp"
+          isVisible={this.state.showPopUp}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         <Content padder>
           <View style={{ marginTop: 50 }} />
           <Body>
@@ -110,25 +131,30 @@ class MenuSide extends Component {
             </Body>
           </ListItem>
 
-          <ListItem icon style={{ marginTop: 10 }} onPress={() =>
-            Actions.EclaimSubmit({
-              services: this.props.Services,
-              clinicid: this.props.clinic_Id,
-              member: this.props.member,
-              nric: this.props.nric,
-              checkId: this.props.check_Id,
-              checkTime: this.props.checkTime,
-              capCurrency: this.props.capCurrency,
-              capAmount: this.props.capAmount,
-              clinic_image: this.props.clinic_image,
-              clinic_name: this.props.clinic_name,
-              consultation_fee_symbol: this.props.consultation_fee_symbol,
-              consultation_status: this.props.consultation_status,
-              consultation_fees: this.props.consultation_fees
-            })
-          }>
+          <ListItem icon style={{ marginTop: 10 }}
+            onPress={() =>
+              Actions.EclaimSubmit({
+                services: this.props.Services,
+                clinicid: this.props.clinic_Id,
+                member: this.props.member,
+                nric: this.props.nric,
+                checkId: this.props.check_Id,
+                checkTime: this.props.checkTime,
+                capCurrency: this.props.capCurrency,
+                capAmount: this.props.capAmount,
+                clinic_image: this.props.clinic_image,
+                clinic_name: this.props.clinic_name,
+                consultation_fee_symbol: this.props.consultation_fee_symbol,
+                consultation_status: this.props.consultation_status,
+                consultation_fees: this.props.consultation_fees
+              })
+              // this.renderPopUp()
+            }
+          >
             <Left>
-              <TouchableOpacity>
+              <TouchableOpacity
+              // onPress={() => this.renderPopUp()}
+              >
                 <Image
                   style={{
                     justifyContent: 'center',
@@ -250,7 +276,7 @@ class MenuSide extends Component {
             </Body>
           </ListItem>
         </Content>
-      </ImageBackground>
+      </ImageBackground >
     );
   }
 }

@@ -1,3 +1,19 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 import React, { Component } from 'react';
 import { StatusBar, Image, Text, TouchableOpacity, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -34,38 +50,17 @@ class Login extends Component {
   }
 
   async componentDidMount() {
-    
+
     await Core.GetLocationPermission(async (error, result) => {
       // await this.getClinicType()
     });
   }
 
   async componentWillMount() {
-    // //Version Check
-    // await VersionCheck.getLatestVersion({
-    //   provider: 'appStore'  // for Android
-    // })
-    //   .then(latestVersion => {
-    //     // console.warn('latest - ' + latestVersion);    // 0.1.2
-    //     this.setState({
-    //       appstoreVersion: latestVersion,
-    //     })
 
-    //     this.inAppTrigger();
-    //   });
-    // // this.checkversion()
-
-    // Core.GetUpdateNotifStatus( (err, result) => {
-    //   if (result) {
-    //     console.log( result );
-    //   } else {
-    //     console.log( err );
-    //   }
-    // });
-
-    fetch( "https://itunes.apple.com/lookup?bundleId=sg.medicloud.user" )
-      .then( res => res.json() )
-      .then( json => {
+    fetch("https://itunes.apple.com/lookup?bundleId=sg.medicloud.user")
+      .then(res => res.json())
+      .then(json => {
         this.setState({
           appstoreVersion: json.results[0].version,
         })
@@ -73,10 +68,10 @@ class Login extends Component {
       });
   }
 
-  inAppTrigger(){
+  inAppTrigger() {
     //Get Pop Up
-    console.log( 'app store version', this.state.appstoreVersion );
-    console.log( 'my app version', this.state.thisVersion );
+    console.log('app store version', this.state.appstoreVersion);
+    console.log('my app version', this.state.thisVersion);
     if (parseInt(this.state.appstoreVersion.substring(4, 10)) == parseInt(this.state.thisVersion.substring(4, 10))) {
       console.warn('UP TO DATE')
     } else if (parseInt(this.state.thisVersion.substring(4, 10)) < parseInt(this.state.appstoreVersion.substring(4, 10))) {
@@ -87,12 +82,6 @@ class Login extends Component {
     }
   }
 
-  // checkversion = async () =
-  //   version = await Core.CheckVersion()
-  // }
-
-
-
   isVisibleUpdate() {
     this.setState({ failed: false })
   }
@@ -100,22 +89,35 @@ class Login extends Component {
   LoginHandler() {
     this.setState({ isLoading: true, button: 'Logging in...' })
 
+    // this.LoginOld();
+    this.NEW_Login();
+  }
+
+  LoginOld() {
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
       if (result) {
         this.setState({ isLoading: false, failed: false, button: 'Log in' })
         Actions.Home({ type: 'reset' });
       } else {
-        // Toast.show(err.error_description, Toast.LONG);
         this.setState({ failed: true, title: 'Login Failed', isLoading: false, button: 'Log in', url: err.url })
         // this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', isLoading: false, button: 'Log in', url: err.url })
-        // this.setState({ failed: true, title: 'Login Failed', message: 'Please enter your password', isLoading: false, button: 'Log in' })
-        // Core.getNotify('', err.error_description);
       }
     })
 
     // setTimeout(()=>{
     //   this.setState({isLoading: !this.state.isLoading})
     // },500)
+  }
+
+  NEW_Login() {
+    Core.NEW_LoginProcess(this.state.username, this.state.password, (err, result) => {
+      if (result) {
+        this.setState({ isLoading: false, failed: false, button: 'Log in' })
+        Actions.Home({ type: 'reset' });
+      } else {
+        this.setState({ failed: true, title: 'Login Failed', isLoading: false, button: 'Log in', url: err.url })
+      }
+    })
   }
 
   renderError = () => {
@@ -152,6 +154,7 @@ class Login extends Component {
     console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
     console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
     console.warn("props: " + JSON.stringify(this.props, null, 4))
+    console.warn("TOKEN " + Config.NEW_ACCESS_TOKEN)
 
     return (
       <Container>
