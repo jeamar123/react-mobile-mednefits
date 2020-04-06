@@ -25,6 +25,7 @@
     "react-masked-text": "^0.4.1",
     "react-native": "^0.59.0-rc.3",
     "react-native-actionsheet": "^2.4.2",
+    "react-native-base64": "0.0.2",
     "react-native-camera": "^1.13.1",
     "react-native-datepicker-latest": "^1.12.0",
     "react-native-datepicker-modal": "^1.0.2",

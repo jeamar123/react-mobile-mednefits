@@ -20,6 +20,9 @@ class HomeContent extends Component {
   }
 
   async componentWillMount() {
+    // NEW_
+    await this.NEW_getUserDetail();
+
     await this.getUserDetail();
     await this.getUserBalance();
   }
@@ -69,6 +72,19 @@ class HomeContent extends Component {
         this.props.isLoadingSearch("false")
       }, 2000)
     }
+  }
+
+  async NEW_getUserDetail() {
+    console.log('fetching NEW_getUserDetail')
+    await Core.NEW_UserDetail(async (error, result) => {
+      console.log('fetching done for NEW_getUserDetail');
+      NEW_data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      console.warn(NEW_data);
+      await this.setState({
+        Full_name: data.Name,
+      });
+    });
   }
 
 

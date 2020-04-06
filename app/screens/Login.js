@@ -45,6 +45,13 @@ class Login extends Component {
     } else {
       console.warn('Checking...')
     }
+
+    await this.CheckToken();
+  }
+
+  async CheckToken() {
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token__OnLogin " + New_token)
   }
 
   componentWillMount() {
@@ -73,6 +80,11 @@ class Login extends Component {
   LoginHandler() {
     this.setState({ isLoading: true })
 
+    this.LoginOld();
+    this.NEW_Login();
+  }
+
+  LoginOld() {
     Core.LoginProcess(this.state.username, this.state.password, (err, result) => {
       console.log(err)
       // console.log(result);
@@ -91,6 +103,17 @@ class Login extends Component {
     // setTimeout(()=>{
     //   this.setState({isLoading: !this.state.isLoading})
     // },500)
+  }
+
+  NEW_Login() {
+    Core.NEW_LoginProcess(this.state.username, this.state.password, (err, result) => {
+      if (result) {
+        this.setState({ isLoading: false})
+        Actions.Home({ type: 'reset' });
+      } else {
+        this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', url: err.url })
+      }
+    })
   }
 
   render() {

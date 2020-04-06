@@ -5,12 +5,12 @@
 
 import { PermissionsAndroid } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { getAlert, getNotify } from './notify';
-import * as Config from '../config';
-import * as Core from './index';
 import SystemSetting from 'react-native-system-setting'
 import Geolocation from 'react-native-geolocation-service';
 import Permissions from 'react-native-permissions';
+import { getAlert, getNotify } from './notify';
+import * as Config from '../config';
+import * as Core from './index';
 
 const headerLogin = {
   'Accept': 'application/json',
@@ -1272,3 +1272,128 @@ export const CancelVisiByClinic = async (check_in_id, callback) => {
 //     })
 //   });
 // }
+
+
+
+
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------
+// NEW VARIABLE API Node.js
+
+export async function NEW_LoginProcess(username, password, callback) {
+  try {
+    loginParameter = {
+      identity: username,
+      password: password
+    };
+
+    params = {
+      url: Config.NEW_AUTH_LOGIN,
+      method: 'POST',
+      header: headerLogin,
+      body: loginParameter,
+    };
+
+    await fetching(params, async result => {
+      // console.log(result + "LoginProcess");
+      if (!result.status) {
+        console.log('gagal')
+
+        // getNotify('', result.message);
+        await callback(result);
+      } else {
+        console.log('sukses')
+
+        // getNotify('', 'Success! Wait a second...');
+
+        // data = result;
+        // data_parse = typeof data == 'string' ? JSON.parse(data) : data;
+        // New_access_token = data_parse.token;
+
+        params = {
+          key: 'token',
+          value: result.token,
+        };
+
+        await Core.SetDataLocal(params, async (err, result) => {
+          if (result) {
+            console.log('Success save token NEW API', result)
+            // user_data = {
+            //   key: 'user_id',
+            //   value: String(data_parse.user_id),
+            // };
+
+            // await Core.SetDataLocal(user_data, async (err, result) => {
+            //   console.log('result user_id key from login', result)
+            // });
+
+            await callback('', true);
+            // Actions.Home({ type: 'reset' });
+          } else {
+            getNotify('', 'Failed login, try again');
+          }
+        });
+      }
+    });
+  } catch (e) {
+    Core.getNotify('', 'Failed login, try again');
+  }
+}
+
+export const NEW_UserDetail = async (callback) => {
+  console.warn('NEW_UserDetail called in function')
+  try {
+    await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
+      console.warn('fetch Data NEW_UserDetail')
+      if (err || result == undefined) {
+        Actions.Login({ type: 'reset' });
+      } else {
+        params = {
+          url: Config.NEW_USER,
+          method: 'GET',
+          header: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': result,
+            Authorization: 'Basic ' + Config.BASIC_AUTH,
+          },
+        };
+        await fetching(params, async result => {
+          console.warn('done fetching in NEW_UserDetail');
+          await callback('', result)
+        });
+        console.warn('fetching executed');
+      }
+    });
+  } catch (e) {
+    console.warn('error user detail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+export const NEW_GetECardDetail = async (callback) => {
+  console.warn('NEW_GetECardDetail called in function')
+  try {
+    await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
+      console.warn('fetch Data NEW_GetECardDetail')
+      params = {
+        url: Config.NEW_ECARD,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': result,
+          Authorization: 'Basic ' + Config.BASIC_AUTH,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in NEW_GetECardDetail');
+        await callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get NEW_GetECardDetail' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}

@@ -38,6 +38,9 @@ class HomeContent extends Component {
   }
 
   async componentWillMount() {
+    // NEW_
+    await this.NEW_getUserDetail();
+
     await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
@@ -46,6 +49,9 @@ class HomeContent extends Component {
   async StatusUseronClinic() {
     console.log(this.props);
     // this.props.toggleLoadingState('');
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token__OnHome " + New_token)
+    //
     user = await Core.GetDataLocalReturnNew('user_id');
     newUserCheckinIDName = Config.CHECKIDVISIT + '_' + user;
     storageCheckinUser = await Core.GetDataLocalReturnNew(newUserCheckinIDName);
@@ -146,6 +152,19 @@ class HomeContent extends Component {
         this.props.isLoadingSearch("false")
       }, 2000)
     }
+  }
+
+  async NEW_getUserDetail() {
+    this.toggleEcardLoading(true);
+    await Core.NEW_UserDetail(async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      await this.setState({
+        Full_name: data.Name,
+      }, () => {
+        this.toggleEcardLoading(false);
+      });
+    });
   }
 
   async getUserDetail() {
@@ -315,7 +334,7 @@ class HomeContent extends Component {
                   Actions.notRegister()
                 }
                 disabled={this.state.isCheckoutLoading}
-                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
+                style={this.state.isCheckoutLoading == true ? { opacity: .5 } : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -378,7 +397,7 @@ class HomeContent extends Component {
                   })
                 }
                 disabled={this.state.isCheckoutLoading}
-                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
+                style={this.state.isCheckoutLoading == true ? { opacity: .5 } : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -452,7 +471,7 @@ class HomeContent extends Component {
                   })
                 }
                 disabled={this.state.isCheckoutLoading}
-                style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
+                style={this.state.isCheckoutLoading == true ? { opacity: .5 } : null}
               >
                 <View style={styles.gridBox}>
                   <View style={{ flex: 1 }}>
@@ -510,7 +529,7 @@ class HomeContent extends Component {
                         Actions.notRegister()
                       }
                       disabled={this.state.isCheckoutLoading}
-                      style={this.state.isCheckoutLoading == true ? {opacity:.5} : null}
+                      style={this.state.isCheckoutLoading == true ? { opacity: .5 } : null}
                     >
                       <View style={styles.gridBox}>
                         <View style={{ flex: 1 }}>

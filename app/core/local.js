@@ -99,3 +99,59 @@ export function CheckUserData(callback) {
     Actions.Wallet();
   }
 }
+
+export function NEW_GetAccessToken() {
+  return new Promise((resolve, reject) => {
+    try {
+      AsyncStorage.getItem(NEW_ACCESS_TOKEN, async (err, result) => {
+        // statusIntro = await CheckStatusIntro()
+
+        if (result) {
+          resolve(result)
+          // } else if (!statusIntro) {
+          // Actions.intro({type: 'reset'})
+          // reject('Error to get welcome')
+        } else {
+          Actions.login({ type: 'reset' })
+          console.log("Token Null")
+        }
+      })
+    } catch (e) {
+      Actions.login({ type: 'reset' })
+      console.log("Token Null")
+    }
+  })
+}
+
+export async function CheckAppStatus() {
+  try {
+    token = await NEW_GetAccessToken()
+
+    if (!token) {
+      Actions.login({ type: 'reset' })
+    } else if (token) {
+
+      Actions.home({ type: 'reset' })
+
+    } else {
+      Actions.login({ type: 'reset' })
+    }
+
+  } catch (e) {
+    Actions.login({ type: 'reset' })
+  }
+}
+
+export function NEW_CheckStatusApp(callback) {
+  try {
+    Core.NEW_GetAccessToken(result => {
+      if (result) {
+        Actions.home();
+      } else {
+        Actions.Login();
+      }
+    });
+  } catch (error) {
+    Actions.Login();
+  }
+}
