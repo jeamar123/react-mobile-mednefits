@@ -106,9 +106,11 @@ class Login extends Component {
   }
 
   NEW_Login() {
+    console.log('start NEW_Login')
     Core.NEW_LoginProcess(this.state.username, this.state.password, (err, result) => {
+      console.log('the result NEW_Login : ' + result)
       if (result) {
-        this.setState({ isLoading: false})
+        this.setState({ isLoading: false })
         Actions.Home({ type: 'reset' });
       } else {
         this.setState({ failed: true, title: 'Login Failed', message: 'Invalid Credentials', url: err.url })

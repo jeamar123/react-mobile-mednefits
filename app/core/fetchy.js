@@ -20,49 +20,48 @@ const headerLogin = {
 function fetching(params, callback) {
   Core.CheckNetworkConnection(connection => {
     try {
-      if (connection == 'none') {
-        throw 'No Internet Connection';
-      } else if (connection == 'unknown') {
-        throw 'Connection Unknown';
-      } else {
-        fetch(params.url, {
-          method: params.method,
-          headers: params.header,
-          body:
-            params.body == ''
-              ? ''
-              : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
-                ? params.body
-                : JSON.stringify(params.body),
-          mode: (params.mode) ? params.mode : false,
-          cache: (params.cache) ? params.cache : false
+      // if (connection == 'none') {
+      //   throw 'No Internet Connection';
+      // } else if (connection == 'unknown') {
+      //   throw 'Connection Unknown';
+      // } else {
+      fetch(params.url, {
+        method: params.method,
+        headers: params.header,
+        body:
+          params.body == ''
+            ? ''
+            : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
+              ? params.body
+              : JSON.stringify(params.body),
+        mode: (params.mode) ? params.mode : false,
+        cache: (params.cache) ? params.cache : false
+      })
+        .then(response => response.json())
+        .then(async res => {
+          console.warn('Response Server ' + res.expired)
+          if (res.status == '401') {
+            // getAlert('', res.message);
+            // if (res.expired) {
+            Actions.Login({ type: 'reset' });
+            // }
+            callback(res);
+          } else if (res.status) {
+            callback(res);
+          } else {
+            callback(res)
+            // getAlert('', 'Please try again...');
+          }
         })
-          .then(response => response.json())
-          .then(res => {
-            // console.warn('done fetching execution');
-            // console.warn(res);
-            if (!res.status) {
-              // getAlert('', res.message);
-
-              if (res.expired) {
-                Actions.Login({ type: 'reset' });
-              }
-              callback(res);
-            } else if (res.status) {
-              callback(res);
-            } else {
-              // getAlert('', 'Please try again...');
-            }
-          })
-          .catch(error => {
-            // console.warn('error fetching' + error.message);
-            error = (typeof error.message !== 'undefined') ? error : error.message
-            if (error == 'Network request failed') {
-              error = 'Please check your connection'
-            }
-            callback("", error)
-          });
-      }
+        .catch(error => {
+          // console.warn('error fetching' + error.message);
+          error = (typeof error.message !== 'undefined') ? error : error.message
+          if (error == 'Network request failed') {
+            error = 'Please check your connection'
+          }
+          callback("", error)
+        });
+      // }
     } catch (e) {
       Core.getNotify('', e);
     }

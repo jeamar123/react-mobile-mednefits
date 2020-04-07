@@ -28,6 +28,29 @@ class checkinUser extends Component {
 
   componentWillMount() {
     this.GetDataEcard();
+    this.NEW_GetDataEcard();
+  }
+
+  NEW_GetDataEcard() {
+    Core.NEW_GetECardDetail((error, result) => {
+      data =
+        typeof result == 'string' ? JSON.parse(result) : result;
+      console.log('Fetching NEW_GetDataEcard ' + data);
+      this.setState({
+        FullName: data.Name,
+        MemberID: data.UserID,
+        Nric: data.NRIC,
+        PlanType: data.plan_type,
+        PlanAddon: data.plan_add_on,
+        cap_per_visit: data.cap_per_visit,
+        Company: data.company_name,
+        StartDate: data.start_date,
+        EndDate: data.valid_date,
+        resultPackage: data.packages,
+        mobile: data.PhoneCode + ' ' + data.PhoneNo,
+        dob: data.dob,
+      });
+    });
   }
 
   GetDataEcard() {
@@ -35,10 +58,10 @@ class checkinUser extends Component {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
-      console.log( data );
+      console.log(data);
       this.setState({
-        FullName: data.fullname,
-        MemberID: data.member_id,
+        // FullName: data.fullname,
+        // MemberID: data.member_id,
         Nric: data.nric,
         PlanType: data.plan_type,
         PlanAddon: data.plan_add_on,
@@ -47,7 +70,7 @@ class checkinUser extends Component {
         StartDate: data.start_date,
         EndDate: data.valid_date,
         resultPackage: data.packages,
-        mobile: data.mobile ? "+" + (data.mobile.replace("+","")) : "",
+        // mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
         dob: data.dob,
       });
     });
@@ -117,7 +140,7 @@ class checkinUser extends Component {
             Member ID {this.state.MemberID}
           </Text>
 
-          { this.state.mobile != "" ? 
+          {this.state.mobile != "" ?
             <Text style={{
               fontFamily: 'HelveticaNeue-Roman',
               textAlign: 'center',
@@ -128,7 +151,7 @@ class checkinUser extends Component {
             }}>
               Mobile no.: {this.state.mobile}
             </Text>
-            : 
+            :
             <Text style={{
               fontFamily: 'HelveticaNeue-Roman',
               textAlign: 'center',
@@ -137,7 +160,7 @@ class checkinUser extends Component {
               paddingTop: 10,
               paddingBottom: responsiveHeight(1),
             }}>
-            </Text>           
+            </Text>
           }
 
           <View
