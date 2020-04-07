@@ -67,13 +67,13 @@ class Profile extends Component {
     if (index == 0) {
       try {
         // await AsyncStorage.removeItem('check_in_id');
+        await AsyncStorage.removeItem('token')
         await AsyncStorage.removeItem('access_token');
         await AsyncStorage.removeItem('latitude');
         await AsyncStorage.removeItem('longitude');
-        await AsyncStorage.remoteItem('token')
       }
       catch (exception) {
-        // Core.getNotify("", "Failed logout, please try again")
+        Core.getNotify("", "Failed logout, please try again")
       }
       finally {
         Actions.Login({

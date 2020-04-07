@@ -115,8 +115,10 @@ class Login extends Component {
   }
 
   NEW_Login() {
+    console.log('start NEW_Login')
     Core.NEW_LoginProcess(this.state.username, this.state.password, (err, result) => {
-      if (result) {
+      console.log('the result NEW_Login : ' + result)
+      if (result == true) {
         this.setState({ isLoading: false, failed: false, button: 'Log in' })
         Actions.Home({ type: 'reset' });
       } else {
@@ -156,10 +158,10 @@ class Login extends Component {
   }
 
   render() {
-    console.warn('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
-    console.warn('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
-    console.warn("props: " + JSON.stringify(this.props, null, 4))
-    console.warn("TOKEN " + Config.NEW_ACCESS_TOKEN)
+    console.log('ThisVersion -' + parseInt(this.state.thisVersion.substring(4, 10)));     // this version check
+    console.log('appStoreVersion -' + parseInt(this.state.appstoreVersion.substring(4, 10)));     // AppStore version check
+    console.log("props: " + JSON.stringify(this.props, null, 4))
+    console.log("TOKEN " + Config.NEW_ACCESS_TOKEN)
 
     return (
       <Container>

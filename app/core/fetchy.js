@@ -142,12 +142,13 @@ export async function LoginProcess(username, password, callback) {
 }
 
 export const UserDetail = async (callback) => {
-  console.warn('UserDetail called in function')
+  console.warn('UserDetail called in function in Splash')
   try {
     await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       console.warn('GetDataLocal called in function')
       if (err || result == undefined) {
         Actions.Login({ type: 'reset' });
+        console.warn('Trying Get Data')
       } else {
         params = {
           url: Config.AUTH_USER_PROFILE,
@@ -1346,25 +1347,26 @@ export const NEW_UserDetail = async (callback) => {
   try {
     await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
       console.warn('fetch Data NEW_UserDetail')
-      if (err || result == undefined) {
-        Actions.Login({ type: 'reset' });
-      } else {
-        params = {
-          url: Config.NEW_USER,
-          method: 'GET',
-          header: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'x-access-token': result,
-            Authorization: 'Basic ' + Config.BASIC_AUTH,
-          },
-        };
-        await fetching(params, async result => {
-          console.warn('done fetching in NEW_UserDetail');
-          await callback('', result)
-        });
-        console.warn('fetching executed');
-      }
+      // if (err || result == undefined) {
+      //   // Actions.Login({ type: 'reset' });
+      //   console.warn('Trying Get Data')
+      // } else {
+      params = {
+        url: Config.NEW_USER,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': result,
+          Authorization: 'Basic ' + Config.BASIC_AUTH,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in NEW_UserDetail');
+        await callback('', result)
+      });
+      console.warn('fetching executed');
+      // }
     });
   } catch (e) {
     console.warn('error user detail' + e.message);

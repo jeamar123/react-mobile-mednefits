@@ -66,13 +66,13 @@ class HomeContent extends Component {
   }
 
   async UNSAFE_componentWillMount() {
-  // NEW_
+    // NEW_
     await this.NEW_getUserDetail();
 
-    await this.getUserDetail();
+    // await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
-    
+
   }
 
   async getUserBalance() {
