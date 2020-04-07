@@ -55,12 +55,12 @@ async function fetching(params, callback) {
     })
       .then(async response => response.json())
       .then(async res => {
-        console.warn(res)
-        if (!res.status) {
+        console.warn('Response Server ' + res.expired)
+        if (res.status == '401') {
           // getAlert('', res.message);
-          if (res.expired) {
-            Actions.Login({ type: 'reset' });
-          }
+          // if (res.expired) {
+          Actions.Login({ type: 'reset' });
+          // }
           callback(res);
         } else if (res.status) {
           callback(res);
@@ -146,25 +146,25 @@ export const UserDetail = async (callback) => {
   try {
     await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
       console.warn('GetDataLocal called in function')
-      if (err || result == undefined) {
-        Actions.Login({ type: 'reset' });
-        console.warn('Trying Get Data')
-      } else {
-        params = {
-          url: Config.AUTH_USER_PROFILE,
-          method: 'GET',
-          header: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: result,
-          },
-        };
-        await fetching(params, async result => {
-          console.warn('done fetching in UserDetail');
-          await callback('', result)
-        });
-        console.warn('fetching executed');
-      }
+      // if (err || result == undefined) {
+      //   Actions.Login({ type: 'reset' });
+      //   console.warn('Trying Get Data')
+      // } else {
+      params = {
+        url: Config.AUTH_USER_PROFILE,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: result,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in UserDetail');
+        await callback('', result)
+      });
+      console.warn('fetching executed');
+      // }
     });
   } catch (e) {
     console.warn('error user detail' + e.message);

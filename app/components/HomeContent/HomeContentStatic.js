@@ -69,7 +69,7 @@ class HomeContent extends Component {
     // NEW_
     await this.NEW_getUserDetail();
 
-    // await this.getUserDetail();
+    await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
 

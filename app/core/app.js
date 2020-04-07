@@ -29,6 +29,56 @@ import * as Core from './index';
 //   'Content-Type': 'application/json'
 // }
 
+export async function AppStatus() {
+  try {
+    Token = await NEW_GetToken();
+    console.log('Cek NEW_Token ' + Token)
+
+    if (!Token) {
+
+      await AsyncStorage.removeItem('token')
+      await AsyncStorage.removeItem('access_token');
+      await AsyncStorage.removeItem('latitude');
+      await AsyncStorage.removeItem('longitude');
+      Actions.Login({ type: 'reset' })
+
+    } else {
+      Actions.Home({ type: 'reset' });
+    }
+  } catch (e) {
+
+    await AsyncStorage.removeItem('token')
+    await AsyncStorage.removeItem('access_token');
+    await AsyncStorage.removeItem('latitude');
+    await AsyncStorage.removeItem('longitude');
+    Actions.login({ type: 'reset' })
+  }
+}
+
+export function NEW_GetToken() {
+  return new Promise((resolve, reject) => {
+    try {
+      AsyncStorage.getItem(NEW_ACCESS_TOKEN, async (err, result) => {
+        // statusIntro = await CheckStatusIntro()
+        console.log("token local " + result)
+
+        if (result) {
+          resolve(result)
+          // } else if (!statusIntro) {
+          // Actions.intro({type: 'reset'})
+          // reject('Error to get welcome')
+        } else {
+          Actions.Login({ type: 'reset' })
+          console.log("Token Null")
+        }
+      })
+    } catch (e) {
+      Actions.Login({ type: 'reset' })
+      console.log("Token Null")
+    }
+  })
+}
+
 // export async function AppStatus() {
 //   try {
 //     Token = await NEW_GetToken();
@@ -73,90 +123,51 @@ import * as Core from './index';
 //   }
 // }
 
-export async function AppStatus() {
-  try {
-    Token = await NEW_GetToken();
+// export async function AppStatus() {
+//   try {
+//     Token = await NEW_GetToken();
 
-    if (!Token) {
-      Actions.login({ type: 'reset' })
-    } else if (Token) {
+//     if (!Token) {
+//       Actions.login({ type: 'reset' })
+//     } else if (Token) {
 
-      Core.NEW_UserDetail(async (err, result) => {
-        console.log('Splash Fetch Data  ' + result);
-        console.log('auto Logout Log ' + result.Active)
-        if (!result.Active) {
-          await AsyncStorage.removeItem('token')
-          await AsyncStorage.removeItem('access_token');
-          await AsyncStorage.removeItem('latitude');
-          await AsyncStorage.removeItem('longitude');
-          console.log("USERID " + result.UserID)
-          Actions.Login({ type: 'reset' })
+//       Core.NEW_UserDetail(async (err, result) => {
+//         console.log('Splash Fetch Data  ' + result);
+//         console.log('auto Logout Log ' + result.Active)
+//         if (!result.Active) {
+//           await AsyncStorage.removeItem('token')
+//           await AsyncStorage.removeItem('access_token');
+//           await AsyncStorage.removeItem('latitude');
+//           await AsyncStorage.removeItem('longitude');
+//           console.log("USERID " + result.UserID)
+//           Actions.Login({ type: 'reset' })
 
-        } else if (result.Active === 1) {
-          // if (result.expired) {
-          Actions.Home({ type: 'reset' });
-          // } else {
-          //   try {
-          //     params = {
-          //       key: 'user_id',
-          //       value: String(result.data.profile.user_id),
-          //     };
-          //     console.log('params', params)
-          //     await Core.SetDataLocal(params, async (err, result) => {
-          //       console.log('result user_id key', result)
-          //     });
-          //     Actions.Home({ type: 'reset' })
-          //   } catch (e) {
-          //     Actions.Login({ type: 'reset' })
-          //   }
-          // }
-        }
-      })
-    } else {
-      // Actions.login({ type: 'reset' })
-    }
+//         } else if (result.Active === 1) {
+//           // if (result.expired) {
+//           Actions.Home({ type: 'reset' });
+//           // } else {
+//           //   try {
+//           //     params = {
+//           //       key: 'user_id',
+//           //       value: String(result.data.profile.user_id),
+//           //     };
+//           //     console.log('params', params)
+//           //     await Core.SetDataLocal(params, async (err, result) => {
+//           //       console.log('result user_id key', result)
+//           //     });
+//           //     Actions.Home({ type: 'reset' })
+//           //   } catch (e) {
+//           //     Actions.Login({ type: 'reset' })
+//           //   }
+//           // }
+//         }
+//       })
+//     } else {
+//       // Actions.login({ type: 'reset' })
+//     }
 
-  } catch (e) {
-    // Actions.login({ type: 'reset' })
-  }
-}
+//   } catch (e) {
+//     // Actions.login({ type: 'reset' })
+//   }
+// }
 
-
-export function NEW_GetToken() {
-  return new Promise((resolve, reject) => {
-    try {
-      AsyncStorage.getItem(NEW_ACCESS_TOKEN, async (err, result) => {
-        // statusIntro = await CheckStatusIntro()
-
-        if (result) {
-          resolve(result)
-          // } else if (!statusIntro) {
-          // Actions.intro({type: 'reset'})
-          // reject('Error to get welcome')
-        } else {
-          Actions.Login({ type: 'reset' })
-          console.log("Token Null")
-        }
-      })
-    } catch (e) {
-      Actions.Login({ type: 'reset' })
-      console.log("Token Null")
-    }
-  })
-}
-
-export async function NEW_AppStatus() {
-  try {
-    Token = await Core.GetDataLocalReturnNew('token');
-
-    if (!Token) {
-      Actions.Login({ type: 'reset' })
-    } else {
-      Actions.Home({ type: 'reset' })
-    }
-
-  } catch (e) {
-    Actions.Login({ type: 'reset' })
-  }
-
-}
