@@ -7,6 +7,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
 import * as Common from '../common';
 import * as Config from '../../config';
+import { Popup } from '../../components/common'
 
 class HomeContent extends Component {
   constructor(props) {
@@ -33,8 +34,18 @@ class HomeContent extends Component {
       consultation_fees: '',
       isWalletLoading: false,
       isEcardLoading: false,
-      isCheckoutLoading: false
+      isCheckoutLoading: false,
+      title: null,
+      message: null,
+      showPopUp: false,
     };
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
+  isVisibleUpdate() {
+    this.setState({ showPopUp: false })
+  }
+  renderPopUp() {
+    this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
 
   async componentWillMount() {
@@ -189,6 +200,14 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
+        <Popup
+          kind="CobaPopUp"
+          isVisible={this.state.showPopUp}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
           <TouchableOpacity
             onPress={() =>
               Actions.HomeSearch()
@@ -261,6 +280,8 @@ class HomeContent extends Component {
                     consultation_status: this.state.consultation_status,
                     consultation_fees: this.state.consultation_fees
                   })
+                  //this.renderPopUp()
+                  
                 }
               >
                 <View style={styles.gridBox}>
@@ -283,6 +304,7 @@ class HomeContent extends Component {
             ) : (this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
+                 // this.renderPopUp()
                   Actions.Barcode()
                 }
               >
@@ -331,6 +353,7 @@ class HomeContent extends Component {
             {(this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
+                  //this.renderPopUp()
                   Actions.notRegister()
                 }
                 disabled={this.state.isCheckoutLoading}
@@ -526,6 +549,7 @@ class HomeContent extends Component {
             ) : (
                     <TouchableOpacity
                       onPress={() =>
+                        //this.renderPopUp()
                         Actions.notRegister()
                       }
                       disabled={this.state.isCheckoutLoading}

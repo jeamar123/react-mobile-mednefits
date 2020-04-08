@@ -13,12 +13,25 @@ import {
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';
+//import { Root, Popup } from 'popup-ui'
+import { Popup } from '../../components/common';
 
 class MenuSide extends Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      title: null,
+      message: null,
+      showPopUp: false,
+    }
+    this.isVisibleUpdate = this.isVisibleUpdate.bind(this);
+  }
+  isVisibleUpdate() {
+    this.setState({ showPopUp: false })
+  }
+  renderPopUp() {
+    this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
   render() {
     return (
@@ -26,6 +39,14 @@ class MenuSide extends Component {
         source={require('../../../assets/andriod_splash.png')}
         style={styles.DrawerContain}
       >
+        <Popup
+          kind="CobaPopUp"
+          isVisible={this.state.showPopUp}
+          closeSection={true}
+          closeSectionUpdate={this.isVisibleUpdate}
+          title={this.state.title}
+          message={this.state.message}
+        />
         <Content padder>
           <View style={{ marginTop: 50 }} />
           <Body>
@@ -78,6 +99,7 @@ class MenuSide extends Component {
           </ListItem>
 
           <ListItem icon style={{ marginTop: 10 }} onPress={() =>
+            
             Actions.Wallet({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,
@@ -93,6 +115,7 @@ class MenuSide extends Component {
               consultation_status: this.props.consultation_status,
               consultation_fees: this.props.consultation_fees
             })
+            
           }>
             <Left>
               <TouchableOpacity
@@ -114,7 +137,9 @@ class MenuSide extends Component {
             </Body>
           </ListItem>
 
-          <ListItem icon style={{ marginTop: 10 }} onPress={() =>
+          <ListItem icon style={{ marginTop: 10 }} button={true} onPress={() =>
+            
+            
             Actions.EclaimSubmit({
               services: this.props.Services,
               clinicid: this.props.clinic_Id,
@@ -130,9 +155,10 @@ class MenuSide extends Component {
               consultation_status: this.props.consultation_status,
               consultation_fees: this.props.consultation_fees
             })
-          }>
+          }
+            >
             <Left>
-              <TouchableOpacity>
+              <TouchableOpacity  onPress={() => this.renderPopUp()}>
                 <Image
                   style={{
                     justifyContent: 'center',

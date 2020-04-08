@@ -28,7 +28,7 @@ export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'Empat Kali',
+      title: 'Mednefits',
       loading: false,
       right: false,
       left: false,
@@ -1413,6 +1413,48 @@ export default class Navbar extends React.Component {
           />
         </View>
       );
+    } else if (this.props.rightNav == 'term-drop-two') {
+      return (
+        <View
+          style={{
+            width: 50,
+            height: 50,
+            paddingRight: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9,
+            elevation: 3,
+          }}
+        >
+          <CustomDropdown
+            //ref="termDrop"
+            style={{ 
+              width: 140,
+              height: 'auto',
+              borderWidth: 0,
+              position: 'absolute',
+              top: 8,
+              right: 0,
+            }}
+            labelContainerStyle={{ 
+              borderWidth: 0,
+            }}
+            dropArrowStyle={{
+              top: 0,
+              marginTop: -7,
+            }}
+            dropContainerStyle={{
+              marginTop: -4.3,
+            }}
+            labelOverlay={ this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {} }
+            labelStyle={{ textAlign: 'right' }}
+            value={ this.state.selectedTerm }
+            DropdownData={[ 'Current term', 'Last term' ]}
+            //onChangeValue={ ( value ) => this.selectTerm( value ) }
+            //onChangeStatus={ (  ) => this.toggleDrop(  ) }
+          />
+        </View>
+      );
     } else {
       return (
         <View
@@ -1490,12 +1532,11 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: '#fff',
-    fontWeight: '500',
+    fontWeight: '200',
     fontSize: 24,
     fontFamily: 'MyriadPro',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    width: '80%',
-  },
+    width: '50%',  },
 });

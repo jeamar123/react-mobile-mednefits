@@ -605,7 +605,6 @@ class NearbyClinic extends Component {
             >
               <Text style={{ color: '#fff', fontSize: 14, marginTop: 8, fontWeight: 'bold' }}>LIST</Text>
             </TouchableOpacity>
-
           </View>
         </View>
       </View>

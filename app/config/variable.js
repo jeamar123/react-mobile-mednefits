@@ -142,7 +142,16 @@ export let CLINIC_TYPE                    = [
         "web_link": "",
         "promotional_link": true,
         "type": "more"
-    }
+    },
+    /*{
+        "ClinicTypeID": "03",
+        "Name": "Popup",
+        "clinic_type_image_url": "https://img.icons8.com/wired/64/000000/details-popup.png",
+        "web_link": "",
+        "promotional_link": true,
+        "type": "popup"
+    }*/
+    
 ]
 
 /* AWS VARIABLE */

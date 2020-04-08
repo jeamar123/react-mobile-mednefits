@@ -14,6 +14,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import RF from "react-native-responsive-fontsize";
 import * as Core from '../../core';
 import * as Config from '../../config';
+import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -169,9 +170,10 @@ export default class Navbar extends React.Component {
             <Text
               style={{
                 color: '#000',
-                fontSize: RF(1.8),
+                fontSize: RF(1.7),
                 fontFamily: Config.FONT_FAMILY_THIN,
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+               
               }}
             >
               Home
@@ -233,7 +235,7 @@ export default class Navbar extends React.Component {
       return (
         <View
           style={{
-            width: 50,
+            width: 70,
             height: 50,
             justifyContent: 'center',
             alignItems: 'flex-start',
@@ -254,9 +256,10 @@ export default class Navbar extends React.Component {
                 fontSize: RF(1.8),
                 fontFamily: Config.FONT_FAMILY_THIN,
                 fontWeight: 'bold',
-                width: 50,
+                width: 70,
                 paddingStart: 2,
-                paddingEnd: 2
+                paddingEnd: 2,
+                marginRight: 10
               }}
             >
               Cancel
