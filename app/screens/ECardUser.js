@@ -8,6 +8,7 @@ import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
 import * as Core from '../core';
 import * as Common from '../components/common';
+import * as Helper from '../helper'
 
 class checkinUser extends Component {
   constructor(props) {
@@ -61,14 +62,14 @@ class checkinUser extends Component {
       this.setState({
         // FullName: data.fullname,
         // MemberID: data.member_id,
-        Nric: data.nric,
-        PlanType: data.plan_type,
-        PlanAddon: data.plan_add_on,
+        // Nric: data.nric,
+        // PlanType: data.plan_type,
+        // PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
-        Company: data.company_name,
+        // Company: data.company_name,
         // StartDate: data.start_date,
         // EndDate: data.valid_date,
-        resultPackage: data.packages,
+        // resultPackage: data.packages,
         // mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
         // dob: data.dob,
       });
