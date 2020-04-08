@@ -47,7 +47,7 @@ class checkinUser extends Component {
         StartDate: Helper.formatDate(data.start_date, 'month-char', ' '),
         EndDate: Helper.formatDate(data.valid_date, 'month-char', ' '),
         resultPackage: data.packages,
-        mobile: data.PhoneCode ? '' : data.PhoneCode + ' ' + data.PhoneNo ? '' : data.PhoneNo,
+        mobile: data.mobile ? data.mobile.substring(0, 3) + ' ' + data.mobile.substring(3, 20) : "",
         dob: data.dob,
       });
     });
@@ -66,11 +66,11 @@ class checkinUser extends Component {
         PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
         Company: data.company_name,
-        StartDate: data.start_date,
-        EndDate: data.valid_date,
+        // StartDate: data.start_date,
+        // EndDate: data.valid_date,
         resultPackage: data.packages,
         // mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
-        dob: data.dob,
+        // dob: data.dob,
       });
     });
   }
