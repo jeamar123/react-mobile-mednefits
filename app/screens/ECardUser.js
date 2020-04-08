@@ -8,6 +8,7 @@ import Navbar from '../components/common/Navbar';
 import * as Config from '../config';
 import * as Core from '../core';
 import * as Common from '../components/common';
+import * as Helper from '../helper'
 
 class checkinUser extends Component {
   constructor(props) {
@@ -28,27 +29,26 @@ class checkinUser extends Component {
 
   UNSAFE_componentWillMount() {
     this.GetDataEcard();
-    // this.NEW_GetDataEcard();
+    this.NEW_GetDataEcard();
   }
 
   NEW_GetDataEcard() {
     Core.NEW_GetECardDetail((error, result) => {
       data =
         typeof result == 'string' ? JSON.parse(result) : result;
-      console.warn(data);
-      console.log(data);
+      console.log('Fetching NEW_GetDataEcard ' + JSON.stringify(data, null, 4));
       this.setState({
-        FullName: data.Name,
-        MemberID: data.UserID,
-        Nric: data.NRIC,
+        FullName: data.fullname,
+        MemberID: data.member_id,
+        Nric: data.nric,
         PlanType: data.plan_type,
         PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
         Company: data.company_name,
-        StartDate: data.start_date,
-        EndDate: data.valid_date,
+        StartDate: Helper.formatDate(data.start_date, 'month-char', ' '),
+        EndDate: Helper.formatDate(data.valid_date, 'month-char', ' '),
         resultPackage: data.packages,
-        mobile: data.mobile ? "+" + (data.mobile.replace("+","")) : "",
+        mobile: data.mobile ? data.mobile.substring(0, 3) + ' ' + data.mobile.substring(3, 20) : "",
         dob: data.dob,
       });
     });
@@ -58,21 +58,20 @@ class checkinUser extends Component {
     Core.GetECardDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      console.log(data);
+      console.log(JSON.stringify(data, null, 4));
       this.setState({
-        FullName: data.fullname,
-        MemberID: data.member_id,
-        Nric: data.nric,
-        PlanType: data.plan_type,
-        PlanAddon: data.plan_add_on,
+        // FullName: data.fullname,
+        // MemberID: data.member_id,
+        // Nric: data.nric,
+        // PlanType: data.plan_type,
+        // PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
-        Company: data.company_name,
-        StartDate: data.start_date,
-        EndDate: data.valid_date,
-        resultPackage: data.packages,
-        mobile: data.mobile ? "+" + (data.mobile.replace("+","")) : "",
-        dob: data.dob,
+        // Company: data.company_name,
+        // StartDate: data.start_date,
+        // EndDate: data.valid_date,
+        // resultPackage: data.packages,
+        // mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
+        // dob: data.dob,
       });
     });
   }
@@ -141,7 +140,7 @@ class checkinUser extends Component {
             Member ID {this.state.MemberID}
           </Text>
 
-          { this.state.mobile != "" ? 
+          {this.state.mobile != "" ?
             <Text style={{
               fontFamily: 'HelveticaNeue-Roman',
               textAlign: 'center',
@@ -152,7 +151,7 @@ class checkinUser extends Component {
             }}>
               Mobile no.: {this.state.mobile}
             </Text>
-            : 
+            :
             <Text style={{
               fontFamily: 'HelveticaNeue-Roman',
               textAlign: 'center',
@@ -161,7 +160,7 @@ class checkinUser extends Component {
               paddingTop: 10,
               paddingBottom: responsiveHeight(1),
             }}>
-            </Text>           
+            </Text>
           }
 
           <View

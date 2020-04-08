@@ -27,6 +27,18 @@ class ECardUser extends Component {
 
   UNSAFE_componentWillMount() {
     this.GetDataEcard();
+    this.NEW_GetDataEcard();
+  }
+
+  NEW_GetDataEcard() {
+    Core.NEW_GetECardDetail((error, result) => {
+      data =
+        typeof result == 'string' ? JSON.parse(result) : result;
+      console.log('Fetching NEW_GetDataEcard ' + JSON.stringify(data, null, 4));
+      this.setState({
+        resultPackage: data.packages,
+      });
+    });
   }
 
   GetDataEcard() {
@@ -35,15 +47,15 @@ class ECardUser extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.warn(data);
       this.setState({
-        FullName: data.fullname,
-        MemberID: data.member_id,
-        Nric: data.nric,
-        PlanType: data.plan_type,
-        PlanAddon: data.plan_add_on,
-        Company: data.company_name,
-        StartDate: data.start_date,
-        EndDate: data.valid_date,
-        resultPackage: data.packages,
+        // FullName: data.fullname,
+        // MemberID: data.member_id,
+        // Nric: data.nric,
+        // PlanType: data.plan_type,
+        // PlanAddon: data.plan_add_on,
+        // Company: data.company_name,
+        // StartDate: data.start_date,
+        // EndDate: data.valid_date,
+        // resultPackage: data.packages,
       });
     });
   }
@@ -71,7 +83,7 @@ class ECardUser extends Component {
                 fontSize: RF(2.0)
               }}
             >
-              {Data.package_name}
+              {Data.medi_care_package.package_name}
             </Text>
 
             <Text
@@ -88,7 +100,7 @@ class ECardUser extends Component {
                 color: '#2C3E50',
                 fontSize: RF(1.6),
                 marginTop: responsiveHeight(0.5)
-              }}> {Data.package_discount} </Text>
+              }}> {Data.medi_care_package.package_discount} </Text>
             </Text>
 
             <Text
@@ -99,12 +111,12 @@ class ECardUser extends Component {
                 marginTop: responsiveHeight(0.5)
               }}
             >
-              {Data.package_description}
+              {Data.medi_care_package.package_description}
             </Text>
           </View>
 
           <Image
-            source={{ uri: Data.image }}
+            source={{ uri: Data.medi_care_package.image }}
             style={{ height: 35, width: 35, resizeMode: 'contain' }}
           />
 
