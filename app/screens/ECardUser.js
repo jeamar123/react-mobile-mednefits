@@ -35,19 +35,19 @@ class checkinUser extends Component {
     Core.NEW_GetECardDetail((error, result) => {
       data =
         typeof result == 'string' ? JSON.parse(result) : result;
-      console.log('Fetching NEW_GetDataEcard ' + data);
+      console.log('Fetching NEW_GetDataEcard ' + JSON.stringify(data, null, 4));
       this.setState({
-        FullName: data.Name,
-        MemberID: data.UserID,
-        Nric: data.NRIC,
+        FullName: data.fullname,
+        MemberID: data.member_id,
+        Nric: data.nric,
         PlanType: data.plan_type,
         PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
         Company: data.company_name,
-        StartDate: data.start_date,
-        EndDate: data.valid_date,
+        StartDate: Helper.formatDate(data.start_date, 'month-char', ' '),
+        EndDate: Helper.formatDate(data.valid_date, 'month-char', ' '),
         resultPackage: data.packages,
-        mobile: data.PhoneCode + ' ' + data.PhoneNo,
+        mobile: data.PhoneCode ? '' : data.PhoneCode + ' ' + data.PhoneNo ? '' : data.PhoneNo,
         dob: data.dob,
       });
     });
@@ -57,8 +57,7 @@ class checkinUser extends Component {
     Core.GetECardDetail((error, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
-      console.warn(data);
-      console.log(data);
+      console.log(JSON.stringify(data, null, 4));
       this.setState({
         // FullName: data.fullname,
         // MemberID: data.member_id,
