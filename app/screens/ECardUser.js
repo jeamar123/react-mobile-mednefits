@@ -24,6 +24,20 @@ class checkinUser extends Component {
       EndDate: '',
       cap_per_visit: '',
       resultPackage: [],
+
+      // Variable NEW API
+      NEW_FullName: '',
+      NEW_MemberID: '',
+      NEW_Nric: '',
+      NEW_PlanType: '',
+      NEW_PlanAddon: '',
+      NEW_Company: '',
+      NEW_StartDate: '',
+      NEW_EndDate: '',
+      NEW_cap_per_visit: '',
+      NEW_resultPackage: [],
+      //--------------
+
     };
   }
 
@@ -38,18 +52,18 @@ class checkinUser extends Component {
         typeof result == 'string' ? JSON.parse(result) : result;
       console.log('Fetching NEW_GetDataEcard ' + JSON.stringify(data, null, 4));
       this.setState({
-        FullName: data.fullname,
-        MemberID: data.member_id,
-        Nric: data.nric,
-        PlanType: data.plan_type,
-        PlanAddon: data.plan_add_on,
-        cap_per_visit: data.cap_per_visit,
-        Company: data.company_name,
-        StartDate: Helper.formatDate(data.start_date, 'month-char', ' '),
-        EndDate: Helper.formatDate(data.valid_date, 'month-char', ' '),
-        resultPackage: data.packages,
-        mobile: data.mobile ? data.mobile.substring(0, 3) + ' ' + data.mobile.substring(3, 20) : "",
-        dob: data.dob,
+        NEW_FullName: data.fullname,
+        NEW_MemberID: data.member_id,
+        NEW_Nric: data.nric,
+        NEW_PlanType: data.plan_type,
+        NEW_PlanAddon: data.plan_add_on,
+        NEW_cap_per_visit: data.cap_per_visit,
+        NEW_Company: data.company_name,
+        NEW_StartDate: Helper.formatDate(data.start_date, 'month-char'),
+        NEW_EndDate: Helper.formatDate(data.valid_date, 'month-char'),
+        NEW_resultPackage: data.packages,
+        NEW_mobile: data.mobile ? data.mobile.substring(0, 3) + ' ' + data.mobile.substring(3, 20) : "",
+        NEW_dob: data.dob,
       });
     });
   }
@@ -60,18 +74,18 @@ class checkinUser extends Component {
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;
       console.log(JSON.stringify(data, null, 4));
       this.setState({
-        // FullName: data.fullname,
-        // MemberID: data.member_id,
-        // Nric: data.nric,
-        // PlanType: data.plan_type,
-        // PlanAddon: data.plan_add_on,
+        FullName: data.fullname,
+        MemberID: data.member_id,
+        Nric: data.nric,
+        PlanType: data.plan_type,
+        PlanAddon: data.plan_add_on,
         cap_per_visit: data.cap_per_visit,
-        // Company: data.company_name,
-        // StartDate: data.start_date,
-        // EndDate: data.valid_date,
-        // resultPackage: data.packages,
-        // mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
-        // dob: data.dob,
+        Company: data.company_name,
+        StartDate: data.start_date,
+        EndDate: data.valid_date,
+        resultPackage: data.packages,
+        mobile: data.mobile ? "+" + (data.mobile.replace("+", "")) : "",
+        dob: data.dob,
       });
     });
   }
@@ -116,7 +130,7 @@ class checkinUser extends Component {
             marginTop: responsiveHeight(5),
           }}
           >
-            {this.state.FullName}
+            {this.state.NEW_FullName ? this.state.NEW_FullName : this.state.FullName}
           </Text>
           <Text style={{
             fontFamily: 'HelveticaNeue-Roman',
@@ -127,7 +141,7 @@ class checkinUser extends Component {
             paddingTop: 2,
             paddingBottom: 10
           }}>
-            {this.state.dob}
+            {this.state.NEW_dob ? this.state.NEW_dob : this.state.dob}
           </Text>
 
           <Text style={{
@@ -137,7 +151,7 @@ class checkinUser extends Component {
             color: '#fff',
             paddingTop: 20,
           }}>
-            Member ID {this.state.MemberID}
+            Member ID {this.state.NEW_MemberID ? this.state.NEW_MemberID : this.state.MemberID}
           </Text>
 
           {this.state.mobile != "" ?
@@ -149,7 +163,7 @@ class checkinUser extends Component {
               paddingTop: 10,
               paddingBottom: responsiveHeight(3),
             }}>
-              Mobile no.: {this.state.mobile}
+              Mobile no.: {this.state.NEW_mobile ? this.state.NEW_mobile : this.state.mobile}
             </Text>
             :
             <Text style={{
@@ -186,7 +200,7 @@ class checkinUser extends Component {
                 Company
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.state.Company}
+                {this.state.NEW_Company ? this.state.NEW_Company : this.state.Company}
               </Text>
             </View>
 
@@ -208,7 +222,7 @@ class checkinUser extends Component {
                 Your Plan Type
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.state.PlanType}
+                {this.state.NEW_PlanType ? this.state.NEW_PlanType : this.state.PlanType}
               </Text>
             </View>
 
@@ -226,7 +240,7 @@ class checkinUser extends Component {
                 Plan Add-on
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.state.PlanAddon}
+                {this.state.NEW_PlanAddon ? this.state.NEW_PlanAddon : this.state.PlanAddon}
               </Text>
             </View>
 
@@ -271,7 +285,7 @@ class checkinUser extends Component {
                 Start Date
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.state.StartDate}
+                {this.state.NEW_StartDate ? this.state.NEW_StartDate : this.state.StartDate}
               </Text>
             </View>
 
@@ -290,7 +304,7 @@ class checkinUser extends Component {
                 End Date
               </Text>
               <Text style={{ fontFamily: Config.FONT_FAMILY_ROMAN, fontWeight: 'bold', color: '#2C3E50', fontSize: RF(1.8) }}>
-                {this.state.EndDate}
+                {this.state.NEW_EndDate ? this.state.NEW_EndDate : this.state.EndDate}
               </Text>
             </View>
 

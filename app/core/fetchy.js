@@ -1399,3 +1399,77 @@ export const NEW_GetECardDetail = async (callback) => {
     getNotify('', 'Failed get data, try again');
   }
 }
+
+export const NEW_GetBalance = async (callback) => {
+  console.warn('NEW_GetBalance called in function')
+  try {
+    await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
+      console.warn('fetch Data NEW_GetBalance')
+      params = {
+        url: Config.NEW_CREDIT,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': result,
+          Authorization: 'Basic ' + Config.BASIC_AUTH,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in NEW_GetBalance');
+        await callback('', result);
+      });
+    });
+  } catch (e) {
+    console.warn('error get NEW_GetBalance' + e.message);
+    getNotify('', 'Failed get data, try again');
+  }
+}
+
+// export async function GetBalanceMedical(filter, callback) {
+//   await setTimeout(async function () {
+//     try {
+//       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+//         params = {
+//           url: Config.USER_CREDITS + "?spending_type=medical&filter=" + filter,
+//           method: 'GET',
+//           header: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//             Authorization: result,
+//           },
+//         };
+//         await fetching(params, async result => {
+//           await callback('', result);
+//         });
+//       });
+//     } catch (e) {
+//       console.warn('error get balance' + e.message);
+//       getNotify('', 'Failed get data, try again');
+//     }
+//   }, 100);
+// }
+
+// export async function GetBalanceWellness(filter, callback) {
+//   await setTimeout(async function () {
+//     try {
+//       await Core.GetDataLocal(Config.ACCESS_TOKEN, async (err, result) => {
+//         params = {
+//           url: Config.USER_CREDITS + "?spending_type=wellness&filter=" + filter,
+//           method: 'GET',
+//           header: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json',
+//             Authorization: result,
+//           },
+//         };
+//         await fetching(params, async result => {
+//           await callback('', result);
+//         });
+//       });
+//     } catch (e) {
+//       console.warn('error get balance' + e.message);
+//       getNotify('', 'Failed get data, try again');
+//     }
+//   }, 100);
+// }

@@ -29,7 +29,12 @@ class HomeContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Balance: '0',
+      // Variable NEW API
+      NEW_Balance: '',
+      NEW_Fullname: '',
+      NEW_currency: '',
+      //--------------
+      Balance: '',
       Full_name: '',
       currency: false,
       isClearSearch: false,
@@ -66,13 +71,30 @@ class HomeContent extends Component {
   }
 
   async UNSAFE_componentWillMount() {
+    New_token = await Core.GetDataLocalReturnNew('token');
+    console.log("New_token__OnHome " + New_token)
     // NEW_
     await this.NEW_getUserDetail();
+    await this.NEW_getBalance();
 
     await this.getUserDetail();
     await this.getUserBalance();
     await this.StatusUseronClinic();
+  }
 
+  async NEW_getBalance() {
+    this.toggleWalletLoading(true);
+    await Core.NEW_GetBalance(async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      console.log('Fetching NEW_GetBalance ' + JSON.stringify(data, null, 4));
+      await this.setState({
+        NEW_Balance: data.balance,
+        NEW_currency: data.currency_symbol ? data.currency_symbol == "S$" ? "SGD" : "MYR" : ""
+      }, () => {
+        this.toggleWalletLoading(false);
+      });
+    });
   }
 
   async getUserBalance() {
@@ -132,8 +154,6 @@ class HomeContent extends Component {
 
   async StatusUseronClinic() {
     // this.props.toggleLoadingState('');
-    New_token = await Core.GetDataLocalReturnNew('token');
-    console.log("New_token__OnHome " + New_token)
     //
     user = await Core.GetDataLocalReturnNew('user_id');
     console.log("Storage_Data " + user)
@@ -187,8 +207,9 @@ class HomeContent extends Component {
     await Core.NEW_UserDetail(async (error, result) => {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
+      console.log('Fetching NEW_UserDetail ' + JSON.stringify(data, null, 4));
       await this.setState({
-        Full_name: data.Name,
+        NEW_Fullname: data.Name,
       }, () => {
         this.toggleEcardLoading(false);
       });
@@ -211,6 +232,7 @@ class HomeContent extends Component {
   render() {
     console.warn('kickout ' + this.state.kickout)
     console.warn("props: " + JSON.stringify(this.props, null, 4))
+    console.log("NEW_Balance__ " + this.state.Balance)
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
@@ -614,7 +636,9 @@ class HomeContent extends Component {
                       <Text style={styles.title}>E-Card</Text>
                       {
                         this.state.isEcardLoading == false ?
-                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                          <Text numberOfLines={3} style={styles.detail}>
+                            {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -641,7 +665,9 @@ class HomeContent extends Component {
                       <Text style={styles.title}>E-Card</Text>
                       {
                         this.state.isEcardLoading == false ?
-                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                          <Text numberOfLines={3} style={styles.detail}>
+                            {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -667,7 +693,9 @@ class HomeContent extends Component {
                           <Text style={styles.title}>E-Card</Text>
                           {
                             this.state.isEcardLoading == false ?
-                              <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                              <Text numberOfLines={3} style={styles.detail}>
+                                {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                              </Text>
                               :
                               <ActivityIndicator color="#fff" size="small" />
                           }
@@ -716,7 +744,8 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -748,7 +777,8 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -780,7 +810,8 @@ class HomeContent extends Component {
                           <Text style={styles.title}>Wallet</Text>
                           {
                             this.state.isWalletLoading == false ?
-                              <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                              <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                              </Text>
                               :
                               <ActivityIndicator color="#fff" size="small" />
                           }

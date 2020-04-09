@@ -32,6 +32,7 @@ export let NEW_AUTH_LOGIN                 = NEW_AUTH + '/login';
 /** USER VARIABLE */
 export let NEW_USER                       = BASE_URL + '/users';
 export let NEW_ECARD                      = NEW_USER + '/ecard';
+export let NEW_CREDIT                     = NEW_USER + '/credit';
 
 
 /* LOCAL VARIABLE */
