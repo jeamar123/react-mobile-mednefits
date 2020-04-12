@@ -41,7 +41,7 @@ export default class Navbar extends React.Component {
     console.log(this.state);
   }
 
-  toggleDrop( ){
+  toggleDrop() {
     setTimeout(() => {
       // console.log( this.refs.termDrop.state.showDrop );
       this.setState({ isDropShow: this.refs.termDrop.state.showDrop });
@@ -50,17 +50,17 @@ export default class Navbar extends React.Component {
     }, 0);
   }
 
-  selectTerm( term ) {
-    this.setState({ 
-      selectedTerm: term ,
+  selectTerm(term) {
+    this.setState({
+      selectedTerm: term,
       isDropShow: false
     })
-    this.props.updateSelectedTerm( term );
+    this.props.updateSelectedTerm(term);
   }
 
-  closeDrop(){
-    if( this.state.isDropShow == true ){
-      this.setState({ 
+  closeDrop() {
+    if (this.state.isDropShow == true) {
+      this.setState({
         isDropShow: false
       })
     }
@@ -84,7 +84,7 @@ export default class Navbar extends React.Component {
       this.setState({ right: true });
     }
 
-    if ( this.props.trans_id ) {
+    if (this.props.trans_id) {
       this.getTransactionCurrency();
     }
   }
@@ -92,12 +92,12 @@ export default class Navbar extends React.Component {
   getTransactionCurrency() {
     Core.GetUserNetwork(this.props.trans_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
-      console.log( data );
+      console.log(data);
       this.setState({
         currency_symbol: data.default_currency.toUpperCase(),
         convert_option: data.convert_option,
       })
-      console.log( this.state );
+      console.log(this.state);
     })
   }
 
@@ -1362,12 +1362,12 @@ export default class Navbar extends React.Component {
                   style={{ resizeMode: 'contain', marginTop: 10 }}
                   initWidth="100" initHeight="30"
                 />
-              :
-              <ResponsiveImage
-                source={require('../../../assets/toggle-currency-sgd.jpg')}
-                style={{ resizeMode: 'contain', marginTop: 10 }}
-                initWidth="100" initHeight="30"
-              />
+                :
+                <ResponsiveImage
+                  source={require('../../../assets/toggle-currency-sgd.jpg')}
+                  style={{ resizeMode: 'contain', marginTop: 10 }}
+                  initWidth="100" initHeight="30"
+                />
             }
           </TouchableOpacity>
         </View>
@@ -1386,7 +1386,7 @@ export default class Navbar extends React.Component {
         >
           <CustomDropdown
             ref="termDrop"
-            style={{ 
+            style={{
               width: 140,
               height: 'auto',
               borderWidth: 0,
@@ -1394,7 +1394,7 @@ export default class Navbar extends React.Component {
               top: 8,
               right: 0,
             }}
-            labelContainerStyle={{ 
+            labelContainerStyle={{
               borderWidth: 0,
             }}
             dropArrowStyle={{
@@ -1404,12 +1404,12 @@ export default class Navbar extends React.Component {
             dropContainerStyle={{
               marginTop: -4.3,
             }}
-            labelOverlay={ this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {} }
+            labelOverlay={this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {}}
             labelStyle={{ textAlign: 'right' }}
-            value={ this.state.selectedTerm }
-            DropdownData={[ 'Current term', 'Last term' ]}
-            onChangeValue={ ( value ) => this.selectTerm( value ) }
-            onChangeStatus={ (  ) => this.toggleDrop(  ) }
+            value={this.state.selectedTerm}
+            DropdownData={['Current term', 'Last term']}
+            onChangeValue={(value) => this.selectTerm(value)}
+            onChangeStatus={() => this.toggleDrop()}
           />
         </View>
       );
@@ -1428,7 +1428,7 @@ export default class Navbar extends React.Component {
         >
           <CustomDropdown
             //ref="termDrop"
-            style={{ 
+            style={{
               width: 140,
               height: 'auto',
               borderWidth: 0,
@@ -1436,7 +1436,7 @@ export default class Navbar extends React.Component {
               top: 8,
               right: 0,
             }}
-            labelContainerStyle={{ 
+            labelContainerStyle={{
               borderWidth: 0,
             }}
             dropArrowStyle={{
@@ -1446,12 +1446,12 @@ export default class Navbar extends React.Component {
             dropContainerStyle={{
               marginTop: -4.3,
             }}
-            labelOverlay={ this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {} }
+            labelOverlay={this.state.isDropShow == true ? { color: 'rgba(255,255,255,.2)' } : {}}
             labelStyle={{ textAlign: 'right' }}
-            value={ this.state.selectedTerm }
-            DropdownData={[ 'Current term', 'Last term' ]}
-            //onChangeValue={ ( value ) => this.selectTerm( value ) }
-            //onChangeStatus={ (  ) => this.toggleDrop(  ) }
+            value={this.state.selectedTerm}
+            DropdownData={['Current term', 'Last term']}
+            onChangeValue={(value) => this.selectTerm(value)}
+            onChangeStatus={() => this.toggleDrop()}
           />
         </View>
       );
@@ -1494,9 +1494,9 @@ export default class Navbar extends React.Component {
             {this.renderMiddle()}
             {
               this.state.isDropShow == true ?
-                <View 
-                  style={{ 
-                    backgroundColor: 'rgba(0,0,0,.5)', 
+                <View
+                  style={{
+                    backgroundColor: 'rgba(0,0,0,.5)',
                     position: 'absolute',
                     top: 0,
                     left: 0,
@@ -1505,7 +1505,7 @@ export default class Navbar extends React.Component {
                     zIndex: 2,
                     elevation: 2
                   }}></View>
-              : null
+                : null
             }
             {this.renderRight()}
           </View>
@@ -1538,5 +1538,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    width: '50%',  },
+    width: '50%',
+  },
 });

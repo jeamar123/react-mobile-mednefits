@@ -25,7 +25,7 @@ export function formatDate(dates, format, divider) {
   if ((today.getDate() == date.getDate()) && (today.getFullYear() == date.getFullYear()) && (today.getMonth() == date.getMonth())) {
     fullDate = day + ", " + hour + ":" + minute
   } else {
-    fullDate = day + " " + monthNames[monthIndex] + " " + year 
+    fullDate = day + " " + monthNames[monthIndex] + " " + year
     // + ", " + hour + ":" + minute
   }
 

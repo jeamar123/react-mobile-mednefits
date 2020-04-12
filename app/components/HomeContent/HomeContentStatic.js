@@ -13,6 +13,11 @@ class HomeContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // Variable NEW API
+      NEW_Balance: '',
+      NEW_Fullname: '',
+      NEW_currency: '',
+      //--------------
       Balance: '0',
       Full_name: '',
       currency: false,
@@ -50,10 +55,11 @@ class HomeContent extends Component {
 
   async componentWillMount() {
     // NEW_
+    await this.NEW_getBalance();
     await this.NEW_getUserDetail();
 
     await this.getUserDetail();
-    await this.getUserBalance();
+    // await this.getUserBalance();
     await this.StatusUseronClinic();
   }
 
@@ -104,6 +110,21 @@ class HomeContent extends Component {
       //   kickout: result.data.check_in_status_removed,
       // });
 
+    });
+  }
+
+  async NEW_getBalance() {
+    this.toggleWalletLoading(true);
+    await Core.NEW_GetBalance(async (error, result) => {
+      data =
+        await typeof result == 'string' ? JSON.parse(result) : result;
+      console.log('Fetching NEW_GetBalance ' + JSON.stringify(data, null, 4));
+      await this.setState({
+        NEW_Balance: data.balance,
+        NEW_currency: data.currency_symbol ? data.currency_symbol == "S$" ? "SGD" : "MYR" : ""
+      }, () => {
+        this.toggleWalletLoading(false);
+      });
     });
   }
 
@@ -171,7 +192,7 @@ class HomeContent extends Component {
       data =
         await typeof result == 'string' ? JSON.parse(result) : result;
       await this.setState({
-        Full_name: data.Name,
+        NEW_Fullname: data.Name,
       }, () => {
         this.toggleEcardLoading(false);
       });
@@ -200,14 +221,14 @@ class HomeContent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.sectionTitle}>
-        <Popup
-          kind="CobaPopUp"
-          isVisible={this.state.showPopUp}
-          closeSection={true}
-          closeSectionUpdate={this.isVisibleUpdate}
-          title={this.state.title}
-          message={this.state.message}
-        />
+          <Popup
+            kind="CobaPopUp"
+            isVisible={this.state.showPopUp}
+            closeSection={true}
+            closeSectionUpdate={this.isVisibleUpdate}
+            title={this.state.title}
+            message={this.state.message}
+          />
           <TouchableOpacity
             onPress={() =>
               Actions.HomeSearch()
@@ -281,7 +302,7 @@ class HomeContent extends Component {
                     consultation_fees: this.state.consultation_fees
                   })
                   //this.renderPopUp()
-                  
+
                 }
               >
                 <View style={styles.gridBox}>
@@ -304,7 +325,7 @@ class HomeContent extends Component {
             ) : (this.state.kickout == true) ? (
               <TouchableOpacity
                 onPress={() =>
-                 // this.renderPopUp()
+                  // this.renderPopUp()
                   Actions.Barcode()
                 }
               >
@@ -630,7 +651,9 @@ class HomeContent extends Component {
                       <Text style={styles.title}>E-Card</Text>
                       {
                         this.state.isEcardLoading == false ?
-                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                          <Text numberOfLines={3} style={styles.detail}>
+                            {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -657,7 +680,9 @@ class HomeContent extends Component {
                       <Text style={styles.title}>E-Card</Text>
                       {
                         this.state.isEcardLoading == false ?
-                          <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                          <Text numberOfLines={3} style={styles.detail}>
+                            {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -685,7 +710,9 @@ class HomeContent extends Component {
                           <Text style={styles.title}>E-Card</Text>
                           {
                             this.state.isEcardLoading == false ?
-                              <Text numberOfLines={3} style={styles.detail}>{this.state.Full_name}</Text>
+                              <Text numberOfLines={3} style={styles.detail}>
+                                {this.state.NEW_Fullname ? this.state.NEW_Fullname : this.state.Full_name}
+                              </Text>
                               :
                               <ActivityIndicator color="#fff" size="small" />
                           }
@@ -733,7 +760,8 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                          <Text style={styles.detail}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -767,7 +795,8 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                          <Text style={styles.detail}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
                       }
@@ -801,7 +830,8 @@ class HomeContent extends Component {
                           <Text style={styles.title}>Wallet</Text>
                           {
                             this.state.isWalletLoading == false ?
-                              <Text style={styles.detail}>{(this.state.currency) ? this.state.currency : " "} {this.state.Balance}</Text>
+                              <Text style={styles.detail}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                              </Text>
                               :
                               <ActivityIndicator color="#fff" size="small" />
                           }
