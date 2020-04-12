@@ -744,7 +744,7 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
                           </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -777,7 +777,7 @@ class HomeContent extends Component {
                       <Text style={styles.title}>Wallet</Text>
                       {
                         this.state.isWalletLoading == false ?
-                          <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                          <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
                           </Text>
                           :
                           <ActivityIndicator color="#fff" size="small" />
@@ -810,7 +810,7 @@ class HomeContent extends Component {
                           <Text style={styles.title}>Wallet</Text>
                           {
                             this.state.isWalletLoading == false ?
-                              <Text style={styles.amount}>{(this.state.currency) ? this.state.currency : " "} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
+                              <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
                               </Text>
                               :
                               <ActivityIndicator color="#fff" size="small" />
