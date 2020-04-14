@@ -23,7 +23,7 @@ class AddMedication extends Component {
     this.AddMedication = this.AddMedication.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataProfile();
   }
 

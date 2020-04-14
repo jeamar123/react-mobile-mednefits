@@ -38,7 +38,7 @@ class HistoryTransaction extends Component {
     this.selectTerm = this.selectTerm.bind(this);
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await this.getUserDetail();
     await this.getDataIn_Network();
     await this.getDataE_Claim();

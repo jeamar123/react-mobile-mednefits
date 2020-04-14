@@ -54,7 +54,7 @@ class Login extends Component {
     console.log("New_token__OnLogin " + New_token)
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     //Version Check
     VersionCheck.getLatestVersion({
       provider: 'playStore'  // for Android

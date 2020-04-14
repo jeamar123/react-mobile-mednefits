@@ -19,7 +19,7 @@ class HomeContent extends Component {
     };
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await this.getUserDetail();
     await this.getUserBalance();
   }

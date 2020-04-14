@@ -75,7 +75,7 @@ export default class Navbar extends React.Component {
   }
 
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.leftNav) {
       this.setState({ left: true });
     }

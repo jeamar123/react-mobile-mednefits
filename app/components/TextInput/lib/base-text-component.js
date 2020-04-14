@@ -11,7 +11,7 @@ export default class BaseTextComponent extends PureComponent {
         this._bindProps(this.props);
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this._bindProps(nextProps);
     }
 

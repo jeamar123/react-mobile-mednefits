@@ -213,7 +213,7 @@ class NearbyClinic extends Component {
 
   // Nearby Function
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getDataLocation()
   }
 

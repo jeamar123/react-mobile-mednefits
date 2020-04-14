@@ -43,7 +43,7 @@ class MedicalAllergies extends Component {
     }
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     this.getFavorites_Clinic();
     await Core.UserDetail(async (error, result) => {
       // console.log(error);

@@ -27,7 +27,7 @@ class addMedicalHistory extends Component {
     this.addMedicalHistory = this.addMedicalHistory.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataProfile();
   }
 

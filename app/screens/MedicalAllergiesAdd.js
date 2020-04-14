@@ -22,7 +22,7 @@ class AddAllergies extends Component {
     this.AddAllergies = this.AddAllergies.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataProfile();
   }
 

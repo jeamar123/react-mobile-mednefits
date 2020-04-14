@@ -148,7 +148,7 @@ class History extends Component {
     });
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     Core.GetUserNetwork(this.props.transaction_id, (result) => {
       data = (typeof result == "string") ? JSON.parse(result.data) : result.data
       console.warn(data)

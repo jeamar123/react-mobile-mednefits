@@ -40,7 +40,7 @@ class NearbyClinic extends Component {
     // this.paginateClinicResults = this.paginateClinicResults.bind(this);
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     await Core.GetClinicMapList(this.props.ClinicTypeID, async (error, result) => {
       console.warn(error);
       console.warn(result);

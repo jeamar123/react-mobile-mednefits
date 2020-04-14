@@ -426,7 +426,7 @@ class Home extends Component {
     this.isVisibleAds = this.isVisibleAds.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     //Version Check
     VersionCheck.getLatestVersion({
       provider: 'playStore'  // for Android

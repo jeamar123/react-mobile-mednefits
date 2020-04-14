@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BackHandler, SafeAreaView, Animated, Easing } from 'react-native';
 import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
-import OneSignal from 'react-native-onesignal'; // Import package from node modules
+// import OneSignal from 'react-native-onesignal'; // Import package from node modules
 
 import Logins from '../screens/Login';
 import Forgot from '../screens/ForgotPassword';
@@ -161,7 +161,7 @@ class RouterComponent extends Component {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 

@@ -7,7 +7,7 @@ import * as Core from '../core';
 
 class Splash extends Component {
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     setTimeout(() => {
       Core.AppStatus()
     }, 1000);

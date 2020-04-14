@@ -17,7 +17,7 @@ class HistoryUser extends Component {
     console.log(this.props);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     // this.getUserDetail();
   }
 

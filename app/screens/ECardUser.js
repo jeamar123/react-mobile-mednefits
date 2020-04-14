@@ -40,7 +40,7 @@ class checkinUser extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataEcard();
     this.NEW_GetDataEcard();
   }

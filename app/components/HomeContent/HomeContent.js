@@ -30,7 +30,7 @@ class HomeContent extends Component {
     this.setState({ showPopUp: true, message: 'You have no credit to access this feature at the moment.Kindly contact your HR.', })
   }
 
-  async componentWillMount() {
+  async UNSAFE_componentWillMount() {
     // NEW_
     await this.NEW_getUserDetail();
 

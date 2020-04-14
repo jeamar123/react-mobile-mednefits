@@ -11,7 +11,7 @@ class DollarBenefits extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserBalance();
   }
 

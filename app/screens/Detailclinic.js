@@ -29,7 +29,7 @@ class HistoryTransaction extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     Core.GetDetailClinic(this.props.clinic_id, (err, result) => {
       data =
         typeof result.data == 'string' ? JSON.parse(result.data) : result.data;

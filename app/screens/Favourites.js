@@ -50,12 +50,12 @@ class Favourites extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     this.setState({ favourite: nextProps.favourite });
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getFavorites_Clinic();
   }
 

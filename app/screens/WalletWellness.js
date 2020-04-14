@@ -45,7 +45,7 @@ class Wallet extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserBalance();
     this.selectSpending("in_network_transactions")
     // Core.GetBalance((err, result)=>{

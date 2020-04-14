@@ -48,7 +48,7 @@ class manageProfile extends Component {
     this.updateProfile = this.updateProfile.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.GetDataProfile();
   }
 

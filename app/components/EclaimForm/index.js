@@ -54,7 +54,7 @@ export default class EclaimForm extends Component {
     this.inputDate = {};
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getUserDetail()
     this.getVisitDateList();
     this.getMember()
