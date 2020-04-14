@@ -741,7 +741,9 @@ class HomeContent extends Component {
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
-                      <Text style={styles.title}>Wallet</Text>
+                      <Text style={styles.title}>
+                        Wallet
+                      </Text>
                       {
                         this.state.isWalletLoading == false ?
                           <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
@@ -774,7 +776,9 @@ class HomeContent extends Component {
                       />
                     </View>
                     <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
-                      <Text style={styles.title}>Wallet</Text>
+                      <Text style={styles.title}>
+                        Wallet
+                      </Text>
                       {
                         this.state.isWalletLoading == false ?
                           <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}
@@ -807,7 +811,9 @@ class HomeContent extends Component {
                           />
                         </View>
                         <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '7.5%', width: '70%' }}>
-                          <Text style={styles.title}>Wallet</Text>
+                          <Text style={styles.title}>
+                            Wallet
+                          </Text>
                           {
                             this.state.isWalletLoading == false ?
                               <Text style={styles.amount}>{(this.state.NEW_currency) ? this.state.NEW_currency : this.state.currency} {this.state.NEW_Balance ? this.state.NEW_Balance : this.state.Balance}

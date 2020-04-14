@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "cd ios && pod install",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -16,9 +17,6 @@
     "@react-native-community/async-storage": "^1.8.0",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/netinfo": "^5.3.3",
-    "appcenter": "3.0.1",
-    "appcenter-analytics": "3.0.1",
-    "appcenter-crashes": "3.0.1",
     "native-base": "^2.13.8",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",

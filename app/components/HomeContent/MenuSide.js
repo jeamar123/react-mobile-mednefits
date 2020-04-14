@@ -275,6 +275,7 @@ class MenuSide extends Component {
               <Text style={styles.text}>Profile</Text>
             </Body>
           </ListItem>
+
         </Content>
       </ImageBackground >
     );

@@ -1,22 +1,4 @@
 PODS:
-  - appcenter-analytics (3.0.1):
-    - AppCenter/Analytics
-    - AppCenterReactNativeShared
-    - React
-  - appcenter-core (3.0.1):
-    - AppCenterReactNativeShared
-    - React
-  - appcenter-crashes (3.0.1):
-    - AppCenter/Crashes
-    - AppCenterReactNativeShared
-    - React
-  - AppCenter/Analytics (3.1.0):
-    - AppCenter/Core
-  - AppCenter/Core (3.1.0)
-  - AppCenter/Crashes (3.1.0):
-    - AppCenter/Core
-  - AppCenterReactNativeShared (3.0.1):
-    - AppCenter/Core (= 3.1.0)
   - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
   - CodePush (6.2.0):
@@ -224,15 +206,15 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
-  - react-native-camera (3.17.0):
+  - react-native-camera (3.22.1):
     - React
-    - react-native-camera/RCT (= 3.17.0)
-    - react-native-camera/RN (= 3.17.0)
-  - react-native-camera/RCT (3.17.0):
+    - react-native-camera/RCT (= 3.22.1)
+    - react-native-camera/RN (= 3.22.1)
+  - react-native-camera/RCT (3.22.1):
     - React
-  - react-native-camera/RN (3.17.0):
+  - react-native-camera/RN (3.22.1):
     - React
-  - react-native-document-picker (3.2.4):
+  - react-native-document-picker (3.3.3):
     - React
   - react-native-geolocation (2.0.2):
     - React
@@ -240,12 +222,12 @@ PODS:
     - React
   - react-native-maps (0.22.1):
     - React
-  - react-native-netinfo (5.3.3):
+  - react-native-netinfo (5.7.0):
     - React
-  - react-native-simple-toast (1.0.0):
+  - react-native-simple-toast (1.1.0):
     - React
     - Toast (~> 4.0.0)
-  - react-native-version-check (3.3.1):
+  - react-native-version-check (3.4.0):
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -284,17 +266,17 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - ReactNativePermissions (1.2.1):
     - React
-  - RNCAsyncStorage (1.8.0):
+  - RNCAsyncStorage (1.9.0):
     - React
   - RNFastImage (7.0.2):
     - React
     - SDWebImage (~> 5.0)
     - SDWebImageWebPCoder (~> 0.2.3)
-  - RNGestureHandler (1.5.6):
+  - RNGestureHandler (1.6.1):
     - React
-  - RNReanimated (1.7.0):
+  - RNReanimated (1.8.0):
     - React
-  - RNScreens (2.0.0-beta.2):
+  - RNScreens (2.4.0):
     - React
   - RNSVG (9.13.6):
     - React
@@ -311,9 +293,6 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - appcenter-analytics (from `../node_modules/appcenter-analytics/ios`)
-  - appcenter-core (from `../node_modules/appcenter/ios`)
-  - appcenter-crashes (from `../node_modules/appcenter-crashes/ios`)
   - CodePush (from `../node_modules/react-native-code-push`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -366,8 +345,6 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - GoogleMaps
   trunk:
-    - AppCenter
-    - AppCenterReactNativeShared
     - Base64
     - boost-for-react-native
     - JWT
@@ -378,12 +355,6 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
-  appcenter-analytics:
-    :path: "../node_modules/appcenter-analytics/ios"
-  appcenter-core:
-    :path: "../node_modules/appcenter/ios"
-  appcenter-crashes:
-    :path: "../node_modules/appcenter-crashes/ios"
   CodePush:
     :path: "../node_modules/react-native-code-push"
   DoubleConversion:
@@ -472,11 +443,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppCenter: a1c30c47b7882a04a615ffa5ab26c007326436d8
-  appcenter-analytics: 46b4bb2832834a198ba6c4058b4eb335386c1063
-  appcenter-core: 765878f5c300907bb70dbb8e956c5a74df7ca23d
-  appcenter-crashes: 66b533f4e2a2278ddbd9369614fe18f0d7f58e47
-  AppCenterReactNativeShared: a18a3da01dd569fbfbdd264c8c43491af6efa88d
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CodePush: 187dbff5571da2045869ef5d342568fb5a13d387
@@ -498,14 +464,14 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
-  react-native-camera: 4ead7a30a89f275f531d80aa720cc69363c38135
-  react-native-document-picker: c36bf5f067a581657ecaf7124dcd921a8be19061
+  react-native-camera: 94d52da97e82a78b9745a1b92074d2b5f820c962
+  react-native-document-picker: dd96ce05bf1453b110d7a3912097bf6d298d2cb6
   react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-image-picker: 3637d63fef7e32a230141ab4660d3ceb773c824f
   react-native-maps: 5a3de82c153db99e5ac939cb2ed576f245514016
-  react-native-netinfo: 75711548b53a527515d9226e6370249f75083e63
-  react-native-simple-toast: 9c2f5979dfe555d0aa7b084348a06fd6ef7a6f55
-  react-native-version-check: 5320555e50941afd1838e396920cee42163862f5
+  react-native-netinfo: 61a837131d5f0194d22f8048a456d8f31a074baa
+  react-native-simple-toast: 186abeb411a14ff60aeeeb51d9d06ee9c6676794
+  react-native-version-check: 8779690132c82e7c2eda4441731b1bb512db9ab2
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -517,11 +483,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   ReactNativePermissions: e7db6c38a2f3fb8f26dbfdcaeb5c5e9364657a6d
-  RNCAsyncStorage: 455b48eb552543bad4e3099e180e1700700771f3
+  RNCAsyncStorage: b16697280b08bab4b5f2f67f752d93d13a52e9ed
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
-  RNGestureHandler: 911d3b110a7a233a34c4f800e7188a84b75319c6
-  RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
-  RNScreens: 5e4758109c6d35f9a009ce72af873df907548020
+  RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
+  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
