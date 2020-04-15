@@ -1,15 +1,31 @@
+/* eslint-disable eol-last */
+/* eslint-disable space-infix-ops */
+/* eslint-disable no-shadow */
+/* eslint-disable eslint-comments/no-unused-disable */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable semi */
+/* eslint-disable quotes */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable handle-callback-err */
+/* eslint-disable radix */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable comma-dangle */
+/* eslint-disable prettier/prettier */
+
 /*
  * @author detatsatrio
  * @year 2018
  */
 
-import { PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import SystemSetting from 'react-native-system-setting'
-import Geolocation from 'react-native-geolocation-service';
+import Geolocation from '@react-native-community/geolocation';
 import Permissions from 'react-native-permissions';
-import { getAlert, getNotify } from './notify';
-import * as Config from '../config';
+import { getNotify } from './notify';
+import * as Config from 'MednefitsMobile/app/config';
 import * as Core from './index';
 
 const headerLogin = {
@@ -17,55 +33,55 @@ const headerLogin = {
   'Content-Type': 'application/json',
 };
 
-function fetching(params, callback) {
-  Core.CheckNetworkConnection(connection => {
-    try {
-      // if (connection == 'none') {
-      //   throw 'No Internet Connection';
-      // } else if (connection == 'unknown') {
-      //   throw 'Connection Unknown';
-      // } else {
-      fetch(params.url, {
-        method: params.method,
-        headers: params.header,
-        body:
-          params.body == ''
-            ? ''
-            : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
-              ? params.body
-              : JSON.stringify(params.body),
-        mode: (params.mode) ? params.mode : false,
-        cache: (params.cache) ? params.cache : false
+async function fetching(params, callback) {
+  // await Core.CheckNetworkConnection(async connection => {
+  try {
+    // if (connection == 'none') {
+    //   throw 'No Internet Connection';
+    // } else if (connection == 'unknown') {
+    //   throw 'Connection Unknown';
+    // } else {
+    await fetch(params.url, {
+      method: params.method,
+      headers: params.header,
+      body:
+        params.body == ''
+          ? ''
+          : (typeof params.body == 'object' && params.bodyType == 'object') || params.bodyType == 'multipart'
+            ? params.body
+            : JSON.stringify(params.body),
+      mode: (params.mode) ? params.mode : false,
+      cache: (params.cache) ? params.cache : false
+    })
+      .then(async response => response.json())
+      .then(async res => {
+        console.warn('Response Server ' + res.expired)
+        if (res.status == '401') {
+          // getAlert('', res.message);
+          // if (res.expired) {
+          Actions.Login({ type: 'reset' });
+          // }
+          callback(res);
+        } else if (res.status) {
+          callback(res);
+        } else {
+          callback(res)
+          // getAlert('', 'Please try again...');
+        }
       })
-        .then(response => response.json())
-        .then(async res => {
-          console.warn('Response Server ' + res.expired)
-          if (res.status == '401') {
-            // getAlert('', res.message);
-            // if (res.expired) {
-            Actions.Login({ type: 'reset' });
-            // }
-            callback(res);
-          } else if (res.status) {
-            callback(res);
-          } else {
-            callback(res)
-            // getAlert('', 'Please try again...');
-          }
-        })
-        .catch(error => {
-          // console.warn('error fetching' + error.message);
-          error = (typeof error.message !== 'undefined') ? error : error.message
-          if (error == 'Network request failed') {
-            error = 'Please check your connection'
-          }
-          callback("", error)
-        });
-      // }
-    } catch (e) {
-      Core.getNotify('', e);
-    }
-  });
+      .catch(error => {
+        error = (typeof error.message !== 'undefined') ? error : error.message
+        if (error == 'Network request failed') {
+          error = 'Please check your connection'
+        }
+        callback("", error)
+      });
+    // }
+  } catch (e) {
+    Core.getNotify('', e);
+    callback("", e)
+  }
+  // });
 }
 
 export async function LoginProcess(username, password, callback) {
@@ -79,7 +95,7 @@ export async function LoginProcess(username, password, callback) {
     };
 
     params = {
-      url: Config.AUTH_NEWLOGIN,
+      url: Config.AUTH_LOGIN,
       method: 'POST',
       header: headerLogin,
       body: loginParameter,
@@ -107,9 +123,11 @@ export async function LoginProcess(username, password, callback) {
               key: 'user_id',
               value: String(data_parse.user_id),
             };
+
             await Core.SetDataLocal(user_data, async (err, result) => {
               console.log('result user_id key from login', result)
             });
+
             await callback('', true);
             // Actions.Home({ type: 'reset' });
           } else {
@@ -1345,25 +1363,26 @@ export const NEW_UserDetail = async (callback) => {
   try {
     await Core.GetDataLocal(Config.NEW_ACCESS_TOKEN, async (err, result) => {
       console.warn('fetch Data NEW_UserDetail')
-      if (err || result == undefined) {
-        Actions.Login({ type: 'reset' });
-      } else {
-        params = {
-          url: Config.NEW_USER,
-          method: 'GET',
-          header: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'x-access-token': result,
-            Authorization: 'Basic ' + Config.BASIC_AUTH,
-          },
-        };
-        await fetching(params, async result => {
-          console.warn('done fetching in NEW_UserDetail');
-          await callback('', result)
-        });
-        console.warn('fetching executed');
-      }
+      // if (err || result == undefined) {
+      //   // Actions.Login({ type: 'reset' });
+      //   console.warn('Trying Get Data')
+      // } else {
+      params = {
+        url: Config.NEW_USER,
+        method: 'GET',
+        header: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': result,
+          Authorization: 'Basic ' + Config.BASIC_AUTH,
+        },
+      };
+      await fetching(params, async result => {
+        console.warn('done fetching in NEW_UserDetail');
+        await callback('', result)
+      });
+      console.warn('fetching executed');
+      // }
     });
   } catch (e) {
     console.warn('error user detail' + e.message);
